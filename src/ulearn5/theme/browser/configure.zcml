@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="ulearn5.theme">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="ulearn5.theme"
+      type="plone"
+      directory="static"
+      />
+
+</configure>
