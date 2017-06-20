@@ -19,7 +19,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Plone Theme: Ulearn5 Theme"
+      title="ulearn5.theme"
       directory="profiles/default"
       description="Installs the Plone theme package ulearn5.theme."
       provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -28,7 +28,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="Uninstall: Plone Theme: Ulearn5 Theme"
+      title="Uninstall: ulearn5.theme"
       directory="profiles/uninstall"
       description="Uninstalls the Plone theme package ulearn5.theme."
       provides="Products.GenericSetup.interfaces.EXTENSION"

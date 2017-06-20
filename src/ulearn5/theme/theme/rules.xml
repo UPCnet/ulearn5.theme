@@ -20,10 +20,9 @@
     <!-- Don't use Plone icons, use the theme's -->
     <drop css:content="head link[rel='apple-touch-icon']" />
     <drop css:content="head link[rel='shortcut icon']" />
-    <!-- drop the theme stylesheets -->
-    <drop theme="/html/head/link[rel='stylesheet']" />
     <!-- CSS -->
     <after css:theme-children="head" css:content="head link" />
+    <after css:theme-children="head" css:content="head style" />
     <!-- Script -->
     <after css:theme-children="head" css:content="head script" />
   </rules>
@@ -33,6 +32,11 @@
 
   <!-- move global nav -->
   <replace css:theme-children="#mainnavigation" css:content-children="#portal-mainnavigation" method="raw" />
+
+  <!-- move hero to top -->
+  <replace css:theme-children="#hero .gigantic" css:content-children=".hero"/>
+  <drop css:theme="#hero" css:if-not-content=".hero" />
+  <drop css:content=".hero" />
 
   <!-- full-width breadcrumb -->
   <replace css:content="#viewlet-above-content" css:theme="#above-content" />
@@ -48,9 +52,6 @@
     </xsl:variable>
 
     <div class="{$central}">
-      <!-- <p class="pull-right visible-xs">
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-      </p> -->
       <div class="row">
         <div class="col-xs-12 col-sm-12">
           <xsl:apply-templates css:select="#content" />
@@ -70,22 +71,22 @@
   <!-- Left column -->
   <rules css:if-content="#portal-column-one">
     <replace css:theme="#column1-container">
-        <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
-          <aside id="portal-column-one">
-              <xsl:copy-of css:select="#portal-column-one > *" />
-          </aside>
-        </div>
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+        <aside id="portal-column-one">
+          <xsl:copy-of css:select="#portal-column-one > *" />
+        </aside>
+      </div>
     </replace>
   </rules>
 
   <!-- Right column -->
   <rules css:if-content="#portal-column-two">
     <replace css:theme="#column2-container">
-        <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="complementary">
-          <aside id="portal-column-two">
-              <xsl:copy-of css:select="#portal-column-two > *" />
-          </aside>
-        </div>
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="complementary">
+        <aside id="portal-column-two">
+          <xsl:copy-of css:select="#portal-column-two > *" />
+        </aside>
+      </div>
     </replace>
   </rules>
 
@@ -97,6 +98,7 @@
 
   <!-- toolbar -->
   <replace css:theme="#portal-toolbar" css:content-children="#edit-bar" css:if-not-content=".ajax_load" css:if-content=".userrole-authenticated" />
+  <drop css:theme="#portal-toolbar" css:if-content=".userrole-anonymous" />
   <replace css:theme="#anonymous-actions" css:content-children="#portal-personaltools-wrapper" css:if-not-content=".ajax_load" css:if-content=".userrole-anonymous" />
 
 </rules>
