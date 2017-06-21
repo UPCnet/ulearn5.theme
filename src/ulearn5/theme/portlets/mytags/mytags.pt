@@ -1,0 +1,23 @@
+<div id="box_mytags" class="ulearnbox"
+     i18n:domain="ulearn"
+     tal:define="tags view/getMyTags|nothing">
+
+    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+
+    <h2 i18n:translate="mytags">My Tags</h2>
+
+    <div class="tags_cloud">
+      <span class="tag_pill" tal:repeat="tag tags">
+        <span tal:content="tag">
+          Category
+        </span>
+      </span>
+    </div>
+
+    <div class="see_all_tags">
+      <a tal:attributes="href string:${view/portal_url}/alltags">
+        <i class="icon-plus-sign icons"> </i>
+        <tal:seemore i18n:translate="seemore_tags">See all tags</tal:seemore>
+      </a>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div id="box_econnect" class="ulearnbox"
+     i18n:domain="ulearn"
+     tal:condition="view/allow_render">
+
+    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+
+    <h2 i18n:translate="Meetings space">Online Meetings</h2>
+    <a href="" class="btn btn-large btn-comunitat"
+       tal:attributes="href string:${view/portal_url}/addBBBReservation"
+       i18n:translate="web_collaboration">
+        <i class="fa fa-arrow-circle-right"></i>
+        Create a new session
+    </a>
+</div>

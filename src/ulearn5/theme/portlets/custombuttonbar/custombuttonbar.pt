@@ -1,0 +1,47 @@
+<div id="menusup"
+     i18n:domain="ulearn" ng-non-bindable >
+  <nav>
+    <div class="row-fluid">
+
+      <div class="active bubble top span4">
+        <div class="arrow"></div>
+        <div class="bubble-content">
+          <a href="#"
+             data-toggle="tab"
+             data-target="#corporatiu" target="_self">
+                <i class="fa fa-comment icons"></i>
+                <tal:Corporatiu i18n:translate="Entrada"> Stream </tal:Corporatiu></a>
+        </div>
+      </div>
+
+      <div class="bubble top span4">
+        <div class="arrow"></div>
+        <div class="bubble-content">
+          <a href="#"
+             data-toggle="tab"
+             data-target="#mynews" target="_self">
+                <i class="fa fa-group icons"></i>
+                <tal:Noticies i18n:translate="mynews"> Noticias </tal:Noticies></a>
+        </div>
+      </div>
+
+      <div class="bubble top span4">
+        <div class="arrow"></div>
+        <div class="bubble-content">
+          <a href="#"
+             data-toggle="tab"
+             data-target="#mycommunities" target="_self">
+                <i class="fa fa-calendar icons"></i>
+                <tal:Stream i18n:translate="my_communities"> Mis Comunidades </tal:Stream></a>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+<div class="tab-content" ng-non-bindable>
+  <div class="tab-pane active" id="corporatiu"></div>
+  <div class="tab-pane" id="mynews"></div>
+ <div class="tab-pane" id="mycommunities"></div>
+</div>

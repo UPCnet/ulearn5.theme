@@ -19,6 +19,7 @@ src/ulearn5.theme.egg-info/requires.txt
 src/ulearn5.theme.egg-info/top_level.txt
 src/ulearn5/theme/__init__.py
 src/ulearn5/theme/configure.zcml
+src/ulearn5/theme/controlportlets.py
 src/ulearn5/theme/interfaces.py
 src/ulearn5/theme/setuphandlers.py
 src/ulearn5/theme/testing.py

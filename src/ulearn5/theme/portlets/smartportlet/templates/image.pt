@@ -1,0 +1,11 @@
+<img tal:attributes="src string:${view/item/getURL}/@@images/image" />
+
+<div class="description_video">
+   <a tal:attributes="href string:${view/item/getURL}/view;
+                      title view/item/Title">
+      <!-- <tal:renderer replace="structure view/item/description"> </tal:renderer> -->
+      <tal:renderer replace="structure view/item/Title"> </tal:renderer>
+  </a>
+</div>
+
+

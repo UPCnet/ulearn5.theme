@@ -1,0 +1,141 @@
+<div id="box_mysubjects"
+	 class="ulearnbox"
+	 i18n:domain="ulearn"
+     tal:define="subjects view/getSubjects;
+	    		       subjects_student python:subjects['studentCourses'];
+	      	 	     subjects_teacher python:subjects['teacherCourses'];
+						     primary_color view/getPrimaryColor">
+    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+
+	<ul class="nav nav-stacked" id="accordion_portlet">
+		<li class="panel portletClose">
+			<a data-toggle="collapse" data-parent="#accordion_portlet" href="#subjects_portlet">
+    			<h2 i18n:translate="subjects">Subjects</h2>
+			</a>
+			<ul class="collapse in" id="subjects_portlet">
+				<li>
+
+				    <tal:notSubjects condition="python:not subjects_student and not subjects_teacher">
+				    	<span i18n:translate="label_not_subjects"> No hay asignaturas disponibles </span>
+				    </tal:notSubjects>
+				    <tal:isStudent condition="subjects_student">
+					    <h4 i18n:translate="student">Student</h4>
+					    <ul class="nav nav-stacked" id="accordion">
+						    <tal:subjs repeat="subject subjects_student">
+						    	<li class="panel subject"
+						    	    tal:define="subject_name subject/name;
+						    	    subject_haveNews subject/alerts;
+						    	    normalizeString nocall: context/plone_utils/normalizeString;
+						    	    id_subject python:normalizeString(subject_name)">
+
+						    	<tal:haveNews condition="python:subject_haveNews>0">
+									<a data-toggle="collapse"
+									   data-parent="#accordion"
+	                                   tal:attributes="href string:#${id_subject}"
+	                                   i18n:attributes="title label_info_tasks">
+								    	<div class="bubble left subject-alert"
+													 tal:attributes="style string:background-color:${primary_color}">
+
+													 <div class="arrow2"
+		 												   tal:attributes="style string:background-color:${primary_color}"></div>
+												<div class="bubble-content"></div>
+											</div>
+									</a>
+							    </tal:haveNews>
+						    	    <tal:haveNews condition="python:subject_haveNews<1">
+						    	    	<a>
+								    	    <div class="bubble left subject-no-alert">
+												  <div class="arrow"></div>
+												<div class="bubble-content"></div>
+											</div>
+										</a>
+									</tal:haveNews>
+						    		<a tal:attributes="href subject/link" target="_blank"
+								   i18n:attributes="title label_go_subject">
+						    			<span tal:content="subject/name"></span>
+						    		</a>
+						    		<ul tal:attributes="id  string:${id_subject}"
+						    		    class="collapse">
+						    			<tal:activ repeat="activity subject/activities">
+							    			<li tal:define="pending activity/pending">
+							    			    <span tal:content="activity/name">
+								             		Link service
+								             	</span>
+								             	<tal:badgeOn condition="python:pending>0">
+									             	<span class="badge badge-active" tal:content="activity/pending">
+									             		pending to read
+									             	</span>
+								             	</tal:badgeOn>
+
+							    			</li>
+						    			</tal:activ>
+					    			</ul>
+						    	</li>
+						    </tal:subjs>
+						</ul>
+					</tal:isStudent>
+					<tal:isTeacher condition="subjects_teacher">
+					    <h4 i18n:translate="teacher">Teacher</h4>
+					    <ul class="nav nav-stacked" id="accordion">
+						    <tal:subjs repeat="subject subjects_teacher">
+						    	<li class="panel subject"
+						    	    tal:define="subject_name subject/name;
+						    	    subject_haveNews subject/alerts;
+						    	    normalizeString nocall: context/plone_utils/normalizeString;
+						    	    id_subject python:normalizeString(subject_name)">
+
+						    	    <tal:haveNews condition="python:subject_haveNews>0">
+								<a data-toggle="collapse"
+                                   data-parent="#accordion"
+                                   tal:attributes="href string:#${id_subject}"
+                                   i18n:attributes="title label_info_tasks">
+
+							    	    <div class="bubble left subject-alert"
+														 tal:attributes="style string:background-color:${primary_color}">
+											<div class="arrow2"
+												   tal:attributes="style string:background-color:${primary_color}"></div>
+											<div class="bubble-content"></div>
+								    </div>
+								</a>
+									</tal:haveNews>
+						    	    <tal:haveNews condition="python:subject_haveNews<1">
+						    	    	<a>
+								    	    <div class="bubble left subject-no-alert">
+												<div class="arrow"></div>
+												<div class="bubble-content"></div>
+											</div>
+										</a>
+									</tal:haveNews>
+								<a tal:attributes="href subject/link" target="_blank"
+                                                                   i18n:attributes="title label_go_subject">
+                                                                        <span tal:content="subject/name"></span>
+                                                                </a>
+						    		<ul tal:attributes="id  string:${id_subject}"
+						    		    class="collapse">
+						    			<tal:activ repeat="activity subject/activities">
+							    			<li tal:define="pending activity/pending">
+							    			    <span tal:content="activity/name">
+								             		Link service
+								             	</span>
+								             	<tal:badgeOn condition="python:pending>0">
+									             	<span class="badge badge-active" tal:content="activity/pending">
+									             		pending to read
+									             	</span>
+								             	</tal:badgeOn>
+							    			</li>
+						    			</tal:activ>
+					    			</ul>
+						    	</li>
+						    </tal:subjs>
+						</ul>
+					</tal:isTeacher>
+
+
+				</li>
+			</ul>
+
+		</li>
+	</ul>
+
+
+</div>

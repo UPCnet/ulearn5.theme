@@ -1,0 +1,36 @@
+<tal:items tal:define="items view/portlet/results"
+               tal:condition="items"
+               i18n:domain="plone">
+
+
+      <div class="row-fluid">
+        <div id="portlet_media" class="ulearnbox">
+          <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+
+          <h2 tal:condition="view/portlet/data/show_header"
+              tal:content="view/portlet/data/header"></h2>
+
+          <div tal:define="carousel_id string:${view/portlet/data/header}-carousel"
+               tal:attributes="id carousel_id"
+               class="carousel slide" data-interval="false">
+
+              <div class="carousel-inner">
+                <tal:carouselItem repeat="item items">
+                  <div tal:define="isTheFirst repeat/item/start;
+                                   renderer python:view.portlet.getItemRenderer(item)"
+                       tal:attributes="class python:(isTheFirst and 'item active ' or 'item ') + renderer['css_class']">
+
+                    <tal:renderer replace="structure renderer/html">
+                    </tal:renderer>
+
+                  </div>
+                </tal:carouselItem>
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" tal:attributes="href string:#${carousel_id}" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" tal:attributes="href string:#${carousel_id}" data-slide="next">&rsaquo;</a>
+          </div>
+        </div>
+      </div>
+
+  </tal:items>

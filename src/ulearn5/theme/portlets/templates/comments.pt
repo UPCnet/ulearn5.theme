@@ -1,0 +1,10 @@
+<div id="box_comentaris" class="ulearnbox">
+    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+
+    <h2>Comentarios</h2>
+    <ul class="icons">
+        <li><i class="fa-icon-comment"></i><a href="#">Esta idea me parece genial para la empresa...</a></li>
+        <li><i class="fa-icon-comment"></i><a href="#">Es un buen ejemplo de como se tiene que realizar...</a></li>
+        <li><i class="fa-icon-comment"></i><a href="#">El tercer sector social es muy importante...</a> </li>
+    </ul>
+</div>

@@ -1,0 +1,159 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="genweb.portlets">
+
+    <include package="plone.app.portlets" />
+
+    <plone:portlet
+        name="ulearn.portlets.communities"
+        interface=".communities.ICommunitiesNavigation"
+        assignment=".communities.Assignment"
+        renderer=".communities.Renderer"
+        addview=".communities.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.profile"
+        interface=".profile.IProfilePortlet"
+        assignment=".profile.Assignment"
+        renderer=".profile.Renderer"
+        addview=".profile.AddForm"
+     />
+
+    <plone:portlet
+        name="ulearn.portlets.thinnkers"
+        interface=".thinnkers.IThinnkersPortlet"
+        assignment=".thinnkers.Assignment"
+        renderer=".thinnkers.Renderer"
+        addview=".thinnkers.AddForm"
+     />
+
+    <plone:portlet
+        name="ulearn.portlets.buttonbar"
+        interface=".homebuttonbar.IHomeButtonBarPortlet"
+        assignment=".homebuttonbar.Assignment"
+        renderer=".homebuttonbar.Renderer"
+        addview=".homebuttonbar.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.calendar"
+        interface=".calendar.ICalendarPortlet"
+        assignment=".calendar.Assignment"
+        renderer=".calendar.Renderer"
+        addview=".calendar.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.mostvalued"
+        interface=".mostvalued.IMostValuedPortlet"
+        assignment=".mostvalued.Assignment"
+        renderer=".mostvalued.Renderer"
+        addview=".mostvalued.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.discussion"
+        interface=".discussion.ICommentsPortlet"
+        assignment=".discussion.Assignment"
+        renderer=".discussion.Renderer"
+        addview=".discussion.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.stats"
+        interface=".stats.IStatsPortlet"
+        assignment=".stats.Assignment"
+        renderer=".stats.Renderer"
+        addview=".stats.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.econnect"
+        interface=".econnect.IeConnectPortlet"
+        assignment=".econnect.Assignment"
+        renderer=".econnect.Renderer"
+        addview=".econnect.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.angularrouteview"
+        interface=".angularrouteview.IAngularRouteViewPortlet"
+        assignment=".angularrouteview.Assignment"
+        renderer=".angularrouteview.Renderer"
+        addview=".angularrouteview.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.importantnews"
+        interface=".importantnews.importantnews.IImportantNewsPortlet"
+        assignment=".importantnews.importantnews.Assignment"
+        renderer=".importantnews.importantnews.Renderer"
+        addview=".importantnews.importantnews.AddForm"
+        editview=".importantnews.importantnews.EditForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.flashesinformativos"
+        interface=".flashesinformativos.flashesinformativos.IFlashesInformativosPortlet"
+        assignment=".flashesinformativos.flashesinformativos.Assignment"
+        renderer=".flashesinformativos.flashesinformativos.Renderer"
+        addview=".flashesinformativos.flashesinformativos.AddForm"
+        editview=".flashesinformativos.flashesinformativos.EditForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.mysubjects"
+        interface=".mysubjects.mysubjects.IMySubjectsPortlet"
+        assignment=".mysubjects.mysubjects.Assignment"
+        renderer=".mysubjects.mysubjects.Renderer"
+        addview=".mysubjects.mysubjects.AddForm"
+        editview=".mysubjects.mysubjects.EditForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.subscribednews"
+        interface=".subscribednews.subscribednews.ISubscribedNewsPortlet"
+        assignment=".subscribednews.subscribednews.Assignment"
+        renderer=".subscribednews.subscribednews.Renderer"
+        addview=".subscribednews.subscribednews.AddForm"
+        editview=".subscribednews.subscribednews.EditForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.custombuttonbar"
+        interface=".custombuttonbar.custombuttonbar.ICustomButtonBarPortlet"
+        assignment=".custombuttonbar.custombuttonbar.Assignment"
+        renderer=".custombuttonbar.custombuttonbar.Renderer"
+        addview=".custombuttonbar.custombuttonbar.AddForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.mycommunities"
+        interface=".mycommunities.mycommunities.IMyCommunitiesPortlet"
+        assignment=".mycommunities.mycommunities.Assignment"
+        renderer=".mycommunities.mycommunities.Renderer"
+        addview=".mycommunities.mycommunities.AddForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.mytags"
+        interface=".mytags.mytags.IMyTagsPortlet"
+        assignment=".mytags.mytags.Assignment"
+        renderer=".mytags.mytags.Renderer"
+        addview=".mytags.mytags.AddForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.sharedwithme"
+        interface=".sharedwithme.ISharedWithMePortlet"
+        assignment=".sharedwithme.Assignment"
+        renderer=".sharedwithme.Renderer"
+        addview=".sharedwithme.AddForm"
+        />
+
+</configure>

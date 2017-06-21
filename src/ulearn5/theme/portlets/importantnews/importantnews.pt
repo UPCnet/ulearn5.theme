@@ -1,0 +1,61 @@
+<tal:newsitems tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                           plone_view context/@@plone;
+                           dades_noticies view/dadesNoticies"
+               tal:condition="dades_noticies"
+               i18n:domain="ulearn">
+
+    <div class="ulearnbox portlet-noticies">
+      <div class="osomcorner-wrapper">
+        <div class="osomcorner"></div>
+      </div>
+        <h2 i18n:translate="actualidad">Notícies</h2>
+      <!--  <div class="seemore pull-right">
+          <a tal:attributes="href string:${view/get_noticias_folder_url}"><i class="fa fa-camera-retro fa-lg"></i><span i18n:translate="seemore"> See more</span>
+          </a>
+        </div> -->
+        <ul class="list-portlet">
+          <li class="noticies clearfix" tal:repeat="obj dades_noticies">
+
+            <div>
+              <a href="" tal:attributes="href obj/url">
+                <div class="imatge_noticia">
+                  <img tal:condition="obj/new/image"
+                       tal:define="scale obj/new/@@images"
+                       tal:replace="structure python: scale.scale('image',
+                                    scale='mini').tag(css_class='newsImage')" />
+                  <p class="discreet" tal:condition="obj/new/image_caption|nothing"
+                     tal:content="structure obj/new/image_caption" >
+                  </p>
+                </div>
+              </a>
+                <div class="text_noticia">
+
+                  <h3><a href=""
+                     tal:attributes="href obj/url">
+                      <span tal:replace="obj/title">
+                      Notícies RSS
+                      </span>
+                  </a></h3>
+
+                  <p><time class="smaller" tal:content="obj/date">May 5</time></p>
+
+                    <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">
+                      Text Noticia
+                    </span>
+                </div>
+            </div>
+
+          </li>
+
+          <li class="noticies clearfix" >
+            <a href="" tal:attributes="href string:${view/get_noticias_folder_url}">
+              <i class="icon-plus-sign icons"> </i>
+              <span i18n:translate="seemore">Més notícies</span>
+            </a>
+          </li>
+
+        </ul>
+
+    </div>
+
+</tal:newsitems>
