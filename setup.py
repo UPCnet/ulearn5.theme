@@ -44,6 +44,8 @@ setup(
         'z3c.jbot',
         'plone.app.theming',
         'plone.app.themingplugins',
+        'bleach',
+        'bs4'
     ],
     extras_require={
         'test': [

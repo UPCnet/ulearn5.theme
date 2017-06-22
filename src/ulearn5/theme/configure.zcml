@@ -11,17 +11,12 @@
   <includeDependencies package="." />
 
   <include package=".browser" />
+  <include package=".portlets" />
 
   <plone:static
       directory="theme"
       type="theme"
       name="ulearn5-theme"
-      />
-
-  <plone:static
-      directory="portlets"
-      type="ulearn5"
-      name="portlets"
       />
 
 

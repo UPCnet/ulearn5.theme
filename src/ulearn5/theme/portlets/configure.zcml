@@ -134,10 +134,11 @@
 
     <plone:portlet
         name="ulearn.portlets.mycommunities"
-        interface=".mycommunities.mycommunities.IMyCommunitiesPortlet"
-        assignment=".mycommunities.mycommunities.Assignment"
-        renderer=".mycommunities.mycommunities.Renderer"
-        addview=".mycommunities.mycommunities.AddForm"
+        interface=".mycommunities.IMyCommunitiesPortlet"
+        assignment=".mycommunities.Assignment"
+        renderer=".mycommunities.Renderer"
+        addview=".mycommunities.AddForm"
+        editview=".mycommunities.EditForm"
     />
 
     <plone:portlet

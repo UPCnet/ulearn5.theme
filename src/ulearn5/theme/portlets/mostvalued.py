@@ -4,7 +4,7 @@ from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
 from ulearn5.core.interfaces import IHomePage
-from genweb.core.utils import pref_lang
+from ulearn5.core.utils import pref_lang
 from zope.component import getMultiAdapter
 from ulearn5.core.content.community import ICommunity
 

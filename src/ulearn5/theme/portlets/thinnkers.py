@@ -13,7 +13,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 
 from ulearn5.core.content.community import ICommunity
 
-from genweb.core.utils import get_safe_member_by_id, pref_lang
+from ulearn5.core.utils import get_safe_member_by_id, pref_lang
 
 
 class IThinnkersPortlet(IPortletDataProvider):

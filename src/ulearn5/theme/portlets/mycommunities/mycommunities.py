@@ -49,6 +49,15 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.NullAddForm):
+    schema = IMyCommunitiesPortlet
+    label = _(u"Add Tags portlet")
+    description = _(u"This portlet lists tags by type and context.")
 
     def create(self):
         return Assignment()
+
+
+class EditForm(base.EditForm):
+    schema = IMyCommunitiesPortlet
+    label = _(u"Edit Tags Portlet")
+    description = _(u"This portlet lists tags by type and context.")

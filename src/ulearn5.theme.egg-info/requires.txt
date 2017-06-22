@@ -4,6 +4,8 @@ setuptools
 z3c.jbot
 plone.app.theming
 plone.app.themingplugins
+bleach
+bs4
 
 [test]
 plone.app.testing

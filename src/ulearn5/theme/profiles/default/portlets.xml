@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<portlets>
+    <portlet title="Ulearn Communities" addview="ulearn.portlets.communities"
+       description="Communities portlet"/>
+    <portlet title="Ulearn Profile" addview="ulearn.portlets.profile"
+       description="User's profile portlet"/>
+    <portlet title="Ulearn Thinnkers" addview="ulearn.portlets.thinnkers"
+       description="Thinnkers portlet"/>
+    <portlet title="Ulearn Button Bar" addview="ulearn.portlets.buttonbar"
+       description="Button bar portlet"/>
+    <portlet title="Ulearn calendar" addview="ulearn.portlets.calendar"
+       description="Calendar portlet"/>
+    <portlet title="Ulearn most valued" addview="ulearn.portlets.mostvalued"
+       description="Most valued portlet"/>
+    <portlet title="Ulearn discussion" addview="ulearn.portlets.discussion"
+       description="Discussion portlet"/>
+    <portlet title="Ulearn stats" addview="ulearn.portlets.stats"
+       description="Stats portlet"/>
+    <portlet title="Ulearn eConnect" addview="ulearn.portlets.econnect"
+       description="eConnect portlet"/>
+    <portlet title="Ulearn AngularRouteView" addview="ulearn.portlets.angularrouteview"
+       description="AngularRouteView portlet"/>
+    <portlet title="News Important" addview="ulearn.portlets.importantnews"
+       description="News Important portlet"/>
+    <portlet title="News Flash" addview="ulearn.portlets.flashesinformativos"
+       description="News Flash portlet"/>
+     <portlet title="News Subscribed with tags" addview="ulearn.portlets.subscribednews"
+        description="News Subscribed with tags portlet"/>
+     <portlet title="Custom ButtonBar" addview="ulearn.portlets.custombuttonbar"
+        description="Custom buttonBar portlet "/>
+     <portlet title="My Communities" addview="ulearn.portlets.mycommunities"
+         description="My Communities portlet"/>
+     <portlet title="My Subjects" addview="ulearn.portlets.mysubjects"
+        description="My Subjects EVA portlet"/>
+     <portlet title="My Tags" addview="ulearn.portlets.mytags"
+        description="My Tags portlet"/>
+
+
+    <!-- Obsolete -->
+    <portlet title="Ulearn comments" addview="ulearn.portlets.comments" remove="True" />
+
+<assignment remove="True" name="navigation" category="context" key="/"
+              manager="plone.leftcolumn" type="portlets.Navigation" />
+
+
+</portlets>
