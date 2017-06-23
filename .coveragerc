@@ -1,0 +1,6 @@
+[report]
+include =
+    src/ulearn5/*
+omit =
+    */test*
+    */upgrades/*
