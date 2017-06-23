@@ -20,7 +20,7 @@ from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
-from ulearn5.core.utils import get_safe_member_by_id
+from base5.core.utils import get_safe_member_by_id
 
 
 class IProfilePortlet(IPortletDataProvider):

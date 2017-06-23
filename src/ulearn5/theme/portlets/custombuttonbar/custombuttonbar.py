@@ -4,7 +4,7 @@ from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
 from ulearn5.core.interfaces import IHomePage
-from ulearn5.core.utils import pref_lang
+from base5.core.utils import pref_lang
 
 
 from plone.portlets.interfaces import IPortletDataProvider

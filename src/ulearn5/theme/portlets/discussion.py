@@ -8,7 +8,7 @@ from Acquisition import aq_chain
 from plone.memoize.view import memoize_contextless
 
 from ulearn5.core.interfaces import IHomePage
-from ulearn5.core.utils import pref_lang
+from base5.core.utils import pref_lang
 from zope.component import getMultiAdapter
 from ulearn5.core.content.community import ICommunity
 
