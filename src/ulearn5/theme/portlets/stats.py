@@ -74,9 +74,9 @@ class Renderer(base.Renderer):
             return _(u'entrades')
 
     def show_stats(self):
-        """ The genweb.webmaster can see stats.
+        """ The base.webmaster can see stats.
         """
-        if checkPermission('genweb.webmaster', self.context):
+        if checkPermission('base.webmaster', self.context):
             return True
 
 
