@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
+
+<body>
+
+<tal:comment replace="nothing">
+    Please note that this template fills the "content" slot instead of the
+    "main" slot, this is done so we can provide stuff like the content
+    tabs. This also means that we have to supply things that are normally
+    present from main_template.
+</tal:comment>
+
+<metal:main fill-slot="content">
+    <tal:main-macro metal:define-macro="main"
+                    tal:define="username view/username;
+                                userinfo view/user_info;
+                                portal_url context/@@plone_portal_state/navigation_root_url;
+                                member context/@@plone_portal_state/member;">
+
+      <tal:noAuthor condition="not: userinfo">
+          <dl class="portalMessage error">
+              <dt i18n:translate="">
+                  Error
+              </dt>
+              <dd i18n:domain="plone" i18n:translate="text_no_user_by_name">
+                  No user by that name.
+              </dd>
+          </dl>
+          <div id="content">
+              &nbsp;
+          </div>
+      </tal:noAuthor>
+
+      <tal:haveAuthor condition="userinfo"
+          tal:define="isOwner python:member.getId()==username;
+                      isAnon context/@@plone_portal_state/anonymous;">
+
+          <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+              Portal status message
+          </div>
+
+          <div id="content">
+              <h1 class="documentFirstHeading" tal:condition="userinfo/fullname" tal:content="userinfo/fullname">
+                  Author name
+              </h1>
+
+              <h1 class="documentFirstHeading" tal:condition="not: userinfo/fullname" tal:content="username">
+                  Author ID
+              </h1>
+
+              <div id="content-core">
+                <div class="row-fluid">
+                  <div class="span3">
+                    <div class="row-fluid">
+                        <div class="photo span12">
+                          <p>
+                            <span class="dades currentactivity">
+                              <max-activities-count object="user" tal:attributes="username username"></max-activities-count>
+                            </span>
+                            <span i18n:domain="ulearn" i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
+                          </p>
+                          <a tal:omit-tag="not: isOwner"
+                             tal:attributes="href string:${view/portal_url}/@@personal-information"
+                             tal:define="ulearn_utils context/@@ulearn.utils">
+                              <img tal:attributes="src string:${ulearn_utils/url_max_server}/people/${view/username}/avatar/large" alt="User" >
+                          </a>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="badges span12">
+                          <badge class="box_badges" image="badge1.png"
+                                 tal:attributes="enabled view/has_complete_profile">
+                          </badge>
+                          <badge class="box_badges" image="badge2.png" threshold="50"></badge>
+                          <badge class="box_badges" image="badge3.png" threshold="100"></badge>
+                          <badge class="box_badges" image="badge4.png" threshold="500"></badge>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="span9">
+                    <tal:field repeat="field view/get_user_info_for_display">
+                      <tal:empty condition="field/value">
+                        <h2 tal:content="field/name">Biography</h2>
+                        <p tal:content="field/value"></p>
+                      </tal:empty>
+                    </tal:field>
+                  </div>
+
+              </div>
+          </div>
+
+        </tal:haveAuthor>
+    </tal:main-macro>
+
+</metal:main>
+
+</body>
+</html>
