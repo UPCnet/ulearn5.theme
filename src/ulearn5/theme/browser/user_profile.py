@@ -51,7 +51,7 @@ class userProfile(BrowserView):
         return self
 
     def get_posts_literal(self):
-        literal = api.portal.get_registry_record(name='ulearn.core.controlpanel.IUlearnControlPanelSettings.people_literal')
+        literal = api.portal.get_registry_record(name='ulearn5.core.controlpanel.IUlearnControlPanelSettings.people_literal')
         if literal == 'thinnkers':
             return 'thinnkins'
         else:
