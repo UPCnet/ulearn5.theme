@@ -24,8 +24,10 @@ src/ulearn5/theme/setuphandlers.py
 src/ulearn5/theme/testing.py
 src/ulearn5/theme/browser/__init__.py
 src/ulearn5/theme/browser/configure.zcml
+src/ulearn5/theme/browser/user_profile.py
 src/ulearn5/theme/browser/overrides/.gitkeep
 src/ulearn5/theme/browser/static/.gitkeep
+src/ulearn5/theme/browser/views_templates/user_profile.pt
 src/ulearn5/theme/locales/ulearn5.theme.pot
 src/ulearn5/theme/locales/update.sh
 src/ulearn5/theme/portlets/__init__.py
