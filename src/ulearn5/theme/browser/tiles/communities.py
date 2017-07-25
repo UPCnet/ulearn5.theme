@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+from Acquisition import aq_inner
+from plone.app.standardtiles import PloneMessageFactory as _
+from plone.supermodel.model import Schema
+from plone.tiles.tile import Tile
+from plone.memoize.instance import memoize
+from zope import schema
+from Products.CMFCore.utils import getToolByName
+from base5.core.utils import pref_lang
 from zope.interface import implements
 from zope.component.hooks import getSite
 from zope.component import queryUtility
@@ -22,20 +31,22 @@ from repoze.catalog.query import Eq
 from DateTime.DateTime import DateTime
 
 
-class ICommunitiesNavigation(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information.
-    """
+
+class ICommunities(Schema):
+    """A banner which can render element tagged with premsa-destacat-agenda"""
+
+    tile_title = schema.TextLine(
+        title=_(u"Title"),
+        description=_(u"Title of the tile"),
+        default=u'Communities portlet',
+        required=True)
 
 
-class Assignment(base.Assignment):
-    implements(ICommunitiesNavigation)
+class Communities(Tile):
+    """The Banner tile displays an element tagged with premsa-destacat-agenda"""
 
-    title = _(u'communities', default=u'Communities portlet')
-
-
-class Renderer(base.Renderer):
-
-    render = ViewPageTemplateFile('templates/communities.pt')
+    def __call__(self):
+        return self.index()
 
     @staticmethod
     def get_pending_community_user(community, user):
@@ -86,9 +97,10 @@ class Renderer(base.Renderer):
         """ The Contributor role is assumed that will be applied at the group in
             the portal root.
         """
-        if IHomePage.providedBy(self.context) and \
-           checkPermission('ulearn.addCommunity', self.portal()):
-            return True
+        # if IHomePage.providedBy(self.context) and \
+        #    checkPermission('ulearn.addCommunity', self.portal()):
+        #     return True
+        return True
 
     def showEditCommunity(self):
         pm = getToolByName(self.portal(), 'portal_membership')
@@ -107,10 +119,15 @@ class Renderer(base.Renderer):
         pc = getToolByName(portal, "portal_catalog")
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
-        communities = pc.searchResults(object_provides=ICommunity.__identifier__,
-                                       favoritedBy=current_user,
-                                       sort_on="subscribed_items",
-                                       sort_order="reverse")
+        communities = []
+
+        try:
+            communities = pc.searchResults(object_provides=ICommunity.__identifier__,
+                                           favoritedBy=current_user,
+                                           sort_on="subscribed_items",
+                                           sort_order="reverse")
+        except:
+            pass
 
         def format_communities():
             """ Generator to return information of the community.
@@ -155,7 +172,7 @@ class Renderer(base.Renderer):
         return current_user
 
 
-class AddForm(base.NullAddForm):
-
-    def create(self):
-        return Assignment()
+    @property
+    def title(self):
+        """ Return tile title"""
+        return self.data.get('tile_title', '')

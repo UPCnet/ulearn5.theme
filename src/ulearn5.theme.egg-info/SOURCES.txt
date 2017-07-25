@@ -27,6 +27,11 @@ src/ulearn5/theme/browser/configure.zcml
 src/ulearn5/theme/browser/user_profile.py
 src/ulearn5/theme/browser/overrides/.gitkeep
 src/ulearn5/theme/browser/static/.gitkeep
+src/ulearn5/theme/browser/tiles/__init__.py
+src/ulearn5/theme/browser/tiles/banner.py
+src/ulearn5/theme/browser/tiles/homebuttonbar.py
+src/ulearn5/theme/browser/tiles/templates/banner.pt
+src/ulearn5/theme/browser/tiles/templates/homebuttonbar.pt
 src/ulearn5/theme/browser/views_templates/user_profile.pt
 src/ulearn5/theme/locales/ulearn5.theme.pot
 src/ulearn5/theme/locales/update.sh

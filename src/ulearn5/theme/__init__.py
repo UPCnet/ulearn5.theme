@@ -3,7 +3,7 @@
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('ulearn5.theme')
+# _ = MessageFactory('ulearn5.theme')
 
 import calendar as calmodule
 

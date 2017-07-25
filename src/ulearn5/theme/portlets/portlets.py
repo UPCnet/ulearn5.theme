@@ -3,7 +3,7 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets.navigation import Renderer as NavigationRenderer
 from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IHomePage
+from base5.core.browser.interfaces import IHomePage
 
 
 # Not used

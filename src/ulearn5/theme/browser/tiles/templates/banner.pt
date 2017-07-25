@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ulearn">
+  <body>
+    <tal:banner define="banner view/getBanner" condition="banner">
+      <div class="space-bottom">
+        <a tal:attributes="href banner/absolute_url" class="btn-banner btn-banner-primary">
+          <h2 tal:content="banner/title">Convocatòria</h2>
+          <p tal:content="banner/description" style="outline-style: none;">Algo molt important per periodistes</p>
+        </a>
+      </div>
+    </tal:banner>
+  </body>
+</html>

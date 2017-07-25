@@ -6,7 +6,7 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="ulearn5.theme">
 
-  <i18n:registerTranslations directory="locales" />
+  <!-- <i18n:registerTranslations directory="locales" /> -->
 
   <includeDependencies package="." />
 

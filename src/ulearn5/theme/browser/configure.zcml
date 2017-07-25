@@ -6,6 +6,8 @@
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
   <include package="z3c.jbot" file="meta.zcml" />
+  <include package="plone.tiles" file="meta.zcml" />
+
   <browser:jbot
       directory="overrides"
       layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
@@ -23,6 +25,64 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".user_profile.userProfile"
       permission="zope2.View"
+      />
+
+  <!--Tiles -->
+
+  <plone:tile
+      name="banner"
+      title="Banner"
+      description="Banner used to show premsa-destacat-agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.banner.IBanner"
+
+      class="ulearn5.theme.browser.tiles.banner.Banner"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/templates/banner.pt"
+      />
+
+  <plone:tile
+      name="homebuttonbar"
+      title="Homebuttonbar"
+      description="Banner used to show premsa-destacat-agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.homebuttonbar.IHomeButtonBar"
+
+      class="ulearn5.theme.browser.tiles.homebuttonbar.HomeButtonBar"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/templates/homebuttonbar.pt"
+      />
+
+  <plone:tile
+      name="communities"
+      title="Communities"
+      description="Banner used to show premsa-destacat-agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.communities.ICommunities"
+
+      class="ulearn5.theme.browser.tiles.communities.Communities"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/templates/communities.pt"
+      />
+
+  <plone:tile
+      name="custombuttonbar"
+      title="Custombuttonbar"
+      description="Banner used to show premsa-destacat-agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.custombuttonbar.custombuttonbar.ICustomButtonBar"
+
+      class="ulearn5.theme.browser.tiles.custombuttonbar.custombuttonbar.CustomButtonBar"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/custombuttonbar/custombuttonbar.pt"
       />
 
 

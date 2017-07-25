@@ -24,4 +24,62 @@
 	      <element>template|+plone+static/components/tinymce-builded/js/tinymce/plugins/template</element>
 	    </value>
 	</record>
+
+	<records prefix="plone.app.mosaic.app_tiles.banner"
+	         interface="plone.app.mosaic.interfaces.ITile">
+	    <value key="name">banner</value>
+	    <value key="label">Banner</value>
+	    <value key="category">advanced</value>
+	    <value key="tile_type">app</value>
+	    <value key="default_value"></value>
+	    <value key="read_only">false</value>
+	    <value key="settings">false</value>
+	    <value key="favorite">false</value>
+	    <value key="rich_text">false</value>
+	    <value key="weight">20</value>
+	</records>
+
+	<records prefix="plone.app.mosaic.app_tiles.homebuttonbar"
+	         interface="plone.app.mosaic.interfaces.ITile">
+	    <value key="name">homebuttonbar</value>
+	    <value key="label">Homebuttonbar</value>
+	    <value key="category">advanced</value>
+	    <value key="tile_type">app</value>
+	    <value key="default_value"></value>
+	    <value key="read_only">false</value>
+	    <value key="settings">false</value>
+	    <value key="favorite">false</value>
+	    <value key="rich_text">false</value>
+	    <value key="weight">20</value>
+	</records>
+
+	<records prefix="plone.app.mosaic.app_tiles.communities"
+	         interface="plone.app.mosaic.interfaces.ITile">
+	    <value key="name">communities</value>
+	    <value key="label">Communities</value>
+	    <value key="category">advanced</value>
+	    <value key="tile_type">app</value>
+	    <value key="default_value"></value>
+	    <value key="read_only">false</value>
+	    <value key="settings">false</value>
+	    <value key="favorite">false</value>
+	    <value key="rich_text">false</value>
+	    <value key="weight">20</value>
+	</records>
+
+	<records prefix="plone.app.mosaic.app_tiles.custombuttonbar"
+	         interface="plone.app.mosaic.interfaces.ITile">
+	    <value key="name">custombuttonbar</value>
+	    <value key="label">Custombuttonbar</value>
+	    <value key="category">advanced</value>
+	    <value key="tile_type">app</value>
+	    <value key="default_value"></value>
+	    <value key="read_only">false</value>
+	    <value key="settings">false</value>
+	    <value key="favorite">false</value>
+	    <value key="rich_text">false</value>
+	    <value key="weight">20</value>
+	</records>
+
+
 </registry>

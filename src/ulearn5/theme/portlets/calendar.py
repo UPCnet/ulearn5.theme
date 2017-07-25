@@ -2,7 +2,7 @@ from plone import api
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner, aq_chain
-from ulearn5.core.interfaces import IHomePage
+from base5.core.browser.interfaces import IHomePage
 
 from zope.component import getMultiAdapter
 

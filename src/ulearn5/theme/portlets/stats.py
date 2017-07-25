@@ -9,7 +9,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from ulearn5.core.interfaces import IHomePage
+from base5.core.browser.interfaces import IHomePage
 from ulearn5.core.content.community import ICommunity
 
 from zope.security import checkPermission
