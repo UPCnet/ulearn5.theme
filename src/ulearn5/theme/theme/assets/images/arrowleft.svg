@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>arrowleft</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="arrowleft" fill="#221F20">
+            <path d="M6.999,12 C6.999,11.744 7.097,11.488 7.292,11.293 L15.292,3.293 C15.683,2.902 16.315,2.902 16.706,3.293 C17.097,3.684 17.097,4.316 16.706,4.707 L9.413,12 L16.706,19.293 C17.097,19.684 17.097,20.316 16.706,20.707 C16.315,21.098 15.683,21.098 15.292,20.707 L7.292,12.707 C7.097,12.512 6.999,12.256 6.999,12" id="Fill-3"></path>
+        </g>
+    </g>
+</svg>

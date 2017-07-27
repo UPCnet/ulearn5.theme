@@ -1,0 +1,143 @@
+@media (#{$max-width}: $screen-xs) {
+  main {
+    > * > .row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+   .side-bar {
+     flex: auto;
+   }
+   .main-content {
+     flex: auto;
+   }
+  }
+}
+@media (#{$max-width}: $screen-md) {
+  .main-banner > a {
+    flex: initial;
+  }
+  .main-banner > a h1 > .icona-upc {
+    font-size: 200px;
+    top: -70px;
+  }
+  .button-menu-mobile, .button-menu-mobile--close {
+    flex: auto;
+    text-align: right;
+    a {
+      text-transform: uppercase;
+      font-weight: 500;
+      top: 50%;
+      transform: translateY(-50%);
+      position: relative;
+      display: inherit;
+      &:hover, &:active {
+        text-decoration: none;
+      }
+      span {
+        top: 1px;
+        margin-left: 12px;
+        position: relative;
+      }
+    }
+  }
+  .button-menu-mobile--close {
+    display: none;
+  }
+  .global-navigation {
+    position: absolute;
+    transform: translateX(calc(100vw + -15px));
+    display: block;
+    height: 100vh;
+    width: calc(100vw - 105px);
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    &.open {
+      display: flex;
+      box-shadow: 0 0 2px rgba(0,0,0,.33), 0 0 100px rgba(0,0,0,.33);
+      z-index: 1000;
+      overflow-y: scroll;
+      height: 100vh;
+      position: fixed;
+    }
+    .upc-eines {
+      order:2;
+      margin-top: 6px;
+      li {
+        margin: 6px 0;
+      }
+      .upc-eines-skip {
+        display: none !important;
+      }
+    }
+    li.upc-eines-cerca {
+      input { padding: 10px 12px 10px 36px;}
+      button { left:0; right: auto;}
+    }
+    li.upc-eines-cerca input:active, li.upc-eines-cerca input:focus, li.upc-eines-cerca input:active:focus {
+      width: calc(100% + 24px);
+    }
+    .upc-menu {
+      order:1;
+      border-bottom: 1px solid #d1d1d1;
+      margin-top: 6px;
+      padding-bottom: 6px;
+      margin-bottom: 0;
+    }
+
+  }
+  .main-banner > nav .upc-menu li, .main-banner > nav li {
+    display: block;
+    text-align: left;
+    position: relative;
+    padding-right: 0;
+    & .caret {
+      position: absolute;
+      right: 24px;
+      border-left: 1px solid #d1d1d1;
+      padding-left: 12px;
+      height: 24px;
+      &::after {
+        margin-bottom: 4px;
+        height: 16px;
+      }
+    }
+  }
+  .main-banner > nav .upc-eines {
+    margin-left: 12px;
+    & .caret {
+      right:22px;
+      padding-left: 8px;
+    }
+  }
+  .destacat-1, .destacat-2, .destacat-3 {
+    display: none !important;
+  }
+  .upc-menu .dropdown, .upc-menu .dropdown:hover, .upc-menu .dropdown-menu, .upc-eines .dropdown-menu,
+  .main-banner .upc-eines > li > a[aria-expanded="true"], .main-banner .upc-eines > li > a:hover {
+    box-shadow: none;
+    background: transparent;
+  }
+  .upc-menu .dropdown-menu.te-destacats {
+    padding-right: 0;
+  }
+  .upc-menu .dropdown li a {
+    margin: 0;
+    padding: 12px 0;
+    font-size: $font-size-s;
+    white-space: normal;
+    padding-right: 12px;
+  }
+  .upc-menu li.dropdown:hover::after {
+    content: none;
+  }
+  .upc-menu ul.dropdown-menu.pull-right, .upc-eines ul.dropdown-menu {
+    left: 0;
+    margin:0;
+    float: none !important;
+    position: relative;
+  }
+  .upc-menu li a {
+    display: block;
+  }
+}

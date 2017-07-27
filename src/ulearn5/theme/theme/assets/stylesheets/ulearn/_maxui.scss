@@ -1,0 +1,172 @@
+//   ==========================================================================
+//     MAX
+//   ==========================================================================
+
+#maxui-container {
+   color: #444444;
+   font: 13px/18px 'Open Sans', serif;
+   text-shadow: 0 1px #FFFFFF;
+   border: 0 none;
+   box-shadow: -1px 1px 2px #dddddd;
+}
+#maxui-container a {
+    color: #007BC0;
+    font-family: 'Open Sans', serif;
+}
+#maxui-container a:hover {border-bottom:0;}
+.maxui-displayname {
+    color: #F58D3D;
+    font-size: 14px;
+    font-weight: bold;
+}
+#maxui-container a:hover {
+    color: #34495E;
+    text-decoration: none;
+}
+#maxui-timeline {
+    background: none repeat scroll 0 0 #FFFFFF;
+    clear: both;
+    margin: 0;
+    overflow: hidden;
+    padding: 0px 10px;
+}
+#maxui-newactivity {
+    background: none repeat scroll 0 0 #34495E;
+    padding: 10px;
+    position: relative;
+}
+#maxui-newactivity textarea, .maxui-comments textarea {
+    border: 0 none;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0;
+    color: #444444;
+    font-family: 'Open Sans', serif;
+    font-size: 13px;
+    height: 48px;
+    line-height: 18px;
+    min-height: 48px;
+    overflow: auto;
+    padding: 5px 3px 5px 8px;
+    position: relative;
+    resize: vertical;
+    width: 100%;
+}
+#maxui-search {
+    background: none repeat scroll 0 0 #DEDED6;
+    border-bottom: 0 none;
+    border-top: 0 none;
+    padding: 10px 30px 10px 10px;
+}
+#maxui-search-text {
+    -moz-appearance: none;
+    border: 1px solid #B2B2B2;
+    color: #666666;
+    font-family: 'Open Sans', serif;
+    font-size: 13px;
+    height: 24px;
+    line-height: 20px;
+    min-height: 24px;
+    padding: 1px 5px;
+    position: relative;
+    width: 100%;
+}
+.maxui-avatar:before, .maxui-avatar:before {
+    border-radius: 0 0 0 0;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-shadow: none;
+}
+#maxui-container a img {
+    border: 0 none;
+    border-radius: 0 0 0 0;
+}
+.maxui-topright {
+    color: #222222;
+    font-size: 11px;
+    text-align: right;
+}
+.maxui-avatar {
+    float: left;
+    left: -55px;
+    max-width: 100%;
+    position: absolute;
+    top: 5px;
+}
+.activities .maxui-activity-content {
+    margin: 0 0 0 60px;
+}
+#maxui-back-conversations, #maxui-show-conversations {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-bottom: 0 none;
+    height: 18px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+.maxui-avatar img {
+    box-shadow: none;
+}
+input.maxui-button {
+    background: none repeat scroll 0 0 #F58D3D;
+    border: 0 none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 5px 0 0;
+    padding: 4px 16px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+input.maxui-button:hover, input.maxui-button:hover, input.maxui-button:focus, input.maxui-button:focus {
+    background: none repeat scroll 0 0 #fb9a4f;
+    border: 0 none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    color: #FFFFFF;
+    cursor: pointer;
+}
+input.maxui-button[disabled] {
+    background: none repeat scroll 0 0 #E5E5E5;
+    border: 0;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: none;
+    color: #666666;
+    cursor: default;
+    text-shadow: 0 1px #FFFFFF;
+}
+#maxui-container input:focus {
+    box-shadow: none !important;
+}
+#maxui-container textarea:focus, #maxui-container input[type="search"]:focus {
+    border: 1px solid #F58D3D !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset, 0 0 8px rgba(100, 123, 192, 0.5) !important;
+}
+
+#maxui-search-filters .maxui-filter .close{
+    top: 0;
+}
+
+
+#maxui-container .maxui-body {
+    font-family: open sans;
+    margin: 2px 0 0;
+    font-weight: 600;
+}
+
+#maxui-container .maxui-body > a {
+    font-family: open sans;
+    margin: 2px 0 0;
+    font-weight: normal;
+}
+
+.maxui-origin.maxui-icon- > a {
+    background: none repeat scroll 0 0 #ddd;
+    border-radius: 4px;
+    color: #444 !important;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-shadow: none;
+}

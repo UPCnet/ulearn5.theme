@@ -1,0 +1,78 @@
+.filter-block {
+  margin-bottom: 50px;
+  border-bottom: 1px solid #D1D1D1;
+  padding-bottom: 24px;
+  .fieldset-search {
+    margin-bottom: -12px;
+    padding-bottom: 0;
+    border-bottom: 0;
+    margin-top: 0;
+  }
+  .filter-search {
+    background: #F6F7F7;
+    border:0;
+    border-top: 1px solid #D1D1D1;
+    border-bottom: 1px solid #D1D1D1;
+    padding:18px;
+    padding-right: 36px;
+    width: 100%;
+    margin-bottom: -13px;
+    position: relative;
+    &:focus {
+      outline: 5px solid rgba(#1FBDEE,.5);
+      border-radius: 2px;
+      transition: .25s all ease;
+    }
+    + input {
+      background: #F6F7F7;
+      background: linear-gradient(to right, rgba(246,247,247,0) 0%,rgba(246,247,247,0) 1%,rgba(246,247,247,1) 25%);
+      font-family: "upc-icones";
+      position: relative;
+      right: 6px;
+      border: 0;
+      padding: 5px 8px;
+      top: -36px;
+      font-size: $font-size-xl;
+      float:right;
+      border-radius: 50%;
+      &:focus {
+        outline: 5px solid rgba(#1FBDEE,.5);
+        transition: .25s all ease;
+      }
+      &:hover {
+        outline: 0;
+        box-shadow: none;
+        color: #007BC1;
+      }
+      &:active {
+        outline: 0;
+        box-shadow: 0 0 0 2px #007BC1;
+        transition: .25s all ease;
+        background: #FFF;
+        color: #252525;
+      }
+    }
+  }
+  fieldset {
+    margin-top: 12px;
+  }
+  fieldset > div {
+    margin: 0 12px 10px;
+  }
+  label {
+    margin: 0 24px;
+  }
+  legend {
+    padding: 0 12px 12px;
+  }
+  .titling {
+    padding: 0;
+  }
+  [style*="outline"]::before {
+    outline:none !important;
+  }
+}
+.filter-press {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

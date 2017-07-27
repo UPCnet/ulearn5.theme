@@ -1,0 +1,111 @@
+//   ==========================================================================
+//     MODIFICACIONS GENWEB
+//   ==========================================================================
+
+#portal-header h1.pull-left {
+  // Override the media query for retina images.
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (   min--moz-device-pixel-ratio: 2),
+    only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2),
+    only screen and (                min-resolution: 192dpi),
+    only screen and (                min-resolution: 2dppx) {
+      height: auto;
+      width: auto;
+      background: url('../ulearn_comunitats@2x.png') no-repeat;
+      -webkit-background-size: 100%;
+      -moz-background-size: 100%;
+      -o-background-size: 100%;
+      background-size: 100%;
+    }
+}
+
+h1, h2, h3, label, span.label {
+    color: #F58D3D;
+}
+
+// #portal-column-content {background-color: white;}
+.template-homepage .content_edit {
+  background-color: inherit;
+}
+
+#portlet-prefs, .content_edit, .documentEditable,
+.template-overview-controlpanel #content {
+     padding: 10px;
+     background-color: white;
+}
+
+.liniaDalt, .tileHeadline {
+    border-top: 1px solid #DDDDDD;
+    box-shadow: none;
+    padding: 10px 0;
+}
+.liniaBaix, .documentFirstHeading {
+    border-bottom: 1px solid #DDDDDD;
+    box-shadow: none;
+    margin: 0 0 15px;
+    padding: 0 0 5px;
+}
+
+.content_edit .rowlike {padding: 10px;}
+.nav-tabs, .contentViews, .configlets {
+ box-shadow: none;
+}
+#portal-header .container {
+    border-top: 0 none;
+    // margin-bottom: 15px;
+    margin-top: 0;
+    border-bottom:0;
+}
+#portal-breadcrumbs {
+  margin-bottom: 6px;
+  clear: both;
+}
+#portal-breadcrumbs + #content-area {
+  margin-top: 0px;
+}
+
+#content-area {
+    margin-top: 1.7em;
+    }
+[class*="span"], .cella {
+    margin-bottom: 0;
+}
+#portal-breadcrumbs {
+    // margin-bottom: -15px;
+    // margin-top: -15px;
+}
+.template-homepage #portal-breadcrumbs {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#eines .input-append {
+    border-left: 0;
+    }
+#edit-bar, .formTabs {
+font-size:12px;
+}
+#edit-bar a, .formTabs a {text-decoration:none;}
+
+// Valorar si incloure-ho en GW
+#formfield-form-widgets-start_date input,
+#formfield-form-widgets-end_date input {width: 40px;}
+#formfield-form-widgets-start_date select,
+#formfield-form-widgets-end_date select {width: 100px;}
+#caltitle select,
+#calyear select {width: 155px;}
+
+nav#portal-personaltools-wrapper {
+  @media
+    only screen and (max-width: 979px) and (orientation: portrait),
+    only screen and (max-width: 979px) and (orientation: landscape) {
+      margin-top: 36px !important;
+    }
+}
+
+.template-personal-information [for="form.portrait"] ~ img {
+  float: none;
+  height: 100px;
+  width: auto;
+}

@@ -1,0 +1,128 @@
+@import "compass_twitter_bootstrap/mixins";
+// Arrows
+$zindexBubble:           1010 !default;
+
+$bubbleBackground:       #fff !default;
+$bubbleArrowWidth:       8px !default;
+// $bubbleArrowColor:       #fff !default;
+$bubbleArrowColor:       red !default;
+$bubbleTitleBackground:  darken($bubbleBackground, 3%) !default;
+
+// Special enhancement for bubbles
+$bubbleArrowOuterWidth:  $bubbleArrowWidth + 1 !default;
+$bubbleArrowOuterColor:  rgba(0,0,0,.15) !default;
+$white:                 #fff !default;
+
+.bubble {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: $zindexBubble;
+  display: block;
+  // width: 236px;
+  // padding: 1px;
+  background-color: $bubbleBackground;
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+  // border: 1px solid #ccc;
+  // border: 1px solid rgba(0,0,0,.2);
+  // @include border-radius(6px);
+  // @include box-shadow(0 5px 10px rgba(0,0,0,.2));
+
+  // Offset the bubble to account for the bubble arrow
+  &.top     { margin-bottom: 10px; }
+  &.right   { margin-left: 10px; }
+  &.bottom  { margin-top: 10px; }
+  &.left    { margin-right: 10px; }
+
+}
+// .bubble-container {position: absolute;}
+
+.bubble-title {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 107.692308%;
+  font-weight: normal;
+  line-height: 18px;
+  text-shadow:0 -1px $white;
+  background-color: $bubbleTitleBackground;
+  border-bottom: 1px solid darken($bubbleTitleBackground, 15%);
+  @include border-radius(5px 5px 0 0);
+}
+
+.bubble-content {
+  padding: 9px 12px;
+  p, ul, ol {
+    margin-bottom: 0;
+  }
+}
+
+.bubble .arrow,
+.bubble .arrow:after {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.bubble .arrow:after {
+  content: "";
+  z-index: -1;
+}
+
+.bubble {
+  &.top .arrow {
+    bottom: -$bubbleArrowWidth;
+    left: 50%;
+    margin-left: -$bubbleArrowWidth;
+    border-width: $bubbleArrowWidth $bubbleArrowWidth 0;
+    border-top-color: $bubbleArrowColor;
+    &:after {
+      border-width: $bubbleArrowOuterWidth $bubbleArrowOuterWidth 0;
+      border-top-color: $bubbleArrowOuterColor;
+      bottom: -1px;
+      left: -$bubbleArrowOuterWidth;
+    }
+  }
+  &.right .arrow {
+    top: 50%;
+    left: -$bubbleArrowWidth;
+    margin-top: -$bubbleArrowWidth;
+    border-width: $bubbleArrowWidth $bubbleArrowWidth $bubbleArrowWidth 0;
+    border-right-color: $bubbleArrowColor;
+    &:after {
+      border-width: $bubbleArrowOuterWidth $bubbleArrowOuterWidth $bubbleArrowOuterWidth 0;
+      border-right-color: $bubbleArrowOuterColor;
+      bottom: -$bubbleArrowOuterWidth;
+      left: -1px;
+    }
+  }
+  &.bottom .arrow {
+    top: -$bubbleArrowWidth;
+    left: 50%;
+    margin-left: -$bubbleArrowWidth;
+    border-width: 0 $bubbleArrowWidth $bubbleArrowWidth;
+    border-bottom-color: $bubbleTitleBackground;
+    &:after {
+      border-width: 0 $bubbleArrowOuterWidth $bubbleArrowOuterWidth;
+      border-bottom-color: $bubbleArrowOuterColor;
+      top: -1px;
+      left: -$bubbleArrowOuterWidth;
+    }
+  }
+  &.left .arrow {
+    top: 50%;
+    right: -$bubbleArrowWidth;
+    margin-top: -$bubbleArrowWidth;
+    border-width: $bubbleArrowWidth 0 $bubbleArrowWidth $bubbleArrowWidth;
+    border-left-color: $bubbleArrowColor;
+    &:after {
+      border-width: $bubbleArrowOuterWidth 0 $bubbleArrowOuterWidth $bubbleArrowOuterWidth;
+      border-left-color: $bubbleArrowOuterColor;
+      bottom: -$bubbleArrowOuterWidth;
+      right: -1px;
+    }
+  }
+}

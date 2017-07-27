@@ -1,0 +1,92 @@
+.portlet-calendari {
+  margin-bottom: 40px;
+  .portlet-header {
+    display: flex;
+    min-height: 40px;
+  }
+  h2 {
+    font-weight: 700;
+    font-size: $font-size-l;
+    text-align: center;
+    width: 100%;
+    margin: 2px;
+  }
+  .calendari-anterior, .calendari-seguent {
+    font-size: 0;
+  }
+  .calendari-anterior::before, .calendari-seguent::before {
+    content: "\e900";
+    font-size: $font-size-l;
+    font-family: "upc-icones";
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid transparent;
+  }
+  & .calendari-anterior:hover, & .calendari-seguent:hover {
+    text-decoration: none;
+  }
+  & .calendari-anterior:hover::before, & .calendari-seguent:hover::before {
+    border: 1px solid $link-hover-color;
+    transition: .25s all ease;
+  }
+  .calendari-seguent::before {
+    content: "\e902";
+  }
+  .portlet-footer {
+    border-top: 1px solid $gray-lighter;
+    font-size: $font-size-s;
+    padding: 12px 0;
+    margin-top: 12px;
+  }
+}
+
+.calendari {
+  width: 100%;
+  text-align: center;
+  color: $gray-darker;
+  & th, & td {
+    text-align: center;
+    height: 30px;
+    width: calc(100% / 7);
+  }
+  abbr {
+    font-weight: 300;
+    text-transform: uppercase;
+    border-bottom-color: #EDF1F2;
+  }
+  .te-esdeveniment {
+    font-weight: 700;
+  }
+  .mes-seguent, .mes-anterior {
+    color: $gray-light;
+    &.te-esdeveniment {
+      font-weight: 300;
+    }
+  }
+  .avui {
+    a {
+      background: transparent;
+      border: 2px solid $gray-lighter;
+      color: $gray-base;
+      width: 28px;
+      height: 28px;
+      position: relative;
+      display: inline-block;
+      border-radius: 50%;
+      padding-top: 2px;
+    }
+    &.te-esdeveniment a {
+      background: $link-color;
+      border-color: $link-color;
+      color: #FFF;
+      &:hover, &:focus {
+        background: $link-hover-color;
+        border-color: $link-hover-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.portlet-btn {
+  margin-bottom: 40px;
+}

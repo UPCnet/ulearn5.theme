@@ -1,0 +1,70 @@
+.panel-group {
+  margin-bottom: 40px;
+  .panel-default {
+    border:0;
+    box-shadow: none;
+    border-bottom: 1px solid #D1D1D1;
+    >.panel-heading+.panel-collapse>.panel-body {
+      border-top: 0;
+      padding: 0 18px 18px;
+    }
+  }
+  .panel-default>.panel-heading {
+    background: transparent;
+    padding: 0;
+    a {
+      display: block;
+      padding: 30px 36px 30px 18px;
+      font-weight: 500;
+      color: #007BC1;
+      position: relative;
+      border-top:1px solid #D1D1D1;
+      &:after {
+        content:"\e919";
+        position: absolute;
+        right:18px;
+        font-family: "upc-icones";
+        transition: all .25s ease;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &[aria-expanded="true"]:after {
+        transform: rotate(180deg) translateY(50%);
+        transition: all .25s ease;
+      }
+      &[aria-expanded="true"] {
+        border-top-color: #007BC1;
+        &:hover {text-decoration: none;}
+      }
+    }
+  }
+  .collapse {
+    border-bottom: 1px solid #D1D1D1;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .collapse.in {
+    border-bottom-color: #007BC1;
+  }
+  .panel-title > a > img:first-child {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-top: -12px;
+    float: left;
+    margin-right: 12px;
+  }
+
+}
+
+
+.collapse-well.well {
+  padding: 0;
+  .panel {background: transparent;}
+  .collapse.in, .panel-default {border-bottom: 0;}
+  .panel-default > .panel-heading a {border-top:0;}
+  label {padding: 12px 0 0;}
+  button {margin-top: 24px;}
+  .titling {-webkit-text-fill-color: initial;}
+}

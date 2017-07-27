@@ -1,0 +1,75 @@
+$textColor: #6f6f6f;
+$linkColor: #555;
+$actionLinkColor: #6f6f6f;
+$actionHoverLinkColor: darken($textColor, 10%);
+$hoverLinkColor: darken($linkColor, 10%);
+$favoriteColor: #ff9b00;
+
+#communities-view {
+    .pagination {
+        text-align: center;
+    }
+}
+
+.community-actions {
+    position: relative;
+    line-height: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+a.community-action {
+    display:inline;
+    font-size:11px;
+    padding-right: 5px;
+    cursor:pointer;
+    color: $actionLinkColor;
+
+    //Use this for transitions
+    &.ng-enter,
+    &.ng-leave,
+    &.ng-animate{
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+    //Use this for keyframe animations
+    &.ng-animate {
+       -webkit-animation: none 0s;
+       animation: none 0s;
+    }
+
+    &:before {
+        font-size:12px;
+        margin-right:.22em;
+        font-family: "maxicons";
+    }
+
+    &:hover {
+        color:$actionHoverLinkColor;
+    }
+
+    &.community-edit:before                                 { font-family: FontAwesome; content: "\f040"; }
+    &.community-edit:hover                                  { color: $linkColor;}
+
+    &.community-subscribe:before                            { font-family: FontAwesome; content: "\f096"; }
+    &.community-subscribe.community-subscribed                       { color: $linkColor; }
+    &.community-subscribe.community-subscribed:before                { font-family: FontAwesome; content: "\f046"; color: $linkColor;}
+    &.community-subscribe.community-subscribed:hover:before          { color:$hoverLinkColor;}
+    &.community-subscribe.community-subscribed:hover                 { color:$hoverLinkColor;}
+
+    &.community-favorite:before                        { content: '\e801'; }
+    &.community-favorite:hover:before                  { content: '\e801'; color: $favoriteColor;}
+    &.community-favorite.community-favorited               { color: $linkColor; }
+    &.community-favorite.community-favorited:hover         { color: $hoverLinkColor; }
+    &.community-favorite.community-favorited:before        { content: '\e800'; color: $linkColor}
+    &.community-favorite.community-favorited:hover:before  { color : favoriteColor}
+
+    &.community-flag:before                             { content: '\e81e'; }
+    &.community-flag:hover:before                       { content: '\e81e'; color: $linkColor;}
+    &.community-flag.community-flagged                      { color: $linkColor; }
+    &.community-flag.community-flagged:hover                { color: $hoverLinkColor; }
+    &.community-flag.community-flagged:before               { content: '\e81d'; color: $linkColor}
+    &.community-flag.community-flagged:hover:before         { color : $hoverLinkColor}
+
+    &.community-delete:before                           { content: '\e806'; }
+}

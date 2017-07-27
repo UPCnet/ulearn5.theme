@@ -1,0 +1,57 @@
+// The SCSS that has been temporarily disabled or cleaned.
+
+#box_valorats ul, #box_comentaris ul { margin-top:10px; margin-left:25px; }
+
+#box_valorats li a:hover, #box_comentaris li a:hover {text-decoration:underline;}
+
+#box_valorats li, #box_comentaris li {
+    border-bottom: 1px solid #EEEEEE;
+    font-size: 13px;
+    line-height: 15px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+#box_valorats i, #box_comentaris i {
+ color:#34495E;
+ font-size:15px;
+ // vertical-align: middle;
+}
+
+#menusup .nav-tabs > .btn-plus > a {
+    background: none repeat scroll 0 0 #34495E;
+    color: white;
+    padding-left: 10px;
+    padding-right: 5px;
+    text-shadow: none;
+}
+#menusup .nav-tabs > .btn-plus > a:hover {
+    background: none repeat scroll 0 0 #34495E;
+    opacity: 0.8;
+}
+
+#menusup .nav-tabs {
+  border-bottom:0;
+  margin-bottom:0;
+  }
+#menusup .nav-tabs > li > a {
+  background:#DEDED6;
+  color:#444;
+  border-radius:0;
+  border:0;
+  padding-right:15px;
+  padding-left:7px;
+  text-shadow:1px 1px 0px white;
+  text-decoration:none;
+  margin:0;
+  }
+#menusup .nav-tabs > .active > a, #menusup .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+background:#f58d3d;
+color:white;
+text-shadow:none;
+    }
+#menusup .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  background:#EEEEEE;
+   transition: all 0.25s ease 0s;
+  }
+
+

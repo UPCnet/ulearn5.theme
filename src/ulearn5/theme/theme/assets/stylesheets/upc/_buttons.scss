@@ -1,0 +1,221 @@
+.btn-banner {
+  background: #fff;
+  padding:2px 72px 2px 20px;
+  min-height: 80px;
+  color: $gray-darker;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  transition: all .25s ease-out;
+  margin: 0 0 24px;
+  transform: scale(1.0,1.0) perspective(1px) translateZ(0px);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+  border-radius:2px;
+  &:before {
+    content:"";
+    border: 1.5px solid $link-color;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    margin-top: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 5px;
+    z-index:0;
+  }
+  &:after {
+    content: "\e902";
+    font-family: upc-icones;
+    border: 1.5px solid rgba(255,255,255,0);
+    position: absolute;
+    font-size: $font-size-l;
+    right: 18px;
+    top: 50%;
+    margin-top: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 5px;
+    color: $link-color;
+    background: rgba(255,255,255,.8);
+    z-index:0;
+  }
+  &[target="_blank"]:after {
+    content: "\e91c";
+  }
+  img {
+    object-fit: cover;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    transition: all .5s ease;
+  }
+  &.compat-object-fit {
+    // fallback habilitat per l'script d'objectfit i fer que es vegi bé a IE
+    background-size: cover;
+    background-position: center;
+  }
+  h2 {
+    font-size: $font-size-l;
+    font-weight: 900;
+    margin: 0;
+    margin: -3px -6px -6px;
+    padding: 3px 6px;
+    z-index: 1;
+    display: inline-table;
+    position: relative;
+    color: $gray-darker;
+  }
+  p {
+    font-size: $font-size-s;
+    font-weight: 300;
+    margin: 6px -6px -3px;
+    padding:3px 6px;
+    display: inline-table;
+    position: relative;
+    z-index: 1;
+  }
+  p, &:hover p {
+    -webkit-font-smoothing: subpixel-antialiased;
+    tramsform:translateZ(0px);
+  }
+  img + h2, img ~ p {
+    background: rgba(255,255,255,.8); -webkit-backdrop-filter:blur(1px); transition: all .25s ease-in;
+  }
+  &:hover, &:focus {
+    box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 5px 10px rgba(0,0,0,.1), 0 10px 20px rgba(0,0,0,.05);
+    color: #252525;
+    transition: all .25s ease-in;
+    text-decoration: none;
+    transform: perspective(1px) scale(1.00775,1.00775) translateZ(0px);
+    -webkit-font-smoothing: subpixel-antialiased;
+    & img + h2, & img ~ p {
+      background: rgba(255,255,255,.85); -webkit-backdrop-filter:blur(3px); transition: all .25s ease-in;
+    }
+    & img {width:101%; height:101%; transition: all .5s ease; }
+  }
+}
+.btn-banner-danger {
+  background-color: #ED4033;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
+}
+.btn-banner-success {
+  background-color: #51AA55;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
+}
+.btn-banner-primary {
+  background-color: #007BC1;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
+}
+.btn-banner-info {
+  background-color: #1FBDEE;
+  &::after {color:#636363; border-color:#636363; background:none;}
+
+}
+.btn-banner-warning {
+  background-color: #F2C91E;
+  &::after {color:#636363; border-color:#636363; background:none;}
+}
+.btn-banner-large {
+  height: 280px;
+  padding: 0;
+  justify-content: flex-end;
+  & div {
+    padding: 2px 72px 2px 20px;
+    background: rgba(255,255,255,.95);
+    z-index: 0;
+    height: 80px;
+    bottom: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    transition: all .25s ease-out;
+  }
+  &::before, &::after {
+    bottom:20px; top:auto;
+  }
+  &::after {
+    border-color: $link-color;
+  }
+}
+.link-banner {
+  font-size: $font-size-l;
+  font-weight: 500;
+  background: #F2F5F6;
+  display: block;
+  padding: 30px 24px;
+  color: $gray-dark;
+  position: relative;
+  transition: all .25s ease-out;
+  border-radius: 2px;
+  padding-right: 72px;
+  &::after {
+    content: "\e902";
+    font-family: upc-icones;
+    border: 2px solid $link-color;
+    position: absolute;
+    font-size: $font-size-l;
+    right: 24px;
+    top: 50%;
+    margin-top: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 5px;
+    color: $link-color;
+    z-index:0;
+  }
+  &[target="_blank"]:after {
+    content: "\e91c";
+  }
+  &:hover, &:focus {
+    box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 5px 10px rgba(0,0,0,.1), 0 10px 20px rgba(0,0,0,.05);
+    color: #252525;
+    transition: all .25s ease-in;
+    text-decoration: none;
+    transform: perspective(1px) scale(1.00775,1.00775) translateZ(0px);
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+.link-banner-minimal {
+  background: #F2F5F6;
+  display: block;
+  padding: 20px 24px;
+  position: relative;
+  transition: all .25s ease-out;
+  border-radius: 2px;
+  padding-right: 72px;
+  &::after {
+    content: "\e902";
+    font-family: upc-icones;
+    position: absolute;
+    font-size: $font-size-l;
+    right: 24px;
+    color: $link-color;
+  }
+  &[target="_blank"]:after {
+    content: "\e91c";
+  }
+  &:hover, &:focus {
+    box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 5px 10px rgba(0,0,0,.1), 0 10px 20px rgba(0,0,0,.05);
+    transition: all .25s ease-in;
+    text-decoration: none;
+    transform: perspective(1px) scale(1.00775,1.00775) translateZ(0px);
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}

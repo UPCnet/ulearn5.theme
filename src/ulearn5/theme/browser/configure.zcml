@@ -8,18 +8,6 @@
   <include package="z3c.jbot" file="meta.zcml" />
   <include package="plone.tiles" file="meta.zcml" />
 
-  <browser:jbot
-      directory="overrides"
-      layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-      />
-
-  <!-- Publish static files -->
-  <plone:static
-      name="ulearn5.theme"
-      type="plone"
-      directory="static"
-      />
-
   <browser:page
       name="profile"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"

@@ -1,0 +1,97 @@
+.portlet-subnavigation {
+  margin-bottom: 50px;
+  @media (#{$max-width}: $screen-sm) {
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-top: -40px;
+  }
+  @media (#{$max-width}: $screen-xs) {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -40px;
+  }
+  .portlet-content {
+    > ul {
+      list-style: none;
+      padding-left: 0;
+      border-bottom: 1px solid #B8B8B8;
+      border-top: 1px solid #B8B8B8;
+      background: #F6F7F7;
+      & > li:not(:last-child) {
+        border-bottom:1px solid #B8B8B8;
+      }
+      & a {
+        font-weight: 500;
+        color: #636363;
+        display: block;
+        padding: 15px 24px 15px 18px;
+        position: relative;
+        outline-offset: -5px;
+        transition: all .25s ease;
+        &::after, &.current-item::after {
+          content:"\e902";
+          font-family: "upc-icones";
+          position: absolute;
+          right: 8px;
+          top:15px;
+          transition: all .25s ease;
+          z-index: 1;
+          opacity:0;
+        }
+        &:hover, &:focus {
+          text-decoration: none;
+          transition: all .25s ease;
+          color: #4A4A4A;
+        }
+        &:hover::after, &.current-item::after {
+          opacity:1;
+        }
+        &[target="_blank"]::after, &[target="_blank"].current-item::after {
+          content:"\e91c";
+          font-size: 100%;
+        }
+      }
+    }
+    .current-node {
+      background: #fff;
+    }
+    .current-item {
+      color: #007BC1;
+      &::after {
+        content:"\e902";
+        font-family: "upc-icones";
+        position: absolute;
+        right: 8px;
+        top:16px;
+        transition: all .25s ease;
+      }
+      &::before {
+        content:"";
+        position: absolute;
+        width: 3px;
+        height: calc(100% - 20px);
+        background: #007BC1;
+        margin-left: -18px;
+        top: 10px;
+        transition: all .25s ease;
+      }
+      &:hover, &:focus {
+        color: #01559B;
+      }
+      &:hover::before, &:focus::before {
+        background: #01559B;
+        transition: all .25s ease;
+      }
+    }
+    ul ul {
+      list-style: none;
+      padding-left: 12px;
+    }
+    li li a {
+      font-weight: 300;
+      &.current-item::before {
+        margin-left: -30px;
+      }
+    }
+  }
+}

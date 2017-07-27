@@ -1,0 +1,43 @@
+.pagination {
+  margin: 0 0 18px;
+  li a {
+    border:0;
+    padding: 6px;
+    &:hover, &:focus {
+      background: transparent;
+    }
+  }
+  li:not(:first-child) a {
+    margin-left: 6px;
+  }
+  li:not(:last-child) a {
+    margin-right: 6px;
+  }
+
+  li.active a {
+    color:#7F7F7F;
+    background: transparent;
+    font-weight: bolder;
+    &::after {
+      content:"";
+      width:12px;
+      height: 2px;
+      background: #7f7f7f;
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 6px);
+    }
+    &:hover {
+      background: transparent;
+      color: #7f7f7f;
+    }
+    &:hover::after {
+      background: #7f7f7f;
+    }
+  }
+  .icona-upc {
+    position: relative;
+    top:2px;
+    margin: 0 6px;
+  }
+}

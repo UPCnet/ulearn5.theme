@@ -1,0 +1,135 @@
+ol.list-events {
+  li:hover {
+    border-top-color:$link-color;
+    border-bottom-color:$link-color;
+    z-index: 1;
+  }
+  & li > * {
+    margin-left: calc(128px + 24px + 18px);
+    max-width: calc(100% - 128px - 24px - 18px);
+  }
+  li::before {
+    content: none;
+  }
+  .event-time {
+    border: 1px solid $gray;
+    width: 128px;
+    height: 128px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    left: 18px;
+    display: table-cell;
+    text-align: center;
+    &--wrap {
+      top:50%;
+      transform: translateY(-50%);
+      position: relative;
+      display: block;
+    }
+  }
+  .event-days {
+    font-weight: 700;
+    font-size: $font-size-xl;
+    color: $gray;
+    display: block;
+    //auric adjustment
+    padding-bottom: 1px; margin-top: -2px; line-height: 1;
+  }
+  .event-months {
+    font-weight: 300;
+    font-size: $font-size-s;
+    text-transform: uppercase;
+    color: $gray;
+    display: block;
+    //auric adjustment
+    padding-bottom: 1px; margin-top: -2px;
+  }
+  .event-place {
+    font-weight: bolder;
+    color: $gray-dark;
+  }
+  .event-category {
+    color: #ED4033;
+    font-size: $font-size-s;
+  }
+}
+@media (#{$max-width}: $screen-xs) {
+  ol.list-events {
+    & li > * {
+      margin-left: calc((128px * 0.8) + 24px );
+      max-width: calc(100% - (128px * 0.8) + 24px);
+    }
+    .event-time {
+      left:0;
+      transform: scale(.8) translateX(-6px);
+    }
+  }
+}
+
+.portlet-esdeveniments {
+  margin-bottom: 40px;
+  .titling {margin-top: 0;}
+  .portlet-header {
+    border-bottom: 1px solid $gray-lighter;
+  }
+  ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  li {
+    position: relative;
+    padding: 12px;
+    min-height: 78px;
+  }
+  li:not(:last-child) {
+    border-bottom: 1px solid $gray-lighter;
+  }
+  ol li > * {
+    margin-left: calc(54px + 12px);
+    max-width: calc(100% - 54px - 12px);
+    display: block;
+  }
+  .event-time {
+    border: 1px solid $gray;
+    width: 54px;
+    height: 54px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    left: 12px;
+    display: table-cell;
+    text-align: center;
+    &--wrap {
+      top:50%;
+      transform: translateY(-50%);
+      position: relative;
+      display: block;
+    }
+  }
+  .event-days {
+    font-weight: 700;
+    font-size: $font-size-s;
+    color: $gray;
+    display: block;
+    span {font-weight: 300; margin: 0 -3px;}
+  }
+  .event-months {
+    font-weight: 300;
+    font-size: $font-size-xxs;
+    text-transform: uppercase;
+    color: $gray;
+    display: block;
+    line-height: .875;
+    margin:0 12px;
+    & abbr {border-bottom: 0;}
+  }
+
+  .portlet-footer {
+    border-top: 1px solid $gray-lighter;
+    font-size: $font-size-s;
+    padding: 12px 0;
+    margin-top: 0;
+  }
+}

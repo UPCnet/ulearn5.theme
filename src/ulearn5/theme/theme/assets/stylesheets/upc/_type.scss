@@ -1,0 +1,201 @@
+
+
+
+@font-face {
+  font-family: 'upc-icones';
+  src:
+    url('../fonts/upc-icones.woff?y6zlm7') format('woff'),
+    url('../fonts/upc-icones.ttf?y6zlm7') format('truetype'),
+    url('../fonts/upc-icones.svg?y6zlm7#upc-icones') format('svg');
+
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: ‘chunk-webfont’;
+    src: url('../fonts/upc-icones.svg?y6zlm7#upc-icones') format('svg');
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+[class^="icona-upc"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'upc-icones' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+// img {border-radius:2px;} //Sha de fer una classe per això
+* {-webkit-font-smoothing: antialiased;}
+b, strong {
+  font-weight: bolder;
+}
+p {font-weight: 300;}
+.lead {color: #7F7F7F;}
+h1 {font-weight: 500; color: #fff; padding:12px 18px; }
+h2 {color: #023470;}
+h3 {color: #4A4A4A; font-weight: 500;}
+img {max-width: 100%; border-radius: 4px;}
+img.retina {zoom:50%; -moz-transform:scale(.5); -moz-transform-origin: left top;}
+.pull-left {margin-right: 30px;}
+.pull-right {margin-left: 30px;}
+a {-webkit-text-decoration-skip: ink; -webkit-text-decoration-color: #023470;}
+a:not([class])[target="_blank"]::after {
+  content:" \e91c";
+  font-family: "upc-icones";
+  font-size: 75%;
+  position: relative;
+}
+a:not([class])[href$=".pdf"]::before {
+  content:" \e91d";
+  font-family: "upc-icones";
+  font-size: 100%;
+  color: #ED4033;
+  position: relative;
+  margin-right: 6px;
+}
+a:focus {
+  outline: 5px solid rgba(#1FBDEE,.5);
+  outline-offset: 0;
+  z-index: initial;
+  transition: .25s all ease;
+}
+*:active:focus {
+  outline: 0 !important;
+}
+ul, ol {    padding-left: 24px;}
+.required::after {
+  color:#B32801;
+  content:"\e906";
+  font-family: "upc-icones";
+  font-size: calc(100% * 2 / 3);
+}
+
+.document-heading {
+  font-size: $font-size-xxl;
+  color: #4A4A4A;
+  background: transparent;
+  border-bottom: 3px solid #B8C6C8;
+  margin: -6px 0 36px 0;
+  padding: 0 0 12px 0;
+}
+.document-description, .lead {
+  font-size:$font-size-l;
+  color:#7F7F7F;
+  margin-bottom: 30px;
+}
+.composite-description {
+  margin-bottom: 30px;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+.note {
+  font-size: $font-size-xxxs;
+  strong {
+    display: block;
+    padding-left: 18px;
+    &::before {
+      content:"\e903";
+      color: #A71FAF;
+      font-family: "upc-icones";
+      position: absolute;
+      line-height: 0;
+      font-size: 125%;
+      margin-top: 7px;
+      margin-left: -18px;
+    }
+  }
+}
+.note-mark {
+  color: #A71FAF;
+  font-family: "upc-icones";
+  font-size: 75%;
+}
+
+.well {
+  padding: 18px;
+  background-color: #F2F5F6;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  margin-bottom: 40px;
+  > img + *, > :first-child {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+.well-inverse {
+  background-color: #636363;
+  color: #fff;
+  padding: 48px;
+  text-align: center;
+}
+.alert-fixed {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+  opacity: .95;
+  z-index: 1000;
+  box-shadow: 0 0 1px 1px rgba(0,0,0,.05);
+  & ~ footer {
+    margin-bottom: 57px;
+  }
+}
+.alert-cookies {
+  background: rgba(255,255,255,.95);
+  strong {margin-right:12px;}
+
+}
+
+.space-bottom {margin-bottom: 24px;}
+.space-top {margin-top: 24px;}
+
+.grau-lloc {margin-left: 6px;}
+
+
+
+/*layout*/ //s'ha de moure
+.row.same-height {
+  display: flex;
+  flex-wrap: wrap;
+  & > [class*='col-'] {
+          display: flex;
+          flex-direction: column;
+      }
+  &::after,
+  &::before {
+          display: flex;
+      }
+}
+.text-middle {vertical-align: middle;  justify-content: center;}
+.compat-object-fit img {opacity: 0;}

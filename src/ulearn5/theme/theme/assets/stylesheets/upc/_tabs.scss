@@ -1,0 +1,75 @@
+.nav-tabs {
+  display: table;
+  width: calc(100% + 12px);
+  border-spacing: 3px;
+  margin: auto -6px;
+  border-bottom: 0;
+  table-layout: fixed;
+  margin-bottom: 24px;
+  > li {
+    display: table-cell;
+    float: none;
+    vertical-align: bottom;
+    width: 100%;
+  }
+  > li > a {
+    border:0;
+    border-bottom: 3px solid #EDF1F2;
+    margin-right: 3px;
+    padding: 15px;
+    transition: .25s all ease;
+  }
+  &:last-child a {
+    margin-right: 0;
+  }
+}
+.tab-content {
+  margin-bottom: 40px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #4A4A4A;
+    font-weight: 500;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 3px solid #007BC1;
+    cursor: default;
+}
+.nav-tabs>li>a:hover {
+    border-bottom-color: #B8C6C8;
+    transition: .25s all ease;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+    background-color: transparent;
+}
+
+@media (#{$max-width}: $screen-xs) {
+  .nav-tabs {
+    table-layout: auto;
+  }
+  .tabs-responsive {
+    overflow: scroll;
+    position: relative;
+
+      background:
+        radial-gradient(24px 24px ellipse at left center, white, rgba(255,255,255,0)),
+        radial-gradient(24px 24px ellipse at right center, white, rgba(255,255,255,0)) 100% 0,
+        radial-gradient(12px 24px ellipse at left center, #d1d1d1, rgba(255,255,255,0)),
+        radial-gradient(12px 24px ellipse at right center, #d1d1d1, rgba(255,255,255,0)) 100% 0;
+
+
+
+  background-repeat: no-repeat;
+  background-size: 0 100%, 0 100%, 12px 100%, 12px 100%;
+  background-attachment: local, local, scroll, scroll;
+
+  margin-left:-15px;
+  margin-right: -15px;
+  margin-bottom:24px;
+  .nav-tabs {
+    position: relative;
+    box-shadow: inset 35px 0 15px -15px white, inset -35px 0 15px -15px white;
+    padding: 0 12px;
+    margin-bottom:0;
+  }
+  }
+}

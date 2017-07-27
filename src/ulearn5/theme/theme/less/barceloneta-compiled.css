@@ -4876,3 +4876,50 @@ body.template-logged_out #content-core .portletFooter {
   margin-right: 0.5rem;
 }
 /*# sourceMappingURL=++theme++barceloneta/less/barceloneta-compiled.css.map */
+
+.row-fluid, #dashboard, .fila, .template-album_view #content-core {
+    width: 100%;
+}
+
+.row-fluid [class*="span"]:first-child, #dashboard [class*="span"]:first-child, .fila [class*="span"]:first-child, .template-album_view #content-core [class*="span"]:first-child, .row-fluid .cella:first-child, #dashboard .cella:first-child, .fila .cella:first-child, .template-album_view #content-core .cella:first-child {
+    margin-left: 0;
+}
+
+.row-fluid .span3, #dashboard .span3, .fila .span3, .template-album_view #content-core .span3, .row-fluid #dashboard-portlets1, #dashboard #dashboard-portlets1, .fila #dashboard-portlets1, .template-album_view #content-core #dashboard-portlets1, .row-fluid #dashboard-portlets2, #dashboard #dashboard-portlets2, .fila #dashboard-portlets2, .template-album_view #content-core #dashboard-portlets2, .row-fluid #dashboard-portlets3, #dashboard #dashboard-portlets3, .fila #dashboard-portlets3, .template-album_view #content-core #dashboard-portlets3, .row-fluid #dashboard-portlets4, #dashboard #dashboard-portlets4, .fila #dashboard-portlets4, .template-album_view #content-core #dashboard-portlets4, .row-fluid .w1\3a 4, #dashboard .w1\3a 4, .fila .w1\3a 4, .template-album_view #content-core .w1\3a 4, .row-fluid .photoAlbumEntry, #dashboard .photoAlbumEntry, .fila .photoAlbumEntry, .template-album_view #content-core .photoAlbumEntry {
+    width: 22.69939%;
+}
+
+.row-fluid [class*="span"], #dashboard [class*="span"], .fila [class*="span"], .template-album_view #content-core [class*="span"], .row-fluid .cella, #dashboard .cella, .fila .cella, .template-album_view #content-core .cella {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    margin-left: 3.06748%;
+}
+.row-fluid .span9, #dashboard .span9, .fila .span9, .template-album_view #content-core .span9, .row-fluid .w3\3a 4, #dashboard .w3\3a 4, .fila .w3\3a 4, .template-album_view #content-core .w3\3a 4 {
+    width: 74.23313%;
+}
+.row-fluid [class*="span"], #dashboard [class*="span"], .fila [class*="span"], .template-album_view #content-core [class*="span"], .row-fluid .cella, #dashboard .cella, .fila .cella, .template-album_view #content-core .cella {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    margin-left: 3.06748%;
+}
+
+.badges .box_badges {
+    display: inline;
+    padding-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.row-fluid .span6, #dashboard .span6, .fila .span6, .template-album_view #content-core .span6, .row-fluid .w1\3a 2, #dashboard .w1\3a 2, .fila .w1\3a 2, .template-album_view #content-core .w1\3a 2, .row-fluid .w2\3a 4, #dashboard .w2\3a 4, .fila .w2\3a 4, .template-album_view #content-core .w2\3a 4 {
+    width: 48.46626%;
+}

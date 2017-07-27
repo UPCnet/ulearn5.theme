@@ -1,0 +1,21 @@
+.tooltip {
+  font-size: $font-size-xxxs;
+  font-weight: 300;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.25));
+  transition-delay: 2s;
+  .tooltip-inner {
+    background: #EDF1F2;
+    color:#636363;
+  }
+  &.top .tooltip-arrow {
+    border-top-color: #EDF1F2;
+  }
+}
+.tooltip:not(.in) {
+  .tooltip-inner, .tooltip-arrow {
+    transition: all .25s ease;
+    -webkit-filter: blur(20px);
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
