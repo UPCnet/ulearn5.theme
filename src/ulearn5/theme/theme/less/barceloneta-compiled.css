@@ -4923,3 +4923,19 @@ body.template-logged_out #content-core .portletFooter {
 .row-fluid .span6, #dashboard .span6, .fila .span6, .template-album_view #content-core .span6, .row-fluid .w1\3a 2, #dashboard .w1\3a 2, .fila .w1\3a 2, .template-album_view #content-core .w1\3a 2, .row-fluid .w2\3a 4, #dashboard .w2\3a 4, .fila .w2\3a 4, .template-album_view #content-core .w2\3a 4 {
     width: 48.46626%;
 }
+
+header#content-header {
+    background: #f58d3d;
+}
+
+#portal-header {
+    border-top: none;
+    border-bottom: none;
+    background: none;
+    box-shadow: none;
+}
+
+.searchSection {
+    margin-bottom: 0;
+    margin-top: 0;
+}

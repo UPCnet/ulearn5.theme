@@ -1,0 +1,91 @@
+<div id="communitysearch" ng-cloak>
+
+    <h2>{{'SEARCHUSERS.THINNKERS' | translate}}
+    </h2>
+
+    <div id="searchinputusers">
+      <div class="input-append">
+        <input ng-model="ctrl.query" ng-keyup="ctrl.searchby()"
+               class="searchInput" type="text" placeholder="{{'SEARCHUSERS.SEARCH' | translate}}" />
+        <span class="add-on"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+
+    <div id="subscribealert" class="alert alert-info" role="alert">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        <p>
+        <tal:msg>{{'SEARCHUSERS.USE_THE_SEARCH_INPUT_TO_FIND_MORE_PEOPLE1' | translate}}
+        </tal:msg>
+        <span ng-if="ctrl.users.big === true">
+            <tal:msg>{{'SEARCHUSERS.USE_THE_SEARCH_INPUT_TO_FIND_MORE_PEOPLE2' | translate}} </tal:msg>
+            <span>{{ctrl.users.length}}</span>
+            <tal:msg>{{'SEARCHUSERS.PEOPLE' | translate}} </tal:msg>
+        </span>
+        </p>
+      </div>
+
+    <div class="pagination">
+      <dir-pagination-controls boundary-links="true" template-url="++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+
+    <section id="userlist">
+
+      <div ng-if="ctrl.users.big === true">
+        <div dir-paginate="user in ctrl.users.content | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
+          <div class="directori_usuari_foto">
+            <a ng-href="{{user.url}}" ng-bind-html="user.foto">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="ctrl.users.big === false">
+        <ul class="sortablelist"
+          ng-if="ctrl.users.length > 0">
+          <span dir-paginate="user in ctrl.users.content | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
+            <li class="mix">
+              <div class="row-fluid">
+
+                <div class="span3">
+                  <a class="photo" ng-href="{{user.url}}" ng-bind-html="user.foto"></a>
+                </div>
+
+                <div class="span9">
+                  <a ng-href="{{user.url}}">
+                    <h4><span>{{user.fullname}}</span> <span class="usuari_petit">{{user.id}}</span></h4>
+                  </a>
+                  <span ng-repeat="field in ctrl.properties">
+                    <p class="queryable" ng-show="user[field['name']]">
+                        <a target="_blank" ng-if="(field['name'] === 'email')"
+                           ng-href="mailto:{{user[field['name']]}}">
+                          <i class="queryable {{field['icon']}}"></i>
+                        </a>
+                      <span ng-if="(field['name'] != 'email')">
+                         <i class="queryable {{field['icon']}}" ng-click="ctrl.searchby(user[field['name']])"></i>
+                      </span>
+                      <span ng-if="(field['name'] == 'collectiveFaculty')">
+                        {{ getFacultyLabel(user[field['name']]) }}
+                      </span>
+                      <span ng-if="(field['name'] != 'collectiveFaculty')">
+                        {{ user[field['name']] }}
+                      </span>
+                    </p>
+                  </span>
+                </div>
+
+              </div>
+            </li>
+          </span>
+        </ul>
+      </div>
+
+     <div class="clearfix" ng-if="ctrl.users.big === true">
+     </div>
+
+
+    </section>
+    <div class="pagination">
+      <dir-pagination-controls boundary-links="true" template-url="++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+
+</div>

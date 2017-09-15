@@ -1,0 +1,29 @@
+<v-modal class="vModal--default" onclose="statsmodal.close()">
+  <v-dialog heading="My modal" small middle>
+    <v-close label="Close"></v-close>
+
+    <h1>{{ 'STATS.RESULTDETAIL' | translate }}</h1>
+
+     <table class="table table-striped">
+<!--        <thead>
+         <tr>
+           <th></th>
+           <th ng-repeat="header in resultsctrl.column_headers">{{ header }}</th>
+         </tr>
+       </thead> -->
+
+       <tbody>
+       <tr ng-repeat="register in statsmodal.drilldown">
+          <td>{{ register.context }}</td>
+          <td> {{ register.username }}</td>
+          <td> {{ register.count }}</td>
+       </tr>
+       </tbody>
+     </table>
+
+    <div style="text-align: center;">
+      <button class="btn btn-primary" ng-click="statsmodal.close()">OK</button>
+    </div>
+    <div style="height: 40px;"></div>
+  </v-dialog>
+</v-modal>

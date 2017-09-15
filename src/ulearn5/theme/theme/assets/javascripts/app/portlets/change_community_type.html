@@ -1,0 +1,36 @@
+
+<div class="ngdialog-message">
+    <h2>{{ 'CHANGECOMMUNITYTYPE_VIEW.TITLE' | translate }}</h2>
+    <div class="pill" ng-class="{selected: selected === 'Closed'}" ng-click="selected='Closed'">
+        <div class="text-center">
+            <i class="fa fa-lock"></i>
+            {{ 'CHANGECOMMUNITYTYPE_VIEW.CLOSED' | translate }}
+        </div>
+    </div>
+    <div class="pill" ng-class="{selected: selected === 'Open'}" ng-click="selected='Open'">
+        <div class="text-center">
+            <i class="fa fa-unlock"></i>
+            {{ 'CHANGECOMMUNITYTYPE_VIEW.OPEN' | translate }}
+        </div>
+    </div>
+    <div class="pill" ng-class="{selected: selected === 'Organizative'}" ng-click="selected='Organizative'">
+        <div class="text-center">
+            <i class="fa fa-sitemap"></i>
+            {{ 'CHANGECOMMUNITYTYPE_VIEW.ORGANIZATIVE' | translate }}
+        </div>
+    </div>
+    <div class="subpill">
+        {{ 'CHANGECOMMUNITYTYPE_VIEW.CLOSEDDESC' | translate }}
+    </div>
+    <div class="subpill">
+        {{ 'CHANGECOMMUNITYTYPE_VIEW.OPENDESC' | translate }}
+    </div>
+    <div class="subpill">
+        {{ 'CHANGECOMMUNITYTYPE_VIEW.ORGANIZATIVEDESC' | translate }}
+    </div>
+    <button class="btn btn-large btn-comunitat"
+            ng-disabled="selected === ngDialogData.community_type"
+            ng-click="changeCommunityType(selected)">
+            {{ 'COMMON.SAVE' | translate }}
+    </button>
+</div>

@@ -1,0 +1,50 @@
+<div class="documentEditable">
+<div>
+  <div id="viewlet-above-content-title"></div>
+  <h1 class="documentFirstHeading">{{ 'STATS.TITLE' | translate }}</h1>
+
+    <ul class="nav nav-tabs">
+      <li ui-sref-active-eq="active">
+        <a ui-sref="stats.activity">{{ 'STATS.ACTIVITY' | translate }}</a>
+      </li>
+      <li ui-sref-active-eq="active">
+        <a ui-sref="stats.chats" ui-sref-opts="{reload: true}">{{ 'STATS.CHATS' | translate }}</a>
+      </li>
+    </ul>
+
+    <div ui-view></div>
+
+<br/>
+  <div ng-controller="ResultsController as resultsctrl">
+
+  <div id="stats-results"
+
+       ng-show="resultsctrl.show">
+
+     <div id="viewlet-above-content-title"></div>
+     <h2 class="documentFirstHeading">{{ 'STATS.RESULTSTITLE' | translate }}</h2>
+
+     <table class="table table-striped">
+       <thead>
+         <tr>
+           <th></th>
+           <th ng-repeat="header in resultsctrl.column_headers">{{ header }}</th>
+         </tr>
+       </thead>
+
+       <tbody>
+       <tr ng-repeat="row in resultsctrl.results">
+          <td ng-repeat="item in row track by $index">{{ item.value }}
+            <a href="" class="fa fa-question-circle"
+              ng-show="item.show_drilldown"
+              ng-click="resultsctrl.show_modal(item)"></a>
+          </td>
+       </tr>
+       </tbody>
+     </table>
+
+  </div>
+  </div>
+
+</div>
+</div>

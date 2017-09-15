@@ -1,0 +1,86 @@
+<div class="row-fluid">
+  <div class="field empty span6">
+      <label for="form-widgets-IDublinCore-effective" class="horizontal">
+      {{ 'STATS.STARTDATE' | translate }}
+          <span class="formHelp"></span>
+      </label>
+
+      <!-- month -->
+
+      <select class="month datetime-widget datetime-field" id="first_month" name="first_month"
+              ng-model="statsctrl.startMonth"
+              ng-options="month for month in statsctrl.months">
+      </select>
+      <span class="separator">/</span>
+
+      <!-- year -->
+
+      <select class="year datetime-widget datetime-field" id="first_month_year" name="first_month_year"
+              ng-model="statsctrl.startYear"
+              ng-options="year for year in statsctrl.years">
+      </select>
+  </div>
+
+  <div class="field empty span6">
+      <label for="form-widgets-IDublinCore-effective" class="horizontal">
+      {{ 'STATS.ENDDATE' | translate }}
+          <span class="formHelp"></span>
+      </label>
+
+      <!-- month -->
+
+      <select class="month datetime-widget datetime-field" id="first_month" name="first_month"
+              ng-model="statsctrl.endMonth"
+              ng-options="month for month in statsctrl.months">
+      </select>
+      <span class="separator">/</span>
+
+      <!-- year -->
+
+      <select class="year datetime-widget datetime-field" id="first_month_year" name="first_month_year"
+              ng-model="statsctrl.endYear"
+              ng-options="year for year in statsctrl.years">
+      </select>
+  </div>
+</div>
+<br />
+
+<div class="row-fluid">
+  <div class="field empty span6">
+    <label for="form-widgets-IDublinCore-effective" class="horizontal" i18n:translate="Usuario_stats">
+      {{ 'STATS.USER' | translate }}
+      <span class="formHelp"></span>
+    </label>
+
+    <ui-select ng-model="statsctrl.selected_user" theme="selectize" style="width: 300px;">
+      <ui-select-match placeholder="{{'STATS.SEARCHUSERS' | translate}}">{{$select.selected.text}}</ui-select-match>
+      <ui-select-choices repeat="principal in statsctrl.principals"
+           refresh="statsctrl.refreshUsers($select.search)"
+           refresh-delay="400">
+          <div ng-bind-html="principal.text | highlight: $select.search"></div>
+      </ui-select-choices>
+    </ui-select>
+
+  </div>
+</div>
+
+<br/>
+
+<div class="row-fluid">
+    <div class=" span8 formControls">
+        <button id="form-buttons-load" class="button-field context"
+                ng-click="statsctrl.search()">{{ 'STATS.FIND' | translate }}</button>
+        <button id="form-buttons-export" class="button-field context" i18n:translate="exporta"
+                ng-click="statsctrl.export()">{{ 'STATS.EXPORT' | translate }}</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true" i18n:translate="btnCancel">
+        {{ 'STATS.CANCELA' | translate }}</button>
+    </div>
+    <div class="span4 formControls"
+         ng-if="statsctrl.extended_report">
+        <button id="form-buttons-activity-chats"
+                class="button-field context"
+                i18n:domain="ulearn"
+                i18n:translate="btnInfo"
+                ng-click="statsctrl.chats()">{{ 'STATS.INFO' | translate }}</button>
+    </div>
+</div>
