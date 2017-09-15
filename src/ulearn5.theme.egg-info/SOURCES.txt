@@ -8,6 +8,7 @@ setup.py
 docs/LICENSE.GPL
 docs/LICENSE.rst
 docs/index.rst
+src/ulearn5/.DS_Store
 src/ulearn5/__init__.py
 src/ulearn5.theme.egg-info/PKG-INFO
 src/ulearn5.theme.egg-info/SOURCES.txt
@@ -17,11 +18,13 @@ src/ulearn5.theme.egg-info/namespace_packages.txt
 src/ulearn5.theme.egg-info/not-zip-safe
 src/ulearn5.theme.egg-info/requires.txt
 src/ulearn5.theme.egg-info/top_level.txt
+src/ulearn5/theme/.DS_Store
 src/ulearn5/theme/__init__.py
 src/ulearn5/theme/configure.zcml
 src/ulearn5/theme/interfaces.py
 src/ulearn5/theme/setuphandlers.py
 src/ulearn5/theme/testing.py
+src/ulearn5/theme/browser/.DS_Store
 src/ulearn5/theme/browser/__init__.py
 src/ulearn5/theme/browser/configure.zcml
 src/ulearn5/theme/browser/user_profile.py

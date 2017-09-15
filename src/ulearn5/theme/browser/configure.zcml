@@ -73,5 +73,18 @@
       template="tiles/custombuttonbar/custombuttonbar.pt"
       />
 
+  <plone:tile
+      name="flashesinformativos"
+      title="Flashesinformativos"
+      description="Banner used to show premsa-destacat-agenda"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.flashesinformativos.flashesinformativos.IFlashesInformativos"
+
+      class="ulearn5.theme.browser.tiles.flashesinformativos.flashesinformativos.FlashesInformativos"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/flashesinformativos/flashesinformativos.pt"
+      />
 
 </configure>

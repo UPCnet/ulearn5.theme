@@ -28,6 +28,29 @@
 	<records prefix="plone.resources/prueba"
 	          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
 	  <value key="js">+++theme++ulearn5-theme/assets/javascripts/app/portlets/controllers.js</value>
+
+<!-- 	<records prefix="plone.bundles/bootstrap-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">++theme++ulearn5-theme/assets/css/bootstrap.css</value>
+			<value key="last_compilation">2017-07-28 00:00:00</value>
+	</records> -->
+
+<!-- 	<records prefix="plone.bundles/genweb-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">++theme++ulearn5-theme/assets/css/genwebupc.css</value>
+			<value key="last_compilation">2017-07-28 00:00:00</value>
+	</records> -->
+
+	<records prefix="plone.bundles/ulearn-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">++theme++ulearn5-theme/assets/css/ulearn.css</value>
+			<value key="last_compilation">2017-07-28 00:00:00</value>
 	</records>
 
 	<records prefix="plone.app.mosaic.app_tiles.banner"
@@ -86,5 +109,18 @@
 	    <value key="weight">20</value>
 	</records>
 
+	<records prefix="plone.app.mosaic.app_tiles.flashesinformativos"
+	         interface="plone.app.mosaic.interfaces.ITile">
+	    <value key="name">flashesinformativos</value>
+	    <value key="label">Flashesinformativos</value>
+	    <value key="category">advanced</value>
+	    <value key="tile_type">app</value>
+	    <value key="default_value"></value>
+	    <value key="read_only">false</value>
+	    <value key="settings">true</value>
+	    <value key="favorite">false</value>
+	    <value key="rich_text">false</value>
+	    <value key="weight">20</value>
+	</records>
 
 </registry>

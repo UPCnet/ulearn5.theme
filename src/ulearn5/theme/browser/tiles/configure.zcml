@@ -13,5 +13,10 @@
       layer="*"
       />
 
+  <browser:resourceDirectory
+      name="flashesinformativos"
+      directory="flashesinformativos"
+      layer="*"
+      />
 
 </configure>
