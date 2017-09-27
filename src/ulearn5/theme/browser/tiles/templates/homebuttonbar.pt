@@ -10,7 +10,7 @@
             <div tal:condition="ulearn_utils/is_activate_sharedwithme" id="menusup" i18n:domain="ulearn">
                 <nav>
                     <div class="row-fluid">
-                        <div class="active bubble top span4" ng-class="{active: ctrl.active_tab == 'stream'}">
+                        <div class="active bubble top col-md-4" ng-class="{active: ctrl.active_tab == 'stream'}">
                             <div class="arrow"></div>
                             <div class="bubble-content">
                                 <a ng-click="ctrl.active_tab = 'stream'">
@@ -19,7 +19,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="bubble top span4" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
+                        <div class="bubble top col-md-4" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
                             <div class="arrow"></div>
                             <div class="bubble-content">
                                 <a ng-click="ctrl.active_tab = 'mycommunities'">
@@ -28,7 +28,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="bubble top span4" ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
+                        <div class="bubble top col-md-4" ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
                             <div class="arrow"></div>
                             <div class="bubble-content">
                                 <a ng-click="ctrl.active_tab = 'sharedwithme'">
@@ -42,8 +42,8 @@
             </div>
             <div tal:condition="not:ulearn_utils/is_activate_sharedwithme" id="menusup" i18n:domain="ulearn">
                 <nav>
-                    <div class="row-fluid">
-                        <div class="active bubble top span6" ng-class="{active: ctrl.active_tab == 'stream'}">
+                    <div class="row">
+                        <div class="active bubble top col-md-6" ng-class="{active: ctrl.active_tab == 'stream'}">
                             <div class="arrow"></div>
                             <div class="bubble-content">
                                 <a ng-click="ctrl.active_tab = 'stream'">
@@ -52,7 +52,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="bubble top span6" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
+                        <div class="bubble top col-md-6" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
                             <div class="arrow"></div>
                             <div class="bubble-content">
                                 <a ng-click="ctrl.active_tab = 'mycommunities'">
@@ -106,53 +106,7 @@
                         </div>
                     </div>
                 </div>
-              <div id="librarysearch" i18n:domain="ulearn">
-                <div id="sharedwithme-container" ng-switch-when="sharedwithme">
-                    <div id="shared-with-me-view" ng-controller="SharedWithMe as ctrl">
-                        <div class="caixessearch_shared">
-                          <div id="searchinputcontent">
-                           <div class="input-append">
-                              <input ng-model="q"
-                                     class="searchInput" type="text" placeholder="Cerca"
-                                     i18n:attributes="placeholder search">
-                              <span class="add-on"><i class="fa fa-search"></i></span>
-                            </div>
-                          </div>
-                        </div>
 
-                        <section id="sharedlist">
-                            <div id="content-core">
-                                <p ng-if="ctrl.shared_items.length == 0" ng-cloak i18n:translate="no_content_shared_user">There is no content shared with you right now.</p>
-                                <div class="tileItem visualIEFloatFix" dir-paginate="shared_item in ctrl.shared_items | filter:q | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
-                                    <h4 class="tileHeadline {{shared_item.portal_type}}" >
-                                        <a ng-href="{{shared_item.url}}" class="summary url">{{shared_item.title}} </a>
-                                    </h4>
-                                    <div class="documentByLine">
-                                    </div>
-                                    <p class="tileBody">
-                                        <span class="description">{{shared_item.description}}</span>
-                                    </p>
-                                    <div class="shared_by">
-                                      <i class="fa fa-share-alt icons"></i>Compartido por
-                                      <a ng-href="{{shared_item.by_profile}}">{{shared_item.by}}</a>
-                                    </div>
-                                    <div class="shared_from">
-                                      desde
-                                      <span class="shared_from_community">{{shared_item.community_displayname}}</span>
-                                    </div>
-                                    <div class="visualClear">
-                                        <!-- -->
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="pagination">
-                            <dir-pagination-controls boundary-links="true" template-url="++components++ulearn/angular-utils-pagination/dirPagination.tpl.html">
-                            </dir-pagination-controls>
-                        </div>
-                    </div>
-                </div>
-              </div>
             </div>
         </div>
   </body>
