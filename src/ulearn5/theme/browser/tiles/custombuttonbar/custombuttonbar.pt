@@ -40,7 +40,7 @@
                </fieldset>
           </div>
 
-          <div class="active bubble top span4">
+          <div class="active bubble top col-md-4">
             <div class="arrow"></div>
             <div class="bubble-content">
               <a href="#"
@@ -51,7 +51,7 @@
             </div>
           </div>
 
-          <div class="bubble top span4">
+          <div class="bubble top col-md-4">
             <div class="arrow"></div>
             <div class="bubble-content">
               <a href="#"
@@ -62,7 +62,7 @@
             </div>
           </div>
 
-          <div class="bubble top span4">
+          <div class="bubble top col-md-4">
             <div class="arrow"></div>
             <div class="bubble-content">
               <a href="#"

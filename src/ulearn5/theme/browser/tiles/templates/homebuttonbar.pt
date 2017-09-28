@@ -72,13 +72,13 @@
                             <ul>
                                 <li dir-paginate="community in ctrl.user_communities | filter:q | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
                                     <div class="row-fluid">
-                                        <div class="span2">
+                                        <div class="col-md-2">
                                             <a ng-href="{{community.url}}">
                                                 <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/thumb" />
                                                 <img ng-if="!community.image" src="/++ulearn++static/images/avatar_default.png" />
                                             </a>
                                         </div>
-                                        <div class="span10">
+                                        <div class="col-md-10">
                                             <a ng-href="{{community.url}}">
                                                 <h4>{{community.title}}</h4>
                                                 <p>{{community.description}}</p>

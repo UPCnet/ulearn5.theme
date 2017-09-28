@@ -25,25 +25,6 @@
 	    </value>
 	</record>
 
-	<records prefix="plone.resources/prueba"
-	          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-	  <value key="js">+++theme++ulearn5-theme/assets/javascripts/app/portlets/controllers.js</value>
-
-<!-- 	<records prefix="plone.bundles/bootstrap-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/assets/css/bootstrap.css</value>
-			<value key="last_compilation">2017-07-28 00:00:00</value>
-	</records> -->
-
-<!-- 	<records prefix="plone.bundles/genweb-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/assets/css/genwebupc.css</value>
-			<value key="last_compilation">2017-07-28 00:00:00</value>
-	</records> -->
 
 	<records prefix="plone.bundles/ulearn-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 			<value key="resources"> </value>

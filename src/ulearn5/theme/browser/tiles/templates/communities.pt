@@ -93,5 +93,7 @@
         </div>
       </div>
     </tal:showcreate>
+
+   </div>
   </body>
 </html>
