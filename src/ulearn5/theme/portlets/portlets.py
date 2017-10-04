@@ -7,19 +7,19 @@ from base5.core.browser.interfaces import IHomePage
 
 
 # Not used
-class ulearnCommunitiesNavigation(NavigationRenderer):
-    """ The standard navigation portlet override 'old style'
-        as it doesn't allow to do it jbot way...
-    """
-    _template = ViewPageTemplateFile('templates/navigation.pt')
-    recurse = ViewPageTemplateFile('templates/navigation_recurse.pt')
+# class ulearnCommunitiesNavigation(NavigationRenderer):
+#     """ The standard navigation portlet override 'old style'
+#         as it doesn't allow to do it jbot way...
+#     """
+#     _template = ViewPageTemplateFile('templates/navigation.pt')
+#     recurse = ViewPageTemplateFile('templates/navigation_recurse.pt')
 
-    def showCreateCommunity(self):
-        if IHomePage.providedBy(self.context):
-            return True
+#     def showCreateCommunity(self):
+#         if IHomePage.providedBy(self.context):
+#             return True
 
-    def showEditCommunity(self):
-        if not IPloneSiteRoot.providedBy(self.context) and \
-           ICommunity.providedBy(self.context) and \
-           checkPermission('cmf.RequestReview', self.context):
-            return True
+#     def showEditCommunity(self):
+#         if not IPloneSiteRoot.providedBy(self.context) and \
+#            ICommunity.providedBy(self.context) and \
+#            checkPermission('cmf.RequestReview', self.context):
+#             return True

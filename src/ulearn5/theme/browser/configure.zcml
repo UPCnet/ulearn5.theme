@@ -23,7 +23,6 @@
       description="Banner used to show premsa-destacat-agenda"
       add_permission="cmf.ModifyPortalContent"
       schema="ulearn5.theme.browser.tiles.banner.IBanner"
-
       class="ulearn5.theme.browser.tiles.banner.Banner"
       permission="zope2.View"
       for="*"
@@ -37,7 +36,6 @@
       description="Banner used to show premsa-destacat-agenda"
       add_permission="cmf.ModifyPortalContent"
       schema="ulearn5.theme.browser.tiles.homebuttonbar.IHomeButtonBar"
-
       class="ulearn5.theme.browser.tiles.homebuttonbar.HomeButtonBar"
       permission="zope2.View"
       for="*"
@@ -51,7 +49,6 @@
       description="Banner used to show premsa-destacat-agenda"
       add_permission="cmf.ModifyPortalContent"
       schema="ulearn5.theme.browser.tiles.communities.ICommunities"
-
       class="ulearn5.theme.browser.tiles.communities.Communities"
       permission="zope2.View"
       for="*"
@@ -65,7 +62,6 @@
       description="Banner used to show premsa-destacat-agenda"
       add_permission="cmf.ModifyPortalContent"
       schema="ulearn5.theme.browser.tiles.custombuttonbar.custombuttonbar.ICustomButtonBar"
-
       class="ulearn5.theme.browser.tiles.custombuttonbar.custombuttonbar.CustomButtonBar"
       permission="zope2.View"
       for="*"
@@ -79,12 +75,24 @@
       description="Banner used to show premsa-destacat-agenda"
       add_permission="cmf.ModifyPortalContent"
       schema="ulearn5.theme.browser.tiles.flashesinformativos.flashesinformativos.IFlashesInformativos"
-
       class="ulearn5.theme.browser.tiles.flashesinformativos.flashesinformativos.FlashesInformativos"
       permission="zope2.View"
       for="*"
       layer="*"
       template="tiles/flashesinformativos/flashesinformativos.pt"
+      />
+
+  <plone:tile
+      name="thinnkers"
+      title="Thinnkers"
+      description="The tile display all people or community people"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.thinnkers.thinnkers.IThinnkers"
+      class="ulearn5.theme.browser.tiles.thinnkers.thinnkers.Thinnkers"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/thinnkers/thinnkers.pt"
       />
 
 </configure>

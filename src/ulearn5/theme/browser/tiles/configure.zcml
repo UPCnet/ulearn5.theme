@@ -19,4 +19,10 @@
       layer="*"
       />
 
+  <browser:resourceDirectory
+      name="thinnkers"
+      directory="thinnkers"
+      layer="*"
+      />
+
 </configure>
