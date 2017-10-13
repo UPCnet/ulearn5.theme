@@ -79,7 +79,7 @@
       </li>
     </ul>
 
-    <tal:showcreate condition="view/showCreateCommunity">
+<!--     <tal:showcreate condition="view/showCreateCommunity">
       <a href="#addModal" class="plone-btn plone-btn-large plone-btn-primary pat-plone-modal" data-pat-plone-modal="width: 600">
         <i class="fa fa-group"></i>
         <tal:createcommunity i18n:translate="createcommunity">Create a new community</tal:createcommunity>
@@ -93,7 +93,7 @@
         </div>
       </div>
     </tal:showcreate>
-
+ -->
    </div>
   </body>
 </html>

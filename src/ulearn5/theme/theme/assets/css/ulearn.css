@@ -5017,3 +5017,25 @@ header#content-header {
     overflow: hidden;
 }
 
+
+.ulearnbox_agenda {
+    background-color: white;
+    position: relative;
+    padding: 0;
+    clear: both;
+    margin-bottom: 0;
+    box-shadow: none;
+    text-align: left;
+}
+
+.ulearnbox_agenda h2 {
+    color: #f58d3d;
+    font-size: 20px;
+    line-height: 26px;
+    margin: 0;
+    padding: 0;
+}
+
+.ulearnbox_calendar {
+  margin-top: 115px;
+}

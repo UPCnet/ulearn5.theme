@@ -25,4 +25,10 @@
       layer="*"
       />
 
+  <browser:resourceDirectory
+      name="maxui"
+      directory="maxui"
+      layer="*"
+      />
+
 </configure>

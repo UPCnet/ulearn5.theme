@@ -95,4 +95,31 @@
       template="tiles/thinnkers/thinnkers.pt"
       />
 
+  <plone:tile
+      name="maxui"
+      title="MaxUI"
+      description="The tile display MaxUI"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.maxui.maxui.IMaxUI"
+      class="ulearn5.theme.browser.tiles.maxui.maxui.MaxUI"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/maxui/maxui.pt"
+      />
+
+  <plone:tile
+      name="calendari"
+      title="Calendari"
+      description="Tile used to show the Calendar"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.calendari.ICalendarTile"
+
+      class="ulearn5.theme.browser.tiles.calendari.CalendarTile"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/templates/calendari.pt"
+      />
+
 </configure>
