@@ -1,0 +1,15 @@
+<footer role="complementary">
+  <div class="container">
+    <div class="row footer-complementary">
+      <div class="col-xs-12">
+        <p><span>©</span>
+          <a href="https://www.upcnet.es" target="_blank">
+            <abbr rel="tooltip" data-placement="top" title="UPCnet - IThinkUPC">
+              UPCnet 2017-${viewlet/get_current_year}
+            </abbr>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

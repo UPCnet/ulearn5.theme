@@ -25,8 +25,10 @@ src/ulearn5/theme/testing.py
 src/ulearn5/theme/browser/__init__.py
 src/ulearn5/theme/browser/configure.zcml
 src/ulearn5/theme/browser/user_profile.py
+src/ulearn5/theme/browser/viewlets.py
 src/ulearn5/theme/browser/tiles/__init__.py
 src/ulearn5/theme/browser/tiles/banner.py
+src/ulearn5/theme/browser/tiles/calendari.py
 src/ulearn5/theme/browser/tiles/communities.py
 src/ulearn5/theme/browser/tiles/configure.zcml
 src/ulearn5/theme/browser/tiles/homebuttonbar.py
@@ -40,9 +42,18 @@ src/ulearn5/theme/browser/tiles/flashesinformativos/flashesinformativos.js
 src/ulearn5/theme/browser/tiles/flashesinformativos/flashesinformativos.pt
 src/ulearn5/theme/browser/tiles/flashesinformativos/flashesinformativos.py
 src/ulearn5/theme/browser/tiles/flashesinformativos/readme.txt
+src/ulearn5/theme/browser/tiles/maxui/__init__.py
+src/ulearn5/theme/browser/tiles/maxui/maxui.pt
+src/ulearn5/theme/browser/tiles/maxui/maxui.py
 src/ulearn5/theme/browser/tiles/templates/banner.pt
+src/ulearn5/theme/browser/tiles/templates/calendari.pt
 src/ulearn5/theme/browser/tiles/templates/communities.pt
 src/ulearn5/theme/browser/tiles/templates/homebuttonbar.pt
+src/ulearn5/theme/browser/tiles/thinnkers/__init__.py
+src/ulearn5/theme/browser/tiles/thinnkers/thinnkers.pt
+src/ulearn5/theme/browser/tiles/thinnkers/thinnkers.py
+src/ulearn5/theme/browser/viewlets_templates/footer.pt
+src/ulearn5/theme/browser/viewlets_templates/header.pt
 src/ulearn5/theme/browser/views_templates/user_profile.pt
 src/ulearn5/theme/locales/ulearn5.theme.pot
 src/ulearn5/theme/locales/update.sh
@@ -124,6 +135,7 @@ src/ulearn5/theme/profiles/default/metadata.xml
 src/ulearn5/theme/profiles/default/portlets.xml
 src/ulearn5/theme/profiles/default/registry.xml
 src/ulearn5/theme/profiles/default/theme.xml
+src/ulearn5/theme/profiles/default/viewlets.xml
 src/ulearn5/theme/profiles/uninstall/browserlayer.xml
 src/ulearn5/theme/profiles/uninstall/theme.xml
 src/ulearn5/theme/tests/__init__.py

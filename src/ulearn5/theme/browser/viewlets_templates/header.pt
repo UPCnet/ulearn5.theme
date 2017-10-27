@@ -1,0 +1,95 @@
+<div id="header-menu" class="container">
+  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn5.theme">
+    <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
+      <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
+      <span aria-hidden="true" role="presentation" class="icona-upc"><img alt="" src="/++theme++ulearn5-theme/assets/images/logomark.png"></span></h1>
+    </a>
+    <div class="button-menu-mobile hidden-md hidden-lg">
+      <a href="#" role="button">Menu<span role="presentation" class="icona-upc">menu</span></a>
+    </div>
+    <div class="button-menu-mobile--close hidden-md hidden-lg">
+      <a href="#" role="button">Menu<span role="presentation" class="icona-upc">close</span></a>
+    </div>
+    <nav role="navigation" class="global-navigation">
+      <h2 class="sr-only" i18n:translate="">Eines</h2>
+      <ul role="menubar" class="upc-eines">
+        <li role="presentation" class="upc-eines-skip"><a href="#main-content" role="menuitem" class="sr-only"> <span>Skip to content</span></a></li>
+        <li tal:condition="viewlet/canManage" role="presentation" class="dropdown upc-eines-info">
+          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${view/portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <tal:management i18n:domain="ulearn" i18n:translate="menu-gestion">
+                      Management</tal:management>
+            <b aria-hidden="true" class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${view/portal_url}/gestion/menu">
+                <i class="fa fa-folder"></i>
+                <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestion-menu">Management menu</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canResetMenu">
+              <a tal:attributes="href string:${view/portal_url}/reset_menu">
+                <i class="fa fa-refresh"></i>
+                <tal:footer i18n:domain="ulearn" i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown upc-eines-info" >
+          <a href="#" id="ql" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="menuitem" aria-haspopup="true">
+            <i tal:attributes="class string:fa ${dades/quickLinksIcon}"></i>
+            <span>
+              <tal:quicklinks tal:content="dades/quickLinksLiteral"> Quick Links </tal:quicklinks><span class="caret"></span>
+            </span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="ql" role="menu" >
+            <li role="presentation" tal:repeat="item dades/quickLinksTable">
+              <tal:span condition="not: item/new_window">
+                <a tal:attributes="href string:${item/link}" role="menuitem">
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/text">Links1</tal:link>
+                </a>
+              </tal:span>
+              <tal:span condition="item/new_window">
+                <a class="quickLinks" tal:attributes="href string:${item/link}" target="_blank" role="menuitem">
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/text">Links1</tal:link>
+                </a>
+              </tal:span>
+            </li>
+          </ul>
+        </li>
+        <!-- <li tal:define="menu viewlet/linksMenu" tal:condition="menu" class="dropdown upc-eines-info" role="presentation" tal:repeat="dades menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" role="menuitem">
+            <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
+            <b aria-hidden="true" class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="menuitem" tal:repeat="item dades/links">
+              <tal:span condition="not: item/new_window">
+                <a tal:attributes="href item/url">
+                  <tal:link tal:content="item/title">Links1</tal:link>
+                </a>
+              </tal:span>
+              <tal:span condition="item/new_window">
+                <a class="quicklinks" tal:attributes="href item/url" target="_blank">
+                  <tal:link tal:content="item/title">Links1</tal:link>
+                </a>
+              </tal:span>
+            </li>
+          </ul>
+        </li> -->
+        <li role="presentation" class="upc-eines-cerca">
+          <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
+            <legend class="sr-only" i18n:translate="">Buscar</legend>
+            <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
+            <fieldset role="search">
+              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" placeholder="Buscar en el Sitio" class="searchField" tal:attributes="value request/input-cerca|nothing">
+              <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
+            </fieldset>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>

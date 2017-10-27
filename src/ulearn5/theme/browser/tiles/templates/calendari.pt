@@ -4,12 +4,13 @@
       i18n:domain="plone"
       tal:omit-tag="">
 
-<!-- <div id="box_agenda" class="ulearnbox">
+<div id="box_agenda" class="ulearnbox">
+  <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
 
   <h2>Agenda</h2>
-  <div class="row-fluid"
+  <div id="agenda" class="row-fluid"
        tal:define="today view/today">
-    <div id="day" class="bubble left col-md-5">
+    <div id="day" class="bubble left span5">
       <div class="arrow"></div>
       <div class="bubble-content">
         <p tal:content="today/number">14</p>
@@ -18,7 +19,7 @@
       </div>
     </div>
 
-    <div id="esdev" class="col-md-6"
+    <div id="esdev" class="span6"
          tal:define="today_event view/get_nearest_today_event">
           <div class="vertical_aligned">
             <a href="#"
@@ -32,47 +33,14 @@
           </div>
     </div>
   </div>
-</div> -->
-
 
 <section class="portlet portletCalendar" role="section"
     tal:define="navigation_root_url context/@@plone_portal_state/navigation_root_url;
                 year view/year;">
 
 <div class="portlet-block portlet-calendari">
-  <header class="portlet-header portletHeader" >
-
-<div id="box_agenda" class="ulearnbox_agenda">
-
-  <h2>Agenda</h2>
-  <div class="row-fluid"
-       tal:define="today view/today">
-    <div id="day" class="bubble left col-md-5">
-      <div class="arrow"></div>
-      <div class="bubble-content">
-        <p tal:content="today/number">14</p>
-        <p class="data"
-           tal:content="today/weekday">Jueves</p>
-      </div>
-    </div>
-
-    <div id="esdev" class="col-md-6"
-         tal:define="today_event view/get_nearest_today_event">
-          <div class="vertical_aligned">
-            <a href="#"
-              tal:condition="today_event"
-              tal:content="today_event/Title"
-              tal:attributes="href today_event/getURL">Desayuno de trabajo: aportando valores a la formación...</a>
-            <a href="#"
-              tal:condition="not: today_event"
-              i18n:domain="ulearn"
-              i18n:translate="not_events_for_today">There are not events today</a>
-          </div>
-    </div>
-  </div>
-</div>
-<div class="ulearnbox_calendar">
-    <a href="#" rel="nofollow" class="calendarPrevious calendari-anterior pat-contentloader" title="Previous month"
+  <header class="portlet-header">
+    <a href="#" rel="nofollow" class="calendari-anterior pat-contentloader" title="Previous month"
         tal:define="prev_month view/prev_month;
                     prev_year view/prev_year"
         tal:attributes="href view/prev_query;
@@ -81,6 +49,7 @@
                         data-pat-contentloader python:view.nav_pattern_options(view.prev_query)"
         i18n:attributes="title title_previous_month;" class="calendari-anterior">&laquo;</a>
 
+<h2>
     <span i18n:translate="" tal:omit-tag="">
       <span i18n:name="monthname" i18n:translate=""
           tal:content="view/month_name"
@@ -89,9 +58,9 @@
           tal:content="year"
           tal:omit-tag="">year</span> -->
     </span>
+    </h2>
 
-
-    <a href="#" rel="nofollow" class="calendarNext calendari-seguent pat-contentloader" title="Next month"
+    <a href="#" rel="nofollow" class="calendari-seguent pat-contentloader" title="Next month"
          tal:define="next_month view/next_month;
                      next_year view/next_year"
          tal:attributes="href view/next_query;
@@ -99,7 +68,6 @@
                          data-month next_month;
                          data-pat-contentloader python:view.nav_pattern_options(view.next_query)"
          i18n:attributes="title title_next_month;" class="calendari-seguent">&raquo;</a>
-  </div>
   </header>
 
   <article class="portlet-content">
@@ -148,6 +116,6 @@
   <footer class="portlet-footer" style="outline-style: none;"><a href="#">Afegeix al calendari iCal</a></footer>
 </div>
 </section>
-
+</div>
 
 </html>
