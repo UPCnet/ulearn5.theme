@@ -11,14 +11,30 @@
      flex: auto;
    }
   }
+  section#main-content > .row { // elimina marges per evitar scroll horitzontal en mobil
+    margin-left: 0;
+    margin-right: 0; 
+  }
+  // adaptacions carousel
+  .carousel-indicators {
+    display: none;
+  }
+  .carousel-caption {
+    font-size: 70%;
+    padding-bottom: 0 !important;
+    h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  }
 }
 @media (#{$max-width}: $screen-md) {
   .main-banner > a {
     flex: initial;
   }
   .main-banner > a h1 > .icona-upc {
-    font-size: 200px;
-    top: -70px;
+    img { width: 263px; }
+    //top: -70px;
   }
   .button-menu-mobile, .button-menu-mobile--close {
     flex: auto;

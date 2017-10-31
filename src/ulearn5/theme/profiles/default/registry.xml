@@ -1,17 +1,5 @@
 <?xml version="1.0"?>
 <registry>
-	<record name="plone.templates" interface="Products.CMFPlone.interfaces.controlpanel.ITinyMCESchema" field="templates">
-	  <field type="plone.registry.field.Text">
-	    <default></default>
-	    <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="help_tinymce_templates">Enter the list of templates in json format                 http://www.tinymce.com/wiki.php/Plugin:template</description>
-	    <required>False</required>
-	    <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone" ns0:translate="label_tinymce_templates">Templates</title>
-	  </field>
-	  <value>[
-	  	{"title": "Image Grid 2x2", "url": "++theme++theme/tinymce-templates/image-grid-2x2.html"}
-	  	]</value>
-	</record>
-
 	<record name="plone.custom_plugins" interface="Products.CMFPlone.interfaces.controlpanel.ITinyMCESchema" field="custom_plugins">
 	    <field type="plone.registry.field.List">
 	      <default/>
@@ -25,13 +13,57 @@
 	    </value>
 	</record>
 
+	<records prefix="plone.resources/bootstrap-popover" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++plone++static/components/bootstrap/js/popover.js</value>
+      <value key="deps">jquery</value>
+  </records>
+
+	<!-- <records prefix="plone.bundles/mo-boots-js" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="resources"> </value>
+    <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/modernizr-bootstrap.js</value>
+    <value key="last_compilation">2017-10-30 00:00:00</value>
+    <value key="compile">False</value>
+    <value key="enabled">True</value>
+  </records>
+
+	<records prefix="plone.bundles/upc-js" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/upc.js</value>
+			<value key="last_compilation">2017-10-30 00:00:00</value>
+	</records>
+
+	<records prefix="plone.bundles/homeupc-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">++theme++ulearn5-theme/assets/css/homeupc-compiled.css</value>
+			<value key="last_compilation">2017-10-30 00:00:00</value>
+	</records>
+
+	<records prefix="plone.bundles/upc-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">++theme++ulearn5-theme/assets/css/upc.css</value>
+			<value key="last_compilation">2017-10-30 00:00:00</value>
+	</records>
 
 	<records prefix="plone.bundles/ulearn-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 			<value key="resources"> </value>
 			<value key="enabled">True</value>
 			<value key="compile">False</value>
 			<value key="csscompilation">++theme++ulearn5-theme/assets/css/ulearn.css</value>
-			<value key="last_compilation">2017-07-28 00:00:00</value>
+			<value key="last_compilation">2017-10-31 00:00:00</value>
+	</records> -->
+
+	<records prefix="plone.bundles/dynamic-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+			<value key="enabled">True</value>
+			<value key="compile">False</value>
+			<value key="csscompilation">dynamic.css</value>
+			<value key="last_compilation">2017-10-30 00:00:00</value>
 	</records>
 
 	<records prefix="plone.app.mosaic.app_tiles.banner"

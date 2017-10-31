@@ -20,13 +20,16 @@
       }
     }
     h1 > .icona-upc {
-      font-size: 320px;
       position: relative;
-      top:-125px;
+      //top:-12px;
       left: 1px;
       @media (#{$max-width}: $screen-md) {
-        font-size: 263px;
-        top:-103px;
+        img { width: 263px; }
+        //top:-103px;
+      }
+      img {
+        margin-top:0;
+        display: block;
       }
     }
   &:hover {
@@ -47,11 +50,16 @@
     padding-left: 0;
     margin-top: 16px;
     text-align: right;
+    //position:relative;
+    > li {
+      //height: 24px;
+    }
     > li > a {
       padding: 9px 12px;
       border-radius: 2px;
       color: $gray-dark;
       transition: all .25s ease;
+      display: inline-block;
       &[aria-expanded="true"], &:hover {
         box-shadow: 0 0 2px $regular-shadow;
         transition: all .25s ease;
@@ -115,16 +123,32 @@
   text-decoration: none;
 }
 li.upc-eines-skip {
-  & a:focus { clip: auto; width: auto; height: auto; overflow: auto; position: relative;}
+  //left: 0;
+  //top: 12px;
+  //position:absolute;
+  & a:focus { clip: auto; width: auto; height: auto; overflow: auto; position: relative; display: inline;}
 }
-li.upc-eines-info {
+li.ulearn-eines-ql {
+  border-right: 1px solid #ccc;
+  margin-right: 12px;
   > a {
-    width: 170px;
+    width: 180px;
     display: inline-block;
     text-align: left;
+    font-weight: 400;
+    margin-right: 6px;
+    font-size: $font-size-s;
+    > span {
+      color: #007BC1;
+    }
+    > span:first-child {
+      text-shadow: 0 0 1px #007BC1;
+      display: inline-block;
+      font-weight: bold;
+    }
   }
   > ul {
-    min-width:170px;
+    min-width:180px;
   }
 }
 li.upc-eines-idiomes {
@@ -165,10 +189,10 @@ li.upc-eines-cerca {
     &:active + button, &:focus + button, &:active:focus + button {
       color: $brand-primary;
     }
-    ::-webkit-input-placeholder {color: $gray-dark;}
-    ::-moz-placeholder { color: $gray-dark;}
-    :-ms-input-placeholder { color: $gray-dark;}
-    :-moz-placeholder { color: $gray-dark;}
+    &::-webkit-input-placeholder {color: $gray-dark;}
+    &::-moz-placeholder { color: $gray-dark;}
+    &:-ms-input-placeholder { color: $gray-dark;}
+    &:-moz-placeholder { color: $gray-dark;}
   }
   button {
     border: 0;
@@ -209,9 +233,8 @@ li.upc-eines-cerca {
     padding: 12px;
     margin: 0 0 0 12px;
     font-weight: 500;
-    text-transform: uppercase;
     &:hover {
-      box-shadow: 0 0 2px $regular-shadow;
+      box-shadow: 0 0 2px $broken-background;
       transition: .25s all ease;
     }
   }
@@ -227,7 +250,7 @@ li.upc-eines-cerca {
   }
   .dropdown-menu {
     margin-top: -4px;
-    box-shadow: 0 0 2px $regular-shadow;
+    box-shadow: 0 0 2px $broken-background;
   }
   .dropdown-menu.te-destacats {
     padding-right: 210px;

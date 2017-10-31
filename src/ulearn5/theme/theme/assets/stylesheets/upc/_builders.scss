@@ -17,7 +17,7 @@
     text-align: center;
     padding: 12px 6px;
     height: 260px;
-    border-radius: 1px;
+    //border-radius: 1px;
     box-shadow: 0 0 0 9px #fff;
     transition: all .25s ease;
     &:hover, &:active {
@@ -44,7 +44,7 @@
 .content-highlighted {
   background: $gray-base;
   text-align: center;
-  min-height: 550px;
+  min-height: 400px;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -56,7 +56,7 @@
     height: 100%;
     z-index: 1;
     opacity: 0.69;
-    background-image: linear-gradient(-179deg, #4A4A4A 0%, rgba(74,73,74,0.00) 41%);
+    //background-image: linear-gradient(-179deg, #4A4A4A 0%, rgba(74,73,74,0.00) 41%);
   }
   &::after {
     content: "";
@@ -65,7 +65,7 @@
     height: 100%;
     z-index: 1;
     opacity: 0.3;
-    background-image: linear-gradient(89deg, #00BCD6 0%, #CDDE1F 98%);
+    //background-image: linear-gradient(89deg, #00BCD6 0%, #CDDE1F 98%);
   }
   img {
     object-fit: cover;
@@ -124,9 +124,16 @@
       margin-top: 120px;
       position: relative;
     }
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 }
 //- actualitat
+
+.titling-line-container {
+  position: relative;
+}
 .titling-line {
   font-size: $font-size-xl;
   color: $gray-dark;
@@ -246,7 +253,12 @@
     object-position: center center;
     margin-bottom: 18px;
   }
-  &.compat-object-fit {
+  div.compat-object-fit {
+    width: 170px;
+    height: 170px;
+    padding: 85px;
+    border-radius: 4px;
+    margin-right: 18px;
     // fallback habilitat per l'script d'objectfit i fer que es vegi bé a IE
     background-size: cover;
     background-position: center;
@@ -265,7 +277,7 @@
 }
 .hotnews {
   display: block;
-  margin: 12px;
+  margin: 12px 15px;
   padding: 18px;
   background: #F2F5F6;
   height: 300px;
@@ -299,7 +311,7 @@
     display: inline-block;
     background: rgba(255, 255, 255, 0.8);
     padding: 6px 7px 5px;
-    border-radius: 2px;
+    //border-radius: 2px;
     position: absolute;
     left: 12px;
     top: 12px;
@@ -385,7 +397,9 @@
   border-bottom: 1px solid $gray-lighter;
   > div {
     background: #fff;
-    padding: 24px 0 6px;
+    //padding: 24px 0 6px;
+    padding-top: 24px;
+    padding-bottom: 6px;
     width: 100%;
   }
   .hotnews-category {
@@ -420,7 +434,7 @@
   padding: 0;
   a {
     box-shadow: 0 0 0 1px rgba(0,0,0,.15);
-    border-radius: 4px;
+    //border-radius: 4px;
     height: 300px;
     position: relative;
     display: block;
@@ -468,7 +482,7 @@
   }
   .event-time {
     opacity: 0.9;
-    background-image: linear-gradient(89deg, #00BCD4 0%, #03A9F4 100%);
+    background-image: linear-gradient(89deg, #00BCD4 0%, #007bc1 100%);
     width: 128px;
     height: 128px;
     border-radius: 50%;
@@ -525,7 +539,7 @@
   .event-highlighted {
     .event-time {
       opacity: 0.9;
-      background-image: linear-gradient(89deg, #F44336 0%, #D81B60 98%);
+      background-image: linear-gradient(89deg, #fa5c2a 0%, #ed4033 98%);
     }
     &.event-img {
       .event-time {
@@ -641,7 +655,7 @@
       left: 0;
       top: 0;
       opacity: 0.2;
-      background-image: linear-gradient(89deg, #FF9800 0%, #D81B60 98%);
+      //background-image: linear-gradient(89deg, #FF9800 0%, #D81B60 98%);
     }
   }
 }
@@ -677,20 +691,29 @@
       transition: transform .5s ease;
     }
   }
+  span.compat-object-fit {
+    width: 200px;
+    height: 200px;
+    padding: 85px;
+    border-radius: 50%;
+    // fallback habilitat per l'script d'objectfit i fer que es vegi bé a IE
+    background-size: cover;
+    background-position: center;
+  }
   img {
     border-radius: 50%;
     width: 200px;
     height: 200px;
+    object-fit: cover;
     @media (#{$max-width}: $screen-sm) {
       height: 150px;
       width: 150px;
       margin: 0 auto;
       display: block;
     }
+
   }
-  @-moz-document url-prefix() {
-    img { width: 100%; max-width: -moz-max-content; height: 100%; max-height: -moz-max-content;}
-  }
+
   div *:first-child {
     margin-top:0;
   }

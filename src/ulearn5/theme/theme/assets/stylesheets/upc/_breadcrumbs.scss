@@ -5,14 +5,13 @@
   transition: all .25s ease-out;
   overflow: hidden;
   background: $gray-base;
-  @media (#{$max-width}: $screen-xs) {height: 120px; min-height: 25vh;}
+  @media (#{$max-width}: $screen-xs) {height: 120px; }
   &:after {
     content:"";
     width: 100%;
     height: 100%;
     opacity: .7;
     background-image: linear-gradient(-179deg, $gray-darker 0%, rgba(74,73,74,0.00) 41%);
-    background-color: rgba(0,0,0,.75);
     position: absolute;
     z-index: 1;
   }
@@ -21,7 +20,6 @@
     width: 100%;
     height: 100%;
     opacity: 0.3;
-    background-image: linear-gradient(89deg, #00BCD6 0%, #CDDE1F 98%);
     position: absolute;
     z-index: 1;
   }

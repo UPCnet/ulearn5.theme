@@ -73,7 +73,7 @@
     & > :last-child {
       margin-bottom: 0;
     }
-    &> img:first-child ~ * {
+    &> img:first-child ~ *, &> .lletra-cercle:first-child ~ * {
       margin-left: 66px;
       max-width: calc(100% - 66px);
     }
@@ -339,5 +339,33 @@ ol.list-sections {
   }
   footer {
     font-size: $font-size-s;
+  }
+}
+
+// mapa del web
+#portal-sitemap {
+  &.navTreeLevel0 { 
+    padding-left: 0;
+    > li {
+      font-size: $font-size-large;
+      font-weight: 600;
+      list-style-type: none;
+      margin-top: $font-size-base;
+      > a {
+        border-top: 1px solid $gray-lighter;
+        display: list-item;
+        padding: $font-size-base / 4 0; 
+      }
+    }
+  }
+  .navTreeLevel2 > li {
+    font-size: $font-size-base;
+    font-weight: 200;
+    list-style-type: disc; 
+    padding: $font-size-base / 8 0; 
+  }
+  .navTreeLevel3 > li {
+    font-size: $font-size-small;
+    list-style-type: circle;
   }
 }

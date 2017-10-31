@@ -55,7 +55,7 @@ p {font-weight: 300;}
 h1 {font-weight: 500; color: #fff; padding:12px 18px; }
 h2 {color: #023470;}
 h3 {color: #4A4A4A; font-weight: 500;}
-img {max-width: 100%; border-radius: 4px;}
+img {max-width: 100%;}
 img.retina {zoom:50%; -moz-transform:scale(.5); -moz-transform-origin: left top;}
 .pull-left {margin-right: 30px;}
 .pull-right {margin-left: 30px;}
@@ -158,6 +158,12 @@ ul, ol {    padding-left: 24px;}
   padding: 48px;
   text-align: center;
 }
+.well-blau-upc {
+  background-color: #007BC1;
+  color: #fff;
+  padding: 48px;
+  text-align: center;
+}
 .alert-fixed {
   position: fixed;
   width: 100%;
@@ -199,3 +205,68 @@ ul, ol {    padding-left: 24px;}
 }
 .text-middle {vertical-align: middle;  justify-content: center;}
 .compat-object-fit img {opacity: 0;}
+
+
+
+
+// lletres encerclades
+
+// lletra-cercle s'utilitza en pagines
+.lletra-cercle {
+  float:left;
+  font-size: 3rem;
+}
+
+// lletra-cercle-petita s'utilitza en el menu del peu
+.lletra-cercle-petita {
+  font-size: 0.9rem !important;
+  &:before {
+    font-size: 1rem !important;
+    font-weight: 400;
+    margin-right: 0.2rem;
+  }
+}
+
+.color-blau     { color: #089FE4; }
+.color-blaucel  { color: #1FBDEE; }
+.color-verd     { color: #069182; }
+.color-vermell  { color: #D01157; }
+.color-groc     { color: #f6a808; }
+
+.color-morat    { color: #622AD9; }
+.color-violeta  { color: #023470; }
+
+
+.color-carbassa { color: #ED4033; }
+.color-lila     { color: #A71FAF; }
+.color-taronja  { color: #fa5c2a; }
+
+
+.lletra-cercle-a:before { content: "\24d0" !important; }
+.lletra-cercle-b:before { content: "\24d1" !important; }
+.lletra-cercle-c:before { content: "\24d2" !important; }
+.lletra-cercle-d:before { content: "\24d3" !important; }
+.lletra-cercle-e:before { content: "\24d4" !important; }
+.lletra-cercle-f:before { content: "\24d5" !important; }
+.lletra-cercle-g:before { content: "\24d6" !important; }
+.lletra-cercle-h:before { content: "\24d7" !important; }
+.lletra-cercle-i:before { content: "\24d8" !important; }
+.lletra-cercle-j:before { content: "\24d9" !important; }
+.lletra-cercle-k:before { content: "\24da" !important; }
+.lletra-cercle-l:before { content: "\24db" !important; }
+.lletra-cercle-m:before { content: "\24dc" !important; }
+.lletra-cercle-n:before { content: "\24dd" !important; }
+.lletra-cercle-o:before { content: "\24de" !important; }
+.lletra-cercle-p:before { content: "\24df" !important; }
+.lletra-cercle-q:before { content: "\24e0" !important; }
+.lletra-cercle-r:before { content: "\24e1" !important; }
+.lletra-cercle-s:before { content: "\24e2" !important; }
+.lletra-cercle-t:before { content: "\24e3" !important; }
+.lletra-cercle-u:before { content: "\24e4" !important; }
+.lletra-cercle-v:before { content: "\24e5" !important; }
+.lletra-cercle-w:before { content: "\24e6" !important; }
+.lletra-cercle-x:before { content: "\24e7" !important; }
+.lletra-cercle-y:before { content: "\24e8" !important; }
+.lletra-cercle-z:before { content: "\24e9" !important; }
+
+

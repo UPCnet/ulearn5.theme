@@ -12,7 +12,7 @@
   margin: 0 0 24px;
   transform: scale(1.0,1.0) perspective(1px) translateZ(0px);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
-  border-radius:2px;
+  //border-radius:2px;
   &:before {
     content:"";
     border: 1.5px solid $link-color;
@@ -104,12 +104,12 @@
   }
 }
 .btn-banner-danger {
-  background-color: #ED4033;
+  background-color: #d01157;
   & h2, & p {color:#fff;}
   &::after {color:#fff; border-color:#fff; background:none;}
 }
 .btn-banner-success {
-  background-color: #51AA55;
+  background-color: #069182;
   & h2, & p {color:#fff;}
   &::after {color:#fff; border-color:#fff; background:none;}
 }
@@ -124,8 +124,23 @@
 
 }
 .btn-banner-warning {
-  background-color: #F2C91E;
+  background-color: #f6a808;
   &::after {color:#636363; border-color:#636363; background:none;}
+}
+.btn-banner-morat {
+  background-color: #622AD9;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
+}
+.btn-banner-violeta {
+  background-color: #023470;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
+}
+.btn-banner-blaucel {
+  background-color: #1FBDEE;
+  & h2, & p {color:#fff;}
+  &::after {color:#fff; border-color:#fff; background:none;}
 }
 .btn-banner-large {
   height: 280px;
@@ -218,4 +233,14 @@
     transform: perspective(1px) scale(1.00775,1.00775) translateZ(0px);
     -webkit-font-smoothing: subpixel-antialiased;
   }
+}
+.btn-mes {
+  font-size: $font-size-m;
+  top: $font-size-m / 2 - 0.1;
+  position: absolute;
+  right: 0;
+  background: white;
+  z-index: 1;
+  padding: 6px 0 6px 6px;
+  margin-top:-2px;
 }

@@ -5,8 +5,13 @@
        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
        xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <theme href="index.html" />
+  <!-- Include the backend theme (Barceloneta) loaded on edit views -->
+  <xi:include href="++theme++ulearn5-theme/backend.xml" />
+
+  <!-- Default template loaded -->
+  <theme href="base.html" />
   <notheme css:if-not-content="#visual-portal-wrapper" />
+  <!--<theme href="home-base.html" css:if-content="body.section-homepage"/> -->
 
   <rules css:if-content="#portal-top">
     <!-- Attributes -->
@@ -20,75 +25,102 @@
     <!-- Don't use Plone icons, use the theme's -->
     <drop css:content="head link[rel='apple-touch-icon']" />
     <drop css:content="head link[rel='shortcut icon']" />
+    <!-- drop the theme stylesheets -->
+    <drop theme="/html/head/link[rel='stylesheet']" />
     <!-- CSS -->
     <after css:theme-children="head" css:content="head link" />
-    <after css:theme-children="head" css:content="head style" />
     <!-- Script -->
     <after css:theme-children="head" css:content="head script" />
+  </rules>
+
+  <rules css:if-content="body.section-agenda.subsection-agenda">
+    <before css:theme-children="body">
+      <div id="widget-config" data-config-url="{$portal_url}">
+      </div>
+    </before>
   </rules>
 
   <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
   <copy attributes="*" css:content="body" css:theme="body" />
 
-  <!-- move global nav -->
-  <replace css:theme-children="#mainnavigation" css:content-children="#portal-mainnavigation" method="raw" />
+  <drop css:content="#portal-logo" />
+  <drop css:content="#portal-searchbox" />
+  <drop css:content="#portal-languageselector" />
+  <drop css:content="#mainnavigation" />
+  <!-- TODO: This hides all the portlets! Test footer footer... -->
+  <drop css:content=".portletWrapper" />
 
-  <!-- move hero to top -->
-  <replace css:theme-children="#hero .gigantic" css:content-children=".hero"/>
-  <drop css:theme="#hero" css:if-not-content=".hero" />
-  <drop css:content=".hero" />
+  <!-- Barra Menu Eines -->
+  <replace css:theme=".upc-eines" css:content=".upc-eines" />
+  <!-- Barra Menu Venta-->
+  <replace css:theme=".upc-menu" css:content=".upc-menu" />
+  <!-- Barra Menu Navegació -->
+  <replace css:theme=".footer-navigation" css:content=".footer-navigation" />
+  <!-- Barra Menu Navegació -->
+  <replace css:theme=".footer-socials" css:content=".footer-socials" />
+
+  <!-- HOME -->
+  <replace css:theme=".content-highlighted" css:content=".content-highlighted" />
+  <replace css:theme=".content-banners" css:content=".content-banners" />
+  <replace css:theme=".content-hotnews" css:content=".content-hotnews" />
+  <replace css:theme=".content-well" css:content=".content-well" />
+  <replace css:theme=".content-agenda" css:content=".content-agenda" />
+  <replace css:theme=".content-recerca" css:content=".content-recerca" />
+  <replace css:theme=".content-xifres" css:content=".content-xifres" />
+
+  <!-- Breadcrumb -->
+  <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
+  <drop css:theme="#breadcrumbs" if-path="ca/"/>
+  <drop css:theme="#breadcrumbs" if-path="es/"/>
+  <drop css:theme="#breadcrumbs" if-path="en/"/>
+
+  <!-- Importante eliminar el titulo antes de cambiar la class sino no funciona -->
+  <drop css:content=".documentFirstHeading" css:if-content=".portaltype-contingut_upc" />
+  <drop css:content=".documentFirstHeading" css:if-content=".mosaic-grid" />
+
+  <!-- titulo paginas -->
+  <xsl:template match="@class[contains(., 'documentFirstHeading')]">
+    <xsl:attribute name="class">document-heading</xsl:attribute>
+  </xsl:template>
+
+
+  <!-- Mosaic Title -->
+  <drop css:content=".mosaic-IDublinCore-title-tile"/>
 
   <!-- full-width breadcrumb -->
   <replace css:content="#viewlet-above-content" css:theme="#above-content" />
+
+  <!-- Left column -->
+  <rules css:if-content="#portal-column-one">
+    <replace css:theme="#column1-container">
+      <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
+        <xsl:copy-of css:select="#portal-column-one > *" />
+      </section>
+    </replace>
+  </rules>
 
   <!-- Central column -->
   <replace css:theme="#content-container" method="raw">
 
     <xsl:variable name="central">
-      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-xs-12 col-sm-6</xsl:if>
+      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-lg-9 col-md-8 col-xs-12</xsl:if>
       <xsl:if test="//aside[@id='portal-column-two'] and not(//aside[@id='portal-column-one'])">col-xs-12 col-sm-9</xsl:if>
-      <xsl:if test="//aside[@id='portal-column-one'] and not(//aside[@id='portal-column-two'])">col-xs-12 col-sm-9</xsl:if>
-      <xsl:if test="not(//aside[@id='portal-column-one']) and not(//aside[@id='portal-column-two'])">col-xs-12 col-sm-12</xsl:if>
+      <xsl:if test="//aside[@id='portal-column-one'] and not(//aside[@id='portal-column-two'])">col-lg-9 col-md-8 col-xs-12</xsl:if>
+      <xsl:if test="not(//aside[@id='portal-column-one']) and not(//aside[@id='portal-column-two'])">col-lg-12 col-md-12 col-sm-12 col-xs-12</xsl:if>
     </xsl:variable>
 
-    <div class="{$central}">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12">
-          <xsl:apply-templates css:select="#content" />
-        </div>
-      </div>
+    <section id="main-content" class="{$central} main-content">
+      <xsl:apply-templates css:select="#content" />
       <footer class="row">
         <div class="col-xs-12 col-sm-12">
           <xsl:copy-of css:select="#viewlet-below-content" />
         </div>
       </footer>
-    </div>
+    </section>
   </replace>
 
   <!-- Alert message -->
   <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
-
-  <!-- Left column -->
-  <rules css:if-content="#portal-column-one">
-    <replace css:theme="#column1-container">
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
-        <aside id="portal-column-one">
-          <xsl:copy-of css:select="#portal-column-one > *" />
-        </aside>
-      </div>
-    </replace>
-  </rules>
-
-  <!-- Right column -->
-  <rules css:if-content="#portal-column-two">
-    <replace css:theme="#column2-container">
-      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="complementary">
-        <aside id="portal-column-two">
-          <xsl:copy-of css:select="#portal-column-two > *" />
-        </aside>
-      </div>
-    </replace>
-  </rules>
 
   <!-- Content header -->
   <replace css:theme="#portal-top" css:content-children="#portal-top" />
@@ -96,9 +128,7 @@
   <!-- Footer -->
   <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
 
-  <!-- toolbar -->
-  <replace css:theme="#portal-toolbar" css:content-children="#edit-bar" css:if-not-content=".ajax_load" css:if-content=".userrole-authenticated" />
-  <drop css:theme="#portal-toolbar" css:if-content=".userrole-anonymous" />
-  <replace css:theme="#anonymous-actions" css:content-children="#portal-personaltools-wrapper" css:if-not-content=".ajax_load" css:if-content=".userrole-anonymous" />
+  <replace css:theme-children="#portal-anontools" css:content-children="#portal-anontools" />
 
+  <drop css:content="#portal-anontools" />
 </rules>

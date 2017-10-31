@@ -1,10 +1,10 @@
-@import "compass_twitter_bootstrap/mixins";
+@import "../bootstrap/mixins";
+@import "compass/css3";
+
 // Arrows
 $zindexBubble:           1010 !default;
-
 $bubbleBackground:       #fff !default;
 $bubbleArrowWidth:       8px !default;
-// $bubbleArrowColor:       #fff !default;
 $bubbleArrowColor:       red !default;
 $bubbleTitleBackground:  darken($bubbleBackground, 3%) !default;
 
@@ -19,17 +19,10 @@ $white:                 #fff !default;
   left: 0;
   z-index: $zindexBubble;
   display: block;
-  // width: 236px;
-  // padding: 1px;
   background-color: $bubbleBackground;
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box;
-  // border: 1px solid #ccc;
-  // border: 1px solid rgba(0,0,0,.2);
-  // @include border-radius(6px);
-  // @include box-shadow(0 5px 10px rgba(0,0,0,.2));
-
   // Offset the bubble to account for the bubble arrow
   &.top     { margin-bottom: 10px; }
   &.right   { margin-left: 10px; }
@@ -37,7 +30,6 @@ $white:                 #fff !default;
   &.left    { margin-right: 10px; }
 
 }
-// .bubble-container {position: absolute;}
 
 .bubble-title {
   margin: 0;

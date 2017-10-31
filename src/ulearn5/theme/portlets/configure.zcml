@@ -49,14 +49,6 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.mostvalued"
-        interface=".mostvalued.IMostValuedPortlet"
-        assignment=".mostvalued.Assignment"
-        renderer=".mostvalued.Renderer"
-        addview=".mostvalued.AddForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.discussion"
         interface=".discussion.ICommentsPortlet"
         assignment=".discussion.Assignment"

@@ -42,6 +42,20 @@
     padding-bottom: 18px;
     &.acces-directe {padding-left: 18px;}
   }
+  .acces-directe  {
+    li {
+      list-style-type: none;
+      &:before {
+        margin-left: -20px;
+        top: -2px;
+        color: inherit;
+      }
+    }
+    a {
+      font-weight: 700; color: $link-color;
+      &:hover {color:$link-hover-color;}
+    }
+  }
   & > ul ul ul {padding-left: 12px; padding-bottom: 0;}
   & li li {
     list-style: none;
@@ -58,29 +72,6 @@
     & li:before {
       content:"\e904";
     }
-    &.atenea::before, &.esecretaria::before, &.seuelectronica::before, &.personalupc::before, &.directori::before, &.websupc::before, &.perfilcontractant::before, &.identitatcorporativa::before {
-      content: "a";
-      font-family: inherit;
-      border: 1px solid #1FBDEE;
-      border-radius: 50%;
-      width: 14px;
-      height: 14px;
-      font-weight: 400;
-      font-size: $font-size-xxs;
-      line-height: 11.5px;
-      padding-left: 0;
-      margin-top: 1px;
-      margin-left: -18px;
-      text-align: center;
-      color:#1FBDEE;
-    }
-    &.esecretaria::before { content: "e"; color:#089FE4; border-color: #089FE4; }
-    &.seuelectronica::before { content: "s"; color: #A71FAF; border-color: #A71FAF;}
-    &.personalupc::before { content: "p"; color:#D01157; border-color: #D01157;}
-    &.directori::before { content: "d"; color:#ED4033; border-color: #ED4033;}
-    &.websupc::before { content: "w"; color:#FA5C2A; border-color: #FA5C2A;}
-    &.perfilcontractant::before { content: "c"; color:#622AD9; border-color: #622AD9;}
-    &.identitatcorporativa::before { content: "i"; color:#023470; border-color: #023470;}
   }
 }
 
@@ -139,7 +130,6 @@
     width: calc(50% - 6px);
   }
   a {
-    background: #F2F5F6;
     border-radius: 2px;
     transition: all .5s ease-out;
     display: block;
@@ -154,10 +144,10 @@
     }
   }
   img {
-    height: 40px;
+    //height: 40px;
     display: block;
     text-align: center;
-    margin: 0 auto;
+    //margin: 0 auto;
   }
   span {
     font-size: $font-size-xxs;
@@ -216,7 +206,6 @@
   box-shadow: 500px 0 0 0 #FFF, -500px 0 0 0 #FFF;
   font-size: $font-size-s;
   margin: 0 auto;
-  text-align: center;
   border-top: 2px solid #F2F5F6;
   padding:12px 0;
   h2 {
@@ -224,7 +213,7 @@
     font-weight: 700;
     color: #4A4A4A;
     display: inline-block;
-    margin: 15px 0;
+    margin: 15px -15px 6px -15px;
     transform: translateY(1px);
     &::after {content:":";}
   }

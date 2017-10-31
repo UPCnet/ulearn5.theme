@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
 from five import grok
 from cgi import escape
 from plone import api
 from zope.interface import Interface
 from zope.component import getMultiAdapter, getUtility
-from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IPortalFooter, IAboveContentTitle
-from plone.app.layout.navigation.root import getNavigationRootObject
-from plone.app.multilingual.interfaces import ITranslationManager
+from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IPortalFooter
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings

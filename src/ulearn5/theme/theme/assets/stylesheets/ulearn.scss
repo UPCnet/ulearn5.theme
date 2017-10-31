@@ -1,7 +1,5 @@
-$fa-font-path: "assets/stylesheet/fontawesome/fonts";
+$fa-font-path: "fontawesome/fonts";
 @import "fontawesome/scss/font-awesome";
-// @import "select2";
-// @import "maxui";
 @import "ulearn/overrides";
 @import "ulearn/hidden";
 @import "ulearn/arrows";
@@ -9,25 +7,10 @@ $fa-font-path: "assets/stylesheet/fontawesome/fonts";
 @import "ulearn/templates";
 @import "ulearn/plugins";
 @import "ulearn/iefixes";
-@import "ulearn/propostes";
 @import "ulearn/angular";
 @import "ulearn/communities";
 @import "ulearn/community";
-// @import "genwebupc";
 
-// Victor for pushing it to genweb.theme
-
-// .pb-ajax {
-//   @extend .modal;
-// }
-
-// .pb-ajax .documentFirstHeading {
-//   @extend .modal-header;
-// }
-
-// .pb-ajax #content-core {
-//   @extend .modal-body;
-// }
 
 // Marc's CSS
 
@@ -65,7 +48,6 @@ input, button, select, textarea {
 }
 a {
   color: #007BC0;
-//  text-decoration: underline; Victor
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -o-transition: 0.25s;
@@ -112,10 +94,6 @@ a:hover, a:active {
   text-decoration:none;
   }
 
-// .span6 {
-// background:white;
-//   }
-
 #peu {
   background-color: #f58d3d;
   border-top: none;
@@ -127,11 +105,9 @@ a:hover, a:active {
 #peu .container {
   border-top: none;
   background-color: #f58d3d;
-  // padding:20px;
   font-size:13px;
   color:white;
   margin-top:20px;
-  // box-shadow:0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 0 #DDDDDD;
 }
 
 #peu .inner { padding: 20px;}
@@ -146,7 +122,6 @@ border-color: #34495E;
 }
 
 .ulearnbox {
-  // background: url("../pix_cantonada.png") no-repeat right top white;
   background-color: white;
   position: relative;
   padding: 10px;
@@ -2494,11 +2469,4 @@ i.icon-plone-contentmenu-display-contents_pretty_view, i.icon-folder-contents_pr
     font-size: 150%;
     line-height: 0;
     margin-left: 5px;
-}
-
-
-// Modificaciones
-
-header#content-header {
-    background: #f58d3d;
 }

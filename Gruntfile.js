@@ -1,5 +1,9 @@
 module.exports = function (grunt) {
     'use strict';
+
+    var uglify_options = {
+        sourceMap: true };
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         // we could just concatenate everything, really
@@ -7,74 +11,95 @@ module.exports = function (grunt) {
         // also, in this way we do not have to worry
         // about putting files in the correct order
         // (the dependency tree is walked by r.js)
-        less: {
-            dist: {
+
+        compass: {
+            upc: {
                 options: {
-                    paths: [],
-                    strictMath: false,
-                    sourceMap: true,
-                    outputSourceFiles: true,
-                    sourceMapURL: '++theme++ulearn5-theme/less/theme-compiled.css.map',
-                    sourceMapFilename: 'less/theme-compiled.css.map',
-                    modifyVars: {
-                        "isPlone": "false"
-                    }
+                    sassDir: 'stylesheets',
+                    cssDir: 'css',
+                    outputStyle: 'compressed'
                 },
                 files: {
-                    'less/theme-compiled.css': 'less/theme.local.less',
+                    'css/upc.css': 'stylesheets/upc.scss'
+                }
+            },
+            homeupc: {
+                options: {
+                    sassDir: 'stylesheets',
+                    cssDir: 'css',
+                    outputStyle: 'compressed'
+                },
+                files: {
+                    'css/upcnet.css': 'stylesheets/upcnet.scss',
+                    'css/bootstrap.css': 'stylesheets/bootstrap.scss'
+                }
+            },
+            ulearn: {
+                options: {
+                    sassDir: 'stylesheets',
+                    cssDir: 'css',
+                    outputStyle: 'compressed'
+                },
+                files: {
+                    'css/ulearn.css': 'stylesheets/ulearn.scss'
                 }
             }
         },
-        postcss: {
+        concat: {
             options: {
-                map: true,
-                processors: [
-                    require('autoprefixer')({
-                        browsers: ['last 2 versions']
-                    })
-                ]
+                separator: '',
             },
             dist: {
-                src: 'less/*.css'
-            }
+                src: ['css/bootstrap.css', 'css/upcnet.css'],
+                dest: 'css/homeupc-compiled.css',
+            },
         },
         watch: {
-            scripts: {
+            upc: {
                 files: [
-                    'less/*.less',
-                    'barceloneta/less/*.less'
+                    'stylesheets/upc/*.scss',
+                    'stylesheets/upc.scss'
                 ],
-                tasks: ['less', 'postcss']
+                tasks: ['compass:upc']
+            },
+            homeupc:  {
+                files: [
+                    'stylesheets/bootstrap/*.scss',
+                    'stylesheets/bootstrap/mixins/*.scss',
+                    'stylesheets/bootstrap.scss',
+                    'stylesheets/upcnet.scss',
+                ],
+                tasks: ['compass:homeupc', 'concat']
+            },
+            ulearn: {
+                files: [
+                    'stylesheets/ulearn/*.scss',
+                    'stylesheets/ulearn.scss'
+                ],
+                tasks: ['compass:ulearn']
             }
         },
+
+        // uglify: {
+        //     main: {
+        //         files: {
+        //             'dist/homeupc.min.js': ['javascripts/upcnet.js'],
+        //             'dist/search.min.js': ['javascripts/search.js']
+        //         }
+        //     }
+        // },
+
         browserSync: {
-            html: {
-                bsFiles: {
-                    src : [
-                      'less/*.less',
-                      'barceloneta/less/*.less'
-                    ]
-                },
-                options: {
-                    watchTask: true,
-                    debugInfo: true,
-                    online: true,
-                    server: {
-                        baseDir: "."
-                    },
-                }
-            },
             plone: {
                 bsFiles: {
                     src : [
-                      'less/*.less',
-                      'barceloneta/less/*.less'
+                      'css/*.css'
                     ]
                 },
                 options: {
                     watchTask: true,
                     debugInfo: true,
-                    proxy: "localhost:8080",
+                    proxy: "localhost:8080/Plone",
                     reloadDelay: 3000,
                     // reloadDebounce: 2000,
                     online: true
@@ -83,18 +108,18 @@ module.exports = function (grunt) {
         }
     });
 
-
     // grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     // CWD to theme folder
-    grunt.file.setBase('./src/ulearn5/theme/theme');
+    grunt.file.setBase('./src/ulearn5/theme/theme/assets');
 
-    grunt.registerTask('compile', ['less', 'postcss']);
-    grunt.registerTask('default', ['compile']);
+    grunt.registerTask('default', ["browserSync:plone", "watch"]);
     grunt.registerTask('bsync', ["browserSync:html", "watch"]);
     grunt.registerTask('plone-bsync', ["browserSync:plone", "watch"]);
+    grunt.registerTask('minify', ['uglify']);
 };

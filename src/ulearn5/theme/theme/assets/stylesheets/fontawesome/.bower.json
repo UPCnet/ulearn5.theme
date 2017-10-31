@@ -1,4 +1,4 @@
-{
+/*{
   "name": "font-awesome",
   "description": "Font Awesome",
   "version": "4.1.0",
@@ -33,4 +33,4 @@
   "_source": "git://github.com/FortAwesome/Font-Awesome.git",
   "_target": "*",
   "_originalSource": "fontawesome"
-}
+}*/
