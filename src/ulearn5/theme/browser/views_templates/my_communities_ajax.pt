@@ -1,0 +1,53 @@
+<div id="communities-view" ng-controller="AllCommunities as ctrl">
+  <section id="communitylist">
+    <ul>
+      <li dir-paginate="community in ctrl.user_communities | filter:q | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
+        <div class="row-fluid">
+          <div class="span2">
+            <a ng-href="{{community.url}}">
+              <img ng-if="community.image"
+                   ng-src="{{community.url}}/@@images/image/thumb" />
+              <img ng-if="!community.image"
+                   src="++ulearn++static/images/avatar_default.png" />
+            </a>
+          </div>
+          <div class="span10">
+            <a ng-href="{{community.url}}">
+              <h4>{{community.title}}</h4>
+              <p>{{community.description}}</p>
+            </a>
+          </div>
+        </div>
+        <div class="community-actions">
+          <a class="community-action community-favorite community-icon-"
+             ng-class="{'community-favorited': community.favorited}"
+             ng-click="ctrl.toggleFavorite(community)">
+             favorite
+          </a>
+          <a class="community-action community-subscribe community-icon-"
+             ng-if="!ctrl.is_subscribed(community.url)"
+             ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}"
+             ng-click="ctrl.subscribe(community)" ng-cloak>
+             subscribe
+          </a>
+          <a class="community-action community-subscribe community-icon-"
+             ng-if="ctrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+             ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}"
+             ng-click="ctrl.unSubscribe(community)" ng-cloak>
+             unsubscribe
+          </a>
+          <a class="community-action community-edit community-icon-"
+             ng-if="community.can_manage"
+             tal:attributes="href string:${context/absolute_url}/edit">edit</a>
+          <a class="community-action community-delete community-icon-"
+             ng-if="community.can_manage"
+             ng-click="ctrl.delete(community)">delete</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <div class="pagination">
+    <dir-pagination-controls boundary-links="true" tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+  </div>
+
+</div>

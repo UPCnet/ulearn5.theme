@@ -1,0 +1,313 @@
+@import "mixins";
+
+// The green alternate version, for the record:
+// $main-color: #017000;
+// $secondary-color: #24A33B;
+// $maxui-form-bg: #DEDED6;
+// $alt-gradient-start-color: #27B040;
+// $alt-gradient-end-color: #229A38;
+// $background-property: transparent;
+// $background-color: #eae9e4;
+// $buttons-color-primary: #24a33b;
+// $buttons-color-secondary: #017000;
+
+// Main
+
+body {
+  background: $background-property $background-color;
+}
+
+a {
+  color: $secondary-color;
+}
+
+
+#portal-header {
+  @include gradient-vertical($alt-gradient-start-color, $alt-gradient-end-color);
+}
+
+.osomcorner {
+  background-color: $background-color;
+}
+
+.ulearnbox h2 {
+    color: $secondary-color;
+}
+
+#peu {
+  background-color: $main-color;
+}
+
+#peu .container {
+  background-color: $main-color;
+}
+
+.num {
+    background: none repeat scroll 0 0 $main-color;
+}
+
+#menusup {
+  nav {
+    .active {
+      .arrow {
+        border-top-color: $main-color;
+      }
+
+      &, a, a:hover {
+        background:$main-color !important;
+      }
+    }
+  }
+}
+
+#day {
+  background: none repeat scroll 0 0 $main-color;
+  text-shadow: 1px 1px 0 #444;
+  .arrow { border-left-color: $main-color; }
+}
+
+.todayevent{ background:$main-color; }
+
+#communitylist {
+  a {
+    h4 { color: $main-color; }
+    }
+  img {
+    &:hover {border:2px solid $main-color;}
+  }
+}
+
+#box_comunitats {
+  .bubble-content {
+    background: none repeat scroll 0 0 $main-color;
+  }
+  .bubble {
+    .arrow { border-right-color: $main-color; }
+  }
+}
+
+input[type="text"] {
+  border-color: $main-color;
+}
+
+input[type="text"]:focus {
+  border-color: $secondary-color;
+}
+
+.box_badges {
+  color: $main-color;
+}
+
+// .novetat { background: none repeat scroll 0 0 $secondary-color; }
+
+#box_agenda {
+  li {
+    i { color: $secondary-color; }
+  }
+}
+
+#communitylist {
+    .eines {
+        color: $secondary-color;
+    }
+}
+
+.btn-comunitat {
+  background-image: none;
+  background-color: $buttons-color-primary;
+}
+.btn-comunitat:hover,
+.btn-comunitat:active,
+.btn-comunitat.active,
+.btn-comunitat.disabled,
+.btn-comunitat[disabled] {
+  color: #FFFFFF;
+  background-image: none;
+  background-color: $buttons-color-secondary;
+  *background-color: $buttons-color-secondary;
+}
+.context {
+  background: $buttons-color-primary;
+}
+.context:hover {
+  background: $buttons-color-secondary;
+}
+
+#box_stats {
+  .bubble {
+    background-color: $main-color;
+    .arrow {
+      border-left-color: $main-color;
+    }
+  }
+}
+
+// MAXUI
+#maxui-container a {
+  color: $main-color;
+}
+.maxui-displayname {
+  color: $main-color;
+}
+input.maxui-button {
+  background: none repeat scroll 0 0 $secondary-color;
+}
+#maxui-container textarea:focus, #maxui-container input[type="search"]:focus {
+  border: 1px solid $secondary-color !important;
+}
+#maxui-container a:hover {
+  color: $secondary-color;
+}
+#maxui-newactivity {
+  background: none repeat scroll 0 0 $maxui-form-bg;
+}
+// #maxui-search { background: none repeat scroll 0 0 #f7f7f7; }
+
+#maxui-more-activities input.maxui-button {
+  color: $secondary-color;
+}
+
+// OVERRIDES
+h1, h2, h3, label, span.label, fieldset legend {
+  color: $secondary-color;
+}
+
+#maxui-container .maxui-actions {
+  a.maxui-action.maxui-likes.maxui-liked,
+  a.maxui-action.maxui-likes.maxui-liked:before {
+    color: $main-color;
+  }
+  a.maxui-action.maxui-likes.maxui-liked:hover:before {
+    color: $main-color;
+  }
+  a.maxui-action.maxui-favorites.maxui-favorited,
+  a.maxui-action.maxui-favorites.maxui-favorited:before {
+    color: $main-color;
+  }
+  a.maxui-action.maxui-commentaction {
+    color: $main-color;
+  }
+  a.maxui-action.maxui-flag.maxui-flagged:before {
+      color: $main-color;
+  }
+  a.maxui-action.maxui-flag.maxui-flagged {
+      color: $main-color;
+  }
+  a.maxui-action.maxui-flag:hover:before {
+      color: $main-color;
+  }
+  a.maxui-action.maxui-favorites.maxui-favorited:hover,
+  a.maxui-action.maxui-likes.maxui-liked:hover,
+  a.maxui-action.maxui-commentaction:hover {
+    color: $main-color;
+  }
+}
+
+.portletCalendar .ploneCalendar td.cal_has_events .popover-content a {
+  color: $secondary-color;
+  text-shadow: 0 -1px
+}
+
+.portletCalendar .ploneCalendar td.cal_has_events {
+  background: $secondary-color;
+  font-weight: bold;
+  text-shadow: 0 -1px $secondary-color;
+}
+
+.Closed {
+  border-left: 3px solid $color_community_closed;
+}
+
+.Organizative {
+  border-left: 3px solid $color_community_organizative;
+}
+
+.Open {
+  border-left: 3px solid $color_community_open;
+}
+
+#box_comunitats .bubble a {
+  color: $main-color;
+  font-weight: 600;
+  height: 18px;
+  width: 33px;
+}
+
+#tagslist a h4 {
+  color: $main-color;
+  font-size: 16px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.state-intranet, #workflow-transition-publishtointranet, #workflow-transition-publicaalaintranet, #workflow-transition-retracttointranet, #workflow-transition-retiraalaintranet {
+    color: $secondary-color;
+}
+.favorite .fa-star {
+    color: $main-color;
+}
+#box_community .btn-large.dropdown-toggle {
+background: $main-color;
+border-color: $main-color;
+}
+.breadcrumb .active, .breadcrumb .selected, .breadcrumb .contentViews .selected:hover, .contentViews .breadcrumb .selected:hover, .breadcrumb .active a, .breadcrumb .selected a, .breadcrumb .contentViews .selected:hover a, .contentViews .breadcrumb .selected:hover a {
+    color: $main-color;
+    font-weight: 600;
+}
+.breadcrumb .divider {
+    color: #888;
+}
+#maxui-container #maxui-new-participants .maxui-filter span, #maxui-container #maxui-search-filters .maxui-filter span, .maxui-filters .maxui-filter span, #maxui-container .maxui-button {
+    background-color: $main-color;
+    border: 1px solid $main-color;
+}
+.loginbox {
+  .control-label {
+    color: $main-color;
+  }
+  input[type="text"] {
+    border-color: $main-color;
+  }
+  .loginbox .btn.btn-primary {
+    background: $main-color;
+    border-color: $main-color;
+  }
+  #login-forgotten-password {
+    a {color:$main-color;}
+  }
+}
+
+.tag_pill {
+    background-color: $main-color;
+    border-radius: 15px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 3px;
+    padding: 2px 7px;
+}
+
+.tagfollowed {
+    background-color: $main-color;
+    border-radius: 15px;
+    color: white;
+    margin: 3px;
+    padding: 2px 7px;
+}
+
+#subscribednews-search-filters .maxui-filter span {
+  background-color: $main-color;
+  border: 1px solid $main-color;
+  border-radius: 5px;
+  box-shadow: 0 1px #fff;
+  color: #fff;
+  display: block;
+  padding: 0 0 3px 4px;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+}
+
+i.shared_icon {
+    float: right;
+    color: $secondary-color;
+    font-size: 25px;
+    padding-right: 20px;
+}

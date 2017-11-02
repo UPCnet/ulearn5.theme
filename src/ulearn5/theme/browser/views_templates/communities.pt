@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="ulearn">
+
+<head>
+  <metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1);"/>
+</head>
+
+<body>
+
+  <metal:main metal:fill-slot="main"
+              tal:define="b_start python:0;
+                         b_start request/b_start | b_start;
+                         communities python: view.get_batched_communities(b_start=b_start);">
+
+  <div id="communities-view">
+
+  <div id="communitysearch">
+
+    <h2 i18n:translate="allcommunities">Communities</h2>
+
+    <div id="searchinputcommunities">
+      <div class="input-append">
+        <input class="searchInput" type="text" placeholder="Cerca"
+               i18n:attributes="placeholder search_communities">
+        <span class="add-on"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+
+    <section id="communitylist">
+      <ul>
+        <li tal:repeat="community communities">
+          <div class="row-fluid">
+            <div class="span2">
+              <a tal:attributes="href community/getURL">
+                <img tal:condition="community/image_filename"
+                     tal:attributes="src string:${community/getURL}/@@images/image/thumb" />
+                <img src="/++ulearn++static/images/avatar_default.png"
+                     tal:condition="not: community/image_filename" />
+              </a>
+            </div>
+            <div class="span7">
+              <a tal:attributes="href community/getURL">
+                <h4 tal:content="community/Title">Community</h4>
+                <p tal:content="community/Description">Description</p>
+              </a>
+            </div>
+          <div class="eines span3">
+            <a class="favorite" href="#"
+               i18n:attributes="title label_check_favorite"
+               tal:attributes="class python:'favorite' if view.favorite_button_enabled(community) else 'favoritedisabled';
+                               data-community string:${community/getURL}">
+              <i tal:attributes="class python:view.get_star_class(community)"></i>
+            </a>
+            <a class="subscribe" href="#"
+               i18n:attributes="title label_subscribe_to_community"
+               tal:condition="python:view.is_not_organizative(community)"
+               tal:attributes="data-community string:${community/getURL};
+                               data-name community/Title">
+              <i tal:attributes="class python:view.get_subscribed_class(community)"></i>
+            </a>
+            <a tal:condition="python:view.is_community_manager(community)"
+               tal:attributes="href string:${community/getURL}/edit"
+               i18n:attributes="title label_edit_community">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <a class="delete" href="#"
+               i18n:attributes="title label_delete_community"
+               tal:condition="python:view.is_community_manager(community)"
+               tal:attributes="href string:${community/getURL}/delete_confirmation;
+                               data-authenticator view/get_authenticator;
+                               data-name community/Title">
+            <i class="fa fa-times"></i>
+            </a>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <tal:batchnavigation
+      define="batchnavigation nocall:context/@@batchnavigation"
+      replace="structure python:batchnavigation(communities)" />
+
+  </div>
+  </div>
+
+  </metal:main>
+</body>
+</html>

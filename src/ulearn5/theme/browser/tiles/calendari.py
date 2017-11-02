@@ -26,7 +26,9 @@ from zope import schema
 from zope.component.hooks import getSite
 import calendar
 import json
+from urllib import urlencode
 
+from plone.app.event.base import find_ploneroot
 from plone.app.event.base import find_site
 
 

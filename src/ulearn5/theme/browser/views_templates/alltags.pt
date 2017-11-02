@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="ulearn">
+
+<head>
+  <metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1);"/>
+</head>
+
+<body>
+
+  <metal:main metal:fill-slot="main"
+              tal:define="subscribed_tags view/get_subscribed_tags;
+                          unsubscribed_tags view/get_unsubscribed_tags;">
+
+    <h3> Subscribed Tags </h3>
+    <div class="tags-subscribed" tal:repeat="tag subscribed_tags">
+      <a tal:content="tag"
+         tal:attributes="href string:${context/absolute_url}/toggle_subscriptiontag?tag=${tag}">
+        tag
+      </a>
+
+    </div>
+
+    <h3> Unsubscribed Tags </h3>
+    <div clas="tags-unsubscribed" tal:repeat="tag unsubscribed_tags">
+      <a tal:content="tag"
+         tal:attributes="href string:${context/absolute_url}/toggle_subscriptiontag?tag=${tag}">
+         tag
+      </a>
+
+    </div>
+
+  </metal:main>
+</body>
+</html>
