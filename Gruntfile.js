@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         compass: {
             upc: {
                 options: {
-                    sassDir: 'stylesheets',
+                    sassDir: 'stylesheets/upc',
                     cssDir: 'css',
                     outputStyle: 'compressed'
                 },
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
             },
             ulearn: {
                 options: {
-                    sassDir: 'stylesheets',
+                    sassDir: 'stylesheets/ulearn',
                     cssDir: 'css',
                     outputStyle: 'compressed'
                 },

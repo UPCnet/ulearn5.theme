@@ -8,15 +8,14 @@
   <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
 
   <h2>Agenda</h2>
-  <div id="agenda" class="row-fluid"
-       tal:define="today view/today">
-    <div id="day" class="bubble left span5">
+  <div id="agenda" class="row-fluid" tal:define="today view/today">
+    <div id="day" class="bubble left col-lg-6 col-md-6 col-xs-12">
       <div class="arrow"></div>
-      <div class="bubble-content">
-        <p tal:content="today/number">14</p>
-        <p class="data"
-           tal:content="today/weekday">Jueves</p>
-      </div>
+        <div class="bubble-content">
+          <p tal:content="today/number">14</p>
+          <p class="data"
+             tal:content="today/weekday">Jueves</p>
+        </div>
     </div>
 
     <div id="esdev" class="span6"
@@ -34,11 +33,11 @@
     </div>
   </div>
 
-<section class="portlet portletCalendar" role="section"
+<section class="portlet portlet-calendari" role="section"
     tal:define="navigation_root_url context/@@plone_portal_state/navigation_root_url;
                 year view/year;">
 
-<div class="portlet-block portlet-calendari">
+<div class="portlet-block">
   <header class="portlet-header">
     <a href="#" rel="nofollow" class="calendari-anterior pat-contentloader" title="Previous month"
         tal:define="prev_month view/prev_month;

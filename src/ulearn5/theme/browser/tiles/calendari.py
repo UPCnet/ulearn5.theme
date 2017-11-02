@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_chain
 from Products.CMFCore.utils import getToolByName
 from plone.supermodel.model import Schema
 from plone.tiles.tile import Tile
@@ -7,29 +7,24 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implementer
 from ulearn5.core import _
+from ulearn5.core.content.community import ICommunity
 from plone.app.event.base import RET_MODE_OBJECTS
 from plone.app.event.base import _prepare_range
 from plone.app.event.base import first_weekday
 from ComputedAttribute import ComputedAttribute
 from zExceptions import NotFound
 from plone.app.event.portlets import get_calendar_url
-from plone.app.event.base import expand_events
-from plone.app.event.base import get_events, construct_calendar
-from plone.app.event.base import localized_today
-from plone.app.event.base import start_end_query
-from plone.app.event.base import wkday_to_mon1
+from plone.app.event.base import expand_events, get_events, construct_calendar, localized_today, start_end_query, wkday_to_mon1, localized_now, find_site, dt_end_of_day
 from plone.app.querystring import queryparser
 from plone.app.uuid.utils import uuidToObject
 from plone.app.vocabularies.catalog import CatalogSource
 from plone.event.interfaces import IEventAccessor
+from plone.memoize.view import memoize_contextless
 from zope import schema
 from zope.component.hooks import getSite
 import calendar
 import json
-from urllib import urlencode
-
-from plone.app.event.base import find_ploneroot
-from plone.app.event.base import find_site
+from zope.component import getMultiAdapter
 
 
 def get_calendar_url(context):
@@ -334,3 +329,43 @@ class CalendarTile(Tile):
                 ['{}:tuple={}&'.format(key, item) for item in value])
         else:
             return ''
+
+    def today(self):
+        today = {}
+        loc_today = localized_today(self.context)
+        weekday = loc_today.isoweekday()
+        today['weekday'] = PLMF(self._ts.day_msgid(0 if weekday == 7 else weekday, format='l'))
+        today['number'] = loc_today.day
+        return today
+
+    @memoize_contextless
+    def get_nearest_today_event(self):
+        context = aq_inner(self.context)
+        pc = getToolByName(context, 'portal_catalog')
+        now = localized_now()
+
+        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
+        navigation_root_path = portal_state.navigation_root_path()
+
+        context = aq_inner(self.context)
+        path = navigation_root_path
+        for obj in aq_chain(context):
+            if ICommunity.providedBy(obj):
+                community = aq_inner(obj)
+                path = '/'.join(community.getPhysicalPath())
+
+        query = {
+            'portal_type': 'Event',
+            'review_state': self.state,
+            'start': {'query': [now, dt_end_of_day(now)], 'range': 'min:max'},
+            'end': {'query': now, 'range': 'min'},
+            'sort_on': 'start',
+            'path': path,
+            'sort_limit': 1
+        }
+
+        result = pc(**query)
+        if result:
+            return result[0]
+        else:
+            return

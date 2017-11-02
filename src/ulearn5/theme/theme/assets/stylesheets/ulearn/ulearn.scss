@@ -1,18 +1,18 @@
 $fa-font-path: "fontawesome/fonts";
 @import "fontawesome/scss/font-awesome";
-@import "ulearn/overrides";
-@import "ulearn/hidden";
-@import "ulearn/arrows";
-@import "ulearn/login";
-@import "ulearn/templates";
-@import "ulearn/plugins";
-@import "ulearn/iefixes";
-@import "ulearn/angular";
-@import "ulearn/communities";
-@import "ulearn/community";
-
+@import "overrides";
+@import "hidden";
+@import "arrows";
+@import "login";
+@import "templates";
+@import "plugins";
+@import "iefixes";
+@import "angular";
+@import "communities";
+@import "community";
 
 // Marc's CSS
+
 
 body {
   background:#eae9e4;
@@ -361,7 +361,7 @@ border-color: #34495E;
   padding: 8px 4px 0 2px;
 	margin-bottom:0;
 
-  .vertical_aligned { display: table; height: 62px; }
+  .vertical_aligned { display: table; height: 98px; }
   a { display: table-cell; vertical-align: middle; }
 }
 

@@ -133,7 +133,7 @@ class dynamicCSS(grok.View):
     @ram.cache(_render_cachekey)
     def compile_scss(self, **kwargs):
         ulearnthemeegg = pkg_resources.get_distribution('ulearn5.theme')
-        scssfile = open('{}/ulearn5/theme/theme/assets/stylesheets/dynamic.scss'.format(ulearnthemeegg.location))
+        scssfile = open('{}/ulearn5/theme/theme/assets/stylesheets/dyn/dynamic.scss'.format(ulearnthemeegg.location))
 
         settings = dict(main_color=self.settings.main_color,
                         secondary_color=self.settings.secondary_color,
