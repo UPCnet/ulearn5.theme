@@ -18,46 +18,6 @@
       <value key="deps">jquery</value>
   </records>
 
-	<!-- <records prefix="plone.bundles/mo-boots-js" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="resources"> </value>
-    <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/modernizr-bootstrap.js</value>
-    <value key="last_compilation">2017-10-30 00:00:00</value>
-    <value key="compile">False</value>
-    <value key="enabled">True</value>
-  </records>
-
-	<records prefix="plone.bundles/upc-js" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/upc.js</value>
-			<value key="last_compilation">2017-10-30 00:00:00</value>
-	</records>
-
-	<records prefix="plone.bundles/homeupc-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/assets/css/homeupc-compiled.css</value>
-			<value key="last_compilation">2017-10-30 00:00:00</value>
-	</records>
-
-	<records prefix="plone.bundles/upc-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/assets/css/upc.css</value>
-			<value key="last_compilation">2017-10-30 00:00:00</value>
-	</records>
-
-	<records prefix="plone.bundles/ulearn-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/assets/css/ulearn.css</value>
-			<value key="last_compilation">2017-10-31 00:00:00</value>
-	</records> -->
-
 	<records prefix="plone.bundles/dynamic-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 			<value key="resources"> </value>
 			<value key="enabled">True</value>

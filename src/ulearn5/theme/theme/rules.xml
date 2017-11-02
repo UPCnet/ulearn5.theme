@@ -9,9 +9,9 @@
   <xi:include href="++theme++ulearn5-theme/backend.xml" />
 
   <!-- Default template loaded -->
-  <theme href="base.html" />
+  <theme href="community.html" />
+  <theme href="homepage.html" css:if-content="body.section-homepage"/>
   <notheme css:if-not-content="#visual-portal-wrapper" />
-  <!--<theme href="home-base.html" css:if-content="body.section-homepage"/> -->
 
   <rules css:if-content="#portal-top">
     <!-- Attributes -->
@@ -48,41 +48,40 @@
   <drop css:content="#portal-languageselector" />
   <drop css:content="#mainnavigation" />
   <!-- TODO: This hides all the portlets! Test footer footer... -->
-  <drop css:content=".portletWrapper" />
+  <!-- <drop css:content=".portletWrapper" /> -->
 
   <!-- Barra Menu Eines -->
-  <replace css:theme=".upc-eines" css:content=".upc-eines" />
+  <!-- <replace css:theme=".upc-eines" css:content=".upc-eines" /> -->
   <!-- Barra Menu Venta-->
-  <replace css:theme=".upc-menu" css:content=".upc-menu" />
+  <!-- <replace css:theme=".upc-menu" css:content=".upc-menu" /> -->
   <!-- Barra Menu Navegació -->
-  <replace css:theme=".footer-navigation" css:content=".footer-navigation" />
+  <!-- <replace css:theme=".footer-navigation" css:content=".footer-navigation" /> -->
   <!-- Barra Menu Navegació -->
-  <replace css:theme=".footer-socials" css:content=".footer-socials" />
+  <!-- <replace css:theme=".footer-socials" css:content=".footer-socials" /> -->
 
   <!-- HOME -->
-  <replace css:theme=".content-highlighted" css:content=".content-highlighted" />
+  <!-- <replace css:theme=".content-highlighted" css:content=".content-highlighted" />
   <replace css:theme=".content-banners" css:content=".content-banners" />
   <replace css:theme=".content-hotnews" css:content=".content-hotnews" />
   <replace css:theme=".content-well" css:content=".content-well" />
   <replace css:theme=".content-agenda" css:content=".content-agenda" />
   <replace css:theme=".content-recerca" css:content=".content-recerca" />
-  <replace css:theme=".content-xifres" css:content=".content-xifres" />
+  <replace css:theme=".content-xifres" css:content=".content-xifres" /> -->
 
   <!-- Breadcrumb -->
   <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
-  <drop css:theme="#breadcrumbs" if-path="ca/"/>
+  <!-- <drop css:theme="#breadcrumbs" if-path="ca/"/>
   <drop css:theme="#breadcrumbs" if-path="es/"/>
-  <drop css:theme="#breadcrumbs" if-path="en/"/>
+  <drop css:theme="#breadcrumbs" if-path="en/"/> -->
 
   <!-- Importante eliminar el titulo antes de cambiar la class sino no funciona -->
-  <drop css:content=".documentFirstHeading" css:if-content=".portaltype-contingut_upc" />
+  <!-- <drop css:content=".documentFirstHeading" css:if-content=".portaltype-contingut_upc" /> -->
   <drop css:content=".documentFirstHeading" css:if-content=".mosaic-grid" />
 
   <!-- titulo paginas -->
   <xsl:template match="@class[contains(., 'documentFirstHeading')]">
     <xsl:attribute name="class">document-heading</xsl:attribute>
   </xsl:template>
-
 
   <!-- Mosaic Title -->
   <drop css:content=".mosaic-IDublinCore-title-tile"/>
@@ -99,11 +98,20 @@
     </replace>
   </rules>
 
+  <!-- Right column -->
+  <rules css:if-content="#portal-column-two">
+    <replace css:theme="#column2-container">
+      <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
+        <xsl:copy-of css:select="#portal-column-two > *" />
+      </section>
+    </replace>
+  </rules>
+
   <!-- Central column -->
   <replace css:theme="#content-container" method="raw">
 
     <xsl:variable name="central">
-      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-lg-9 col-md-8 col-xs-12</xsl:if>
+      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-lg-6 col-md-4 col-xs-12</xsl:if>
       <xsl:if test="//aside[@id='portal-column-two'] and not(//aside[@id='portal-column-one'])">col-xs-12 col-sm-9</xsl:if>
       <xsl:if test="//aside[@id='portal-column-one'] and not(//aside[@id='portal-column-two'])">col-lg-9 col-md-8 col-xs-12</xsl:if>
       <xsl:if test="not(//aside[@id='portal-column-one']) and not(//aside[@id='portal-column-two'])">col-lg-12 col-md-12 col-sm-12 col-xs-12</xsl:if>
@@ -112,7 +120,7 @@
     <section id="main-content" class="{$central} main-content">
       <xsl:apply-templates css:select="#content" />
       <footer class="row">
-        <div class="col-xs-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <xsl:copy-of css:select="#viewlet-below-content" />
         </div>
       </footer>
