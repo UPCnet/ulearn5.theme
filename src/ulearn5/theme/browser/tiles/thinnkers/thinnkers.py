@@ -3,7 +3,7 @@ from hashlib import sha1
 from plone import api
 from Acquisition import aq_inner, aq_chain
 from ulearn5.core.content.community import ICommunity
-from base5.core.utils import get_safe_member_by_id, pref_lang
+from base5.core.utils import pref_lang
 from ulearn5.core import _
 from zope import schema
 from plone.supermodel.model import Schema

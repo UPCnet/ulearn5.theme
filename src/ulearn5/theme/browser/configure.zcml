@@ -15,6 +15,14 @@
       permission="zope2.View"
       />
 
+  <browser:page
+     name="angular"
+     for="*"
+     class=".angular.AngularView"
+     template="page.pt"
+     permission="zope2.View"
+     />
+
   <!--Tiles -->
 
   <plone:tile

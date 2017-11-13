@@ -74,18 +74,6 @@
   <drop css:theme="#breadcrumbs" if-path="es/"/>
   <drop css:theme="#breadcrumbs" if-path="en/"/> -->
 
-  <!-- Importante eliminar el titulo antes de cambiar la class sino no funciona -->
-  <!-- <drop css:content=".documentFirstHeading" css:if-content=".portaltype-contingut_upc" /> -->
-  <drop css:content=".documentFirstHeading" css:if-content=".mosaic-grid" />
-
-  <!-- titulo paginas -->
-  <xsl:template match="@class[contains(., 'documentFirstHeading')]">
-    <xsl:attribute name="class">document-heading</xsl:attribute>
-  </xsl:template>
-
-  <!-- Mosaic Title -->
-  <drop css:content=".mosaic-IDublinCore-title-tile"/>
-
   <!-- full-width breadcrumb -->
   <replace css:content="#viewlet-above-content" css:theme="#above-content" />
 

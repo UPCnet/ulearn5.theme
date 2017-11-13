@@ -19,8 +19,7 @@
             Thinnkers
           </h2>
           <div id="miniatures">
-            <lastauthors type="context"
-              tal:attributes="community_hash community_hash" ng-cloak>
+            <lastauthors type="context" tal:attributes="community_hash community_hash" ng-cloak>
               <div class="thinnker">
                 <a ng-repeat="author in last_authors"
                    title="{{author.displayName}}"
@@ -81,6 +80,6 @@
     </div>
     </tal:isprofile>
     </tal:thinnkers>
-
+    <!-- <app-root></app-root> -->
   </body>
 </html>

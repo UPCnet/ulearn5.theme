@@ -20,18 +20,18 @@ module.exports = function (grunt) {
                     outputStyle: 'compressed'
                 },
                 files: {
-                    'css/upc.css': 'stylesheets/upc.scss'
+                    'css/upc.css': 'stylesheets/upc/upc.scss'
                 }
             },
             homeupc: {
                 options: {
-                    sassDir: 'stylesheets',
+                    sassDir: 'stylesheets/bootstrap',
                     cssDir: 'css',
                     outputStyle: 'compressed'
                 },
                 files: {
-                    'css/upcnet.css': 'stylesheets/upcnet.scss',
-                    'css/bootstrap.css': 'stylesheets/bootstrap.scss'
+                    'css/upcnet.css': 'stylesheets/bootstrap/upcnet.scss',
+                    'css/bootstrap.css': 'stylesheets/bootstrap/bootstrap.scss'
                 }
             },
             ulearn: {
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
                     outputStyle: 'compressed'
                 },
                 files: {
-                    'css/ulearn.css': 'stylesheets/ulearn.scss'
+                    'css/ulearn.css': 'stylesheets/ulearn/ulearn.scss'
                 }
             }
         },

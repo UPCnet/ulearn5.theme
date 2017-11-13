@@ -7,7 +7,7 @@
 
 <nav class="subnavbar">
   <ul class="nav nav-pills nav-stacked" role="menu" tal:define="user view/get_user">
-    <li role="menuitem"
+    <!-- <li role="menuitem"
         tal:repeat="community view/getCommunities"
         tal:attributes="class community/community_type">
           <div class="bubble right pull-right">
@@ -43,7 +43,7 @@
                 Community
               </tal:community>
           </a>
-    </li>
+    </li> -->
   </ul>
 </nav>
 

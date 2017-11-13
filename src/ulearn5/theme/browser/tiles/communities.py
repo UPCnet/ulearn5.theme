@@ -97,10 +97,9 @@ class Communities(Tile):
         """ The Contributor role is assumed that will be applied at the group in
             the portal root.
         """
-        # if IHomePage.providedBy(self.context) and \
-        #    checkPermission('ulearn.addCommunity', self.portal()):
-        #     return True
-        return True
+        if IHomePage.providedBy(self.context) and \
+           checkPermission('ulearn.addCommunity', self.portal()):
+            return True
 
     def showEditCommunity(self):
         pm = getToolByName(self.portal(), 'portal_membership')
