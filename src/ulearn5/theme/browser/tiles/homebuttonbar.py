@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import transaction
+from plone import api
 from plone.app.standardtiles import PloneMessageFactory as _
 from plone.supermodel.model import Schema
 from plone.tiles.tile import Tile
 from zope import schema
-from ulearn5.core.utils import is_activate_sharedwithme, is_activate_news
 
 
 
@@ -23,10 +24,23 @@ class HomeButtonBar(Tile):
     def __call__(self):
         return self.index()
 
+    def is_activate_sharedwithme(self):
+        if (api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.elasticsearch') != None) and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
+            portal = api.portal.get()
+            if portal.portal_actions.object.local_roles.visible == False:
+                portal.portal_actions.object.local_roles.visible = True
+                transaction.commit()
+            return True
+        else:
+            return False
+
+    def is_activate_news(self):
+        return api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_news')
+
     def getClass(self):
         """ Returns class for links """
-        shared = is_activate_sharedwithme()
-        news = is_activate_news()
+        shared = self.is_activate_sharedwithme()
+        news = self.is_activate_news()
         width = ''
         if shared and news:
             width = 'col-md-3'

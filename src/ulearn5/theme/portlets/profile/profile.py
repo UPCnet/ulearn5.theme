@@ -7,6 +7,7 @@ from OFS.Image import Image
 from zope.interface import implements
 from zope.component import queryUtility
 from zope.component import getMultiAdapter
+from zope.formlib import form
 
 from plone.app.portlets.portlets import base
 from plone.registry.interfaces import IRegistry
@@ -31,15 +32,21 @@ class IProfilePortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IProfilePortlet)
 
-    title = _(u'profile', default=u'User profile')
+    def __init__(self):
+        pass
 
+    @property
+    def title(self):
+        title = _(u'profile', default=u'User profile')
+        return title
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('templates/profile.pt')
+    render = ViewPageTemplateFile('profile.pt')
 
-    def __init__(self, context, request, view, manager, data):
-        super(Renderer, self).__init__(context, request, view, manager, data)
+    def __init__(self):
+        # base.Renderer.__init__(self)
+        super(Renderer, self).__init__(self)
         self.username = api.user.get_current().id
         self.user_info = get_safe_member_by_id(self.username)
         self.portal_url = api.portal.get().absolute_url()
@@ -152,7 +159,15 @@ class Renderer(base.Renderer):
         return community.community_type
 
 
-class AddForm(base.NullAddForm):
+# base.NullAddForm)
 
-    def create(self):
-        return Assignment()
+class AddForm(base.AddForm):
+    schema = IProfilePortlet
+    form_fields = form.Fields(IProfilePortlet)
+    label = _(u"Afegeix portlet de perfil")
+    description = _(u"Aquest portlet mostra el perfil d'usuari")
+
+    def create(self, data):
+        # s'invoca despres de __init__ en clicar Desa
+        assignment = Assignment(**data)
+        return assignment
