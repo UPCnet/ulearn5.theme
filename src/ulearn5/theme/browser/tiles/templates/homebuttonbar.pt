@@ -7,9 +7,8 @@
    i18n:domain="ulearn">
    <body>
       <div ng-controller="homeTopPageMenuButtons as ctrl"
-           tal:define="ulearn_utils context/@@ulearn.utils;
-                       shared ulearn_utils/is_activate_sharedwithme;
-                       news ulearn_utils/is_activate_news;
+           tal:define="shared view/is_activate_sharedwithme;
+                       news view/is_activate_news;
                        cls view/getClass">
 
          <div id="menusup" i18n:domain="ulearn">

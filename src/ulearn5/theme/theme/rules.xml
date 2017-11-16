@@ -33,12 +33,12 @@
     <after css:theme-children="head" css:content="head script" />
   </rules>
 
-  <rules css:if-content="body.section-agenda.subsection-agenda">
+  <!-- <rules css:if-content="body.section-agenda.subsection-agenda">
     <before css:theme-children="body">
       <div id="widget-config" data-config-url="{$portal_url}">
       </div>
     </before>
-  </rules>
+  </rules> -->
 
   <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
   <copy attributes="*" css:content="body" css:theme="body" />

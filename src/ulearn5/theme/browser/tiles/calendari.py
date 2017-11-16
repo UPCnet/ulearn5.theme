@@ -119,19 +119,9 @@ class CalendarTile(Tile):
         # aq_inner, because somehow search_base gets wrapped by the renderer
         return aq_inner(self._search_base)
 
-    @property
-    def search_base_path(self):
-        search_base = self.search_base
-        if search_base is not None:
-            search_base = '/'.join(search_base.getPhysicalPath())
-        return search_base
-
     def __call__(self):
         context = aq_inner(self.context)
-        # self.calendar_url = self.context.absolute_url()
-        # self.calendar_url = get_calendar_url(context, self.search_base_path)
         self.calendar_url = get_calendar_url(context)
-        # self.calendar_url = 'http://localhost:8080/Plone2/event_listing'
 
         self.year, self.month = year, month = self.year_month_display()
         self.prev_year, self.prev_month = prev_year, prev_month = (
@@ -251,12 +241,9 @@ class CalendarTile(Tile):
                 sort='start', sort_reverse=False
             )
         else:
-            # search_base_path = self.search_base_path
-            # search_base_path = '/Plone2/'
             search_base_path = "/".join(self.context.getParentNode().getPhysicalPath())
             if search_base_path:
                 query['path'] = {'query': search_base_path}
-            # query['path'] = {'query': '/Plone/ca'}
             events = get_events(context, start=start, end=end,
                                 ret_mode=RET_MODE_OBJECTS,
                                 expand=True, **query)
