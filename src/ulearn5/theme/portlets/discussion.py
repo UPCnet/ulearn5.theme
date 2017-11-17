@@ -7,7 +7,6 @@ from Acquisition import aq_inner
 from Acquisition import aq_chain
 from plone.memoize.view import memoize_contextless
 
-from base5.core.browser.interfaces import IHomePage
 from base5.core.utils import pref_lang
 from zope.component import getMultiAdapter
 from ulearn5.core.content.community import ICommunity
@@ -90,7 +89,7 @@ class Renderer(base.Renderer):
 
     def show_newdiscussion_url(self):
         context = aq_inner(self.context)
-        if IHomePage.providedBy(context) or IPloneSiteRoot.providedBy(self.context):
+        if IPloneSiteRoot.providedBy(self.context):
             return False
 
         if 'Editor' in plone.api.user.get_roles(obj=self.get_community()):

@@ -2,7 +2,6 @@ from plone import api
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner, aq_chain
-from base5.core.browser.interfaces import IHomePage
 
 from zope.component import getMultiAdapter
 
@@ -50,8 +49,7 @@ class Renderer(base.Renderer):
     def update(self):
         context = aq_inner(self.context)
 
-        if IHomePage.providedBy(self.context) or \
-           IPloneSiteRoot.providedBy(self.context) or \
+        if IPloneSiteRoot.providedBy(self.context) or \
            not IDexterityContent.providedBy(self.context):
             path = ''
         else:
@@ -314,7 +312,7 @@ class Renderer(base.Renderer):
     def show_newevent_url(self):
         """ Assume that the calendar is only shown on the community itself. """
         context = aq_inner(self.context)
-        if IHomePage.providedBy(context) or IPloneSiteRoot.providedBy(self.context):
+        if IPloneSiteRoot.providedBy(self.context):
             return False
         else:
             user_roles = api.user.get_roles(username=self.username, obj=self.context)

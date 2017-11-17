@@ -9,7 +9,6 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from base5.core.browser.interfaces import IHomePage
 from ulearn5.core.content.community import ICommunity
 
 from zope.security import checkPermission
@@ -50,11 +49,7 @@ class Renderer(base.Renderer):
         return False
 
     def get_stats_for(self, query_type):
-        if IHomePage.providedBy(self.context):
-            portal = api.portal.get()
-            current_path = '/'.join(portal.getPhysicalPath())
-        else:
-            current_path = '/'.join(self.context.getPhysicalPath())
+        current_path = '/'.join(self.context.getPhysicalPath())
 
         pc = api.portal.get_tool('portal_catalog')
         if query_type == 'documents':

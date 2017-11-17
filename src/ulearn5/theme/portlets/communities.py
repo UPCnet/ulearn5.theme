@@ -13,7 +13,6 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from base5.core.browser.interfaces import IHomePage
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from plone import api
@@ -86,8 +85,7 @@ class Renderer(base.Renderer):
         """ The Contributor role is assumed that will be applied at the group in
             the portal root.
         """
-        if IHomePage.providedBy(self.context) and \
-           checkPermission('ulearn.addCommunity', self.portal()):
+        if checkPermission('ulearn.addCommunity', self.portal()):
             return True
 
     def showEditCommunity(self):

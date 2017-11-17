@@ -9,7 +9,6 @@ from Products.CMFCore.utils import getToolByName
 from base5.core.utils import pref_lang
 
 from Products.CMFCore.utils import getToolByName
-from base5.core.browser.interfaces import IHomePage
 from zope.component.hooks import getSite
 
 class ICustomButtonBar(Schema):
@@ -27,17 +26,6 @@ class CustomButtonBar(Tile):
 
     def __call__(self):
         return self.index()
-
-
-    def getHomepage(self):
-        page = {}
-        context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        result = pc.searchResults(object_provides=IHomePage.__identifier__,
-                                  Language=pref_lang())
-        page['body'] = result[0].CookedBody()
-
-        return page
 
     def portal_url(self):
         return self.portal().absolute_url()

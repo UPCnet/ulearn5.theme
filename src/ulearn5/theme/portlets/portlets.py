@@ -3,7 +3,6 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.portlets.portlets.navigation import Renderer as NavigationRenderer
 from ulearn5.core.content.community import ICommunity
-from base5.core.browser.interfaces import IHomePage
 
 
 # Not used
@@ -13,10 +12,6 @@ from base5.core.browser.interfaces import IHomePage
 #     """
 #     _template = ViewPageTemplateFile('templates/navigation.pt')
 #     recurse = ViewPageTemplateFile('templates/navigation_recurse.pt')
-
-#     def showCreateCommunity(self):
-#         if IHomePage.providedBy(self.context):
-#             return True
 
 #     def showEditCommunity(self):
 #         if not IPloneSiteRoot.providedBy(self.context) and \

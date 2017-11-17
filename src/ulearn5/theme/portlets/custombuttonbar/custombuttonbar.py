@@ -3,7 +3,6 @@ from zope.interface import implements
 
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner
-from base5.core.browser.interfaces import IHomePage
 from base5.core.utils import pref_lang
 
 
@@ -30,16 +29,6 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('custombuttonbar.pt')
-
-    def getHomepage(self):
-        page = {}
-        context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        result = pc.searchResults(object_provides=IHomePage.__identifier__,
-                                  Language=pref_lang())
-        page['body'] = result[0].CookedBody()
-
-        return page
 
     def portal_url(self):
         return self.portal().absolute_url()
