@@ -51,38 +51,4 @@
                 title="My Tags"
                 i18n:attributes="title"/>
 
-      <!-- <assignment
-          remove="True"
-          name="navigation"
-          category="context"
-          key="/"
-          manager="plone.leftcolumn"
-          type="portlets.Navigation"
-          />
-
-      <assignment
-          type="ulearn.portlets.profile"
-          manager="plone.leftcolumn"
-          category="context"
-          key="/"
-          name="profile"
-          insert-before="*"
-          />
-
-      <assignment
-          type="ulearn.portlets.communities"
-          manager="plone.leftcolumn"
-          category="context"
-          key="/"
-          name="communities"
-          />
-
-      <assignment
-          type="ulearn.portlets.thinnkers"
-          manager="plone.leftcolumn"
-          category="context"
-          key="/"
-          name="thinnkers"
-          /> -->
-
 </portlets>

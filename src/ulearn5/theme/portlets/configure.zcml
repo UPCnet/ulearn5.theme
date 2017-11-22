@@ -34,10 +34,10 @@
 
     <plone:portlet
         name="ulearn.portlets.buttonbar"
-        interface=".homebuttonbar.IHomeButtonBarPortlet"
-        assignment=".homebuttonbar.Assignment"
-        renderer=".homebuttonbar.Renderer"
-        addview=".homebuttonbar.AddForm"
+        interface=".buttonbar.IButtonBarPortlet"
+        assignment=".buttonbar.Assignment"
+        renderer=".buttonbar.Renderer"
+        addview=".buttonbar.AddForm"
         />
 
     <plone:portlet
