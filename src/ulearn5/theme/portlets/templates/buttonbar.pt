@@ -96,6 +96,7 @@
                   </div>
                </div>
             </div>
+            <div id="mynews"><!-- Falta angular para que se vea algo--></div>
             <div id="librarysearch" ng-switch-when="sharedwithme">
                 <div id="sharedwithme-container">
                     <div id="shared-with-me-view" ng-controller="SharedWithMe as swm">

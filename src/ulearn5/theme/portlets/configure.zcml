@@ -17,20 +17,12 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.profile"
-        interface=".profile.IProfilePortlet"
-        assignment=".profile.Assignment"
-        renderer=".profile.Renderer"
-        addview=".profile.AddForm"
-     />
-
-    <plone:portlet
         name="ulearn.portlets.thinnkers"
         interface=".thinnkers.IThinnkersPortlet"
         assignment=".thinnkers.Assignment"
         renderer=".thinnkers.Renderer"
         addview=".thinnkers.AddForm"
-     />
+        />
 
     <plone:portlet
         name="ulearn.portlets.buttonbar"
@@ -41,12 +33,55 @@
         />
 
     <plone:portlet
+        name="ulearn.portlets.angularrouteview"
+        interface=".angularrouteview.IAngularRouteViewPortlet"
+        assignment=".angularrouteview.Assignment"
+        renderer=".angularrouteview.Renderer"
+        addview=".angularrouteview.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.mycommunities"
+        interface=".mycommunities.IMyCommunitiesPortlet"
+        assignment=".mycommunities.Assignment"
+        renderer=".mycommunities.Renderer"
+        addview=".mycommunities.AddForm"
+        editview=".mycommunities.EditForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.subscribednews"
+        interface=".subscribednews.subscribednews.ISubscribedNewsPortlet"
+        assignment=".subscribednews.subscribednews.Assignment"
+        renderer=".subscribednews.subscribednews.Renderer"
+        addview=".subscribednews.subscribednews.AddForm"
+        editview=".subscribednews.subscribednews.EditForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.sharedwithme"
+        interface=".sharedwithme.ISharedWithMePortlet"
+        assignment=".sharedwithme.Assignment"
+        renderer=".sharedwithme.Renderer"
+        addview=".sharedwithme.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.profile"
+        interface=".profile.IProfilePortlet"
+        assignment=".profile.Assignment"
+        renderer=".profile.Renderer"
+        addview=".profile.AddForm"
+        />
+
+    <plone:portlet
         name="ulearn.portlets.calendar"
         interface=".calendar.ICalendarPortlet"
         assignment=".calendar.Assignment"
         renderer=".calendar.Renderer"
         addview=".calendar.AddForm"
         />
+    <!-- Hasta aqui P5 -->
 
     <plone:portlet
         name="ulearn.portlets.discussion"
@@ -73,21 +108,13 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.angularrouteview"
-        interface=".angularrouteview.IAngularRouteViewPortlet"
-        assignment=".angularrouteview.Assignment"
-        renderer=".angularrouteview.Renderer"
-        addview=".angularrouteview.AddForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.importantnews"
         interface=".importantnews.importantnews.IImportantNewsPortlet"
         assignment=".importantnews.importantnews.Assignment"
         renderer=".importantnews.importantnews.Renderer"
         addview=".importantnews.importantnews.AddForm"
         editview=".importantnews.importantnews.EditForm"
-    />
+        />
 
     <plone:portlet
         name="ulearn.portlets.flashesinformativos"
@@ -96,7 +123,7 @@
         renderer=".flashesinformativos.flashesinformativos.Renderer"
         addview=".flashesinformativos.flashesinformativos.AddForm"
         editview=".flashesinformativos.flashesinformativos.EditForm"
-    />
+        />
 
     <plone:portlet
         name="ulearn.portlets.mysubjects"
@@ -105,33 +132,7 @@
         renderer=".mysubjects.mysubjects.Renderer"
         addview=".mysubjects.mysubjects.AddForm"
         editview=".mysubjects.mysubjects.EditForm"
-    />
-
-    <plone:portlet
-        name="ulearn.portlets.subscribednews"
-        interface=".subscribednews.subscribednews.ISubscribedNewsPortlet"
-        assignment=".subscribednews.subscribednews.Assignment"
-        renderer=".subscribednews.subscribednews.Renderer"
-        addview=".subscribednews.subscribednews.AddForm"
-        editview=".subscribednews.subscribednews.EditForm"
-    />
-
-    <plone:portlet
-        name="ulearn.portlets.custombuttonbar"
-        interface=".custombuttonbar.custombuttonbar.ICustomButtonBarPortlet"
-        assignment=".custombuttonbar.custombuttonbar.Assignment"
-        renderer=".custombuttonbar.custombuttonbar.Renderer"
-        addview=".custombuttonbar.custombuttonbar.AddForm"
-    />
-
-    <plone:portlet
-        name="ulearn.portlets.mycommunities"
-        interface=".mycommunities.IMyCommunitiesPortlet"
-        assignment=".mycommunities.Assignment"
-        renderer=".mycommunities.Renderer"
-        addview=".mycommunities.AddForm"
-        editview=".mycommunities.EditForm"
-    />
+        />
 
     <plone:portlet
         name="ulearn.portlets.mytags"
@@ -139,14 +140,6 @@
         assignment=".mytags.mytags.Assignment"
         renderer=".mytags.mytags.Renderer"
         addview=".mytags.mytags.AddForm"
-    />
-
-    <plone:portlet
-        name="ulearn.portlets.sharedwithme"
-        interface=".sharedwithme.ISharedWithMePortlet"
-        assignment=".sharedwithme.Assignment"
-        renderer=".sharedwithme.Renderer"
-        addview=".sharedwithme.AddForm"
         />
 
 </configure>

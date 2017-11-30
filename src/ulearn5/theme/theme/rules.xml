@@ -77,6 +77,8 @@
   <!-- full-width breadcrumb -->
   <replace css:content="#viewlet-above-content" css:theme="#above-content" />
 
+  <drop css:content=".documentFirstHeading" if-path="front-page/"/>
+
   <!-- Left column -->
   <rules css:if-content="#portal-column-one">
     <replace css:theme="#column1-container">

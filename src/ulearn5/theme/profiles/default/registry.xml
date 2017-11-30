@@ -50,7 +50,7 @@
 			<value key="last_compilation">2017-10-30 00:00:00</value>
 	</records>
 
-	<records prefix="plone.app.mosaic.app_tiles.banner"
+	<!-- <records prefix="plone.app.mosaic.app_tiles.banner"
 	         interface="plone.app.mosaic.interfaces.ITile">
 	    <value key="name">banner</value>
 	    <value key="label">Banner</value>
@@ -160,6 +160,6 @@
 	    <value key="favorite">false</value>
 	    <value key="rich_text">false</value>
 	    <value key="weight">20</value>
-	</records>
+	</records> -->
 
 </registry>

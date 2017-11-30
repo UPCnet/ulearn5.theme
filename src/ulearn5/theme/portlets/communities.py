@@ -105,10 +105,15 @@ class Renderer(base.Renderer):
         pc = getToolByName(portal, "portal_catalog")
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
-        communities = pc.searchResults(object_provides=ICommunity.__identifier__,
+        communities = []
+
+        try:
+            communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,
                                        sort_on="subscribed_items",
                                        sort_order="reverse")
+        except:
+            pass
 
         def format_communities():
             """ Generator to return information of the community.

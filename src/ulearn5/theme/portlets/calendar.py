@@ -2,9 +2,9 @@ from plone import api
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_inner, aq_chain
-
+import json
 from zope.component import getMultiAdapter
-
+from zope.component.hooks import getSite
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.view import memoize_contextless
@@ -141,7 +141,24 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
+    def nav_pattern_options(self, query):
+        return json.dumps({
+            'url': '%s/@@calendari%s&%s' % (
+                getSite().absolute_url(),
+                query,
+                self.quote_query('state', self.state)),
+            'target': '.portletCalendar'
+        })
 
+    def quote_query(self, key, value):
+        """ This only is capable of Zope encode tuples. If ever required, can
+        be extended to support further types (and complex dicts of data)"""
+
+        if isinstance(value, tuple):
+            return ''.join(
+                ['{}:tuple={}&'.format(key, item) for item in value])
+        else:
+            return ''
 
     @property
     def cal_data(self):
