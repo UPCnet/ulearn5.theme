@@ -6,15 +6,17 @@
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.communities" title="Ulearn Communities"
                 i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.mycommunities" title="My Communities"
+    <portlet addview="ulearn.portlets.mycommunities" title="Ulearn My Communities"
                 i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.calendar" title="Ulearn calendar"
+    <portlet addview="ulearn.portlets.calendar" title="Ulearn Calendar"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.thinnkers" title="Ulearn Thinnkers"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.buttonbar" title="Ulearn Button Bar"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.profile" title="Ulearn Profile"
+                i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.subscribednews" title="Ulearn Subscribed News"
                 i18n:attributes="title"/>
 
     <!--portlets externs -->
@@ -27,8 +29,6 @@
     <portlet addview="ulearn.portlets.importantnews" title="News Important"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.flashesinformativos" title="News Flash"
-                i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.subscribednews" title="News Subscribed with tags"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.mysubjects" title="My Subjects"
                 i18n:attributes="title"/>
