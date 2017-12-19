@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="ca" ng-app="GenwebApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,10 +26,12 @@
     <main class="main-element" role="main">
       <div class="container">
         <div class="row">
-          <aside id="global_statusmessage"></aside>
-          <div id="column1-container"></div>
-          <div id="content-container"></div>
-          <div id="column2-container"></div>
+          <div id="home-angular-route-view" ui-view>
+            <aside id="global_statusmessage"></aside>
+            <div id="column1-container"></div>
+            <div id="content-container"></div>
+            <div id="column2-container"></div>
+          </div>
         </div>
       </div>
     </main>
@@ -37,6 +39,8 @@
       <div class="container"></div>
     </footer>
   </body>
-  <link rel="text/javascript" href="assets/javascripts/modernizr-bootstrap.js"/>
-  <link rel="text/javascript" href="assets/javascripts/upc.js"/>
+  <script src="assets/javascripts/modernizr-bootstrap.js"></script>
+  <script src="assets/javascripts/upc.js"></script>
+  <script src="angular/ulearn.common.ee2544fc.js"></script>
+  <script src="angular/ulearn.app.7cea1b36.js"></script>
 </html>

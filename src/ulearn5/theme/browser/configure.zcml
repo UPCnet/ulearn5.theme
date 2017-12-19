@@ -6,7 +6,7 @@
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
   <include package="z3c.jbot" file="meta.zcml" />
-  <include package="plone.tiles" file="meta.zcml" />
+  <!-- <include package="plone.tiles" file="meta.zcml" /> -->
 
   <browser:page
       name="profile"
@@ -16,16 +16,15 @@
       />
 
   <browser:page
-     name="angular"
-     for="*"
-     class=".angular.AngularView"
-     template="page.pt"
-     permission="zope2.View"
-     />
+      for="*"
+      name="plone_javascript_variables.js"
+      class=".jsvariables.JSVariables"
+      permission="zope.Public"
+      />
 
   <!--Tiles -->
 
-  <plone:tile
+  <!-- <plone:tile
       name="banner"
       title="Banner"
       description="Banner used to show premsa-destacat-agenda"
@@ -128,6 +127,6 @@
       for="*"
       layer="*"
       template="tiles/templates/calendari.pt"
-      />
+      /> -->
 
 </configure>

@@ -1,29 +1,17 @@
 <?xml version="1.0"?>
 <registry>
-	<records prefix="plone.resources/aa-inline" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-	  	<value key="js">++theme++ulearn5-theme/angular/dist/inline.b5f39c6d4115e1e9c6f1.bundle.js</value>
-	</records>
-	<records prefix="plone.resources/aa-main" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-	  	<value key="js">++theme++ulearn5-theme/angular/dist/main.8c8c7ff35bc1fc15af22.bundle.js</value>
-	  	<value key="deps">aa-inline</value>
-	  	<value key="deps">aa-polyfill</value>
-	</records>
-	<records prefix="plone.resources/aa-polyfill" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-	  	<value key="js">++theme++ulearn5-theme/angular/dist/polyfills.ad37cd45a71cb38eee76.bundle.js</value>
-	</records>
-	<records prefix="plone.bundles/aa" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+	<!-- <records prefix="plone.bundles/common" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 	  <value key="resources"> </value>
 	  <value key="enabled">True</value>
-	  <value key="jscompilation">++theme++ulearn5-theme/angular/main.js</value>
-	  <value key="last_compilation">2017-11-08 00:00:00</value>
+	  <value key="jscompilation">++theme++ulearn5-theme/angular/ulearn.common.ee2544fc.js</value>
+	  <value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
-	<records prefix="plone.bundles/aa-style" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-			<value key="enabled">True</value>
-			<value key="compile">False</value>
-			<value key="csscompilation">++theme++ulearn5-theme/angular/dist/styles.d41d8cd98f00b204e980.bundle.css</value>
-			<value key="last_compilation">2017-11-08 00:00:00</value>
-	</records>
+	<records prefix="plone.bundles/app" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+	  <value key="resources"> </value>
+	  <value key="enabled">True</value>
+	  <value key="jscompilation">++theme++ulearn5-theme/angular/ulearn.app.7cea1b36.js</value>
+	  <value key="last_compilation">2017-12-13 00:00:00</value>
+	</records> -->
 	<record name="plone.custom_plugins" interface="Products.CMFPlone.interfaces.controlpanel.ITinyMCESchema" field="custom_plugins">
 	    <field type="plone.registry.field.List">
 	      <default/>
@@ -48,6 +36,12 @@
 			<value key="compile">False</value>
 			<value key="csscompilation">dynamic.css</value>
 			<value key="last_compilation">2017-10-30 00:00:00</value>
+	</records>
+	<records prefix="plone.bundles/pl_variables" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+	  <value key="resources"> </value>
+	  <value key="enabled">True</value>
+	  <value key="jscompilation">plone_javascript_variables.js</value>
+	  <value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
 
 	<!-- <records prefix="plone.app.mosaic.app_tiles.banner"

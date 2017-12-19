@@ -41,4 +41,3 @@ class Banner(Tile):
     def title(self):
         """ Return tile title"""
         return self.data.get('tile_title', '')
-

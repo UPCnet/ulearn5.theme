@@ -106,7 +106,7 @@ class Renderer(base.Renderer):
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
         communities = []
-
+        #import ipdb; ipdb.set_trace()
         try:
             communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,

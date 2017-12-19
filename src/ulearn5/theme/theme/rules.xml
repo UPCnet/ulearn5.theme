@@ -10,7 +10,7 @@
 
   <!-- Default template loaded -->
   <theme href="community.html" />
-  <theme href="homepage.html" css:if-content="body.section-homepage"/>
+  <theme href="homepage.html" css:if-content="body.section-front-page"/>
   <notheme css:if-not-content="#visual-portal-wrapper" />
 
   <rules css:if-content="#portal-top">
