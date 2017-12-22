@@ -20,7 +20,7 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('templates/buttonbar.pt')
+    render = ViewPageTemplateFile('buttonbar.pt')
 
     def __init__(self, context, request, view, manager, data):
         super(Renderer, self).__init__(context, request, view, manager, data)

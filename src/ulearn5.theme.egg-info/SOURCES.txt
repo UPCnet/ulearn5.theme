@@ -155,9 +155,10 @@ src/ulearn5/theme/theme/homepage.html
 src/ulearn5/theme/theme/manifest.cfg
 src/ulearn5/theme/theme/preview.png
 src/ulearn5/theme/theme/rules.xml
-src/ulearn5/theme/theme/angular/dist/ulearn5.app.ea8baebc.js
+src/ulearn5/theme/theme/angular/dist/mijs.js
+src/ulearn5/theme/theme/angular/dist/ulearn5.app.1253952c.js
 src/ulearn5/theme/theme/angular/dist/ulearn5.app.map
-src/ulearn5/theme/theme/angular/dist/ulearn5.common.559f8bee.js
+src/ulearn5/theme/theme/angular/dist/ulearn5.common.1116c434.js
 src/ulearn5/theme/theme/angular/dist/ulearn5.common.map
 src/ulearn5/theme/theme/assets/css/bootstrap.css
 src/ulearn5/theme/theme/assets/css/dynamic.css

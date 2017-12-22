@@ -95,5 +95,29 @@
             </article>
          </div>
       </div>
+      <ul class="calendarlinks" i18n:domain="ulearn" tal:condition="view/is_community">
+         <li>
+            <a tal:attributes="href string:${view/get_event_folder_url}">
+               <i class="icon-plus-sign icons"> </i>
+               <tal:seeevents i18n:translate="seemoreevents">See more events</tal:seeevents>
+            </a>
+         </li>
+      </ul>
+      <ul class="icons-ul" i18n:domain="ulearn">
+         <li tal:repeat="event view/get_next_three_events">
+            <a tal:attributes="href event/getURL">
+               <i class="fa fa-calendar"></i>
+               <tal:event content="event/Title">Event Title</tal:event>
+            </a>
+         </li>
+      </ul>
+      <p class="newevent"
+         tal:condition="view/show_newevent_url">
+         <a class="btn btn-large btn-comunitat"
+            tal:attributes="href view/newevent_url">
+            <i class="fa fa-calendar"></i>
+            <tal:newevent  i18n:domain="ulearn" i18n:translate="newevent">Create a new event</tal:newevent>
+         </a>
+      </p>
    </section>
 </html>

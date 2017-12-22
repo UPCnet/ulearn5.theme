@@ -333,7 +333,7 @@ class Renderer(base.Renderer):
             return False
         else:
             user_roles = api.user.get_roles(username=self.username, obj=self.context)
-            if 'Editor' in user_roles:
+            if 'Editor' in user_roles and ICommunity.providedBy(context):
                 return True
             else:
                 return False
