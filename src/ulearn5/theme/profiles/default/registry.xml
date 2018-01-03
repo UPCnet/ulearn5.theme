@@ -1,17 +1,5 @@
 <?xml version="1.0"?>
 <registry>
-	<!-- <records prefix="plone.bundles/common" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-	  <value key="resources"> </value>
-	  <value key="enabled">True</value>
-	  <value key="jscompilation">++theme++ulearn5-theme/angular/ulearn.common.ee2544fc.js</value>
-	  <value key="last_compilation">2017-12-13 00:00:00</value>
-	</records>
-	<records prefix="plone.bundles/app" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-	  <value key="resources"> </value>
-	  <value key="enabled">True</value>
-	  <value key="jscompilation">++theme++ulearn5-theme/angular/ulearn.app.7cea1b36.js</value>
-	  <value key="last_compilation">2017-12-13 00:00:00</value>
-	</records> -->
 	<record name="plone.custom_plugins" interface="Products.CMFPlone.interfaces.controlpanel.ITinyMCESchema" field="custom_plugins">
 	    <field type="plone.registry.field.List">
 	      <default/>
@@ -37,12 +25,43 @@
 			<value key="csscompilation">dynamic.css</value>
 			<value key="last_compilation">2017-10-30 00:00:00</value>
 	</records>
+
 	<records prefix="plone.bundles/pl_variables" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 	  <value key="resources"> </value>
 	  <value key="enabled">True</value>
 	  <value key="jscompilation">plone_javascript_variables.js</value>
 	  <value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
+
+	<!-- <records prefix="plone.resources/modernizr-bootstrap" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+      <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/modernizr-bootstrap.js</value>
+			<value key="last_compilation">2018-01-03 00:00:00</value>
+	    <value key="compile">False</value>
+	    <value key="enabled">True</value>
+  </records>
+
+	<records prefix="plone.resources/upc" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+			<value key="resources"> </value>
+      <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/upc.js</value>
+			<value key="last_compilation">2018-01-03 00:00:00</value>
+	    <value key="compile">False</value>
+	    <value key="enabled">True</value>
+  </records> -->
+	<!-- <records prefix="plone.bundles/angular-common" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+		<value key="enabled">False</value>
+		<value key="jscompilation">++theme++ulearn5-theme/angular/dist/ulearn5.common.ab590370.js</value>
+		<value key="last_compilation">2018-01-02 00:00:00</value>
+		<value key="compile">False</value>
+		<value key="depends">plone</value>
+	</records>
+	<records prefix="plone.bundles/angular-app" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+		<value key="enabled">False</value>
+		<value key="jscompilation">++theme++ulearn5-theme/angular/dist/ulearn5.app.bf129920.js</value>
+		<value key="last_compilation">2018-01-02 00:00:00</value>
+		<value key="compile">False</value>
+		<value key="depends">angular-common</value>
+	</records> -->
 
 	<!-- <records prefix="plone.app.mosaic.app_tiles.banner"
 	         interface="plone.app.mosaic.interfaces.ITile">
