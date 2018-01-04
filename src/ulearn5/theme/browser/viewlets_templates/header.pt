@@ -2,7 +2,7 @@
   <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn5.theme">
     <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
-      <span aria-hidden="true" role="presentation" class="icona-upc"><img alt="" src="/++theme++ulearn5-theme/assets/images/logomark.png"></span></h1>
+      <span aria-hidden="true" role="presentation" class="icona-upc"><img alt="" src="/++theme++ulearn5/assets/images/logomark.png"></span></h1>
     </a>
     <div class="button-menu-mobile hidden-md hidden-lg">
       <a href="#" role="button">Menu<span role="presentation" class="icona-upc">menu</span></a>

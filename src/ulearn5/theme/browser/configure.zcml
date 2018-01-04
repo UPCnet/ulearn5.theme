@@ -6,7 +6,6 @@
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
   <include package="z3c.jbot" file="meta.zcml" />
-  <!-- <include package="plone.tiles" file="meta.zcml" /> -->
 
   <browser:page
       name="profile"
@@ -22,8 +21,24 @@
       permission="zope.Public"
       />
 
-  <!--Tiles -->
+  <!-- necessari per a que el portlet de calendari funcioni. Aquest crida a una
+  vista anomenada calendari, que es la que es defineix aquí-->
+  <plone:tile
+      name="calendari"
+      title="Calendari"
+      description="Tile used to show the Calendar"
+      add_permission="cmf.ModifyPortalContent"
+      schema="ulearn5.theme.browser.tiles.calendari.ICalendarTile"
 
+      class="ulearn5.theme.browser.tiles.calendari.CalendarTile"
+      permission="zope2.View"
+      for="*"
+      layer="*"
+      template="tiles/templates/calendari.pt"
+      />
+
+  <!--Tiles -->
+  <!-- <include package="plone.tiles" file="meta.zcml" /> -->
   <!-- <plone:tile
       name="banner"
       title="Banner"
@@ -113,20 +128,6 @@
       for="*"
       layer="*"
       template="tiles/maxui/maxui.pt"
-      />
-
-  <plone:tile
-      name="calendari"
-      title="Calendari"
-      description="Tile used to show the Calendar"
-      add_permission="cmf.ModifyPortalContent"
-      schema="ulearn5.theme.browser.tiles.calendari.ICalendarTile"
-
-      class="ulearn5.theme.browser.tiles.calendari.CalendarTile"
-      permission="zope2.View"
-      for="*"
-      layer="*"
-      template="tiles/templates/calendari.pt"
       /> -->
 
 </configure>

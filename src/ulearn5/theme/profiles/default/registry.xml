@@ -33,36 +33,6 @@
 	  <value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
 
-	<!-- <records prefix="plone.resources/modernizr-bootstrap" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-      <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/modernizr-bootstrap.js</value>
-			<value key="last_compilation">2018-01-03 00:00:00</value>
-	    <value key="compile">False</value>
-	    <value key="enabled">True</value>
-  </records>
-
-	<records prefix="plone.resources/upc" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-			<value key="resources"> </value>
-      <value key="jscompilation">++theme++ulearn5-theme/assets/javascripts/upc.js</value>
-			<value key="last_compilation">2018-01-03 00:00:00</value>
-	    <value key="compile">False</value>
-	    <value key="enabled">True</value>
-  </records> -->
-	<!-- <records prefix="plone.bundles/angular-common" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-		<value key="enabled">False</value>
-		<value key="jscompilation">++theme++ulearn5-theme/angular/dist/ulearn5.common.ab590370.js</value>
-		<value key="last_compilation">2018-01-02 00:00:00</value>
-		<value key="compile">False</value>
-		<value key="depends">plone</value>
-	</records>
-	<records prefix="plone.bundles/angular-app" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-		<value key="enabled">False</value>
-		<value key="jscompilation">++theme++ulearn5-theme/angular/dist/ulearn5.app.bf129920.js</value>
-		<value key="last_compilation">2018-01-02 00:00:00</value>
-		<value key="compile">False</value>
-		<value key="depends">angular-common</value>
-	</records> -->
-
 	<!-- <records prefix="plone.app.mosaic.app_tiles.banner"
 	         interface="plone.app.mosaic.interfaces.ITile">
 	    <value key="name">banner</value>
@@ -159,9 +129,9 @@
 	    <value key="favorite">false</value>
 	    <value key="rich_text">false</value>
 	    <value key="weight">20</value>
-	</records>
+	</records> -->
 
-	<records prefix="plone.app.mosaic.app_tiles.calendari"
+	<!-- <records prefix="plone.app.mosaic.app_tiles.calendari"
            interface="plone.app.mosaic.interfaces.ITile">
 	    <value key="name">calendari</value>
 	    <value key="label">Calendari</value>

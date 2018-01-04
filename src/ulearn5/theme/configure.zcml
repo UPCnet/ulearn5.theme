@@ -18,19 +18,53 @@
   <include package=".portlets" />
 
   <!-- <cmf:registerDirectory name="ulearntheme_custom" directory="skins" recursive="True" /> -->
-
+  <!-- ++theme++ulearn5 -->
   <plone:static
       directory="theme"
       type="theme"
-      name="ulearn5-theme"
+      name="ulearn5"
       />
-
+  <!-- ++ulearn++portlets -->
   <plone:static
       directory="portlets"
       type="ulearn"
       name="portlets"
       />
 
+  <!-- Resource traversers -->
+  <adapter
+      name="ulearn"
+      for="* zope.publisher.interfaces.IRequest"
+      provides="zope.traversing.interfaces.ITraversable"
+      factory=".traversal.UlearnTraverser"
+      />
+
+  <adapter
+      name="legacy"
+      for="* zope.publisher.interfaces.IRequest"
+      provides="zope.traversing.interfaces.ITraversable"
+      factory=".traversal.LegacyTraverser"
+      />
+  <adapter
+      name="app"
+      for="* zope.publisher.interfaces.IRequest"
+      provides="zope.traversing.interfaces.ITraversable"
+      factory=".traversal.AppTraverser"
+      />
+
+  <adapter
+      name="components"
+      for="* zope.publisher.interfaces.IRequest"
+      provides="zope.traversing.interfaces.ITraversable"
+      factory=".traversal.ComponentsTraverser"
+      />
+
+  <adapter
+      name="dist"
+      for="* zope.publisher.interfaces.IRequest"
+      provides="zope.traversing.interfaces.ITraversable"
+      factory=".traversal.DistTraverser"
+      />
 
   <genericsetup:registerProfile
       name="default"

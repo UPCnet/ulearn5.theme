@@ -6,7 +6,7 @@
        xmlns:xi="http://www.w3.org/2001/XInclude">
 
   <!-- Include the backend theme (Barceloneta) loaded on edit views -->
-  <xi:include href="++theme++ulearn5-theme/backend.xml" />
+  <xi:include href="++theme++ulearn5/backend.xml" />
 
   <!-- Default template loaded -->
   <theme href="community.html" />

@@ -70,7 +70,7 @@
     <ul class="dropdown-menu">
       <li><a tal:attributes="href string:${community/absolute_url}/editacl"><i class="fa fa-users"></i><tal:manageacl i18n:domain="ulearn" i18n:translate="manage_membership">Manage members</tal:manageacl></a></li>
       <li tal:condition="view/has_webmaster_role">
-          <a ng-dialog="++ulearn++app/portlets/change_community_type.html"
+          <a ng-dialog="++app++ulearn/portlets/change_community_type.html"
              ng-dialog-class="ngdialog-theme-default changeCommunityType"
              ng-dialog-controller="profilePortletModal"
              ng-dialog-cache="false"
@@ -110,16 +110,16 @@
         <div class="badges span12">
           <div class="box_badges" image="badge1.png"
                  tal:attributes="enabled view/has_complete_profile">
-                 <img src="++theme++ulearn5-theme/assets/images/badge1.png">
+                 <img src="++theme++ulearn5/assets/images/badge1.png">
           </div>
           <badge class="box_badges" image="badge2.png" threshold="50">
-             <img src="++theme++ulearn5-theme/assets/images/badge2.png">
+             <img src="++theme++ulearn5/assets/images/badge2.png">
           </badge>
           <badge class="box_badges" image="badge3.png" threshold="100">
-             <img src="++theme++ulearn5-theme/assets/images/badge3.png">
+             <img src="++theme++ulearn5/assets/images/badge3.png">
           </badge>
           <badge class="box_badges" image="badge4.png" threshold="500">
-             <img src="++theme++ulearn5-theme/assets/images/badge4.png">
+             <img src="++theme++ulearn5/assets/images/badge4.png">
           </badge>
         </div>
     </div>
