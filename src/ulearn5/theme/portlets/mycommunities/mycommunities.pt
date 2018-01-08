@@ -9,7 +9,7 @@
                  <img ng-if="community.image"
                       ng-src="{{community.url}}/@@images/image/thumb" />
                  <img ng-if="!community.image"
-                      src="++ulearn++static/images/avatar_default.png" />
+                      src="++theme++ulearn5/assets/images/avatar_default.png" />
                </a>
              </div>
              <div class="span10">

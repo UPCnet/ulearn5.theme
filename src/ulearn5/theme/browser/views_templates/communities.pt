@@ -40,7 +40,7 @@
               <a tal:attributes="href community/getURL">
                 <img tal:condition="community/image_filename"
                      tal:attributes="src string:${community/getURL}/@@images/image/thumb" />
-                <img src="/++ulearn++static/images/avatar_default.png"
+                <img src="/++theme++ulearn5/assets/images/avatar_default.png"
                      tal:condition="not: community/image_filename" />
               </a>
             </div>

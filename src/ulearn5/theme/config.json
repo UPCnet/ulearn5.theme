@@ -1,0 +1,55 @@
+{
+  "resources": {
+    "ulearn": {
+      "css": {
+        "development": [
+          "../genweb.js/genweb/js/components/select2/select2.css",
+          "../ulearn.js/ulearn/js/components/angular-ui-select/dist/select.css",
+          "../ulearn.js/ulearn/js/components/selectize/dist/css/selectize.default.css",
+          "../ulearn.js/ulearn/js/components/selectize/dist/css/selectize.bootstrap2.css",
+          "../ulearn.js/ulearn/js/components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css",
+          "../ulearn.js/ulearn/js/components/ngDialog/css/ngDialog.css",
+          "../ulearn.js/ulearn/js/components/ngDialog/css/ngDialog-theme-default.css",
+          "../ulearn.js/ulearn/js/components/ngDialog/css/ngDialog-theme-plain.css",
+          "../ulearn.js/ulearn/js/components/sweetalert/lib/sweet-alert.css",
+          "../ulearn.js/ulearn/js/components/v-modal/dist/v-modal.css",
+          "../ulearn.theme/ulearn/theme/stylesheets/ulearn.css",
+          "../ulearn.theme/ulearn/theme/portlets/importantnews/importantnews.css",
+          "../ulearn.theme/ulearn/theme/portlets/flashesinformativos/flashesinformativos.css",
+          "../ulearn.theme/ulearn/theme/portlets/subscribednews/subscribednews.css",
+          "../ulearn.theme/ulearn/theme/portlets/mysubjects/mysubjects.css"
+        ],
+        "production": [
+          "../genweb.cdn/genweb/cdn/dist/ulearn.css"
+        ]
+      }
+    }
+  },
+  "order": [
+    "ulearn"
+  ],
+  "replace_map": {
+    "../genweb.js/genweb/js/components": "++components++root",
+    "../genweb.core/genweb/core/static": "++genweb++static",
+    "../genweb.js/genweb/js/legacy": "++genweb++js",
+    "../genweb.cdn/genweb/cdn/dist": "++genweb++dist",
+    "../ulearn.js/ulearn/js/legacy": "++ulearn++js",
+    "../ulearn.js/ulearn/js/components": "++components++ulearn",
+    "../ulearn.js/ulearn/js/app": "++ulearn++app",
+    "../../parts/omelette/Products/TinyMCE/browser/stylesheets": "++resource++tinymce.stylesheets",
+    "../../parts/omelette/plone/app/jquerytools/browser/jquery.tools.dateinput.css": "++resource++plone.app.jquerytools.dateinput.css",
+    "../../parts/omelette/plone/formwidget/querystring/querywidget.css": "++resource++plone.formwidget.querystring.querywidget.css",
+    "../../parts/omelette/collective/z3cform/datagridfield/static": "++resource++collective.z3cform.datagridfield",
+    "../mrs.max/mrs/max/static": "++maxui++static",
+    "../../parts/omelette/plone/formwidget/datetime/resources": "++resource++plone.formwidget.datetime",
+    "../../parts/omelette/plone/formwidget/recurrence/browser/lib": "++resource++plone.formwidget.recurrence",
+    "../../parts/omelette/plone/formwidget/autocomplete/jquery-autocomplete": "++resource++plone.formwidget.autocomplete",
+    "../../parts/omelette/plone/formwidget/contenttree/jquery-contenttree": "++resource++plone.formwidget.contenttree",
+    "../../parts/omelette/plone/app/discussion/browser/stylesheets": "++resource++plone.app.discussion.stylesheets",
+    "../ulearn.theme/ulearn/theme/stylesheets": "++ulearn++stylesheets",
+    "../ulearn.theme/ulearn/theme/portlets": "++ulearn++portlets"
+  },
+  "revision_info": {
+    "../genweb.cdn/genweb/cdn/dist/ulearn.css": "../genweb.cdn/genweb/cdn/dist/ulearn.aba5cd29.css"
+  }
+}

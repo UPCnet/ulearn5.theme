@@ -64,7 +64,7 @@
                               <div class="col-md-2">
                                  <a ng-href="{{community.url}}">
                                  <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/thumb" />
-                                 <img ng-if="!community.image" src="/++ulearn++static/images/avatar_default.png" />
+                                 <img ng-if="!community.image" src="/++theme++ulearn5/assets/images/avatar_default.png" />
                                  </a>
                               </div>
                               <div class="col-md-10">

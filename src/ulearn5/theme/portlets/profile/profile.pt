@@ -23,7 +23,7 @@
                  tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
                  tal:condition="nocall:image"/>
             <img alt="User"
-                 src="++ulearn++static/images/avatar_default.png"
+                 src="++theme++ulearn5/assets/images/avatar_default.png"
                  tal:condition="nocall:not:image"/>
         </div>
     </div>
