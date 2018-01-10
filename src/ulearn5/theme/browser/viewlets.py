@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from five import grok
+from Acquisition import aq_inner, aq_chain
 from cgi import escape
 from plone import api
 from zope.interface import Interface
@@ -7,7 +8,7 @@ from zope.component import getMultiAdapter, getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IPortalFooter
+from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IAboveContent, IPortalFooter
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
@@ -16,6 +17,8 @@ from souper.soup import get_soup
 from souper.soup import Record
 from repoze.catalog.query import Eq
 from plone.memoize import forever
+from ulearn5.core.content.community import ICommunity
+from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, IDiscussionFolder
 
 import datetime
 
@@ -185,6 +188,62 @@ class viewletHeaderUlearn(viewletBase):
         else:
             return exist[0].attrs['dades']
 
+
+class folderBar(viewletBase):
+    grok.name('ulearn.folderbar')
+    grok.template('folderbar')
+    grok.viewletmanager(IAboveContent)
+    grok.layer(IUlearn5ThemeLayer)
+
+    def update(self):
+        context = aq_inner(self.context)
+        self.folder_type = ''
+        for obj in aq_chain(context):
+            if IDocumentFolder.providedBy(obj):
+                self.folder_type = 'documents'
+                break
+            if ILinksFolder.providedBy(obj):
+                self.folder_type = 'links'
+                break
+            if IPhotosFolder.providedBy(obj):
+                self.folder_type = 'photos'
+                break
+            if IEventsFolder.providedBy(obj):
+                self.folder_type = 'events'
+                break
+            if IDiscussionFolder.providedBy(obj):
+                self.folder_type = 'discussion'
+                break
+            if ICommunity.providedBy(obj):
+                self.folder_type = 'community'
+                break
+
+    def bubble_class(self, bubble):
+        if self.folder_type == 'events' or \
+           self.folder_type == 'discussion':
+            width = 'col-md-4'
+        else:
+            width = 'col-md-6'
+
+        if bubble == self.folder_type:
+            return 'active bubble top {}'.format(width)
+        elif bubble == 'documents' and 'photos' == self.folder_type:
+            return 'active bubble top {}'.format(width)
+        else:
+            return 'bubble top {}'.format(width)
+
+    def get_community(self):
+        context = aq_inner(self.context)
+        for obj in aq_chain(context):
+            if ICommunity.providedBy(obj):
+                return obj
+
+    def render_viewlet(self):
+        context = aq_inner(self.context)
+        for obj in aq_chain(context):
+            if ICommunity.providedBy(obj):
+                return True
+        return False
 
 class viewletFooterUlearn(viewletBase):
     grok.name('ulearn.footer')

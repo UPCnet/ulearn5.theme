@@ -39,13 +39,6 @@
     </before>
   </rules>
 
-  <!-- <rules css:if-content="body.section-agenda.subsection-agenda">
-    <before css:theme-children="body">
-      <div id="widget-config" data-config-url="{$portal_url}">
-      </div>
-    </before>
-  </rules> -->
-
   <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
   <copy attributes="*" css:content="body" css:theme="body" />
 
@@ -53,37 +46,20 @@
   <drop css:content="#portal-searchbox" />
   <drop css:content="#portal-languageselector" />
   <drop css:content="#mainnavigation" />
-  <!-- TODO: This hides all the portlets! Test footer footer... -->
-  <!-- <drop css:content=".portletWrapper" /> -->
+  <drop css:content="#portal-breadcrumbs" />
+  <drop css:content="#portal-anontools" />
 
-  <!-- Barra Menu Eines -->
-  <!-- <replace css:theme=".upc-eines" css:content=".upc-eines" /> -->
-  <!-- Barra Menu Venta-->
-  <!-- <replace css:theme=".upc-menu" css:content=".upc-menu" /> -->
-  <!-- Barra Menu Navegació -->
-  <!-- <replace css:theme=".footer-navigation" css:content=".footer-navigation" /> -->
-  <!-- Barra Menu Navegació -->
-  <!-- <replace css:theme=".footer-socials" css:content=".footer-socials" /> -->
-
-  <!-- HOME -->
-  <!-- <replace css:theme=".content-highlighted" css:content=".content-highlighted" />
-  <replace css:theme=".content-banners" css:content=".content-banners" />
-  <replace css:theme=".content-hotnews" css:content=".content-hotnews" />
-  <replace css:theme=".content-well" css:content=".content-well" />
-  <replace css:theme=".content-agenda" css:content=".content-agenda" />
-  <replace css:theme=".content-recerca" css:content=".content-recerca" />
-  <replace css:theme=".content-xifres" css:content=".content-xifres" /> -->
+  <!-- Login Form -->
+  <replace css:theme-children="#portal-anontools" css:content-children="#portal-anontools" />
+  <!-- Alert message -->
+  <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
+  <!-- Content header -->
+  <replace css:theme="#portal-top" css:content-children="#portal-top" />
 
   <!-- Breadcrumb -->
   <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
-  <!-- <drop css:theme="#breadcrumbs" if-path="ca/"/>
-  <drop css:theme="#breadcrumbs" if-path="es/"/>
-  <drop css:theme="#breadcrumbs" if-path="en/"/> -->
 
-  <!-- full-width breadcrumb -->
-  <replace css:content="#viewlet-above-content" css:theme="#above-content" />
-
-  <drop css:content=".documentFirstHeading" if-path="front-page/"/>
+  <drop css:content=".documentFirstHeading" css:if-content=".section-front-page" />
 
   <!-- Left column -->
   <rules css:if-content="#portal-column-one">
@@ -114,6 +90,7 @@
     </xsl:variable>
 
     <section id="main-content" class="{$central} main-content">
+      <xsl:apply-templates css:select="#viewlet-above-content" />
       <xsl:apply-templates css:select="#content" />
       <footer class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -123,16 +100,13 @@
     </section>
   </replace>
 
-  <!-- Alert message -->
-  <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
-
-  <!-- Content header -->
-  <replace css:theme="#portal-top" css:content-children="#portal-top" />
-
   <!-- Footer -->
   <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
 
-  <replace css:theme-children="#portal-anontools" css:content-children="#portal-anontools" />
-
-  <drop css:content="#portal-anontools" />
+  <!-- <rules css:if-path="/manage-portlets">
+    <drop css:content="#menusup"/>
+  </rules>
+  <rules css:if-path="/edit">
+    <drop css:content="#menusup"/>
+  </rules> -->
 </rules>
