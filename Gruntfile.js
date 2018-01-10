@@ -80,15 +80,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // uglify: {
-        //     main: {
-        //         files: {
-        //             'dist/homeupc.min.js': ['javascripts/upcnet.js'],
-        //             'dist/search.min.js': ['javascripts/search.js']
-        //         }
-        //     }
-        // },
-
         browserSync: {
             plone: {
                 bsFiles: {

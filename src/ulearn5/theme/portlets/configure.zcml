@@ -50,15 +50,6 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.subscribednews"
-        interface=".subscribednews.subscribednews.ISubscribedNewsPortlet"
-        assignment=".subscribednews.subscribednews.Assignment"
-        renderer=".subscribednews.subscribednews.Renderer"
-        addview=".subscribednews.subscribednews.AddForm"
-        editview=".subscribednews.subscribednews.EditForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.sharedwithme"
         interface=".sharedwithme.ISharedWithMePortlet"
         assignment=".sharedwithme.Assignment"

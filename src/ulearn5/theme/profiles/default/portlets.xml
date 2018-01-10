@@ -16,8 +16,6 @@
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.profile" title="Ulearn Profile"
                 i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.subscribednews" title="Ulearn Subscribed News"
-                i18n:attributes="title"/>
 
     <!--portlets externs -->
     <!-- <portlet addview="ulearn.portlets.mostvalued" title="Ulearn most valued"
