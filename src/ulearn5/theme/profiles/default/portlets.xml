@@ -18,8 +18,6 @@
                 i18n:attributes="title"/>
 
     <!--portlets externs -->
-    <portlet addview="ulearn.portlets.mostvalued" title="Ulearn most valued"
-                i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.discussion" title="Ulearn discussion"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.econnect" title="Ulearn eConnect"
@@ -36,13 +34,22 @@
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />
 
-    <assignment type="ulearn.portlets.profile" manager="plone.leftcolumn"
-                category="context" key="/" name="profile" insert-before="*" />
+     <assignment type="ulearn.portlets.profile" manager="plone.leftcolumn"
+                category="context" key="/" name="Ulearn Profile"/>
 
     <assignment type="ulearn.portlets.communities" manager="plone.leftcolumn"
-                  category="context" key="/" name="communities" />
+                  category="context" key="/" name="Ulearn Communities" />
 
     <assignment type="ulearn.portlets.thinnkers" manager="plone.leftcolumn"
-                  category="context" key="/" name="thinnkers" />
+                  category="context" key="/" name="Ulearn Thinnkers" />
+
+    <!-- <assignment remove="True" type="ulearn.portlets.profile" name="Ulearn Profile"
+                  manager="plone.leftcolumn" category="context" key="/front-page" />
+
+    <assignment remove="True"type="ulearn.portlets.communities" name="Ulearn Communities"
+                  manager="plone.leftcolumn" category="context" key="/front-page" />
+
+    <assignment remove="True" type="ulearn.portlets.thinnkers" name="Ulearn Thinnkers"
+                  manager="plone.leftcolumn" category="context" key="/front-page" /> -->
 
 </portlets>
