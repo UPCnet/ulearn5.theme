@@ -7,10 +7,6 @@
 
   <!-- Include the backend theme (Barceloneta) loaded on edit views -->
   <xi:include href="++theme++ulearn5/backend.xml" />
-
-  <!-- Default template loaded -->
-  <theme href="community.html" />
-  <theme href="homepage.html" css:if-content="body.section-front-page"/>
   <notheme css:if-not-content="#visual-portal-wrapper" />
 
   <rules css:if-content="#portal-top">
@@ -59,54 +55,54 @@
   <!-- Breadcrumb -->
   <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
 
-  <drop css:content=".documentFirstHeading" css:if-content=".section-front-page" />
-
-  <!-- Left column -->
-  <rules css:if-content="#portal-column-one">
-    <replace css:theme="#column1-container">
-      <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
-        <xsl:copy-of css:select="#portal-column-one > *" />
-      </section>
-    </replace>
-  </rules>
-
-  <!-- Right column -->
-  <rules css:if-content="#portal-column-two">
-    <replace css:theme="#column2-container">
-      <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
-        <xsl:copy-of css:select="#portal-column-two > *" />
-      </section>
-    </replace>
-  </rules>
-
-  <!-- Central column -->
-  <replace css:theme="#content-container" method="raw">
-
-    <xsl:variable name="central">
-      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-lg-6 col-md-4 col-xs-12</xsl:if>
-      <xsl:if test="//aside[@id='portal-column-two'] and not(//aside[@id='portal-column-one'])">col-xs-12 col-sm-9</xsl:if>
-      <xsl:if test="//aside[@id='portal-column-one'] and not(//aside[@id='portal-column-two'])">col-lg-9 col-md-8 col-xs-12</xsl:if>
-      <xsl:if test="not(//aside[@id='portal-column-one']) and not(//aside[@id='portal-column-two'])">col-lg-12 col-md-12 col-sm-12 col-xs-12</xsl:if>
-    </xsl:variable>
-
-    <section id="main-content" class="{$central} main-content">
-      <xsl:apply-templates css:select="#viewlet-above-content" />
-      <xsl:apply-templates css:select="#content" />
-      <footer class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <xsl:copy-of css:select="#viewlet-below-content" />
-        </div>
-      </footer>
-    </section>
-  </replace>
-
   <!-- Footer -->
   <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
 
-  <!-- <rules css:if-path="/manage-portlets">
-    <drop css:content="#menusup"/>
+  <!-- Default template loaded -->
+  <rules css:if-not-content="body.section-front-page">
+    <theme href="community.html" />
+
+    <!-- Portlets Left column -->
+    <rules css:if-content="#portal-column-one">
+      <replace css:theme="#column1-container">
+        <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
+          <xsl:copy-of css:select="#portal-column-one > *" />
+        </section>
+      </replace>
+    </rules>
+
+    <!-- Portlets Central column -->
+    <replace css:theme="#content-container" method="raw">
+      <section id="main-content" class="col-lg-9 col-md-8 col-xs-12 main-content">
+        <xsl:apply-templates css:select="#viewlet-above-content" />
+        <xsl:apply-templates css:select="#content" />
+        <footer class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <xsl:copy-of css:select="#viewlet-below-content" />
+          </div>
+        </footer>
+      </section>
+    </replace>
+
   </rules>
-  <rules css:if-path="/edit">
-    <drop css:content="#menusup"/>
-  </rules> -->
+
+  <!-- Special template for homepage -->
+  <rules css:if-content="body.section-front-page">
+    <theme href="homepage.html" />
+    <drop css:content=".documentFirstHeading"/>
+
+    <!-- Portlets Central column -->
+    <replace css:theme="#content-container" method="raw">
+      <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
+        <xsl:apply-templates css:select="#viewlet-above-content" />
+        <xsl:apply-templates css:select="#content" />
+        <footer class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <xsl:copy-of css:select="#viewlet-below-content" />
+          </div>
+        </footer>
+      </section>
+    </replace>
+  </rules>
+
 </rules>

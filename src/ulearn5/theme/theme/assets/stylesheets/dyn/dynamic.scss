@@ -1,5 +1,3 @@
-@import "mixins";
-
 // The green alternate version, for the record:
 // $main-color: #017000;
 // $secondary-color: #24A33B;
@@ -12,7 +10,6 @@
 // $buttons-color-secondary: #017000;
 
 // Main
-
 body {
   background: $background-property $background-color;
 }
