@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_skins" default_skin="Ulearn5Theme">
+ <object name="ulearn5theme_custom"
+    meta_type="Filesystem Directory View"
+    directory="ulearn5.theme:skins/ulearn5theme_custom"/>
+
+ <skin-path name="Ulearn5Theme" based-on="Plone Default">
+  <layer name="ulearn5theme_custom" insert-after="custom"/>
+ </skin-path>
+</object>

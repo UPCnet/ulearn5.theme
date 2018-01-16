@@ -17,7 +17,8 @@
   <include package=".browser" />
   <include package=".portlets" />
 
-  <!-- <cmf:registerDirectory name="ulearntheme_custom" directory="skins" recursive="True" /> -->
+  <cmf:registerDirectory name="ulearn5theme_custom" directory="skins" recursive="True" />
+
   <!-- ++theme++ulearn5 -->
   <plone:static
       directory="theme"
