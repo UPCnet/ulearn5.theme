@@ -3,6 +3,10 @@
  <order manager="plone.abovecontent" skinname="Plone Default">
   <viewlet name="plone.path_bar"/>
  </order>
+ <order manager="plone.abovecontenttitle" skinname="Plone Default">
+  <viewlet name="ulearn.folderbar"/>
+  <viewlet name="plone.abovecontenttitle.socialtags"/>
+ </order>
  <order manager="plone.belowcontent" skinname="Plone Default">
   <viewlet name="plone.belowcontenttitle.keywords"/>
   <viewlet name="plone.nextprevious"/>
@@ -39,6 +43,14 @@
   <viewlet name="ulearn.header"/>
   <viewlet name="plone.searchbox"/>
   <viewlet name="plone.anontools"/>
+ </order>
+ <order manager="plone.abovecontenttitle" skinname="Ulearnskin">
+  <viewlet name="contentleadimage"/>
+  <viewlet name="genweb.important"/>
+  <viewlet name="ulearn.folderbar"/>
+ </order>
+ <order manager="plone.belowcontenttitle" skinname="Ulearnskin">
+  <viewlet name="contentleadimage"/>
  </order>
  <order manager="plone.portalfooter" skinname="Ulearnskin">
   <viewlet name="upc.footer"/>
