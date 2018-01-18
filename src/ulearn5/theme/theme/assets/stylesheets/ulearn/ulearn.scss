@@ -230,27 +230,35 @@ border-color: #34495E;
 }
 
 .type1 {
-    background: url("/++theme++ulearn5/images/badge1.png") no-repeat 7px;
+    background: url("/++theme++ulearn5/assets/images/badge1.png") no-repeat 7px;
 }
 .type2 {
-    background: url("/++theme++ulearn5/images/badge2.png") no-repeat 7px;
+    background: url("/++theme++ulearn5/assets/images/badge2.png") no-repeat 7px;
 }
 .type3 {
-    background: url("/++theme++ulearn5/images/badge3.png") no-repeat 7px;
+    background: url("/++theme++ulearn5/assets/images/badge3.png") no-repeat 7px;
+}
+.type4 {
+    background: url("/++theme++ulearn5/assets/images/badge4.png") no-repeat 7px;
 }
 
 .type1.notawarded {
-   background: url("/++theme++ulearn5/images/badge1_gris.png") no-repeat 7px;
+   background: url("/++theme++ulearn5/assets/images/badge1_alt.png") no-repeat 7px;
    color: #bfbfbf;
 }
 .type2.notawarded {
-   background: url("/++theme++ulearn5/images/badge2_gris.png") no-repeat 7px;
+   background: url("/++theme++ulearn5/assets/images/badge2_alt.png") no-repeat 7px;
    color: #bfbfbf;
 }
 .type3.notawarded {
-   background: url("/++theme++ulearn5/images/badge3_gris.png") no-repeat 7px;
+   background: url("/++theme++ulearn5/assets/images/badge3_alt.png") no-repeat 7px;
    color: #bfbfbf;
 }
+.type4.notawarded {
+   background: url("/++theme++ulearn5/assets/images/badge4_alt.png") no-repeat 7px;
+   color: #bfbfbf;
+}
+
 
 #user {
     color: #666666;
