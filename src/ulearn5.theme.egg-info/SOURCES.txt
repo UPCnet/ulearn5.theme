@@ -191,6 +191,10 @@ src/ulearn5/theme/theme/assets/images/.keep
 src/ulearn5/theme/theme/assets/images/arrowleft.svg
 src/ulearn5/theme/theme/assets/images/arrowright.svg
 src/ulearn5/theme/theme/assets/images/avatar_default.png
+<<<<<<< HEAD
+=======
+src/ulearn5/theme/theme/assets/images/background-login.jpg
+>>>>>>> 7d6c7dfb70b2793aa3baccc4f30bde2e1db6f9a2
 src/ulearn5/theme/theme/assets/images/badge1-alt.png
 src/ulearn5/theme/theme/assets/images/badge1.png
 src/ulearn5/theme/theme/assets/images/badge2-alt.png
