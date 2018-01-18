@@ -144,4 +144,14 @@ $(document).ready(function() {
     }
   });
 
+  $(document).on("scroll", function(){
+		if
+      ($(document).scrollTop() > 100){
+		  $("#portal-header").addClass("shrink");
+		}
+		else
+		{
+			$("#portal-header").removeClass("shrink");
+		}
+	});
 });//ready

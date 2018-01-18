@@ -2,7 +2,9 @@
   <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn5.theme">
     <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
-      <span aria-hidden="true" role="presentation" class="icona-upc"><img alt="" src="/++theme++ulearn5/assets/images/logomark.png"></span></h1>
+      <span aria-hidden="true" role="presentation" class="icona-upc">
+        <img alt="" src="/++theme++ulearn5/assets/images/logomark.png"></span>
+      </h1>
     </a>
     <div class="button-menu-mobile hidden-md hidden-lg">
       <a href="#" role="button">Menu<span role="presentation" class="icona-upc">menu</span></a>
@@ -59,7 +61,7 @@
             </li>
           </ul>
         </li>
-        <!-- <li tal:define="menu viewlet/linksMenu" tal:condition="menu" class="dropdown ulearn-eines-ql" role="presentation" tal:repeat="dades menu">
+        <li tal:define="menu viewlet/linksMenu" tal:condition="menu" class="dropdown ulearn-eines-ql" role="presentation" tal:repeat="dades menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" role="menuitem">
             <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
             <b aria-hidden="true" class="caret"></b>
@@ -78,7 +80,7 @@
               </tal:span>
             </li>
           </ul>
-        </li> -->
+        </li>
         <li role="presentation" class="upc-eines-cerca">
           <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
             <legend class="sr-only" i18n:translate="">Buscar</legend>

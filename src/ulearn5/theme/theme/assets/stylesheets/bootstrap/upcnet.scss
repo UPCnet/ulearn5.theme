@@ -130,7 +130,7 @@ side-bar + .main-content .mosaic-grid-row section.container {
 .main-banner {
   display: flex;
   margin: 0 auto;
-  max-width: 1140px; /* 1110 -> 1140 tamany correcte de menu superior */
+  /*max-width: 1140px;  1110 -> 1140 tamany correcte de menu superior */
 }
 .header-presentation {
   float: right; // evitar scroll horitzontal, canviem left per right
