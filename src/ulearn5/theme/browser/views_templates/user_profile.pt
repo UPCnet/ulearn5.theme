@@ -61,10 +61,10 @@
               </h1>
 
               <div id="content-core">
-                <div class="row-fluid">
-                  <div class="span3">
-                    <div class="row-fluid">
-                        <div class="photo span12">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="row">
+                        <div class="photo col-md-12">
                           <p>
                             <span class="dades currentactivity">
                               <max-activities-count object="user" tal:attributes="username username"></max-activities-count>
@@ -78,8 +78,8 @@
                           </a>
                         </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="badges span12">
+                    <div class="row">
+                        <div class="badges col-md-12">
                           <badge class="box_badges" image="badge1.png"
                                  tal:attributes="enabled view/has_complete_profile">
                           </badge>
@@ -90,7 +90,7 @@
                     </div>
                   </div>
 
-                  <div class="span9">
+                  <div class="col-md-9">
                     <tal:field repeat="field view/get_user_info_for_display">
                       <tal:empty condition="field/value">
                         <h2 tal:content="field/name">Biography</h2>
