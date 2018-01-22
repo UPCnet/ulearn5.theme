@@ -14,6 +14,52 @@ $fa-font-path: "fontawesome/fonts";
 
 // Marc's CSS
 
+.template-login_form , .template-logged_out{
+    background: url(../images/background-login.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+}
+
+.template-login_form article#content , .template-logged_out article#content {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  background: #fcfcfd!important;
+}
+
+.template-login_form .main-element , .template-logged_out .main-element{
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+
+.template-login_form span.icona-upc img , .template-logged_out span.icona-upc img{ margin-bottom: 20px!important;}
+
+div#login-forgotten-password {
+    margin-top: 15px;
+}
+
+body.template-login_form #content-core, body.template-logged_out #content-core{
+  box-shadow: none!important;
+  text-align: center;
+}
+
+body.template-login_form .formControls , body.template-logged_out .formControls  {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+body.template-login_form .field , body.template-logged_out .field {
+    text-align: left;
+}
+body.template-login_form input[type="text"] , body.template-logged_out input[type="text"] {
+    border: 1px solid #ccc;
+    }
+
+
 body {
   background:#EDF1F2;
   font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -70,7 +116,7 @@ input, button, select, textarea {
 }
 
 
-.ulearnbox h2 {
+.ulearnbox h2 , #communitysearch h2 {
     // color: #f58d3d;
     // font-size: 20px;
     // line-height: 26px;
@@ -86,7 +132,7 @@ input, button, select, textarea {
     line-height: 1.1;
 }
 
-.ulearnbox h2::after {
+.ulearnbox h2::after , #communitysearch h2::after{
     content: "";
     position: absolute;
     margin-left: 12px;
@@ -224,7 +270,7 @@ border-color: #34495E;
     display: inline;
     padding-top: 10px;
     margin-right: 5px;
-    margin-left: 5px;
+    // margin-left: 5px;
     &:hover { opacity:0.8; cursor:pointer; padding-top: 5px; transition: all 0.25s ease 0s; }
     }
 }
@@ -618,13 +664,13 @@ padding-right: 10px;
 .template-communities #content,
 .template-searchusers #content { background-color: white; }
 
-#communitysearch, #librarysearch {
-  h2 {
-    float: left;
-    padding-left: 13px;
-    margin-top: 13px;
-  }
-}
+// #communitysearch, #librarysearch {
+//   h2 {
+//     float: left;
+//     padding-left: 13px;
+//     margin-top: 13px;
+//   }
+// }
 
 #communitysearch .portalMessage,
 #communitysearch .alert,
@@ -699,13 +745,15 @@ padding-right: 10px;
     }
   }
   .fa {
-    border: 1px solid;
+    border: 1px solid #dddddd;
     border-radius: 21px;
-    color: #555555;
+    color: #007ac2!important;
     font-size: 11px;
     margin-right: 10px;
-    min-width: 13px;
-    padding: 4px 3px;
+    width: 21px;
+    min-width: 21px;
+    min-height: 21px;
+    padding: 4px 4px;
     text-align: center;
   }
   .fa:hover {
@@ -1605,13 +1653,13 @@ border-radius: 0;
 }
 
 #communitysearch {
-  h2 {
-      float: left;
-      margin-bottom: 20px;
-      margin-top: 10px;
-      padding-left: 13px;
-      width: 55%;
-  }
+  // h2 {
+  //     float: left;
+  //     margin-bottom: 20px;
+  //     margin-top: 10px;
+  //     padding-left: 13px;
+  //     width: 55%;
+  // }
   .span9 {
       margin-left: 5px !important;
   }
@@ -2548,7 +2596,7 @@ i.icon-plone-contentmenu-display-contents_pretty_view, i.icon-folder-contents_pr
 
 .breadcrumbs {
     margin-bottom: 0px;
-    margin-top: 153px;
+    margin-top: 155px;
     background-color: #edf1f2!important;
 }
 
@@ -2666,6 +2714,7 @@ div#miniatures lastauthors {
 .portlet-subscribed-news .text_noticia h2 {
     font-size: 18px;
     margin-bottom: 5px;
+    margin-top: 10px!important;
 }
 
 .portlet-subscribed-news .text_noticia ul{
@@ -2949,7 +2998,8 @@ a.community-action {
 
 #box_comunitats .bubble-content {
     min-height: 40px;
-    display: flex;
+    // display: flex;
+    line-height: 40px;
     align-items: center;
 }
 #box_comunitats .bubble-content {
@@ -3039,10 +3089,6 @@ button{
       display: none;
   }
 
-  .section-front-page .main-element {
-    margin-top: 180px;
-}
-
 article#content h1 {
   font-size: 2.25rem;
   color: #4A4A4A;
@@ -3114,3 +3160,132 @@ article.media.ng-scope {
   .plone-toolbar-top-default {
       margin-top: 0px!important;
   }
+
+  #communitysearch {
+      background-color: #fff;
+      padding: 7px 15px 15px 15px;
+      box-shadow: -1px 1px 2px #ddd;
+
+      div#subscribealert {
+          margin-top: 15px!important;
+      }
+      #searchinputusers {
+          padding-top: 0px;
+      }
+
+  }
+
+  #communitysearch .input-append {
+    position: relative;
+
+    span.add-on {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+    }
+
+}
+
+// #userlist .mix:first-of-type{border-bottom: 0;}
+
+
+  .mix{border-bottom: 1px solid #ddd;}
+
+
+  .close {
+      padding: 0px!important;
+    }
+
+    .photo.col-md-12 p {
+        position: absolute;
+        bottom: 5px;
+        left: 15px;
+        color: white;
+        background-color: #007bc0;
+        font-size: 90%;
+        padding: 2px 6px;
+        border-radius: 0px 5px 0px 0px;
+    }
+
+  body.template-login_form #content-core, body.template-logged_out #content-core {
+        border: 0px;
+        max-width: 600px;
+        margin: 0 auto 6px;
+        padding: 15px 30px;
+    }
+
+
+    .section-front-page .main-element {
+        margin-top: 180px!important;
+    }
+
+
+    li#portal-personaltools ul {
+        right: 0px!important;
+    }
+
+    .dropdown.ulearn-eines-ql .caret:after {
+    margin-top: 3px;
+  }
+
+.plone-toolbar-top-expanded{margin-top: 0px!important}
+
+.main-element {
+    margin-bottom: 0px!important;
+}
+
+/*img news*/
+
+figure.newsImageContainer img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+}
+
+.leadImage {
+    max-width: 400px !important;
+    margin: 0 20px 10px 0px;
+    float: left;
+    border: 1px solid #d1d1d1;
+    padding: 5px;
+}
+
+article#content figcaption {
+    font-size: 85%;
+    padding: 5px 0px 0px 0px;
+}
+
+// article#content{overflow: auto!important;}
+
+article#content h1{font-weight: 500!important;}
+
+footer{margin-top: 20px;}
+
+.portaltype-news-item div#viewlet-below-content-title {
+    float: left;
+}
+
+a.communit.y-action.community-subscribe.community-icon-.ng-scope.community-subscribed:before {
+    font-family: FontAwesome;
+    content: "\f046";
+    color: #555;}
+
+    .section-front-page img.newsImage {
+        border: 1px solid #d1d1d1;
+        padding: 5px;
+    }
+
+    li.noticies.clearfix {
+    position: relative;
+}
+
+.text_noticia span {
+    /* border: 1px solid red; */
+    position: absolute;
+    bottom: 10px;
+    right: 1px;
+    left: auto;
+}
