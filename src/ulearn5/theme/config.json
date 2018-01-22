@@ -16,7 +16,6 @@
           "../ulearn.theme/ulearn/theme/stylesheets/ulearn.css",
           "../ulearn.theme/ulearn/theme/portlets/importantnews/importantnews.css",
           "../ulearn.theme/ulearn/theme/portlets/flashesinformativos/flashesinformativos.css",
-          "../ulearn.theme/ulearn/theme/portlets/subscribednews/subscribednews.css",
           "../ulearn.theme/ulearn/theme/portlets/mysubjects/mysubjects.css"
         ],
         "production": [

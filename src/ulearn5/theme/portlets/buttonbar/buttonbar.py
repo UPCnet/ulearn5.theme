@@ -14,15 +14,32 @@ from plone.memoize.instance import memoize
 from DateTime.DateTime import DateTime
 from souper.soup import get_soup
 from repoze.catalog.query import Eq
+from zope import schema
 
 
 class IButtonBarPortlet(IPortletDataProvider):
     """ A portlet which can render the logged user profile information.
     """
+    count = schema.Int(title=_(u'Number of items to display'),
+                       description=_(u'How many items to list.'),
+                       required=True,
+                       default=20)
+
+    state = schema.Tuple(title=_(u"Workflow state"),
+                         description=_(u"Items in which workflow state to show."),
+                         default=('published', 'intranet'),
+                         required=True,
+                         value_type=schema.Choice(
+                             vocabulary="plone.app.vocabularies.WorkflowStates")
+                         )
 
 
 class Assignment(base.Assignment):
     implements(IButtonBarPortlet)
+
+    def __init__(self, count=20, state=('intranet')):
+        self.count = count
+        self.state = state
 
     title = _(u'buttonbar', default=u'Button bar')
 
@@ -31,9 +48,8 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('buttonbar.pt')
 
-    def __init__(self, context, request, view, manager, data):
-        super(Renderer, self).__init__(context, request, view, manager, data)
-        self.portal_url = api.portal.get().absolute_url()
+    def __init__(self, *args):
+        base.Renderer.__init__(self, *args)
 
     def is_activate_sharedwithme(self):
         if (api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
@@ -64,14 +80,32 @@ class Renderer(base.Renderer):
 
         return "bubble top " + width
 
-    # Subscribed News
+    # Subscribed news
+
+    def news_to_show(self):
+        return self.data.count > 0 and len(self._data())
+
     @memoize_contextless
     def portal(self):
         return getSite()
 
+    def published_news_items(self):
+        return self._data()
+
+    def get_noticias_folder_url(self):
+        url = self.portal().absolute_url() + '/noticies'
+        return url
+
     def dadesNoticies(self):
         noticies = self._data()
         return noticies
+
+    def id_noticies(self, noticies):
+        info_id = []
+        for item in noticies:
+            info_id.append(item['id'])
+
+        return info_id
 
     @memoize
     def _data(self):
@@ -79,32 +113,14 @@ class Renderer(base.Renderer):
         context = aq_inner(self.context)
         portal_state = getMultiAdapter((context, self.request), name='plone_portal_state')
         path = portal_state.navigation_root_path()
-        limit = 20
-        state = ('published', 'intranet')
+        limit = self.data.count
+        state = self.data.state
 
-        news += self._getNews(context, state, path, limit)
+        news += self.get_news(context, state, path, limit)
         if news:
             return news
         else:
             return []
-
-    def _getNews(self, context, state, path, limit):
-        catalog = getToolByName(context, 'portal_catalog')
-        now = DateTime()
-        results = catalog(portal_type='News Item',
-                          review_state=state,
-                          path=path,
-                          expires={'query': now, 'range': 'min', },
-                          effective={'query': now, 'range': 'max', },
-                          sort_on='effective',
-                          sort_order='reverse',
-                          sort_limit=limit,
-                          is_outoflist=False
-                          )
-
-        noticies = self._dades(results)
-        for item in noticies:
-            yield item
 
     def getSearchers(self):
         portal = getSite()
@@ -120,7 +136,25 @@ class Renderer(base.Renderer):
                     res.append(' '.join(val))
         return res
 
-    def _dades(self, noticies):
+    def get_news(self, context, state, path, limit):
+        catalog = getToolByName(context, 'portal_catalog')
+        now = DateTime()
+        results = catalog(portal_type='News Item',
+                          review_state=state,
+                          path=path,
+                          expires={'query': now, 'range': 'min', },
+                          effective={'query': now, 'range': 'max', },
+                          sort_on='effective',
+                          sort_order='reverse',
+                          sort_limit=limit,
+                          is_outoflist=False
+                          )
+
+        noticies = self.dades(results)
+        for item in noticies:
+            yield item
+
+    def dades(self, noticies):
         dades = []
         for noticia in noticies:
             noticiaObj = noticia.getObject()
@@ -182,8 +216,17 @@ class Renderer(base.Renderer):
 
         return bb
 
+class AddForm(base.AddForm):
+    schema = IButtonBarPortlet
+    label = _(u"Add Subscribed News Portlet")
+    description = _(u"This portlet displays subscribed News Items.")
 
-class AddForm(base.NullAddForm):
+    def create(self, data):
+        return Assignment(count=data.get('count', 20),
+                          state=data.get('state', ('intranet', )))
 
-    def create(self):
-        return Assignment()
+
+class EditForm(base.EditForm):
+    schema = IButtonBarPortlet
+    label = _(u"Edit Subscribed News Portlet")
+    description = _(u"This portlet displays subscribed News Items.")
