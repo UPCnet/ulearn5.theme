@@ -6,8 +6,6 @@
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.communities" title="Ulearn Communities"
                 i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.mycommunities" title="Ulearn My Communities"
-                i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.calendar" title="Ulearn Calendar"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.thinnkers" title="Ulearn Thinnkers"

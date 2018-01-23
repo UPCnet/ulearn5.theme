@@ -41,15 +41,6 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.mycommunities"
-        interface=".mycommunities.IMyCommunitiesPortlet"
-        assignment=".mycommunities.Assignment"
-        renderer=".mycommunities.Renderer"
-        addview=".mycommunities.AddForm"
-        editview=".mycommunities.EditForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.sharedwithme"
         interface=".sharedwithme.ISharedWithMePortlet"
         assignment=".sharedwithme.Assignment"
