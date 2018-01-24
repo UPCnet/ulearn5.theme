@@ -1,0 +1,109 @@
+<!-- Navigation -->
+<tal:batchnavigation define="batch view/batch|nothing" condition="batch"
+    metal:define-macro="navigation">
+
+  <ul class="pagination" i18n:domain="plone"
+    tal:condition="batch/multiple_pages">
+
+    <tal:comment replace="nothing">
+      <!-- First page -->
+    </tal:comment>
+    <li tal:attributes="class python: '' if batch.previous_pages else 'disabled'">
+      <a class="pagination-first"
+        tal:attributes="href python:view.make_link(1) if batch.previous_pages else '#'">
+        <span class="sr-only" i18n:translate="batch_first_page">
+          Primera pàgina
+        </span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          first
+        </span>
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Previous page -->
+    </tal:comment>
+    <li tal:attributes="class python: '' if batch.previous_pages else 'disabled'">
+      <a class="pagination-previous"
+        tal:attributes="href python:view.make_link(batch.previouspage) if batch.previous_pages else '#'">
+        <span class="sr-only" i18n:translate="batch_previous_page">
+          Pàgina anterior
+        </span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          arrowleft
+        </span>
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Pagelist with links to previous pages for quick navigation -->
+    </tal:comment>
+    <li tal:repeat="pagenumber batch/previous_pages">
+      <a class="pagination-activate"
+        tal:attributes="href python:view.make_link(pagenumber)">
+        <span class="sr-only" i18n:translate="batch_page">
+          Pàgina
+        </span>
+        <span tal:content="pagenumber" />
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Active page -->
+    </tal:comment>
+    <li class="active" tal:condition="batch/navlist">
+      <a href="#" class="pagination-activate">
+        <span class="sr-only" i18n:translate="batch_actual_page">
+          Pàgina actual
+        </span>
+        <span tal:content="batch/pagenumber" />
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Pagelist with links to next pages for quick navigation -->
+    </tal:comment>
+    <li tal:repeat="pagenumber batch/next_pages">
+      <a class="pagination-activate"
+        tal:attributes="href python:view.make_link(pagenumber)">
+        <span class="sr-only" i18n:translate="batch_page">
+          Pàgina
+        </span>
+        <span tal:content="pagenumber" />
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Next page -->
+    </tal:comment>
+    <li tal:attributes="class python: '' if batch.next_pages else 'disabled'">
+      <a class="pagination-previous"
+        tal:attributes="href python:view.make_link(batch.nextpage) if batch.next_pages else '#'">
+        <span class="sr-only" i18n:translate="batch_next_page">
+          Pàgina següent
+        </span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          arrowright
+        </span>
+      </a>
+    </li>
+
+    <tal:comment replace="nothing">
+      <!-- Last page -->
+    </tal:comment>
+    <li tal:attributes="class python: '' if batch.next_pages else 'disabled'">
+      <a class="pagination-last"
+        tal:attributes="href python:view.make_link(batch.numpages) if batch.next_pages else '#'">
+        <span class="sr-only" i18n:translate="batch_last_page">
+          Darrera pàgina
+        </span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          last
+        </span>
+      </a>
+    </li>
+
+  </ul>
+
+</tal:batchnavigation>
+
