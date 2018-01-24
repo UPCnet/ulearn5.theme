@@ -16,8 +16,8 @@
                <span i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
             </p>
          </div>
-         <div class="row-fluid">
-            <div class="span12"
+         <div class="row">
+            <div class="col-md-12"
                tal:define="image nocall:community/image">
                <img alt="User"
                   tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
@@ -51,37 +51,37 @@
                <p></p>
             </div>
          </div>
-         <div class="community_actions btn-group"
+         <div class="btn-group contentaddtoolbar"
             tal:condition="view/showEditCommunity"
             ng-controller="profilePortlet as portlet"
             tal:define="community_type python:view.get_community_type(community)">
-            <a class="btn btn-large btn-comunitat"
+            <a class="btn btn-default"
                tal:attributes="href string:${community/absolute_url}/edit">
                <i class="fa fa-pencil"></i>
-               <tal:editcommunity i18n:domain="ulearn" i18n:translate="editcommunity">Edit this community</tal:editcommunity>
+               <!-- <tal:editcommunity i18n:domain="ulearn" i18n:translate="editcommunity">Edit this community</tal:editcommunity> -->
             </a>
-            <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+            <!-- <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-               <li>
-                  <a tal:attributes="href string:${community/absolute_url}/editacl">
+               <li> -->
+                  <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl">
                      <i class="fa fa-users"></i>
-                     <tal:manageacl i18n:domain="ulearn" i18n:translate="manage_membership">Manage members</tal:manageacl>
+                     <!-- <tal:manageacl i18n:domain="ulearn" i18n:translate="manage_membership">Manage members</tal:manageacl> -->
                   </a>
-               </li>
-               <li tal:condition="view/has_webmaster_role">
-                  <a ng-dialog="++app++ulearn/portlets/change_community_type.html"
+               <!-- </li> -->
+               <tal:block tal:condition="view/has_webmaster_role">
+                  <a class="btn btn-default" ng-dialog="++app++ulearn/portlets/change_community_type.html"
                      ng-dialog-class="ngdialog-theme-default changeCommunityType"
                      ng-dialog-controller="profilePortletModal"
                      ng-dialog-cache="false"
                      tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
                      href="">
-                     <i class="fa fa-pencil"></i>
-                     <tal:changetype i18n:domain="ulearn" i18n:translate="change_community_type">Change type</tal:changetype>
+                     <i class="fa fa-exchange" ></i>
+                     <!-- <tal:changetype i18n:domain="ulearn" i18n:translate="change_community_type">Change type</tal:changetype> -->
                   </a>
-               </li>
-            </ul>
+               </tal:block>
+            <!-- </ul> -->
          </div>
       </div>
    </tal:iscommunity>
@@ -101,15 +101,15 @@
                <span i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
             </p>
          </div>
-         <div class="row-fluid">
-            <div class="photo span12" tal:define="ulearn_utils context/@@ulearn.utils">
+         <div class="row">
+            <div class="photo col-md-12" tal:define="ulearn_utils context/@@ulearn.utils">
                <a tal:attributes="href string:${view/portal_url}/@@personal-information">
                <img tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large" alt="User" style="width:202px">
                </a>
             </div>
          </div>
-         <div class="row-fluid">
-            <div class="badges span12">
+         <div class="row">
+            <div class="badges col-md-12">
                <div class="box_badges" image="badge1.png"
                   tal:attributes="enabled view/has_complete_profile">
                   <img src="++theme++ulearn5/assets/images/badge1.png">

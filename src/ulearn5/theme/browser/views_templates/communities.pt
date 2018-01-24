@@ -35,8 +35,8 @@
     <section id="communitylist">
       <ul>
         <li tal:repeat="community communities">
-          <div class="row-fluid">
-            <div class="span2">
+          <div class="row">
+            <div class="col-md-2">
               <a tal:attributes="href community/getURL">
                 <img tal:condition="community/image_filename"
                      tal:attributes="src string:${community/getURL}/@@images/image/thumb" />
@@ -44,13 +44,13 @@
                      tal:condition="not: community/image_filename" />
               </a>
             </div>
-            <div class="span7">
+            <div class="col-md-7">
               <a tal:attributes="href community/getURL">
                 <h4 tal:content="community/Title">Community</h4>
                 <p tal:content="community/Description">Description</p>
               </a>
             </div>
-          <div class="eines span3">
+          <div class="eines col-md-3">
             <a class="favorite" href="#"
                i18n:attributes="title label_check_favorite"
                tal:attributes="class python:'favorite' if view.favorite_button_enabled(community) else 'favoritedisabled';

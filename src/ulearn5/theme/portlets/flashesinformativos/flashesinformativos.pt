@@ -1,10 +1,10 @@
-<div class="ulearnboxflash row-fluid"
+<div class="ulearnboxflash row"
      tal:define="flashes view/getFlashesInformativos"
      tal:condition="flashes"
      i18n:domain="ulearn">
 
     <div id="flasinformatiu" class="carousel slide">
-        <div id="flashes-informativos" class="bubble left span2">
+        <div id="flashes-informativos" class="bubble left col-md-2">
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
@@ -14,15 +14,15 @@
                 </a> -->
             </div>
         </div>
-        <div class="carousel-inner span9">
+        <div class="carousel-inner col-md-9">
             <tal:item tal:repeat="item flashes">
                 <div tal:define="isTheFirst repeat/item/start" tal:attributes="class python:isTheFirst and 'item active' or 'item'">
                     <img tal:condition="item/flash/image" tal:define="scale item/flash/@@images" tal:replace="structure python: scale.scale('image',
-                                    scale='mini').tag(css_class='newsImage span2')"/>
+                                    scale='mini').tag(css_class='newsImage col-md-2')"/>
 
                     <a href="#" tal:attributes="href item/url">
-                        <!-- <span class="span6" tal:replace="structure item/text">Flash</span> -->
-                        <span class="span6" tal:replace="structure item/title">Flash</span>
+                        <!-- <span class="col-md-6" tal:replace="structure item/text">Flash</span> -->
+                        <span class="col-md-6" tal:replace="structure item/title">Flash</span>
                     </a>
                 </div>
             </tal:item>
@@ -31,7 +31,7 @@
         <!-- Carousel nav -->
         <tal:bloc tal:condition="python:len(flashes) > 1">
             <!-- <a class="carousel-control left" href="#flasinformatiu" data-slide="prev">&lsaquo;</a> -->
-            <a class="carousel-control right span1" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
+            <a class="carousel-control right col-md-1" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
         </tal:bloc>
     </div>
 

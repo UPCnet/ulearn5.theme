@@ -3,7 +3,7 @@
    tal:condition="viewlet/render_viewlet"
    i18n:domain="ulearn">
    <nav>
-      <div class="row-fluid">
+
          <div class="active bubble top"
             tal:attributes="class python: viewlet.bubble_class('community')">
             <div class="arrow"></div>
@@ -52,6 +52,5 @@
                </div>
             </div>
          </tal:isDiscussionFolder>
-      </div>
    </nav>
 </div>

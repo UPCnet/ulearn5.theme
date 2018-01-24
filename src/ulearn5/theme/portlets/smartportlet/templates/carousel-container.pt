@@ -3,7 +3,7 @@
                i18n:domain="plone">
 
 
-      <div class="row-fluid">
+      <div class="row">
         <div id="portlet_media" class="ulearnbox">
           <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
 

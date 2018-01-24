@@ -7,8 +7,8 @@
    <section id="box_agenda" class="ulearnbox portletCalendar" role="section">
       <div class="osomcorner-wrapper"><div class="osomcorner"></div> </div>
       <h2>Agenda</h2>
-      <div id="agenda" class="row-fluid" tal:define="today view/today">
-         <div id="day" class="bubble left col-lg-6 col-md-6 col-xs-12">
+      <div id="agenda" class="row" tal:define="today view/today">
+         <div id="day" class="bubble col-lg-6 col-md-6 col-xs-12">
             <div class="arrow"></div>
             <div class="bubble-content">
                <p tal:content="today/number">14</p>
@@ -16,7 +16,7 @@
                   tal:content="today/weekday">Jueves</p>
             </div>
          </div>
-         <div id="esdev" class="span6"
+         <div id="esdev" class="col-md-6"
             tal:define="today_event view/get_nearest_today_event">
             <div class="vertical_aligned">
                <a href="#"

@@ -4,7 +4,7 @@
    cls view/getClass">
 <div id="menusup" i18n:domain="ulearn">
    <nav>
-      <div class="row-fluid">
+      <!-- <div class="row"> -->
          <div tal:attributes="class cls" ng-class="{active: ctrl.active_tab == 'stream'}">
             <div class="arrow"></div>
             <div class="bubble-content">
@@ -41,30 +41,36 @@
                </a>
             </div>
          </div>
-      </div>
+      <!-- </div> -->
    </nav>
 </div>
 <div ng-switch="ctrl.active_tab">
-   <div id="maxui-widget-container" ng-hide="ctrl.active_tab !== 'stream'"></div>
-   <div id="communities-view" ng-switch-when="mycommunities">
-      <div id="communities-view" ng-controller="AllCommunities as ctrl">
+   <div id="maxui-widget-container" class="tab-container" ng-hide="ctrl.active_tab !== 'stream'"></div>
+   <div id="communities-view" class="tab-container" ng-switch-when="mycommunities">
+      <div id="communities-view-int" ng-controller="AllCommunities as ctrl">
          <section id="communitylist">
             <article class="media" dir-paginate="community in ctrl.user_communities | filter:q | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
                <div class="media-left">
                   <a ng-href="{{community.url}}">
-                  <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/mini" />
+                  <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/thumb" />
                   </a>
                </div>
                <div class="media-body">
                   <a ng-href="{{community.url}}">
-                     <h4>{{community.title}}</h4>
+                     <h2>{{community.title}}</h2>
                      <p>{{community.description}}</p>
                   </a>
                </div>
                <div class="community-actions">
-                  <a class="community-action community-favorite community-icon-" ng-class="{'community-favorited': community.favorited}" ng-click="ctrl.toggleFavorite(community)">favorite</a>
-                  <a class="community-action community-subscribe community-icon-" ng-if="!ctrl.is_subscribed(community.url)" ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}" ng-click="ctrl.subscribe(community)" ng-cloak>subscribe</a>
-                  <a class="community-action community-subscribe community-icon-" ng-if="ctrl.is_subscribed(community.url) && !(community.type === 'Organizative')" ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}" ng-click="ctrl.unSubscribe(community)" ng-cloak>unsubscribe</a>
+                  <a class="community-action community-favorite community-icon-" ng-class="{'community-favorited': community.favorited}" ng-click="ctrl.toggleFavorite(community)">
+                  favorite
+                  </a>
+                  <a class="community-action community-subscribe community-icon-" ng-if="!ctrl.is_subscribed(community.url)" ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}" ng-click="ctrl.subscribe(community)" ng-cloak>
+                  subscribe
+                  </a>
+                  <a class="community-action community-subscribe community-icon-" ng-if="ctrl.is_subscribed(community.url) && !(community.type === 'Organizative')" ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}" ng-click="ctrl.unSubscribe(community)" ng-cloak>
+                  unsubscribe
+                  </a>
                   <a class="community-action community-edit community-icon-" ng-if="community.can_manage" ng-href="{{community.url}}/edit">edit</a>
                   <a class="community-action community-delete community-icon-" ng-if="community.can_manage" ng-click="ctrl.delete(community)">delete</a>
                </div>
@@ -75,7 +81,7 @@
          </div>
       </div>
    </div>
-   <div id="news-container" ng-switch-when="news">
+   <div id="news-container" class="tab-container" ng-switch-when="news">
       <tal:newsitems tal:define="news_to_show view/news_to_show;" tal:condition="news_to_show" i18n:domain="ulearn">
          <div tal:define="dades_noticies view/dadesNoticies;
                           Batch python:modules['Products.CMFPlone'].Batch;
@@ -108,6 +114,8 @@
                <li class="noticies clearfix" tal:repeat="obj batch">
                   <div>
                      <div class="imatge_noticia">
+                       <a href=""
+                          tal:attributes="href obj/url">
                         <img tal:condition="obj/new/image"
                            tal:define="scale obj/new/@@images"
                            tal:replace="structure python: scale.scale('image',
@@ -115,6 +123,7 @@
                         <p class="discreet" tal:condition="obj/new/image_caption|nothing"
                            tal:content="structure obj/new/image_caption" >
                         </p>
+                      </a>
                      </div>
                      <div class="text_noticia">
                         <h2><a href=""
@@ -130,7 +139,7 @@
                         </span>
                         <a href="#" class="readmore"
                            tal:attributes="href obj/url;
-                           title obj/title"><span i18n:translate="readmore">Leer mas..</span>
+                           title obj/title"><span class="readmore" i18n:translate="readmore">Leer mas..</span>
                         </a>
                      </div>
                   </div>
