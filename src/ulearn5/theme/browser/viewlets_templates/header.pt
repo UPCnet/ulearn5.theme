@@ -61,26 +61,11 @@
             </li>
           </ul>
         </li>
-        <!--<li tal:define="menu viewlet/linksMenu" tal:condition="menu" class="dropdown ulearn-eines-ql" role="presentation" tal:repeat="dades menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" role="menuitem">
-            <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
-            <b aria-hidden="true" class="caret"></b>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li role="menuitem" tal:repeat="item dades/links">
-              <tal:span condition="not: item/new_window">
-                <a tal:attributes="href item/url">
-                  <tal:link tal:content="item/title">Links1</tal:link>
-                </a>
-              </tal:span>
-              <tal:span condition="item/new_window">
-                <a class="quicklinks" tal:attributes="href item/url" target="_blank">
-                  <tal:link tal:content="item/title">Links1</tal:link>
-                </a>
-              </tal:span>
-            </li>
-          </ul>
-        </li> -->
+        <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte" style="outline-style: none;">
+            <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
+                <i class="fa fa-info-circle"></i>
+            </a>
+        </li>
         <li role="presentation" class="upc-eines-cerca">
           <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
             <legend class="sr-only" i18n:translate="">Buscar</legend>

@@ -48,6 +48,16 @@ class viewletHeaderUlearn(viewletBase):
     grok.viewletmanager(IPortalHeader)
     grok.layer(IUlearn5ThemeLayer)
 
+    def is_info_servei_activate(self):
+        servei = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.info_servei')
+        if not servei:
+            return False
+        else:
+            return True
+
+    def info_servei(self):
+        return api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.info_servei')
+
     def quickLinks(self):
         """ Return quicklinks for language """
         lang = self.pref_lang()

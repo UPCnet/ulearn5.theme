@@ -84,7 +84,7 @@
   </rules>
 
   <!-- Template for frontpage -->
-  <rules css:if-content="body.section-front-page">
+  <rules css:if-content="body.section-front-page, body.template-profile">
       <theme href="homepage.html" />
       <drop css:content=".documentFirstHeading"/>
       <!-- Portlets Central column -->
@@ -101,7 +101,26 @@
       </replace>
   </rules>
 
-  <!-- <rules css:if-content="body.portaltype-ulearn-community, body.template-filtered_contents_search_view"> -->
+  <rules css:if-content="body.section-news">
+      <rules css:if-content="body.userrole-anonymous">
+          <theme href="homepage.html" />
+          <drop css:theme="#column1-container"/>
+
+          <!-- Portlets Central column -->
+          <replace css:theme="#content-container" method="raw">
+            <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
+              <xsl:apply-templates css:select="#viewlet-above-content" />
+              <xsl:apply-templates css:select="#content" />
+              <footer class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <xsl:copy-of css:select="#viewlet-below-content" />
+                </div>
+              </footer>
+            </section>
+          </replace>
+      </rules>
+  </rules>
+
   <!-- Default Template WITH PORTLETS-->
   <theme href="community.html" />
 
@@ -126,4 +145,5 @@
       </footer>
     </section>
   </replace>
+
 </rules>
