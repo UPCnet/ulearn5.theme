@@ -84,9 +84,13 @@
       post_handler=".setuphandlers.uninstall"
       />
 
-
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="ulearn5.theme-hiddenprofiles" />
+
+  <browser:jbot
+      directory="templates"
+      layer=".interfaces.IUlearn5ThemeLayer"
+  />
 
 </configure>

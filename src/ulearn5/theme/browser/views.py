@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import json
 import scss
 import pkg_resources
+import pytz
 from souper.interfaces import ICatalogFactory
 from souper.soup import get_soup
 from repoze.catalog.query import Eq
@@ -23,6 +25,7 @@ from plone.registry.interfaces import IRegistry
 from plone.app.users.browser.userdatapanel import UserDataPanel
 from plone.app.contenttypes.behaviors.collection import ICollection
 from plone.app.contenttypes.browser.folder import FolderView
+from plone.dexterity.interfaces import IDexterityContent
 
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.utils import safe_unicode
@@ -40,7 +43,77 @@ from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.core.browser.searchuser import searchUsersFunction
 from ulearn5.core.interfaces import IDiscussionFolder
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email import Encoders
+from email.utils import formatdate
+
+from cStringIO import StringIO
+
+
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
+
+# iCal header and footer
+ICS_HEADER = """\
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Plone.org//NONSGML plone.app.event//EN
+X-WR-TIMEZONE:%(timezone)s
+"""
+
+ICS_FOOTER = """\
+END:VCALENDAR
+"""
+
+# iCal event
+ICS_EVENT_START = """\
+BEGIN:VEVENT
+SUMMARY:%(summary)s
+DTSTART;TZID=%(timezone)s;VALUE=DATE-TIME:%(startdate)s
+DTEND;TZID=%(timezone)s;VALUE=DATE-TIME:%(enddate)s
+DTSTAMP;VALUE=DATE-TIME:%(dtstamp)s
+UID:%(uid)s
+"""
+
+ICS_EVENT_END = """\
+CONTACT:%(contact_name)s\, %(contact_email)s
+CREATED;VALUE=DATE-TIME:%(created)s
+LAST-MODIFIED;VALUE=DATE-TIME:%(modified)s
+LOCATION:%(location)s
+URL:%(url)s
+END:VEVENT
+"""
+
+# iCal timezone
+ICS_TIMEZONE_START = """\
+BEGIN:VTIMEZONE
+TZID:%(timezone)s
+X-LIC-LOCATION:%(timezone)s
+"""
+
+ICS_TIMEZONE_END = """\
+END:VTIMEZONE
+"""
+
+# iCal standard
+ICS_STANDARD = """\
+BEGIN:STANDARD
+DTSTART;VALUE=DATE-TIME:20161030T020000
+TZNAME:CET
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+END:STANDARD
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE = """\
+%(title)s
+Iniciar: %(start)s
+Final: %(end)s
+Assistents: %(attendees)s
+Descripció: %(description)s
+S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
+"""
 
 
 class baseCommunities(grok.View):
@@ -952,3 +1025,118 @@ class resetMenuBar(grok.View):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         soup_menu = get_soup('menu_soup', portal)
         soup_menu.clear()
+
+
+class SendEventToAttendees(grok.View):
+    grok.context(IDexterityContent)
+    grok.name('event_to_attendees')
+    # grok.require('cmf.ModifyPortalContent')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def render(self):
+        portal = api.portal
+        context = aq_inner(self.context)
+        subject = 'Invitació: %s\n' % self.context.Title()
+        email_charset = portal.get_registry_record('plone.email_charset')
+        mailhost = getToolByName(context, 'MailHost')
+
+        map = {
+            'title': self.context.Title(),
+            'start': self.applytz(self.context.start).strftime('%d/%m/%Y %H:%M:%S'),
+            'end': self.applytz(self.context.end).strftime('%d/%m/%Y %H:%M:%S'),
+            'attendees': ', '.join(self.context.attendees).encode('utf-8'),
+            'description': self.context.Description()
+            }
+
+        body = ATTENDEES_MESSAGE_TEMPLATE % map
+        msg = MIMEMultipart()
+        msg['From'] = portal.get_registry_record('plone.email_from_address')
+        msg['To'] = ', '.join(self.context.attendees).encode('utf-8')
+        msg['Date'] = formatdate(localtime=True)
+        msg['Subject'] = subject
+
+        msg.attach(MIMEText(body, 'plain'))
+        msg.attach(self.get_ics())
+
+        mailhost.send(msg)
+
+    def get_ics(self):
+        """iCalendar output
+        """
+        out = StringIO()
+
+        out.write(ICS_HEADER % {'timezone': api.portal.get_registry_record('plone.portal_timezone')})
+        out.write(self.getICal())
+        out.write(ICS_FOOTER)
+
+        part = MIMEBase('application', "octet-stream")
+        part.set_payload(self.n2rn(out.getvalue()))
+        Encoders.encode_base64(part)
+        part.add_header('Content-Disposition', 'attachment; filename="%s.ics"'
+            % self.context.getId())
+
+        return part
+
+    def getICal(self):
+        """get iCal data
+        """
+        portal = api.portal
+        out = StringIO()
+
+        map = {
+            'summary': self.vformat(self.context.Title()),
+            'timezone': portal.get_registry_record('plone.portal_timezone'),
+            'startdate': self.rfc2445dtlocal(self.context.start),
+            'enddate': self.rfc2445dtlocal(self.context.end),
+            'dtstamp': self.rfc2445dt(DateTime()),
+            'uid': self.context.sync_uid,
+        }
+        out.write(ICS_EVENT_START % map)
+
+        for assistant in self.context.attendees:
+            out.write('ATTENDEE;CN={0};ROLE=REQ-PARTICIPANT:{0}\n'.format(assistant.encode('utf-8')))
+
+        for category in self.context.subject:
+            out.write('CATEGORIES:%s\n' % category.encode('utf-8'))
+
+        location = self.context.location.encode('utf-8') if self.context.location else None
+        map = {
+            'contact_name': self.context.contact_name,
+            'contact_email': self.context.contact_email,
+            'created': self.rfc2445dt(self.context.creation_date),
+            'modified': self.rfc2445dt(self.context.modification_date),
+            'location': location,
+            'url': self.context.absolute_url(),
+        }
+        out.write(ICS_EVENT_END % map)
+
+        map = {
+            'timezone': portal.get_registry_record('plone.portal_timezone'),
+        }
+        out.write(ICS_TIMEZONE_START % map)
+
+        out.write(ICS_STANDARD)
+        out.write(ICS_TIMEZONE_END)
+
+        return out.getvalue()
+
+    def vformat(self, s):
+        # return string with escaped commas and semicolons
+        # NOTE: RFC 2445 specifies "a COLON character in a 'TEXT' property value
+        # SHALL NOT be escaped with a BACKSLASH character." So watch out for
+        # non-TEXT values, should they be introduced later in this code!
+        return s.strip().replace(', ', '\, ').replace(';', '\;')
+
+    def n2rn(self, s):
+        return s.replace('\n', '\r\n')
+
+    def rfc2445dt(self, dt):
+        # return UTC in RFC2445 format YYYYMMDDTHHMMSSZ
+        return dt.HTML4().replace('-', '').replace(':', '')
+
+    def rfc2445dtlocal(self, dt):
+        # return UTC in RFC2445 format YYYYMMDDTHHMMSS
+        return self.applytz(dt).strftime('%Y%m%dT%H%M%S')
+
+    def applytz(self, dt):
+        return dt.astimezone(pytz.timezone(api.portal.get_registry_record('plone.portal_timezone')))

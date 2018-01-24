@@ -154,4 +154,28 @@ $(document).ready(function() {
 			$("#portal-header").removeClass("shrink");
 		}
 	});
+
+
+  // Process per enviar convocatòria en els esdeveniments
+  $( '#NotAttendeesMsg' ).hide();
+
+  if($( '#SendInvitation' ).length){
+    var attendants = $( '.attendee' ).map(function(){
+                      return $.trim($(this).text());
+                    }).get()
+
+    if(attendants.length <= 0){
+      $( '#SendInvitation' ).remove();
+      $( '#NotAttendeesMsg' ).show();
+    }
+  }
+
+  $( '#SendInvitation' ).on( 'click', function(){
+    dexterity_url = $( this ).attr( 'data-dexterityUrl' );
+    $.ajax({
+        type: 'POST',
+        url: dexterity_url + '/event_to_attendees',
+        success: function(){ }
+      });
+  });
 });//ready
