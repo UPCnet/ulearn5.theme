@@ -269,3 +269,26 @@ class viewletFooterUlearn(viewletBase):
     @forever.memoize
     def get_current_year(self):
         return datetime.datetime.now().year
+
+    def get_links(self):
+        current = api.user.get_current()
+        user_language = current.getProperty('language')
+        links = {}
+
+        if user_language == 'ca':
+            links['contact'] = 'https://www.upc.edu/ca/contacte'
+            links['sitemap'] = 'https://www.upc.edu/ca/sitemap'
+            links['accessibility'] = 'https://www.upc.edu/ca/avis-legal/accessibilitat'
+            links['disclaimer'] = 'https://www.upc.edu/ca/avis-legal'
+        elif user_language == 'es':
+            links['contact'] = 'https://www.upc.edu/es/contacto'
+            links['sitemap'] = 'https://www.upc.edu/es/sitemap'
+            links['accessibility'] = 'https://www.upc.edu/es/aviso-legal/accesibilidad'
+            links['disclaimer'] = 'https://www.upc.edu/es/aviso-legal'
+        else:
+            links['contact'] = 'https://www.upc.edu/en/contact'
+            links['sitemap'] = 'https://www.upc.edu/en/sitemap'
+            links['accessibility'] = 'https://www.upc.edu/en/disclaimer/accessibility'
+            links['disclaimer'] = 'https://www.upc.edu/en/disclaimer'
+
+        return links

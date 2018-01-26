@@ -1,32 +1,17 @@
-<!-- <footer role="complementary">
+<footer role="complementary" i18n:domain="ulearn">
   <div class="container">
-    <div class="row footer-complementary">
-      <div class="col-xs-12">
-        <p><span>©</span>
-          <a href="https://www.upcnet.es" target="_blank">
-            <abbr rel="tooltip" data-placement="top" title="UPCnet - IThinkUPC">
-              UPCnet 2017-${viewlet/get_current_year}
-            </abbr>
-          </a>
-        </p>
+    <div class="row footer-complementary" style="outline-style: none;">
+      <div class="col-xs-12" style="outline-style: none;">
+        <p> <span>© UPC - ${viewlet/get_current_year}</span>Universitat Politècnica de Catalunya · BarcelonaTech</p>
+        <nav>
+          <ul id="footer-menu-complementari" class="footer-container" tal:define="links viewlet/get_links">
+            <li><a tal:attributes="href links/contact" i18n:translate="contact">Contacte</a></li>
+            <li><a accesskey="3" tal:attributes="href links/sitemap" i18n:translate="sitemap">Mapa del web</a></li>
+            <li><a accesskey="0" tal:attributes="href links/accessibility" i18n:translate="accessibility">Accessibilitat</a></li>
+            <li><a tal:attributes="href links/disclaimer" i18n:translate="disclaimer">Avís legal</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-</footer> -->
-<footer role="complementary">
-  <div class="container">
-<div class="row footer-complementary" style="outline-style: none;">
-    <div class="col-xs-12" style="outline-style: none;">
-      <p> <span>© UPC - ${viewlet/get_current_year}</span>Universitat Politècnica de Catalunya · BarcelonaTech</p>
-      <nav>
-        <ul id="footer-menu-complementari" class="footer-container">
-          <li><a href="http://www.upc.edu/ca/contacte">Contacte</a></li>
-          <li><a accesskey="3" href="http://www.upc.edu/ca/sitemap">Mapa del web</a></li>
-          <li><a accesskey="0" href="http://www.upc.edu/ca/avis-legal/accessibilitat">Accessibilitat</a></li>
-          <li><a href="http://www.upc.edu/ca/avis-legal">Avís legal</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
 </footer>
