@@ -368,7 +368,7 @@ padding-right: 10px;
   margin-bottom: 5px;
 }
 .thinnker {
-  margin: 9px;
+  margin: 3px;
   flex-basis: auto;
 }
 #miniatures img {
@@ -465,7 +465,7 @@ padding-right: 10px;
 .data { font-size:13px;padding-top:6px; }
 
 #agenda {
-  background:#f5f5f5;
+  background:#e8e8e8;
   font-size:12px;
   margin-top:10px;
 }
@@ -2772,6 +2772,7 @@ div#miniatures lastauthors {
 }
 .portlet-subscribed-news .list-search-portlet {
        padding: 0 5px 0 0;
+       margin-top: 30px!important;
 }
 .portlet-subscribed-news .noticies.clearfix {
   border-bottom: 1px solid #ddd;
@@ -2803,10 +2804,8 @@ div#miniatures lastauthors {
 }
 
 .portlet-subscribed-news .readmore {
-    float: right;
-    font-size: 13px;
-    font-weight: 400;
-    margin-right: 5px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .portlet-subscribed-news .list-search-portlet {
@@ -3453,4 +3452,63 @@ article {
 
 body.userrole-anonymous > div#portal-header{
 top: 0;
+}
+
+.plone-modal-content {
+  margin: 0 auto;
+}
+
+
+li.upc-eines-contacte a:not([class])[target="_blank"]::after {
+    display: none;
+}
+
+li.upc-eines-contacte i.fa.fa-info-circle {
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+li.upc-eines-contacte {
+    border-right: 1px solid #ccc;
+    margin-right: 12px;
+}
+
+.main-banner .upc-eines>li>a {
+    padding: 9px 12px 9px 4px;
+    color: #007BC1!important;
+}
+
+.main-banner .upc-eines>li>a[aria-expanded="true"], .main-banner .upc-eines>li>a:hover {
+    box-shadow: none!important;
+    transition: all .25s ease;
+    text-decoration: none;
+    color: #34495E!important;
+}
+
+.btn-banner {
+    margin: 0 0 15px;
+  }
+
+#communitysearch .col-md-9 {margin-left: 0px !important;}
+
+
+#news-container span.add-on {
+    position: absolute;
+    right: 22px;
+    top: 18px;
+
+}
+
+#news-container #subscribednews-search-box input {
+    position: relative;
+    height: 34px !important;
+      border-radius: 4px!important;
+      margin-bottom: 5px;
+}
+
+.portlet-subscribed-news #subscribednews-search {
+
+   border: 0px!important;
+  background-color: transparent!important;
+
 }
