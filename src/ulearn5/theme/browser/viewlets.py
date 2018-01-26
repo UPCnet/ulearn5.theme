@@ -95,33 +95,37 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
-            if 'Reader' in roles or 'Editor' in roles or 'Contributor' in roles or 'Reviewer' in roles or 'WebMaster' in roles or 'Manager' in roles:
+            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canGestionarMenu() or self.canGestionarHeader() or self.canGestionarFooter() or self.canGestionarNoticies() or self.canGestionarEstadistiques():
                 return True
-            else:
-                return False
-        else:
-            return False
-
-    def canManageMenu(self):
-        current = api.user.get_current()
-        portal = api.portal.get()
-        if 'gestion' in portal and 'menu' in portal['gestion']:
-            roles = api.user.get_roles(username=current.id, obj=portal['gestion']['menu'])
-            if 'Reader' in roles or 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles:
-                return True
-            else:
-                return False
         return False
 
-    def canResetMenu(self):
+    def canManageDirectory(self, directory):
         current = api.user.get_current()
         portal = api.portal.get()
-        if 'gestion' in portal and 'menu' in portal['gestion']:
-            roles = api.user.get_roles(username=current.id, obj=portal['gestion']['menu'])
+        if 'gestion' in portal and directory in portal['gestion']:
+            roles = api.user.get_roles(username=current.id, obj=portal['gestion'][directory])
+            if 'Editor' in roles or 'Contributor' in roles or 'Reviewer' in roles or 'WebMaster' in roles or 'Manager' in roles:
+                return True
+        return False
+
+    def canManageMenu(self):
+        return self.canManageDirectory('menu')
+
+    def canManageNews(self):
+        current = api.user.get_current()
+        portal = api.portal.get()
+        if 'news' in portal:
+            roles = api.user.get_roles(username=current.id, obj=portal['news'])
             if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles:
                 return True
-            else:
-                return False
+        return False
+
+    def canManageStats(self):
+        current = api.user.get_current()
+        portal = api.portal.get()
+        roles = api.user.get_roles(username=current.id, obj=portal)
+        if 'WebMaster' in roles or 'Manager' in roles:
+            return True
         return False
 
     def _createLinksMenu(self, language):
@@ -187,6 +191,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         soup_menu = get_soup('menu_soup', portal)
         exist = [r for r in soup_menu.query(Eq('id_menusoup', user_language))]
+
         if not exist:
             dades = self._createLinksMenu(user_language)
             record = Record()

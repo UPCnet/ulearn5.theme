@@ -14,27 +14,59 @@
     </div>
     <nav role="navigation" class="global-navigation">
       <h2 class="sr-only" i18n:translate="">Eines</h2>
-      <ul role="menubar" class="upc-eines">
+      <ul role="menubar" class="upc-eines" tal:define="menu viewlet/linksMenu">
+        <li tal:condition="menu" class="dropdown" role="menuitem" tal:repeat="dades menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
+            <b aria-hidden="true" class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="menuitem" tal:repeat="item dades/links">
+              <tal:span condition="not: item/new_window">
+                <a tal:attributes="href item/url">
+                     <tal:link tal:content="item/title">
+                        Links1</tal:link>
+                </a>
+              </tal:span>
+              <tal:span condition="item/new_window">
+                <a class="quicklinks" tal:attributes="href item/url" target="_blank">
+                     <tal:link tal:content="item/title">
+                        Links1</tal:link>
+                </a>
+              </tal:span>
+            </li>
+          </ul>
+        </li>
         <li role="presentation" class="upc-eines-skip"><a href="#main-content" role="menuitem" class="sr-only"> <span>Skip to content</span></a></li>
         <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql">
-          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${view/portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
+          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${viewlet/portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
             <tal:management i18n:domain="ulearn" i18n:translate="menu-gestion">
                       Management</tal:management>
             <b aria-hidden="true" class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu">
+            <li role="menuitem" tal:condition="viewlet/canManageNews">
+              <a href="#" tal:attributes="href string:${viewlet/portal_url}/news">
+                <i class="fa fa-newspaper-o"></i>
+                <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
+              </a>
+            </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${view/portal_url}/gestion/menu">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/menu">
                 <i class="fa fa-folder"></i>
                 <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestion-menu">Management menu</tal:footer>
               </a>
             </li>
-            <li role="menuitem" tal:condition="viewlet/canResetMenu">
-              <a tal:attributes="href string:${view/portal_url}/reset_menu">
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${viewlet/portal_url}/reset_menu">
                 <i class="fa fa-refresh"></i>
                 <tal:footer i18n:domain="ulearn" i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
             </li>
+            <li role="menuitem" tal:condition="viewlet/canManageStats"><a href="#" tal:attributes="href string:#/stats/activity">
+              <i class="fa fa-bar-chart"></i>
+              <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestio-estadistiques">Estadístiques</tal:footer>
+            </a></li>
           </ul>
         </li>
         <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql" >
