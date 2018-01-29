@@ -73,7 +73,7 @@
                         ng-dialog-class="ngdialog-theme-default changeCommunityType"
                         ng-dialog-controller="profilePortletModal"
                         ng-dialog-cache="false"
-                        tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot; ; title view/get_com_type_literal;}"
+                        tal:attributes="title view/get_com_type_literal; ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
                         href="">
                         <i class="fa fa-exchange" ></i>
                     </a>
