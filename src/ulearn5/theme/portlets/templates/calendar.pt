@@ -43,6 +43,9 @@
                 <span i18n:translate="" tal:omit-tag="">
                    <span i18n:name="monthname" i18n:translate="" tal:content="view/month_name" tal:omit-tag="">monthname</span>
                 </span>
+                <span i18n:translate="" tal:omit-tag="">
+                   <span i18n:name="year" i18n:translate="" tal:content="year" tal:omit-tag="">year</span>
+                </span>
              </h3>
              <a href="#" rel="nofollow" class="calendari-seguent pat-contentloader" title="Next month"
                 tal:define="next_month view/next_month; next_year view/next_year"
