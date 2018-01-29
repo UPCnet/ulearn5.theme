@@ -182,26 +182,29 @@ class viewletHeaderUlearn(viewletBase):
             usuario en su perfil
         """
         current = api.user.get_current()
-        user_language = current.getProperty('language')
-        if user_language == '':
-            lt = getToolByName(self.portal(), 'portal_languages')
-            user_language = lt.getPreferredLanguage()
-            current.setMemberProperties({'language': user_language})
-
-        portal = api.portal.get()
-        soup_menu = get_soup('menu_soup', portal)
-        exist = [r for r in soup_menu.query(Eq('id_menusoup', user_language))]
-
-        if not exist:
-            dades = self._createLinksMenu(user_language)
-            record = Record()
-            record.attrs['id_menusoup'] = user_language
-            record.attrs['dades'] = dades.values()
-            soup_menu.add(record)
-            soup_menu.reindex()
-            return dades.values()
+        if current.getUserName() == 'Anonymous User':
+            pass
         else:
-            return exist[0].attrs['dades']
+            user_language = current.getProperty('language')
+            if user_language == '':
+                lt = getToolByName(self.portal(), 'portal_languages')
+                user_language = lt.getPreferredLanguage()
+                current.setMemberProperties({'language': user_language})
+
+            portal = api.portal.get()
+            soup_menu = get_soup('menu_soup', portal)
+            exist = [r for r in soup_menu.query(Eq('id_menusoup', user_language))]
+
+            if not exist:
+                dades = self._createLinksMenu(user_language)
+                record = Record()
+                record.attrs['id_menusoup'] = user_language
+                record.attrs['dades'] = dades.values()
+                soup_menu.add(record)
+                soup_menu.reindex()
+                return dades.values()
+            else:
+                return exist[0].attrs['dades']
 
 
 class folderBar(viewletBase):
@@ -234,11 +237,10 @@ class folderBar(viewletBase):
                 break
 
     def bubble_class(self, bubble):
-        if self.folder_type == 'events' or \
-           self.folder_type == 'discussion':
-            width = 'col-md-4'
+        if self.folder_type == 'discussion':
+            width = 'col-md-3'
         else:
-            width = 'col-md-6'
+            width = 'col-md-4'
 
         if bubble == self.folder_type:
             return 'active bubble top {}'.format(width)

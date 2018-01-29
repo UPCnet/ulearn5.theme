@@ -1,56 +1,53 @@
 <div id="menusup"
-   tal:define="community viewlet/get_community"
-   tal:condition="viewlet/render_viewlet"
-   i18n:domain="ulearn">
-   <nav>
-
-         <div class="active bubble top"
+    tal:define="community viewlet/get_community"
+    tal:condition="viewlet/render_viewlet"
+    i18n:domain="ulearn">
+    <nav>
+        <div class="active bubble top"
             tal:attributes="class python: viewlet.bubble_class('community')">
             <div class="arrow"></div>
             <div class="bubble-content">
-               <a href="#"
-                  tal:attributes="href string:${community/absolute_url}">
-                  <i class="fa fa-comment icons"></i>
-                  <tal:Activity i18n:domain="ulearn" i18n:translate="ulearn_activity">Activity</tal:Activity>
-               </a>
+                <a href="#"
+                    tal:attributes="href string:${community/absolute_url}">
+                    <i class="fa fa-comment icons"></i>
+                    <tal:Activity i18n:domain="ulearn" i18n:translate="ulearn_activity">Activity</tal:Activity>
+                </a>
             </div>
-         </div>
-         <div class="bubble top"
+        </div>
+        <div class="bubble top"
             tal:attributes="class python: viewlet.bubble_class('documents')">
             <div class="arrow"></div>
             <div class="bubble-content">
-               <a href="#"
-                  tal:attributes="href string:${community/absolute_url}/documents">
-                  <i class="fa fa-file-text-o icons"></i>
-                  <tal:Documents i18n:domain="ulearn" i18n:translate="ulearn_documents">Documents</tal:Documents>
-               </a>
+                <a href="#"
+                    tal:attributes="href string:${community/absolute_url}/documents">
+                    <i class="fa fa-file-text-o icons"></i>
+                    <tal:Documents i18n:domain="ulearn" i18n:translate="ulearn_documents">Documents</tal:Documents>
+                </a>
             </div>
-         </div>
-         <tal:isEventFolder condition="python: viewlet.folder_type == 'events'">
+        </div>
+        <div class="bubble top"
+            tal:attributes="class python: viewlet.bubble_class('events')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <a href="#"
+                    tal:attributes="href string:${community/absolute_url}/events">
+                    <i class="fa fa-calendar icons"></i>
+                    <tal:Events i18n:translate="Events">Esdeveniments</tal:Events>
+                </a>
+            </div>
+        </div>
+        <tal:isDiscussionFolder condition="python: viewlet.folder_type == 'discussion'">
             <div class="bubble top"
-               tal:attributes="class python: viewlet.bubble_class('events')">
-               <div class="arrow"></div>
-               <div class="bubble-content">
-                  <a href="#"
-                     tal:attributes="href string:${community/absolute_url}/events">
-                     <i class="fa fa-calendar icons"></i>
-                     <tal:Events i18n:translate="Events">Esdeveniments</tal:Events>
-                  </a>
-               </div>
+                tal:attributes="class python: viewlet.bubble_class('discussion')">
+                <div class="arrow"></div>
+                <div class="bubble-content">
+                    <a href="#"
+                        tal:attributes="href string:${community/absolute_url}/discussion">
+                        <i class="fa fa-calendar icons"></i>
+                        <tal:Discussion i18n:translate="Discussion">Discussion</tal:Discussion>
+                    </a>
+                </div>
             </div>
-         </tal:isEventFolder>
-         <tal:isDiscussionFolder condition="python: viewlet.folder_type == 'discussion'">
-            <div class="bubble top"
-               tal:attributes="class python: viewlet.bubble_class('discussion')">
-               <div class="arrow"></div>
-               <div class="bubble-content">
-                  <a href="#"
-                     tal:attributes="href string:${community/absolute_url}/discussion">
-                     <i class="fa fa-calendar icons"></i>
-                     <tal:Discussion i18n:translate="Discussion">Discussion</tal:Discussion>
-                  </a>
-               </div>
-            </div>
-         </tal:isDiscussionFolder>
-   </nav>
+        </tal:isDiscussionFolder>
+    </nav>
 </div>
