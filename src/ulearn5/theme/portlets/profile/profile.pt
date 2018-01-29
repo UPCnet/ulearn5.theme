@@ -62,10 +62,10 @@
                 ng-controller="profilePortlet as portlet"
                 tal:define="community_type python:view.get_community_type(community)">
                 <a class="btn btn-default"
-                    tal:attributes="href string:${community/absolute_url}/edit">
+                    tal:attributes="href string:${community/absolute_url}/edit; title view/get_edit_literal;">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl">
+                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl; title view/get_acl_literal;">
                     <i class="fa fa-users"></i>
                 </a>
                 <tal:block tal:condition="view/has_webmaster_role">
@@ -73,7 +73,7 @@
                         ng-dialog-class="ngdialog-theme-default changeCommunityType"
                         ng-dialog-controller="profilePortletModal"
                         ng-dialog-cache="false"
-                        tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
+                        tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot; ; title view/get_com_type_literal;}"
                         href="">
                         <i class="fa fa-exchange" ></i>
                     </a>

@@ -20,7 +20,7 @@ from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
-from base5.core.utils import get_safe_member_by_id
+from base5.core.utils import get_safe_member_by_id, pref_lang
 
 
 class IProfilePortlet(IPortletDataProvider):
@@ -149,6 +149,36 @@ class Renderer(base.Renderer):
 
     def get_community_type(self, community):
         return community.community_type
+
+    def get_edit_literal(self):
+        """ Get string literal for edit """
+        lang = pref_lang()
+        if 'ca' in lang:
+            return "Editar la comunitat"
+        elif 'es' in lang:
+            return "Editar la comunidad"
+        else:
+            return "Edit community"
+
+    def get_acl_literal(self):
+        """ Get string literal for editacl """
+        lang = pref_lang()
+        if 'ca' in lang:
+            return "Gestiona els membres"
+        elif 'es' in lang:
+            return "Gestiona los miembros"
+        else:
+            return "Manage members"
+
+    def get_com_type_literal(self):
+        """ Get string literal for community type """
+        lang = pref_lang()
+        if 'ca' in lang:
+            return "Canvia el tipus de comunitat"
+        elif 'es' in lang:
+            return "Cambia el tipo de comunidad"
+        else:
+            return "Change community type"
 
 
 class AddForm(base.NullAddForm):

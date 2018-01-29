@@ -1057,7 +1057,6 @@ class SendEventToAttendees(grok.View):
 
         msg.attach(MIMEText(body, 'plain'))
         msg.attach(self.get_ics())
-
         mailhost.send(msg)
 
     def get_ics(self):
