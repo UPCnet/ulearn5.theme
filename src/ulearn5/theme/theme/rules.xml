@@ -1,149 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rules xmlns="http://namespaces.plone.org/diazo"
        xmlns:css="http://namespaces.plone.org/diazo/css"
        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-       xmlns:xi="http://www.w3.org/2001/XInclude">
+       xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <!-- Include the backend theme (Barceloneta) loaded on edit views -->
-  <xi:include href="++theme++ulearn5/backend.xml" />
-  <notheme css:if-not-content="#visual-portal-wrapper" />
-
-  <rules css:if-content="#portal-top">
-    <!-- Attributes -->
-    <copy attributes="*" css:theme="html" css:content="html" />
-    <!-- Base tag -->
-    <before css:theme="title" css:content="base" />
-    <!-- Title -->
-    <replace css:theme="title" css:content="title" />
-    <!-- Don't use Plone icons, use the theme's -->
-    <drop css:content="head link[rel='apple-touch-icon']" />
-    <drop css:content="head link[rel='shortcut icon']" />
-    <!-- drop the theme stylesheets -->
-    <drop theme="/html/head/link[rel='stylesheet']" />
-    <!-- Pull in Plone Meta -->
-    <after css:theme-children="head" css:content="head meta" />
-    <!-- CSS -->
-    <after css:theme-children="head" css:content="head link" />
-    <!-- ... before your own scripts -->
-    <before theme="/html/head/script[1]">
-        <xsl:apply-templates select="/html/head/script" /> <!-- include the Plone scripts -->
-        <script>
-            require = undefined
-            define = undefined
-        </script> <!-- and then unset require and define -->
-    </before>
-  </rules>
-
-  <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
-  <copy attributes="*" css:content="body" css:theme="body" />
-
-  <drop css:content="#portal-logo" />
-  <drop css:content="#portal-searchbox" />
-  <drop css:content="#portal-languageselector" />
-  <drop css:content="#mainnavigation" />
-  <drop css:content="#portal-breadcrumbs" />
-  <drop css:content="#portal-anontools" />
-
-  <!-- Login Form -->
-  <replace css:theme-children="#portal-anontools" css:content-children="#portal-anontools" />
-  <!-- Alert message -->
-  <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
-  <!-- Content header -->
-  <replace css:theme="#portal-top" css:content-children="#portal-top" />
-
-  <!-- Breadcrumb -->
-  <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
-
-  <!-- Footer -->
-  <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
-
-  <!-- Template for login, logout -->
-  <rules css:if-content="body.template-login_form, body.template-logged_out, body.template-login_failed">
-      <theme href="login.html" />
-      <drop css:content=".documentFirstHeading"/>
-
-      <before css:content="#login_form">
-        <span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
-        <span aria-hidden="true" role="presentation" class="icona-upc">
-          <img alt="" src="/++theme++ulearn5/assets/images/logomark.png"></img>
-        </span>
-      </before>
-
-      <!-- Portlets Central column -->
-      <replace css:theme="#content-container" method="raw">
-        <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
-          <xsl:apply-templates css:select="#content" />
-          <footer class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <xsl:copy-of css:select="#viewlet-below-content" />
-            </div>
-          </footer>
-        </section>
-      </replace>
-  </rules>
-
-  <!-- Template for frontpage -->
-  <rules css:if-content="body.section-front-page, body.template-profile">
-      <theme href="homepage.html" />
-      <drop css:content=".documentFirstHeading"/>
-      <!-- Portlets Central column -->
-      <replace css:theme="#content-container" method="raw">
-        <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
-          <xsl:apply-templates css:select="#viewlet-above-content" />
-          <xsl:apply-templates css:select="#content" />
-          <footer class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <xsl:copy-of css:select="#viewlet-below-content" />
-            </div>
-          </footer>
-        </section>
-      </replace>
-  </rules>
-
-  <rules css:if-content="body.section-news">
-      <rules css:if-content="body.userrole-anonymous">
-          <theme href="homepage.html" />
-          <drop css:theme="#column1-container"/>
-
-          <!-- Portlets Central column -->
-          <replace css:theme="#content-container" method="raw">
+    <!-- Include the backend theme (Barceloneta) loaded on edit views -->
+    <xi:include href="++theme++ulearn5/backend.xml" />
+    <notheme css:if-not-content="#visual-portal-wrapper" />
+    <rules css:if-content="#portal-top">
+        <!-- Attributes -->
+        <copy attributes="*" css:theme="html" css:content="html" />
+        <!-- Base tag -->
+        <before css:theme="title" css:content="base" />
+        <!-- Title -->
+        <replace css:theme="title" css:content="title" />
+        <!-- Don't use Plone icons, use the theme's -->
+        <drop css:content="head link[rel='apple-touch-icon']" />
+        <drop css:content="head link[rel='shortcut icon']" />
+        <!-- drop the theme stylesheets -->
+        <drop theme="/html/head/link[rel='stylesheet']" />
+        <!-- Pull in Plone Meta -->
+        <after css:theme-children="head" css:content="head meta" />
+        <!-- CSS -->
+        <after css:theme-children="head" css:content="head link" />
+        <!-- ... before your own scripts -->
+        <before theme="/html/head/script[1]">
+            <xsl:apply-templates select="/html/head/script" />
+            <!-- include the Plone scripts -->
+            <script>require = undefined
+            define = undefined</script>
+            <!-- and then unset require and define -->
+        </before>
+    </rules>
+    <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
+    <copy attributes="*" css:content="body" css:theme="body" />
+    <drop css:content="#portal-logo" />
+    <drop css:content="#portal-searchbox" />
+    <drop css:content="#portal-languageselector" />
+    <drop css:content="#mainnavigation" />
+    <drop css:content="#portal-breadcrumbs" />
+    <drop css:content="#portal-anontools" />
+    <!-- Alert message -->
+    <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
+    <!-- Content header -->
+    <replace css:theme="#portal-top" css:content-children="#portal-top" />
+    <!-- Breadcrumb -->
+    <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
+    <!-- Footer -->
+    <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
+    <!-- Template for login, logout -->
+    <rules css:if-content="body.template-login_form, body.template-logged_out, body.template-login_failed">
+        <theme href="login.html" />
+        <drop css:content=".documentFirstHeading" />
+        <before css:content="#login_form">
+            <span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
+            <span aria-hidden="true" role="presentation" class="icona-upc">
+                <img alt="" src="/++theme++ulearn5/assets/images/logomark.png" />
+            </span>
+        </before>
+        <!-- Portlets Central column -->
+        <replace css:theme="#content-container" method="raw">
             <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
-              <xsl:apply-templates css:select="#viewlet-above-content" />
-              <xsl:apply-templates css:select="#content" />
-              <footer class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <xsl:copy-of css:select="#viewlet-below-content" />
-                </div>
-              </footer>
+                <xsl:apply-templates css:select="#content" />
+                <footer class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <xsl:copy-of css:select="#viewlet-below-content" />
+                    </div>
+                </footer>
             </section>
-          </replace>
-      </rules>
-  </rules>
-
-  <!-- Default Template WITH PORTLETS-->
-  <theme href="community.html" />
-
-  <!-- Portlets Left column -->
-  <rules css:if-content="#portal-column-one">
-    <replace css:theme="#column1-container">
-      <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
-        <xsl:copy-of css:select="#portal-column-one > *" />
-      </section>
+        </replace>
+    </rules>
+    <!-- Template for frontpage and profile-->
+    <rules css:if-content="body.section-front-page, body.template-profile">
+        <theme href="homepage.html" />
+        <drop css:content=".documentFirstHeading" />
+        <!-- Portlets Central column -->
+        <replace css:theme="#content-container" method="raw">
+            <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
+                <xsl:apply-templates css:select="#viewlet-above-content" />
+                <xsl:apply-templates css:select="#content" />
+                <footer class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <xsl:copy-of css:select="#viewlet-below-content" />
+                    </div>
+                </footer>
+            </section>
+        </replace>
+    </rules>
+    <rules css:if-content="body.section-news">
+        <rules css:if-content="body.userrole-anonymous">
+            <theme href="homepage.html" />
+            <drop css:theme="#column1-container" />
+            <!-- Portlets Central column -->
+            <replace css:theme="#content-container" method="raw">
+                <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
+                    <xsl:apply-templates css:select="#viewlet-above-content" />
+                    <xsl:apply-templates css:select="#content" />
+                    <footer class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <xsl:copy-of css:select="#viewlet-below-content" />
+                        </div>
+                    </footer>
+                </section>
+            </replace>
+        </rules>
+    </rules>
+    <!-- Default Template WITH PORTLETS-->
+    <theme href="community.html" />
+    <!-- Portlets Left column -->
+    <rules css:if-content="#portal-column-one">
+        <replace css:theme="#column1-container">
+            <section class="col-lg-3 col-md-4 col-xs-12 side-bar">
+                <xsl:copy-of css:select="#portal-column-one &gt; *" />
+            </section>
+        </replace>
+    </rules>
+    <!-- Portlets Central column -->
+    <replace css:theme="#content-container" method="raw">
+        <section id="main-content" class="col-lg-9 col-md-8 col-xs-12 main-content">
+            <xsl:apply-templates css:select="#viewlet-above-content" />
+            <xsl:apply-templates css:select="#content" />
+            <footer class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <xsl:copy-of css:select="#viewlet-below-content" />
+                </div>
+            </footer>
+        </section>
     </replace>
-  </rules>
-
-  <!-- Portlets Central column -->
-  <replace css:theme="#content-container" method="raw">
-    <section id="main-content" class="col-lg-9 col-md-8 col-xs-12 main-content">
-      <xsl:apply-templates css:select="#viewlet-above-content" />
-      <xsl:apply-templates css:select="#content" />
-      <footer class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <xsl:copy-of css:select="#viewlet-below-content" />
-        </div>
-      </footer>
-    </section>
-  </replace>
-
 </rules>
