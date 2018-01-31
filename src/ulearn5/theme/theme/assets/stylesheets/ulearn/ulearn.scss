@@ -13,7 +13,7 @@ $fa-font-path: "fontawesome/fonts";
 
 // Marc's CSS
 
-.template-login_form , .template-logged_out{
+.template-login_form , .template-logged_out, .template-login_failed{
     background: url(../images/background-login.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -22,41 +22,41 @@ $fa-font-path: "fontawesome/fonts";
     height: 100%;
 }
 
-.template-login_form article#content , .template-logged_out article#content {
+.template-login_form article#content, .template-logged_out article#content, .template-login_failed article#content {
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   background: #fcfcfd!important;
 }
 
-.template-login_form .main-element , .template-logged_out .main-element{
-display: flex;
-align-items: center;
-justify-content: center;
-
+.template-login_form .main-element , .template-logged_out .main-element, .template-login_failed .main-element{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.template-login_form span.icona-upc img , .template-logged_out span.icona-upc img{ margin-bottom: 20px!important;}
+.template-login_form span.icona-upc img , .template-logged_out span.icona-upc img, .template-login_failed span.icona-upc img{ margin-bottom: 20px!important;}
 
 div#login-forgotten-password {
     margin-top: 15px;
 }
 
-body.template-login_form #content-core, body.template-logged_out #content-core{
+body.template-login_form #content-core, body.template-logged_out #content-core, body.template-login_failed #content-core{
   box-shadow: none!important;
   text-align: center;
 }
 
-body.template-login_form .formControls , body.template-logged_out .formControls  {
+body.template-login_form .formControls , body.template-logged_out .formControls, body.template-login_failed .formControls {
     margin-top: 25px;
     margin-bottom: 20px;
 }
 
-body.template-login_form .field , body.template-logged_out .field {
+body.template-login_form .field , body.template-logged_out .field, body.template-login_failed .field {
     text-align: left;
 }
-body.template-login_form input[type="text"] , body.template-logged_out input[type="text"] {
+
+body.template-login_form input[type="text"] , body.template-logged_out input[type="text"], body.template-login_failed input[type="text"] {
     border: 1px solid #ccc;
-    }
+}
 
 
 body {
@@ -121,7 +121,7 @@ input, button, select, textarea {
 }
 
 
-.ulearnbox h2 , #communitysearch h2 {
+.ulearnbox h2 , #communitysearch h2  {
     // color: #f58d3d;
     // font-size: 20px;
     // line-height: 26px;
@@ -137,7 +137,9 @@ input, button, select, textarea {
     line-height: 1.1;
 }
 
-.ulearnbox h2::after , #communitysearch h2::after{
+.maxui-chat h2.maxui-title , .maxui-chat h2.maxui-title:after {display: none;}
+
+.ulearnbox h2::after , #communitysearch h2::after {
     content: "";
     position: absolute;
     margin-left: 12px;
@@ -1019,9 +1021,6 @@ label[for="form.ext_editor"] ~ div.widget {
   padding-left: 0;
 }
 
-#librarysearch #searchinputcontent {
-  padding-top: 5px;
-}
 
 .searchbytagcontainer .searchInput {
   font-size: 15px;
@@ -1039,7 +1038,7 @@ label[for="form.ext_editor"] ~ div.widget {
   margin-bottom: 15px;
   padding: 13px 5px 13px 10px;
   vertical-align: middle;
-  width: 97%;
+  // width: 97%;
 }
 #librarysearch .searchbytagcontainer {
   float: left;
@@ -1049,7 +1048,7 @@ label[for="form.ext_editor"] ~ div.widget {
 
 
 #librarysearch #searchinputcontent {
-  padding-top: 5px;
+  // padding-top: 5px;
   width: 100%;
 }
 
@@ -1101,11 +1100,13 @@ label[for="form.ext_editor"] ~ div.widget {
   text-shadow: 1px 1px 1px #FFFFFF;
 }
 
-#librarysearch .documentDescription {
+#librarysearch .documentDescription{
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 18px;
 }
+
+ #librarysearch .Document {font-size: 18px!important;}
 
 .icon-ulearn-discussion {@extend .fa-comments; @extend .fa; }
 .icon-ulearn-video {@extend .fa-video-camera; @extend .fa; margin-top: 2px}
@@ -1915,8 +1916,12 @@ margin-top: 10px!important;
 #portal-personaltools-wrapper .container {
     box-shadow: none;
 }
-.bubble.left .arrow {
-  right: -7px;
+#day .bubble .arrow {
+  top: 50%;
+right: -8px;
+margin-top: -8px;
+border-width: 8px 0 8px 8px;
+  // right: -7px;
 }
 .bubble.right .arrow {
  left: -7px;
@@ -1926,7 +1931,7 @@ margin-top: 10px!important;
 }
 #sharedwithme-container {
     background: white none repeat scroll 0 0;
-    padding: 10px;
+    padding: 15px;
     box-shadow: -1px 1px 2px #ddd;
 }
 .homepage-hpm3 {
@@ -2634,10 +2639,10 @@ i.icon-plone-contentmenu-display-contents_pretty_view, i.icon-folder-contents_pr
 }
 
 .caixessearch_shared {
-    background: #f5f5f5 none repeat scroll 0 0;
+    // background: #f5f5f5 none repeat scroll 0 0;
     margin-bottom: 10px;
-    min-height: 60px;
-    padding: 10px;
+    // min-height: 60px;
+    // padding: 10px;
 }
 
 .shared_from_community {
@@ -2780,7 +2785,7 @@ div#miniatures lastauthors {
 
  }
 .portlet-subscribed-news .list-search-portlet li {
-    padding-left: 10px!important;
+    padding-left: 0px!important;
 }
 .portlet-subscribed-news .text_noticia {
     margin-top: 5px;
@@ -2884,7 +2889,7 @@ div#miniatures lastauthors {
   box-sizing: border-box;
   border: 1px #cccccc solid;
   background-color: #e8e8e8;
-  padding: 10px;
+  padding: 0px;
   overflow: auto;
 }
 .portlet-subscribed-news #subscribednews-search.folded #subscribednews-search-filters {
@@ -2929,7 +2934,7 @@ div#miniatures lastauthors {
   width: auto;
   text-align: left;
 }
-.portlet-subscribed-news #subscribednews-search #subscribednews-search-box #subscribednews-search-text {
+.portlet-subscribed-news #subscribednews-search #subscribednews-search-box #subscribednews-search-text , .caixessearch_shared .searchInput{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -2938,7 +2943,7 @@ div#miniatures lastauthors {
   height: 24px;
   min-height: 24px;
   border: 1px #b2b2b2 solid;
-  position: relative;
+  position: relative!important;
   padding: 1px 5px;
   -moz-border-radius: 3em;
   -webkit-border-radius: 3em;
@@ -2969,8 +2974,8 @@ div#miniatures lastauthors {
 
 #subscribednews-search-filters .maxui-filter{
   float: left;
-  margin-top: 2px;
-  padding: 2px 4px 2px 0;
+  margin-top: 10px!important;
+  padding: 0!important;
 }
 
 #subscribednews-search-filters .maxui-filter .maxui-close .maxui-icon-cancel-circled::before {
@@ -3132,7 +3137,7 @@ button{
     border-radius: 50%;
 }
 
-#maxui-show-conversations{display: none!important}
+// #maxui-show-conversations{display: none!important}
 
 #maxui-container {
    border: 0px!important;
@@ -3250,7 +3255,7 @@ article.media.ng-scope {
 
   }
 
-  #communitysearch .input-append {
+  #communitysearch .input-append , #sharedwithme-container .input-append {
     position: relative;
 
     span.add-on {
@@ -3282,7 +3287,7 @@ article.media.ng-scope {
         border-radius: 0px 5px 0px 0px;
     }
 
-  body.template-login_form #content-core, body.template-logged_out #content-core {
+  body.template-login_form #content-core, body.template-logged_out #content-core, body.template-login_failed #content-core {
         border: 0px;
         max-width: 600px;
         margin: 0 auto 6px;
@@ -3398,12 +3403,20 @@ nav.pagination ul li {
     border-radius: 2px;
 }
 
+
+.liniaDalt, .tileHeadline {
+  border-top: none;
+  padding: 0px 0;
+}
+
 .section-news{
 
   .liniaDalt, .tileHeadline {
     border-top: none;
     padding: 0px 0;
 }
+
+
 
   .tileImage {
       float: left;
@@ -3491,14 +3504,14 @@ li.upc-eines-contacte {
 #communitysearch .col-md-9 {margin-left: 0px !important;}
 
 
-#news-container span.add-on {
+#news-container span.add-on , #sharedwithme-container span.add-on {
     position: absolute;
-    right: 22px;
-    top: 18px;
+    right: 12px;
+    top: 8px;
 
 }
 
-#news-container #subscribednews-search-box input {
+#news-container #subscribednews-search-box input , .caixessearch_shared input {
     position: relative;
     height: 34px !important;
       border-radius: 4px!important;
@@ -3510,4 +3523,117 @@ li.upc-eines-contacte {
    border: 0px!important;
   background-color: transparent!important;
 
+}
+
+.maxui-widget-chat {
+width: 100%;
+height: 530px;
+}
+
+#communitylist article.media.ng-scope:last-of-type {
+    margin-bottom: 0px!important;
+    padding-bottom: 0px!important;
+}
+
+
+#sharedwithme-container .tileItem.visualIEFloatFix.ng-scope {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+
+#sharedwithme-container .tileHeadline { border-top:0!important; padding: 0!important;}
+
+#subscribednews-filters-toolbox>a {
+    color: #444444;
+    margin-top: 8px;
+}
+
+.bubble.left {
+    margin-right: 0!important;
+}
+
+input[type="search"]:focus {
+    border-color: #64bee8!important;
+    outline: 0!important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(100,190,232,0.6)!important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(100,190,232,0.6)!important;
+}
+
+#maxui-container .maxui-togglebar{}
+
+#maxui-container #maxui-conversations-header , input.maxui-button.maxui-button-grey {
+    display: none!important;
+}
+
+#maxui-container #maxui-conversations .maxui-wrapper #maxui-conversations-list .maxui-conversation .maxui-activity-content {
+    margin: -5px 0 0 44px!important;
+}
+
+p.maxui-body , #maxui-container .maxui-message.maxui-user-notme .maxui-balloon {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+
+#content-core{
+    article.tileItem {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    }
+
+    article.tileItem:last-of-type {
+        border-bottom: 0px solid #ddd;
+        padding-bottom: 15px;
+    }
+
+    h2.tileHeadline
+    {
+      font-size: 18px!important;
+          margin-bottom: 5px;
+    }
+
+    .tileBody {
+        margin-top: 10px;
+    }
+
+    .tileFooter {
+        padding-top: 15px;
+    }
+
+}
+
+.event.summary {
+    // float: none!important;
+    clear: right;
+    list-style: none!important;
+    background-color: #edf1f2;
+    padding: 15px 15px;margin-left: 30px;
+}
+
+  ul.hiddenStructure {
+      display: none!important;
+  }
+
+  ul.event.summary.details li {
+    border-bottom: 1px solid hsla(192, 16%, 90%, 1);
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+ul.event.summary.details li:last-of-type {
+  border-bottom: 0!important;
+  padding-bottom: 0px;
+  padding-top: 7px;
+}
+
+.template-shared .outer-wrapper, .template-sharing .outer-wrapper {
+    margin-top: 80px;
 }

@@ -35,6 +35,7 @@
         <link tal:replace="structure provider:plone.htmlhead.links" />
         <link rel="stylesheet" tal:attributes="href string:${portal_url}/dynamic.css">
         <link rel="stylesheet" tal:attributes="href string:${portal_url}/++theme++ulearn5/assets/css/homeupc-compiled.css">
+        <link rel="stylesheet" tal:attributes="href string:${portal_url}/++theme++ulearn5/assets/css/ulearn.css">
     </tal:notajax>
     <style type="text/css">
       body {background:none transparent;}

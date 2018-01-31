@@ -8,7 +8,7 @@
       <div class="osomcorner-wrapper"><div class="osomcorner"></div> </div>
       <h2>Agenda</h2>
       <div id="agenda" class="row" tal:define="today view/today">
-         <div id="day" class="bubble col-lg-6 col-md-6 col-xs-12">
+         <div id="day" class="bubble left col-lg-6 col-md-6 col-xs-12">
             <div class="arrow"></div>
             <div class="bubble-content">
                <p tal:content="today/number">14</p>
