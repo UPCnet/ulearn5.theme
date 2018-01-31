@@ -55,6 +55,7 @@
         <drop css:theme="#portal-top" />
         <drop css:theme="#portal-footer-wrapper" />
         <drop css:theme="#column2-container" />
+        <drop css:content="#menusup"/>
 
         <!-- Portlets Left column -->
         <rules css:if-content="#portal-column-one">
@@ -90,8 +91,6 @@
         </replace>
     </rules>
     <!-- CUSTOM RULES -->
-    <!-- Hide ulearn.folderbar in edition mode -->
-    <drop css:content="#menusup" />
     <!-- Template for shared and sharing -->
     <rules css:if-content="body.template-shared, body.template-sharing">
         <after css:theme-children="head">
