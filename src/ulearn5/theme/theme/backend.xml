@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rules xmlns="http://namespaces.plone.org/diazo"
-       xmlns:css="http://namespaces.plone.org/diazo/css"
-       xmlns:xhtml="http://www.w3.org/1999/xhtml"
-       xmlns:xi="http://www.w3.org/2001/XInclude"
-       xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+<rules xmlns="http://namespaces.plone.org/diazo" xmlns:css="http://namespaces.plone.org/diazo/css" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <!-- Toolbar -->
     <before css:theme-children="body" css:content-children="#edit-bar" css:if-not-content=".ajax_load" css:if-content=".userrole-authenticated" />
     <replace css:theme="#anonymous-actions" css:content-children="#portal-personaltools-wrapper" css:if-not-content=".ajax_load" css:if-content=".userrole-anonymous" />
     <!-- We don't want overlays -->
     <drop attributes="class" css:content="#edit-bar a.pat-plone-modal" />
-
     <!-- Cut down barceloneta without just for backend UI -->
     <rules css:if-not-content="body.viewpermission-view, body.viewpermission-none">
-        <theme href="../++theme++barceloneta/index.html" />
+        <theme href="++theme++barceloneta/index.html" />
         <notheme css:if-not-content="#visual-portal-wrapper" />
         <!-- We can't control the bundle from here due to include. Just hard code -->
         <after css:theme-children="head">
-            <link rel="stylesheet" href="/++theme++barceloneta/less/barceloneta-compiled.css" />
+            <link rel="stylesheet" href="++theme++barceloneta/less/barceloneta-compiled.css" />
         </after>
         <rules css:if-content="#portal-top">
             <!-- Attributes -->
@@ -35,10 +29,8 @@
         <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
         <copy attributes="*" css:content="body" css:theme="body" />
         <!-- CSS -->
-        <drop css:content="head link[data-bundle='diazo']" />
         <after css:theme-children="head" css:content="head link" />
         <!-- Script -->
-        <drop css:content="head script[data-bundle='diazo']" />
         <after css:theme-children="head" css:content="head script" />
         <!-- We don't need global nav -->
         <drop css:theme="#mainnavigation-wrapper" />
@@ -54,8 +46,8 @@
         <!-- Content header -->
         <drop css:theme="#portal-top" />
         <drop css:theme="#portal-footer-wrapper" />
-        <drop css:theme="#column2-container" />
-        <drop css:content="#menusup"/>
+        <!-- Hide ulearn.folderbar in edition mode -->
+        <drop css:content="#menusup" />
 
         <!-- Portlets Left column -->
         <rules css:if-content="#portal-column-one">
@@ -90,7 +82,6 @@
             </section>
         </replace>
     </rules>
-    <!-- CUSTOM RULES -->
     <!-- Template for shared and sharing -->
     <rules css:if-content="body.template-shared, body.template-sharing">
         <after css:theme-children="head">
