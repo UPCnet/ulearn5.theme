@@ -7,7 +7,7 @@
     <drop attributes="class" css:content="#edit-bar a.pat-plone-modal" />
     <!-- Cut down barceloneta without just for backend UI -->
     <rules css:if-content="body.portaltype-plone-site, body.template-folder_contents">
-        <rules css:if-not-content="body.template-profile">
+        <rules css:if-not-content="body.template-profile, body.template-allcommunities">
             <theme href="++theme++barceloneta/index.html" />
             <notheme css:if-not-content="#visual-portal-wrapper" />
             <!-- We can't control the bundle from here due to include. Just hard code -->
