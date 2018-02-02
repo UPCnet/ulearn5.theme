@@ -92,6 +92,8 @@ class viewletHeaderUlearn(viewletBase):
 
     def canManage(self):
         current = api.user.get_current()
+        if current.getUserName() == 'Anonymous User':
+            return False
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
