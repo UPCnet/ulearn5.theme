@@ -102,6 +102,9 @@
   <viewlet name="plone.app.i18n.locales.languageselector"/>
   <viewlet name="plone.app.multilingual.languageselector"/>
  </hidden>
+ <hidden manager="plone.abovecontenttitle" skinname="Ulearn5Theme">
+  <viewlet name="contentleadimage"/>
+ </hidden>
  <hidden manager="plone.abovecontenttitle" skinname="Ulearnskin">
   <viewlet name="contentleadimage"/>
  </hidden>
@@ -125,4 +128,3 @@
  <hidden manager="plone.belowcontentbody" skinname="mosaic"/>
  <hidden manager="plone.belowcontenttitle" skinname="mosaic"/>
 </object>
-
