@@ -43,6 +43,12 @@ class Renderer(base.Renderer):
         self.user_info = get_safe_member_by_id(self.username)
         self.portal_url = api.portal.get().absolute_url()
 
+    def is_admin_user(self):
+        if api.user.get_current().id == 'admin':
+            return True
+        else:
+            return False
+
     def fullname(self):
         if self.user_info:
             fullname = self.user_info.get('fullname', '')
@@ -62,7 +68,6 @@ class Renderer(base.Renderer):
         if self.user_info:
             pm = api.portal.get_tool('portal_membership')
             portrait = pm.getPersonalPortrait()
-
             if self.user_info.get('fullname', False) \
                and self.user_info.get('fullname', False) != self.username \
                and self.user_info.get('email', False) \

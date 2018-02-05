@@ -3,7 +3,7 @@
         <div id="box_community" class="ulearnbox" tal:define="community view/get_community;
             community_hash python:view.get_hash(community)">
             <div id="user">
-                <h2 tal:content="community/title">Ricard Grau</h2>
+                <h2 tal:content="community/title"> Jill Duncan </h2>
                 <p>
                     <span class="dades currentactivity">
                         <max-activities-count object="context"
@@ -15,11 +15,9 @@
             <div class="row">
                 <div class="col-md-12"
                     tal:define="image nocall:community/image">
-                    <img alt="User"
-                        tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
+                    <img tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
                         tal:condition="nocall:image"/>
-                    <img alt="User"
-                        src="++theme++ulearn5/assets/images/avatar_default.png"
+                    <img src="++theme++ulearn5/assets/images/avatar_default.png"
                         tal:condition="nocall:not:image"/>
                 </div>
             </div>
@@ -88,7 +86,7 @@
                 <div class="osomcorner"></div>
             </div>
             <div id="user">
-                <h2 tal:content="view/fullname">Ricard Grau</h2>
+                <h2 tal:content="view/fullname"> Jill Duncan </h2>
                 <p>
                     <span class="dades currentactivity">
                         <max-activities-count object="user"
@@ -97,10 +95,11 @@
                     <span i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
                 </p>
             </div>
-            <div class="row">
+            <div class="row" tal:define="isAdmin view/is_admin_user">
                 <div class="photo col-md-12" tal:define="ulearn_utils context/@@ulearn.utils">
                     <a tal:attributes="href string:${view/portal_url}/@@personal-information">
-                    <img tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large" alt="User" style="width:202px">
+                    <img tal:condition="isAdmin" tal:attributes="src string:++theme++ulearn5/assets/images/avatar_default.png" alt="admin user" style="width:202px">
+                    <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large" style="width:202px">
                     </a>
                 </div>
             </div>
