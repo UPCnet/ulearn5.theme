@@ -296,3 +296,17 @@ class viewletFooterUlearn(viewletBase):
             links['disclaimer'] = 'https://www.upc.edu/en/disclaimer'
 
         return links
+
+
+class angularRouteView(viewletBase):
+    grok.name('ulearn.angularrouteview')
+    grok.template('angularrouteview')
+    grok.viewletmanager(IAboveContent)
+    grok.layer(IUlearn5ThemeLayer)
+
+    def render_viewlet(self):
+        context = aq_inner(self.context)
+        for obj in aq_chain(context):
+            if ICommunity.providedBy(obj):
+                return True
+        return False

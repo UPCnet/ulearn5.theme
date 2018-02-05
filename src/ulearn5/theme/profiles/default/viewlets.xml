@@ -47,6 +47,7 @@
  <order manager="plone.abovecontenttitle" skinname="Ulearnskin">
   <viewlet name="contentleadimage"/>
   <viewlet name="genweb.important"/>
+  <viewlet name="ulearn.angularrouteview"/>
   <viewlet name="ulearn.folderbar"/>
  </order>
  <order manager="plone.belowcontenttitle" skinname="Ulearnskin">
