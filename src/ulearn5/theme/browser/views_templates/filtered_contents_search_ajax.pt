@@ -1,0 +1,59 @@
+<tal:block define="site_properties context/portal_properties/site_properties;
+                   ulearn_utils context/@@ulearn.utils;
+                   use_view_action site_properties/typesUseViewActionInListings|python:()">
+
+<!-- <ul tal:define="continguts view/get_contenttags_by_query">
+  <tal:llistat repeat="contingut continguts">
+    <li tal:define="item_type contingut/portal_type;
+                    item_url contingut/getURL|contingut/absolute_url;">
+      <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
+        <h4><span tal:replace="contingut/Title">Title</span></h4>
+        <p tal:condition="contingut/Description"><span tal:content="contingut/Description">Description</span></p>
+      </a>
+    </li>
+  </tal:llistat>
+
+</ul> -->
+<ul tal:define="continguts view/get_contenttags_by_query" i18n:domain="ulearn">
+   <li tal:condition="ulearn_utils/is_activate_sharedwithme">
+      <div class="nofavorite">
+        <a tal:attributes="href python:context.absolute_url() + '/@@shared'">
+          <h4 class="Shared" i18n:translate="shared_content_title">Shared content</h4>
+
+        </a>
+      </div>
+   </li>
+  <tal:llistat repeat="continguttot continguts">
+    <tal:favorite repeat="contingut continguttot/favorite">
+      <li tal:define="item_type contingut/obj/portal_type;
+                      item_url contingut/obj/getURL|contingut/absolute_url;">
+        <div class="favorite">
+          <div class="star pull-right"><i class="fa fa-star pull-right"></i></div>
+          <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
+            <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
+            <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
+            </h4>
+            <p tal:condition="contingut/obj/Description"><span tal:content="contingut/obj/Description">Description</span>
+            </p>
+          </a>
+        </div>
+     </li>
+    </tal:favorite>
+    <tal:nofavorite repeat="contingut continguttot/nofavorite">
+      <li tal:define="item_type contingut/obj/portal_type;
+                        item_url contingut/obj/getURL|contingut/obj/absolute_url;">
+        <div class="nofavorite">
+          <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
+            <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
+            <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
+            </h4>
+            <p tal:condition="contingut/obj/Description"><span tal:content="contingut/obj/Description">Description</span>
+            </p>
+          </a>
+        </div>
+     </li>
+    </tal:nofavorite>
+  </tal:llistat>
+
+</ul>
+</tal:block>

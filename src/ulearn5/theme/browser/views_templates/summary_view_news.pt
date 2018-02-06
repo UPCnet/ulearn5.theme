@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:block use-macro="context/standard_view/macros/content-core">
+
+    <metal:entries fill-slot="entries">
+    <metal:block use-macro="context/standard_view/macros/entries">
+    <metal:entry fill-slot="entry">
+
+        <div tal:define="obj item/getObject" >
+            <div class="summary_news clearfix">
+              <div class="imatge_noticia">
+                <a href="#"
+                   tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;">
+                  <img tal:condition="python:getattr(obj.aq_explicit, 'image', None)"
+                       tal:define="scales obj/@@images;
+                                   scale python:scales.scale('image', 'mini')"
+                       tal:replace="structure python:scale.tag(css_class='newsImage')" />
+                </a>
+              </div>
+
+              <div class="text_noticia">
+
+                <h2>
+                    <a href="#"
+                       class="summary url"
+                       tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;"
+                       tal:content="item/Title">
+                        Item Title
+                    </a>
+                </h2>
+                <p><time class="smaller" tal:define="date python:view.effectiveDate(item)" tal:content="date">May 5</time></p>
+
+                <p tal:condition="item/text">
+                    <span class="description" tal:define="text python:view.abreviaText(item)" tal:content="structure text">
+                        Text
+                    </span>
+                </p>
+
+
+  <!--               <a href=""
+                   tal:attributes="href python:item_type in use_view_action and item_url+'/view' or item_url;"><span i18n:translate="read_more">Read more</span>
+
+                </a> -->
+
+              </div>
+
+
+          </div>
+          <div class="visualClear"><!-- --></div>
+      </div>
+    </metal:entry>
+    </metal:block>
+    </metal:entries>
+
+</metal:block>
+</metal:content-core>
+
+</body>
+</html>
