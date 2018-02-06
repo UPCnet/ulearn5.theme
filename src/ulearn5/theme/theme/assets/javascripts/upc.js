@@ -1,14 +1,14 @@
 // habilita tooltips i popover de bootstrap
 $(function () { $('[data-toggle="tooltip"]').tooltip()})
-$(function () { $('[data-toggle="popover"]').popover(
-    {
+$(function () {
+    $('[data-toggle="popover"]').popover({
         html:true,
-        placement:'bottom',
-        content:function(){
-            return $($(this).data('contentwrapper')).html();
-        }
-    }
-)})
+        trigger:"click",
+    })
+    $('[data-toggle="popover"]').on('click', function (e) {
+        $('[data-toggle="popover"]').not(this).popover('hide');
+    });
+})
 
 $(document).ready(function() {
   var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;

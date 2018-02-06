@@ -51,7 +51,6 @@ from email.utils import formatdate
 
 from cStringIO import StringIO
 from zope.i18n import translate
-from plone import api
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
 
@@ -117,6 +116,16 @@ S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
 """
 
 
+def _render_cachekey(method, self, main_color, secondary_color, background_property, background_color,
+                     buttons_color_primary, buttons_color_secondary, maxui_form_bg,
+                     alt_gradient_start_color, alt_gradient_end_color, color_community_closed, color_community_organizative, color_community_open):
+    """Cache by the specific colors"""
+    return (main_color, secondary_color, background_property, background_color,
+            buttons_color_primary, buttons_color_secondary, maxui_form_bg,
+            alt_gradient_start_color, alt_gradient_end_color,
+            color_community_closed, color_community_organizative, color_community_open)
+
+
 class baseCommunities(grok.View):
     grok.baseclass()
 
@@ -152,16 +161,6 @@ class communitiesAJAX(baseCommunities):
     #grok.require('genweb.member')
     grok.template('my_communities_ajax')
     grok.layer(IUlearn5ThemeLayer)
-
-
-def _render_cachekey(method, self, main_color, secondary_color, background_property, background_color,
-                     buttons_color_primary, buttons_color_secondary, maxui_form_bg,
-                     alt_gradient_start_color, alt_gradient_end_color, color_community_closed, color_community_organizative, color_community_open):
-    """Cache by the specific colors"""
-    return (main_color, secondary_color, background_property, background_color,
-            buttons_color_primary, buttons_color_secondary, maxui_form_bg,
-            alt_gradient_start_color, alt_gradient_end_color,
-            color_community_closed, color_community_organizative, color_community_open)
 
 
 class dynamicCSS(grok.View):
