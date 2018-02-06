@@ -97,7 +97,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
-            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canGestionarMenu() or self.canGestionarHeader() or self.canGestionarFooter() or self.canGestionarNoticies() or self.canGestionarEstadistiques():
+            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats():
                 return True
         return False
 

@@ -1,20 +1,21 @@
-from plone import api
-from zope.interface import implements
-from Products.CMFCore.utils import getToolByName
-from Acquisition import aq_inner, aq_chain
 import json
+from Acquisition import aq_inner, aq_chain
+from DateTime import DateTime
+
+from zope.interface import implements
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
+from zope.i18nmessageid import MessageFactory
+
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.view import memoize_contextless
-
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from Products.CMFPlone import PloneMessageFactory as _
-from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IEventsFolder
 from plone.app.event.base import localized_today, localized_now, dt_end_of_day
 from plone.app.event.base import RET_MODE_OBJECTS
 from plone.app.event.base import first_weekday
@@ -24,11 +25,11 @@ from plone.app.event.portlets import get_calendar_url
 from plone.event.interfaces import IEventAccessor
 from plone.dexterity.interfaces import IDexterityContent
 
-from DateTime import DateTime
-from zope.i18nmessageid import MessageFactory
-PLMF = MessageFactory('plonelocales')
-
+from ulearn5.core.content.community import ICommunity
+from ulearn5.core.interfaces import IEventsFolder
 from ulearn5.theme import calmodule
+
+PLMF = MessageFactory('plonelocales')
 
 
 class ICalendarPortlet(IPortletDataProvider):
@@ -65,8 +66,6 @@ class Renderer(base.Renderer):
         self.state = ('published', 'intranet')
 
         self.username = api.user.get_current().id
-        # self.user_info = get_safe_member_by_id(self.username)
-
         self.calendar_url = get_calendar_url(context, self.search_base)
 
         self.year, self.month = year, month = self.year_month_display()
@@ -287,7 +286,7 @@ class Renderer(base.Renderer):
             'end': {'query': now, 'range': 'min'},
             'sort_on': 'start',
             'path': path,
-        }
+            }
 
         result = pc(**query)
         nearest = self.get_nearest_today_event()
