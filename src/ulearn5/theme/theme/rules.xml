@@ -49,6 +49,21 @@
     <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
     <!-- Footer -->
     <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
+    <rules css:if-content="body.template-default_error_message">
+        <theme href="error.html" />
+        <!-- Portlets Central column -->
+        <replace css:theme="#content-container" method="raw">
+            <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
+                <xsl:apply-templates css:select="#viewlet-above-content" />
+                <xsl:apply-templates css:select="#content" />
+                <footer class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <xsl:copy-of css:select="#viewlet-below-content" />
+                    </div>
+                </footer>
+            </section>
+        </replace>
+    </rules>
     <!-- Template for login, logout -->
     <rules css:if-content="body.template-login_failed, body.template-login_form, body.template-logged_out">
         <theme href="login.html" />
