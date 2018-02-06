@@ -67,28 +67,21 @@
                   <tbody>
                      <tr tal:repeat="week view/cal_data">
                         <tal:block repeat="day week">
-                           <td class="event"
-                              tal:define="today day/today;
-                              next_month day/next_month;
-                              prev_month day/prev_month;
-                              events day/events;
-                              limit python:len(events) if events is not None else 0"
-                              tal:attributes="class python:u'%s%s%s%s' %
-                              ((' avui' if today else ''),
-                              (' cal_next_month' if next_month else ''),
-                              (' cal_prev_month' if prev_month else ''),
-                              (' te-esdeveniment' if events else ''))">
+                           <td class="event" tal:define="today day/today;
+                                                        next_month day/next_month;
+                                                        prev_month day/prev_month;
+                                                        events day/events;
+                                                        limit python:len(events) if events is not None else 0"
+                                    tal:attributes="class python:u'%s%s%s%s' %
+                                    ((' avui' if today else ''),
+                                    (' cal_next_month' if next_month else ''),
+                                    (' cal_prev_month' if prev_month else ''),
+                                    (' te-esdeveniment' if events else ''))">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
-                              <span
-                                 tal:condition="not:events"
-                                 tal:content="day/day"></span>
-                              <a href=""
-                                 tal:condition="events"
-                                 tal:attributes="href python:view.date_events_url(day['date_string']);
-                                 title day/events_string;
-                                 data-original-title day/events_string;
-                                 data-toggle string:tooltip;
-                                 data-placement string:top;"
+                              <span tal:condition="not:events" tal:content="day/day"></span>
+                              <a tal:condition="events" tal:attributes="title day/events_string;
+                                 data-toggle string:popover;
+                                 data-placement string:bottom;"
                                  tal:content="day/day">31</a>
                            </td>
                         </tal:block>
