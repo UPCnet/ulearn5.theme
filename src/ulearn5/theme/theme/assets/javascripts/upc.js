@@ -1,14 +1,12 @@
 // habilita tooltips i popover de bootstrap
 $(function () { $('[data-toggle="tooltip"]').tooltip() })
-$(function () {
-    $('[data-toggle="popover"]').popover({
-        html: true,
-        trigger: "click",
-    })
-    $('[data-toggle="popover"]').on('click', function (e) {
-        $('[data-toggle="popover"]').not(this).popover('hide');
-    });
-})
+$('[data-toggle="popover"]').popover({
+    html: true,
+    trigger: "manual",
+}).on('click', function (e) {
+    $(this).popover('toggle');
+    $('[data-toggle="popover"]').not(this).popover('hide');
+});
 
 $(document).ready(function () {
 
@@ -48,7 +46,13 @@ $(document).ready(function () {
             tipClass: 'pae_calendar_tooltip'
         });
         try {
-            $('[rel="popover"]').popover();
+            $('.portletCalendar [rel="popover"]').popover({
+                html: true,
+                trigger: "manual",
+            }).on('click', function (e) {
+                $(this).popover('toggle');
+                $('.portletCalendar [rel="popover"]').not(this).popover('hide');
+            });
         } catch (e) {
             console.log('This instance seems that doesn\'t have bootstrap.popover loaded')
         }

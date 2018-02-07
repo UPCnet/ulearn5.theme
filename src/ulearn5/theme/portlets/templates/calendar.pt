@@ -79,9 +79,8 @@
                                     (' te-esdeveniment' if events else ''))">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
                               <span tal:condition="not:events" tal:content="day/day"></span>
-                              <a tal:condition="events" tal:attributes="title day/events_string;
-                                 data-toggle string:popover;
-                                 data-placement string:bottom;"
+                              <a tal:condition="events" tal:attributes="title day/events_string;"
+                                 rel="popover" data-placement="bottom"
                                  tal:content="day/day">31</a>
                            </td>
                         </tal:block>
