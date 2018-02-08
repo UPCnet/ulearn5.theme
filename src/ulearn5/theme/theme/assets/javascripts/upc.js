@@ -241,4 +241,12 @@ $(document).ready(function () {
             success: function () {}
         });
     });
+
+    // Delete .portalMessage 15 seconds after being displayed
+    if($('.portalMessage').length){
+      setTimeout(function () {
+        $('.portalMessage').fadeOut(1000, function() { $(this).remove(); });
+      }, 15000);
+    }
+
 }); //ready
