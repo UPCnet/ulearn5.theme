@@ -40,7 +40,7 @@
         <li role="presentation" class="upc-eines-skip"><a href="#main-content" role="menuitem" class="sr-only"> <span>Skip to content</span></a></li>
         <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql">
           <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${viewlet/portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
-            <tal:management i18n:domain="ulearn" i18n:translate="menu-gestion">
+            <tal:management i18n:translate="menu-gestion">
                       Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
@@ -48,24 +48,24 @@
             <li role="menuitem" tal:condition="viewlet/canManageNews">
               <a href="#" tal:attributes="href string:${viewlet/portal_url}/news">
                 <i class="fa fa-newspaper-o"></i>
-                <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
+                <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
               <a tal:attributes="href string:${viewlet/portal_url}/gestion/menu">
                 <i class="fa fa-folder"></i>
-                <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestion-menu">Management menu</tal:footer>
+                <tal:footer i18n:translate="menu-gestion-menu">Management menu</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
               <a tal:attributes="href string:${viewlet/portal_url}/reset_menu">
                 <i class="fa fa-refresh"></i>
-                <tal:footer i18n:domain="ulearn" i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
+                <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageStats"><a href="#" tal:attributes="href string:#/stats/activity">
               <i class="fa fa-bar-chart"></i>
-              <tal:footer i18n:domain="ulearn" i18n:translate="menu-gestio-estadistiques">Estadístiques</tal:footer>
+              <tal:footer i18n:translate="menu-gestio-estadistiques">Estadístiques</tal:footer>
             </a></li>
           </ul>
         </li>
@@ -95,6 +95,7 @@
         <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte" style="outline-style: none;">
             <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
                 <i class="fa fa-info-circle"></i>
+                <tal:block i18n:translate="info">Informació</tal:block>
             </a>
         </li>
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
