@@ -87,7 +87,7 @@
         </replace>
     </rules>
     <!-- Template for frontpage and profile-->
-    <rules css:if-content="body.section-front-page, body.template-profile, body.template-personal-information, body.template-personal-preferences, body.template-search">
+    <rules css:if-content="body.section-front-page, body.template-profile, body.template-search">
         <theme href="homepage.html" />
         <rules css:if-content="body.section-front-page">
             <drop css:content=".documentFirstHeading" />
