@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-          i18n:domain="plone">
+          i18n:domain="ulearn">
 
     <portlet addview="ulearn.portlets.angularrouteview" title="Ulearn AngularRouteView"
                 i18n:attributes="title"/>
@@ -13,6 +13,8 @@
     <portlet addview="ulearn.portlets.buttonbar" title="Ulearn Button Bar"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.profile" title="Ulearn Profile"
+                i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.profilecommunity" title="Ulearn Profile Community"
                 i18n:attributes="title"/>
 
     <!--portlets externs -->

@@ -57,6 +57,14 @@
         />
 
     <plone:portlet
+        name="ulearn.portlets.profilecommunity"
+        interface=".profilecommunity.IProfileCommunityPortlet"
+        assignment=".profilecommunity.Assignment"
+        renderer=".profilecommunity.Renderer"
+        addview=".profilecommunity.AddForm"
+        />
+
+    <plone:portlet
         name="ulearn.portlets.calendar"
         interface=".calendar.ICalendarPortlet"
         assignment=".calendar.Assignment"

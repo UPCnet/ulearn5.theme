@@ -1,0 +1,85 @@
+<tal:profile tal:define="is_community view/community_mode" i18n:domain="ulearn">
+    <tal:iscommunity condition="is_community">
+        <div id="box_community" class="ulearnbox" tal:define="community view/get_community;
+            community_hash python:view.get_hash(community)">
+            <div id="user">
+                <h2 tal:content="community/title"> Jill Duncan </h2>
+                <p>
+                    <span class="dades currentactivity">
+                        <max-activities-count object="context"
+                            tal:attributes="community_hash community_hash"></max-activities-count>
+                    </span>
+                    <span i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-12"
+                    tal:define="image nocall:community/image">
+                    <img tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
+                        tal:condition="nocall:image"/>
+                    <img src="++theme++ulearn5/assets/images/avatar_default.png"
+                        tal:condition="nocall:not:image"/>
+                </div>
+            </div>
+            <div tal:define="types view/get_addable_types;
+                             documentPage python:view.isCurrentPage('documents');
+                             eventsPage python:view.isCurrentPage('events');"
+                 class="btn-group contentaddtoolbar">
+                <tal:docs condition="documentPage" repeat="type types">
+                    <tal:con tal:define="type_id type/id">
+                        <tal:cond tal:condition="python: type_id in ('Folder', 'Document', 'File' , 'Image', 'Link')">
+                            <a class="btn btn-default" rel="tooltip" data-placement="bottom"
+                                tal:attributes="href type/action; title type/description">
+                                <i tal:attributes="class string:icon-${type/extra/id}"></i>
+                            </a>
+                        </tal:cond>
+                    </tal:con>
+                </tal:docs>
+                <tal:events condition="eventsPage" repeat="type types">
+                    <tal:con tal:define="type_id type/id">
+                        <tal:cond tal:condition="python: type_id in ('Event')">
+                            <a class="btn btn-default" rel="tooltip" data-placement="bottom"
+                                tal:attributes="href type/action; title type/description">
+                                <i tal:attributes="class string:icon-${type/extra/id}"></i>
+                            </a>
+                        </tal:cond>
+                    </tal:con>
+                </tal:events>
+            </div>
+            <div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="editModalLabel" i18n:translate="editcommunity">Edit this community</h3>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+            </div>
+            <div class="btn-group contentaddtoolbar"
+                tal:condition="view/showEditCommunity"
+                ng-controller="profilePortlet as portlet"
+                tal:define="community_type python:view.get_community_type(community)">
+                <a class="btn btn-default"
+                    tal:attributes="href string:${community/absolute_url}/edit;"
+                    i18n:attributes="title btnEditCommunity" title="Edit community">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl;"
+                    i18n:attributes="title btnAclCommunity" title="Manage members">
+                    <i class="fa fa-users"></i>
+                </a>
+                <tal:block tal:condition="view/has_webmaster_role">
+                    <a class="btn btn-default" ng-dialog="++app++ulearn/portlets/change_community_type.html"
+                        ng-dialog-class="ngdialog-theme-default changeCommunityType"
+                        ng-dialog-controller="profilePortletModal"
+                        ng-dialog-cache="false"
+                        i18n:attributes="title btnChangeTypeCommunity" title="Change community type"
+                        tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
+                        href="">
+                        <i class="fa fa-exchange" ></i>
+                    </a>
+                </tal:block>
+            </div>
+        </div>
+    </tal:iscommunity>
+</tal:profile>
