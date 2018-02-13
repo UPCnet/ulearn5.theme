@@ -40,7 +40,7 @@ class ICalendarPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(ICalendarPortlet)
 
-    title = _(u'ulearncalendar', default=u'Calendar portlet')
+    title = _(u'calendar', default=u'Calendar portlet')
 
 
 class Renderer(base.Renderer):
