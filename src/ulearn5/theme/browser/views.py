@@ -799,8 +799,8 @@ class SummaryViewNews(FolderView):
 class AllTags(grok.View):
     grok.name('alltags')
     grok.context(Interface)
-    #grok.require('genweb.authenticated')
     grok.template('alltags')
+    grok.require('base.authenticated')
     grok.layer(IUlearn5ThemeLayer)
 
     def get_subscribed_tags(self):
