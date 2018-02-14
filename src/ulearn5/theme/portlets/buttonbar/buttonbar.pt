@@ -8,7 +8,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                    <a ng-click="ctrl.active_tab = 'stream'">
-                      <i class="fa fa-comment icons"></i>
+                      <i class="fa fa-comment icons"></i><br />
                       <tal:Stream i18n:translate="Entrada"> Stream </tal:Stream>
                    </a>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <a ng-click="ctrl.active_tab = 'mycommunities'">
-                        <i class="fa fa-calendar icons"></i>
+                        <i class="fa fa-calendar icons"></i><br />
                         <tal:Community i18n:translate="my_communities">My communities</tal:Community>
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <a ng-click="ctrl.active_tab = 'news'">
-                        <i class="fa fa-group icons"></i>
+                        <i class="fa fa-group icons"></i><br />
                         <tal:News i18n:translate="news">Noticies</tal:News>
                     </a>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <a ng-click="ctrl.active_tab = 'sharedwithme'">
-                        <i class="fa fa-share-alt icons"></i>
+                        <i class="fa fa-share-alt icons"></i><br />
                         <tal:Documents i18n:translate="shared_with_me">Shared with me</tal:Documents>
                     </a>
                 </div>
@@ -180,4 +180,3 @@
       </div>
    </div>
 </div>
-

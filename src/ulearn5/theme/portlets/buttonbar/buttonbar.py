@@ -70,13 +70,13 @@ class Renderer(base.Renderer):
         news = self.is_activate_news()
         width = ''
         if shared and news:
-            width = 'col-md-3'
+            width = 'col-md-3 col-sm-3 col-xs-3'
         elif shared and not news:
-            width = 'col-md-4'
+            width = 'col-md-4 col-sm-4 col-xs-4'
         elif news and not shared:
-            width = 'col-md-4'
+            width = 'col-md-4 col-sm-4 col-xs-4'
         else:
-            width = 'col-md-6'
+            width = 'col-md-6 col-sm-6 col-xs-6'
 
         return "bubble top " + width
 
