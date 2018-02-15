@@ -34,22 +34,23 @@
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />
 
+    <assignment remove="True" name="navigation" category="context" key="/"
+                  manager="plone.leftcolumn" type="portlets.portlets.profilecommunity" />
+
     <assignment type="ulearn.portlets.profile" manager="plone.leftcolumn"
-                category="context" key="/" name="Ulearn Profile"/>
+                category="context" key="/" name="Ulearn Profile"
+                insert-before="*"/>
 
     <assignment type="ulearn.portlets.communities" manager="plone.leftcolumn"
-                  category="context" key="/" name="Ulearn Communities" />
+                category="context" key="/" name="Ulearn Communities"
+                insert-after="Ulearn Profile"/>
+
+    <assignment type="mrs5.max.maxuichat" manager="plone.leftcolumn"
+                category="context" key="/" name="maxuichat"
+                insert-after="Ulearn Communities"/>
 
     <assignment type="ulearn.portlets.thinnkers" manager="plone.leftcolumn"
-                  category="context" key="/" name="Ulearn Thinnkers" />
-
-    <!-- <assignment remove="True" type="ulearn.portlets.profile" name="Ulearn Profile"
-                  manager="plone.leftcolumn" category="context" key="/front-page" />
-
-    <assignment remove="True"type="ulearn.portlets.communities" name="Ulearn Communities"
-                  manager="plone.leftcolumn" category="context" key="/front-page" />
-
-    <assignment remove="True" type="ulearn.portlets.thinnkers" name="Ulearn Thinnkers"
-                  manager="plone.leftcolumn" category="context" key="/front-page" /> -->
+                category="context" key="/" name="Ulearn Thinnkers"
+                insert-after="maxuichat"/>
 
 </portlets>
