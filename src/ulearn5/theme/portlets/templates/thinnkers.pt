@@ -25,11 +25,11 @@
       </div>
       <div id="searchinputusers">
         <!-- <div class="input-append inputsearchUsers" ng-controller="Thinnkers as ctrl">
-            <input ng-model="ctrl.query" id="search" name="search" class="searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
+            <input ng-model="ctrl.query" id="search" name="search" class="form-control searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
             <span class="add-on"><button ng-click="ctrl.searchby()" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
         </div> -->
         <div class="input-group input-append inputsearchUsers" ng-controller="Thinnkers as ctrl">
-            <input ng-model="ctrl.query" id="search" name="search" class="searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
+            <input ng-model="ctrl.query" id="search" name="search" class="form-control searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
              <span class="input-group-btn">
                <button ng-click="ctrl.searchby()" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
              </span>
@@ -71,13 +71,13 @@
      <div id="searchinputusers">
 
        <div class="input-append inputsearchUsers input-group" ng-controller="Thinnkers as ctrl">
-           <input ng-model="ctrl.query" id="search" name="search" class="searchInput form-control" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
+           <input ng-model="ctrl.query" id="search" name="search" class="form-control searchInput form-control" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users" ng-keypress="ctrl.searchbyenter($event)">
             <span class="input-group-btn">
               <button ng-click="ctrl.searchby()" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
             </span>
           </div>
         <!-- <div class="input-append inputsearchUsers" ng-controller="Thinnkers as ctrl">
-            <input ng-model="ctrl.query" id="search" name="search" class="searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users"  ng-keypress="ctrl.searchbyenter($event)" >
+            <input ng-model="ctrl.query" id="search" name="search" class="form-control searchInput" type="text" placeholder="Cerca" i18n:attributes="placeholder search_users"  ng-keypress="ctrl.searchbyenter($event)" >
             <span class="add-on"><button ng-click="ctrl.searchby()" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
         </div> -->
     </div>

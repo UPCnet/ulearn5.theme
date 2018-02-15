@@ -7,10 +7,10 @@
             tal:attributes="class python: viewlet.bubble_class('community')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <a href="#"
+                <!-- i18n:translate="ulearn_activity" -->
+                <a title="Activitat" aria-label="Activitat" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}">
                     <i class="fa fa-comment icons"></i>
-                    <tal:Activity i18n:domain="ulearn" i18n:translate="ulearn_activity">Activity</tal:Activity>
                 </a>
             </div>
         </div>
@@ -18,10 +18,10 @@
             tal:attributes="class python: viewlet.bubble_class('documents')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <a href="#"
+                <!-- i18n:translate="ulearn_documents" -->
+                <a title="Documents" aria-label="Documents" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}/documents">
                     <i class="fa fa-file-text-o icons"></i>
-                    <tal:Documents i18n:domain="ulearn" i18n:translate="ulearn_documents">Documents</tal:Documents>
                 </a>
             </div>
         </div>
@@ -29,10 +29,10 @@
             tal:attributes="class python: viewlet.bubble_class('events')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <a href="#"
+                <!-- i18n:translate="Events" -->
+                <a title="Esdeveniments" aria-label="Esdeveniments" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}/events">
                     <i class="fa fa-calendar icons"></i>
-                    <tal:Events i18n:translate="Events">Esdeveniments</tal:Events>
                 </a>
             </div>
         </div>
@@ -41,10 +41,10 @@
                 tal:attributes="class python: viewlet.bubble_class('discussion')">
                 <div class="arrow"></div>
                 <div class="bubble-content">
-                    <a href="#"
+                    <!-- i18n:translate="Discussion" -->
+                    <a title="Discussió" aria-label="Discussió" aria-hidden="true"
                         tal:attributes="href string:${community/absolute_url}/discussion">
                         <i class="fa fa-calendar icons"></i>
-                        <tal:Discussion i18n:translate="Discussion">Discussion</tal:Discussion>
                     </a>
                 </div>
             </div>

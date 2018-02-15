@@ -1,5 +1,3 @@
-
-
 .titling {
   font-size: $font-size-m;
   background: -webkit-linear-gradient(left, #51AA55, #007BC1 100%);
@@ -44,63 +42,6 @@ label {
   font-weight: 500;
   cursor: pointer;
   transition: .25s all ease;
-}
-[type="radio"], [type="checkbox"] {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  opacity: 0;
-}
-input:checked ~ output {color: #51AA55;}
-
-[type="checkbox"] + label, [type="radio"] + label {
-  margin-left:24px;
-}
-
-[type="checkbox"] + label::before, [type="radio"] + label::before {
-  width: 20px;
-  height: 20px;
-  font-family: "upc-icones";
-  background: #fff;
-  color: #fff;
-  border:1px solid #D1D1D1;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 9px 0px;
-  font-size: 23px;
-  line-height: 0;
-  transition: .25s all ease;
-  text-indent: -2px;
-}
-[type="checkbox"]:hover + label::before, [type="radio"]:hover + label::before {
-  border-color: #007BC1;
-}
-[type="checkbox"]:focus + label::before, [type="radio"]:focus + label::before {
-  outline: 5px solid rgba(#1FBDEE,.5);
-}
-[type="radio"]:not(:checked) + label::before {
-  content:"";
-}
-[type="checkbox"]:not(:checked) + label::before {
-  content:"";
-  border-radius: 2px;
-}
-[type="radio"]:checked + label::before {
-  content:"\e90f";
-  background: #007BC1;
-  border-color: #007BC1;
-  color: #fff;
-}
-[type="checkbox"]:checked + label::before {
-  content:"\e90e";
-  border-radius: 2px;
-  background: #007BC1;
-  border-color: #007BC1;
-  color: #fff;
 }
 
 .btn-destructive {
