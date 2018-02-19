@@ -106,6 +106,9 @@
  <hidden manager="plone.abovecontenttitle" skinname="Ulearn5Theme">
   <viewlet name="contentleadimage"/>
  </hidden>
+ <hidden manager="plone.abovecontenttitle" skinname="Ulearn5UPC">
+  <viewlet name="contentleadimage"/>
+ </hidden>
  <hidden manager="plone.abovecontenttitle" skinname="Ulearnskin">
   <viewlet name="contentleadimage"/>
  </hidden>
