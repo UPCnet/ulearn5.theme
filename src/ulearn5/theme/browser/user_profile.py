@@ -1,24 +1,15 @@
-from copy import deepcopy
 from OFS.Image import Image
 
 from zope.interface import implements
 from zope.component import getUtility
-from zope.component.hooks import getSite
 from zope.publisher.interfaces import IPublishTraverse, NotFound
 from zope.component import getUtilitiesFor
 
-from plone.memoize.view import memoize_contextless
-from plone.registry.interfaces import IRegistry
-
 from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from souper.interfaces import ICatalogFactory
 
-from mrs5.max.utilities import IMAXClient
-from ulearn5.core.badges import AVAILABLE_BADGES
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from base5.core.utils import get_safe_member_by_id
 from ulearn5.core import _
 
@@ -115,4 +106,3 @@ class userProfile(BrowserView):
                 'telefon': member_data.getProperty('telefon'),
                 'ubicacio': member_data.getProperty('ubicacio'),
                 }
-
