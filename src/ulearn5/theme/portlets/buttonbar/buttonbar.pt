@@ -50,7 +50,7 @@
                     <article class="media" dir-paginate="community in comCtrl.user_communities | filter:q | itemsPerPage: comCtrl.pageSize" current-page="comCtrl.currentPage" ng-cloak>
                         <div class="media-left">
                             <a ng-href="{{community.url}}">
-                                <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/tile" />
+                                <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/mini" />
                             </a>
                         </div>
                         <div class="media-body">
@@ -109,7 +109,7 @@
                                 <img tal:condition="obj/new/image"
                                    tal:define="scale obj/new/@@images"
                                    tal:replace="structure python: scale.scale('image',
-                                   scale='tile').tag(css_class='newsImage')" />
+                                   scale='mini').tag(css_class='newsImage')" />
                                 <p class="discreet" tal:condition="obj/new/image_caption|nothing"
                                    tal:content="structure obj/new/image_caption" >
                                 </p>
