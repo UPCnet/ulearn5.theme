@@ -8,7 +8,7 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <!-- i18n:translate="ulearn_activity" -->
-                <a title="Activitat" aria-label="Activitat" aria-hidden="true"
+                <a i18n:attributes="title ulearn_activity; aria-label ulearn_activity" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}">
                     <i class="fa fa-comment icons"></i>
                 </a>
@@ -19,7 +19,7 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <!-- i18n:translate="ulearn_documents" -->
-                <a title="Documents" aria-label="Documents" aria-hidden="true"
+                <a i18n:attributes="title ulearn_documents; aria-label ulearn_documents" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}/documents">
                     <i class="fa fa-file-text-o icons"></i>
                 </a>
@@ -30,7 +30,7 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <!-- i18n:translate="Events" -->
-                <a title="Esdeveniments" aria-label="Esdeveniments" aria-hidden="true"
+                <a i18n:attributes="title Events; aria-label Events" aria-hidden="true"
                     tal:attributes="href string:${community/absolute_url}/events">
                     <i class="fa fa-calendar icons"></i>
                 </a>
@@ -42,7 +42,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="Discussion" -->
-                    <a title="Discussió" aria-label="Discussió" aria-hidden="true"
+                    <a i18n:attributes="title Discussion; aria-label Discussion" aria-hidden="true"
                         tal:attributes="href string:${community/absolute_url}/discussion">
                         <i class="fa fa-calendar icons"></i>
                     </a>

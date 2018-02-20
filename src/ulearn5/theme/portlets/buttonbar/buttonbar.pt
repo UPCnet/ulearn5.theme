@@ -8,7 +8,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="Entrada" -->
-                   <a ng-click="ctrl.active_tab = 'stream'" title="Activitat" aria-label="Activitat" aria-hidden="true">
+                   <a ng-click="ctrl.active_tab = 'stream'" i18n:attributes="title Entrada; aria-label Entrada" aria-hidden="true">
                       <i class="fa fa-comment icons"></i>
                    </a>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="my_communities" -->
-                    <a ng-click="ctrl.active_tab = 'mycommunities'" title="Les meves Comunitats" aria-label="Les meves Comunitats" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'mycommunities'" i18n:attributes="title my_communities; aria-label my_communities" aria-hidden="true">
                         <i class="fa fa-group icons"></i>
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="news">Noticies -->
-                    <a ng-click="ctrl.active_tab = 'news'" title="Notícies" aria-label="Notícies" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'news'" i18n:attributes="title news; aria-label news" aria-hidden="true">
                         <i class="fa fa-newspaper-o icons"></i>
                     </a>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="shared_with_me" -->
-                    <a ng-click="ctrl.active_tab = 'sharedwithme'" title="Compartit amb mi" aria-label="Compartit amb mi" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'sharedwithme'" i18n:attributes="title shared_with_me; aria-label shared_with_me" aria-hidden="true">
                         <i class="fa fa-share-alt icons"></i>
                     </a>
                 </div>
