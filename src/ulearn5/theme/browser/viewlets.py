@@ -188,7 +188,7 @@ class viewletHeaderUlearn(viewletBase):
             pass
         else:
             user_language = current.getProperty('language')
-            if user_language == '':
+            if not user_language or user_language == '':
                 lt = getToolByName(self.portal(), 'portal_languages')
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
