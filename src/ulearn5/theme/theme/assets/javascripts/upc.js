@@ -53,6 +53,13 @@ $(document).ready(function () {
                 $(this).popover('toggle');
                 $('.portletCalendar [rel="popover"]').not(this).popover('hide');
             });
+            if($('.portletCalendar').size() > 0){
+              $(document).click(function(){
+                if(!$(event.target).is('.portletCalendar [rel="popover"]')){
+                  $('.portletCalendar [rel="popover"]').popover('hide');
+                }
+              })
+            }
         } catch (e) {
             console.log('This instance seems that doesn\'t have bootstrap.popover loaded')
         }
