@@ -37,7 +37,7 @@ class IButtonBarPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IButtonBarPortlet)
 
-    def __init__(self, count=20, state=('intranet')):
+    def __init__(self, count=20, state=('published', 'intranet')):
         self.count = count
         self.state = state
 
