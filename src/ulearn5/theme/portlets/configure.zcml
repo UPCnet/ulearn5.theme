@@ -30,6 +30,7 @@
         assignment=".buttonbar.buttonbar.Assignment"
         renderer=".buttonbar.buttonbar.Renderer"
         addview=".buttonbar.buttonbar.AddForm"
+        editview=".buttonbar.buttonbar.EditForm"
         />
 
     <plone:portlet
