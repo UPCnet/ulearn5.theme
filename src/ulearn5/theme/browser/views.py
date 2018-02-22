@@ -800,7 +800,7 @@ class AllTags(grok.View):
     grok.name('alltags')
     grok.context(Interface)
     grok.template('alltags')
-    grok.require('base.authenticated')
+    #grok.require('base.authenticated')
     grok.layer(IUlearn5ThemeLayer)
 
     def get_subscribed_tags(self):
