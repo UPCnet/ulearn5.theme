@@ -150,7 +150,7 @@ class baseCommunities(grok.View):
 class AllCommunities(baseCommunities):
     """ The list of communities """
     grok.context(IPloneSiteRoot)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.layer(IUlearn5ThemeLayer)
 
 
@@ -158,7 +158,7 @@ class communitiesAJAX(baseCommunities):
     """ The list of communities via AJAX """
     grok.name('my-communities-ajax')
     grok.context(IPloneSiteRoot)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.template('my_communities_ajax')
     grok.layer(IUlearn5ThemeLayer)
 
@@ -310,7 +310,7 @@ class SearchUser(grok.View):
 class searchUsers(grok.View):
     grok.name('searchUsers')
     grok.context(Interface)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
@@ -516,7 +516,7 @@ class FilteredContentsSearchView(grok.View):
     """ Filtered content search view for every folder. """
     grok.name('filtered_contents_search_view')
     grok.context(Interface)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.template('filtered_contents_search')
     grok.layer(IUlearn5ThemeLayer)
 
@@ -800,7 +800,7 @@ class AllTags(grok.View):
     grok.name('alltags')
     grok.context(Interface)
     grok.template('alltags')
-    #grok.require('base.authenticated')
+    grok.require('base.authenticated')
     grok.layer(IUlearn5ThemeLayer)
 
     def get_subscribed_tags(self):
@@ -957,7 +957,7 @@ class ContentsPrettyView(grok.View):
 
     grok.name('contents_pretty_view')
     grok.context(Interface)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.template('contentspretty')
     grok.layer(IUlearn5ThemeLayer)
 
@@ -1012,7 +1012,7 @@ class SharedWithMe(baseCommunities):
     """ The list of communities """
 
     grok.context(IPloneSiteRoot)
-    #grok.require('genweb.member')
+    grok.require('base.member')
     grok.layer(IUlearn5ThemeLayer)
 
 
@@ -1033,14 +1033,13 @@ class resetMenuBar(grok.View):
 class SendEventToAttendees(grok.View):
     grok.context(IDexterityContent)
     grok.name('event_to_attendees')
-    # grok.require('cmf.ModifyPortalContent')
+    grok.require('cmf.ModifyPortalContent')
     grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         portal = api.portal
         context = aq_inner(self.context)
         subject = 'Invitació: %s\n' % self.context.Title()
-        email_charset = portal.get_registry_record('plone.email_charset')
         mailhost = getToolByName(context, 'MailHost')
 
         map = {
@@ -1074,8 +1073,7 @@ class SendEventToAttendees(grok.View):
         part = MIMEBase('application', "octet-stream")
         part.set_payload(self.n2rn(out.getvalue()))
         Encoders.encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment; filename="%s.ics"'
-            % self.context.getId())
+        part.add_header('Content-Disposition', 'attachment; filename="%s.ics"' % self.context.getId())
 
         return part
 
@@ -1092,7 +1090,7 @@ class SendEventToAttendees(grok.View):
             'enddate': self.rfc2445dtlocal(self.context.end),
             'dtstamp': self.rfc2445dt(DateTime()),
             'uid': self.context.sync_uid,
-        }
+            }
         out.write(ICS_EVENT_START % map)
 
         for assistant in self.context.attendees:
