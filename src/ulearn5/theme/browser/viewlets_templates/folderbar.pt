@@ -19,8 +19,9 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <!-- i18n:translate="ulearn_documents" -->
-                <a i18n:attributes="title ulearn_documents; aria-label ulearn_documents" aria-hidden="true"
-                    tal:attributes="href string:${community/absolute_url}/documents">
+                <a title="Documents" aria-label="Documents" aria-hidden="true"
+                   i18n:attributes="title ulearn_documents; aria-label ulearn_documents"
+                   tal:attributes="href string:${community/absolute_url}/documents">
                     <i class="fa fa-file-text-o icons"></i>
                 </a>
             </div>

@@ -13,7 +13,7 @@
       <a href="#" role="button">Menu<span role="presentation" class="icona-upc">close</span></a>
     </div>
     <nav role="navigation" class="global-navigation">
-      <h2 class="sr-only" i18n:translate="">Eines</h2>
+      <h2 class="sr-only" i18n:translate="Eines">Eines</h2>
       <ul role="menubar" class="upc-eines" tal:define="menu viewlet/linksMenu">
         <li tal:condition="menu" class="dropdown ulearn-eines-ql" role="menuitem" tal:repeat="dades menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -95,7 +95,7 @@
         <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte" style="outline-style: none;">
             <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
                 <i class="fa fa-info-circle"></i>
-                <tal:block i18n:translate="info">Informació</tal:block>
+                <tal:block i18n:translate="info">Info</tal:block>
             </a>
         </li>
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">

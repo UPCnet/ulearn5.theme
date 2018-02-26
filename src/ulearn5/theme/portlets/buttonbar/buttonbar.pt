@@ -35,7 +35,8 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="shared_with_me" -->
-                    <a ng-click="ctrl.active_tab = 'sharedwithme'" i18n:attributes="title shared_with_me; aria-label shared_with_me" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'sharedwithme'" title="Shared with me" aria-label="Shared with me"
+                       i18n:attributes="title shared_with_me; aria-label shared_with_me" aria-hidden="true">
                         <i class="fa fa-share-alt icons"></i>
                     </a>
                 </div>
