@@ -38,8 +38,18 @@ class TitleViewlet(TitleViewlet, viewletBase):
     def update(self):
         context_state = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
         page_title = escape(safe_unicode(context_state.object_title()))
-        marcaUlearn = escape(safe_unicode(u"Ulearn Comunidades"))
-        self.site_title = u"%s - %s" % (page_title, marcaUlearn)
+        portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
+        portal_title = escape(safe_unicode(portal_state.navigation_root_title()))
+
+        current = api.user.get_current()
+        lang = current.getProperty('language')
+        titleUlearn = self.context.translate('Ulearn Communities', domain='ulearn', target_language=lang)
+        marcaUlearn = escape(safe_unicode(titleUlearn))
+
+        if page_title == portal_title or self.context.id == 'front-page':
+            self.site_title = u"%s" % (marcaUlearn)
+        else:
+            self.site_title = u"%s - %s" % (page_title, marcaUlearn)
 
 
 class viewletHeaderUlearn(viewletBase):
