@@ -286,15 +286,18 @@ class viewletFooterUlearn(viewletBase):
 
     def get_links(self):
         current = api.user.get_current()
-        user_language = current.getProperty('language')
-        links = {}
+        language = current.getProperty('language')
+        if not language:
+            lt = getToolByName(self.portal(), 'portal_languages')
+            language = lt.getPreferredLanguage()
 
-        if user_language == 'ca':
+        links = {}
+        if language == 'ca':
             links['contact'] = 'https://www.upc.edu/ca/contacte'
             links['sitemap'] = 'https://www.upc.edu/ca/sitemap'
             links['accessibility'] = 'https://www.upc.edu/ca/avis-legal/accessibilitat'
             links['disclaimer'] = 'https://www.upc.edu/ca/avis-legal'
-        elif user_language == 'es':
+        elif language == 'es':
             links['contact'] = 'https://www.upc.edu/es/contacto'
             links['sitemap'] = 'https://www.upc.edu/es/sitemap'
             links['accessibility'] = 'https://www.upc.edu/es/aviso-legal/accesibilidad'
