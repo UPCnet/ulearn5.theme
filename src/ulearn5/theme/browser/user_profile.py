@@ -53,12 +53,14 @@ class userProfile(BrowserView):
             pm = api.portal.get_tool('portal_membership')
             portrait = pm.getPersonalPortrait(self.user_info.id)
             member_info = get_safe_member_by_id(self.user_info.id)
-
+            print portrait.size
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
-               and isinstance(portrait, Image):
+               and isinstance(portrait, Image) and portrait.size != '3566':
                 return True
+                # 5037 is the size of defaultUser.png I don't know how get image
+                # title. This behavior is reproduced in profile portlet.
             else:
                 return False
         else:

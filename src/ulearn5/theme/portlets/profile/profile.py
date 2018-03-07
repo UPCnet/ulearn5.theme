@@ -68,11 +68,15 @@ class Renderer(base.Renderer):
         if self.user_info:
             pm = api.portal.get_tool('portal_membership')
             portrait = pm.getPersonalPortrait()
-            if self.user_info.get('fullname', False) \
-               and self.user_info.get('fullname', False) != self.username \
-               and self.user_info.get('email', False) \
-               and isinstance(portrait, Image):
+            member_info = get_safe_member_by_id(self.user_info.id)
+
+            if member_info.get('fullname', False) \
+               and member_info.get('fullname', False) != self.username \
+               and member_info.get('email', False) \
+               and isinstance(portrait, Image) and portrait.size != '3566':
                 return True
+                # 5037 is the size of defaultUser.png I don't know how get image
+                # title. This behavior is reproduced in user_profile view.
             else:
                 return False
         else:
