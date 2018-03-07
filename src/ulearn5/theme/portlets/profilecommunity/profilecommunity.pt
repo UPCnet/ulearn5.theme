@@ -23,7 +23,8 @@
             </div>
             <div tal:define="types view/get_addable_types;
                              documentPage python:view.isCurrentPage('documents');
-                             eventsPage python:view.isCurrentPage('events');"
+                             eventsPage python:view.isCurrentPage('events');
+                             newsPage python:view.isCurrentPage('news');"
                  class="btn-group contentaddtoolbar">
                 <tal:docs condition="documentPage" repeat="type types">
                     <tal:con tal:define="type_id type/id">
@@ -45,6 +46,16 @@
                         </tal:cond>
                     </tal:con>
                 </tal:events>
+                <tal:news condition="newsPage" repeat="type types">
+                    <tal:con tal:define="type_id type/id">
+                        <tal:cond tal:condition="python: type_id in ('News Item')">
+                            <a class="btn btn-default" rel="tooltip" data-placement="bottom"
+                                tal:attributes="href type/action; title type/description">
+                                <i class="icon-news"></i>
+                            </a>
+                        </tal:cond>
+                    </tal:con>
+                </tal:news>
             </div>
             <div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-header">
