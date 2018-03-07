@@ -41,7 +41,6 @@ from base5.core.utils import json_response
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.core.browser.searchuser import searchUsersFunction
-from ulearn5.core.interfaces import IDiscussionFolder
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase

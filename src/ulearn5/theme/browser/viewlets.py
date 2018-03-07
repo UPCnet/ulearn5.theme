@@ -18,7 +18,7 @@ from souper.soup import Record
 from repoze.catalog.query import Eq
 from plone.memoize import forever
 from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, INewsFolder
+from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, INewsItemFolder
 
 import datetime
 
@@ -241,7 +241,7 @@ class folderBar(viewletBase):
             if IEventsFolder.providedBy(obj):
                 self.folder_type = 'events'
                 break
-            if INewsFolder.providedBy(obj):
+            if INewsItemFolder.providedBy(obj):
                 self.folder_type = 'news'
                 break
             if ICommunity.providedBy(obj):
