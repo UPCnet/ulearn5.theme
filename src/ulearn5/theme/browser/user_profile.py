@@ -106,3 +106,8 @@ class userProfile(BrowserView):
                 'telefon': member_data.getProperty('telefon'),
                 'ubicacio': member_data.getProperty('ubicacio'),
                 }
+
+    def is_admin_user(self):
+        if api.user.get_current().id == 'admin':
+            return True
+        return False

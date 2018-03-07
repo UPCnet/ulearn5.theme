@@ -61,7 +61,7 @@
               </h1>
 
               <div id="content-core">
-                <div class="row">
+                <div class="row" tal:define="isAdmin view/is_admin_user">
                   <div class="col-md-2">
                     <div class="row">
                         <div class="photo col-md-12">
@@ -74,18 +74,19 @@
                           <a tal:omit-tag="not: isOwner"
                              tal:attributes="href string:${view/portal_url}/@@personal-information"
                              tal:define="ulearn_utils context/@@ulearn.utils">
-                              <img tal:attributes="src string:${ulearn_utils/url_max_server}/people/${view/username}/avatar/large" alt="User" >
+                              <img tal:condition="isAdmin" tal:attributes="src string:++theme++ulearn5/assets/images/defaultUser.png" alt="admin user">
+                              <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${view/username}/avatar/large" alt="User" >
                           </a>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" tal:condition="not:isAdmin">
                         <div class="badges col-md-12">
-                          <badge class="box_badges" image="badge1.png"
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
                                  tal:attributes="enabled view/has_complete_profile">
                           </badge>
-                          <badge class="box_badges" image="badge2.png" threshold="50"></badge>
-                          <badge class="box_badges" image="badge3.png" threshold="100"></badge>
-                          <badge class="box_badges" image="badge4.png" threshold="500"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png" threshold="50"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png" threshold="100"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png" threshold="500"></badge>
                         </div>
                     </div>
                   </div>
