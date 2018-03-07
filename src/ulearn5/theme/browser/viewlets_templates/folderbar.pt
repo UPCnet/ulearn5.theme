@@ -27,6 +27,17 @@
             </div>
         </div>
         <div class="bubble top"
+            tal:attributes="class python: viewlet.bubble_class('news')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <!-- i18n:translate="News" -->
+                <a i18n:attributes="title Discussion; aria-label News" aria-hidden="true"
+                    tal:attributes="href string:${community/absolute_url}/news">
+                    <i class="fa fa-newspaper-o icons"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bubble top"
             tal:attributes="class python: viewlet.bubble_class('events')">
             <div class="arrow"></div>
             <div class="bubble-content">
@@ -37,18 +48,5 @@
                 </a>
             </div>
         </div>
-        <tal:isDiscussionFolder condition="python: viewlet.folder_type == 'discussion'">
-            <div class="bubble top"
-                tal:attributes="class python: viewlet.bubble_class('discussion')">
-                <div class="arrow"></div>
-                <div class="bubble-content">
-                    <!-- i18n:translate="Discussion" -->
-                    <a i18n:attributes="title Discussion; aria-label Discussion" aria-hidden="true"
-                        tal:attributes="href string:${community/absolute_url}/discussion">
-                        <i class="fa fa-calendar icons"></i>
-                    </a>
-                </div>
-            </div>
-        </tal:isDiscussionFolder>
     </nav>
 </div>

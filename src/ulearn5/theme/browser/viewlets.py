@@ -18,7 +18,7 @@ from souper.soup import Record
 from repoze.catalog.query import Eq
 from plone.memoize import forever
 from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, IDiscussionFolder
+from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, INewsFolder
 
 import datetime
 
@@ -241,18 +241,15 @@ class folderBar(viewletBase):
             if IEventsFolder.providedBy(obj):
                 self.folder_type = 'events'
                 break
-            if IDiscussionFolder.providedBy(obj):
-                self.folder_type = 'discussion'
+            if INewsFolder.providedBy(obj):
+                self.folder_type = 'news'
                 break
             if ICommunity.providedBy(obj):
                 self.folder_type = 'community'
                 break
 
     def bubble_class(self, bubble):
-        if self.folder_type == 'discussion':
-            width = 'col-md-3'
-        else:
-            width = 'col-md-4'
+        width = 'col-md-3'
 
         if bubble == self.folder_type:
             return 'active bubble top {}'.format(width)

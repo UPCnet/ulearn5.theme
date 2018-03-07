@@ -356,54 +356,6 @@ class ULearnPersonalPreferences(UserDataPanel):
         request.set('disable_plone.rightcolumn', True)
 
 
-class DiscussionFolderView(grok.View):
-    grok.name('discussion_folder_view')
-    grok.context(IDiscussionFolder)
-    grok.template('discussion')
-    grok.layer(IUlearn5ThemeLayer)
-
-    @memoize_contextless
-    def portal_url(self):
-        return self.portal().absolute_url()
-
-    @memoize_contextless
-    def portal(self):
-        return getSite()
-
-    def get_folder_discussions(self):
-        pc = api.portal.get_tool(name="portal_catalog")
-        path = "/".join(self.context.getPhysicalPath())
-        results = pc.searchResults(portal_type="ulearn.discussion",
-                                   path={'query': path},
-                                   sort_on='created')
-        return results
-
-    def get_last_comment_from_discussion(self, discussion):
-        pc = api.portal.get_tool(name="portal_catalog")
-        pm = api.portal.get_tool(name="portal_membership")
-        results = pc.searchResults(portal_type="Discussion Item",
-                                   path={'query': discussion.getPath()},
-                                   sort_on='created',
-                                   sort_order='reverse')
-        if results:
-            comment = results[0].getObject()
-
-            return dict(text=comment.getText(),
-                        author_username=comment.author_username,
-                        author_name=comment.author_name,
-                        portrait_url=pm.getPersonalPortrait(comment.author_username).absolute_url(),
-                        modification_date=comment.modification_date)
-        else:
-            return None
-
-    def format_time(self, time):
-        # We have to transform Python datetime into Zope DateTime
-        # before we can call toLocalizedTime.
-        util = getToolByName(self.context, 'translation_service')
-        zope_time = DateTime(time.isoformat())
-        return util.toLocalizedTime(zope_time, long_format=True)
-
-
 class TypeAheadSearch(grok.View):
     grok.name('gw_type_ahead_search')
     grok.context(Interface)

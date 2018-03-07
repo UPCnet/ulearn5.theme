@@ -1121,7 +1121,6 @@ position: relative!important;
 
  #librarysearch .Document {font-size: 18px!important;}
 
-.icon-ulearn-discussion {@extend .fa-comments; @extend .fa; }
 .icon-ulearn-video {@extend .fa-video-camera; @extend .fa; margin-top: 2px}
 
 .documentByLine {
@@ -1134,57 +1133,10 @@ position: relative!important;
     @include border-radius(50%);
   }
 }
-.discussion {
-  background-color: white;
-  padding: 10px;
-  .comment { clear: both; padding: 10px; }
-  .replyTreeLevel0 {
-    margin: 0;
-    // padding: 10px;
-    box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, 0.25);
-  }
-  .cimage img {
-    width: 40px;
-    height: 40px;
-    @include border-radius(50%);
-    float: left;
-    vertical-align: top;
-    margin-right: 10px;
-  }
-  .commentDate { padding-top: 0; }
-  .cbyline {}
-  .reply-to-comment-button { margin: 0; }
-}
 
 #commenting {
   background-color: white;
   padding: 10px;
-}
-
-.subsection-discussion {
-  // Do not allow user to change views for discussion folder
-  #plone-contentmenu-display { display: none; }
-}
-
-#discussionfolderview {
-  ul { list-style: none; margin: 0; }
-  a { text-decoration: none; }
-  li {
-    box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, 0.25);
-    margin-top: 10px;
-    &:first-child { box-shadow: none; }
-  }
-  .cimage img {
-    width: 40px;
-    height: 40px;
-    @include border-radius(50%);
-    float: left;
-    vertical-align: top;
-    margin-right: 10px;
-  }
-  .commentDate { padding-top: 0; }
-  .cbyline {}
-  .reply-to-comment-button { margin: 0; }
 }
 
 #box_discussion {
@@ -1898,7 +1850,7 @@ margin-top: 10px!important;
 .documentByLine {
     font-size: 12px;
 }
-.muted, .box-example::after, .formHelp, .discreet, .discussion .documentByLine, .discussion .commentDate, .portaltype-packet .estudis .gris, #category.documentByLine {
+.muted, .box-example::after, .formHelp, .discreet, .documentByLine, .portaltype-packet .estudis .gris, #category.documentByLine {
     color: #999;
 }
 
