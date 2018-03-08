@@ -30,9 +30,10 @@
             tal:attributes="class python: viewlet.bubble_class('news')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <!-- i18n:translate="News" -->
-                <a i18n:attributes="title news; aria-label News" aria-hidden="true"
-                    tal:attributes="href string:${community/absolute_url}/news">
+                <!-- i18n:translate="ulearn_news" -->
+                <a title="Noticies" aria-label="Noticies" aria-hidden="true"
+                   i18n:attributes="title ulearn_news; aria-label ulearn_news"
+                   tal:attributes="href string:${community/absolute_url}/news">
                     <i class="fa fa-newspaper-o icons"></i>
                 </a>
             </div>
