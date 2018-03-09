@@ -72,7 +72,7 @@ class Renderer(base.Renderer):
 
     def has_complete_profile(self):
         if self.user_info:
-            id = self.user_info.id
+            id = self.user_info['id']
             maxclient, settings = getUtility(IMAXClient)()
             foto = maxclient.people[id].avatar
             imageUrl = foto.uri + '/large'
@@ -83,11 +83,11 @@ class Renderer(base.Renderer):
             portrait = Image(id=id, file=scaled, title=id)
 
             membertool = getToolByName(self, 'portal_memberdata')
-            membertool._setPortrait(portrait, id)
+            membertool._setPortrait(portrait, str(id))
             import transaction
             transaction.commit()
 
-            member_info = get_safe_member_by_id(self.user_info.id)
+            member_info = get_safe_member_by_id(id)
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
