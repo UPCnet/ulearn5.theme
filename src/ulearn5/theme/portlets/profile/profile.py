@@ -22,6 +22,12 @@ from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 from base5.core.utils import get_safe_member_by_id, pref_lang
 
+from zope.component import getUtility
+from mrs5.max.utilities import IMAXClient
+from ulearn5.core.adapters.portrait import convertSquareImage
+import urllib
+from Products.CMFCore.utils import getToolByName
+
 
 class IProfilePortlet(IPortletDataProvider):
     """ A portlet which can render the logged user profile information. """
@@ -66,17 +72,29 @@ class Renderer(base.Renderer):
 
     def has_complete_profile(self):
         if self.user_info:
-            pm = api.portal.get_tool('portal_membership')
-            portrait = pm.getPersonalPortrait()
-            member_info = get_safe_member_by_id(self.user_info.id)
+            id = self.user_info.id
+            maxclient, settings = getUtility(IMAXClient)()
+            foto = maxclient.people[id].avatar
+            imageUrl = foto.uri + '/large'
 
+            portrait = urllib.urlretrieve(imageUrl)
+
+            scaled, mimetype = convertSquareImage(portrait[0])
+            portrait = Image(id=id, file=scaled, title=id)
+
+            membertool = getToolByName(self, 'portal_memberdata')
+            membertool._setPortrait(portrait, id)
+            import transaction
+            transaction.commit()
+
+            member_info = get_safe_member_by_id(self.user_info.id)
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
                and isinstance(portrait, Image) and portrait.size != '3566':
                 return True
-                # 5037 is the size of defaultUser.png I don't know how get image
-                # title. This behavior is reproduced in user_profile view.
+                # 3566 is the size of defaultUser.png I don't know how get image
+                # title. This behavior is reproduced in profile portlet.
             else:
                 return False
         else:

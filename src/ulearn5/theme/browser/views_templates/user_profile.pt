@@ -52,11 +52,11 @@
           </div>
 
           <div id="content">
-              <h1 class="documentFirstHeading" tal:condition="userinfo/fullname" tal:content="userinfo/fullname">
+              <h1 class="documentFirstHeading" tal:condition="view/fullname" tal:content="view/fullname">
                   Author name
               </h1>
 
-              <h1 class="documentFirstHeading" tal:condition="not: userinfo/fullname" tal:content="username">
+              <h1 class="documentFirstHeading" tal:condition="not: view/fullname" tal:content="username">
                   Author ID
               </h1>
 

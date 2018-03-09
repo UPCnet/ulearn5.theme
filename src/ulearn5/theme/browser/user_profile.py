@@ -14,6 +14,10 @@ from base5.core.utils import get_safe_member_by_id
 from ulearn5.core import _
 
 from plone import api
+from mrs5.max.utilities import IMAXClient
+import urllib
+from Products.CMFCore.utils import getToolByName
+from ulearn5.core.adapters.portrait import convertSquareImage
 
 
 class userProfile(BrowserView):
@@ -37,6 +41,7 @@ class userProfile(BrowserView):
             self.user_info = api.user.get(self.username)
             member_info = get_safe_member_by_id(self.user_info.id)
             self.user_fullname = member_info.get('fullname', '')
+            self.fullname = self.user_fullname
         else:
             raise NotFound(self, name, request)
         return self
@@ -50,16 +55,28 @@ class userProfile(BrowserView):
 
     def has_complete_profile(self):
         if self.user_info:
-            pm = api.portal.get_tool('portal_membership')
-            portrait = pm.getPersonalPortrait(self.user_info.id)
+            id = self.user_info.id
+            maxclient, settings = getUtility(IMAXClient)()
+            foto = maxclient.people[id].avatar
+            imageUrl = foto.uri + '/large'
+
+            portrait = urllib.urlretrieve(imageUrl)
+
+            scaled, mimetype = convertSquareImage(portrait[0])
+            portrait = Image(id=id, file=scaled, title=id)
+
+            membertool = getToolByName(self, 'portal_memberdata')
+            membertool._setPortrait(portrait, id)
+            import transaction
+            transaction.commit()
+
             member_info = get_safe_member_by_id(self.user_info.id)
-            print portrait.size
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
                and isinstance(portrait, Image) and portrait.size != '3566':
                 return True
-                # 5037 is the size of defaultUser.png I don't know how get image
+                # 3566 is the size of defaultUser.png I don't know how get image
                 # title. This behavior is reproduced in profile portlet.
             else:
                 return False
