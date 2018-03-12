@@ -97,7 +97,7 @@ class userProfile(BrowserView):
                 rendered_properties.append(dict(
                     name=_(prop),
                     value=self.user_info.getProperty(prop, '')
-                ))
+                    ))
             return rendered_properties
         else:
             # If it's not extended, then return the simple set of data we know
@@ -106,15 +106,13 @@ class userProfile(BrowserView):
                 rendered_properties.append(dict(
                     name=_(prop),
                     value=self.user_info.getProperty(prop, '')
-                ))
+                    ))
             return rendered_properties
 
     def get_member_data(self):
         return api.user.get_current()
 
     def user_properties(self):
-        user_properties_default = [_(u'fullname'), _(u'email'), _(u'home_page'), _(u'description'), _(u'twitter_username'), _(u'location'), _(u'telefon'), _(u'ubicacio')]
-
         member_data = self.get_member_data()
         return {'fullname': member_data.getProperty('fullname'),
                 'email': member_data.getProperty('email'),

@@ -21,13 +21,4 @@
       permission="zope.Public"
       />
 
-  <browser:page
-      name="summary_view_news"
-      permission="zope2.View"
-      for="plone.app.contenttypes.behaviors.collection.ISyndicatableCollection"
-      class=".views.SummaryViewNews"
-      template="views_templates/summary_view_news.pt"
-      layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-      />
-
 </configure>
