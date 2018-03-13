@@ -11,15 +11,22 @@ $fa-font-path: "fontawesome/fonts";
 @import "communities";
 @import "community";
 
-// Marc's CSS
 
 .template-login_form , .template-logged_out, .template-login_failed{
-    background: url(../images/background-login.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
+  background: url(../images/background-login.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+// Marc's CSS
+
+
+
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+  display: inline-block;
 }
 
 .template-login_form article#content, .template-logged_out article#content, .template-login_failed article#content {
@@ -1679,6 +1686,7 @@ margin-top: 10px!important;
       padding: 10px;
 }
 #communitysearch {
+  padding: 7px 15px 15px 15px;
   position: relative;
 }
 .user {
@@ -3099,9 +3107,7 @@ li.ulearn-eines-ql>a {
   height: 34px!important;
 }
 
-input[type="text"], input[type="email"], input[type="password"], textarea, select {
-    display: inline-block!important;
-  }
+
 
   .btn-default {
       background-color: #007ac2!important;
@@ -4313,6 +4319,7 @@ font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif!important;
     img {
     height: 62px;
     object-fit: cover;
+    width: 100%;
 }
 }
 
@@ -4643,4 +4650,111 @@ div#maxui-conversations{height: 278px!important;}
     height: 62px;
     object-fit: cover;
     width: 100%;
+}
+
+
+
+.select2-container-multi .select2-choices{background: none!important; border: 0px!important;}
+
+
+
+
+
+
+@media (max-width: 768px){
+        #agenda {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .tab-container {
+            padding: 0px;
+            box-shadow: none!important;
+        }
+        .ulearnbox {
+            margin-bottom: 30px;
+            display: flex;
+            flex-flow: column;
+        }
+        .media-left, .media-right, .media-body {
+            display: block;
+        }
+        #communities-view .media-left {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        #communitylist article.media.ng-scope , #communitylist article.media.ng-scope:last-of-type {
+          padding: 0 0px 15px 0!important;
+
+        }
+        .community-actions {
+          text-align: left;
+        }
+        .portlet-subscribed-news .imatge_noticia {
+          float: none;
+          width: 100%!important;
+        }
+        .bubble , #menusup nav a {
+          background-color: #e8e8e8;
+        }
+        #menusup nav .bubble .arrow {
+          border-top-color: #e8e8e8;
+        }
+        .bubble.top .arrow:before {
+          box-shadow: none;
+        }
+        #menusup nav .bubble {
+          box-shadow: none;
+      }
+      div#portlets-below-title {
+          display: flex;
+          flex-flow: column;
+      }
+      .cell.BelowTitlePortletManager2.col-md-6 {
+          order: -1;
+      }
+      .breadcrumbs {
+          background-color: #ffffff!important;
+        }
+      .bubble.top.col-md-3.col-sm-3.col-xs-3 {
+          border-right: 4px solid white;
+        }
+
+      .bubble.top.col-md-3.col-sm-3.col-xs-3:last-of-type{border-right: 0px;}
+
+      #sharedwithme-container {
+    // background: #fff none repeat scroll 0 0;
+    padding: 0px;
+    box-shadow:none;
+    }
+
+    #searchinputcontent{
+        padding-top: 0px;
+        right: 0px;
+        top: 0px;
+      }
+
+      #menusup nav .bubble {
+          box-shadow: none;
+          border-right: 4px solid #fff;
+        }
+
+        #menusup nav .bubble:last-of-type{
+          border-right: 0px;
+          }
+
+       article#content {
+            padding: 0px!important;
+          }
+
+          div#community-page {
+    display: flex;
+    flex-flow: column;
+}
+
+section#main-content {
+    order: -1;
+}
+.button-menu-mobile a, .button-menu-mobile--close a {
+      top: 42%;
+}
 }
