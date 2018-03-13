@@ -37,7 +37,6 @@
                 item_description item/Description;
                 item_type item/PortalType;
                 item_modified item/ModificationDate;
-                item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year());
                 item_created item/CreationDate;
                 item_wf_state item/review_state;
                 item_wf_state_class python:'state-' + view.normalizeString(item_wf_state);
@@ -45,6 +44,7 @@
                 item_link python:item_type in view.use_view_action and item_url+'/view' or item_url;
                 item_is_event python:view.is_event(obj);
                 item_has_image python:item.getIcon;
+                item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year()) if item.effective_date else str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());
                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;
                 ">
               <metal:block define-slot="entry">
