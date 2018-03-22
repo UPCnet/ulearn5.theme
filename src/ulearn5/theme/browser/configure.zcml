@@ -4,21 +4,39 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="ulearn">
 
-  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include package="z3c.jbot" file="meta.zcml" />
+    <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+    <include package="z3c.jbot" file="meta.zcml" />
 
-  <browser:page
-      name="profile"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".user_profile.userProfile"
-      permission="zope2.View"
-      />
+    <browser:page
+        name="profile"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".user_profile.userProfile"
+        permission="zope2.View"
+        />
 
-  <browser:page
-      for="*"
-      name="plone_javascript_variables.js"
-      class=".jsvariables.JSVariables"
-      permission="zope.Public"
-      />
+    <browser:page
+        for="*"
+        name="plone_javascript_variables.js"
+        class=".jsvariables.JSVariables"
+        permission="zope.Public"
+        />
+
+    <!-- override FolderView class and template -->
+    <browser:page
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        class="ulearn5.theme.browser.folder.MyFolderView"
+        name="summary_view"
+        template="../templates/plone.app.contenttypes.browser.templates.listing_summary.pt"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+    />
+    <browser:page
+        for="plone.app.contenttypes.behaviors.collection.ISyndicatableCollection"
+        class="ulearn5.theme.browser.collection.MyCollectionView"
+        name="summary_view"
+        template="../templates/plone.app.contenttypes.browser.templates.listing_summary.pt"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+    />
 
 </configure>
