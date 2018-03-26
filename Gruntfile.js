@@ -10,51 +10,44 @@ module.exports = function (grunt) {
         // (the dependency tree is walked by r.js)
 
         compass: {
-            upc: {
+            theming5: {
                 options: {
-                    sassDir: 'stylesheets/upc',
+                    sassDir: 'stylesheets/theming5',
                     cssDir: 'css',
                     outputStyle: 'compressed'
                 },
-                files: {
-                    'css/upc.css': 'stylesheets/upc/upc.scss'
-                }
             },
-            homeupc: {
+            bootstrap3: {
                 options: {
                     sassDir: 'stylesheets/bootstrap',
-                    cssDir: 'css',
+                    cssDir: 'css/',
                     outputStyle: 'compressed'
                 },
-                files: {
-                    'css/upcnet.css': 'stylesheets/bootstrap/upcnet.scss',
-                    'css/bootstrap.css': 'stylesheets/bootstrap/bootstrap.scss'
-                }
             },
             ulearn: {
                 options: {
                     sassDir: 'stylesheets/ulearn',
-                    cssDir: 'css/ulearn/',
+                    cssDir: 'css/',
                     outputStyle: 'compressed'
                 },
-                files: {
-                    'css/ulearn/ulearn.css': 'stylesheets/ulearn/ulearn.scss'
-                }
             }
         },
         concat: {
             options: {
                 separator: '',
             },
-            dist: {
-                src: ['css/bootstrap.css', 'css/upcnet.css'],
-                dest: 'css/homeupc-compiled.css',
+            theming5: {
+                src: ['css/theming5.css'],
+                dest: 'css/theming5.min.css',
+            },
+            bootstrap3: {
+                src: ['css/bootstrap.css'],
+                dest: 'css/bootstrap3.min.css',
             },
             ulearn: {
                 src: ['../../../../../../ulearn5.js/ulearn5/js/components/angular-ui-select/dist/select.css',
-                "../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.default.css",
-                "../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.bootstrap2.css",
-                // '../../../../../../ulearn5.js/ulearn5/js/components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css',
+                '../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.default.css',
+                '../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.bootstrap2.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog-theme-default.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog-theme-plain.css',
@@ -63,32 +56,31 @@ module.exports = function (grunt) {
                 '../../portlets/importantnews/importantnews.css',
                 '../../portlets/flashesinformativos/flashesinformativos.css',
                 '../../portlets/mysubjects/mysubjects.css',
-                'css/ulearn/ulearn.css'],
-                dest: 'css/ulearn/ulearn-compiled.css',
+                'css/ulearn.css'],
+                dest: 'css/ulearn-concat.css',
             },
         },
         cssmin: {
             target : {
-				src : ["css/ulearn/ulearn-compiled.css"],
-				dest : "css/ulearn-compiled.min.css"
+				src : ["css/ulearn-concat.css"],
+				dest : "css/ulearn.min.css"
 			}
         },
         watch: {
-            upc: {
+            theming5: {
                 files: [
-                    'stylesheets/upc/*.scss',
-                    'stylesheets/upc.scss'
+                    'stylesheets/theming5/*.scss',
+                    'stylesheets/theming5.scss'
                 ],
-                tasks: ['compass:upc']
+                tasks: ['compass:theming5', 'concat:theming5'] //concat here only for renaming
             },
-            homeupc:  {
+            bootstrap3:  {
                 files: [
                     'stylesheets/bootstrap/*.scss',
                     'stylesheets/bootstrap/mixins/*.scss',
                     'stylesheets/bootstrap.scss',
-                    'stylesheets/upcnet.scss',
                 ],
-                tasks: ['compass:homeupc', 'concat:dist']
+                tasks: ['compass:bootstrap3', 'concat:bootstrap3'] //concat here only for renaming
             },
             ulearn: {
                 files: [
@@ -127,6 +119,7 @@ module.exports = function (grunt) {
     // CWD to theme folder
     grunt.file.setBase('./src/ulearn5/theme/theme/assets');
 
+    // Registered tasks: grunt watch
     grunt.registerTask('default', ["browserSync:plone", "watch"]);
     grunt.registerTask('bsync', ["browserSync:html", "watch"]);
     grunt.registerTask('plone-bsync', ["browserSync:plone", "watch"]);
