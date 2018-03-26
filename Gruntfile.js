@@ -54,7 +54,7 @@ module.exports = function (grunt) {
                 src: ['../../../../../../ulearn5.js/ulearn5/js/components/angular-ui-select/dist/select.css',
                 "../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.default.css",
                 "../../../../../../ulearn5.js/ulearn5/js/components/selectize/dist/css/selectize.bootstrap2.css",
-                '../../../../../../ulearn5.js/ulearn5/js/components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css',
+                // '../../../../../../ulearn5.js/ulearn5/js/components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog-theme-default.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog-theme-plain.css',
