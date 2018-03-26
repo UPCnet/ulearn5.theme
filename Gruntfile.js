@@ -90,6 +90,13 @@ module.exports = function (grunt) {
                 tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin']
             }
         },
+        uglify: {
+            main: {
+                files: {
+                    'javascripts/theming5.min.js': 'javascripts/theming5.js'
+                }
+            }
+        },
         browserSync: {
             plone: {
                 bsFiles: {
@@ -115,6 +122,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // CWD to theme folder
     grunt.file.setBase('./src/ulearn5/theme/theme/assets');
@@ -123,4 +131,5 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ["browserSync:plone", "watch"]);
     grunt.registerTask('bsync', ["browserSync:html", "watch"]);
     grunt.registerTask('plone-bsync', ["browserSync:plone", "watch"]);
+    grunt.registerTask('minify', ['uglify']);
 };
