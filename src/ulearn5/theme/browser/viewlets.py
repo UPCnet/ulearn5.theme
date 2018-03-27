@@ -249,7 +249,7 @@ class folderBar(viewletBase):
                 break
 
     def bubble_class(self, bubble):
-        width = 'col-md-3'
+        width = 'col-xs-3'
 
         if bubble == self.folder_type:
             return 'active bubble top {}'.format(width)

@@ -48,36 +48,43 @@
                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;
                 ">
               <metal:block define-slot="entry">
-                <article class="entry">
+
+                <article class="media">
                   <header metal:define-macro="listitem" tal:attributes="class python:'vevent' if item_is_event else None">
-                    <span class="summary" tal:attributes="title item_type">
-                      <a tal:condition="python:item_type == 'File' and showicons"
-                         tal:attributes="href item_link;
-                                         class string:$item_type_class $item_wf_state_class url;
-                                         title item_type">
-                         <img class="mime-icon"
-                                tal:attributes="src item/MimeTypeIcon">
-                      </a>
-                      <a tal:attributes="href item_link;
-                                            class string:$item_type_class $item_wf_state_class url;
-                                            title item_type"
-                         tal:content="item_title">Item Title
-                      </a>
-                      <a tal:attributes="href item_link;"
-                         tal:condition="python: item_has_image and thumb_scale_list">
-                         <img tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_list, css_class=img_class)" />
-                      </a>
-                    </span>
+                  <div class="media-left">
+                          <a tal:attributes="href item_link;"
+                             tal:condition="python: item_has_image and thumb_scale_list">
+                             <img tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_list, css_class=img_class)" />
+                          </a>
+                  </div>
                     <metal:block metal:define-macro="document_byline">
-                      <div class="documentByLine">
+                      <div class="media-body">
+                        <div class="summary" tal:attributes="title item_type">
+                          <a tal:condition="python:item_type == 'File' and showicons"
+                             tal:attributes="href item_link;
+                                             class string:$item_type_class $item_wf_state_class url;
+                                             title item_type">
+                             <img class="mime-icon"
+                                    tal:attributes="src item/MimeTypeIcon">
+                          </a>
+                          <h2 class="tileHeadline media-heading">
+                          <a tal:attributes="href item_link;
+                                                class string:$item_type_class $item_wf_state_class url;
+                                                title item_type"
+                             tal:content="item_title">Item Title
+                          </a>
+                        </h2>
+                        </div>
+
+                        <div class="item-event">
                         <tal:event condition="item_is_event">
                           <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
-                          <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
-                            <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
+                          <span tal:condition="item/location" i18n:translate="label_event_byline_location">
+                            <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>
+                            <br/>
                           </span>
                         </tal:event>
                         <tal:byline condition="view/show_about">
-                          &mdash;
                           <tal:name tal:condition="item_creator"
                               tal:define="author python:view.pas_member.info(item_creator);
                                           creator_short_form author/username;
@@ -96,7 +103,7 @@
                           </tal:name>
 
                           <tal:modified condition="python: item_type != 'Event'">
-                            &mdash;
+                            <br>
                             <tal:mod i18n:translate="box_last_modified">last modified</tal:mod>
                             <span tal:replace="python:view.toLocalizedTime(item_modified,long_format=1)">
                               August 16, 2001 at 23:35:59
@@ -109,15 +116,21 @@
                             </tal:comment>
                           </metal:description>
                         </tal:byline>
+                        </div>
+                        <br/>
+                        <p class="description discreet"
+                            tal:condition="item_description"
+                            tal:content="item_description">
+                          description
+                        </p>
                       </div>
                     </metal:block>
                   </header>
-                  <p class="description discreet"
-                      tal:condition="item_description"
-                      tal:content="item_description">
-                    description
-                  </p>
+
                 </article>
+
+
+
               </metal:block>
             </tal:block>
           </tal:repeat>
