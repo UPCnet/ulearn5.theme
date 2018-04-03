@@ -105,7 +105,7 @@
             </section>
         </replace>
     </rules>
-    <rules css:if-content="body.section-news">
+    <rules css:if-content="body.section-news, body.subsection-news">
         <rules css:if-content="body.userrole-anonymous">
             <theme href="homepage.html" />
             <drop css:theme="#column1-container" />

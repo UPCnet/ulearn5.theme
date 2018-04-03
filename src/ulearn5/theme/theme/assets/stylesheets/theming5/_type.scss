@@ -65,14 +65,6 @@ a:not([class])[target="_blank"]::after {
   font-size: 75%;
   position: relative;
 }
-a:not([class])[href$=".pdf"]::before {
-  content:" \e91d";
-  font-family: "upc-icones";
-  font-size: 100%;
-  color: #ED4033;
-  position: relative;
-  margin-right: 6px;
-}
 a:focus {
   outline: 5px solid rgba(#1FBDEE,.5);
   outline-offset: 0;

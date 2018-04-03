@@ -60,13 +60,6 @@
                     <metal:block metal:define-macro="document_byline">
                       <div class="media-body">
                         <div class="summary" tal:attributes="title item_type">
-                          <a tal:condition="python:item_type == 'File' and showicons"
-                             tal:attributes="href item_link;
-                                             class string:$item_type_class $item_wf_state_class url;
-                                             title item_type">
-                             <img class="mime-icon"
-                                    tal:attributes="src item/MimeTypeIcon">
-                          </a>
                           <h2 class="tileHeadline media-heading">
                           <a tal:attributes="href item_link;
                                                 class string:$item_type_class $item_wf_state_class url;
