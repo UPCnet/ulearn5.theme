@@ -4433,7 +4433,7 @@ fieldset:not(:last-child) {
           flex-flow: column;
       }
       .cell.BelowTitlePortletManager2.col-md-6 {
-          order: -1;
+          // order: -1;
       }
       .breadcrumbs {
           background-color: #ffffff!important;
@@ -4475,7 +4475,7 @@ fieldset:not(:last-child) {
 }
 
 section#main-content {
-    order: -1;
+     order: -1;
 }
 .button-menu-mobile a, .button-menu-mobile--close a {
       top: 42%;
@@ -5155,4 +5155,126 @@ div#maxui-widget-container {
 	div#maxui-conversations {
 		height: 278px!important;
 	}
+}
+
+
+
+
+@media (max-width: 767px) {
+
+  #portal-header{top: 0px;}
+  #edit-zone .plone-toolbar-logo, .plone-toolbar-expanded #edit-zone .plone-toolbar-logo {
+      display: none;
+  }
+
+.plone-toolbar-left #edit-zone{display: none;}
+
+.breadcrumbs {
+    margin-top: 80px!important;
+}
+
+.main-banner>nav .upc-eines .caret {
+    top: 14px;
+    right: 5px;
+}
+
+.main-banner .upc-eines>li>a {
+    font-size: 1.25rem;
+}
+
+.upc-eines .dropdown li a {
+    font-size: 1.20rem;
+    font-weight: 400;
+}
+
+a.quicklinks {
+    // border-bottom: 1px solid #bbb;
+}
+
+.upc-eines .dropdown-menu {
+
+    box-shadow: none;
+}
+
+.main-banner>nav .upc-menu li .caret, .main-banner>nav li .caret{
+  border-left: 0px;
+}
+
+.searchPage .actionMenu dt {
+
+    position: relative; margin-top: 15px;
+}
+
+.searchPage .actionMenu dd {
+    top: 92px;
+ }
+
+ .event.summary {
+     margin-left: 0px;
+     width: 100%;
+}
+
+img.thumb-mini {
+    display: none;
+}
+
+.media-body{
+    display: inline;
+}
+
+.leadImage {
+    max-width: 100%!important;
+    margin: 0 0px 10px 0;
+    float: none!important;
+}
+
+.portaltype-news-item div#viewlet-below-content-title {
+    float: none!important;
+}
+
+.photoAlbumEntry {
+    width: 47%;
+  }
+
+  section#main-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.imgcaption {
+    margin: 10px 0px;
+}
+
+article#content h1 {
+    font-size: 1.75rem;
+  }
+
+  img.image-inline {
+      margin: 10px 0;
+  }
+
+  article#content iframe {
+    max-width: 100%;
+    height: 240px;
+}
+
+.footer-complementary p {
+    text-align: center;
+}
+
+li#breadcrumbs-home a {
+    padding-left: 0;
+}
+.caixessearch>h3 {
+    color: #777;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.pat-autotoc.autotabs .autotoc-nav a {
+
+    display: block!important;
+    margin: 0!important;
+  }
+
 }

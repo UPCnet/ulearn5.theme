@@ -13,7 +13,7 @@
   }
   section#main-content > .row { // elimina marges per evitar scroll horitzontal en mobil
     margin-left: 0;
-    margin-right: 0; 
+    margin-right: 0;
   }
   // adaptacions carousel
   .carousel-indicators {
@@ -59,6 +59,8 @@
   .button-menu-mobile--close {
     display: none;
   }
+
+
   .global-navigation {
     position: absolute;
     transform: translateX(calc(100vw + -15px));
@@ -102,6 +104,8 @@
     }
 
   }
+
+
   .main-banner > nav .upc-menu li, .main-banner > nav li {
     display: block;
     text-align: left;
