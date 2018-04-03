@@ -2990,6 +2990,7 @@ button{
       // min-height: 415px;
       display: inline-block;
       width: 100%;
+      box-shadow: -1px 1px 2px #ddd;
   }
 
   .section-front-page article#content {
@@ -5162,12 +5163,23 @@ div#maxui-widget-container {
 
 @media (max-width: 767px) {
 
-  #portal-header{top: 0px;}
-  #edit-zone .plone-toolbar-logo, .plone-toolbar-expanded #edit-zone .plone-toolbar-logo {
-      display: none;
+  .plone-modal-content {
+      margin: 0px!important;
+      width: 100%!important;
   }
 
-.plone-toolbar-left #edit-zone{display: none;}
+  .plone-modal.fade.in {
+    padding: 20px 0!important;
+}
+
+.plone-modal-dialog{width: 100%!important; left:0!important}
+
+//   #portal-header{top: 0px;}
+//   #edit-zone .plone-toolbar-logo, .plone-toolbar-expanded #edit-zone .plone-toolbar-logo {
+//       display: none;
+//   }
+//
+// .plone-toolbar-left #edit-zone{display: none;}
 
 .breadcrumbs {
     margin-top: 80px!important;
@@ -5263,9 +5275,14 @@ article#content h1 {
 }
 
 li#breadcrumbs-home a {
-    padding-left: 0;
+      padding-left: 0;
 }
-.caixessearch>h3 {
+.caixessearch>$(window).resize(function () {
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 600) {
+            $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
+    }
+});h3 {
     color: #777;
     margin-top: 15px;
     font-size: 1rem;
@@ -5278,3 +5295,6 @@ li#breadcrumbs-home a {
   }
 
 }
+
+
+.userrole-anonymous #portal-header{top:0px!important}
