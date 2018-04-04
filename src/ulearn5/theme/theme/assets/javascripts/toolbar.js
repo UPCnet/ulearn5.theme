@@ -44,6 +44,8 @@ define([
         $('body').removeClass(that.options.classNames.left);
         $('body').removeClass(that.options.classNames.leftDefault);
         $('body').removeClass(that.options.classNames.leftExpanded);
+        $('body').removeClass(that.options.classNames.topExpanded);
+        $('body').removeClass(that.options.classNames.expanded);
       }
       else {
         $('body').addClass(that.options.classNames.left);
@@ -51,6 +53,8 @@ define([
         $('body').removeClass(that.options.classNames.top);
         $('body').removeClass(that.options.classNames.topDefault);
         $('body').removeClass(that.options.classNames.topExpanded);
+        $('body').removeClass(that.options.classNames.leftExpanded);
+        $('body').removeClass(that.options.classNames.expanded);
       }
 
       $('body').addClass(that.options.classNames.default);
