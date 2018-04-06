@@ -69,7 +69,6 @@ $(document).ready(function () {
             $('.popover-content').off('click').on('click', 'a', function () {
                 window.location = this.href;
             });
-
         });
     }
 
