@@ -56,42 +56,17 @@ define([
         $('body').removeClass(that.options.classNames.leftExpanded);
         $('body').removeClass(that.options.classNames.expanded);
       }
-
       $('body').addClass(that.options.classNames.default);
-      $('.' + that.options.classNames.logo, that.$container).off('click').on('click', function() {
-        var $el = $(this);
-        if ($el.hasClass('open')){
-          that.$container.css('right', '-' + this.options.toolbar_width);
-          $('html').css('margin-left', '0');
-          $('html').css('margin-right', '0');
-          $el.removeClass('open');
-          $('nav li', that.$container).removeClass(that.options.classNames.active);
-        } else {
-          that.$container.css('right', '0');
-          $el.addClass('open');
-          $('html').css('margin-left', '-' + this.options.toolbar_width);
-          $( 'html' ).css('margin-right', this.options.toolbar_width);
-        }
-      });
-      // Remove desktop event binding
-      $('nav > ul > li', that.$container).has( 'a .plone-toolbar-caret' ).off('click');
-      // Add sub-menu events
+       // Add sub-menu events
       $('nav li a', that.$container).has('.plone-toolbar-caret').off('click').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         var $el = $(this).parent();
         if ($el.hasClass(that.options.classNames.active)) {
-          that.$container.css('right', '0');
-          $('html').css('margin-left', '-' + this.options.toolbar_width);
-          $('html').css('margin-right', this.options.toolbar_width);
           $('nav li', that.$container).removeClass(that.options.classNames.active);
         } else {
           $('nav li', that.$container).removeClass(that.options.classNames.active);
           $el.addClass(that.options.classNames.active);
-          that.$container.css('right', this.options.submenu_width);
-          var margin = this.pxToInt(this.options.toolbar_width) + this.pxToInt(this.options.submenu_width);
-          $('html').css('margin-left', '-' + margin + 'px' );
-          $('html').css('margin-right', + margin + 'px');
         }
       });
     },

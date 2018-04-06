@@ -3,7 +3,8 @@
     <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
       <span aria-hidden="true" role="presentation" class="icona-upc">
-        <img alt="" src="/++theme++ulearn5/assets/images/logomark.png"></span>
+        <img alt="" src="/++theme++ulearn5/assets/images/logomark.png" class="img-desktop">
+        <img alt="" src="/++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive"></span>
       </h1>
     </a>
 

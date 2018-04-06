@@ -21,6 +21,8 @@ $fa-font-path: "fontawesome/fonts";
   height: 100%;
 }
 
+.img-responsive{display: none!important;}
+
 // Marc's CSS
 
 
@@ -2984,6 +2986,15 @@ button{
 // #maxui-show-conversations{display: none!important}
 
 
+  .section-front-page article#content {
+      background-color: white!important;
+      padding: 15px!important;
+      // min-height: 415px;
+      display: inline-block;
+      width: 100%;
+      box-shadow: none!important;
+  }
+
   article#content {
       background-color: white!important;
       padding: 15px!important;
@@ -5182,7 +5193,7 @@ div#maxui-widget-container {
 // .plone-toolbar-left #edit-zone{display: none;}
 
 .breadcrumbs {
-    margin-top: 80px!important;
+    // margin-top: 80px!important;
 }
 
 .main-banner>nav .upc-eines .caret {
@@ -5277,15 +5288,15 @@ article#content h1 {
 li#breadcrumbs-home a {
       padding-left: 0;
 }
-.caixessearch>$(window).resize(function () {
-    var viewportWidth = $(window).width();
-    if (viewportWidth < 600) {
-            $(".view").removeClass("view view-portfolio").addClass("gallery-mobile");
-    }
-});h3 {
+.caixessearch>h3 {
     color: #777;
     margin-top: 15px;
     font-size: 1rem;
+}
+
+article#content {
+    box-shadow: none!important;
+
 }
 
 .pat-autotoc.autotabs .autotoc-nav a {
@@ -5293,6 +5304,45 @@ li#breadcrumbs-home a {
     display: block!important;
     margin: 0!important;
   }
+
+  .plone-toolbar-top #edit-zone .plone-toolbar-logo {
+    display: none!important;
+  }
+
+  .plone-toolbar-top #edit-zone nav {
+    padding-left: 0px!important;
+}
+
+#edit-zone nav > ul .plone-toolbar-separator {
+    border-bottom: 0px solid!important
+  }
+
+li#portal-personaltools {
+    background-color: #007bb3;
+}
+
+.main-banner>a h1>.icona-upc img {
+    width: 186px!important
+}
+
+#edit-zone nav > ul {
+    font-size: 11px!important;
+}
+
+.img-responsive {display: block!important;}
+.img-desktop {display: none!important;}
+
+#edit-zone {right:0px!important}
+
+#plone-contentmenu-display, #plone-contentmenu-portletmanager , #plone-contentmenu-factories{display: none!important}
+
+.template-profile #content {
+    padding: 0px!important;
+}
+
+.plone-toolbar-top #edit-zone nav > ul > li {
+    width: 50px!important;
+}
 
 }
 
