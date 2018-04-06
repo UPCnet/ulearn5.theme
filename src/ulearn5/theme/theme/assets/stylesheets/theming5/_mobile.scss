@@ -63,7 +63,7 @@
 
   .global-navigation {
     position: absolute;
-    transform: translateX(calc(100vw + -15px));
+    // transform: translateX(calc(100vw + -15px));
     display: block;
     height: 100vh;
     width: calc(100vw - 105px);

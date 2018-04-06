@@ -36,7 +36,7 @@ define([
     },
     setupMobile: function() {
       var that = this;
-      that.$container.css('right', '-' + this.options.toolbar_width);
+      that.$container.css('right', '-' + '120px');
       // make sure we are in expanded mode
       if (!that.state.left) {
         $('body').addClass(that.options.classNames.top);
@@ -57,7 +57,7 @@ define([
         $('body').removeClass(that.options.classNames.expanded);
       }
       $('body').addClass(that.options.classNames.default);
-       // Add sub-menu events
+      // Add sub-menu events
       $('nav li a', that.$container).has('.plone-toolbar-caret').off('click').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();

@@ -73,7 +73,6 @@ $(document).ready(function () {
         });
     }
 
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
     // mostra el focus només amb teclat perquè no li cal a qui usa mouse
     $("body").on("mousedown", "*", function (e) {
         remove_outline(this);
@@ -109,22 +108,12 @@ $(document).ready(function () {
     // vista mòbil. Dos botons es mostren i s'amagen amb el menú
     $('.button-menu-mobile a').on("click touchstart", function (e) {
         $(".global-navigation").addClass("open");
-        $("body").css({
-            "transform": "translateX(calc(-100vw + 105px))",
-            "transition": ".25s all ease",
-            "overflow": "hidden"
-        });
         $(".button-menu-mobile").hide();
         $(".button-menu-mobile--close").show();
         e.preventDefault();
     });
     $('.button-menu-mobile--close a').on("click touchstart", function (e) {
         $(".global-navigation").removeClass("open");
-        $("body").css({
-            "transform": "translateX(0)",
-            "transition": ".25s all ease",
-            "overflow": "auto"
-        });
         $(".button-menu-mobile--close").hide();
         $(".button-menu-mobile").show();
         e.preventDefault();
