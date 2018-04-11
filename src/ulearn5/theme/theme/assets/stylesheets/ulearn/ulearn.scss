@@ -4245,6 +4245,8 @@ i.glyphicon.link-external {
 	}
 }
 
+.template-login_failed {padding-right: 0px!important}
+
 .col-md-6.noticies-left input[type="submit"] {
 	margin-bottom: 15px;
 }
@@ -5587,4 +5589,22 @@ div#maxui-widget-container {
 
 .userrole-anonymous #portal-header {
 	top: 0px!important
+}
+
+
+.template-login_failed{
+
+	section#main-content {
+	    margin: auto!important;
+	    text-align: center!important;
+	}
+
+	article#content{
+    	width: auto!important;
+	}
+
+	.alert.status.alert-error>dt:before, .alert.status.alert-error>strong:before, .alert.status.error>dt:before, .alert.status.error>strong:before, .portalMessage.alert-error>dt:before, .portalMessage.alert-error>strong:before, .portalMessage.error>dt:before, .portalMessage.error>strong:before {
+		 padding-top: 2px;
+	}
+
 }
