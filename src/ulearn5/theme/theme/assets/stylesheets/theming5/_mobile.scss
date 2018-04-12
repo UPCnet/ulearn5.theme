@@ -60,7 +60,6 @@
     display: none;
   }
 
-
   .global-navigation {
     position: absolute;
     // transform: translateX(calc(100vw + -15px));
@@ -72,11 +71,14 @@
     flex-direction: column;
     &.open {
       display: flex;
-      box-shadow: 0 0 2px rgba(0,0,0,.33), 0 0 100px rgba(0,0,0,.33);
+      box-shadow: none;
       z-index: 1000;
       overflow-y: scroll;
       height: 100vh;
       position: fixed;
+      top: 120px;
+      left: 0px;
+      width: 100%;
     }
     .upc-eines {
       order:2;
@@ -105,6 +107,9 @@
 
   }
 
+  li.ulearn-eines-ql , .upc-eines-cerca , .upc-eines-contacte {
+      border-right: 0px!important;
+  }
 
   .main-banner > nav .upc-menu li, .main-banner > nav li {
     display: block;
@@ -124,7 +129,8 @@
     }
   }
   .main-banner > nav .upc-eines {
-    margin-left: 12px;
+    margin-left: 0px;
+    margin-top: 0px;
     & .caret {
       right:22px;
       padding-left: 8px;
