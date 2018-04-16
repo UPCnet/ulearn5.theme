@@ -33,10 +33,9 @@
 		<value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
 
-	<records prefix="plone.resources/plone-patterns-toolbar" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-        <value key="js">++theme++ulearn5/assets/javascripts/toolbar.js</value>
-        <value key="css">
-          <element>++plone++static/patterns/toolbar/src/css/toolbar.plone.less</element>
-        </value>
+	<records prefix="plone.resources/tinymce-layer"
+              interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+        <value key="js">++plone++static/components/tinymce-builded/js/tinymce/plugins/layer/plugin.min.js</value>
+        <value key="deps">tinymce</value>
     </records>
 </registry>
