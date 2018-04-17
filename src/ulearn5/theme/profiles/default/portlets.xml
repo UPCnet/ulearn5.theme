@@ -35,7 +35,7 @@
                   manager="plone.leftcolumn" type="portlets.Navigation" />
 
     <assignment remove="True" name="navigation" category="context" key="/"
-                  manager="plone.leftcolumn" type="portlets.portlets.profilecommunity" />
+                  manager="plone.leftcolumn" type="ulearn.portlets.profilecommunity" />
 
     <assignment type="ulearn.portlets.profile" manager="plone.leftcolumn"
                 category="context" key="/" name="Ulearn Profile"
