@@ -4693,6 +4693,9 @@ fieldset:not(:last-child) {
 	#maxui-container #maxui-mainpanel #maxui-newactivity #maxui-newactivity-box #maxui-subscriptions, #maxui-container #maxui-mainpanel #maxui-newactivity-chat #maxui-newactivity-box #maxui-subscriptions {
 		max-width: 200px !important;
 	}
+	.plone-toolbar-expanded #edit-zone nav > ul a > span + span {
+	    display: none;
+	}
 }
 
 
