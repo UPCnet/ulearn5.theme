@@ -118,10 +118,6 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    if (window.screen.width < '768') {
-        $('body').removeClass('plone-toolbar-expanded');
-        $('body').addClass('plone-toolbar');
-    }
     // fallback per a usar object-fit en bàners i capçalera i evitar backgrounds. Afegir la classe compat-object-fit on hi hagi el recurs de object-fit a les CSS
     // Execute this if IE is detected.
     function msieversion() {
