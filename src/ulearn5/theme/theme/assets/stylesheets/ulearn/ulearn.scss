@@ -4130,6 +4130,11 @@ input[type="checkbox"] {
 	color: #FFF;
 }
 
+#visual-portal-wrapper > div.plone-modal-wrapper > div > div > div > div > div.plone-modal-body > div:nth-child(2) > div > input:nth-child(4),
+#visual-portal-wrapper > div.plone-modal-wrapper > div > div > div > div > div.plone-modal-body > div:nth-child(2) > div > input.plone-btn.plone-btn-primary.context {
+	display: none !important;
+}
+
 i.glyphicon.link-https,
 i.glyphicon.link-external {
 	display: none;
