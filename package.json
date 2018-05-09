@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@angular/core": "^5.0.0",
-    "@plone/restapi-angular": "^1.2.4"
+    "@plone/restapi-angular": "^1.2.4",
+    "grunt-contrib-uglify": "^3.3.0"
   }
 }
