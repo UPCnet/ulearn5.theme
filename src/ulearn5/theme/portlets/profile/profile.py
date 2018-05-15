@@ -144,6 +144,10 @@ class Renderer(base.Renderer):
 
         return False
 
+    def userCheckDisplay(self):
+        user = api.user.get_current()
+        return user.getProperty('visible_userprofile_portlet', True)
+
     def showEditCommunity(self):
         if not IPloneSiteRoot.providedBy(self.context) and \
            ICommunity.providedBy(self.context) and \
