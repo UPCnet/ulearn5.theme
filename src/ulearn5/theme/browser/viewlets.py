@@ -140,6 +140,12 @@ class viewletHeaderUlearn(viewletBase):
             return True
         return False
 
+    def canManageHeader(self):
+        return self.canManageDirectory('header')
+
+    def canManageFooter(self):
+        return self.canManageDirectory('footer')
+
     def _createLinksMenu(self, language):
         """ Genera el menu de enlaces segun el idioma que tenga definido el
             usuario en su perfil
@@ -217,6 +223,21 @@ class viewletHeaderUlearn(viewletBase):
                 return dades.values()
             else:
                 return exist[0].attrs['dades']
+
+    def get_customized_header(self):
+        """
+        Get dades header
+        """
+        catalog = getToolByName(self, 'portal_catalog')
+        portalPath = '/'.join(api.portal.get().getPhysicalPath())
+        path = portalPath + '/gestion/header'
+        images = catalog.searchResults(portal_type='Image',
+                                      path={'query': path, 'depth': 1},
+                                      sort_on='getObjPositionInParent')
+        if len(images) > 0:
+            return images[0].getURL()
+        else:
+            return None
 
 
 class folderBar(viewletBase):
@@ -306,6 +327,21 @@ class viewletFooterUlearn(viewletBase):
             links['disclaimer'] = 'https://www.upc.edu/en/disclaimer'
 
         return links
+
+    def get_customized_footer(self):
+        """
+        Get dades footer
+        """
+        catalog = getToolByName(self, 'portal_catalog')
+        portalPath = '/'.join(api.portal.get().getPhysicalPath())
+        path = portalPath + '/gestion/footer'
+        pages = catalog.searchResults(portal_type='Document',
+                                      path={'query': path, 'depth': 1},
+                                      sort_on='getObjPositionInParent')
+        if len(pages) > 0:
+            return pages[0].getObject().text
+        else:
+            return None
 
 
 class angularRouteView(viewletBase):

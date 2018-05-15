@@ -1,10 +1,18 @@
 <div id="header-menu" class="container">
-  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn">
+  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn"
+          tal:define="customized_header viewlet/get_customized_header">
+
     <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
-      <span aria-hidden="true" role="presentation" class="icona-upc">
-        <img alt="" src="/++theme++ulearn5/assets/images/logomark.png" class="img-desktop">
-        <img alt="" src="/++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive"></span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          <tal:block tal:condition="not:customized_header">
+            <img alt="" src="/++theme++ulearn5/assets/images/logomark.png" class="img-desktop">
+            <img alt="" src="/++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive">
+          </tal:block>
+          <tal:block tal:condition="customized_header">
+            <img alt="" tal:attributes="src customized_header" class="img-desktop">
+          </tal:block>
+        </span>
       </h1>
     </a>
 
@@ -16,14 +24,14 @@
       <a href="#" role="button">Menu<span role="presentation" class="icona-upc">close</span></a>
     </div>
     <nav role="navigation" class="global-navigation">
-      <h2 class="sr-only" i18n:translate="Eines">Eines</h2>
+      <h2 class="sr-only" i18n:translate="tools">Tools</h2>
       <ul role="menubar" class="upc-eines" tal:define="menu viewlet/linksMenu">
         <li tal:condition="menu" class="dropdown ulearn-eines-ql" role="menuitem" tal:repeat="dades menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
             <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu pull-right" role="menu">
             <li role="menuitem" tal:repeat="item dades/links">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href item/url">
@@ -47,11 +55,23 @@
                       Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu pull-right" role="menu">
             <li role="menuitem" tal:condition="viewlet/canManageNews">
               <a href="#" tal:attributes="href string:${viewlet/portal_url}/news">
                 <i class="fa fa-newspaper-o"></i>
                 <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageHeader">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/header">
+                <i class="fa fa-folder"></i>
+                <tal:footer i18n:translate="menu-gestion-header">Management header</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageFooter">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/footer">
+                <i class="fa fa-folder"></i>
+                <tal:footer i18n:translate="menu-gestion-footer">Management footer</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
