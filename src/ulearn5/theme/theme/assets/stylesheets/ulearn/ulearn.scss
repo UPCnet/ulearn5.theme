@@ -977,10 +977,6 @@ input[type="text"]:focus {
 	}
 }
 
-.Open {
-	border-left: 3px solid hsla(192, 16%, 74%, 1)!important;
-}
-
 .userslinks {
 	margin-left: 3px;
 	li {
@@ -1321,6 +1317,10 @@ label[for="form.ext_editor"]~div.widget {
 
 .portletCalendar .ploneCalendar td.cal_has_events .popover-content a:hover {
 	opacity: 0.8;
+}
+
+#box_agenda li {
+	padding-left: 5px;
 }
 
 #box_agenda li a {

@@ -1,50 +1,49 @@
-import json
-from Acquisition import aq_inner, aq_chain
+from Acquisition import aq_chain
+from Acquisition import aq_inner
 from DateTime import DateTime
-
-from zope.interface import implements
-from zope.component import getMultiAdapter
-from zope.component.hooks import getSite
-from zope.i18nmessageid import MessageFactory
-
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.memoize.view import memoize_contextless
-from plone.app.event.base import localized_today, localized_now, dt_end_of_day
 from plone.app.event.base import RET_MODE_OBJECTS
+from plone.app.event.base import construct_calendar
 from plone.app.event.base import first_weekday
-from plone.app.event.base import get_events, construct_calendar
+from plone.app.event.base import get_events
+from plone.app.event.base import localized_now
+from plone.app.event.base import localized_today
 from plone.app.event.base import wkday_to_mon1
 from plone.app.event.portlets import get_calendar_url
-from plone.event.interfaces import IEventAccessor
+from plone.app.portlets.portlets import base
 from plone.dexterity.interfaces import IDexterityContent
+from plone.event.interfaces import IEventAccessor
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.component import getMultiAdapter
+from zope.i18nmessageid import MessageFactory
+from zope.interface import implements
 
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IEventsFolder
 from ulearn5.theme import calmodule
 
+import itertools
+
+
 PLMF = MessageFactory('plonelocales')
 
 
 class ICalendarPortlet(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information.
-    """
+    """ A portlet which renders the calendar portlet """
 
 
 class Assignment(base.Assignment):
     implements(ICalendarPortlet)
-
-    title = _(u'calendar', default=u'Calendar portlet')
+    title = _(u'Calendar')
 
 
 class Renderer(base.Renderer):
-
     render = ViewPageTemplateFile('templates/calendar.pt')
 
     def update(self):
@@ -66,6 +65,8 @@ class Renderer(base.Renderer):
         self.state = ('published', 'intranet')
 
         self.username = api.user.get_current().id
+        # self.user_info = get_safe_member_by_id(self.username)
+
         self.calendar_url = get_calendar_url(context, self.search_base)
 
         self.year, self.month = year, month = self.year_month_display()
@@ -140,24 +141,34 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
-    def nav_pattern_options(self, query):
-        return json.dumps({
-            'url': '%s/@@calendari%s&%s' % (
-                getSite().absolute_url(),
-                query,
-                self.quote_query('state', self.state)),
-            'target': '.portletCalendar'
-        })
 
-    def quote_query(self, key, value):
-        """ This only is capable of Zope encode tuples. If ever required, can
-        be extended to support further types (and complex dicts of data)"""
+    def getDifferentCommunities(self, events):
+        communities = []
+        for event in events:
+            uid = event.aq_parent.aq_parent.UID()
+            if uid not in communities:
+                communities.append(uid)
+        return communities
 
-        if isinstance(value, tuple):
-            return ''.join(
-                ['{}:tuple={}&'.format(key, item) for item in value])
-        else:
-            return ''
+    def getclasstag_event(self, day):
+        # Returns class color to show in the calendar
+        classtag = ''
+
+        if day['events']:
+            if len(self.getDifferentCommunities(day['events'])) > 1:
+                classtag += ' event-multiple '
+            else:
+                event = day['events'][0]
+                community = event.aq_parent.aq_parent.community_type
+
+                if 'Closed' in community:
+                    classtag += ' event-closed '
+                elif 'Open' in community:
+                    classtag += ' event-open '
+                else:
+                    # Organizative
+                    classtag += ' event-organizative '
+        return classtag
 
     @property
     def cal_data(self):
@@ -195,23 +206,28 @@ class Renderer(base.Renderer):
                 date_events = cal_dict[isodat]
 
             events_string = u""
-            url = ""
             if date_events:
                 for occ in date_events:
                     accessor = IEventAccessor(occ)
-                    url = accessor.url
+                    location = accessor.location
                     whole_day = accessor.whole_day
                     time = accessor.start.time().strftime('%H:%M')
-                    base = u'<a href="%s"><span class="title">%s</span>%s</a>'
+                    # TODO: make 24/12 hr format configurable
+                    base = u'<a class="%s text" title="%s" href="%s">'\
+                           u'<span class="title">%s</span>'\
+                           u'<span class="hour">%s%s%s</span></a>'
                     events_string += base % (
-                        url,
+                        occ.community_type,
+                        occ.aq_parent.aq_parent.Title(),
+                        accessor.url,
                         accessor.title,
-                        not whole_day and u' %s' % time or u'')
+                        not whole_day and u' %s' % time or u'',
+                        not whole_day and location and u', ' or u'',
+                        location and u' %s' % location or u'')
 
             caldata[-1].append(
                 {'date': dat,
                  'day': dat.day,
-                 'url': url,
                  'prev_month': dat.month < month,
                  'next_month': dat.month > month,
                  'today':
@@ -220,14 +236,16 @@ class Renderer(base.Renderer):
                     dat.day == today.day,
                  'date_string': u"%s-%s-%s" % (dat.year, dat.month, dat.day),
                  'events_string': events_string,
-                 'events': date_events})
+                 'events': date_events}
+            )
         return caldata
 
     def today(self):
         today = {}
         loc_today = localized_today(self.context)
         weekday = loc_today.isoweekday()
-        today['weekday'] = PLMF(self._ts.day_msgid(0 if weekday == 7 else weekday, format='l'))
+        today['weekday'] = PLMF(self._ts.day_msgid(
+            0 if weekday == 7 else weekday, format='l'))
         today['number'] = loc_today.day
         return today
 
@@ -237,7 +255,8 @@ class Renderer(base.Renderer):
         pc = getToolByName(context, 'portal_catalog')
         now = localized_now()
 
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name='plone_portal_state')
         navigation_root_path = portal_state.navigation_root_path()
 
         context = aq_inner(self.context)
@@ -250,7 +269,6 @@ class Renderer(base.Renderer):
         query = {
             'portal_type': 'Event',
             'review_state': self.state,
-            'start': {'query': [now, dt_end_of_day(now)], 'range': 'min:max'},
             'end': {'query': now, 'range': 'min'},
             'sort_on': 'start',
             'path': path,
@@ -268,7 +286,8 @@ class Renderer(base.Renderer):
         pc = getToolByName(context, 'portal_catalog')
         now = localized_now()
 
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name='plone_portal_state')
         navigation_root_path = portal_state.navigation_root_path()
 
         context = aq_inner(self.context)
@@ -284,20 +303,40 @@ class Renderer(base.Renderer):
             'end': {'query': now, 'range': 'min'},
             'sort_on': 'start',
             'path': path,
-            }
+        }
 
-        result = pc(**query)
-        nearest = self.get_nearest_today_event()
-        if nearest:
-            return [event for event in result if event.id != nearest.id][:3]
-        else:
-            return result[:3]
+        events = pc(**query)
+        # nearest = self.get_nearest_today_event()
+        list_events = []
+
+        for item in events:
+            event = item.getObject()
+            list_events.append(dict(Title=item.Title,
+                                    getURL=item.getURL(),
+                                    start=event.start.strftime('%d/%m'),
+                                    community_type=event.community_type,
+                                    community_name=event.aq_parent.aq_parent.title,
+                                    community_url=event.aq_parent.aq_parent.absolute_url()))
+
+        list_events = sorted(list_events[:3], key=lambda x:x['community_name'])
+        group_events = []
+        if len(list_events):
+            for key, group in itertools.groupby(list_events, key=lambda x:x['community_name']):
+                events = [event for event in group]
+                group_events.append(dict(Title=key,
+                                         community_url=events[0]['community_url'],
+                                         community_type=events[0]['community_type'],
+                                         community_name=events[0]['community_name'],
+                                         num_events=len(events),
+                                         events=events))
+        return group_events
 
     def getEventsForCalendar(self):
         context = aq_inner(self.context)
         year = self.year
         month = self.month
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name='plone_portal_state')
         navigation_root_path = portal_state.navigation_root_path()
 
         context = aq_inner(self.context)
@@ -316,9 +355,10 @@ class Renderer(base.Renderer):
                 day['is_today'] = self.isToday(daynumber)
                 if day['event']:
                     cur_date = DateTime(year, month, daynumber)
-                    localized_date = [self._ts.ulocalized_time(cur_date, context=context, request=self.request)]
+                    localized_date = [self._ts.ulocalized_time(
+                        cur_date, context=context, request=self.request)]
                     day['eventstring'] = '\n'.join(localized_date + [' %s' %
-                        self.getEventString(e) for e in day['eventslist']])
+                                                                     self.getEventString(e) for e in day['eventslist']])
                     day['date_string'] = '%s-%s-%s' % (year, month, daynumber)
 
         return weeks
@@ -329,8 +369,9 @@ class Renderer(base.Renderer):
         if IPloneSiteRoot.providedBy(self.context):
             return False
         else:
-            user_roles = api.user.get_roles(username=self.username, obj=self.context)
-            if 'Editor' in user_roles and ICommunity.providedBy(context):
+            user_roles = api.user.get_roles(
+                username=self.username, obj=self.context)
+            if 'Editor' in user_roles:
                 return True
             else:
                 return False

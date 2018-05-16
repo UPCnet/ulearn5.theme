@@ -224,6 +224,33 @@ h1, h2, h3, label, span.label, fieldset legend {
   border-left: 3px solid $color_community_open;
 }
 
+.popover.fade.bottom a.Closed.text,
+.Closed.text a {
+  color: $color_community_closed;
+}
+
+.popover.fade.bottom a.Organizative.text,
+.Organizative.text a {
+  color: $color_community_organizative;
+}
+
+.popover.fade.bottom a.Open.text,
+.Open.text a {
+  color: $color_community_open;
+}
+
+td.cal_has_events.event-closed {
+  background: $color_community_closed;
+}
+
+td.cal_has_events.event-organizative {
+  background: $color_community_organizative;
+}
+
+td.cal_has_events.event-open {
+  background: $color_community_open;
+}
+
 #box_comunitats .bubble a {
   color: $main-color;
   font-weight: 600;

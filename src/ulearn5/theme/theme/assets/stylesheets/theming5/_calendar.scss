@@ -38,6 +38,24 @@
     padding: 12px 0;
     margin-top: 12px;
   }
+  .portlet-btn {
+    margin-bottom: 40px;
+  }
+  .cal_has_events {
+    border: 1px solid white;
+  }
+  .cal_has_events a[rel="popover"] {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 -1px #4A4A4A;
+  }
+  .avui {
+    font-weight: bold;
+  }
+  .avui.cal_has_events a[rel="popover"] {
+    color: #000000;
+  }
+
 }
 
 .calendari {
@@ -66,10 +84,8 @@
   .avui {
     a {
       background: transparent;
-      border: 2px solid $gray-lighter;
       color: $gray-base;
       width: 28px;
-      height: 28px;
       position: relative;
       display: inline-block;
       border-radius: 50%;
@@ -86,7 +102,30 @@
       }
     }
   }
+  .popover {
+    span.title {
+      flex: 0 !important;
+    }
+    span.hour {
+      margin-left: 5px;
+    }
+   }
 }
-.portlet-btn {
-  margin-bottom: 40px;
+
+.portletCalendar {
+  li.text {
+    border-left-width: 5px;
+    p {
+      margin: 5px;
+      font-weight: bold;
+    }
+    .text2::before {
+        font-family: maxicons;
+        font-style: normal;
+        font-weight: 400;
+        content: '\e811';
+        font-size: 12px;
+        margin-right: 0;
+      }
+  }
 }

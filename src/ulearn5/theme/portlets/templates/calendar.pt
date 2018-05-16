@@ -71,17 +71,20 @@
                                                         next_month day/next_month;
                                                         prev_month day/prev_month;
                                                         events day/events;
+                                                        classtag python:view.getclasstag_event(day);
                                                         limit python:len(events) if events is not None else 0"
-                                    tal:attributes="class python:u'%s%s%s%s' %
+                                    tal:attributes="class python:u'%s%s%s%s%s' %
                                     ((' avui' if today else ''),
                                     (' cal_next_month' if next_month else ''),
                                     (' cal_prev_month' if prev_month else ''),
-                                    (' te-esdeveniment' if events else ''))">
+                                    (events and ' cal_has_events' or ''),
+                                    (classtag or ''))">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
                               <span tal:condition="not:events" tal:content="day/day"></span>
                               <a tal:condition="events" tal:attributes="title day/events_string;"
                                  rel="popover" data-placement="bottom"
                                  tal:content="day/day">31</a>
+
                            </td>
                         </tal:block>
                      </tr>
@@ -98,13 +101,22 @@
             </a>
          </li>
       </ul>
-      <ul class="icons-ul" i18n:domain="ulearn">
-         <li tal:repeat="event view/get_next_three_events">
-            <a tal:attributes="href event/getURL">
-               <i class="fa fa-calendar"></i>
-               <tal:event content="event/Title">Event Title</tal:event>
-            </a>
-         </li>
+      <ul i18n:domain="ulearn" class="icons-ul">
+        <tal:block tal:repeat="events view/get_next_three_events">
+          <li tal:attributes="class string:${events/community_type} text">
+            <p tal:repeat="event events/events">
+              <a tal:attributes="href event/getURL">
+                <tal:event content="event/start"> 07/12 </tal:event> -
+                <tal:event content="event/Title"> Event Title </tal:event>
+              </a>
+            </p>
+            <div class="clearfix"></div>
+            <span class="text2">
+              <span i18n:translate="">Published in</span>
+              <a tal:attributes="href events/community_url" tal:content="events/community_name"></a>
+            </span>
+          </li>
+        </tal:block>
       </ul>
       <p class="newevent"
          tal:condition="view/show_newevent_url">
