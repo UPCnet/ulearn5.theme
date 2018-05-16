@@ -45,7 +45,9 @@ setup(
         'plone.app.theming',
         'plone.app.themingplugins',
         'bleach',
-        'bs4'
+        'bs4',
+        'base5.core',
+        'ulearn5.core'
     ],
     extras_require={
         'test': [
