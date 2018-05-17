@@ -11,7 +11,7 @@
         name="profile"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".user_profile.userProfile"
-        permission="zope2.View"
+        permission="base.authenticated"
         />
 
     <browser:page
