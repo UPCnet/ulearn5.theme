@@ -49,6 +49,10 @@
     <replace css:theme-children=".breadcrumbs ol" css:content-children=".plone-breadcrumb ol" />
     <!-- Footer -->
     <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
+
+    <replace css:theme="#favicon" method="raw">
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    </replace>
     <rules css:if-content="body.template-default_error_message">
         <theme href="error.html" />
         <!-- Portlets Central column -->
@@ -71,7 +75,7 @@
         <before css:content="#login_form">
             <span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
             <span aria-hidden="true" role="presentation" class="icona-upc">
-                <img alt="" src="/++theme++ulearn5/assets/images/logomark.png" />
+                <img id="image_login"/>
             </span>
         </before>
         <!-- Portlets Central column -->

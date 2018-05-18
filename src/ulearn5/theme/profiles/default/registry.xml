@@ -39,13 +39,4 @@
 		<value key="last_compilation">2017-12-13 00:00:00</value>
 	</records>
 
-	<!-- <records prefix="plone.bundles/afterall"
-         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-		<value key="enabled">True</value>
-		<value key="jscompilation">++theme++ulearn5/assets/javascripts/afterall.js</value>
-		<value key="last_compilation">2018-06-30 00:00:00</value>
-		<value key="compile">False</value>
-		<value key="merge_with">plone-logged-in</value>
-	</records> -->
-
 </registry>

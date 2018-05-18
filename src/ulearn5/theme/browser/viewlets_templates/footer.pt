@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row footer-complementary" style="outline-style: none;">
       <div class="col-xs-12" style="outline-style: none;">
-        <p> <span>© UPC - ${viewlet/get_current_year}</span>Universitat Politècnica de Catalunya · BarcelonaTech</p>
+        <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
         <nav>
           <ul id="footer-menu-complementari" class="footer-container" tal:define="links viewlet/get_links">
             <li><a tal:attributes="href links/contact" i18n:translate="contact">Contacte</a></li>

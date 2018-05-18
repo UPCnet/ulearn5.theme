@@ -29,6 +29,12 @@
       type="ulearn"
       name="portlets"
       />
+  <!-- ++ulearn++images -->
+  <!-- <plone:static
+      directory="theme/assets/images"
+      type="ulearn"
+      name="images"
+      /> -->
 
   <!-- Resource traversers -->
   <adapter
