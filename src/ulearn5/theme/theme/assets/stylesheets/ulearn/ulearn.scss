@@ -5620,3 +5620,18 @@ div#maxui-widget-container {
 	}
 
 }
+
+.lead.clearfix{
+	margin-bottom: 18px;
+	font-size: 100%;
+	line-height: 18px;
+	background: #f2f2f2;
+	text-shadow: 0 1px #fff;
+	-moz-box-shadow: 0 1px 1px #b2b2b2;
+	-webkit-box-shadow: 0 1px 1px #b2b2b2;
+	box-shadow: 0 1px 1px #b2b2b2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 12px;
+}
