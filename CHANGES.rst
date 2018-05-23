@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.2 (unreleased)
+0.2 (2018-05-23)
 ----------------
 
-- Nothing changed yet.
-
+* Update with latest versions of code [alberto.duran]
+* Remove unused code [alberto.duran]
 
 0.1 (2018-05-22)
 ----------------
