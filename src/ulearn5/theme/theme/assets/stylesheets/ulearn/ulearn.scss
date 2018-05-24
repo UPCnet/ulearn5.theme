@@ -3101,13 +3101,17 @@ a.community-action {
 }
 
 #box_comunitats .bubble-content {
-	min-height: 40px;
-	line-height: 40px;
+	min-height: 38px;
+	line-height: 38px;
 	align-items: center;
 }
 
 #box_comunitats .bubble-content {
 	padding: 0;
+}
+
+#box_comunitats .bubble-content .fa.fa-folder.fa-stack-2x {
+	top: -2px;
 }
 
 .vertical_aligned a {
@@ -4155,8 +4159,8 @@ i.glyphicon.link-external {
 #box_comunitats .bubble-content .fa a {
 	font-size: 11px;
 	position: absolute;
-	top: -3px;
-	left: 0px;
+	top: -4px;
+	left: -2px;
 	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 }
 
