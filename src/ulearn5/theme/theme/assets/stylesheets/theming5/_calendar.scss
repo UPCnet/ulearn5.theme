@@ -53,6 +53,7 @@
   }
   .avui.cal_has_events a[rel="popover"] {
     color: #000000;
+    text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
   }
 
 }
