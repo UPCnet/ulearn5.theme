@@ -2516,14 +2516,25 @@ input:checked+.sliderbutton:before {
 
 #newtoolbar-title {
 	margin-top: -3px;
+	font-weight: bold;
+	color: #bdbdbd;
 }
 
 #toggle-outoflist,
 #toggle-important,
 #toggle-flash,
-#newtoolbar-title {
+#newtoolbar-title,
+#toggle-newsinapp {
 	display: flex;
 	margin-right: 15px;
+}
+
+
+#toggle-outoflist input,
+#toggle-important input,
+#toggle-flash input,
+#toggle-newsinapp input {
+	display: none !important;
 }
 
 .literal-toggle {
