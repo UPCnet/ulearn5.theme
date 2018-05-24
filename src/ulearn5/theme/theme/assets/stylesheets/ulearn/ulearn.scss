@@ -2690,17 +2690,6 @@ i.icon-folder-contents_pretty_view {
 	display: none;
 }
 
-#formfield-form-widgets-terms span.label:after {
-	color: #a62e1f;
-	content: "*";
-	top: .35em;
-	position: relative;
-	font-size: 150%;
-	line-height: 0;
-	margin-left: 5px;
-}
-
-
 /*Albert estils */
 
 .breadcrumbs {
@@ -4124,6 +4113,10 @@ input[type="checkbox"] {
 	height: auto!important;
 	display: inline-block!important;
 	vertical-align: text-top!important;
+}
+
+input[type="checkbox"].required::after {
+    content: "" !important;
 }
 
 .context {
@@ -5626,4 +5619,19 @@ div#maxui-widget-container {
 		 padding-top: 2px;
 	}
 
+}
+
+.lead.clearfix{
+	margin-bottom: 18px;
+	font-size: 100%;
+	line-height: 18px;
+	background: #f2f2f2;
+	text-shadow: 0 1px #fff;
+	-moz-box-shadow: 0 1px 1px #b2b2b2;
+	-webkit-box-shadow: 0 1px 1px #b2b2b2;
+	box-shadow: 0 1px 1px #b2b2b2;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 12px;
 }

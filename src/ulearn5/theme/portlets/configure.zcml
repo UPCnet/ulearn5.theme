@@ -91,14 +91,6 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.econnect"
-        interface=".econnect.IeConnectPortlet"
-        assignment=".econnect.Assignment"
-        renderer=".econnect.Renderer"
-        addview=".econnect.AddForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.importantnews"
         interface=".importantnews.importantnews.IImportantNewsPortlet"
         assignment=".importantnews.importantnews.Assignment"

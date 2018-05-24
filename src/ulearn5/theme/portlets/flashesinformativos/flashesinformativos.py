@@ -42,15 +42,7 @@ class Assignment(base.Assignment):
         self.name = name
         self.count = count
 
-    @property
-    def title(self):
-        """
-        Display the name in portlet mngmt interface
-        """
-        return 'flashesinformativos'
-        # if self.name:
-        #    return self.name
-        # return 'Flashes_Informativos'
+    title = _(u'flashesinformativos', default=u'Flashes Informativos')
 
 
 class Renderer(base.Renderer):
@@ -101,7 +93,6 @@ class Renderer(base.Renderer):
     def abreviaRichText(self, obj, limit):
         """ Retalla contingut segons un limit de caracters sense tags, tanca tags...
         """
-        # body = obj.output
         text_clean_bleach = bleach.clean(obj, tags=['p', 'strong', 'em', 'a', 'b', 'br'], strip=True)
 
         def fix_tags(html):
@@ -171,20 +162,13 @@ class Renderer(base.Renderer):
 
         return dades
 
-        # data = [dict(id=a.id,
-        #              url=a.getURL(),
-        #              flash=a.getObject(),
-        #              image=a.getObject().image,
-        #              text=self.abrevia(a.getObject().text.raw, 90),) for a in flashes]
-        # return data
-
     def get_flashesinformatius_folder_url(self):
         url = self.portal().absolute_url() + '/news'
         return url
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IFlashesInformativosPortlet)
+    schema = IFlashesInformativosPortlet
     label = _(u"Add Flashes Informativos Portlet")
     description = _(u"This portlet displays Flashes Informativos.")
 
@@ -193,11 +177,6 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    """Portlet edit form.
-
-    This is registered with configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display.
-    """
-    form_fields = form.Fields(IFlashesInformativosPortlet)
+    schema = IFlashesInformativosPortlet
     label = _(u"Edit Flashes Informativos portlet")
     description = _(u"This portlet displays Flashes Informativos.")

@@ -119,11 +119,22 @@
   padding-top: 0;
   padding-bottom: 5px;
   float:left;
+  width: 65%;
 }
 /* line 332, CreditAndorraTheme.scss */
 #flasinformatiu .newsImage {
   margin-right: 10px;
   float:left;
+}
+
+#flasinformatiu .carousel-control.right {
+  top: auto;
+}
+
+@media only screen and (max-width: 480px) {
+  #flasinformatiu {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 640px){
@@ -138,5 +149,10 @@
 
 .ulearnboxflash .carousel-inner .item { overflow: hidden;              /* "overflow" value must be different from "visible" */
   text-overflow: ellipsis; height: 30px; text-overflow: "…";}
+
+.ulearnboxflash .item a {
+  vertical-align: middle;
+  font-size: 1.05em;
+}
 
 /* ==================== FIN flashes-informativos ==================== */

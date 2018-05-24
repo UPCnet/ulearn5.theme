@@ -41,9 +41,7 @@ class Assignment(base.Assignment):
         self.count = count
         self.state = state
 
-    @property
-    def title(self):
-        return _(u"importantnews")
+    title = _(u'importantnews', default=u'Important News')
 
 
 class Renderer(base.Renderer):
@@ -56,10 +54,6 @@ class Renderer(base.Renderer):
     # @ram.cache(render_cachekey)
     def render(self):
         return xhtml_compress(self._template())
-
-    # @property
-    # def available(self):
-    #     return self.data.count > 0 and len(self._data())
 
     @memoize_contextless
     def portal(self):
@@ -171,7 +165,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IImportantNewsPortlet)
+    schema = IImportantNewsPortlet
     label = _(u"Add News Portlet")
     description = _(u"This portlet displays recent News Items.")
 
@@ -181,6 +175,6 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IImportantNewsPortlet)
+    schema = IImportantNewsPortlet
     label = _(u"Edit News Portlet")
     description = _(u"This portlet displays recent News Items.")

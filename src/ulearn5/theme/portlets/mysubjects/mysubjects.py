@@ -79,7 +79,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IMySubjectsPortlet)
+    schema = IMySubjectsPortlet
     label = _(u"Add My Subjects Portlet")
     description = _(u"This portlet displays my subjects on moodle.")
 
@@ -90,6 +90,6 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IMySubjectsPortlet)
+    schema = IMySubjectsPortlet
     label = _(u"Edit My Subjects Portlet")
     description = _(u"This portlet displays my subjects on moodle.")

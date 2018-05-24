@@ -20,8 +20,6 @@
     <!--portlets externs -->
     <portlet addview="ulearn.portlets.discussion" title="Ulearn discussion"
                 i18n:attributes="title"/>
-    <portlet addview="ulearn.portlets.econnect" title="Ulearn eConnect"
-                i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.importantnews" title="News Important"
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.flashesinformativos" title="News Flash"
