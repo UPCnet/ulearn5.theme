@@ -21,7 +21,7 @@
         <!-- Pull in Plone Meta -->
         <after css:theme-children="head" css:content="head meta" />
         <!-- CSS -->
-        <after css:theme="head title" css:content="head link" />
+        <after css:theme-children="head" css:content="head link" />
         <!-- ... before your own scripts -->
         <before theme="/html/head/script[1]">
             <xsl:apply-templates select="/html/head/script" />
