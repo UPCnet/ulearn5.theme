@@ -3,7 +3,7 @@
 .template-login_form,
 .template-logged_out,
 .template-login_failed {
-	background: url(++theme++ulearn5/assets/images/background-login.jpg) no-repeat center center fixed;
+	background: url(++theme++ulearn5/assets/images/background-login.jpg) no-repeat center center fixed !important;
 }
 
 #image_login {

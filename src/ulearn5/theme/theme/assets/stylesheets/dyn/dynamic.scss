@@ -336,3 +336,9 @@ i.shared_icon {
     font-size: 25px;
     padding-right: 20px;
 }
+
+/* The slider */
+
+input:checked+.sliderbutton {
+  background-color: $main-color;
+}
