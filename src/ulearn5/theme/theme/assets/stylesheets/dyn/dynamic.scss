@@ -342,3 +342,71 @@ i.shared_icon {
 input:checked+.sliderbutton {
   background-color: $main-color;
 }
+
+
+/* Portlet profile within community */
+
+.btn-group.contentaddtoolbar .btn-default {
+  color: $buttons-color-primary;
+  background-color: #edf1f2!important;
+  border-color: #ddd;
+  &:hover {
+    background-color: $buttons-color-primary!important;
+    color: #fff!important;
+    border-color: #ddd;
+  }
+}
+
+/* Buttons */
+
+body:not(.template-folder_contents) .btn-default {
+  background-color: $buttons-color-primary!important;
+}
+
+
+/* Links footer - Header */
+
+.footer-complementary a,
+.main-banner .upc-eines>li>a,
+li.ulearn-eines-ql>a>span {
+  color: $secondary-color!important;
+  &:hover {
+    color: darken($secondary-color, 10%)!important;
+  }
+}
+
+#edit-zone .plone-toolbar-logo {
+  background: darken($main-color, 5%)!important;
+}
+
+#edit-zone .plone-toolbar-logo:after,
+.plone-toolbar-top #edit-zone .plone-toolbar-logo:after {
+  border-left: 4px solid darken($main-color, 5%)!important;
+}
+
+#edit-zone a:focus,
+#edit-zone nav>ul>li>a:hover,
+#edit-zone nav>ul>li.active>a,
+#edit-zone nav>ul ul a:hover,
+#edit-zone nav>ul>li.active>a>span+span,
+#edit-zone li:not(.active) a:hover>span {
+  background: $secondary-color !important;
+}
+
+/* Portlet ButtonBar */
+
+#menusup nav a {
+  color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 10%);
+  }
+}
+
+/* Tabs */
+
+.autotoc-nav>a.active,
+.autotoc-nav>a.active:focus,
+.autotoc-nav>a.active:hover,
+.pat-autotoc.autotabs .autotoc-nav a.active {
+  border-bottom: 3px solid $secondary-color!important;
+}
