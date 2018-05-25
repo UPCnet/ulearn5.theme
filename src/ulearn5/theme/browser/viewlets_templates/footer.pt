@@ -3,15 +3,7 @@
     <div class="row footer-complementary" style="outline-style: none;">
       <div class="col-xs-12" style="outline-style: none;">
         <tal:block tal:condition="not:customized_footer">
-          <p> <span>© UPC - ${viewlet/get_current_year}</span>Universitat Politècnica de Catalunya · BarcelonaTech</p>
-          <nav>
-            <ul id="footer-menu-complementari" class="footer-container" tal:define="links viewlet/get_links">
-              <li><a tal:attributes="href links/contact" i18n:translate="contact">Contacte</a></li>
-              <li><a accesskey="3" tal:attributes="href links/sitemap" i18n:translate="sitemap">Mapa del web</a></li>
-              <li><a accesskey="0" tal:attributes="href links/accessibility" i18n:translate="accessibility">Accessibilitat</a></li>
-              <li><a tal:attributes="href links/disclaimer" i18n:translate="disclaimer">Avís legal</a></li>
-            </ul>
-          </nav>
+          <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
         </tal:block>
         <tal:block tal:condition="customized_footer" tal:content="structure customized_footer/output"></tal:block>
       </div>
