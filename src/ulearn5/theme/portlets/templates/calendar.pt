@@ -36,8 +36,8 @@
          <div class="portlet-block">
            <header class="portlet-header">
              <a href="#" rel="nofollow" class="calendari-anterior" title="Previous month"
-                tal:define="prev_month view/prev_month; prev_year view/prev_year"
-                tal:attributes="href view/prev_query; data-year prev_year; data-month prev_month;"
+                tal:define="prev_month view/prev_month; prev_year view/prev_year; "
+                tal:attributes="href view/prev_query; data-year prev_year; data-month prev_month; data-community view/is_community; data-community_path view/getCommunityPath"
                 i18n:attributes="title title_previous_month;">&laquo;</a>
              <h3>
                 <span i18n:translate="" tal:omit-tag="">
@@ -49,7 +49,7 @@
              </h3>
              <a href="#" rel="nofollow" class="calendari-seguent" title="Next month"
                 tal:define="next_month view/next_month; next_year view/next_year"
-                tal:attributes="href view/next_query; data-year next_year; data-month next_month;"
+                tal:attributes="href view/next_query; data-year next_year; data-month next_month; data-community view/is_community; data-community_path view/getCommunityPath"
                 i18n:attributes="title title_next_month;">&raquo;</a>
            </header>
            <article class="portlet-content">
@@ -59,7 +59,7 @@
                      <tr class="weekdays">
                         <tal:data repeat="weekday view/weekdays">
                            <th scope="col">
-                              <abbr data-toggle='tooltip' data-placement='top' i18n:translate="" tal:content="weekday">Su</abbr>
+                              <abbr i18n:translate="" tal:content="weekday">Su</abbr>
                            </th>
                         </tal:data>
                      </tr>
@@ -81,8 +81,7 @@
                                     (classtag or ''))">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
                               <span tal:condition="not:events" tal:content="day/day"></span>
-                              <a tal:condition="events" tal:attributes="title day/events_string;"
-                                 rel="popover" data-placement="bottom"
+                              <a tal:condition="events" tal:attributes="data-year day/year; data-month day/month; data-day day/day; data-community view/is_community; data-community_path view/getCommunityPath"
                                  tal:content="day/day">31</a>
 
                            </td>
@@ -102,7 +101,7 @@
          </li>
       </ul>
       <ul i18n:domain="ulearn" class="icons-ul">
-        <tal:block tal:repeat="events view/get_next_three_events">
+        <tal:block tal:repeat="events view/getDayEventsGroup">
           <li tal:attributes="class string:${events/community_type} text">
             <p tal:repeat="event events/events">
               <a tal:attributes="href event/getURL">

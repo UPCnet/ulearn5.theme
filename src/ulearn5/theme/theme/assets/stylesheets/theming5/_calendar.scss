@@ -44,14 +44,14 @@
   .cal_has_events {
     border: 1px solid white;
   }
-  .cal_has_events a[rel="popover"] {
+  .cal_has_events a {
     color: #ffffff;
     font-weight: bold;
   }
   .avui {
     font-weight: bold;
   }
-  .avui.cal_has_events a[rel="popover"] {
+  .avui.cal_has_events a{
     color: #000000;
     text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
   }
@@ -102,21 +102,13 @@
       }
     }
   }
-  .popover {
-    span.title {
-      flex: 0 !important;
-    }
-    span.hour {
-      margin-left: 5px;
-    }
-   }
 }
 
 .portletCalendar {
   li.text {
     border-left-width: 5px;
     p {
-      margin: 5px;
+      margin: 5px 5px 5px 0px;
       font-weight: bold;
     }
     .text2::before {
