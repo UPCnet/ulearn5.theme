@@ -1,6 +1,7 @@
 from Acquisition import aq_chain
 from Acquisition import aq_inner
 from datetime import datetime
+from datetime import timedelta
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
@@ -9,8 +10,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.event.base import RET_MODE_OBJECTS
 from plone.app.event.base import construct_calendar
-from plone.app.event.base import dt_end_of_day
-from plone.app.event.base import dt_start_of_day
 from plone.app.event.base import first_weekday
 from plone.app.event.base import get_events
 from plone.app.event.base import localized_now
@@ -19,6 +18,8 @@ from plone.app.event.base import wkday_to_mon1
 from plone.app.event.portlets import get_calendar_url
 from plone.app.portlets.portlets import base
 from plone.dexterity.interfaces import IDexterityContent
+from plone.event.interfaces import IEvent
+
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.i18nmessageid import MessageFactory
@@ -29,7 +30,6 @@ from ulearn5.core.interfaces import IEventsFolder
 from ulearn5.theme import calmodule
 
 import itertools
-import pytz
 
 
 PLMF = MessageFactory('plonelocales')
@@ -149,7 +149,10 @@ class Renderer(base.Renderer):
     def getDifferentCommunities(self, events):
         communities = []
         for event in events:
-            uid = event.aq_parent.aq_parent.UID()
+            if IEvent.providedBy(event):
+                uid = event.aq_parent.aq_parent.UID()
+            else:
+                uid = event.aq_parent.aq_parent.aq_parent.UID()
             if uid not in communities:
                 communities.append(uid)
         return communities
@@ -174,12 +177,8 @@ class Renderer(base.Renderer):
                     classtag += ' event-organizative '
         return classtag
 
-    @property
-    def cal_data(self):
-        """Calendar iterator over weeks and days of the month to display.
-        """
+    def getCalendarDict(self):
         context = aq_inner(self.context)
-        today = localized_today(context)
         year, month = self.year_month_display()
         monthdates = [dat for dat in self.cal.itermonthdates(year, month)]
 
@@ -194,10 +193,19 @@ class Renderer(base.Renderer):
 
         start = monthdates[0]
         end = monthdates[-1]
-        events = get_events(context, start=start, end=end,
+        events = get_events(context,
+                            start=start-timedelta(days=30), end=end,
                             ret_mode=RET_MODE_OBJECTS,
                             expand=True, **query_kw)
-        cal_dict = construct_calendar(events, start=start, end=end)
+        return construct_calendar(events, start=start, end=end)
+
+    @property
+    def cal_data(self):
+        context = aq_inner(self.context)
+        today = localized_today(context)
+        year, month = self.year_month_display()
+        monthdates = [dat for dat in self.cal.itermonthdates(year, month)]
+        cal_dict = self.getCalendarDict()
 
         # [[day1week1, day2week1, ... day7week1], [day1week2, ...]]
         caldata = [[]]
@@ -257,27 +265,16 @@ class Renderer(base.Renderer):
             return
 
     def getDayEvents(self, date):
-        context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        portal = getToolByName(context, 'portal_url').getPortalObject()
-
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
-        }
-
-        events = pc(**query)
+        events = self.getCalendarDict()
         list_events = []
-
-        for item in events:
-            event = item.getObject()
-            endEventDate = dt_end_of_day(event.end)
-            startEventDate = dt_start_of_day(event.start)
-            date = date.replace(tzinfo=pytz.UTC)
-            if date >= startEventDate and date <= endEventDate:
-                list_events.append(dict(Title=item.Title,
-                                        getURL=item.getURL(),
+        if date.strftime('%Y-%m-%d') in events:
+            for event in events[date.strftime('%Y-%m-%d')]:
+                if not IEvent.providedBy(event):
+                    event = event.aq_parent
+                    if event in events[date.strftime('%Y-%m-%d')]:
+                        continue
+                list_events.append(dict(Title=event.title,
+                                        getURL=event.absolute_url(),
                                         start=event.start.strftime('%d/%m'),
                                         community_type=event.community_type,
                                         community_name=event.aq_parent.aq_parent.title,
@@ -299,7 +296,6 @@ class Renderer(base.Renderer):
         }
 
         events = pc(**query)
-        # nearest = self.get_nearest_today_event()
         list_events = []
 
         for item in events:
