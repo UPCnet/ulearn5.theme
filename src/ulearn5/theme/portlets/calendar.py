@@ -325,6 +325,9 @@ class Renderer(base.Renderer):
 
     def getDayEventsGroup(self):
         group_events = []
+        if 'day' not in self.request.form and 'month' in self.request.form:
+            return None
+
         if 'day' not in self.request.form and 'month' not in self.request.form:
             list_events = self.getNextThreeEvents()
         else:
