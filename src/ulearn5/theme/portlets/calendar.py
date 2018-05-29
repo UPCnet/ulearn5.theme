@@ -268,11 +268,8 @@ class Renderer(base.Renderer):
         events = self.getCalendarDict()
         list_events = []
         if date.strftime('%Y-%m-%d') in events:
-            for event in events[date.strftime('%Y-%m-%d')]:
-                if not IEvent.providedBy(event):
-                    event = event.aq_parent
-                    if event in events[date.strftime('%Y-%m-%d')]:
-                        continue
+            events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')])
+            for event in events:
                 list_events.append(dict(Title=event.title,
                                         getURL=event.absolute_url(),
                                         start=event.start.strftime('%d/%m'),
@@ -283,30 +280,48 @@ class Renderer(base.Renderer):
 
     def getNextThreeEvents(self):
         context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        now = localized_now()
-        portal = getToolByName(context, 'portal_url').getPortalObject()
+        query_kw = {}
+        if self.search_base:
+            portal = getToolByName(context, 'portal_url').getPortalObject()
+            query_kw['path'] = {'query': '%s%s' % (
+                '/'.join(portal.getPhysicalPath()), self.search_base)}
 
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'end': {'query': now, 'range': 'min'},
-            'sort_on': 'start',
-            'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
-        }
+        if self.state:
+            query_kw['review_state'] = self.state
 
-        events = pc(**query)
+        events = get_events(context, ret_mode=RET_MODE_OBJECTS, expand=True, **query_kw)
+        events = self.filterNextEvents(events)
+        events = self.filterOccurrenceEvents(events)
+
         list_events = []
-
-        for item in events:
-            event = item.getObject()
-            list_events.append(dict(Title=item.Title,
-                                    getURL=item.getURL(),
+        for event in events[:3]:
+            list_events.append(dict(Title=event.title,
+                                    getURL=event.absolute_url(),
                                     start=event.start.strftime('%d/%m'),
                                     community_type=event.community_type,
                                     community_name=event.aq_parent.aq_parent.title,
                                     community_url=event.aq_parent.aq_parent.absolute_url()))
-        return list_events[:3]
+
+        return list_events
+
+    def filterOccurrenceEvents(self, events):
+        filter_events = []
+        for event in events:
+            if not IEvent.providedBy(event):
+                event = event.aq_parent
+                if event not in filter_events:
+                    filter_events.append(event)
+            else:
+                filter_events.append(event)
+
+        return filter_events
+
+    def filterNextEvents(self, events):
+        filter_events = []
+        for event in events:
+            if event.end > localized_now():
+                filter_events.append(event)
+        return filter_events
 
     def getDayEventsGroup(self):
         group_events = []
