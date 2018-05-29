@@ -251,6 +251,10 @@ td.cal_has_events.event-open {
   background: $color_community_open;
 }
 
+td.cal_has_events.event-multiple {
+  background: $buttons-color-primary;
+}
+
 #box_comunitats .bubble a {
   color: $main-color;
   font-weight: 600;
