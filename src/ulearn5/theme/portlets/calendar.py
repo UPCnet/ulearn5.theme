@@ -146,23 +146,24 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
-    def getDifferentCommunities(self, events):
-        communities = []
-        for event in events:
-            if IEvent.providedBy(event):
-                uid = event.aq_parent.aq_parent.UID()
-            else:
-                uid = event.aq_parent.aq_parent.aq_parent.UID()
-            if uid not in communities:
-                communities.append(uid)
-        return communities
+    # def getDifferentCommunities(self, events):
+    #     communities = []
+    #     for event in events:
+    #         if IEvent.providedBy(event):
+    #             uid = event.aq_parent.aq_parent.UID()
+    #         else:
+    #             uid = event.aq_parent.aq_parent.aq_parent.UID()
+    #         if uid not in communities:
+    #             communities.append(uid)
+    #     return communities
 
     def getclasstag_event(self, day):
         # Returns class color to show in the calendar
         classtag = ''
 
         if day['events']:
-            if len(self.getDifferentCommunities(day['events'])) > 1:
+            # if len(self.getDifferentCommunities(day['events'])) > 1:
+            if len(day['events']) > 1:
                 classtag += ' event-multiple '
             else:
                 event = day['events'][0]
