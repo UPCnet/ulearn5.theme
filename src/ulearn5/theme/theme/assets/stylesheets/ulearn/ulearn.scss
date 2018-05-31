@@ -5675,3 +5675,18 @@ div#maxui-widget-container {
 	border-radius: 5px;
 	padding: 12px;
 }
+
+#form-buttons-cancel {
+	float: none!important;
+	color: #4d4d4d;
+	background-color: #e5e5e5!important;
+	border-color: #b2b2b2;
+	margin-left: 10px;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.25);
+	font-weight: 700;
+	&:hover{
+		color: #4d4d4d;
+		background-color: #cccccc!important;
+		border-color: #939393;
+	}
+}
