@@ -47,7 +47,7 @@ $(document).ready(function () {
         $('.portletCalendar a.calendari-anterior').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
-        $('.portletCalendar .cal_has_events a').click(function (event) {
+        $('.portletCalendar .cal_has_events').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
         $('#box_agenda #day').click(function (event) {

@@ -80,11 +80,11 @@
                                     (' cal_next_month' if next_month else ''),
                                     (' cal_prev_month' if prev_month else ''),
                                     (events and ' cal_has_events' or ''),
-                                    (classtag or ''))">
+                                    (classtag or ''));
+                                    data-year day/year; data-month day/month; data-day day/day; data-community view/is_community; data-community_path view/getCommunityPath">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
                               <span tal:condition="not:events" tal:content="day/day"></span>
-                              <a tal:condition="events" tal:attributes="data-year day/year; data-month day/month; data-day day/day; data-community view/is_community; data-community_path view/getCommunityPath"
-                                 tal:content="day/day">31</a>
+                              <a tal:condition="events" tal:content="day/day">31</a>
 
                            </td>
                         </tal:block>
