@@ -9,12 +9,13 @@ from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+
 from plone import api
 from souper.soup import get_soup
 from repoze.catalog.query import Eq
@@ -100,33 +101,47 @@ class Renderer(base.Renderer):
            'Owner' in self.context.get_local_roles_for_userid(user.id)):
             return True
 
-    def getCommunities(self):
+    def getTypeCommunities(self, typeCommunity):
         portal = self.portal()
         pc = getToolByName(portal, "portal_catalog")
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
-        communities = []
-        try:
-            communities = pc.searchResults(object_provides=ICommunity.__identifier__,
+        communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,
-                                       sort_on="subscribed_items",
-                                       sort_order="reverse")
-        except:
-            pass
+                                       community_type=typeCommunity,
+                                       sort_on="sortable_title")
 
         def format_communities():
             """ Generator to return information of the community.
             """
             for community in communities:
-                info = {'id': community.id,
-                        'url': community.getURL(),
-                        'title': community.Title,
-                        'community_type': community.community_type,
-                        'pending': self.get_pending_community_user(community, current_user)
-                        }
-                yield info
+                    info = {'id': community.id,
+                            'url': community.getURL(),
+                            'title': community.Title,
+                            'community_type': community.community_type,
+                            'image': community.getObject().image,
+                            'pending': self.get_pending_community_user(community, current_user)
+                            }
+                    yield info
 
-        return format_communities()
+        return format_communities() if len(communities) > 0 else None
+
+    def getOpenCommunities(self):
+        """ in GWOPA equals to CoP """
+        return self.getTypeCommunities("Open")
+
+    def getOrganizativeCommunities(self):
+        """ in GWOPA equals to Corporate """
+        return self.getTypeCommunities("Organizative")
+
+    def getClosedCommunities(self):
+        """ in GWOPA equals to Wop Team """
+        return self.getTypeCommunities("Closed")
+
+    def displayTypeCommunity(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IUlearnControlPanelSettings, check=False)
+        return settings.show_literals
 
     def getCommunityMembers(self, community):
         if community.subscribed_items < 100:
@@ -155,6 +170,11 @@ class Renderer(base.Renderer):
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName()
         return current_user
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
 
 class AddForm(base.NullAddForm):

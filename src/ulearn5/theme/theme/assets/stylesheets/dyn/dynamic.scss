@@ -75,15 +75,6 @@ a {
   }
 }
 
-#box_comunitats {
-  .bubble-content {
-    background: none repeat scroll 0 0 $main-color;
-  }
-  .bubble {
-    .arrow { border-right-color: $main-color; }
-  }
-}
-
 input[type="text"] {
   border-color: $main-color;
 }
@@ -213,15 +204,15 @@ h1, h2, h3, label, span.label, fieldset legend {
 }
 
 .Closed {
-  border-left: 3px solid $color_community_closed;
+  border-left: 5px solid $color_community_closed;
 }
 
 .Organizative {
-  border-left: 3px solid $color_community_organizative;
+  border-left: 5px solid $color_community_organizative;
 }
 
 .Open {
-  border-left: 3px solid $color_community_open;
+  border-left: 5px solid $color_community_open;
 }
 
 .popover.fade.bottom a.Closed.text,
@@ -253,13 +244,6 @@ td.cal_has_events.event-open {
 
 td.cal_has_events.event-multiple {
   background: $buttons-color-primary;
-}
-
-#box_comunitats .bubble a {
-  color: $main-color;
-  font-weight: 600;
-  height: 18px;
-  width: 33px;
 }
 
 #tagslist a h4 {
@@ -413,4 +397,62 @@ li.ulearn-eines-ql>a>span {
 .autotoc-nav>a.active:hover,
 .pat-autotoc.autotabs .autotoc-nav a.active {
   border-bottom: 3px solid $secondary-color!important;
+}
+
+/* Porlet communities */
+
+#box_comunitats {
+  .bubble a {
+    font-weight: 600;
+    height: 18px;
+    width: 33px;
+  }
+  .titleClosed {
+    color: $color_community_closed;
+  }
+  .titleOpen {
+    color: $color_community_open;
+  }
+  .titleOrganizative {
+    color: $color_community_organizative;
+  }
+  .Closed {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_closed;
+      }
+      a {
+        color: $color_community_closed;
+      }
+    }
+    .bubble-content {
+        background: none repeat scroll 0 0 $color_community_closed;
+    }
+  }
+  .Open {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_open;
+      }
+      a {
+        color: $color_community_open;
+      }
+    }
+    .bubble-content {
+      background: none repeat scroll 0 0 $color_community_open;
+    }
+  }
+  .Organizative {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_organizative;
+      }
+      a {
+        color: $color_community_organizative;
+      }
+    }
+    .bubble-content {
+      background: none repeat scroll 0 0 $color_community_organizative;
+    }
+  }
 }

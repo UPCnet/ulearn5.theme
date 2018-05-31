@@ -347,12 +347,30 @@ input[type="text"]:focus {
 }
 
 #box_comunitats {
-	.nav {
-		margin-bottom: 10px;
-		margin-top: 10px;
+	.nav li > a {
+		padding: 5px 15px;
 	}
 	.subnavbar {
 		margin-bottom: 0;
+	}
+	.nav-pills {
+		.bubble-content {
+			min-height: 28px;
+	    	line-height: 28px;
+		}
+		li > a {
+	   		margin-bottom: 6px;
+	   	}
+	 }
+	.titleCommunity {
+		margin-top: 8px;
+		font-size: 1.3em;
+		&.titleOpen {
+			margin-top: 0px;
+		}
+	}
+	.communitylinks {
+		padding-top: 10px;
 	}
 }
 
@@ -3092,6 +3110,10 @@ span#breadcrumbs-current {
 a.community-action {
 	font-size: 13px;
 	padding-right: 10px;
+}
+
+a.community-action.community-favorite.community-favorited:before {
+    color: #ff9b00;
 }
 
 #box_comunitats .fa-stack {
