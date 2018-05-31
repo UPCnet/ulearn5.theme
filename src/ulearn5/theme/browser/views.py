@@ -853,18 +853,18 @@ class SharedWithMe(baseCommunities):
     grok.layer(IUlearn5ThemeLayer)
 
 
-class resetMenuBar(grok.View):
+class ResetMenuBar(grok.View):
     """ This view reset the personal bar """
-
     grok.name('reset_menu')
-    grok.context(IPloneSiteRoot)
-    grok.template('reset_menu_bar')
+    grok.context(Interface)
+    grok.require('cmf.ModifyPortalContent')
     grok.layer(IUlearn5ThemeLayer)
 
-    def update(self):
+    def render(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         soup_menu = get_soup('menu_soup', portal)
         soup_menu.clear()
+        self.redirect('/'.join(self.context.getPhysicalPath()))
 
 
 class SendEventToAttendees(grok.View):
