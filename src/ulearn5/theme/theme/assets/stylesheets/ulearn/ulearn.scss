@@ -87,7 +87,7 @@ body.template-login_failed input[type="text"] {
 }
 
 body {
-	background: #EDF1F2;
+	background: #EDF1F2!important;;
 	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 	font-size: 16px;
 	font-weight: 300;
@@ -2516,14 +2516,25 @@ input:checked+.sliderbutton:before {
 
 #newtoolbar-title {
 	margin-top: -3px;
+	font-weight: bold;
+	color: #bdbdbd;
 }
 
 #toggle-outoflist,
 #toggle-important,
 #toggle-flash,
-#newtoolbar-title {
+#newtoolbar-title,
+#toggle-newsinapp {
 	display: flex;
 	margin-right: 15px;
+}
+
+
+#toggle-outoflist input,
+#toggle-important input,
+#toggle-flash input,
+#toggle-newsinapp input {
+	display: none !important;
 }
 
 .literal-toggle {
@@ -3090,13 +3101,17 @@ a.community-action {
 }
 
 #box_comunitats .bubble-content {
-	min-height: 40px;
-	line-height: 40px;
+	min-height: 38px;
+	line-height: 38px;
 	align-items: center;
 }
 
 #box_comunitats .bubble-content {
 	padding: 0;
+}
+
+#box_comunitats .bubble-content .fa.fa-folder.fa-stack-2x {
+	top: -2px;
 }
 
 .vertical_aligned a {
@@ -4144,8 +4159,8 @@ i.glyphicon.link-external {
 #box_comunitats .bubble-content .fa a {
 	font-size: 11px;
 	position: absolute;
-	top: -3px;
-	left: 0px;
+	top: -4px;
+	left: -2px;
 	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 }
 
@@ -5127,7 +5142,7 @@ li.select2-search-field.form-control {
 }
 
 #maxui-container .maxui-actor a .maxui-displayname {
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: 600;
 }
 
@@ -5449,7 +5464,7 @@ div#maxui-widget-container {
 		display: none!important;
 	}
 	#maxui-container .maxui-body {
-		font-size: 16px!important;
+		font-size: 15px!important;
 	}
 }
 
