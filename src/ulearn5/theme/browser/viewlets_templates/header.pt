@@ -35,14 +35,14 @@
             <li role="menuitem" tal:repeat="item dades/links">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href item/url">
-                     <tal:link tal:content="item/title">
-                        Links1</tal:link>
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/title">Links1</tal:link>
                 </a>
               </tal:span>
               <tal:span condition="item/new_window">
                 <a class="quicklinks" tal:attributes="href item/url" target="_blank">
-                     <tal:link tal:content="item/title">
-                        Links1</tal:link>
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/title">Links1</tal:link>
                 </a>
               </tal:span>
             </li>
@@ -81,7 +81,7 @@
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/reset_menu">
+              <a href="reset_menu">
                 <i class="fa fa-refresh"></i>
                 <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
@@ -98,7 +98,7 @@
               <tal:quicklinks tal:content="dades/quickLinksLiteral"> Quick Links </tal:quicklinks>
               <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="ql" role="menu" >
+          <ul class="dropdown-menu pull-right" aria-labelledby="ql" role="menu" >
             <li role="presentation" tal:repeat="item dades/quickLinksTable">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href string:${item/link}" role="menuitem">

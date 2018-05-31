@@ -185,6 +185,7 @@ class viewletHeaderUlearn(viewletBase):
                         'title': obj.title,
                         'url': obj.remoteUrl,
                         'new_window': obj.open_link_in_new_window,
+                        'icon': obj.awicon
                         }
                 try:
                     carpetes[link_parent_path]['links'].append(info)

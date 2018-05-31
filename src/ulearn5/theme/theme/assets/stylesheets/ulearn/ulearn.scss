@@ -5640,7 +5640,7 @@ div#maxui-widget-container {
 }
 
 .userrole-anonymous #portal-header {
-	top: 0px!important
+	top: 0px!important\e691
 }
 
 
@@ -5689,4 +5689,16 @@ div#maxui-widget-container {
 		background-color: #cccccc!important;
 		border-color: #939393;
 	}
+}
+
+a.quicklinks::after {
+	font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    content: '\f08e';
+    font-size: 8px;
+    vertical-align: top;
+    margin-right: 0;
+    padding-left: 3px;
+    color: #007bc0;
 }
