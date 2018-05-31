@@ -8,12 +8,14 @@
       <div class="osomcorner-wrapper"><div class="osomcorner"></div> </div>
       <h2>Agenda</h2>
       <div id="agenda" class="row" tal:define="today view/today">
-         <div id="day" class="bubble left col-lg-4 col-md-4 col-xs-4">
+         <div id="day" class="bubble left col-lg-4 col-md-4 col-xs-4"
+              tal:attributes="data-year today/year; data-month today/month; data-day today/day;
+                              data-community view/is_community; data-community_path view/getCommunityPath" >
             <div class="arrow"></div>
             <div class="bubble-content">
-               <p tal:content="today/number">14</p>
+               <p tal:content="today/day">14</p>
                <p class="data"
-                  tal:content="today/weekday">Jueves</p>
+                  tal:content="today/weekdayLit">Jueves</p>
             </div>
          </div>
          <div id="esdev" class="col-md-8"
@@ -105,13 +107,17 @@
           <li tal:attributes="class string:${events/community_type} text">
             <p tal:repeat="event events/events">
               <a tal:attributes="href event/getURL">
-                <tal:event content="event/start"> 07/12 </tal:event> -
-                <tal:event content="event/Title"> Event Title </tal:event>
+                <tal:event content="event/start"> 07/12 </tal:event>
+                <span tal:condition="event/end">
+                  <span i18n:translate=""> to </span>
+                  <tal:event content="event/end"> 07/12 </tal:event>
+                </span>
+                - <tal:event content="event/Title"> Event Title </tal:event>
               </a>
             </p>
             <div class="clearfix"></div>
             <span class="text2">
-              <span i18n:translate="">Published in</span>
+              <!-- <span i18n:translate="">Published in</span> -->
               <a tal:attributes="href events/community_url" tal:content="events/community_name"></a>
             </span>
           </li>

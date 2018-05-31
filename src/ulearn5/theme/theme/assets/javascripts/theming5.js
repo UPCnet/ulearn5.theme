@@ -50,6 +50,9 @@ $(document).ready(function () {
         $('.portletCalendar .cal_has_events a').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
+        $('#box_agenda #day').click(function (event) {
+            load_portlet_calendar(event, $(this));
+        });
         $('.portletCalendar dd a[title]').tooltip({
             offset: [-10, 0],
             tipClass: 'pae_calendar_tooltip'

@@ -62,6 +62,10 @@ a {
   background: none repeat scroll 0 0 $main-color;
   text-shadow: 1px 1px 0 #444;
   .arrow { border-left-color: $main-color; }
+  &:hover {
+    background: none repeat scroll 0 0 darken($main-color, 5%);
+    .arrow { border-left-color: darken($main-color, 5%); }
+  }
 }
 
 .todayevent{ background:$main-color; }
@@ -230,20 +234,31 @@ h1, h2, h3, label, span.label, fieldset legend {
   color: $color_community_open;
 }
 
-td.cal_has_events.event-closed {
-  background: $color_community_closed;
-}
-
-td.cal_has_events.event-organizative {
-  background: $color_community_organizative;
-}
-
-td.cal_has_events.event-open {
-  background: $color_community_open;
-}
-
-td.cal_has_events.event-multiple {
-  background: $buttons-color-primary;
+td.cal_has_events {
+  &.event-closed {
+    background: $color_community_closed;
+    &:hover{
+      background: darken($color_community_closed, 5%);
+    }
+  }
+  &.event-organizative {
+    background: $color_community_organizative;
+    &:hover{
+      background: darken($color_community_organizative, 5%);
+    }
+  }
+  &.event-open {
+    background: $color_community_open;
+    &:hover{
+      background: darken($color_community_open, 5%);
+    }
+  }
+  &.event-multiple {
+    background: $buttons-color-primary;
+    &:hover{
+      background: darken($buttons-color-primary, 5%);
+    }
+  }
 }
 
 #tagslist a h4 {

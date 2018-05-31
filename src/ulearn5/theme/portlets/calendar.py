@@ -146,24 +146,24 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
-    # def getDifferentCommunities(self, events):
-    #     communities = []
-    #     for event in events:
-    #         if IEvent.providedBy(event):
-    #             uid = event.aq_parent.aq_parent.UID()
-    #         else:
-    #             uid = event.aq_parent.aq_parent.aq_parent.UID()
-    #         if uid not in communities:
-    #             communities.append(uid)
-    #     return communities
+    def getDifferentCommunities(self, events):
+        communities = []
+        for event in events:
+            if IEvent.providedBy(event):
+                uid = event.aq_parent.aq_parent.UID()
+            else:
+                uid = event.aq_parent.aq_parent.aq_parent.UID()
+            if uid not in communities:
+                communities.append(uid)
+        return communities
 
     def getclasstag_event(self, day):
         # Returns class color to show in the calendar
         classtag = ''
 
         if day['events']:
-            # if len(self.getDifferentCommunities(day['events'])) > 1:
-            if len(day['events']) > 1:
+            # if len(day['events']) > 1:
+            if len(self.getDifferentCommunities(day['events'])) > 1:
                 classtag += ' event-multiple '
             else:
                 event = day['events'][0]
@@ -238,9 +238,11 @@ class Renderer(base.Renderer):
         today = {}
         loc_today = localized_today(self.context)
         weekday = loc_today.isoweekday()
-        today['weekday'] = PLMF(self._ts.day_msgid(
+        today['weekdayLit'] = PLMF(self._ts.day_msgid(
             0 if weekday == 7 else weekday, format='l'))
-        today['number'] = loc_today.day
+        today['day'] = loc_today.day
+        today['month'] = loc_today.month
+        today['year'] = loc_today.year
         return today
 
     @memoize_contextless
@@ -265,18 +267,25 @@ class Renderer(base.Renderer):
         else:
             return
 
+    def getEventCalendarDict(self, event):
+        start = event.start.strftime('%d/%m') if not hasattr(event,'ocstart') else event.ocstart.strftime('%d/%m')
+        end = event.end.strftime('%d/%m') if not hasattr(event,'ocend') else event.ocend.strftime('%d/%m')
+        end = None if end == start else end
+        return dict(Title=event.title,
+                    getURL=event.absolute_url(),
+                    start=start,
+                    end=end,
+                    community_type=event.community_type,
+                    community_name=event.aq_parent.aq_parent.title,
+                    community_url=event.aq_parent.aq_parent.absolute_url())
+
     def getDayEvents(self, date):
         events = self.getCalendarDict()
         list_events = []
         if date.strftime('%Y-%m-%d') in events:
             events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')])
             for event in events:
-                list_events.append(dict(Title=event.title,
-                                        getURL=event.absolute_url(),
-                                        start=event.start.strftime('%d/%m'),
-                                        community_type=event.community_type,
-                                        community_name=event.aq_parent.aq_parent.title,
-                                        community_url=event.aq_parent.aq_parent.absolute_url()))
+                list_events.append(self.getEventCalendarDict(event))
         return list_events
 
     def getNextThreeEvents(self):
@@ -296,12 +305,7 @@ class Renderer(base.Renderer):
 
         list_events = []
         for event in events[:3]:
-            list_events.append(dict(Title=event.title,
-                                    getURL=event.absolute_url(),
-                                    start=event.start.strftime('%d/%m'),
-                                    community_type=event.community_type,
-                                    community_name=event.aq_parent.aq_parent.title,
-                                    community_url=event.aq_parent.aq_parent.absolute_url()))
+            list_events.append(self.getEventCalendarDict(event))
 
         return list_events
 
@@ -309,8 +313,11 @@ class Renderer(base.Renderer):
         filter_events = []
         for event in events:
             if not IEvent.providedBy(event):
+                ocurrence = event
                 event = event.aq_parent
                 if event not in filter_events:
+                    event.ocstart = ocurrence.start
+                    event.ocend = ocurrence.end
                     filter_events.append(event)
             else:
                 filter_events.append(event)

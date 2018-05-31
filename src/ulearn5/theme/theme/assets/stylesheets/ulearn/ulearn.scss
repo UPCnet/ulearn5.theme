@@ -481,8 +481,10 @@ input[type="text"]:focus {
 	text-align: center;
 	text-shadow: none!important;
 	margin-bottom: 0;
+	cursor: pointer;
 	.arrow {
 		border-left-color: #f58d3d;
+		cursor: pointer;
 	}
 	.bubble-content {
 		padding: 9px;
@@ -593,13 +595,14 @@ input[type="text"]:focus {
 .cal_has_events {
 	background-color: #384e65;
 	text-shadow: none;
+	cursor: pointer;
 	.popover-content a {
 		display: block;
 	}
 }
 
-.cal_prev_month,
-.cal_next_month {
+.cal_prev_month:not(.cal_has_events),
+.cal_next_month:not(.cal_has_events) {
 	opacity: 0.5;
 }
 
