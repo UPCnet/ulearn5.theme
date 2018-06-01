@@ -485,3 +485,26 @@ li.ulearn-eines-ql>a>span {
     }
   }
 }
+
+/* Button reedirect to top */
+
+.back-to-top {
+  background: none;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  z-index: 100;
+  display: none;
+  text-decoration: none;
+  color: $main-color;
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($main-color, 5%);
+  }
+  i {
+    font-size: 45px;
+  }
+}
