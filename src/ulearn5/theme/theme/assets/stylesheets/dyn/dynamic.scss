@@ -18,6 +18,9 @@ body {
 
 a {
   color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 5%);
+  }
 }
 
 // #portal-header {
@@ -117,8 +120,16 @@ input[type="text"]:focus {
   color: #FFFFFF;
   background-image: none;
   background-color: $buttons-color-secondary;
-  *background-color: $buttons-color-secondary;
 }
+
+.btn-comunitat:hover,
+.btn-comunitat:active,
+.btn-comunitat.active {
+  &:hover {
+    background-color: darken($buttons-color-secondary, 5%);
+  }
+}
+
 .context {
   background: $buttons-color-primary;
 }
@@ -364,6 +375,9 @@ input:checked+.sliderbutton {
 
 body:not(.template-folder_contents) .btn-default {
   background-color: $buttons-color-primary!important;
+  &:hover{
+    background-color: darken($buttons-color-primary, 5%)!important;
+  }
 }
 
 
@@ -374,7 +388,7 @@ body:not(.template-folder_contents) .btn-default {
 li.ulearn-eines-ql>a>span {
   color: $secondary-color!important;
   &:hover {
-    color: darken($secondary-color, 10%)!important;
+    color: darken($secondary-color, 5%)!important;
   }
 }
 
@@ -401,7 +415,7 @@ li.ulearn-eines-ql>a>span {
 #menusup nav a {
   color: $secondary-color;
   &:hover {
-    color: darken($secondary-color, 10%);
+    color: darken($secondary-color, 5%);
   }
 }
 
