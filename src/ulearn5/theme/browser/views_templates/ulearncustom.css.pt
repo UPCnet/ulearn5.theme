@@ -7,6 +7,5 @@
 }
 
 #image_login {
-  content: url(++theme++ulearn5/assets/images/logomark.png);
   max-width: 30rem;
 }
