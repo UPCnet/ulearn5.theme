@@ -54,6 +54,7 @@ select {
 .template-logged_out span.icona-upc img,
 .template-login_failed span.icona-upc img {
 	margin-bottom: 20px!important;
+	transform: scale(1)!important;
 }
 
 div#login-forgotten-password {
@@ -2746,14 +2747,14 @@ div#miniatures lastauthors {
 
 .icona-upc img {
 	transition: transform 0.4s;
-	transform: scale(1);
+	transform: scale(.5);
 	transform-origin: 0 0;
 	max-width: none;
 }
 
 .shrink .icona-upc img {
 	width: auto;
-	transform: scale(0.7);
+	transform: scale(.3);
 }
 
 
@@ -5649,4 +5650,13 @@ div#maxui-widget-container {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	padding: 12px;
+}
+
+@media (max-width: 992px) {
+	.icona-upc img {
+    transform: scale(1);
+	}
+	.shrink .icona-upc img {
+		transform: scale(.7);
+	}
 }
