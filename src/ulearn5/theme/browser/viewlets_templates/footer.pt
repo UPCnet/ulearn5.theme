@@ -1,5 +1,4 @@
-<footer role="complementary" i18n:domain="ulearn">
-  <div class="container">
+  <div class="container" i18n:domain="ulearn">
     <div class="row footer-complementary" style="outline-style: none;">
       <div class="col-xs-12" style="outline-style: none;">
         <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
@@ -14,4 +13,3 @@
       </div>
     </div>
   </div>
-</footer>
