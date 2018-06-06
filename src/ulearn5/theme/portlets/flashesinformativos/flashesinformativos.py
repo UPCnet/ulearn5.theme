@@ -12,7 +12,7 @@ from Products.CMFCore.utils import getToolByName
 
 from ulearn5.core import _
 from zope import schema
-from zope.formlib import form
+
 from DateTime.DateTime import DateTime
 import bleach
 import bs4
