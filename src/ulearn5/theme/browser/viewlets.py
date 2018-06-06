@@ -271,6 +271,7 @@ class folderBar(viewletBase):
                 return True
         return False
 
+
 class viewletFooterUlearn(viewletBase):
     grok.name('ulearn.footer')
     grok.template('footer')

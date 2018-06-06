@@ -23,8 +23,6 @@ from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
 from plone.app.users.browser.userdatapanel import UserDataPanel
-from plone.app.contenttypes.behaviors.collection import ICollection
-from plone.app.contenttypes.browser.folder import FolderView
 from plone.dexterity.interfaces import IDexterityContent
 
 from Products.CMFPlone import PloneMessageFactory as _
@@ -239,7 +237,7 @@ class dynamicCSS(grok.View):
 
         scss.config.LOAD_PATHS = [
             '{}/ulearn5/theme/theme/assets/stylesheets/bootstrap/'.format(ulearnthemeegg.location)
-            ]
+        ]
 
         css = Scss(scss_opts={
                    'compress': False,
@@ -247,7 +245,7 @@ class dynamicCSS(grok.View):
                    })
 
         dynamic_scss = ''.join([variables_scss, scssfile.read()])
-        #import ipdb; ipdb.set_trace()
+
         return css.compile(dynamic_scss)
 
 
@@ -667,7 +665,7 @@ class AllTags(grok.View):
             user_tags = tags_soup[0].attrs['tags']
         else:
             user_tags = ()
-        return list(set(subjects)-set(user_tags))
+        return list(set(subjects) - set(user_tags))
 
 
 class SearchFilteredNews(grok.View):
@@ -734,15 +732,15 @@ class SearchFilteredNews(grok.View):
                     news_html += '<li class="noticies clearfix">' \
                                    '<div>' \
                                       '<div class="imatge_noticia">' \
-                                        '<img src="'+noticia.getURL()+'/@@images/image/thumb" alt="'+noticiaObj.id+'" title="'+noticiaObj.id+'" class="newsImage" width="222" height="222">'\
+                                        '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'\
                                       '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\
-                                        '<a href="'+noticia.getURL()+'">'+abrevia(noticia.Title, 70)+'</a>'\
+                                        '<a href="' + noticia.getURL() + '">' + abrevia(noticia.Title, 70) + '</a>'\
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text.encode('utf-8')+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70)+'"><span class="readmore">'+readmore+'</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\
@@ -885,7 +883,7 @@ class SendEventToAttendees(grok.View):
             'end': self.applytz(self.context.end).strftime('%d/%m/%Y %H:%M:%S'),
             'attendees': ', '.join(self.context.attendees).encode('utf-8'),
             'description': self.context.Description()
-            }
+        }
 
         body = ATTENDEES_MESSAGE_TEMPLATE % map
         msg = MIMEMultipart()
@@ -927,7 +925,7 @@ class SendEventToAttendees(grok.View):
             'enddate': self.rfc2445dtlocal(self.context.end),
             'dtstamp': self.rfc2445dt(DateTime()),
             'uid': self.context.sync_uid,
-            }
+        }
         out.write(ICS_EVENT_START % map)
 
         for assistant in self.context.attendees:
