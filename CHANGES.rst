@@ -2,11 +2,17 @@ Changelog
 =========
 
 
-0.4 (unreleased)
+0.4 (2018-06-07)
 ----------------
 
-- Nothing changed yet.
-
+* removed footer duplciated entries [Roberto Diaz]
+* translations [Roberto Diaz]
+* Merge branch 'master' of github.com:UPCnet/ulearn5.theme [Pilar Marinas]
+* solucionar error imagen nothing [Pilar Marinas]
+* addapt ng-app to data-ng-app and removed footer twice from templating [Roberto Diaz]
+* Update logo comunitats v2 [alberto.duran]
+* Update template login form for generalize [alberto.duran]
+* Update template login form for generalize [alberto.duran]
 
 0.3 (2018-05-31)
 ----------------
