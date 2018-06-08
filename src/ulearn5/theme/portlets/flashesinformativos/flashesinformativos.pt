@@ -8,7 +8,7 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
-                    <p class="data" i18n:translate="flashesinformativos">Última Hora</p>
+                    <p class="data" i18n:translate="flashesinformativos">Flashes Informativos</p>
                 </a>
                 <!--  <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}"><i class="fa fa-camera-retro fa-lg"></i><span i18n:translate="seemore"> See more</span>
                 </a> -->

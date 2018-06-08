@@ -1,12 +1,10 @@
-<footer role="complementary" i18n:domain="ulearn">
-  <div class="container" tal:define="customized_footer viewlet/get_customized_footer">
-    <div class="row footer-complementary" style="outline-style: none;">
-      <div class="col-xs-12" style="outline-style: none;">
-        <tal:block tal:condition="not:customized_footer">
-          <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
-        </tal:block>
-        <tal:block tal:condition="customized_footer" tal:content="structure customized_footer/output"></tal:block>
-      </div>
+<div class="container" tal:define="customized_footer viewlet/get_customized_footer" i18n:domain="ulearn">
+  <div class="row footer-complementary" style="outline-style: none;">
+    <div class="col-xs-12" style="outline-style: none;">
+      <tal:block tal:condition="not:customized_footer">
+        <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
+      </tal:block>
+      <tal:block tal:condition="customized_footer" tal:content="structure customized_footer/output"></tal:block>
     </div>
   </div>
-</footer>
+</div>

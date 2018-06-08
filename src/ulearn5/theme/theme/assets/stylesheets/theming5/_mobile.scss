@@ -60,6 +60,11 @@
     display: none;
   }
 
+  .shrink .button-menu-mobile, .button-menu-mobile--close {
+    a {
+      top: 42%;
+      }
+  }
   .global-navigation {
     position: absolute;
     // transform: translateX(calc(100vw + -15px));

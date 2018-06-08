@@ -61,11 +61,9 @@
                 <section id="main-content" class="col-lg-12 col-md-12 col-xs-12 main-content">
                     <xsl:apply-templates css:select="#viewlet-above-content" />
                     <xsl:apply-templates css:select="#content" />
-                    <footer class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <xsl:copy-of css:select="#viewlet-below-content" />
                         </div>
-                    </footer>
                 </section>
             </replace>
         </rules>
