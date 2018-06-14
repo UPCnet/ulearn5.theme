@@ -23,9 +23,9 @@ a {
   }
 }
 
-// #portal-header {
-//   @include gradient-vertical($alt-gradient-start-color, $alt-gradient-end-color);
-// }
+#portal-header {
+  @include gradient-vertical($alt-gradient-start-color, $alt-gradient-end-color);
+}
 
 .osomcorner {
   background-color: $background-color;
