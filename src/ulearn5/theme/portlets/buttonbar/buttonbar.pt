@@ -51,7 +51,10 @@
                     <article class="media" dir-paginate="community in comCtrl.user_communities | filter:q | itemsPerPage: comCtrl.pageSize" current-page="comCtrl.currentPage" ng-cloak>
                         <div class="media-left">
                             <a ng-href="{{community.url}}">
-                                <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/mini" />
+                                <img ng-if="community.image"
+                                     ng-src="{{community.url}}/@@images/image/thumb" />
+                                <img ng-if="!community.image"
+                                     src="++theme++ulearn5/assets/images/avatar_default.png" />
                             </a>
                         </div>
                         <div class="media-body">

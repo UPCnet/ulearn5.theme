@@ -4370,13 +4370,17 @@ i.glyphicon.link-external {
 	border: 1px solid #d1d1d1;
 	padding: 5px;
 	height: 115px;
-	object-fit: cover;
+	object-fit: contain;
 	width: 100%;
 }
 
 #communities-view .media-left,
 .media>.pull-left {
 	padding-right: 0px!important;
+}
+
+#communities-view .media-body p {
+	min-height: 4.8em;
 }
 
 #communitylist img {
