@@ -1,0 +1,53 @@
+<div id="menusup"
+    tal:define="community viewlet/get_community"
+    tal:condition="viewlet/render_viewlet"
+    i18n:domain="ulearn">
+    <nav>
+        <div class="active bubble top"
+            tal:attributes="class python: viewlet.bubble_class('community')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <!-- i18n:translate="ulearn_activity" -->
+                <a i18n:attributes="title ulearn_activity; aria-label ulearn_activity" aria-hidden="true"
+                    tal:attributes="href string:${community/absolute_url}">
+                    <i class="fa fa-comment icons"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bubble top"
+            tal:attributes="class python: viewlet.bubble_class('documents')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <!-- i18n:translate="ulearn_documents" -->
+                <a title="Documents" aria-label="Documents" aria-hidden="true"
+                   i18n:attributes="title ulearn_documents; aria-label ulearn_documents"
+                   tal:attributes="href string:${community/absolute_url}/documents">
+                    <i class="fa fa-file-text-o icons"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bubble top"
+            tal:attributes="class python: viewlet.bubble_class('news')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <!-- i18n:translate="ulearn_news" -->
+                <a title="Noticies" aria-label="Noticies" aria-hidden="true"
+                   i18n:attributes="title ulearn_news; aria-label ulearn_news"
+                   tal:attributes="href string:${community/absolute_url}/news">
+                    <i class="fa fa-newspaper-o icons"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bubble top"
+            tal:attributes="class python: viewlet.bubble_class('events')">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <!-- i18n:translate="Events" -->
+                <a i18n:attributes="title Events; aria-label Events" aria-hidden="true"
+                    tal:attributes="href string:${community/absolute_url}/events">
+                    <i class="fa fa-calendar icons"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
