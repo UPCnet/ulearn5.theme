@@ -12,7 +12,7 @@
       <a class="pagination-first"
         tal:attributes="href python:view.make_link(1) if batch.previous_pages else '#'">
         <span class="sr-only" i18n:translate="batch_first_page">
-          Primera pàgina
+          Primera pagina
         </span>
         <span aria-hidden="true" role="presentation" class="icona-upc">
           first
@@ -27,7 +27,7 @@
       <a class="pagination-previous"
         tal:attributes="href python:view.make_link(batch.previouspage) if batch.previous_pages else '#'">
         <span class="sr-only" i18n:translate="batch_previous_page">
-          Pàgina anterior
+          Pagina anterior
         </span>
         <span aria-hidden="true" role="presentation" class="icona-upc">
           arrowleft
@@ -42,7 +42,7 @@
       <a class="pagination-activate"
         tal:attributes="href python:view.make_link(pagenumber)">
         <span class="sr-only" i18n:translate="batch_page">
-          Pàgina
+          Pagina
         </span>
         <span tal:content="pagenumber" />
       </a>
@@ -54,7 +54,7 @@
     <li class="active" tal:condition="batch/navlist">
       <a href="#" class="pagination-activate">
         <span class="sr-only" i18n:translate="batch_actual_page">
-          Pàgina actual
+          Pagina actual
         </span>
         <span tal:content="batch/pagenumber" />
       </a>
@@ -67,7 +67,7 @@
       <a class="pagination-activate"
         tal:attributes="href python:view.make_link(pagenumber)">
         <span class="sr-only" i18n:translate="batch_page">
-          Pàgina
+          Pagina
         </span>
         <span tal:content="pagenumber" />
       </a>
@@ -80,7 +80,7 @@
       <a class="pagination-previous"
         tal:attributes="href python:view.make_link(batch.nextpage) if batch.next_pages else '#'">
         <span class="sr-only" i18n:translate="batch_next_page">
-          Pàgina següent
+          Pagina seguent
         </span>
         <span aria-hidden="true" role="presentation" class="icona-upc">
           arrowright
@@ -95,7 +95,7 @@
       <a class="pagination-last"
         tal:attributes="href python:view.make_link(batch.numpages) if batch.next_pages else '#'">
         <span class="sr-only" i18n:translate="batch_last_page">
-          Darrera pàgina
+          Darrera pagina
         </span>
         <span aria-hidden="true" role="presentation" class="icona-upc">
           last
@@ -106,4 +106,3 @@
   </ul>
 
 </tal:batchnavigation>
-

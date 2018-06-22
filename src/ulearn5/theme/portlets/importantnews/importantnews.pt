@@ -8,7 +8,7 @@
       <div class="osomcorner-wrapper">
         <div class="osomcorner"></div>
       </div>
-        <h2 i18n:translate="actualidad">Notícies</h2>
+        <h2 i18n:translate="actualidad">Noticies</h2>
       <!--  <div class="seemore pull-right">
           <a tal:attributes="href string:${view/get_noticias_folder_url}"><i class="fa fa-camera-retro fa-lg"></i><span i18n:translate="seemore"> See more</span>
           </a>
@@ -50,7 +50,7 @@
           <li class="noticies clearfix" >
             <a href="" tal:attributes="href string:${view/get_noticias_folder_url}">
               <i class="icon-plus-sign icons"> </i>
-              <span i18n:translate="seemore">Més notícies</span>
+              <span i18n:translate="seemore">Mes noticies</span>
             </a>
           </li>
 

@@ -68,7 +68,7 @@
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageStats"><a href="#" tal:attributes="href string:#/stats/activity">
               <i class="fa fa-bar-chart"></i>
-              <tal:footer i18n:translate="menu-gestio-estadistiques">Estadístiques</tal:footer>
+              <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
             </a></li>
           </ul>
         </li>

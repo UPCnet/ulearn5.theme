@@ -245,7 +245,7 @@
                 </li>
               </ul>
               <div class="more-news" tal:define="here_url context/@@plone_context_state/object_url;">
-                <a tal:attributes="href string:$here_url/news" i18n:domain="ulearn5.upc" i18n:translate="more_news_link">Més notícies</a>
+                <a tal:attributes="href string:$here_url/news" i18n:domain="ulearn5.upc" i18n:translate="more_news_link">Mes noticies</a>
               </div>
             </div>
           </div>

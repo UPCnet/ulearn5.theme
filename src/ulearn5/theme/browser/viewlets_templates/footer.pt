@@ -7,7 +7,7 @@
             <li><a tal:attributes="href links/contact" i18n:translate="contact">Contacte</a></li>
             <li><a accesskey="3" tal:attributes="href links/sitemap" i18n:translate="sitemap">Mapa del web</a></li>
             <li><a accesskey="0" tal:attributes="href links/accessibility" i18n:translate="accessibility">Accessibilitat</a></li>
-            <li><a tal:attributes="href links/disclaimer" i18n:translate="disclaimer">Avís legal</a></li>
+            <li><a tal:attributes="href links/disclaimer" i18n:translate="disclaimer">Avis legal</a></li>
           </ul>
         </nav>
       </div>
