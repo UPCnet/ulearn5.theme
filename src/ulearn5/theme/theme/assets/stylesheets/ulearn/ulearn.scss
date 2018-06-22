@@ -5716,3 +5716,13 @@ a.quicklinks::after {
 		transform: scale(.7);
 	}
 }
+
+div[id^='formfield-form-widgets-fieldset_'] {
+	border-bottom: 1px solid #b2b2b2;
+	.formHelp {
+		font-weight: 500;
+	}
+	label {
+		display: none;
+	}
+}

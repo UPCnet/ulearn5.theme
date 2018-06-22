@@ -82,12 +82,8 @@ a {
   }
 }
 
-input[type="text"] {
-  border-color: $main-color;
-}
-
 input[type="text"]:focus {
-  border-color: $secondary-color;
+  border-color: $main-color;
 }
 
 .box_badges {
@@ -507,4 +503,10 @@ li.ulearn-eines-ql>a>span {
   i {
     font-size: 45px;
   }
+}
+
+/* Fieldset form */
+
+div[id^='formfield-form-widgets-fieldset_'] {
+  border-bottom: 1px solid $main-color;s
 }
