@@ -10,8 +10,8 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from souper.interfaces import ICatalogFactory
 
+from base5.core import _
 from base5.core.utils import get_safe_member_by_id
-from ulearn5.core import _
 
 from plone import api
 from mrs5.max.utilities import IMAXClient
@@ -94,10 +94,11 @@ class userProfile(BrowserView):
         if extender_name in [a[0] for a in getUtilitiesFor(ICatalogFactory)]:
             extended_user_properties_utility = getUtility(ICatalogFactory, name=extender_name)
             for prop in extended_user_properties_utility.profile_properties:
+
                 rendered_properties.append(dict(
                     name=_(prop),
                     value=self.user_info.getProperty(prop, '')
-                    ))
+                ))
             return rendered_properties
         else:
             # If it's not extended, then return the simple set of data we know
@@ -106,8 +107,49 @@ class userProfile(BrowserView):
                 rendered_properties.append(dict(
                     name=_(prop),
                     value=self.user_info.getProperty(prop, '')
-                    ))
+                ))
             return rendered_properties
+
+    def get_public_user_info_for_display(self):
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+
+        rendered_properties = []
+
+        if extender_name in [a[0] for a in getUtilitiesFor(ICatalogFactory)]:
+            extended_user_properties_utility = getUtility(ICatalogFactory, name=extender_name)
+            for prop in extended_user_properties_utility.public_properties:
+                rendered_properties.append(dict(
+                    name=_(prop),
+                    value=self.user_info.getProperty(prop, '')
+                ))
+        return rendered_properties
+
+    def get_private_user_info_for_display(self):
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+
+        portal = api.portal.get()
+        current_user = api.user.get_current().id
+        roles = api.user.get_roles(username=current_user, obj=portal)
+        can_view_properties = True if current_user == self.username or 'WebMaster' in roles or 'Manager' in roles else False
+
+        rendered_properties = []
+
+        if extender_name in [a[0] for a in getUtilitiesFor(ICatalogFactory)]:
+            extended_user_properties_utility = getUtility(ICatalogFactory, name=extender_name)
+            for prop in extended_user_properties_utility.profile_properties:
+                if can_view_properties and prop not in extended_user_properties_utility.public_properties:
+                    rendered_properties.append(dict(
+                        name=_(prop),
+                        value=self.user_info.getProperty(prop, '')
+                    ))
+        return rendered_properties
+
+    def separate_public_private_info(self):
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+        if extender_name in [a[0] for a in getUtilitiesFor(ICatalogFactory)]:
+            extended_user_properties_utility = getUtility(ICatalogFactory, name=extender_name)
+            return hasattr(extended_user_properties_utility, 'public_properties')
+        return False
 
     def get_member_data(self):
         return api.user.get_current()

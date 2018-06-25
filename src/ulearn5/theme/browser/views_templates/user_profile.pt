@@ -91,13 +91,38 @@
                     </div>
                   </div>
 
-                  <div class="col-md-10">
-                    <tal:field repeat="field view/get_user_info_for_display">
-                      <tal:empty condition="field/value">
-                        <label class="control-label" tal:content="field/name">Biography</label>
-                        <p tal:content="field/value"></p>
-                      </tal:empty>
-                    </tal:field>
+                  <div class="col-md-10" tal:define="separate_public_private_info view/separate_public_private_info">
+                    <tal:block tal:condition="not:separate_public_private_info">
+                      <div class="infoProfile">
+                        <tal:field repeat="field view/get_user_info_for_display">
+                          <h3 class="control-label" tal:content="field/name">Biography</h3>
+                          <p tal:content="field/value"></p>
+                        </tal:field>
+                      </div>
+                    </tal:block>
+                    <tal:block tal:condition="separate_public_private_info">
+                      <tal:block tal:define="public view/get_public_user_info_for_display; private view/get_private_user_info_for_display">
+                        <h2 class="titleInfo" i18n:translate="info_public">Informació pública (directori)</h2>
+                        <div class="infoProfile">
+                          <tal:field repeat="field public">
+                            <h3 class="control-label" tal:content="field/name">Biography</h3>
+                            <p tal:content="field/value"></p>
+                          </tal:field>
+                        </div>
+                        <br/>
+                        <br/>
+                        <tal:block tal:condition="nocall: private | nothing">
+                          <h2 class="titleInfo titleInfoPrivate" i18n:translate="info_private">Informació interna</h2>
+                          <p i18n:translate="info_private_help">Estos campos sólo son visibles por administradores en caso de necesidad.</p>
+                          <div class="infoProfile">
+                            <tal:field repeat="field private">
+                              <h3 class="control-label" tal:content="field/name">Biography</h3>
+                              <p tal:content="field/value"></p>
+                            </tal:field>
+                          </div>
+                        </tal:block>
+                      </tal:block>
+                    </tal:block>
                   </div>
                 </div>
               </div>

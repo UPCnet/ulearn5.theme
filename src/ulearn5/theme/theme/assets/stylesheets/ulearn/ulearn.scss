@@ -5726,3 +5726,26 @@ div[id^='formfield-form-widgets-fieldset_'] {
 		display: none;
 	}
 }
+
+.titleInfo {
+	border-bottom: 1px solid #DDDDDD;
+	box-shadow: none;
+	margin: 0 0 15px;
+	padding-bottom: 5px;
+}
+
+.infoProfile h3 {
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+.infoProfile p {
+	font-size: 14px;
+	min-height: 18px;
+	background: #ececec;
+	padding: 7px;
+	font-size: 14px;
+	border-radius: 2px;
+	max-width: 80%;
+	min-height: 32px;
+}
