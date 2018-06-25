@@ -96,7 +96,7 @@
                         <tal:sea tal:define="searchers view/getSearchers;">
                         <span class="add-on"><i class="fa fa-search"></i></span>
                         <select id="searcher_selector" class="form-control searcher_selector">
-                            <option selected disabled><span i18n:translate="find_label">búsqueda...</span></option>
+                            <option selected disabled><span i18n:translate="find_label">busqueda...</span></option>
                             <tal:search tal:repeat="search searchers">
                                <option tal:content="search">search</option>
                             </tal:search>
