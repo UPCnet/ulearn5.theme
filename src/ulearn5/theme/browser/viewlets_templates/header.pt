@@ -122,9 +122,14 @@
             </a>
         </li>
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
-            <a role="menuitem" accesskey="10" href="${viewlet/portal_url}/search">
-                <i class="fa fa-search"></i>
-            </a>
+          <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
+            <legend class="sr-only" i18n:translate="">Buscar</legend>
+            <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
+            <fieldset role="search">
+              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" placeholder="Buscar en el Sitio" class="searchField" tal:attributes="value request/input-cerca|nothing">
+              <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
+            </fieldset>
+          </form>
         </li>
       </ul>
     </nav>

@@ -381,7 +381,8 @@ body:not(.template-folder_contents) .btn-default {
 
 .footer-complementary a,
 .main-banner .upc-eines>li>a,
-li.ulearn-eines-ql>a>span {
+li.ulearn-eines-ql>a>span,
+li.upc-eines-cerca button {
   color: $secondary-color!important;
   &:hover {
     color: darken($secondary-color, 5%)!important;

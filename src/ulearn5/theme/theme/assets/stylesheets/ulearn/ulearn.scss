@@ -2767,15 +2767,15 @@ div#miniatures lastauthors {
 }
 
 .icona-upc img {
-	transition: transform 0.4s;
-	transform: scale(.5);
+	transition: max-height 0.4s;
+	max-height: 83px;
 	transform-origin: 0 0;
 	max-width: none;
 }
 
 .shrink .icona-upc img {
 	width: auto;
-	transform: scale(.3);
+	max-height: 50px;
 }
 
 
@@ -3157,13 +3157,24 @@ a.community-action.community-favorite.community-favorited:before {
 }
 
 li.upc-eines-cerca input {
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.33);
+	box-shadow: none;
+	width: 92px;
+}
+
+li.upc-eines-cerca input:active,
+li.upc-eines-cerca input:focus,
+li.upc-eines-cerca input:active:focus {
+	color: #636363;
 }
 
 li.upc-eines-cerca button {
-	font-weight: 500;
-	padding: 8px 10px 10px 10px;
+	font-weight: 600;
+	padding: 12px 10px !important;
 	color: #007ac2;
+}
+
+li.upc-eines-cerca .pat-livesearch {
+	min-width: 0;
 }
 
 li.ulearn-eines-ql>a {
@@ -3776,12 +3787,6 @@ li.dropdown.ulearn-eines-ql .caret {
 .upc-eines-cerca {
 	border-right: 0!important;
 	padding: 6px 12px 6px 16px;
-}
-
-.upc-eines-contacte:hover,
-.upc-eines-cerca:hover {
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-	transition: .25s all ease;
 }
 
 ol.searchResults li {
@@ -4549,6 +4554,11 @@ fieldset:not(:last-child) {
 			padding: 0px;
 		}
 	}
+}
+
+.pat-livesearch .livesearch-results li:hover,
+.pat-livesearch .livesearch-results li.selected {
+	background-color: transparent !important;
 }
 
 .template-search article#content h1 {
@@ -5640,10 +5650,10 @@ a.quicklinks::after {
 
 @media (max-width: 992px) {
 	.icona-upc img {
-    	transform: scale(1);
+    	max-height: 58px;
 	}
-	.shrink .icona-upc img {
-		transform: scale(.7);
+	.main-banner>a h1>.icona-upc img {
+		width: auto;
 	}
 }
 
