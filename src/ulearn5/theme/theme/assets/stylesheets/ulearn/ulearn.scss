@@ -4518,7 +4518,7 @@ fieldset:not(:last-child) {
 }
 
 #searchform .input-group {
-	max-width: 600px;
+	max-width: 800px;
 }
 
 .template-search span.input-group-btn {
@@ -4529,30 +4529,26 @@ fieldset:not(:last-child) {
 	position: relative;
 }
 
-.searchPage .actionMenu {
-	float: right;
-}
-
-.searchPage .actionMenu dt {
-	top: 0;
-	right: 0;
-	position: absolute;
-}
-
-.searchPage .actionMenu.activated dd {
-	display: block;
-}
-
-.searchPage .actionMenu dd {
-	display: none;
-	position: absolute;
-	right: 0;
-	top: 35px;
-	width: 300px;
-	background-color: #fcfcfd;
-	border: 1px solid #e5e5e5;
-	padding: 15px;
-	z-index: 10;
+.searchPage {
+	position: relative;
+	.actionMenu {
+		margin-top: 10px;
+		.search-type-options,
+		.search-date-options {
+		    div {
+		    	padding-right: 0px;
+		    	&:last-of-type {
+		    		margin-right: 0px;
+		    	}
+		    }
+		}
+		fieldset:not(:last-child) {
+			padding-bottom: 0px;
+		}
+		#search-filter {
+			padding: 0px;
+		}
+	}
 }
 
 .template-search article#content h1 {
