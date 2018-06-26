@@ -16,45 +16,45 @@
                           organizativeCommunities view/getOrganizativeCommunities;
                           user view/get_user;">
             <ul class="nav nav-pills nav-stacked" role="menu">
-              <tal:block tal:condition="openCommunities | nothing">
-                <h3 class="titleCommunity titleOpen" tal:condition="view/displayTypeCommunity">
+              <tal:block tal:condition="organizativeCommunities | nothing">
+                <h3 class="titleCommunity titleOrganizative" tal:condition="view/displayTypeCommunity">
                   <i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
-                  <span i18n:translate=""> Open </span>
+                  <span i18n:translate=""> Organizative </span>
                 </h3>
                 <li role="menuitem"
-                    tal:repeat="community openCommunities"
+                    tal:repeat="community view/getOrganizativeCommunities"
                     tal:attributes="class community/community_type">
-                  <div class="bubble right pull-right">
-                    <div class="arrow"></div>
-                    <div class="bubble-content" tal:define="pending community/pending">
-                      <tal:condition tal:condition="python:pending != 0">
-                        <span class="fa-stack">
-                          <i class="fa fa-folder fa-stack-2x"></i>
-                          <i class="fa fa-stack-1x">
-                            <a href="#" target="_self"
-                               tal:attributes="href community/url"
-                               tal:content="community/pending">
-                            </a>
-                          </i>
-                        </span>
-                      </tal:condition>
-                      <tal:condition tal:condition="python:pending == 0">
-                        <span class="fa-stack">
-                          <i class="fa fa-check-square-o fa-stack-2x">
-                            <a href="#" target="_self"
-                               tal:attributes="href community/url">
-                            </a>
-                          </i>
-                        </span>
-                      </tal:condition>
-                    </div>
-                  </div>
-                  <a id="title_community" href="#" target="_self"
-                      rel="tooltip" data-placement="top" title="Community title not trimmed"
-                      tal:attributes="href community/url;
-                                    title string:CoP: ${community/title}">
-                    <tal:community content="community/title"> Community </tal:community>
-                  </a>
+                      <div class="bubble right pull-right">
+                        <div class="arrow"></div>
+                        <div class="bubble-content" tal:define="pending community/pending">
+                          <tal:condition tal:condition="python:pending != 0">
+                            <span class="fa-stack">
+                              <i class="fa fa-folder fa-stack-2x"></i>
+                              <i class="fa fa-stack-1x">
+                                <a href="#" target="_self"
+                                   tal:attributes="href community/url"
+                                   tal:content="community/pending">
+                                </a>
+                              </i>
+                            </span>
+                          </tal:condition>
+                          <tal:condition tal:condition="python:pending == 0">
+                            <span class="fa-stack">
+                              <i class="fa fa-check-square-o fa-stack-2x">
+                                <a href="#" target="_self"
+                                   tal:attributes="href community/url">
+                                </a>
+                              </i>
+                            </span>
+                          </tal:condition>
+                        </div>
+                      </div>
+                      <a id="title_community" href="#" target="_self"
+                         rel="tooltip" data-placement="top" title="Community title not trimmed"
+                         tal:attributes="href community/url;
+                                         title string:Corporate: ${community/title}">
+                          <tal:community content="community/title"> Community </tal:community>
+                      </a>
                 </li>
               </tal:block>
             </ul>
@@ -102,45 +102,45 @@
               </tal:block>
             </ul>
             <ul class="nav nav-pills nav-stacked" role="menu">
-              <tal:block tal:condition="organizativeCommunities | nothing">
-                <h3 class="titleCommunity titleOrganizative" tal:condition="view/displayTypeCommunity">
+              <tal:block tal:condition="openCommunities | nothing">
+                <h3 class="titleCommunity titleOpen" tal:condition="view/displayTypeCommunity">
                   <i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
-                  <span i18n:translate=""> Organizative </span>
+                  <span i18n:translate=""> Open </span>
                 </h3>
                 <li role="menuitem"
-                    tal:repeat="community view/getOrganizativeCommunities"
+                    tal:repeat="community openCommunities"
                     tal:attributes="class community/community_type">
-                      <div class="bubble right pull-right">
-                        <div class="arrow"></div>
-                        <div class="bubble-content" tal:define="pending community/pending">
-                          <tal:condition tal:condition="python:pending != 0">
-                            <span class="fa-stack">
-                              <i class="fa fa-folder fa-stack-2x"></i>
-                              <i class="fa fa-stack-1x">
-                                <a href="#" target="_self"
-                                   tal:attributes="href community/url"
-                                   tal:content="community/pending">
-                                </a>
-                              </i>
-                            </span>
-                          </tal:condition>
-                          <tal:condition tal:condition="python:pending == 0">
-                            <span class="fa-stack">
-                              <i class="fa fa-check-square-o fa-stack-2x">
-                                <a href="#" target="_self"
-                                   tal:attributes="href community/url">
-                                </a>
-                              </i>
-                            </span>
-                          </tal:condition>
-                        </div>
-                      </div>
-                      <a id="title_community" href="#" target="_self"
-                         rel="tooltip" data-placement="top" title="Community title not trimmed"
-                         tal:attributes="href community/url;
-                                         title string:Corporate: ${community/title}">
-                          <tal:community content="community/title"> Community </tal:community>
-                      </a>
+                  <div class="bubble right pull-right">
+                    <div class="arrow"></div>
+                    <div class="bubble-content" tal:define="pending community/pending">
+                      <tal:condition tal:condition="python:pending != 0">
+                        <span class="fa-stack">
+                          <i class="fa fa-folder fa-stack-2x"></i>
+                          <i class="fa fa-stack-1x">
+                            <a href="#" target="_self"
+                               tal:attributes="href community/url"
+                               tal:content="community/pending">
+                            </a>
+                          </i>
+                        </span>
+                      </tal:condition>
+                      <tal:condition tal:condition="python:pending == 0">
+                        <span class="fa-stack">
+                          <i class="fa fa-check-square-o fa-stack-2x">
+                            <a href="#" target="_self"
+                               tal:attributes="href community/url">
+                            </a>
+                          </i>
+                        </span>
+                      </tal:condition>
+                    </div>
+                  </div>
+                  <a id="title_community" href="#" target="_self"
+                      rel="tooltip" data-placement="top" title="Community title not trimmed"
+                      tal:attributes="href community/url;
+                                    title string:CoP: ${community/title}">
+                    <tal:community content="community/title"> Community </tal:community>
+                  </a>
                 </li>
               </tal:block>
             </ul>
