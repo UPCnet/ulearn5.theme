@@ -477,8 +477,6 @@ input[type="text"]:focus {
 	color: white;
 	font-size: 36px;
 	font-weight: bold;
-	padding-bottom: 7px;
-	padding-top: 13px;
 	text-align: center;
 	text-shadow: none!important;
 	margin-bottom: 0;
@@ -488,7 +486,10 @@ input[type="text"]:focus {
 		cursor: pointer;
 	}
 	.bubble-content {
-		padding: 9px;
+		padding: 6px 0px 8px 0px;
+		p {
+			font-weight: 400;
+		}
 	}
 }
 
@@ -498,7 +499,6 @@ input[type="text"]:focus {
 
 .data {
 	font-size: 13px;
-	padding-top: 6px;
 }
 
 #agenda {
@@ -515,7 +515,7 @@ input[type="text"]:focus {
 	align-items: center;
 	min-height: fit-content;
 	justify-content: center;
-	min-height: 100px;
+	min-height: 76px;
 	.vertical_aligned {
 		flex: 1;
 		text-align: center;
@@ -599,6 +599,18 @@ input[type="text"]:focus {
 	cursor: pointer;
 	.popover-content a {
 		display: block;
+	}
+	&.event-multiple {
+		position: relative;
+		&:before {
+			content: "+";
+		    color: #ffffff;
+		    font-size: 11px;
+		    font-weight: 600;
+		    position: absolute;
+		    bottom: -1px;
+		    right: 1px;
+		}
 	}
 }
 

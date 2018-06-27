@@ -33,7 +33,7 @@ import itertools
 
 
 PLMF = MessageFactory('plonelocales')
-
+PRIORITY_TYPES = ['Organizative', 'Closed', 'Open']
 
 class ICalendarPortlet(IPortletDataProvider):
     """ A portlet which renders the calendar portlet """
@@ -146,16 +146,16 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
-    def getDifferentCommunities(self, events):
-        communities = []
-        for event in events:
-            if IEvent.providedBy(event):
-                uid = event.aq_parent.aq_parent.UID()
-            else:
-                uid = event.aq_parent.aq_parent.aq_parent.UID()
-            if uid not in communities:
-                communities.append(uid)
-        return communities
+    def getPriorityClassTypeEvent(self, events):
+        classType = {'Organizative': 'event-organizative', 'Closed': 'event-closed', 'Open': 'event-open'}
+        for typeCommunity in PRIORITY_TYPES:
+            for event in events:
+                if IEvent.providedBy(event):
+                    community = event.aq_parent.aq_parent
+                else:
+                    community = event.aq_parent.aq_parent.aq_parent
+                if community.community_type == typeCommunity:
+                    return classType[typeCommunity]
 
     def getclasstag_event(self, day):
         # Returns class color to show in the calendar
@@ -163,7 +163,8 @@ class Renderer(base.Renderer):
 
         if day['events']:
             # if len(day['events']) > 1:
-            if len(self.getDifferentCommunities(day['events'])) > 1:
+            if len(day['events']) > 1:
+                classtag += ' ' + self.getPriorityClassTypeEvent(day['events'])
                 classtag += ' event-multiple '
             else:
                 event = day['events'][0]
@@ -252,20 +253,22 @@ class Renderer(base.Renderer):
         now = localized_now()
         portal = getToolByName(context, 'portal_url').getPortalObject()
 
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'end': {'query': now, 'range': 'min'},
-            'sort_on': 'start',
-            'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
-            'sort_limit': 1
-        }
+        for communityType in PRIORITY_TYPES:
+            query = {
+                'portal_type': 'Event',
+                'review_state': self.state,
+                'end': {'query': now, 'range': 'min'},
+                'sort_on': 'start',
+                'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
+                'community_type': communityType,
+                'sort_limit': 1
+            }
 
-        result = pc(**query)
-        if result:
-            return result[0]
-        else:
-            return
+            result = pc(**query)
+            if result:
+                return result[0]
+
+        return None
 
     def getEventCalendarDict(self, event):
         start = event.start.strftime('%d/%m') if not hasattr(event,'ocstart') else event.ocstart.strftime('%d/%m')
@@ -342,15 +345,18 @@ class Renderer(base.Renderer):
             list_events = self.getDayEvents(self.getDateEvents())
         list_events = sorted(list_events, key=lambda x: x['community_name'])
         if len(list_events):
-            for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
-                events = [event for event in group]
-                group_events.append(dict(Title=key,
-                                         getURL=events[0]['getURL'],
-                                         community_url=events[0]['community_url'],
-                                         community_type=events[0]['community_type'],
-                                         community_name=events[0]['community_name'],
-                                         num_events=len(events),
-                                         events=events))
+            for communityType in PRIORITY_TYPES:
+                for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
+                    events = [event for event in group]
+                    events  = sorted(events, key=lambda x: (x['start'], x['Title']))
+                    if events[0]['community_type'] == communityType:
+                        group_events.append(dict(Title=key,
+                                                 getURL=events[0]['getURL'],
+                                                 community_url=events[0]['community_url'],
+                                                 community_type=events[0]['community_type'],
+                                                 community_name=events[0]['community_name'],
+                                                 num_events=len(events),
+                                                 events=events))
             return group_events
         else:
             return None
@@ -368,13 +374,12 @@ class Renderer(base.Renderer):
         """ Assume that the calendar is only shown on the community itself. """
         if IPloneSiteRoot.providedBy(self.context):
             return False
-        else:
-            user_roles = api.user.get_roles(
-                username=self.username, obj=self.context)
-            if 'Editor' in user_roles:
-                return True
-            else:
-                return False
+        elif ICommunity.providedBy(self.context):
+                user_roles = api.user.get_roles(
+                    username=self.username, obj=self.context)
+                if 'Editor' in user_roles:
+                    return True
+        return False
 
     def newevent_url(self):
         """ Assume that the new event button is only shown on the community itself. """

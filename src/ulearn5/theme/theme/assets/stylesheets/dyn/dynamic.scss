@@ -273,12 +273,6 @@ td.cal_has_events {
       background: darken($color_community_open, 5%);
     }
   }
-  &.event-multiple {
-    background: $buttons-color-primary;
-    &:hover{
-      background: darken($buttons-color-primary, 5%);
-    }
-  }
 }
 
 #tagslist a h4 {
