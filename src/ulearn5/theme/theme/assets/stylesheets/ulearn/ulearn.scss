@@ -1177,13 +1177,9 @@ label[for="form.ext_editor"]~div.widget {
 }
 
 #librarysearch .documentDescription {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 	margin-bottom: 18px;
-}
-
-#librarysearch .Document {
-	font-size: 18px!important;
 }
 
 .icon-ulearn-video {
@@ -1493,7 +1489,21 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	.File {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
+		font-weight: 600;
+	}
+	.ulearn5.owncloud.file_owncloud:before {
+		content: "\f0c2";
+		font-family: FontAwesome;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: normal;
+		text-decoration: inherit;
+		margin-right: 7px;
+	}
+	.ulearn5.owncloud.file_owncloud {
+		color: #585858;
+		font-size: 16px;
 		font-weight: 600;
 	}
 	.Link:before {
@@ -1507,7 +1517,7 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	.Link {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 	.Image:before {
@@ -1521,7 +1531,7 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	.Image {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 	.Document:before {
@@ -1535,7 +1545,7 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	.Document {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 }
