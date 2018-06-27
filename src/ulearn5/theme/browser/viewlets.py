@@ -334,9 +334,16 @@ class viewletFooterUlearn(viewletBase):
         """
         Get dades footer
         """
+        user = api.user.get_current()
+        user_language = user.getProperty('language')
+        if not user_language or user_language == '':
+            lt = getToolByName(self.portal(), 'portal_languages')
+            user_language = lt.getPreferredLanguage()
+            user.setMemberProperties({'language': user_language})
+
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
-        path = portalPath + '/gestion/footer'
+        path = portalPath + '/gestion/footer/' + user_language
         pages = catalog.searchResults(portal_type='Document',
                                       path={'query': path, 'depth': 1},
                                       sort_on='getObjPositionInParent')
