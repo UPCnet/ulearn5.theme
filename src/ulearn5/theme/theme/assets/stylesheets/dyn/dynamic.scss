@@ -74,11 +74,24 @@ a {
 .todayevent{ background:$main-color; }
 
 #communitylist {
-  a {
-    h4 { color: $main-color; }
-    }
   img {
     &:hover {border:2px solid $main-color;}
+  }
+  h2,
+  h4 {
+    border-left: none;
+  }
+  h2.Closed.text,
+  h4.Closed.text {
+    color: $color_community_closed;
+  }
+  h2.Organizative.text,
+  h4.Organizative.text {
+    color: $color_community_organizative;
+  }
+  h2.Open.text,
+  h4.Open.text {
+    color: $color_community_open;
   }
 }
 
@@ -481,6 +494,19 @@ li.upc-eines-cerca button {
       background: none repeat scroll 0 0 $color_community_organizative;
     }
   }
+}
+
+/* Buttons */
+
+.btn.btn-primary {
+  background: $main-color;
+  border-color: darken($main-color, 5%);
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:hover:active, {
+  background: darken($main-color, 5%);
 }
 
 /* Button reedirect to top */

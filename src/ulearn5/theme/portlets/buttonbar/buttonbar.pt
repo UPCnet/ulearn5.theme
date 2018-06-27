@@ -59,7 +59,7 @@
                         </div>
                         <div class="media-body">
                             <a ng-href="{{community.url}}">
-                                <h2>{{community.title}}</h2>
+                                <h2 class="{{community.type}} text">{{community.title}}</h2>
                                 <p>{{community.description}}</p>
                             </a>
                         </div>
