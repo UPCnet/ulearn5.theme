@@ -1136,7 +1136,7 @@ label[for="form.ext_editor"]~div.widget {
 .caixessearch {
 	background: none repeat scroll 0 0 #F5F5F5;
 	margin-bottom: 10px;
-	min-height: 160px;
+	min-height: 200px;
 	padding: 10px;
 }
 
@@ -1480,7 +1480,7 @@ label[for="form.ext_editor"]~div.widget {
 		font-size: 16px;
 		font-weight: 600;
 	}
-	.ulearn5.owncloud.file_owncloud:before {
+	.CloudFile:before {
 		content: "\f0c2";
 		font-family: FontAwesome;
 		font-size: 18px;
@@ -1489,7 +1489,7 @@ label[for="form.ext_editor"]~div.widget {
 		text-decoration: inherit;
 		margin-right: 7px;
 	}
-	.ulearn5.owncloud.file_owncloud {
+	.CloudFile {
 		color: #585858;
 		font-size: 16px;
 		font-weight: 600;
@@ -1533,6 +1533,10 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	.Document {
 		color: #585858;
+		font-size: 16px;
+		font-weight: 600;
+	}
+	.Folder {
 		font-size: 16px;
 		font-weight: 600;
 	}
