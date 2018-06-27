@@ -30,10 +30,12 @@
 
 
     <div class="caixessearch">
+
+      <h3 i18n:translate="search_doc">Search documents</h3>
       <div id="searchinputcontent">
         <div class="input-append">
           <input class="form-control searchInput" type="text" placeholder="Cerca"
-                 i18n:attributes="placeholder search"  tal:attributes="data-name path">
+                 i18n:attributes="placeholder write_doc"  tal:attributes="data-name path">
           <span class="add-on"><i class="fa fa-search"></i></span>
         </div>
       </div>
@@ -45,22 +47,11 @@
                  class="form-control searchInput"
                  type="hidden"
                  placeholder="Cerca"
-                 i18n:attributes="placeholder search" tal:attributes="data-name path">
+                 i18n:attributes="placeholder write_tag" tal:attributes="data-name path">
+          <span class="add-on"><i class="fa fa-search"></i></span>
       </div>
 
     </div>
-
-    <!-- <div id="subscribealert" class="alert alert-info" role="alert">
-      <button data-dismiss="alert" class="close" type="button">×</button>
-      <p>
-      <strong i18n:translate="info">
-                Info
-      </strong><br/>
-      <tal:msg i18n:translate="use_the_search_input_to_find_objects_with_tags">
-        Use the search input to find objects with tags selected.
-      </tal:msg>
-      </p>
-    </div> -->
 
     <section id="tagslist"
              tal:define="site_properties context/portal_properties/site_properties;
