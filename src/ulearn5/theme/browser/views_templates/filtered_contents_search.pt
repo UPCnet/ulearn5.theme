@@ -30,7 +30,7 @@
 
 
     <div class="caixessearch">
-      <h5 i18n:translate="">Filtra per nom i/o per etiquetes:</h5>
+      <h5 i18n:translate="filter">Filtra per nom i/o per etiquetes:</h5>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div id="searchinputcontent">
           <div class="input-append">
