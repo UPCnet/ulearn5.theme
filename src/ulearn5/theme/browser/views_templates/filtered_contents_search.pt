@@ -72,7 +72,7 @@
                 <div class="star pull-right"><i class="fa fa-star pull-right"></i></div>
                 <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
                   <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
-                  <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true" i18n:translate="shared_with_me">Shared with me</i></span>
+                  <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
                   </h4>
                   <p tal:condition="contingut/obj/Description"><span tal:content="contingut/obj/Description">Description</span>
                   </p>
@@ -86,7 +86,7 @@
               <div class="nofavorite">
                 <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
                   <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
-                  <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true" i18n:translate="shared_with_me">Shared with me</i></span>
+                  <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
                   </h4>
                   <p tal:condition="contingut/obj/Description"><span tal:content="contingut/obj/Description">Description</span>
                   </p>
