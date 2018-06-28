@@ -51,7 +51,7 @@
                         <tal:cond tal:condition="python: type_id in ('News Item')">
                             <a class="btn btn-default" rel="tooltip" data-placement="bottom"
                                 tal:attributes="href type/action; title type/description">
-                                <i class="icon-news"></i>
+                                <i class="fa fa-newspaper-o icons"></i>
                             </a>
                         </tal:cond>
                     </tal:con>

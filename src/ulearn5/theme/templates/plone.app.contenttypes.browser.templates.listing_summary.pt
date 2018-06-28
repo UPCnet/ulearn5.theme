@@ -45,12 +45,12 @@
       description
     </span>
     </div>
-    <div class="tileFooter">
+    <!-- <div class="tileFooter">
       <a tal:attributes="href item_link"
           i18n:translate="read_more">
         Read More&hellip;
       </a>
-    </div>
+    </div> -->
   </div>
 </article>
 
