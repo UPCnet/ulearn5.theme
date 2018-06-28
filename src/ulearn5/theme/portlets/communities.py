@@ -85,7 +85,8 @@ class Renderer(base.Renderer):
         """ The Contributor role is assumed that will be applied at the group in
             the portal root.
         """
-        if checkPermission('ulearn.addCommunity', self.portal()):
+        if 'front-page' in self.context.getPhysicalPath() and \
+           checkPermission('ulearn.addCommunity', self.portal()):
             return True
 
     def showEditCommunity(self):
