@@ -779,6 +779,9 @@ input[type="text"]:focus {
 #librarysearch {
 	.searchbytagcontainer {
 		float: right;
+		.select2-search-field.form-control {
+	    width: 0;
+		}
 	}
 }
 
@@ -1101,14 +1104,13 @@ label[for="form.ext_editor"]~div.widget {
 	font-size: 15px;
 	height: 20px;
 	margin-bottom: 10px;
-	margin-top: 5px;
 	padding: 0;
 	vertical-align: middle;
 	width: 99%;
 }
 
 #searchinputcontent .searchInput {
-	font-size: 18px;
+	font-size: 16px;
 	height: 20px;
 	margin-bottom: 15px;
 	padding: 13px 5px 13px 10px;
@@ -1128,15 +1130,16 @@ label[for="form.ext_editor"]~div.widget {
 #librarysearch #searchinputcontent {
 	width: 100%;
 }
-.caixessearch>h3 {
+.caixessearch > h3, h4, h5, h6 {
 	color: #777777;
 	margin-top: 0;
 }
 
 .caixessearch {
+
 	background: none repeat scroll 0 0 #F5F5F5;
 	margin-bottom: 10px;
-	min-height: 200px;
+	min-height: 125px;
 	padding: 10px;
 }
 
@@ -2028,8 +2031,7 @@ label[for="form.ext_editor"]~div.widget {
 	}
 	#searchinputcommunities .searchInput,
 	#searchinputusers .searchInput,
-	#searchinputtags .searchInput,
-	#searchinputcontent .searchInput {
+	#searchinputtags .searchInput {
 		font-size: 13px;
 		margin-bottom: 0;
 		padding: 2px 5px;

@@ -30,29 +30,24 @@
 
 
     <div class="caixessearch">
-
-      <h3 i18n:translate="search_doc">Search documents</h3>
-      <div id="searchinputcontent">
-        <div class="input-append">
-          <input class="form-control searchInput" type="text" placeholder="Cerca"
-                 i18n:attributes="placeholder write_doc"  tal:attributes="data-name path">
-          <span class="add-on"><i class="fa fa-search"></i></span>
+      <h5 i18n:translate="">Filtra per nom i/o per etiquetes:</h5>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div id="searchinputcontent">
+          <div class="input-append">
+            <input class="form-control searchInput" type="text" placeholder="Cerca"
+                   i18n:attributes="placeholder write_doc"  tal:attributes="data-name path">
+          </div>
         </div>
       </div>
-
-
-      <h3 i18n:translate="search_tags">Search tags</h3>
-      <div class="searchbytagcontainer" >
-        <div class="input-append">
-          <span class="add-on"><i class="fa fa-search"></i></span>
-          <input id="searchbytag"
-                 class="form-control searchInput"
-                 type="hidden"
-                 placeholder="Cerca"
-                 i18n:attributes="placeholder write_tag" tal:attributes="data-name path">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="searchbytagcontainer" >
+          <div class="input-append">
+            <input id="searchbytag" class="form-control searchInput" type="hidden"
+                   placeholder="Cerca" i18n:attributes="placeholder write_tag"
+                   tal:attributes="data-name path">
+          </div>
         </div>
       </div>
-
     </div>
 
     <section id="tagslist"
