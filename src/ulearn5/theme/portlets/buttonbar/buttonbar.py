@@ -216,6 +216,7 @@ class Renderer(base.Renderer):
 
         return bb
 
+
 class AddForm(base.AddForm):
     schema = IButtonBarPortlet
     label = _(u"Add Subscribed News Portlet")

@@ -126,7 +126,7 @@
             <legend class="sr-only" i18n:translate="">Buscar</legend>
             <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
             <fieldset role="search">
-              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" placeholder="Buscar en el Sitio" class="searchField" tal:attributes="value request/input-cerca|nothing">
+              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" i18n:attributes="placeholder search_site" class="searchField" tal:attributes="value request/input-cerca|nothing">
               <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
             </fieldset>
           </form>

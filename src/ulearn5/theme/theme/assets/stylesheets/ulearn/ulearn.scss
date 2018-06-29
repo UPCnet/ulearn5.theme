@@ -5717,3 +5717,96 @@ a.quicklinks::after {
         font-size: 45px;
     }
 }
+
+/* Portlet Recebt Changes */
+
+.portletRecentChanges {
+	ul {
+		padding-left: 0px;
+		list-style-type: none;
+	}
+
+	.titleBox {
+		margin-bottom: 10px;
+	}
+
+	.changeRow {
+		font-size: 13px;
+    	line-height: 15px;
+		margin-bottom: 8px;
+		padding-left: 5px;
+    	padding-bottom: 5px;
+		color: white;
+		border-left: 3px solid #00A4E5;
+		border-bottom: 1px solid #eee;
+	}
+
+	.infoTypeChange {
+		padding-left: 0px;
+	}
+
+	.infoTypeChange .fa:before {
+		font-size: 12px;
+	}
+
+	.infoTypeChange::before {
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 22px;
+   		margin-right: 10px;
+		margin-top: 11px;
+		float: left;
+	}
+
+	.infoTypeChange.contenttype-Document::before {
+		content: '\f016';
+	}
+
+	.infoTypeChange.contenttype-File::before {
+		content: '\f1c1';
+	}
+
+	.infoTypeChange.contenttype-Image::before {
+		content: '\f1c5';
+	}
+
+	.infoTypeChange.contenttype-Link::before {
+		content: '\f0c1';
+	}
+
+	.infoTypeChange.contenttype-Folder::before {
+		content: '\f07c';
+	}
+
+	.infoTypeChange.contenttype-ulearn-video::before,
+	.infoTypeChange.contenttype-ulearn-video_embed::before {
+		content: '\f03d';
+	}
+
+	.titleChange {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin-bottom: 2px;
+	}
+
+	.titleChange p {
+		font-weight: bold;
+	}
+
+	.infoChange i {
+		font-size: 10px;
+		color: #000000;
+	}
+
+	.modificationDateChange {
+		float: right;
+	}
+
+	.infoChange span {
+		font-size: 11px;
+		font-style: italic;
+		color: #929292;
+	}
+}

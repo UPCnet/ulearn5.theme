@@ -519,3 +519,41 @@ li.upc-eines-cerca button {
 div[id^='formfield-form-widgets-fieldset_'] {
   border-bottom: 1px solid $main-color;
 }
+
+/* Portlet Recent Changes */
+
+li.Organizative.changeRow {
+  border-left: 5px solid $color_community_organizative;
+}
+
+li.Closed.changeRow {
+  border-left: 5px solid $color_community_closed;
+}
+
+li.Open.changeRow {
+  border-left: 5px solid $color_community_open;
+}
+
+li.notCommunity.changeRow {
+  border-left: 5px solid $buttons-color-primary;
+}
+
+li.Organizative.changeRow .titleChange,
+li.Organizative.changeRow .infoTypeChange::before {
+  color: $color_community_organizative;
+}
+
+li.Closed.changeRow .titleChange,
+li.Closed.changeRow .infoTypeChange::before {
+  color: $color_community_closed;
+}
+
+li.Open.changeRow .titleChange,
+li.Open.changeRow .infoTypeChange::before {
+  color: $color_community_open;
+}
+
+li.notCommunity.changeRow .titleChange,
+li.notCommunity.changeRow .infoTypeChange::before {
+  color: $buttons-color-primary;
+}

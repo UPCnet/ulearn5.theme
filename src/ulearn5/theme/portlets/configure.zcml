@@ -72,6 +72,16 @@
         renderer=".calendar.Renderer"
         addview=".calendar.AddForm"
         />
+
+    <plone:portlet
+        name="ulearn.portlets.recentchanges"
+        interface=".recentchanges.recentchanges.IRecentChangesPortlet"
+        assignment=".recentchanges.recentchanges.Assignment"
+        renderer=".recentchanges.recentchanges.Renderer"
+        addview=".recentchanges.recentchanges.AddForm"
+        editview=".recentchanges.recentchanges.EditForm"
+        />
+
     <!-- Hasta aqui P5 -->
 
     <plone:portlet
