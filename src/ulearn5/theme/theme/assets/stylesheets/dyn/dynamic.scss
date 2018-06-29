@@ -428,7 +428,8 @@ li.upc-eines-cerca button {
 .autotoc-nav>a.active,
 .autotoc-nav>a.active:focus,
 .autotoc-nav>a.active:hover,
-.pat-autotoc.autotabs .autotoc-nav a.active {
+.pat-autotoc.autotabs .autotoc-nav a.active,
+.pat-autotoc.autotabs .autotoc-nav a.active:hover {
   border-bottom: 3px solid $secondary-color!important;
 }
 
