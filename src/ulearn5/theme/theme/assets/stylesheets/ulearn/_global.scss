@@ -1552,6 +1552,7 @@ label[for="form.ext_editor"]~div.widget {
 		}
 		.Folder:before {
 			content: "\f114";
+			font-size: 18px;
 			font-family: FontAwesome;
 			font-style: normal;
 			font-weight: normal;
@@ -1563,6 +1564,7 @@ label[for="form.ext_editor"]~div.widget {
 		}
 		.privateFolder:before {
 			content: "\f070";
+			font-size: 18px;
 			font-family: FontAwesome;
 			font-style: normal;
 			font-weight: normal;
@@ -1719,6 +1721,7 @@ label[for="form.ext_editor"]~div.widget {
 	font-weight: normal;
 	text-decoration: inherit;
 	margin-right: 8px;
+	font-size: 18px;
 }
 
 .template-folder_listing .summary .contenttype-document:before {
@@ -1758,6 +1761,7 @@ label[for="form.ext_editor"]~div.widget {
 	font-weight: normal;
 	text-decoration: inherit;
 	margin-right: 10px;
+	font-size: 18px;
 }
 
 .template-folder_listing .summary img {
@@ -1889,6 +1893,7 @@ label[for="form.ext_editor"]~div.widget {
 	font-weight: normal;
 	text-decoration: inherit;
 	margin-right: 10px;
+	font-size: 18px;
 }
 
 #portal-personaltools-wrapper .container {
@@ -2567,7 +2572,7 @@ input:checked+.sliderbutton:before {
 .template-contents_pretty_view #content .contenttype-folder:before {
 	content: "\f114";
 	font-family: FontAwesome;
-	font-size: 20px;
+	font-size: 18px;
 	font-style: normal;
 	font-weight: normal;
 	text-decoration: inherit;
