@@ -63,8 +63,7 @@ module.exports = function (grunt) {
                 '../../portlets/importantnews/importantnews.css',
                 '../../portlets/flashesinformativos/flashesinformativos.css',
                 '../../portlets/mysubjects/mysubjects.css',
-                'css/ulearn.css',
-                'css/ulearn_backend.css'],
+                'css/ulearn.css'],
                 dest: 'css/ulearn-concat.css',
             },
             ulearn_backend: {
@@ -98,12 +97,13 @@ module.exports = function (grunt) {
                 files: [
                     'stylesheets/ulearn/*.scss',
                     'stylesheets/ulearn.scss',
-                    '!stylesheets/ulearn/ulearn_backend.scss'
+                    '!stylesheets/ulearn/*backend.scss'
                 ],
                 tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin']
             },
             ulearn_backend: {
                 files: [
+                    'stylesheets/ulearn/_backend.scss',
                     'stylesheets/ulearn/ulearn_backend.scss'
                 ],
                 tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin', 'compass:ulearn_backend', 'concat:ulearn_backend']
