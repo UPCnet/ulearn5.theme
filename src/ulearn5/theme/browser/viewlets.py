@@ -339,7 +339,8 @@ class viewletFooterUlearn(viewletBase):
         if not user_language or user_language == '':
             lt = getToolByName(self.portal(), 'portal_languages')
             user_language = lt.getPreferredLanguage()
-            user.setMemberProperties({'language': user_language})
+            if 'Anonymous' not in user.roles:
+                user.setMemberProperties({'language': user_language})
 
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
