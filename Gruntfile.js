@@ -103,8 +103,7 @@ module.exports = function (grunt) {
             },
             ulearn_backend: {
                 files: [
-                    'stylesheets/ulearn/_backend.scss',
-                    'stylesheets/ulearn/ulearn_backend.scss'
+                    'stylesheets/ulearn/*backend.scss'
                 ],
                 tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin', 'compass:ulearn_backend', 'concat:ulearn_backend']
             }

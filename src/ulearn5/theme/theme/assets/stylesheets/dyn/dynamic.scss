@@ -95,8 +95,9 @@ a {
   }
 }
 
+textarea:focus,
 input[type="text"]:focus {
-  border-color: $main-color;
+  border-color: $main-color !important;
 }
 
 .box_badges {
