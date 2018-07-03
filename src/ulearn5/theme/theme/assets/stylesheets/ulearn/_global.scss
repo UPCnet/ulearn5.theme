@@ -4565,7 +4565,7 @@ fieldset:not(:last-child) {
 .searchPage {
 	position: relative;
 	.actionMenu {
-		margin-top: 10px;
+		margin-top: 20px;
 		.search-type-options,
 		.search-date-options {
 		    div {
@@ -4577,9 +4577,13 @@ fieldset:not(:last-child) {
 		}
 		fieldset:not(:last-child) {
 			padding-bottom: 0px;
+			border-right: 3px solid #b8c6c8;
 		}
 		#search-filter {
 			padding: 0px;
+		}
+		legend {
+			margin-bottom: 6px;
 		}
 	}
 }
