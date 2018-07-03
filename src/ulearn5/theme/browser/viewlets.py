@@ -229,12 +229,20 @@ class viewletHeaderUlearn(viewletBase):
         """
         Get dades header
         """
+        user = api.user.get_current()
+        user_language = user.getProperty('language')
+        if not user_language or user_language == '':
+            lt = getToolByName(self.portal(), 'portal_languages')
+            user_language = lt.getPreferredLanguage()
+            if 'Anonymous' not in user.roles:
+                user.setMemberProperties({'language': user_language})
+
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
-        path = portalPath + '/gestion/header'
+        path = portalPath + '/gestion/header/' + user_language
         images = catalog.searchResults(portal_type='Image',
-                                      path={'query': path, 'depth': 1},
-                                      sort_on='getObjPositionInParent')
+                                       path={'query': path, 'depth': 1},
+                                       sort_on='getObjPositionInParent')
         if len(images) > 0:
             return images[0].getURL()
         else:
