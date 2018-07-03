@@ -2,11 +2,25 @@ Changelog
 =========
 
 
-0.5 (unreleased)
+0.5 (2018-07-03)
 ----------------
 
-- Nothing changed yet.
-
+* Update vista resum for esdeveniments [root@comunitatsdevel]
+* Update vista resum for esdeveniments [alberto.duran]
+* Eliminar llegir més de vista resum i canviar icona per noticies [alberto.duran]
+* traduccions [root@comunitatsdevel]
+* traduccions [alberto.duran]
+* update vista filtraa [root@comunitatsdevel]
+* traduccions [alberto.duran]
+* Only button Create Community in front-page [Pilar Marinas]
+* update filtered_contents_search [root@comunitatsdevel]
+* update template [alberto.duran]
+* inici supports [root@comunitatsdevel]
+* Update css for vista filtrada [alberto.duran]
+* Update js for gestio noticies [alberto.duran]
+* traduccions [alberto.duran]
+* Recuperar última versión de folderbar.pt [iago.lopez]
+* Checkbox comunitat obligatori amb missatge plone [alberto.duran]
 
 0.4 (2018-06-07)
 ----------------
