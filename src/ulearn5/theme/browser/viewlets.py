@@ -1,24 +1,35 @@
 # -*- coding: utf-8 -*-
-from five import grok
-from Acquisition import aq_inner, aq_chain
-from cgi import escape
-from plone import api
-from zope.interface import Interface
-from zope.component import getMultiAdapter, getUtility
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
+from cgi import escape
+from five import grok
+from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IAboveContent, IPortalFooter
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from ulearn5.core.browser.viewlets import viewletBase
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from plone.registry.interfaces import IRegistry
-from souper.soup import get_soup
-from souper.soup import Record
-from repoze.catalog.query import Eq
+from plone.app.layout.viewlets.interfaces import IAboveContent
+from plone.app.layout.viewlets.interfaces import IHtmlHead
+from plone.app.layout.viewlets.interfaces import IPortalFooter
+from plone.app.layout.viewlets.interfaces import IPortalHeader
 from plone.memoize import forever
+from plone.registry.interfaces import IRegistry
+from repoze.catalog.query import Eq
+from souper.soup import Record
+from souper.soup import get_soup
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.interface import Interface
+
+from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, INewsItemFolder
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.core.interfaces import IDocumentFolder
+from ulearn5.core.interfaces import IEventsFolder
+from ulearn5.core.interfaces import ILinksFolder
+from ulearn5.core.interfaces import INewsItemFolder
+from ulearn5.core.interfaces import IPhotosFolder
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
 import datetime
 
@@ -240,8 +251,12 @@ class viewletHeaderUlearn(viewletBase):
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
         path = portalPath + '/gestion/header/' + user_language
+
+        now = DateTime()
         images = catalog.searchResults(portal_type='Image',
                                        path={'query': path, 'depth': 1},
+                                       expires={'query': now, 'range': 'min', },
+                                       effective={'query': now, 'range': 'max', },
                                        sort_on='getObjPositionInParent')
         if len(images) > 0:
             return images[0].getURL()
@@ -353,8 +368,12 @@ class viewletFooterUlearn(viewletBase):
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
         path = portalPath + '/gestion/footer/' + user_language
+
+        now = DateTime()
         pages = catalog.searchResults(portal_type='Document',
                                       path={'query': path, 'depth': 1},
+                                      expires={'query': now, 'range': 'min', },
+                                      effective={'query': now, 'range': 'max', },
                                       sort_on='getObjPositionInParent')
         if len(pages) > 0:
             return pages[0].getObject().text
