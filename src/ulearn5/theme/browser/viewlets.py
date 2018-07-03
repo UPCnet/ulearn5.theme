@@ -371,6 +371,7 @@ class viewletFooterUlearn(viewletBase):
 
         now = DateTime()
         pages = catalog.searchResults(portal_type='Document',
+                                      review_state=('published', 'intranet'),
                                       path={'query': path, 'depth': 1},
                                       expires={'query': now, 'range': 'min', },
                                       effective={'query': now, 'range': 'max', },
