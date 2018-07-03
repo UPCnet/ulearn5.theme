@@ -4,7 +4,7 @@ from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
-from plone.app.portlets import PloneMessageFactory as _
+from plone.app.portlets import PloneMessageFactory as _PMF
 from plone.app.portlets.portlets import base
 from plone.memoize.compress import xhtml_compress
 from plone.portlets.interfaces import IPortletDataProvider
@@ -12,6 +12,7 @@ from zope import schema
 from zope.component import getMultiAdapter
 from zope.interface import implements
 
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 
 import logging
@@ -21,11 +22,10 @@ logger = logging.getLogger("Plone")
 
 class IRecentChangesPortlet(IPortletDataProvider):
 
-    name = schema.TextLine(title=_(u"Title"),
-                           default=_(u"Recent changes"),
+    name = schema.TextLine(title=_PMF(u"Title"),
                            required=True)
 
-    count = schema.Int(title=_(u'Number of items to display'),
+    count = schema.Int(title=_PMF(u'Number of items to display'),
                        required=True,
                        default=6)
 
