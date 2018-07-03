@@ -1,0 +1,73 @@
+#Media-carousel .carousel-inner {
+    overflow: hidden;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+}
+
+#Media-carousel .carousel-caption {
+    padding: 0px;
+}
+
+#portlet_media {
+    padding: 0px;
+}
+
+#portlet_media h2 {
+    padding: 10px;
+}
+
+#portlet_media .carousel-control {
+    position: absolute;
+    left: 15px;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    font-size: 60px;
+    font-weight: 100;
+    line-height: 30px;
+    color: #6f6f6f !important;
+    text-align: center;
+    opacity: 0.5;
+    border: none;
+}
+
+#portlet_media .carousel-control.right {
+    left: auto;
+    right: 15px;
+}
+
+#player {
+    width: 100%;
+    height: auto;
+    min-height: 450px;
+}
+
+#portlet_media #player {
+    min-height: 220px;
+}
+
+.description_video {
+    background-color: #585858;
+    color: white;
+    padding: 5px;
+    height: 26px;
+}
+
+.carousel-image img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+}
+
+.carousel-audio .jwplayer {
+    max-height: 220px;
+}
+
+#portlet_media .carousel .active>img,
+.carousel .selected>img {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
