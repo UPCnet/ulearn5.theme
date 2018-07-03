@@ -52,7 +52,7 @@
                       <a id="title_community" href="#" target="_self"
                          rel="tooltip" data-placement="top" title="Community title not trimmed"
                          tal:attributes="href community/url;
-                                         title string:Corporate: ${community/title}">
+                                         title string:${community/title}">
                           <tal:community content="community/title"> Community </tal:community>
                       </a>
                 </li>
@@ -95,7 +95,7 @@
                   <a id="title_community" href="#" target="_self"
                       rel="tooltip" data-placement="top" title="Community title not trimmed"
                       tal:attributes="href community/url;
-                                      title string:WOP Team: ${community/title}">
+                                      title string:${community/title}">
                       <tal:community content="community/title"> Community </tal:community>
                   </a>
                 </li>
@@ -138,7 +138,7 @@
                   <a id="title_community" href="#" target="_self"
                       rel="tooltip" data-placement="top" title="Community title not trimmed"
                       tal:attributes="href community/url;
-                                    title string:CoP: ${community/title}">
+                                    title string:${community/title}">
                     <tal:community content="community/title"> Community </tal:community>
                   </a>
                 </li>
