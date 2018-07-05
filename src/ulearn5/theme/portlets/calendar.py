@@ -253,30 +253,28 @@ class Renderer(base.Renderer):
         now = localized_now()
         portal = getToolByName(context, 'portal_url').getPortalObject()
 
-        for communityType in PRIORITY_TYPES:
-            query = {
-                'portal_type': 'Event',
-                'review_state': self.state,
-                'end': {'query': now, 'range': 'min'},
-                'sort_on': 'start',
-                'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
-                'community_type': communityType,
-                'sort_limit': 1
-            }
+        query = {
+            'portal_type': 'Event',
+            'review_state': self.state,
+            'end': {'query': now, 'range': 'min'},
+            'sort_on': 'start',
+            'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
+            'sort_limit': 1
+        }
 
-            result = pc(**query)
-            if result:
-                return result[0]
-
-        return None
+        result = pc(**query)
+        if result:
+            return result[0]
 
     def getEventCalendarDict(self, event):
-        start = event.start.strftime('%d/%m') if not hasattr(event,'ocstart') else event.ocstart.strftime('%d/%m')
-        end = event.end.strftime('%d/%m') if not hasattr(event,'ocend') else event.ocend.strftime('%d/%m')
+        start = event.start.strftime('%d/%m') if not event.recurrence else event.ocstart.strftime('%d/%m')
+        searchStart = event.start.strftime('%m/%s') if not event.recurrence else event.ocstart.strftime('%m/%s')
+        end = event.end.strftime('%d/%m') if not event.recurrence else event.ocend.strftime('%d/%m')
         end = None if end == start else end
         return dict(Title=event.title,
                     getURL=event.absolute_url(),
                     start=start,
+                    searchStart=searchStart,
                     end=end,
                     community_type=event.community_type,
                     community_name=event.aq_parent.aq_parent.title,
@@ -343,12 +341,13 @@ class Renderer(base.Renderer):
             list_events = self.getNextThreeEvents()
         else:
             list_events = self.getDayEvents(self.getDateEvents())
-        list_events = sorted(list_events, key=lambda x: x['community_name'])
+
         if len(list_events):
+            list_events = sorted(list_events, key=lambda x: x['community_name'])
             for communityType in PRIORITY_TYPES:
                 for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
                     events = [event for event in group]
-                    events  = sorted(events, key=lambda x: (x['start'], x['Title']))
+                    events = sorted(events, key=lambda x: (x['searchStart'], x['Title']))
                     if events[0]['community_type'] == communityType:
                         group_events.append(dict(Title=key,
                                                  getURL=events[0]['getURL'],
