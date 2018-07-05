@@ -1,158 +1,179 @@
-/* ==================== portlet flashes-informativos ==================== */
-
-/* line 82, CreditAndorraTheme.scss */
-.ulearnboxflash {
-  background-color: white;
-  height: 50px;
-   /*overflow: hidden;*/
-}
-
-/* line 87, CreditAndorraTheme.scss */
-.ulearnboxflash a {
-  color: #555;
-}
-
-/* line 91, CreditAndorraTheme.scss */
-.ulearnboxflash .carousel-inner img {
-  margin-left: 5px;
-  margin-right: 5px;
-  width: 30px;
-  height: 30px;
-  -webkit-border-radius: 24px;
-  border-radius: 24px;
-}
-
-/* line 100, CreditAndorraTheme.scss */
-#flashes-informativos {
-  background: none repeat scroll 0 0 #b5c035;
-  text-shadow: 1px 1px 0 #b5c035;
-  color: white;
-  font-size: 13px;
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 0;
-  min-width: 15.11%;
-  float:left;
-  overflow: hidden;
-}
-
-/* line 494, CreditAndorraTheme.scss */
-#flashes-informativos .bubble-content p {
-    margin-top: 6px;
-    text-shadow: none;
-
-}
-
-#flashes-informativos .fa-camera-retro:before {
-  display: none;
-}
-
-/* line 111, CreditAndorraTheme.scss */
-.bubble.left .arrow {
-  top: 50%;
-  right: -8px;
-  margin-top: -8px;
-  border-width: 8px 0 8px 8px;
-  border-left-color: #b5c035;
-}
-
-/* line 119, CreditAndorraTheme.scss */
-.carousel-control {
-  position: absolute;
-  top: 40%;
-  left: 115px;
-  width: 5px;
-  height: 40px;
-  margin-top: 5px;
-  font-size: 50px;
-  font-weight: 100;
-  line-height: 30px;
-  color: #6f6f6f !important;
-  text-align: center;
-  opacity: 0.5;
-  border: none;
-}
-
-/* line 136, CreditAndorraTheme.scss */
-.carousel-control.right {
-  left: auto;
-  right: 0px;
-}
-
-/* line 141, CreditAndorraTheme.scss */
-.carousel-inner {
-  border: none;
-  box-shadow: none;
-}
-
 .ulearnboxflash {
   background-color: #FFFFFF;
-   /*overflow: hidden;*/
-   clear: both;
-   margin: 0;
-   /*overflow: hidden;*/
-   margin-bottom: 15px;
-}
+  height: 50px;
+  clear: both;
+  margin: 0;
+  margin-bottom: 15px;
 
-/* line 316, CreditAndorraTheme.scss */
-#flasinformatiu .bubble-content {
-  padding: 6px 6px 6px 6px;
-  height: 38px;
-  font-weight: normal;
-  background-color: #666666;
-}
-/* line 320, CreditAndorraTheme.scss */
-#flasinformatiu .bubble-content a {
-  color: white;
-  font-size: 10px;
-  text-decoration: none;
-}
-/* line 323, CreditAndorraTheme.scss */
-#flasinformatiu .bubble-content a i {
-  margin-right: 1px;
-  margin-top: 7px;
-}
-/* line 329, CreditAndorraTheme.scss */
-#flasinformatiu .carousel-inner {
-  margin-left: 7px;
-  margin-top: 10px;
-  padding-top: 0;
-  padding-bottom: 5px;
-  float:left;
-  width: 65%;
-}
-/* line 332, CreditAndorraTheme.scss */
-#flasinformatiu .newsImage {
-  margin-right: 10px;
-  float:left;
-}
-
-#flasinformatiu .carousel-control.right {
-  top: auto;
-}
-
-@media only screen and (max-width: 480px) {
   #flasinformatiu {
-    margin-top: 10px;
+
+    #flashes-informativos {
+      overflow: visible;
+      padding: 0;
+
+      &.bubble.left .arrow {
+        top: 0;
+        margin: 0;
+        right: -36px;
+        border-left-color: #6f6f6f;
+        border-width: 25px 18px 25px;
+      }
+
+      .bubble-content {
+        background-color: #6f6f6f;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          font-weight: bold;
+        }
+
+        a {
+          color: #fff;
+          font-size: 10px;
+          text-decoration: none;
+
+          &:hover {
+              text-decoration: none;
+          }
+        }
+      }
+    }
+
+    .carousel-inner.col-md-10 {
+      padding: 5px 40px 5px 30px;
+      float: left;
+      height: 50px;
+      width: 83.3333%;
+      display: flex;
+      align-items: center;
+
+      .item {
+        display: none;
+
+        &.next,
+        &.active {
+          display: table;
+          text-align: center;
+        }
+
+        &.next {
+          top: auto;
+        }
+
+        &.left {
+          left: 30px;
+        }
+
+        a {
+          display: flex;
+          text-align: left;
+          vertical-align: middle;
+          overflow: hidden;
+          max-height: 24px;
+          padding-top: 8px;
+          text-overflow: ellipsis;
+          font-weight: 500;
+
+          &:hover {
+              text-decoration: none;
+          }
+        }
+      }
+
+      img {
+        margin-right: 15px;
+        width: 35px;
+        height: 35px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px !important;
+        padding: 0px;
+        border: none;
+
+        &:hover {
+          border: none !important;
+        }
+      }
+    }
+
+    .carousel-control {
+      position: absolute;
+      width: 5px;
+      height: 50px;
+      margin-right: 20px;
+      font-size: 50px;
+      line-height: 40px;
+      background-image: none;
+      text-shadow: none;
+      font-weight: 500;
+      color: #6f6f6f !important;
+
+      &.right {
+        left: auto;
+        right: 0px;
+      }
+    }
   }
 }
 
-@media (max-width: 640px){
-  #flashes-informativos .bubble-content p{margin-top: 6px;}
+@media only screen and (max-width: 920px) {
+  .ulearnboxflash {
 
-.ulearnboxflash .carousel-inner{ width: 80%;}
+    #flasinformatiu {
+      display: flex;
 
+      #flashes-informativos {
+        width: 15%;
+      }
+
+      .carousel-inner.col-md-10 {
+        width: 80%;
+        padding: 5px 40px 5px 30px;
+
+        .item {
+
+          &.next,
+          &.active {
+            display: flex;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }
 
-.portaltype-flash_informativo .newsImageContainer img{max-width: 350px!important;}
+@media only screen and (max-width: 660px) {
+  .ulearnboxflash {
 
+    #flasinformatiu {
 
-.ulearnboxflash .carousel-inner .item { overflow: hidden;              /* "overflow" value must be different from "visible" */
-  text-overflow: ellipsis; height: 30px; text-overflow: "…";}
+      #flashes-informativos {
+        width: 20%;
+      }
 
-.ulearnboxflash .item a {
-  vertical-align: middle;
-  font-size: 1.05em;
+      .carousel-inner.col-md-10 {
+        width: 80%;
+      }
+    }
+  }
 }
 
-/* ==================== FIN flashes-informativos ==================== */
+@media only screen and (max-width: 510px) {
+  .ulearnboxflash {
+
+    #flasinformatiu {
+
+      #flashes-informativos {
+        width: 30%;
+      }
+
+      .carousel-inner.col-md-10 {
+        width: 70%;
+      }
+    }
+  }
+}
+

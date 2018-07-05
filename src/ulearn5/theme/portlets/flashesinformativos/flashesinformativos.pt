@@ -8,20 +8,17 @@
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
-                    <p class="data" i18n:translate="flashesinformativos">Flashes Informativos</p>
+                    <p class="data" i18n:translate="flashesinformativos">Last hour</p>
                 </a>
-                <!--  <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}"><i class="fa fa-camera-retro fa-lg"></i><span i18n:translate="seemore"> See more</span>
-                </a> -->
             </div>
         </div>
-        <div class="carousel-inner col-md-9">
+        <div class="carousel-inner col-md-10">
             <tal:item tal:repeat="item flashes">
                 <div tal:define="isTheFirst repeat/item/start" tal:attributes="class python:isTheFirst and 'item active' or 'item'">
                     <img tal:condition="item/flash/image" tal:define="scale item/flash/@@images" tal:replace="structure python: scale.scale('image',
                                     scale='mini').tag(css_class='newsImage col-md-2')"/>
 
                     <a href="#" tal:attributes="href item/url">
-                        <!-- <span class="col-md-6" tal:replace="structure item/text">Flash</span> -->
                         <span class="col-md-6" tal:replace="structure item/title">Flash</span>
                     </a>
                 </div>
@@ -30,8 +27,7 @@
 
         <!-- Carousel nav -->
         <tal:bloc tal:condition="python:len(flashes) > 1">
-            <!-- <a class="carousel-control left" href="#flasinformatiu" data-slide="prev">&lsaquo;</a> -->
-            <a class="carousel-control right col-md-1" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
+            <a class="carousel-control right" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
         </tal:bloc>
     </div>
 

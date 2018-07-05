@@ -49,6 +49,10 @@ a {
 
 #menusup {
   nav {
+    .bubble {
+      border-right: 1px solid $background-color;
+      border-left: 1px solid $background-color;
+    }
     .active {
       .arrow {
         border-top-color: $main-color;
@@ -562,4 +566,29 @@ li.Open.changeRow .infoTypeChange::before {
 li.notCommunity.changeRow .titleChange,
 li.notCommunity.changeRow .infoTypeChange::before {
   color: $buttons-color-primary;
+}
+
+
+/* Portlet Flashes informativos */
+
+.ulearnboxflash {
+
+  #flasinformatiu {
+
+    #flashes-informativos {
+
+      &.bubble.left .arrow {
+        border-left-color: $buttons-color-primary;
+      }
+
+      .bubble-content {
+        background-color: $buttons-color-primary;
+      }
+
+    }
+
+    .carousel-control {
+      color: $buttons-color-primary !important;
+    }
+  }
 }

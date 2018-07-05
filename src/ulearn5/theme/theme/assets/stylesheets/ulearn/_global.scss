@@ -354,9 +354,6 @@ input[type="text"]:focus {
 	.titleCommunity {
 		margin-top: 8px;
 		font-size: 1.3em;
-		&.titleOpen {
-			margin-top: 0px;
-		}
 	}
 	.communitylinks {
 		padding-top: 10px;
@@ -410,9 +407,11 @@ input[type="text"]:focus {
 		border-bottom: 0;
 		margin-bottom: 0;
 		.bubble {
-			box-shadow: -1px 1px 2px #ddd;
+			border-right: 1px solid #ecf0f1;
+   			border-left: 1px solid #ecf0f1;
 			z-index: 999!important;
 			font-size: 26px!important;
+			padding: 0px;
 			.arrow {
 				border-top-color: #fff;
 			}
@@ -1853,11 +1852,11 @@ label[for="form.ext_editor"]~div.widget {
 		margin-right: 10px;
 		max-width: 30px;
 	}
-	.ulearnboxflash {
+/*	.ulearnboxflash {
 		clear: both;
 		margin: 0;
 		margin-top: -10px !important;
-	}
+	}*/
 	.tab-content {
 		float: left;
 		width: 100%;
