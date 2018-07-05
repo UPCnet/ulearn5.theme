@@ -135,8 +135,7 @@ textarea {
 	-moz-transition: all 0.4s ease-in-out;
 }
 
-.ulearnbox h2,
-#communitysearch h2 {
+.ulearnbox h2 {
 	font-size: 1.5rem;
 	color: #636363!important;
 	position: relative;
@@ -147,8 +146,7 @@ textarea {
 	line-height: 1.1;
 }
 
-.ulearnbox h2::after,
-#communitysearch h2::after {
+.ulearnbox h2::after {
 	content: "";
 	position: absolute;
 	margin-left: 12px;
@@ -559,6 +557,9 @@ input[type="text"]:focus {
 			transition: all 0.25s ease 0s;
 			border: 2px solid #F58D3D;
 		}
+	}
+	div.col-md-2 {
+		padding-left: 5px;
 	}
 }
 
@@ -1438,6 +1439,9 @@ label[for="form.ext_editor"]~div.widget {
 #communitysearch {
 	.col-md-9 {
 		margin-left: 5px !important;
+	}
+	.form-control {
+		padding: 10px 12px;
 	}
 }
 
@@ -4688,7 +4692,8 @@ ul.ColVis_collection {
 }
 
 #communitysearch .input-append span.add-on {
-	top: 16px!important;
+	top: 12px!important;
+	right: 25px;
 }
 
 span.option {
