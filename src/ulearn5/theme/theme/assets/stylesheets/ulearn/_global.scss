@@ -4221,7 +4221,13 @@ fieldset:not(:last-child) {
 }
 
 #searchform .input-group {
-	max-width: 800px;
+	width: calc(57.33333% + 104px);
+}
+
+@media (max-width: 991px){
+#searchform .input-group {
+	width: 100%;
+}
 }
 
 .template-search span.input-group-btn {
@@ -4254,6 +4260,16 @@ fieldset:not(:last-child) {
 		}
 		legend {
 			margin-bottom: 6px;
+		}
+	}
+}
+
+@media (max-width: 991px){
+	.searchPage {
+		.actionMenu {
+			fieldset:not(:last-child) {
+				border-right: 0px;
+			}
 		}
 	}
 }
