@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.6 (unreleased)
+0.6 (2018-07-05)
 ----------------
 
-- Nothing changed yet.
-
+* Cambiar orden sweetalert [alberto.duran]
+* Actualizar versiones de angular [alberto.duran]
 
 0.5 (2018-07-03)
 ----------------
