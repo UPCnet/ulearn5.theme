@@ -119,9 +119,38 @@ input[type="checkbox"].required::after {
     content: "" !important;
 }
 
+/* folder_contents: Popover rearrange */
+
+#popover-structure-rearrange {
+
+    select[name="rearrange_on"] {
+        margin-left: 10px;
+    }
+
+    button.btn {
+        margin-top: 10px;
+    }
+}
+
+/* folder_contents: Structure columns */
+
+#popover-structure-columns {
+
+    button.btn {
+        margin-top: 10px;
+    }
+}
+
 /* Others */
+
+.pat-structure .navbar {
+    background-color: #fff !important;
+}
 
 .plone-breadcrumb {
     margin-top: 0;
 }
 
+.pat-structure .navbar-search input.form-control {
+    height: 30px !important;
+}
