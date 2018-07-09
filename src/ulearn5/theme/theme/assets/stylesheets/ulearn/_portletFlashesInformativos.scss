@@ -42,8 +42,30 @@
       }
     }
 
-    .carousel-inner.col-md-10 {
-      padding: 5px 40px 5px 30px;
+    .marquee  {
+      overflow: hidden;
+      position: relative;
+      display: block !important;
+      padding: 8px 0 !important;
+
+      .item {
+        display: inline-block;
+        margin-right: 150px;
+      }
+    }
+
+    &.carousel {
+
+      .col-md-10 {
+
+        .item {
+          display: none;
+        }
+      }
+    }
+
+    .col-md-10 {
+      padding: 5px 30px 5px 30px;
       float: left;
       height: 50px;
       width: 83.3333%;
@@ -51,7 +73,6 @@
       align-items: center;
 
       .item {
-        display: none;
 
         &.next,
         &.active {
@@ -63,7 +84,7 @@
           top: auto;
         }
 
-        &.left {
+        &:not(.active).left {
           left: 30px;
         }
 
@@ -116,9 +137,39 @@
       }
     }
   }
+
+  /* Carousel fade */
+
+  .carousel-fade {
+
+    .carousel-inner {
+
+      .item {
+        opacity: 0;
+        transition-property: opacity;
+      }
+
+      .active {
+        opacity: 1;
+      }
+
+      .active.left,
+      .active.right {
+        -webkit-transform: none !important;
+        transform: none !important;
+        opacity: 0;
+      }
+
+      .next.left,
+      .prev.right {
+        opacity: 1;
+      }
+    }
+  }
 }
 
-@media only screen and (max-width: 920px) {
+@media only screen and (max-width: 990px) {
+
   .ulearnboxflash {
 
     #flasinformatiu {
@@ -128,8 +179,21 @@
         width: 15%;
       }
 
+      .col-md-10 {
+        width: 85%;
+
+        .item {
+          a {
+            display: inline;
+          }
+        }
+      }
+    }
+
+    #flasinformatiu.carousel {
+
       .carousel-inner.col-md-10 {
-        width: 80%;
+        width: 85%;
         padding: 5px 40px 5px 30px;
 
         .item {
@@ -146,6 +210,7 @@
 }
 
 @media only screen and (max-width: 660px) {
+
   .ulearnboxflash {
 
     #flasinformatiu {
@@ -154,7 +219,7 @@
         width: 20%;
       }
 
-      .carousel-inner.col-md-10 {
+      .col-md-10 {
         width: 80%;
       }
     }
@@ -162,6 +227,7 @@
 }
 
 @media only screen and (max-width: 510px) {
+
   .ulearnboxflash {
 
     #flasinformatiu {
@@ -170,7 +236,7 @@
         width: 30%;
       }
 
-      .carousel-inner.col-md-10 {
+      .col-md-10 {
         width: 70%;
       }
     }

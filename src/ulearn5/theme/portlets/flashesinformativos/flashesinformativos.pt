@@ -3,7 +3,8 @@
      tal:condition="flashes"
      i18n:domain="ulearn">
 
-    <div id="flasinformatiu" class="carousel slide">
+     <!-- Add class carousel-fade to change effect -->
+    <div id="flasinformatiu" class="carousel slide" data-duration="5000">
         <div id="flashes-informativos" class="bubble left col-md-2">
             <div class="arrow"></div>
             <div class="bubble-content">
@@ -30,5 +31,40 @@
             <a class="carousel-control right" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
         </tal:bloc>
     </div>
-
+    <script src="++ulearn++portlets/flashesinformativos/flashesinformativos.js"></script>
 </div>
+
+
+<!-- <div class="ulearnboxflash row"
+     tal:define="flashes view/getFlashesInformativos"
+     tal:condition="flashes"
+     i18n:domain="ulearn">
+
+    <div id="flasinformatiu" tal:attributes="data-items python: len(flashes)">
+        <div id="flashes-informativos" class="bubble left col-md-2">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+                <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
+                    <p class="data" i18n:translate="flashesinformativos">Last hour</p>
+                </a>
+            </div>
+        </div>
+        <div class="marquee col-md-10" data-duration="10000">
+            <div>
+                <tal:item tal:repeat="item flashes">
+                    <div tal:define="isTheFirst repeat/item/start" class="item">
+                        <img tal:condition="item/flash/image" tal:define="scale item/flash/@@images" tal:replace="structure python: scale.scale('image',
+                                        scale='mini').tag(css_class='newsImage col-md-2')"/>
+
+                        <a href="#" tal:attributes="href item/url">
+                            <span class="col-md-6" tal:replace="structure item/title">Flash</span>
+                        </a>
+                    </div>
+                </tal:item>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js" type="text/javascript"></script>
+    <script src="++ulearn++portlets/flashesinformativos/flashesinformativos.js"></script>
+</div>
+ -->
