@@ -135,7 +135,7 @@
                 </ul>
                 <div metal:use-macro="here/batch_macros/macros/navigation" />
             </div>
-            <script src="/++ulearn++portlets/buttonbar/subscribednews.js"></script>
+            <script src="++ulearn++portlets/buttonbar/subscribednews.js"></script>
             </tal:newsitems>
         </div>
       <div id="librarysearch" ng-switch-when="sharedwithme">
