@@ -30,6 +30,10 @@
             width: 100%;
         }
 
+        video[type="video/mp3"] {
+            height: 32px;
+        }
+
         img {
             margin: 0 auto;
             display: block;
@@ -44,12 +48,22 @@
 
             .contentResource {
                 height: 142px;
+
+                video[type="video/mp3"] {
+                    position: absolute;
+                    bottom: 0;
+                }
             }
         }
 
+        .errorYT {
+            height: 100%;
+            display: block;
+            text-align: center;
+        }
+
         .carousel-ctrls {
-            height: 38px;
-            margin-bottom: 10px;
+            height: 32px;
             margin-top: 5px;
 
             .carousel-ctrl {
@@ -77,19 +91,9 @@
     .portlet-container-list {
         list-style: none;
         padding-left: 0px;
-
-        & > li {
-            padding-bottom: 20px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #d1d1d1;
-
-            &:last-of-type {
-                border-bottom: 0px;
-                margin-bottom: 0px;
-            }
-        }
     }
 
+    .portlet-container-list,
     .portlet-container-div {
 
         & > div {
@@ -100,6 +104,7 @@
             &:last-of-type {
                 border-bottom: 0px;
                 margin-bottom: 0px;
+                padding-bottom: 0px;
             }
         }
     }
@@ -107,6 +112,7 @@
     .more_link {
         display: block;
         padding: 10px 0px;
+        margin-top: 10px;
         border-top: 1px solid #d1d1d1;
         border-bottom: 1px solid #d1d1d1;
     }
