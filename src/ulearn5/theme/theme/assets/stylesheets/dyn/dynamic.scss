@@ -592,3 +592,19 @@ li.notCommunity.changeRow .infoTypeChange::before {
     }
   }
 }
+
+/* Portlet Smart */
+
+#portlet-smart {
+
+    .carousel {
+
+        .carousel-ctrl {
+             color: $buttons-color-primary !important;
+
+            &:hover {
+                color: darken($buttons-color-primary, 5%) !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,113 @@
+#portlet-smart {
+
+    h3 {
+        margin: 0px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        overflow: hidden;
+    }
+
+    .titleResource:first-of-type {
+
+        &.show_header{
+
+            h3 {
+                padding-top: 0px;
+            }
+        }
+    }
+
+    .contentResource {
+
+        &.image {
+            display: grid;
+            align-items: center;
+        }
+
+        video,
+        .player {
+            height: 142px;
+            width: 100%;
+        }
+
+        img {
+            margin: 0 auto;
+            display: block;
+            max-height: 142px;
+        }
+    }
+
+    .carousel {
+
+        .item {
+            width: 100%;
+
+            .contentResource {
+                height: 142px;
+            }
+        }
+
+        .carousel-ctrls {
+            height: 38px;
+            margin-bottom: 10px;
+            margin-top: 5px;
+
+            .carousel-ctrl {
+                position: initial;
+                font-size: 60px;
+                font-weight: 500;
+                line-height: 30px;
+                color: #000;
+                opacity: 1;
+                background-image: none;
+                text-align: center;
+                border: none;
+
+                &.left {
+                    float: left;
+                }
+
+                &.right {
+                    float: right;
+                }
+            }
+        }
+    }
+
+    .portlet-container-list {
+        list-style: none;
+        padding-left: 0px;
+
+        & > li {
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #d1d1d1;
+
+            &:last-of-type {
+                border-bottom: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    .portlet-container-div {
+
+        & > div {
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #d1d1d1;
+
+            &:last-of-type {
+                border-bottom: 0px;
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    .more_link {
+        display: block;
+        padding: 10px 0px;
+        border-top: 1px solid #d1d1d1;
+        border-bottom: 1px solid #d1d1d1;
+    }
+}

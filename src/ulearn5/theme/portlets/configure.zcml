@@ -135,4 +135,16 @@
         addview=".mytags.mytags.AddForm"
         />
 
+    <adapter
+        for="ulearn5.core.interfaces.IVideo"
+        provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
+        factory=".smart.renderers.VideoPortletItemRenderer"
+        />
+
+    <adapter
+        for="ulearn5.core.content.video_embed.IVideoEmbed"
+        provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
+        factory=".smart.renderers.YTVideoPortletItemRenderer"
+        />
+
 </configure>
