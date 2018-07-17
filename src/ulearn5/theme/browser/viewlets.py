@@ -245,7 +245,7 @@ class viewletHeaderUlearn(viewletBase):
         if not user_language or user_language == '':
             lt = getToolByName(self.portal(), 'portal_languages')
             user_language = lt.getPreferredLanguage()
-            if 'Anonymous' not in user.roles:
+            if 'Anonymous' not in api.user.get_roles(username=user.id):
                 user.setMemberProperties({'language': user_language})
 
         catalog = getToolByName(self, 'portal_catalog')
@@ -362,7 +362,7 @@ class viewletFooterUlearn(viewletBase):
         if not user_language or user_language == '':
             lt = getToolByName(self.portal(), 'portal_languages')
             user_language = lt.getPreferredLanguage()
-            if 'Anonymous' not in user.roles:
+            if 'Anonymous' not in api.user.get_roles(username=user.id):
                 user.setMemberProperties({'language': user_language})
 
         catalog = getToolByName(self, 'portal_catalog')
