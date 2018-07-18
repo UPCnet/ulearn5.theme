@@ -87,19 +87,20 @@ class Renderer(base.Renderer):
             the portal root.
         """
         if 'front-page' in self.context.getPhysicalPath() and \
-           checkPermission('ulearn.addCommunity', self.portal()):
-            return True
+            checkPermission('ulearn.addCommunity', self.portal()):
+            if api.user.get_current().id != "admin":
+                return True
 
     def showEditCommunity(self):
         pm = getToolByName(self.portal(), 'portal_membership')
         user = pm.getAuthenticatedMember()
 
         if not IPloneSiteRoot.providedBy(self.context) and \
-           ICommunity.providedBy(self.context) and \
-           ('Manager' in user.getRoles() or
-           'WebMaster' in user.getRoles() or
-           'Site Administrator' in user.getRoles() or
-           'Owner' in self.context.get_local_roles_for_userid(user.id)):
+            ICommunity.providedBy(self.context) and \
+            ('Manager' in user.getRoles() or
+            'WebMaster' in user.getRoles() or
+            'Site Administrator' in user.getRoles() or
+            'Owner' in self.context.get_local_roles_for_userid(user.id)):
             return True
 
     def getTypeCommunities(self, typeCommunity):
