@@ -8,7 +8,7 @@
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <!-- i18n:translate="Entrada" -->
-                   <a ng-click="ctrl.active_tab = 'stream'" i18n:attributes="title Entrada; aria-label Entrada" aria-hidden="true">
+                   <a ng-click="ctrl.active_tab = 'stream'" i18n:attributes="title Stream; aria-label Stream" aria-hidden="true">
                       <i class="fa fa-comment icons"></i>
                    </a>
                 </div>
