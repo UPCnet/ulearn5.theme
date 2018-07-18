@@ -290,11 +290,25 @@ class folderBar(viewletBase):
                 self.folder_type = 'news'
                 break
             if ICommunity.providedBy(obj):
-                self.folder_type = 'community'
+                self.folder_type = 'stream'
                 break
 
+    def show_news(self):
+        community = self.get_community()
+        return community.show_news
+
+    def show_events(self):
+        community = self.get_community()
+        return community.show_events
+
     def bubble_class(self, bubble):
-        width = 'col-xs-3'
+        community = self.get_community()
+        if community.show_news and community.show_events:
+            width = 'col-xs-3'
+        elif community.show_news or community.show_events:
+            width = 'col-xs-4'
+        else:
+            width = 'col-xs-6'
 
         if bubble == self.folder_type:
             return 'active bubble top {}'.format(width)
