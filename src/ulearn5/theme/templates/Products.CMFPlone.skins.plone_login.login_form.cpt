@@ -111,7 +111,7 @@
                       tal:attributes="for ac_name">E-mail</label>
                     <div tal:condition="error"
                       tal:content="error">Validation error output</div>
-                    <input type="text"
+                    <input type="text" autofocus
                       size="15"
                       tal:attributes="name ac_name;
                       id ac_name;
