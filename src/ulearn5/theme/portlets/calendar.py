@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from datetime import datetime
-from datetime import timedelta
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from datetime import datetime
+from datetime import timedelta
 
 from plone import api
 from plone.app.event.base import RET_MODE_OBJECTS
@@ -19,7 +21,6 @@ from plone.app.event.portlets import get_calendar_url
 from plone.app.portlets.portlets import base
 from plone.dexterity.interfaces import IDexterityContent
 from plone.event.interfaces import IEvent
-
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.i18nmessageid import MessageFactory
@@ -35,6 +36,7 @@ import itertools
 PLMF = MessageFactory('plonelocales')
 PRIORITY_TYPES = ['Organizative', 'Closed', 'Open']
 
+
 class ICalendarPortlet(IPortletDataProvider):
     """ A portlet which renders the calendar portlet """
 
@@ -46,6 +48,11 @@ class Assignment(base.Assignment):
 
 class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/calendar.pt')
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def update(self):
         context = aq_inner(self.context)

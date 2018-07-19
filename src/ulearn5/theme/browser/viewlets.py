@@ -3,7 +3,9 @@ from Acquisition import aq_chain
 from Acquisition import aq_inner
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import ILanguageSchema
 from Products.CMFPlone.utils import safe_unicode
+
 from cgi import escape
 from five import grok
 from plone import api
@@ -19,6 +21,7 @@ from souper.soup import Record
 from souper.soup import get_soup
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.globalrequest import getRequest
 from zope.interface import Interface
 
 from ulearn5.core.browser.viewlets import viewletBase
@@ -211,10 +214,10 @@ class viewletHeaderUlearn(viewletBase):
         """ Devuelve el menu de enlaces segun el idioma que tenga definido el
             usuario en su perfil
         """
-        current = api.user.get_current()
-        if current.getUserName() == 'Anonymous User':
+        if api.user.is_anonymous():
             pass
         else:
+            current = api.user.get_current()
             user_language = current.getProperty('language')
             if not user_language or user_language == '':
                 lt = getToolByName(self.portal(), 'portal_languages')
@@ -241,12 +244,23 @@ class viewletHeaderUlearn(viewletBase):
         Get dades header
         """
         user = api.user.get_current()
-        user_language = user.getProperty('language')
-        if not user_language or user_language == '':
-            lt = getToolByName(self.portal(), 'portal_languages')
-            user_language = lt.getPreferredLanguage()
-            if 'Anonymous' not in api.user.get_roles(username=user.id):
+
+        if not api.user.is_anonymous():
+            user_language = user.getProperty('language')
+            if not user_language or user_language == '':
+                lt = getToolByName(self.portal(), 'portal_languages')
+                user_language = lt.getPreferredLanguage()
                 user.setMemberProperties({'language': user_language})
+        else:
+            registry = getUtility(IRegistry)
+            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
+            useCookie = lan_tool.use_cookie_negotiation
+            if useCookie:
+                request = getRequest()
+                user_language = request.cookies.get('I18N_LANGUAGE')
+            else:
+                pt = getToolByName(self.portal(), 'portal_languages')
+                user_language = pt.getPreferredLanguage()
 
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
@@ -372,12 +386,23 @@ class viewletFooterUlearn(viewletBase):
         Get dades footer
         """
         user = api.user.get_current()
-        user_language = user.getProperty('language')
-        if not user_language or user_language == '':
-            lt = getToolByName(self.portal(), 'portal_languages')
-            user_language = lt.getPreferredLanguage()
-            if 'Anonymous' not in api.user.get_roles(username=user.id):
+
+        if not api.user.is_anonymous():
+            user_language = user.getProperty('language')
+            if not user_language or user_language == '':
+                lt = getToolByName(self.portal(), 'portal_languages')
+                user_language = lt.getPreferredLanguage()
                 user.setMemberProperties({'language': user_language})
+        else:
+            registry = getUtility(IRegistry)
+            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
+            useCookie = lan_tool.use_cookie_negotiation
+            if useCookie:
+                request = getRequest()
+                user_language = request.cookies.get('I18N_LANGUAGE')
+            else:
+                pt = getToolByName(self.portal(), 'portal_languages')
+                user_language = pt.getPreferredLanguage()
 
         catalog = getToolByName(self, 'portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())

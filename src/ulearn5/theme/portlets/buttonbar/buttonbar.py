@@ -1,20 +1,23 @@
-from zope.interface import implements
-from plone import api
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone import PloneMessageFactory as _
-import transaction
-from zope.component.hooks import getSite
-from zope.component import getMultiAdapter
+# -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
-from plone.memoize.view import memoize_contextless
-from plone.memoize.instance import memoize
 from DateTime.DateTime import DateTime
-from souper.soup import get_soup
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.instance import memoize
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
 from repoze.catalog.query import Eq
+from souper.soup import get_soup
 from zope import schema
+from zope.component import getMultiAdapter
+from zope.component.hooks import getSite
+from zope.interface import implements
+
+import transaction
 
 
 class IButtonBarPortlet(IPortletDataProvider):
@@ -50,6 +53,11 @@ class Renderer(base.Renderer):
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def is_activate_sharedwithme(self):
         if (api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):

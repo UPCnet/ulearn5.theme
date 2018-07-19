@@ -1,4 +1,4 @@
-<tal:stats tal:define="is_community view/is_community">
+<tal:stats tal:condition="not:view/isAnon" tal:define="is_community view/is_community">
 <div id="box_stats" class="ulearnbox"
      i18n:domain="ulearn">
 

@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-from zope.interface import implements
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone import PloneMessageFactory as _
-from zope.component import queryUtility
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
 from plone.registry.interfaces import IRegistry
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from zope import schema
-from zope.formlib import form
-import requests
+from zope.component import queryUtility
+from zope.interface import implements
+
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+
 import json
+import requests
 
 
 class IMySubjectsPortlet(IPortletDataProvider):
@@ -50,6 +52,11 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('mysubjects.pt')
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def getSubjects(self):
         """ return list of user subjects to show in portlet """

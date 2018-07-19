@@ -1,3 +1,4 @@
+<tal:block tal:condition="not:view/isAnon">
 <div id="box_discussion" class="ulearnbox"
      tal:define="discussions view/get_last_discussions"
      tal:condition="discussions"
@@ -54,3 +55,4 @@
   </p>
 
 </div>
+</tal:block>

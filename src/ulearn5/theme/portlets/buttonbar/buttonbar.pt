@@ -1,4 +1,5 @@
 <div ng-controller="homeTopPageMenuButtons as ctrl"
+   tal:condition="not:view/isAnon"
    tal:define="shared view/is_activate_sharedwithme;
    news view/is_activate_news;
    cls view/getClass">

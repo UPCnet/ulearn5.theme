@@ -67,6 +67,11 @@ class Renderer(base.Renderer):
     def render(self):
         return xhtml_compress(self._template())
 
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
     def recent_items(self):
         return self._data()
 

@@ -1,25 +1,25 @@
-from zope.interface import implements
-from zope.component.hooks import getSite
-from zope.component import queryUtility
-from zope.security import checkPermission
-
-from plone.app.portlets.portlets import base
-from plone.registry.interfaces import IRegistry
-from plone.memoize.view import memoize_contextless
-from plone.portlets.interfaces import IPortletDataProvider
+# -*- coding: utf-8 -*-
+from DateTime.DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
+from zope.component import queryUtility
+from zope.component.hooks import getSite
+from zope.interface import implements
+from zope.security import checkPermission
+
 from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-
-from plone import api
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
-from DateTime.DateTime import DateTime
 
 
 class ICommunitiesNavigation(IPortletDataProvider):
@@ -76,6 +76,11 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal(self):
         return getSite()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def get_addview(self):
         add_view = self.portal().restrictedTraverse('{}/addCommunity'.format('/'.join(self.portal().getPhysicalPath())))

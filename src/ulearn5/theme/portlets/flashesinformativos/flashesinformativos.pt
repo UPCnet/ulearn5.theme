@@ -1,3 +1,4 @@
+<tal:block tal:condition="not:view/isAnon">
 <div class="ulearnboxflash row"
      tal:define="flashes view/getFlashesInformativos"
      tal:condition="flashes"
@@ -68,3 +69,4 @@
     <script src="++ulearn++portlets/flashesinformativos/flashesinformativos.js"></script>
 </div>
  -->
+</tal:block>

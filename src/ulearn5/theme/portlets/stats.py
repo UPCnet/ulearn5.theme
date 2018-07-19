@@ -1,18 +1,17 @@
-from hashlib import sha1
-from plone import api
-from Acquisition import aq_inner, aq_chain
-from zope.interface import implements
-
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-
+# -*- coding: utf-8 -*-
+from Acquisition import aq_chain
+from Acquisition import aq_inner
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from ulearn5.core.content.community import ICommunity
-
+from hashlib import sha1
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.interface import implements
 from zope.security import checkPermission
-from ulearn5.core import _
+
+from ulearn5.core.content.community import ICommunity
 
 
 class IStatsPortlet(IPortletDataProvider):
@@ -31,6 +30,11 @@ class Renderer(base.Renderer):
     def __init__(self, context, request, view, manager, data):
         super(Renderer, self).__init__(context, request, view, manager, data)
         self.portal_url = api.portal.get().absolute_url()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def get_hash(self):
         """ Assume that the stats are only shown on the community itself. """

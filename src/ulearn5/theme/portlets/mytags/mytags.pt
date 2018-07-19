@@ -1,5 +1,6 @@
 <div id="box_mytags" class="ulearnbox"
      i18n:domain="ulearn"
+     tal:condition="not:view/isAnon"
      tal:define="tags view/getMyTags|nothing">
 
     <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>

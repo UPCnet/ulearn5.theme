@@ -1,19 +1,18 @@
-from hashlib import sha1
-from plone import api
-from zope.interface import implements
-
-from Acquisition import aq_inner, aq_chain
-
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
+# -*- coding: utf-8 -*-
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from Products.CMFPlone import PloneMessageFactory as _
+from hashlib import sha1
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.interface import implements
 
+from base5.core.utils import get_safe_member_by_id
+from base5.core.utils import pref_lang
 from ulearn5.core.content.community import ICommunity
-
-from base5.core.utils import get_safe_member_by_id, pref_lang
 
 
 class IThinnkersPortlet(IPortletDataProvider):
@@ -37,6 +36,11 @@ class Renderer(base.Renderer):
         self.user_info = get_safe_member_by_id(self.username)
         self.portal_url = api.portal.get().absolute_url()
 
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
     def get_community(self):
         context = aq_inner(self.context)
         for obj in aq_chain(context):
@@ -48,7 +52,6 @@ class Renderer(base.Renderer):
         for obj in aq_chain(context):
             if ICommunity.providedBy(obj):
                 return True
-
         return False
 
     def get_people_literal(self):

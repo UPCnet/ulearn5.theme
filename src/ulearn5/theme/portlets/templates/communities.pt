@@ -4,6 +4,7 @@
    lang="en"
    xmlns:tal="http://xml.zope.org/namespaces/tal"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   tal:condition="not:view/isAnon"
    i18n:domain="ulearn">
    <body>
       <div id="box_comunitats" class="ulearnbox" tal:condition="not:view/isAnon">

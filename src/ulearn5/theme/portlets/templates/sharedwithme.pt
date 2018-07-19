@@ -1,4 +1,4 @@
-<div tal:define="ulearn_utils context/@@ulearn.utils" ng-controller="homeTopPageMenuButtons as ctrl">
+<div tal:condition="not:view/isAnon" tal:define="ulearn_utils context/@@ulearn.utils" ng-controller="homeTopPageMenuButtons as ctrl">
     <div tal:condition="ulearn_utils/is_activate_sharedwithme" id="menusup" i18n:domain="ulearn">
         <nav>
             <div class="row">

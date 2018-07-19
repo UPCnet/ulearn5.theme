@@ -1,32 +1,32 @@
-from hashlib import sha1
-from copy import deepcopy
-from plone import api
-from Acquisition import aq_inner
+# -*- coding: utf-8 -*-
 from Acquisition import aq_chain
+from Acquisition import aq_inner
 from OFS.Image import Image
-from zope.interface import implements
-from zope.component import queryUtility
-from zope.component import getMultiAdapter
-
-from plone.app.portlets.portlets import base
-from plone.registry.interfaces import IRegistry
-from plone.portlets.interfaces import IPortletDataProvider
-
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from copy import deepcopy
+from hashlib import sha1
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.interface import implements
+
+from base5.core.utils import get_safe_member_by_id
+from base5.core.utils import pref_lang
+from mrs5.max.utilities import IMAXClient
+from ulearn5.core.adapters.portrait import convertSquareImage
 from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
-from base5.core.utils import get_safe_member_by_id, pref_lang
-
-from zope.component import getUtility
-from mrs5.max.utilities import IMAXClient
-from ulearn5.core.adapters.portrait import convertSquareImage
 import urllib
-from Products.CMFCore.utils import getToolByName
 
 
 class IProfilePortlet(IPortletDataProvider):
@@ -48,6 +48,11 @@ class Renderer(base.Renderer):
         self.username = api.user.get_current().id
         self.user_info = get_safe_member_by_id(self.username)
         self.portal_url = api.portal.get().absolute_url()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def is_admin_user(self):
         if api.user.get_current().id == 'admin':
