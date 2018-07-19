@@ -244,12 +244,12 @@ class viewletHeaderUlearn(viewletBase):
         Get dades header
         """
         user = api.user.get_current()
+        pt = getToolByName(self.portal(), 'portal_languages')
 
         if not api.user.is_anonymous():
             user_language = user.getProperty('language')
             if not user_language or user_language == '':
-                lt = getToolByName(self.portal(), 'portal_languages')
-                user_language = lt.getPreferredLanguage()
+                user_language = pt.getPreferredLanguage()
                 user.setMemberProperties({'language': user_language})
         else:
             registry = getUtility(IRegistry)
@@ -258,8 +258,9 @@ class viewletHeaderUlearn(viewletBase):
             if useCookie:
                 request = getRequest()
                 user_language = request.cookies.get('I18N_LANGUAGE')
+                if not user_language:
+                    user_language = pt.getPreferredLanguage()
             else:
-                pt = getToolByName(self.portal(), 'portal_languages')
                 user_language = pt.getPreferredLanguage()
 
         catalog = getToolByName(self, 'portal_catalog')
@@ -386,12 +387,12 @@ class viewletFooterUlearn(viewletBase):
         Get dades footer
         """
         user = api.user.get_current()
+        pt = getToolByName(self.portal(), 'portal_languages')
 
         if not api.user.is_anonymous():
             user_language = user.getProperty('language')
             if not user_language or user_language == '':
-                lt = getToolByName(self.portal(), 'portal_languages')
-                user_language = lt.getPreferredLanguage()
+                user_language = pt.getPreferredLanguage()
                 user.setMemberProperties({'language': user_language})
         else:
             registry = getUtility(IRegistry)
@@ -400,8 +401,9 @@ class viewletFooterUlearn(viewletBase):
             if useCookie:
                 request = getRequest()
                 user_language = request.cookies.get('I18N_LANGUAGE')
+                if not user_language:
+                    user_language = pt.getPreferredLanguage()
             else:
-                pt = getToolByName(self.portal(), 'portal_languages')
                 user_language = pt.getPreferredLanguage()
 
         catalog = getToolByName(self, 'portal_catalog')
