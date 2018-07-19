@@ -568,8 +568,8 @@ input[type="text"]:focus {
 }
 
 #communitylist article.media.ng-scope:last-of-type {
-	border-bottom: 0px solid #ddd;
-	padding: 0 15px 15px 0px!important;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
 }
 
 // Afegida la icona de comunitats a tot arreu.
@@ -590,6 +590,11 @@ input[type="text"]:focus {
 		text-align: center;
 		margin-bottom: 10px;
 	}
+}
+
+#box_perfil h2:after,
+#box_community h2:after {
+	content: none;
 }
 
 #box_community img {}
@@ -3260,11 +3265,6 @@ li.upc-eines-contacte {
 	background-color: transparent!important;
 }
 
-#communitylist article.media.ng-scope:last-of-type {
-	margin-bottom: 0px!important;
-	padding-bottom: 0px!important;
-}
-
 #sharedwithme-container .tileItem.visualIEFloatFix.ng-scope {
 	border-bottom: 1px solid #ddd;
 	padding-bottom: 15px;
@@ -4718,7 +4718,11 @@ span.option {
 }
 
 .plone-modal-content button.btn {
-	padding: 10px 20px!important;
+	padding: 10px 20px !important;
+}
+
+.plone-modal-content button.btn:hover {
+	color: #000;
 }
 
 .entries {
@@ -5110,7 +5114,13 @@ div#maxui-widget-container {
 }
 
 .maxui-conversation .maxui-avatar {
-	left: -40px!important;
+	left: -36px !important;
+	top: 1px !important;
+}
+
+.maxui-conversation .maxui-displayname,
+.maxui-conversation .maxui-body {
+	margin-left: 20px !important;
 }
 
 #maxui-common-header h2 {
