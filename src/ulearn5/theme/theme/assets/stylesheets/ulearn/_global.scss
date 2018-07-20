@@ -2054,10 +2054,14 @@ i.icon-folder-filtered_contents_search_view {
 	margin-bottom: 2px;
 }
 
-.text_noticia>p {
+.text_noticia,
+.text_noticia > p {
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.text_noticia > .data {
 	font-size: 12px;
-	line-height: 13px;
-	margin-bottom: 3px;
 }
 
 .imatge_noticia {

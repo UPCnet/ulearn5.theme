@@ -147,7 +147,7 @@
                                        <span tal:replace="obj/title">Notícies RSS</span>
                                     </a>
                                 </h2>
-                                <p><time class="smaller" tal:content="obj/date">May 5</time></p>
+                                <p class="data"><time class="smaller" tal:content="obj/date">May 5</time></p>
                                 <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text Noticia</span>
                                 <a href="#" class="readmore"
                                    tal:attributes="href obj/url;
