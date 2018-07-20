@@ -683,20 +683,28 @@ input[type="text"]:focus {
 				margin-left: 5px;
 			}
 		}
-		.usuari_petit {
-			font-size: 0.8em;
-			font-weight: 400;
-			color: black;
+		h3 {
+			margin-top: 0px;
+			.usuari_petit {
+				font-size: 0.6em;
+				font-weight: 400;
+				color: black;
+			}
 		}
 		.photo {
-			margin: 10px;
+			margin-bottom: 10px;
 			display: block;
+
+			img {
+				width: 115px;
+				height: 115px;
+			}
 		}
 	}
 	.fa {
 		border: 1px solid #dddddd;
 		border-radius: 21px;
-		color: #007ac2!important;
+		color: #007ac2;
 		font-size: 11px;
 		margin-right: 10px;
 		width: 21px;

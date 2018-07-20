@@ -618,3 +618,15 @@ li.notCommunity.changeRow .infoTypeChange::before {
     color: darken($secondary-color, 5%);
   }
 }
+
+/* Users list */
+
+#userlist {
+  .fa {
+    color: $buttons-color-primary !important;
+
+    &:hover {
+      color: darken($buttons-color-primary, 5%) !important;
+    }
+  }
+}
