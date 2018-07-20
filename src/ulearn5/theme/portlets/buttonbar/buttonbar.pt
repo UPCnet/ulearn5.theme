@@ -150,9 +150,9 @@
                                 <p class="data"><time class="smaller" tal:content="obj/date">May 5</time></p>
                                 <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text Noticia</span>
                                 <a href="#" class="readmore"
-                                   tal:attributes="href obj/url;
-                                   title obj/title"><span class="readmore"
-                                   i18n:translate="readmore">Leer mas..</span>
+                                   tal:attributes="href obj/url"
+                                   i18n:attributes="title readmore">
+                                   <span class="readmore" i18n:translate="readmore">Leer mas..</span>
                                 </a>
                             </div>
                         </div>
