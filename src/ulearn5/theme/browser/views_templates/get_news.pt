@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
+<body>
+    <metal:main metal:fill-slot="content"
+                        tal:define="dades_noticies context/get_news;">
+        <ul class="list-search-portlet">
+            <li class="noticies clearfix" tal:repeat="obj dades_noticies">
+                <div>
+                    <div class="imatge_noticia">
+                    <a href="" tal:attributes="href obj/url">
+                        <img tal:condition="obj/new/image"
+                           tal:define="scale obj/new/@@images"
+                           tal:replace="structure python: scale.scale('image',
+                           scale='mini').tag(css_class='newsImage')" />
+                        <p class="discreet" tal:condition="obj/new/image_caption|nothing"
+                           tal:content="structure obj/new/image_caption" >
+                        </p>
+                    </a>
+                    </div>
+                    <div class="text_noticia">
+                        <h2>
+                            <a href="" tal:attributes="href obj/url">
+                               <span tal:replace="obj/title">Notícies RSS</span>
+                            </a>
+                        </h2>
+                        <p><time class="smaller" tal:content="obj/date">May 5</time></p>
+                        <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text Noticia</span>
+                        <a href="#" class="readmore"
+                           tal:attributes="href obj/url;
+                           title obj/title"><span class="readmore"
+                           i18n:translate="readmore">Leer mas..</span>
+                        </a>
+                    </div>
+                </div>
+           </li>
+        </ul>
+    </metal:main>
+
+</body>
+</html>
