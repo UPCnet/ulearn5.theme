@@ -731,16 +731,19 @@ class SearchFilteredNews(grok.View):
 
                     news_html += '<li class="noticies clearfix">' \
                                    '<div>' \
-                                      '<div class="imatge_noticia">' \
-                                        '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'\
-                                      '</div>' \
+                                      '<div class="imatge_noticia">'
+
+                    if noticia.getObject().image:
+                        news_html +=     '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'
+
+                    news_html +=      '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\
                                         '<a href="' + noticia.getURL() + '">' + abrevia(noticia.Title, 70) + '</a>'\
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text.encode('utf-8')+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore + '</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore.decode().encode('utf-8') + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\
