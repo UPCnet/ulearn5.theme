@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12"
-                    tal:define="image nocall:community/image">
+                    tal:define="image nocall:community/image | nothing">
                     <img tal:attributes="src string:${community/absolute_url}/@@download/image/${community/image/filename}"
                         tal:condition="nocall:image"/>
                     <img src="++theme++ulearn5/assets/images/avatar_default.png"
@@ -23,7 +23,8 @@
             </div>
             <div tal:define="types view/get_addable_types;
                              documentPage python:view.isCurrentPage('documents');
-                             eventsPage python:view.isCurrentPage('events');"
+                             eventsPage python:view.isCurrentPage('events');
+                             newsPage python:view.isCurrentPage('news');"
                  class="btn-group contentaddtoolbar">
                 <tal:docs condition="documentPage" repeat="type types">
                     <tal:con tal:define="type_id type/id">
@@ -45,11 +46,21 @@
                         </tal:cond>
                     </tal:con>
                 </tal:events>
+                <tal:news condition="newsPage" repeat="type types">
+                    <tal:con tal:define="type_id type/id">
+                        <tal:cond tal:condition="python: type_id in ('News Item')">
+                            <a class="btn btn-default" rel="tooltip" data-placement="bottom"
+                                tal:attributes="href type/action; title type/description">
+                                <i class="fa fa-newspaper-o icons"></i>
+                            </a>
+                        </tal:cond>
+                    </tal:con>
+                </tal:news>
             </div>
             <div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="editModalLabel" i18n:domain="ulearn" i18n:translate="editcommunity">Edit this community</h3>
+                    <h3 id="editModalLabel" i18n:translate="editcommunity">Edit this community</h3>
                 </div>
                 <div class="modal-body">
                     <p></p>
@@ -60,10 +71,12 @@
                 ng-controller="profilePortlet as portlet"
                 tal:define="community_type python:view.get_community_type(community)">
                 <a class="btn btn-default"
-                    tal:attributes="href string:${community/absolute_url}/edit; title view/get_edit_literal;">
+                    tal:attributes="href string:${community/absolute_url}/edit;"
+                    i18n:attributes="title btnEditCommunity" title="Edit community">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl; title view/get_acl_literal;">
+                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/editacl;"
+                    i18n:attributes="title btnAclCommunity" title="Manage members">
                     <i class="fa fa-users"></i>
                 </a>
                 <tal:block tal:condition="view/has_webmaster_role">
@@ -71,7 +84,8 @@
                         ng-dialog-class="ngdialog-theme-default changeCommunityType"
                         ng-dialog-controller="profilePortletModal"
                         ng-dialog-cache="false"
-                        tal:attributes="title view/get_com_type_literal; ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
+                        i18n:attributes="title btnChangeTypeCommunity" title="Change community type"
+                        tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
                         href="">
                         <i class="fa fa-exchange" ></i>
                     </a>
