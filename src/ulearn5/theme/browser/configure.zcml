@@ -39,4 +39,12 @@
         permission="zope2.View"
     />
 
+    <browser:page
+        name="get_news"
+        for="*"
+        class=".get_news.getNews"
+        permission="zope.Public"
+        />
+
+
 </configure>
