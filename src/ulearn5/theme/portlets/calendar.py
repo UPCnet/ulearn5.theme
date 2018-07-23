@@ -21,7 +21,6 @@ from plone.app.event.portlets import get_calendar_url
 from plone.app.portlets.portlets import base
 from plone.dexterity.interfaces import IDexterityContent
 from plone.event.interfaces import IEvent
-from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implements
@@ -34,7 +33,6 @@ import itertools
 
 
 PLMF = MessageFactory('plonelocales')
-PRIORITY_TYPES = ['Organizative', 'Closed', 'Open']
 
 
 class ICalendarPortlet(IPortletDataProvider):
@@ -154,8 +152,9 @@ class Renderer(base.Renderer):
         super(Renderer, self).__init__(*args, **kwargs)
 
     def getPriorityClassTypeEvent(self, events):
+        priorityTypesOrder = ['Organizative', 'Closed', 'Open']
         classType = {'Organizative': 'event-organizative', 'Closed': 'event-closed', 'Open': 'event-open'}
-        for typeCommunity in PRIORITY_TYPES:
+        for typeCommunity in priorityTypesOrder:
             for event in events:
                 if IEvent.providedBy(event):
                     community = event.aq_parent.aq_parent
@@ -203,7 +202,8 @@ class Renderer(base.Renderer):
         start = monthdates[0]
         end = monthdates[-1]
         events = get_events(context,
-                            start=start-timedelta(days=30), end=end,
+                            start=start - timedelta(days=30),
+                            end=end,
                             ret_mode=RET_MODE_OBJECTS,
                             expand=True, **query_kw)
         return construct_calendar(events, start=start, end=end)
@@ -252,26 +252,6 @@ class Renderer(base.Renderer):
         today['month'] = loc_today.month
         today['year'] = loc_today.year
         return today
-
-    @memoize_contextless
-    def get_nearest_today_event(self):
-        context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        now = localized_now()
-        portal = getToolByName(context, 'portal_url').getPortalObject()
-
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'end': {'query': now, 'range': 'min'},
-            'sort_on': 'start',
-            'path': '/'.join(portal.getPhysicalPath()) + self.search_base,
-            'sort_limit': 1
-        }
-
-        result = pc(**query)
-        if result:
-            return result[0]
 
     def getEventCalendarDict(self, event):
         start = event.start.strftime('%d/%m') if not event.recurrence else event.ocstart.strftime('%d/%m')
@@ -351,18 +331,16 @@ class Renderer(base.Renderer):
 
         if len(list_events):
             list_events = sorted(list_events, key=lambda x: x['community_name'])
-            for communityType in PRIORITY_TYPES:
-                for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
-                    events = [event for event in group]
-                    events = sorted(events, key=lambda x: (x['searchStart'], x['Title']))
-                    if events[0]['community_type'] == communityType:
-                        group_events.append(dict(Title=key,
-                                                 getURL=events[0]['getURL'],
-                                                 community_url=events[0]['community_url'],
-                                                 community_type=events[0]['community_type'],
-                                                 community_name=events[0]['community_name'],
-                                                 num_events=len(events),
-                                                 events=events))
+            for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
+                events = [event for event in group]
+                events = sorted(events, key=lambda x: (x['searchStart'], x['Title']))
+                group_events.append(dict(Title=key,
+                                         getURL=events[0]['getURL'],
+                                         community_url=events[0]['community_url'],
+                                         community_type=events[0]['community_type'],
+                                         community_name=events[0]['community_name'],
+                                         num_events=len(events),
+                                         events=events))
             return group_events
         else:
             return None

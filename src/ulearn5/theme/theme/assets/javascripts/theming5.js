@@ -50,7 +50,7 @@ $(document).ready(function () {
         $('.portletCalendar .cal_has_events').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
-        $('#box_agenda #day').click(function (event) {
+        $('#box_agenda #today').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
         $('.portletCalendar dd a[title]').tooltip({

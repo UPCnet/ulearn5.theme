@@ -65,16 +65,6 @@ a {
   }
 }
 
-#day {
-  background: none repeat scroll 0 0 $main-color;
-  text-shadow: 1px 1px 0 #444;
-  .arrow { border-left-color: $main-color; }
-  &:hover {
-    background: none repeat scroll 0 0 darken($main-color, 5%);
-    .arrow { border-left-color: darken($main-color, 5%); }
-  }
-}
-
 .todayevent{ background:$main-color; }
 
 #communitylist {
