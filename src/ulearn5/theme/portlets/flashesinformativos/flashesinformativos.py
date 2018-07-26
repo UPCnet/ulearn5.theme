@@ -42,7 +42,7 @@ class Assignment(base.Assignment):
         self.name = name
         self.count = count
 
-    title = _(u'flashesinformativos', default=u'Flashes Informativos')
+    title = _(u'flashes_informativos', default=u'Flashes Informativos')
 
 
 class Renderer(base.Renderer):
