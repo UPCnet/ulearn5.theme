@@ -135,6 +135,15 @@
         addview=".mytags.mytags.AddForm"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.rss"
+        interface=".rss.rss.IRSSPortlet"
+        assignment=".rss.rss.Assignment"
+        renderer=".rss.rss.Renderer"
+        addview=".rss.rss.AddForm"
+        editview=".rss.rss.EditForm"
+        />
+
     <adapter
         for="ulearn5.core.interfaces.IVideo"
         provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
