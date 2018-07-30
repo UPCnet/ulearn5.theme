@@ -3450,8 +3450,7 @@ li.dropdown.ulearn-eines-ql .caret {
 }
 
 .upc-eines .dropdown li a {
-	margin: 0 6px;
-	padding: 12px;
+	padding: 8px 12px;
 	border-radius: 2px;
 	font-size: .875rem
 }
@@ -5447,4 +5446,11 @@ a.quicklinks::after {
 img.portraitProfile{
 	max-height: 200px;
     padding-bottom: 10px;
+}
+
+/* Divider menu */
+
+.dropdown-menu .divider {
+	margin: 4px 0;
+	display: block !important;
 }

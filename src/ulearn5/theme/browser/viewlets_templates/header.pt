@@ -90,6 +90,7 @@
               <i class="fa fa-bar-chart"></i>
               <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
             </a></li>
+            <!-- <li aria-hidden="true" class="divider"></li> -->
           </ul>
         </li>
         <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql" >
