@@ -981,7 +981,6 @@ label[for="form.ext_editor"]~div.widget {
 	font-size: 15px;
 	height: 20px;
 	margin-bottom: 10px;
-	margin-top: 5px;
 	padding: 0;
 	vertical-align: middle;
 	width: 99%;
@@ -1408,10 +1407,15 @@ label[for="form.ext_editor"]~div.widget {
 .searchbytagcontainer ul.select2-choices {
 	list-style: none;
 	margin: 0;
+	margin-top: 3px;
 }
 
 #userlist .queryable a img {
 	display: none;
+}
+
+#userlist .queryable.fa {
+	cursor: pointer;
 }
 
 #box_comunitats .bubble.right {
