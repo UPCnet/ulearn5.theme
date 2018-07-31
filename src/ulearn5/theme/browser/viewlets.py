@@ -15,6 +15,8 @@ from plone.app.layout.viewlets.interfaces import IHtmlHead
 from plone.app.layout.viewlets.interfaces import IPortalFooter
 from plone.app.layout.viewlets.interfaces import IPortalHeader
 from plone.memoize import forever
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRetriever
 from plone.registry.interfaces import IRegistry
 from repoze.catalog.query import Eq
 from souper.soup import Record
@@ -121,7 +123,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
-            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats():
+            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats() or self.canManageHeader() or self.canManageFooter() or self.canManageBanners() or self.canManagePersonalBanners():
                 return True
         return False
 
@@ -159,6 +161,39 @@ class viewletHeaderUlearn(viewletBase):
 
     def canManageFooter(self):
         return self.canManageDirectory('footer')
+
+    def isDisplayedPortletBanners(self):
+        columns = ['ContentWellPortlets.BelowTitlePortletManager1',
+                   'ContentWellPortlets.BelowTitlePortletManager2',
+                   'ContentWellPortlets.BelowTitlePortletManager3',
+                   'plone.leftcolumn', 'plone.rightcolumn']
+        for column in columns:
+            managerColumn = getUtility(IPortletManager, name=column)
+            retriever = getMultiAdapter((self.context, managerColumn), IPortletRetriever)
+            portlets = retriever.getPortlets()
+            for portlet in portlets:
+                if portlet['name'] == 'banners':
+                    return portlet['assignment'].typePortlet
+        return False
+
+    def canManageBanners(self):
+        if self.isDisplayedPortletBanners() == 'G':
+            return self.canManageDirectory('banners')
+        return False
+
+    def canManagePersonalBanners(self):
+        if self.isDisplayedPortletBanners() == 'P':
+            current = api.user.get_current()
+            portal = api.portal.get()
+            if 'Members' in portal:
+                if current.id in portal['Members']:
+                    if 'banners' in portal['Members'][current.id]:
+                        return True
+        return False
+
+    def currentUser(self):
+        user = api.user.get_current().id
+        return user
 
     def _createLinksMenu(self, language):
         """ Genera el menu de enlaces segun el idioma que tenga definido el

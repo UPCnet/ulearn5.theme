@@ -62,6 +62,18 @@
                 <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
               </a>
             </li>
+            <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
+              <a tal:attributes="href string:${viewlet/portal_url}/Members/${viewlet/currentUser}/banners">
+                <i class="fa fa-image"></i>
+                <tal:footer i18n:translate="menu-gestion-personal-banners">Personal banners</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageBanners">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/banners">
+                <i class="fa fa-image"></i>
+                <tal:footer i18n:translate="menu-gestion-global-banners">Global banners</tal:footer>
+              </a>
+            </li>
             <li role="menuitem" tal:condition="viewlet/canManageHeader">
               <a tal:attributes="href string:${viewlet/portal_url}/gestion/header">
                 <i class="fa fa-folder"></i>

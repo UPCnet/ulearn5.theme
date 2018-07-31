@@ -606,6 +606,26 @@ li.notCommunity.changeRow .infoTypeChange::before {
     }
 }
 
+/* Portlet BAnners */
+
+body.portaltype-ulearn-banner #content,
+#personal_banners {
+
+  .banner {
+
+    .defaultBanner {
+
+      a {
+        background-color: $buttons-color-primary !important;
+
+        &:hover {
+          background-color: darken($buttons-color-primary, 5%) !important;
+        }
+      }
+    }
+  }
+}
+
 /* Pagination */
 
 .pagination > li > a {

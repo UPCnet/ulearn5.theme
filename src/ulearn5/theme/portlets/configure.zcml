@@ -144,6 +144,15 @@
         editview=".rss.rss.EditForm"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.banners"
+        interface=".banners.banners.IBannersPortlet"
+        assignment=".banners.banners.Assignment"
+        renderer=".banners.banners.Renderer"
+        addview=".banners.banners.AddForm"
+        editview=".banners.banners.EditForm"
+        />
+
     <adapter
         for="ulearn5.core.interfaces.IVideo"
         provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
