@@ -150,10 +150,24 @@ class RSSFeed(object):
         summary = summary.replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<')
         return summary.replace('&middot;', '·').replace('&rsquo;', "'").replace("&ldquo;", '"').replace("&nbsp;", ' ')
 
+    def cleanConflictiveTags(self, summary):
+        while "<iframe>" in summary:
+            startTag = summary.find('<iframe>')
+            endTag = summary.find('</iframe>', startTag) + 9
+            summary = summary[0:startTag] + summary[endTag:]
+
+        while "<script>" in summary:
+            startTag = summary.find('<script>')
+            endTag = summary.find('</script>', startTag) + 9
+            summary = summary[0:startTag] + summary[endTag:]
+
+        return summary
+
     def abrevia(self, summary, sumlenght):
         """ Retalla contingut de cadenes
         """
         bb = ''
+        summary = self.cleanConflictiveTags(summary)
         if sumlenght < len(summary):
             bb = summary[:sumlenght]
             if '<a' in bb:
@@ -181,7 +195,6 @@ class RSSFeed(object):
                 bb = bb + ' ...'
         else:
             bb = summary
-
         return bb
 
     @property
