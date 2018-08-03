@@ -735,7 +735,6 @@ class SearchFilteredNews(grok.View):
 
                     if noticia.getObject().image:
                         news_html +=     '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'
-
                     news_html +=      '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\
@@ -743,7 +742,7 @@ class SearchFilteredNews(grok.View):
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text.encode('utf-8')+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore.decode().encode('utf-8') + '</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore.encode('utf-8') + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\
@@ -766,7 +765,7 @@ class SearchFilteredNews(grok.View):
             query = " AND ".join(query)
             query = quote_bad_chars(query) + '*'
             r_results = pc.searchResults(portal_type='News Item',
-                                         review_state='intranet',
+                                         review_state=['intranet', 'published'],
                                          expires={'query': now, 'range': 'min', },
                                          sort_on='created',
                                          sort_order='reverse',
@@ -779,7 +778,7 @@ class SearchFilteredNews(grok.View):
 
         else:
             r_results = pc.searchResults(portal_type='News Item',
-                                         review_state='intranet',
+                                         review_state=['intranet', 'published'],
                                          expires={'query': now, 'range': 'min', },
                                          sort_on='created',
                                          sort_order='reverse',
