@@ -1,53 +1,51 @@
 # -*- coding: utf-8 -*-
-import json
-import scss
-import pkg_resources
-import pytz
-from souper.interfaces import ICatalogFactory
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
-from scss import Scss
+from AccessControl import getSecurityManager
+from Acquisition import aq_inner
+from base5.core.utils import json_response
+from base5.core.utils import pref_lang
+from cStringIO import StringIO
 from DateTime import DateTime
+from email import Encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import formatdate
 from five import grok
 from plone import api
-from Acquisition import aq_inner
-from zope.component.hooks import getSite
-from zope.interface import Interface
-from zope.component import queryUtility
-from zope.component import getUtilitiesFor
-from zope.component import getUtility
-
-from plone.memoize import ram
+from plone.app.users.browser.userdatapanel import UserDataPanel
 from plone.batching import Batch
+from plone.dexterity.interfaces import IDexterityContent
+from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
-from plone.app.users.browser.userdatapanel import UserDataPanel
-from plone.dexterity.interfaces import IDexterityContent
-
-from Products.CMFPlone import PloneMessageFactory as _
-from Products.CMFPlone.utils import safe_unicode
+from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.PythonScripts.standard import url_quote_plus
+from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
-
-from base5.core.utils import pref_lang
-from base5.core.utils import json_response
-
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PythonScripts.standard import url_quote_plus
+from repoze.catalog.query import Eq
+from scss import Scss
+from souper.interfaces import ICatalogFactory
+from souper.soup import get_soup
 from ulearn5.core.browser.searchuser import searchUsersFunction
-
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email import Encoders
-from email.utils import formatdate
-
-from cStringIO import StringIO
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from zope.component import getUtilitiesFor
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.component.hooks import getSite
 from zope.i18n import translate
+from zope.interface import Interface
+
+import json
+import pkg_resources
+import pytz
+import scss
+
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
 
@@ -604,9 +602,25 @@ class FilteredContentsSearchView(grok.View):
             segun este orden: (order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}) """
         current_user = api.user.get_current().id
         nofavorite = []
-        nofavorite = [{'obj': r, 'tipus': order_by_type[r.portal_type] if r.portal_type in order_by_type else 6} for r in r_results if current_user not in r.favoritedBy]
-
+        for r in r_results:
+            if current_user not in r.favoritedBy:
+                if r.portal_type in order_by_type:
+                    nofavorite += [{'obj': r, 'tipus': order_by_type[r.portal_type]}]
+                else:
+                    if r.portal_type == 'CloudFile':
+                        included = self.include_cloudfile(r)
+                        if included:
+                            nofavorite += [{'obj': r, 'tipus': 6}]
+                    else:
+                        nofavorite += [{'obj': r, 'tipus': 6}]
         return nofavorite
+
+    def include_cloudfile(self, obj):
+        """ Indica si debemos incluir el objeto del conjunto a retornar.
+            Retorna cierto si el objeto es de tipo cloudfile y el usuario
+            tiene permisos de edicion sobre la comunidad """
+        sm = getSecurityManager()
+        return True if sm.checkPermission(ModifyPortalContent, obj.getObject()) else False
 
     def favorites_items(self, path):
         """ Devuelve todos los favoritos del usuario y le asigna un valor al tipus
