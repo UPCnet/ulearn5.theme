@@ -95,11 +95,12 @@ class RSSFeed(object):
 
     def _buildItemDict(self, item):
         link = item.links[0]['href']
+        description = self.html_escape(item.get('description', '').encode('utf-8'))
         itemdict = {
             'title': self.abrevia(item.title, 70),
             'url': link,
-            'summary': self.abrevia(self.html_escape(item.get('description', '').encode('utf-8')), 150),
-            'image': item.get('href', '')
+            'summary': self.abrevia(description, 150),
+            'image': item.get('href', '') or self.getFirstImageDescription(description)
         }
         if hasattr(item, "updated"):
             try:
@@ -161,6 +162,11 @@ class RSSFeed(object):
             endTag = summary.find('</script>', startTag) + 9
             summary = summary[0:startTag] + summary[endTag:]
 
+        while "<img" in summary:
+            startTag = summary.find('<img')
+            endTag = summary.find('>', startTag) + 1
+            summary = summary[0:startTag] + summary[endTag:]
+
         return summary
 
     def abrevia(self, summary, sumlenght):
@@ -196,6 +202,15 @@ class RSSFeed(object):
         else:
             bb = summary
         return bb
+
+    def getFirstImageDescription(self, summary):
+        startTag = summary.find('<img')
+        if startTag >= 0:
+            startLink = summary.find('src', startTag) + 5
+            endLink = summary.find('"', startLink)
+            return summary[startLink:endLink]
+        else:
+            return None
 
     @property
     def items(self):
