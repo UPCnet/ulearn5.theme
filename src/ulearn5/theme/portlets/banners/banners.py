@@ -23,8 +23,8 @@ class TypesVocabulary(object):
 
     def __call__(self, context):
         types = []
-        types.append(SimpleVocabulary.createTerm(u'G', 'G', _(u'Global')))
-        types.append(SimpleVocabulary.createTerm(u'P', 'P', _(u'Personal')))
+        types.append(SimpleVocabulary.createTerm(u'Global', 'Global', _(u'Global')))
+        types.append(SimpleVocabulary.createTerm(u'Personal', 'Personal', _(u'Personal')))
         return SimpleVocabulary(types)
 
 
@@ -37,7 +37,7 @@ class IBannersPortlet(IPortletDataProvider):
     typePortlet = schema.Choice(
         title=_(u'Type'),
         vocabulary=u"ulearn.portlets.banners.Types",
-        default=u'G',
+        default=u'Global',
         required=True
     )
 
@@ -45,10 +45,15 @@ class IBannersPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IBannersPortlet)
 
-    def __init__(self, typePortlet="G"):
+    def __init__(self, typePortlet="Global"):
         self.typePortlet = typePortlet
 
-    title = _(u'banners', default=u'Banners')
+    @property
+    def title(self):
+        if self.typePortlet == 'Global':
+            return _(u'banners_global', default=u'Banners (Global)')
+        else:
+            return _(u'banners_personal', default=u'Banners (Personal)')
 
 
 class Renderer(base.Renderer):
@@ -100,7 +105,7 @@ class Renderer(base.Renderer):
     def getBanners(self):
         catalog = api.portal.get_tool(name='portal_catalog')
 
-        if self.data.typePortlet == 'P':
+        if self.data.typePortlet == 'Personal':
             username = api.user.get_current().id
             path = '/'.join(api.portal.get().getPhysicalPath()) + "/Members/" + username + "/banners"
             portal = api.portal.get()
@@ -127,7 +132,7 @@ class AddForm(base.AddForm):
     description = _(u"This portlet displays banners.")
 
     def create(self, data):
-        return Assignment(typePortlet=data.get('typePortlet', "G"))
+        return Assignment(typePortlet=data.get('typePortlet', "Global"))
 
 
 class EditForm(base.EditForm):

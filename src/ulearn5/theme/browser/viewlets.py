@@ -162,7 +162,7 @@ class viewletHeaderUlearn(viewletBase):
     def canManageFooter(self):
         return self.canManageDirectory('footer')
 
-    def isDisplayedPortletBanners(self):
+    def isDisplayedPortletBanners(self, typePortlet):
         columns = ['ContentWellPortlets.BelowTitlePortletManager1',
                    'ContentWellPortlets.BelowTitlePortletManager2',
                    'ContentWellPortlets.BelowTitlePortletManager3',
@@ -172,17 +172,18 @@ class viewletHeaderUlearn(viewletBase):
             retriever = getMultiAdapter((self.context, managerColumn), IPortletRetriever)
             portlets = retriever.getPortlets()
             for portlet in portlets:
-                if portlet['name'] == 'banners':
-                    return portlet['assignment'].typePortlet
+                if 'banners' in portlet['name']:
+                    if portlet['assignment'].typePortlet == typePortlet:
+                        return True
         return False
 
     def canManageBanners(self):
-        if self.isDisplayedPortletBanners() == 'G':
+        if self.isDisplayedPortletBanners('Global'):
             return self.canManageDirectory('banners')
         return False
 
     def canManagePersonalBanners(self):
-        if self.isDisplayedPortletBanners() == 'P':
+        if self.isDisplayedPortletBanners('Personal'):
             current = api.user.get_current()
             portal = api.portal.get()
             if 'Members' in portal:
