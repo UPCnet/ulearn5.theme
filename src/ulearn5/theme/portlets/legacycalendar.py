@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from DateTime import DateTime
-from StringIO import StringIO
-
 from Acquisition import aq_inner
+from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from Products.PythonScripts.standard import url_quote_plus
+from StringIO import StringIO
 
 from plone import api
 from plone.app.portlets import PloneMessageFactory as _

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from hashlib import sha1
@@ -11,6 +10,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from zope.interface import implements
 from zope.security import checkPermission
 
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 
 

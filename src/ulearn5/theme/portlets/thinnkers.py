@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from hashlib import sha1
@@ -12,6 +11,7 @@ from zope.interface import implements
 
 from base5.core.utils import get_safe_member_by_id
 from base5.core.utils import pref_lang
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 
 

@@ -8,11 +8,11 @@ from zope.interface import implements
 
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from base5.core.utils import get_safe_member_by_id
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 
 

@@ -3,7 +3,6 @@ from Acquisition import aq_chain
 from Acquisition import aq_inner
 from OFS.Image import Image
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -21,6 +20,7 @@ from zope.interface import implements
 from base5.core.utils import get_safe_member_by_id
 from base5.core.utils import pref_lang
 from mrs5.max.utilities import IMAXClient
+from ulearn5.core import _
 from ulearn5.core.adapters.portrait import convertSquareImage
 from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity

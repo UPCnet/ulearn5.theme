@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -7,6 +6,8 @@ from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.interface import implements
+
+from ulearn5.core import _
 
 
 class IAngularRouteViewPortlet(IPortletDataProvider):

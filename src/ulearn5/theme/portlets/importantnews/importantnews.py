@@ -5,7 +5,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
-from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
 from plone.memoize.compress import xhtml_compress
 from plone.memoize.instance import memoize
@@ -15,6 +14,8 @@ from zope import schema
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 from zope.interface import implements
+
+from ulearn5.core import _
 
 
 class IImportantNewsPortlet(IPortletDataProvider):

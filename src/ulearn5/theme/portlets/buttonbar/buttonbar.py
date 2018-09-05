@@ -2,7 +2,7 @@
 from Acquisition import aq_inner
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone import PloneMessageFactory as _PFM
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -17,19 +17,21 @@ from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 from zope.interface import implements
 
+from ulearn5.core import _
+
 import transaction
 
 
 class IButtonBarPortlet(IPortletDataProvider):
     """ A portlet which can render the logged user profile information.
     """
-    count = schema.Int(title=_(u'Number of items to display'),
-                       description=_(u'How many items to list.'),
+    count = schema.Int(title=_PFM(u'Number of items to display'),
+                       description=_PFM(u'How many items to list.'),
                        required=True,
                        default=20)
 
-    state = schema.Tuple(title=_(u"Workflow state"),
-                         description=_(u"Items in which workflow state to show."),
+    state = schema.Tuple(title=_PFM(u"Workflow state"),
+                         description=_PFM(u"Items in which workflow state to show."),
                          default=('published', 'intranet'),
                          required=True,
                          value_type=schema.Choice(

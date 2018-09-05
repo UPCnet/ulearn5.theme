@@ -3,7 +3,6 @@ from Acquisition import aq_chain
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -14,6 +13,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from zope.component.hooks import getSite
 from zope.interface import implements
 
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IDiscussionFolder
 

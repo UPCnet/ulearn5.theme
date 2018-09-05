@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -13,6 +12,7 @@ from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import implements
 
+from ulearn5.core import _
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 
