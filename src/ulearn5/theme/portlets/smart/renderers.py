@@ -12,13 +12,12 @@ import re
 
 
 YOUTUBE_REGEX = re.compile(r'youtube.*?(?:v=|embed\/)([\w\d-]+)', re.IGNORECASE)
-AUDIO_REGEX = re.compile(r'.mp3|.m4a|.acc|.f4a|.ogg|.oga|.mp4|.m4v|.f4v|.mov|.flv|.webm|.smil|.m3u8', re.IGNORECASE)
-
+MEDIA_REGEX = re.compile(r'.aac|.f4v|.flac|.m4v|.mkv|.mov|.mp3|.mp4|.oga|.ogg|.ogv|.webm', re.IGNORECASE)
 
 @adapter(IVideoEmbed)
 @implementer(IPortletItemRenderer)
 class YTVideoPortletItemRenderer(PortletItemRenderer):
-    title = "Video view"
+    title = "Youtube view"
     css_class = 'carousel-video-yt'
 
     @property
@@ -83,13 +82,13 @@ class VideoPortletItemRenderer(PortletItemRenderer):
         try:
             template = ViewPageTemplateFile('templates/{}.pt'.format(embed_type))
         except ValueError:
-            template = ViewPageTemplateFile('templates/default.pt')
+            template = ViewPageTemplateFile('templates/video_default.pt')
         return template
 
     def getEmbed(self):
-        is_audio = AUDIO_REGEX.search(self.getFilename())
-        if is_audio:
-            return ('video', is_audio.group())
+        is_media = MEDIA_REGEX.search(self.getFilename())
+        if is_media:
+            return ('video', is_media.group())
 
         return (None, None)
 
@@ -97,8 +96,8 @@ class VideoPortletItemRenderer(PortletItemRenderer):
         return self.item.file.filename
 
     def getType(self):
-        is_audio = AUDIO_REGEX.search(self.getFilename())
-        return is_audio.group()[1::]
+        is_media = MEDIA_REGEX.search(self.getFilename())
+        return is_media.group()[1::]
 
     def getTitle(self):
         item = self.item.getObject()

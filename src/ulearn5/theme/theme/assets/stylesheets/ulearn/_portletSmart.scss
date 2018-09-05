@@ -30,6 +30,9 @@
             width: 100%;
         }
 
+        video[type="video/aac"],
+        video[type="video/flac"],
+        video[type="video/oga"],
         video[type="video/mp3"] {
             height: 32px;
         }
@@ -49,6 +52,9 @@
             .contentResource {
                 height: 142px;
 
+                video[type="video/aac"],
+                video[type="video/flac"],
+                video[type="video/oga"],
                 video[type="video/mp3"] {
                     position: absolute;
                     bottom: 0;
