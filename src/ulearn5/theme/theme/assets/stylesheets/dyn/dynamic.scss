@@ -360,6 +360,10 @@ border-color: $main-color;
     margin-right: 2px;
 }
 
+.section-front-page img.newsImage:hover {
+  border: 2px solid $main-color!important;
+}
+
 /* The slider */
 
 input:checked+.sliderbutton {
@@ -646,4 +650,10 @@ body.portaltype-ulearn-banner #content,
       color: darken($buttons-color-primary, 5%) !important;
     }
   }
+}
+
+/* Top toolbar */
+
+.plone-toolbar-expanded #edit-zone li a:hover>span {
+  background: $buttons-color-primary !important;
 }

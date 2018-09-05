@@ -141,6 +141,20 @@ input[type="checkbox"].required::after {
     }
 }
 
+/* Top toolbar */
+
+.plone-toolbar-main > li > a {
+    &:focus > span::before,
+    &:active > span::before,
+    &:hover > span::before {
+        color: #FFF;
+    }
+}
+
+.plone-toolbar-submenu-header span.state-intranet {
+    color: #CCC;
+}
+
 /* Others */
 
 .pat-structure .navbar {
