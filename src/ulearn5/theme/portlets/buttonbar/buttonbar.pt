@@ -136,6 +136,8 @@
                                    tal:define="scale obj/new/@@images"
                                    tal:replace="structure python: scale.scale('image',
                                    scale='mini').tag(css_class='newsImage')" />
+                                <img tal:condition="not:obj/new/image" class="newsImage"
+                                   src="/++theme++ulearn5/assets/images/defaultImage.png" />
                                 <p class="discreet" tal:condition="obj/new/image_caption|nothing"
                                    tal:content="structure obj/new/image_caption" >
                                 </p>
