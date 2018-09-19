@@ -525,10 +525,16 @@ li.upc-eines-cerca button {
   }
 }
 
-/* Fieldset form */
+/* Fieldset widget */
 
 div[id^='formfield-form-widgets-fieldset_'] {
   border-bottom: 1px solid $main-color;
+}
+
+div[id^=formfield-form-widgets-check_] {
+  .fa.fa-eye {
+    color: $main-color !important;
+  }
 }
 
 /* Portlet Recent Changes */

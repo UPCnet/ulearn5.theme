@@ -246,6 +246,19 @@ $(document).ready(function () {
         event.preventDefault();
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
-    })
+    });
+
+    // Profile check fields
+    $('div[id^=formfield-form-widgets-check_] .fa').click(function(event){
+        $(this).css('display', 'none');
+        if($(this).hasClass('fa-eye')){
+            $(this).parent().find('.fa-eye-slash').css('display', 'block');
+            $(this).parent().parent().find('input[id^=form-widgets-check_]').prop('checked', false);
+        }else{
+            $(this).parent().find('.fa-eye').css('display', 'block');
+            $(this).parent().parent().find('input[id^=form-widgets-check_]').prop('checked', true);
+        }
+    });
+
 
 }); //ready

@@ -1,15 +1,42 @@
-/* Fieldset form */
+/* Fieldset widget */
 
 div[id^='formfield-form-widgets-fieldset_'] {
     border-bottom: 1px solid #b2b2b2;
+
     .formHelp {
         font-weight: 500;
     }
+
     label {
         display: none;
     }
+
     h3 {
         font-weight: 600;
+    }
+}
+
+/* Visibility widget */
+
+div[id^=formfield-form-widgets-check_] {
+    float: right;
+    margin-bottom: 0px!important;
+
+    input[id^=form-widgets-check_] {
+        display: none!important;
+    }
+
+    .fa {
+        font-size: 1.5em;
+        cursor: pointer;
+
+        &.fa-eye {
+            color: #000;
+        }
+
+        &.fa-eye-slash {
+            color: #999;
+        }
     }
 }
 
@@ -19,10 +46,12 @@ body.template-manage-viewlets {
     .plone-toolbar-main {
         display: none !important;
     }
+
     #portal-header {
         position: initial;
         height: auto !important;
     }
+
     .breadcrumbs {
         margin-top: 0px;
     }
