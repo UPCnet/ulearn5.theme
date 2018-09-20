@@ -102,7 +102,19 @@
               <i class="fa fa-bar-chart"></i>
               <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
             </a></li>
-            <!-- <li aria-hidden="true" class="divider"></li> -->
+            <li aria-hidden="true" class="divider"></li>
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${viewlet/portal_url}/@@usergroup-userprefs">
+                <i class="fa fa-users"></i>
+                <tal:footer i18n:translate="menu-gestio-usuaris">Create users</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${viewlet/portal_url}/@@overview-controlpanel">
+                <i class="fa fa-cog"></i>
+                <tal:footer i18n:domain="plone" i18n:translate="">Site Setup</tal:footer>
+              </a>
+            </li>
           </ul>
         </li>
         <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql" >
