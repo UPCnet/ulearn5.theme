@@ -5457,3 +5457,10 @@ img.portraitProfile{
 	margin: 4px 0;
 	display: block !important;
 }
+
+
+/* Visibility widget */
+
+div[id^=formfield-form-widgets-check_] input[id^=form-widgets-check_] {
+	display: none!important;
+}
