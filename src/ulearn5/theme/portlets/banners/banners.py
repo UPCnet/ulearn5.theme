@@ -14,6 +14,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
 from ulearn5.core import _
+from ulearn5.core.browser.security import execute_under_special_role
 
 import transaction
 
@@ -56,6 +57,42 @@ class Assignment(base.Assignment):
             return _(u'banners_personal', default=u'Banners (Personal)')
 
 
+def createOrGetObject(self, context, newid, title, type_name):
+        if newid in context.contentIds():
+            obj = context[newid]
+        else:
+            obj = createContentInContainer(context, type_name, title=title, checkConstrains=False)
+            transaction.savepoint()
+            if obj.id != newid:
+                context.manage_renameObject(obj.id, newid)
+            obj.reindexObject()
+        return obj
+
+
+def createPersonalBannerFolder(userid):
+    portal = getSite()
+    perFolder = createOrGetObject(portal, portal['Members'], userid, userid, u'privateFolder')
+    perFolder.exclude_from_nav = False
+    perFolder.setLayout('folder_listing')
+    behavior = ISelectableConstrainTypes(perFolder)
+    behavior.setConstrainTypesMode(1)
+    behavior.setLocallyAllowedTypes(('Folder',))
+    behavior.setImmediatelyAddableTypes(('Folder',))
+
+    api.content.disable_roles_acquisition(perFolder)
+    for username, roles in perFolder.get_local_roles():
+        perFolder.manage_delLocalRoles([username])
+    perFolder.manage_setLocalRoles(userid, ['Contributor', 'Editor', 'Reader'])
+
+    banFolder = createOrGetObject(portal, perFolder, 'banners', 'Banners', u'Folder')
+    banFolder.exclude_from_nav = False
+    banFolder.setLayout('folder_listing')
+    behavior = ISelectableConstrainTypes(banFolder)
+    behavior.setConstrainTypesMode(1)
+    behavior.setLocallyAllowedTypes(('ulearn.banner',))
+    behavior.setImmediatelyAddableTypes(('ulearn.banner',))
+
+
 class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('banners.pt')
@@ -68,40 +105,6 @@ class Renderer(base.Renderer):
             return False
         return True
 
-    def createOrGetObject(self, context, newid, title, type_name):
-        if newid in context.contentIds():
-            obj = context[newid]
-        else:
-            obj = createContentInContainer(context, type_name, title=title, checkConstrains=False)
-            transaction.savepoint()
-            if obj.id != newid:
-                context.manage_renameObject(obj.id, newid)
-            obj.reindexObject()
-        return obj
-
-    def createPersonalBannerFolder(self, userid):
-        portal = getSite()
-        perFolder = self.createOrGetObject(portal['Members'], userid, userid, u'privateFolder')
-        perFolder.exclude_from_nav = False
-        perFolder.setLayout('folder_listing')
-        behavior = ISelectableConstrainTypes(perFolder)
-        behavior.setConstrainTypesMode(1)
-        behavior.setLocallyAllowedTypes(('Folder',))
-        behavior.setImmediatelyAddableTypes(('Folder',))
-
-        api.content.disable_roles_acquisition(perFolder)
-        for username, roles in perFolder.get_local_roles():
-            perFolder.manage_delLocalRoles([username])
-        perFolder.manage_setLocalRoles(userid, ['Contributor', 'Editor', 'Reader'])
-
-        banFolder = self.createOrGetObject(perFolder, 'banners', 'Banners', u'Folder')
-        banFolder.exclude_from_nav = False
-        banFolder.setLayout('folder_listing')
-        behavior = ISelectableConstrainTypes(banFolder)
-        behavior.setConstrainTypesMode(1)
-        behavior.setLocallyAllowedTypes(('ulearn.banner',))
-        behavior.setImmediatelyAddableTypes(('ulearn.banner',))
-
     def getBanners(self):
         catalog = api.portal.get_tool(name='portal_catalog')
 
@@ -112,9 +115,9 @@ class Renderer(base.Renderer):
             if 'Members' in portal:
                 if username in portal['Members']:
                     if 'banners' not in portal['Members'][username]:
-                        self.createPersonalBannerFolder(username)
+                        execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
                 else:
-                    self.createPersonalBannerFolder(username)
+                    execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
         else:
             path = '/'.join(api.portal.get().getPhysicalPath()) + "/gestion/banners"
 
