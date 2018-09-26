@@ -106,7 +106,7 @@
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
               <a tal:attributes="href string:${viewlet/portal_url}/@@usergroup-userprefs">
                 <i class="fa fa-users"></i>
-                <tal:footer i18n:translate="menu-gestio-usuaris">Create users</tal:footer>
+                <tal:footer i18n:domain="plone" i18n:translate="">Users and Groups</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
