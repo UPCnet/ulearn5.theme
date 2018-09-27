@@ -202,24 +202,40 @@ a:active {
 	text-decoration: none;
 }
 
-#peu {
+#portal-footer {
 	background-color: #f58d3d;
 	border-top: none;
+
 	a {
 		color: white;
 	}
-}
 
-#peu .container {
-	border-top: none;
-	background-color: #f58d3d;
-	font-size: 13px;
-	color: white;
-	margin-top: 20px;
-}
+	.container {
+		border-top: none;
+		background-color: #f58d3d;
+		font-size: 14px;
+		color: white;
+	}
 
-#peu .inner {
-	padding: 20px;
+	.inner {
+		padding: 20px;
+
+		p:last-child {
+			margin-bottom: 0px;
+		}
+	}
+
+	strong {
+		font-weight: bold;
+	}
+
+	.bg-white {
+	 	background-color: #FFF;
+	}
+
+	.fa {
+		margin-right: 18px;
+	}
 }
 
 input[type="text"] {

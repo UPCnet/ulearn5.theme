@@ -7,13 +7,13 @@
 // $alt-gradient-start-color: #27B040;
 // $alt-gradient-end-color: #229A38;
 // $background-property: transparent;
-// $background-color: #eae9e4;
+// $background-color: #EDF1F2;
 // $buttons-color-primary: #24a33b;
 // $buttons-color-secondary: #017000;
 
 // Main
 body {
-  background: $background-property $background-color;
+  background: $background-color;
 }
 
 a {
@@ -21,6 +21,18 @@ a {
   &:hover {
     color: darken($secondary-color, 5%);
   }
+}
+
+.bg {
+  background-color: $background-color;
+}
+
+.bg-main {
+  background-color: $main-color;
+}
+
+.bg-secondary {
+  background-color: $secondary-color;
 }
 
 #portal-header {
@@ -35,12 +47,16 @@ a {
     color: $secondary-color;
 }
 
-#peu {
+#portal-footer {
   background-color: $main-color;
-}
 
-#peu .container {
-  background-color: $main-color;
+  .container {
+    background-color: $main-color;
+  }
+
+  .bg .fa {
+    color: $main-color;;
+  }
 }
 
 .num {
@@ -517,7 +533,7 @@ li.upc-eines-cerca button {
 /* Button reedirect to top */
 
 .back-to-top {
-  color: $main-color;
+  color: lighten($main-color, 5%);
   &:hover,
   &:active,
   &:focus {
