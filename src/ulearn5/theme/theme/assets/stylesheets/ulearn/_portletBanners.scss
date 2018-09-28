@@ -42,6 +42,10 @@ body.portaltype-ulearn-banner #content,
         }
       }
     }
+
+    a:not([class])[target="_blank"]::after {
+      display: none;
+    }
   }
 
   .osomcorner-wrapper {
