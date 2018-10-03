@@ -153,6 +153,15 @@
         editview=".banners.banners.EditForm"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.quicklinks"
+        interface=".quicklinks.quicklinks.IQuicklinksPortlet"
+        assignment=".quicklinks.quicklinks.Assignment"
+        renderer=".quicklinks.quicklinks.Renderer"
+        addview=".quicklinks.quicklinks.AddForm"
+        editview=".quicklinks.quicklinks.EditForm"
+        />
+
     <adapter
         for="ulearn5.core.interfaces.IVideo"
         provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"

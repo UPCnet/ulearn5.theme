@@ -632,7 +632,7 @@ li.notCommunity.changeRow .infoTypeChange::before {
     }
 }
 
-/* Portlet BAnners */
+/* Portlet Banners */
 
 body.portaltype-ulearn-banner #content,
 #personal_banners {
@@ -649,8 +649,44 @@ body.portaltype-ulearn-banner #content,
         }
       }
     }
+
+    img {
+      background-color: $buttons-color-primary !important;
+
+      &:hover {
+        background-color: darken($buttons-color-primary, 5%) !important;
+      }
+    }
   }
 }
+
+/* Portlet Quicklinks */
+
+.portletQuicklinks {
+  .nav > li {
+    & > a,
+    & > span,
+    & > span + ul a {
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+
+    & > span:hover {
+      border-left: 5px solid $secondary-color;
+    }
+
+    & > span.arrow:hover::after {
+        color: $secondary-color;
+    }
+  }
+
+  .fa-cog:hover {
+    color: $secondary-color;
+  }
+}
+
+
 
 /* Pagination */
 
