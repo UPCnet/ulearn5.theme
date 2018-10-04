@@ -715,3 +715,23 @@ body.portaltype-ulearn-banner #content,
 .plone-toolbar-expanded #edit-zone li a:hover>span {
   background: $buttons-color-primary !important;
 }
+
+
+/* View Collection News */
+
+body.template-collection_news_view #content-core {
+
+  form#searchNews {
+
+    .fa {
+      color: $main-color!important;
+    }
+  }
+
+  .imatge_noticia {
+
+    img:hover {
+      border: 2px solid $main-color!important;
+    }
+  }
+}

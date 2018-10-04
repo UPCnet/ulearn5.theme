@@ -1,49 +1,51 @@
 # -*- coding: utf-8 -*-
 import json
-import scss
 import pkg_resources
 import pytz
-from souper.interfaces import ICatalogFactory
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
-from scss import Scss
+import scss
+
+from Acquisition import aq_inner
 from DateTime import DateTime
 from five import grok
 from plone import api
-from Acquisition import aq_inner
-from zope.component.hooks import getSite
-from zope.interface import Interface
-from zope.component import queryUtility
+from repoze.catalog.query import Eq
+from scss import Scss
+from souper.interfaces import ICatalogFactory
+from souper.soup import get_soup
 from zope.component import getUtilitiesFor
 from zope.component import getUtility
+from zope.component import queryUtility
+from zope.component.hooks import getSite
+from zope.interface import Interface
 
-from plone.memoize import ram
+from plone.app.contenttypes.browser.collection import CollectionView
+from plone.app.users.browser.userdatapanel import UserDataPanel
 from plone.batching import Batch
+from plone.dexterity.interfaces import IDexterityContent
+from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
-from plone.app.users.browser.userdatapanel import UserDataPanel
-from plone.dexterity.interfaces import IDexterityContent
 
-from Products.CMFPlone import PloneMessageFactory as _
-from Products.CMFPlone.utils import safe_unicode
 from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.PythonScripts.standard import url_quote_plus
+from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PythonScripts.standard import url_quote_plus
 
-from base5.core.utils import pref_lang
 from base5.core.utils import json_response
+from base5.core.utils import pref_lang
 
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.core.browser.searchuser import searchUsersFunction
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
 from email import Encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from email.utils import formatdate
 
 from cStringIO import StringIO
@@ -843,6 +845,46 @@ class ContentsPrettyView(grok.View):
                        'item_state': item2.review_state
                        } for item2 in items if item2.exclude_from_nav is False]
         return all_items
+
+
+class CollectionNewsView(grok.View, CollectionView):
+    """ Show content from news in a folder, added search input """
+
+    grok.name('collection_news_view')
+    grok.context(Interface)
+    grok.require('base.member')
+    grok.template('collectionnews')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def viewUrl(self):
+        return self.context.absolute_url()
+
+    def lastSearch(self):
+        if 'filter' in self.request.form:
+            return self.request.form['filter']
+        else:
+            return ''
+
+    def results(self, **kwargs):
+        contentFilter = dict(self.request.get('contentFilter', {}))
+        contentFilter.update(kwargs.get('contentFilter', {}))
+
+        if 'filter' in self.request.form:
+            queryFilters = ''
+            for fil in self.context.query:
+                if fil['i'] == 'SearchableText':
+                    queryFilters = fil['v']
+
+            formFilter = self.request.form['filter']
+            filters = formFilter if queryFilters == '' else queryFilters.encode('utf-8') + ' ' + formFilter
+            contentFilter.update({'SearchableText': filters})
+
+        kwargs.setdefault('custom_query', contentFilter)
+        kwargs.setdefault('batch', True)
+        kwargs.setdefault('b_size', self.b_size)
+        kwargs.setdefault('b_start', self.b_start)
+        results = self.collection_behavior.results(**kwargs)
+        return results
 
 
 class SharedWithMe(baseCommunities):

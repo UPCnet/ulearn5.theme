@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+   xmlns:tal="http://xml.zope.org/namespaces/tal"
+   xmlns:metal="http://xml.zope.org/namespaces/metal"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="ulearn"
+   lang="en">
+   <body>
+      <metal:content-core fill-slot="content-core">
+         <metal:block define-macro="content-core">
+            <div metal:define-macro="text-field-view"
+               id="parent-fieldname-text" class="stx"
+               tal:define="text view/text"
+               tal:condition="text"
+               tal:attributes="class view/text_class">
+               <div metal:define-slot="inside" tal:replace="structure text">The body</div>
+            </div>
+
+            <div id="news-container">
+               <tal:search>
+                  <script type="text/javascript">
+                     $(function() {
+                        formCollectionNewsView = $('form[name="searchNews"]');
+                        formCollectionNewsView.find('input').keypress(function(e) {
+                           if(e.which == 10 || e.which == 13) {
+                              formCollectionNewsView.submit();
+                           }
+                        });
+                     });
+                   </script>
+
+                  <form name="searchNews" method="post" tal:attributes="action view/viewUrl">
+                     <input id="filter" type="search" name="filter"
+                               data-literal="" class="maxui-empty maxui-text-input"
+                               value="" tal:attributes="value view/lastSearch" />
+                     <span class="add-on"><span class="fa fa-search"></span></span>
+                  </form>
+               </tal:search>
+
+               <tal:results define="batch view/batch;
+                  thumb_scale_list view/get_thumb_scale_list;
+                  thumb_scale_table view/get_thumb_scale_table;
+                  thumb_scale_summary view/get_thumb_scale_summary;
+                  img_class python:'thumb-%s pull-right' % thumb_scale_list;
+                  showicons view/show_icons">
+                  <tal:listing condition="batch">
+                     <div class="entries" metal:define-slot="entries"
+                        tal:define="portal context/@@plone_portal_state/portal;
+                        image_scale portal/@@image_scale">
+                        <ul class="list-search-portlet">
+                           <li class="noticies clearfix" tal:repeat="item batch" metal:define-macro="entries">
+                              <tal:block tal:define="obj item/getObject;
+                                 item_url item/getURL;
+                                 item_id item/getId;
+                                 item_title item/Title;
+                                 item_title python:item_title or item_id;
+                                 item_description item/Description;
+                                 item_type item/PortalType;
+                                 item_day item/effective/day;
+                                 item_month item/effective/month;
+                                 item_year item/effective/year;
+                                 item_date string:${item_day}/${item_month}/${item_year};
+                                 item_wf_state item/review_state;
+                                 item_wf_state_class python:'state-' + view.normalizeString(item_wf_state);
+                                 item_link python:item_type in view.use_view_action and item_url+'/view' or item_url;
+                                 item_has_image python:item.getIcon;
+                                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '';">
+                                 <div class="imatge_noticia">
+                                    <a tal:attributes="href item_link;">
+                                       <img tal:condition="python: item_has_image and thumb_scale_list"
+                                            tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_list)" />
+                                       <img tal:condition="not:item_has_image"
+                                            src="/++theme++ulearn5/assets/images/defaultImage.png" />
+                                    </a>
+                                 </div>
+                                 <div class="text_noticia">
+                                    <h2>
+                                       <a tal:content="item_title"
+                                          tal:attributes="href item_link;
+                                                          class string:$item_type_class $item_wf_state_class url;
+                                                          title item_type">
+                                          Item Title
+                                       </a>
+                                    </h2>
+                                    <p class="data"><time class="smaller" tal:content="item_date">May 5</time></p>
+                                    <span class="description"
+                                          tal:condition="item_description"
+                                          tal:content="item_description">
+                                          Description
+                                    </span>
+                                    <a href="#" tal:attributes="href item_link">
+                                       <span class="readmore" i18n:translate="readmore">Leer mas..</span>
+                                    </a>
+                                 </div>
+                              </tal:block>
+                           </li>
+                        </ul>
+                     </div>
+                     <div metal:use-macro="context/batch_macros/macros/navigation" />
+                  </tal:listing>
+                  <metal:empty metal:define-slot="no_items_in_listing">
+                     <p class="discreet"
+                        tal:condition="not: view/batch"
+                        tal:content="view/no_items_message">
+                        There are currently no items in this folder.
+                     </p>
+                  </metal:empty>
+               </tal:results>
+            </div>
+         </metal:block>
+      </metal:content-core>
+   </body>
+</html>
