@@ -20,6 +20,10 @@ from zope.interface import Interface
 
 from plone.app.contenttypes.browser.collection import CollectionView
 from plone.app.users.browser.userdatapanel import UserDataPanel
+from AccessControl import getSecurityManager
+from Products.CMFCore.permissions import ModifyPortalContent
+
+from plone.memoize import ram
 from plone.batching import Batch
 from plone.dexterity.interfaces import IDexterityContent
 from plone.memoize import ram
@@ -618,6 +622,7 @@ class FilteredContentsSearchView(grok.View):
                             nofavorite += [{'obj': r, 'tipus': 6}]
                     else:
                         nofavorite += [{'obj': r, 'tipus': 6}]
+        #nofavorite = [{'obj': r, 'tipus': order_by_type[r.portal_type] if r.portal_type in order_by_type else 6} for r in r_results if current_user not in r.favoritedBy]
         return nofavorite
 
     def include_cloudfile(self, obj):
