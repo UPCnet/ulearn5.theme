@@ -1,0 +1,37 @@
+<div id="personal_banners" i18n:domain="ulearn.enginyersbcn" tal:condition="not:view/isAnon">
+    <tal:banners tal:repeat="banner view/getBanners">
+        <div class="banner">
+            <tal:block tal:condition="banner/image">
+                <a tal:condition="banner/open_external" target="_blank"
+                   tal:attributes="title banner/title;
+                                   href banner/url">
+                    <img tal:define="scale banner/@@images"
+                         tal:replace="structure python: scale.scale('image',
+                                      scale='preview').tag(css_class='image-inline')">
+                </a>
+                <a tal:condition="not:banner/open_external"
+                   tal:attributes="title banner/title;
+                                   href banner/url">
+                    <img tal:define="scale banner/@@images"
+                         tal:replace="structure python: scale.scale('image',
+                                      scale='preview').tag(css_class='image-inline')">
+                </a>
+            </tal:block>
+
+            <tal:block tal:condition="not: banner/image">
+                <div class="defaultBanner">
+                    <a tal:condition="banner/open_external" tal:content="banner/title" target="_blank"
+                       tal:attributes="title banner/title;
+                                       href banner/url">
+                        Link
+                    </a>
+                    <a tal:condition="not:banner/open_external" tal:content="banner/title"
+                       tal:attributes="title banner/title;
+                                       href banner/url">
+                        Link
+                    </a>
+                </div>
+            </tal:block>
+        </div>
+    </tal:banners>
+</div>

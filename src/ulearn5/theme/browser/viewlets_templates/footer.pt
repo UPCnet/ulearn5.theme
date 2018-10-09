@@ -1,15 +1,12 @@
-  <div class="container" i18n:domain="ulearn">
-    <div class="row footer-complementary" style="outline-style: none;">
-      <div class="col-xs-12" style="outline-style: none;">
-        <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
-        <nav>
-          <ul id="footer-menu-complementari" class="footer-container" tal:define="links viewlet/get_links">
-            <li><a tal:attributes="href links/contact" i18n:translate="contact">Contacte</a></li>
-            <li><a accesskey="3" tal:attributes="href links/sitemap" i18n:translate="sitemap">Mapa del web</a></li>
-            <li><a accesskey="0" tal:attributes="href links/accessibility" i18n:translate="accessibility">Accessibilitat</a></li>
-            <li><a tal:attributes="href links/disclaimer" i18n:translate="disclaimer">Avis legal</a></li>
-          </ul>
-        </nav>
-      </div>
+<div class="container" tal:define="customized_footer viewlet/get_customized_footer" i18n:domain="ulearn">
+  <div class="row footer-complementary" tal:condition="not:customized_footer">
+    <div class="col-xs-12">
+      <p> <span>© UPCnet - ${viewlet/get_current_year}</span></p>
     </div>
   </div>
+  <div class="row" tal:condition="customized_footer">
+    <div class="col-xs-12">
+      <tal:block tal:content="structure customized_footer/output"></tal:block>
+    </div>
+  </div>
+</div>

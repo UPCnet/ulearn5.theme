@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:condition="not:view/isAnon"
+      tal:omit-tag="">
+
+<tal:block i18n:domain="ulearn" tal:define="list_content view/getLinks;
+                                            info_content view/getInfoFolders">
+
+  <div class="ulearnbox portletQuicklinks" tal:condition="list_content" tal:repeat="folder list_content">
+    <tal:block tal:define="folderInfo python:info_content[folder]">
+      <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+      <a tal:condition="folderInfo/url" tal:attributes="href folderInfo/url">
+        <span class="fa fa-cog"></span>
+      </a>
+      <h2 class="titleBox" tal:content="folderInfo/title">Quicklinks</h2>
+      <ul class="nav">
+        <li tal:repeat="first python:list_content[folder]">
+          <tal:block tal:define="isLink python:list_content[folder][first]['isLink']">
+            <tal:link tal:condition="isLink" tal:define="link python:list_content[folder][first]">
+              <a class="link" tal:attributes="href link/url;
+                                              target link/target">
+                <!-- <span class="fa fa-link"></span> -->
+                <span tal:content="link/title"></span>
+              </a>
+            </tal:link>
+            <tal:folder tal:condition="not:isLink" tal:define="folder python:list_content[folder][first]">
+              <span class="collapsed arrow" data-toggle="collapse"
+                    tal:attributes="data-target string:#${folderInfo/UID}_${folder/UID}">
+                <!-- <span class="fa fa-folder"></span> -->
+                <span tal:content="folder/title"></span>
+              </span>
+              <ul class="collapse" tal:attributes="id string:${folderInfo/UID}_${folder/UID}">
+                <li tal:repeat="link folder/links">
+                  <a tal:attributes="href link/url;
+                                     target link/target">
+                    <!-- <span class="fa fa-link"></span> -->
+                    <span tal:content="link/title"></span>
+                  </a>
+                </li>
+              </ul>
+            </tal:folder>
+          </tal:block>
+        </li>
+      </ul>
+    </tal:block>
+  </div>
+
+  <div class="ulearnbox portletQuicklinks" tal:condition="not:list_content">
+    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+    <h2 class="titleBox" i18n:translate="">Error, the directory has been deleted.</h2>
+  </div>
+
+</tal:block>
+</html>
+

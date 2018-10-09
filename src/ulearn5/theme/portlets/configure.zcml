@@ -72,6 +72,16 @@
         renderer=".calendar.Renderer"
         addview=".calendar.AddForm"
         />
+
+    <plone:portlet
+        name="ulearn.portlets.recentchanges"
+        interface=".recentchanges.recentchanges.IRecentChangesPortlet"
+        assignment=".recentchanges.recentchanges.Assignment"
+        renderer=".recentchanges.recentchanges.Renderer"
+        addview=".recentchanges.recentchanges.AddForm"
+        editview=".recentchanges.recentchanges.EditForm"
+        />
+
     <!-- Hasta aqui P5 -->
 
     <plone:portlet
@@ -123,6 +133,45 @@
         assignment=".mytags.mytags.Assignment"
         renderer=".mytags.mytags.Renderer"
         addview=".mytags.mytags.AddForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.rss"
+        interface=".rss.rss.IRSSPortlet"
+        assignment=".rss.rss.Assignment"
+        renderer=".rss.rss.Renderer"
+        addview=".rss.rss.AddForm"
+        editview=".rss.rss.EditForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.banners"
+        interface=".banners.banners.IBannersPortlet"
+        assignment=".banners.banners.Assignment"
+        renderer=".banners.banners.Renderer"
+        addview=".banners.banners.AddForm"
+        editview=".banners.banners.EditForm"
+        />
+
+    <plone:portlet
+        name="ulearn.portlets.quicklinks"
+        interface=".quicklinks.quicklinks.IQuicklinksPortlet"
+        assignment=".quicklinks.quicklinks.Assignment"
+        renderer=".quicklinks.quicklinks.Renderer"
+        addview=".quicklinks.quicklinks.AddForm"
+        editview=".quicklinks.quicklinks.EditForm"
+        />
+
+    <adapter
+        for="ulearn5.core.interfaces.IVideo"
+        provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
+        factory=".smart.renderers.VideoPortletItemRenderer"
+        />
+
+    <adapter
+        for="ulearn5.core.content.video_embed.IVideoEmbed"
+        provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
+        factory=".smart.renderers.YTVideoPortletItemRenderer"
         />
 
 </configure>

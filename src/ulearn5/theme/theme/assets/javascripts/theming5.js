@@ -20,10 +20,16 @@ $(document).ready(function () {
         var elem_data = elem.data();
         var portlethash = pw.attr('id');
         portlethash = portlethash.substring(15, portlethash.length);
-        url = portal_url +
-            '/@@render-portlet?portlethash=' + portlethash +
-            '&year=' + elem_data.year +
-            '&month=' + elem_data.month;
+        url = portal_url + '/@@render-portlet?portlethash=' + portlethash +
+                '&community=' + elem_data.community +
+                '&year=' + elem_data.year +
+                '&month=' + elem_data.month;
+        if(elem_data.day){
+          url += '&day=' + elem_data.day;
+        }
+        if(elem_data.community_path){
+          url += '&community_path=' + elem_data.community_path;
+        }
         $.ajax({
             url: url,
             success: function (data) {
@@ -41,34 +47,15 @@ $(document).ready(function () {
         $('.portletCalendar a.calendari-anterior').click(function (event) {
             load_portlet_calendar(event, $(this));
         });
+        $('.portletCalendar .cal_has_events').click(function (event) {
+            load_portlet_calendar(event, $(this));
+        });
+        $('#box_agenda #today').click(function (event) {
+            load_portlet_calendar(event, $(this));
+        });
         $('.portletCalendar dd a[title]').tooltip({
             offset: [-10, 0],
             tipClass: 'pae_calendar_tooltip'
-        });
-        try {
-            $('.portletCalendar [rel="popover"]').popover({
-                html: true,
-                trigger: "manual",
-            }).on('click', function (e) {
-                $(this).popover('toggle');
-                $('.portletCalendar [rel="popover"]').not(this).popover('hide');
-            });
-            if($('.portletCalendar').size() > 0){
-              $(document).click(function(){
-                if(!$(event.target).is('.portletCalendar [rel="popover"]')){
-                  $('.portletCalendar [rel="popover"]').popover('hide');
-                }
-              })
-            }
-        } catch (e) {
-            console.log('This instance seems that doesn\'t have bootstrap.popover loaded')
-        }
-        // Prevent click on calendar events to allow popover
-        $('.cal_has_events').click(function (event) {
-            event.preventDefault();
-            $('.popover-content').off('click').on('click', 'a', function () {
-                window.location = this.href;
-            });
         });
     }
 
@@ -243,5 +230,35 @@ $(document).ready(function () {
         $('.portalMessage').fadeOut(1000, function() { $(this).remove(); });
       }, 15000);
     }
+
+    // Button scroll up of the page
+    var offset = 250;
+    var duration = 300;
+    $(window).scroll(function() {
+        if($(this).scrollTop() > offset){
+            $('.back-to-top').fadeIn(duration);
+        }else{
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    });
+
+    // Profile check fields
+    $('div[id^=formfield-form-widgets-check_] .fa').click(function(event){
+        $(this).css('display', 'none');
+        if($(this).hasClass('fa-eye')){
+            $(this).parent().find('.fa-eye-slash').css('display', 'block');
+            $(this).parent().parent().find('input[id^=form-widgets-check_]').prop('checked', false);
+        }else{
+            $(this).parent().find('.fa-eye').css('display', 'block');
+            $(this).parent().parent().find('input[id^=form-widgets-check_]').prop('checked', true);
+        }
+    });
+
 
 }); //ready

@@ -1,23 +1,20 @@
-from Acquisition import aq_parent
-from zope.interface import implements
-from zope.security import checkPermission
-from zope.component.hooks import getSite
-from Products.CMFCore.utils import getToolByName
-from Acquisition import aq_inner
+# -*- coding: utf-8 -*-
 from Acquisition import aq_chain
-from plone.memoize.view import memoize_contextless
-
-from base5.core.utils import pref_lang
-from zope.component import getMultiAdapter
-from ulearn5.core.content.community import ICommunity
-
+from Acquisition import aq_inner
+from Acquisition import aq_parent
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from Products.CMFPlone import PloneMessageFactory as _
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.component.hooks import getSite
+from zope.interface import implements
+
+from ulearn5.core import _
+from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IDiscussionFolder
 
 import plone.api
@@ -45,6 +42,11 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal(self):
         return getSite()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def get_community(self):
         context = aq_inner(self.context)

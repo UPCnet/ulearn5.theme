@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-from plone.memoize.compress import xhtml_compress
-from zope.interface import implements
-from zope.component.hooks import getSite
-from plone.memoize.view import memoize_contextless
-
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.memoize.compress import xhtml_compress
+
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from zope import schema
+from zope.component.hooks import getSite
+from zope.interface import implements
 
 from ulearn5.core import _
-from zope import schema
 
-from DateTime.DateTime import DateTime
 import bleach
 import bs4
 import re
@@ -42,7 +42,7 @@ class Assignment(base.Assignment):
         self.name = name
         self.count = count
 
-    title = _(u'flashesinformativos', default=u'Flashes Informativos')
+    title = _(u'flashes_informativos', default=u'Flashes Informativos')
 
 
 class Renderer(base.Renderer):
@@ -62,6 +62,12 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal(self):
         return getSite()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
 
     def abrevia(self, summary, sumlenght):
         """ Retalla contingut de cadenes

@@ -1,0 +1,245 @@
+.ulearnboxflash {
+  background-color: #FFFFFF;
+  height: 50px;
+  clear: both;
+  margin: 0;
+  margin-bottom: 15px;
+
+  #flasinformatiu {
+
+    #flashes-informativos {
+      overflow: visible;
+      padding: 0;
+
+      &.bubble.left .arrow {
+        top: 0;
+        margin: 0;
+        right: -36px;
+        border-left-color: #6f6f6f;
+        border-width: 25px 18px 25px;
+      }
+
+      .bubble-content {
+        background-color: #6f6f6f;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          font-weight: bold;
+        }
+
+        a {
+          color: #fff;
+          font-size: 10px;
+          text-decoration: none;
+
+          &:hover {
+              text-decoration: none;
+          }
+        }
+      }
+    }
+
+    .marquee  {
+      overflow: hidden;
+      position: relative;
+      display: block !important;
+      padding: 8px 0 !important;
+
+      .item {
+        display: inline-block;
+        margin-right: 150px;
+      }
+    }
+
+    &.carousel {
+
+      .col-md-10 {
+
+        .item {
+          display: none;
+        }
+      }
+    }
+
+    .col-md-10 {
+      padding: 5px 30px 5px 30px;
+      float: left;
+      height: 50px;
+      width: 83.3333%;
+      display: flex;
+      align-items: center;
+
+      .item {
+
+        &.next,
+        &.active {
+          display: table;
+          text-align: center;
+        }
+
+        &.next {
+          top: auto;
+        }
+
+        &:not(.active).left {
+          left: 30px;
+        }
+
+        a {
+          display: flex;
+          text-align: left;
+          vertical-align: middle;
+          overflow: hidden;
+          max-height: 28px;
+          padding-top: 8px;
+          text-overflow: ellipsis;
+          font-weight: 500;
+
+          &:hover {
+              text-decoration: none;
+          }
+        }
+      }
+
+      img {
+        margin-right: 15px;
+        width: 35px;
+        height: 35px;
+        -webkit-border-radius: 20px;
+        border-radius: 20px !important;
+        padding: 0px;
+        border: none;
+
+        &:hover {
+          border: none !important;
+        }
+      }
+    }
+
+    .carousel-control {
+      position: absolute;
+      width: 5px;
+      height: 50px;
+      margin-right: 20px;
+      font-size: 50px;
+      line-height: 40px;
+      background-image: none;
+      text-shadow: none;
+      font-weight: 500;
+      color: #6f6f6f !important;
+
+      &.right {
+        left: auto;
+        right: 0px;
+      }
+    }
+  }
+
+  /* Carousel fade */
+
+  .carousel-fade {
+
+    .carousel-inner {
+
+      .item {
+        opacity: 0;
+        transition-property: opacity;
+      }
+
+      .active {
+        opacity: 1;
+      }
+
+      .active.left,
+      .active.right {
+        -webkit-transform: none !important;
+        transform: none !important;
+        opacity: 0;
+      }
+
+      .next.left,
+      .prev.right {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 990px) {
+
+  .ulearnboxflash {
+
+    #flasinformatiu {
+      display: flex;
+
+      #flashes-informativos {
+        width: 15%;
+      }
+
+      .col-md-10 {
+        width: 85%;
+
+        .item {
+          a {
+            display: inline;
+          }
+        }
+      }
+    }
+
+    #flasinformatiu.carousel {
+
+      .carousel-inner.col-md-10 {
+        width: 85%;
+        padding: 5px 40px 5px 30px;
+
+        .item {
+
+          &.next,
+          &.active {
+            display: flex;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 660px) {
+
+  .ulearnboxflash {
+
+    #flasinformatiu {
+
+      #flashes-informativos {
+        width: 20%;
+      }
+
+      .col-md-10 {
+        width: 80%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 510px) {
+
+  .ulearnboxflash {
+
+    #flasinformatiu {
+
+      #flashes-informativos {
+        width: 30%;
+      }
+
+      .col-md-10 {
+        width: 70%;
+      }
+    }
+  }
+}
+

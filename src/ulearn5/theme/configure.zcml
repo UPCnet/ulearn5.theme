@@ -83,6 +83,12 @@
       post_handler=".setuphandlers.uninstall"
       />
 
+  <genericsetup:importStep
+      name="ulearn5.theme.setupstep"
+      title="ulearn5.theme special import handlers"
+      description=""
+      handler="ulearn5.theme.setuphandlers.setupVarious" />
+
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="ulearn5.theme-hiddenprofiles" />

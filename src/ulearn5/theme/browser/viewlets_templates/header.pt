@@ -1,10 +1,18 @@
 <div id="header-menu" class="container">
-  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn">
+  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn"
+          tal:define="customized_header viewlet/get_customized_header">
+
     <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
-      <span aria-hidden="true" role="presentation" class="icona-upc">
-        <img alt="" src="++theme++ulearn5/assets/images/logomark.png" class="img-desktop">
-        <img alt="" src="++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive"></span>
+        <span aria-hidden="true" role="presentation" class="icona-upc">
+          <tal:block tal:condition="not:customized_header">
+            <img alt="" src="++theme++ulearn5/assets/images/logomark.png" class="img-desktop">
+            <img alt="" src="++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive">
+          </tal:block>
+          <tal:block tal:condition="customized_header">
+            <img alt="" tal:attributes="src customized_header" class="img-desktop">
+          </tal:block>
+        </span>
       </h1>
     </a>
 
@@ -16,25 +24,25 @@
       <a href="#" role="button">Menu<span role="presentation" class="icona-upc">close</span></a>
     </div>
     <nav role="navigation" class="global-navigation">
-      <h2 class="sr-only" i18n:translate="Eines">Eines</h2>
+      <h2 class="sr-only" i18n:translate="tools">Tools</h2>
       <ul role="menubar" class="upc-eines" tal:define="menu viewlet/linksMenu">
         <li tal:condition="menu" class="dropdown ulearn-eines-ql" role="menuitem" tal:repeat="dades menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
             <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu pull-right" role="menu">
             <li role="menuitem" tal:repeat="item dades/links">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href item/url">
-                     <tal:link tal:content="item/title">
-                        Links1</tal:link>
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/title">Links1</tal:link>
                 </a>
               </tal:span>
               <tal:span condition="item/new_window">
                 <a class="quicklinks" tal:attributes="href item/url" target="_blank">
-                     <tal:link tal:content="item/title">
-                        Links1</tal:link>
+                  <i tal:attributes="class string:fa ${item/icon}"></i>
+                  <tal:link tal:content="item/title">Links1</tal:link>
                 </a>
               </tal:span>
             </li>
@@ -47,11 +55,35 @@
                       Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" role="menu">
+          <ul class="dropdown-menu pull-right" role="menu">
             <li role="menuitem" tal:condition="viewlet/canManageNews">
               <a href="#" tal:attributes="href string:${viewlet/portal_url}/news">
                 <i class="fa fa-newspaper-o"></i>
                 <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
+              <a tal:attributes="href string:${viewlet/portal_url}/Members/${viewlet/currentUser}/banners">
+                <i class="fa fa-image"></i>
+                <tal:footer i18n:translate="menu-gestion-personal-banners">Personal banners</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageBanners">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/banners">
+                <i class="fa fa-image"></i>
+                <tal:footer i18n:translate="menu-gestion-global-banners">Global banners</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageHeader">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/header">
+                <i class="fa fa-folder"></i>
+                <tal:footer i18n:translate="menu-gestion-header">Management header</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageFooter">
+              <a tal:attributes="href string:${viewlet/portal_url}/gestion/footer">
+                <i class="fa fa-folder"></i>
+                <tal:footer i18n:translate="menu-gestion-footer">Management footer</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
@@ -61,7 +93,7 @@
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/reset_menu">
+              <a href="reset_menu">
                 <i class="fa fa-refresh"></i>
                 <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
@@ -70,6 +102,19 @@
               <i class="fa fa-bar-chart"></i>
               <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
             </a></li>
+            <li aria-hidden="true" class="divider"></li>
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${viewlet/portal_url}/@@usergroup-userprefs">
+                <i class="fa fa-users"></i>
+                <tal:footer i18n:domain="plone" i18n:translate="">Users and Groups</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem" tal:condition="viewlet/canManageMenu">
+              <a tal:attributes="href string:${viewlet/portal_url}/@@overview-controlpanel">
+                <i class="fa fa-cog"></i>
+                <tal:footer i18n:domain="plone" i18n:translate="">Site Setup</tal:footer>
+              </a>
+            </li>
           </ul>
         </li>
         <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql" >
@@ -78,7 +123,7 @@
               <tal:quicklinks tal:content="dades/quickLinksLiteral"> Quick Links </tal:quicklinks>
               <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="ql" role="menu" >
+          <ul class="dropdown-menu pull-right" aria-labelledby="ql" role="menu" >
             <li role="presentation" tal:repeat="item dades/quickLinksTable">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href string:${item/link}" role="menuitem">
@@ -102,11 +147,15 @@
             </a>
         </li>
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
-            <a role="menuitem" accesskey="10" href="${viewlet/portal_url}/search">
-                <i class="fa fa-search"></i>
-            </a>
+          <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
+            <legend class="sr-only" i18n:translate="">Buscar</legend>
+            <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
+            <fieldset role="search">
+              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" i18n:attributes="placeholder search_site" class="searchField" tal:attributes="value request/input-cerca|nothing">
+              <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
+            </fieldset>
+          </form>
         </li>
-
       </ul>
     </nav>
   </header>

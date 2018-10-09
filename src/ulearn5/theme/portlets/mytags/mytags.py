@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-from zope.interface import implements
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone import PloneMessageFactory as _
-from zope.component import queryUtility
-from plone.registry.interfaces import IRegistry
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
-from plone.memoize.view import memoize_contextless
-from zope.component.hooks import getSite
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
 from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
+from zope.component import queryUtility
+from zope.component.hooks import getSite
+from zope.interface import implements
+
+from ulearn5.core import _
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 
 class IMyTagsPortlet(IPortletDataProvider):
@@ -33,6 +34,11 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal_url(self):
         return self.portal().absolute_url()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def getMyTags(self):
         portal = getSite()

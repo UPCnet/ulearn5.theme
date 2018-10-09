@@ -1,24 +1,25 @@
-from zope.interface import implements
-from zope.component.hooks import getSite
-from zope.component import queryUtility
-from zope.security import checkPermission
-
-from plone.app.portlets.portlets import base
-from plone.registry.interfaces import IRegistry
-from plone.memoize.view import memoize_contextless
-from plone.portlets.interfaces import IPortletDataProvider
+# -*- coding: utf-8 -*-
+from DateTime.DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
+from zope.component import queryUtility
+from zope.component.hooks import getSite
+from zope.interface import implements
+from zope.security import checkPermission
+
+from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from plone import api
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
-from DateTime.DateTime import DateTime
 
 
 class ICommunitiesNavigation(IPortletDataProvider):
@@ -76,6 +77,11 @@ class Renderer(base.Renderer):
     def portal(self):
         return getSite()
 
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
     def get_addview(self):
         add_view = self.portal().restrictedTraverse('{}/addCommunity'.format('/'.join(self.portal().getPhysicalPath())))
         add_view.update()
@@ -86,48 +92,63 @@ class Renderer(base.Renderer):
             the portal root.
         """
         if 'front-page' in self.context.getPhysicalPath() and \
-           checkPermission('ulearn.addCommunity', self.portal()):
-            return True
+            checkPermission('ulearn.addCommunity', self.portal()):
+            if api.user.get_current().id != "admin":
+                return True
 
     def showEditCommunity(self):
         pm = getToolByName(self.portal(), 'portal_membership')
         user = pm.getAuthenticatedMember()
 
         if not IPloneSiteRoot.providedBy(self.context) and \
-           ICommunity.providedBy(self.context) and \
-           ('Manager' in user.getRoles() or
-           'WebMaster' in user.getRoles() or
-           'Site Administrator' in user.getRoles() or
-           'Owner' in self.context.get_local_roles_for_userid(user.id)):
+            ICommunity.providedBy(self.context) and \
+            ('Manager' in user.getRoles() or
+            'WebMaster' in user.getRoles() or
+            'Site Administrator' in user.getRoles() or
+            'Owner' in self.context.get_local_roles_for_userid(user.id)):
             return True
 
-    def getCommunities(self):
+    def getTypeCommunities(self, typeCommunity):
         portal = self.portal()
         pc = getToolByName(portal, "portal_catalog")
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
-        communities = []
-        try:
-            communities = pc.searchResults(object_provides=ICommunity.__identifier__,
+        communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,
-                                       sort_on="subscribed_items",
-                                       sort_order="reverse")
-        except:
-            pass
+                                       community_type=typeCommunity,
+                                       sort_on="sortable_title")
 
         def format_communities():
             """ Generator to return information of the community.
             """
             for community in communities:
-                info = {'id': community.id,
-                        'url': community.getURL(),
-                        'title': community.Title,
-                        'community_type': community.community_type,
-                        'pending': self.get_pending_community_user(community, current_user)
-                        }
-                yield info
+                    info = {'id': community.id,
+                            'url': community.getURL(),
+                            'title': community.Title,
+                            'community_type': community.community_type,
+                            'image': community.getObject().image,
+                            'pending': self.get_pending_community_user(community, current_user)
+                            }
+                    yield info
 
-        return format_communities()
+        return format_communities() if len(communities) > 0 else None
+
+    def getOpenCommunities(self):
+        """ in GWOPA equals to CoP """
+        return self.getTypeCommunities("Open")
+
+    def getOrganizativeCommunities(self):
+        """ in GWOPA equals to Corporate """
+        return self.getTypeCommunities("Organizative")
+
+    def getClosedCommunities(self):
+        """ in GWOPA equals to Wop Team """
+        return self.getTypeCommunities("Closed")
+
+    def displayTypeCommunity(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IUlearnControlPanelSettings, check=False)
+        return settings.show_literals
 
     def getCommunityMembers(self, community):
         if community.subscribed_items < 100:
@@ -156,6 +177,11 @@ class Renderer(base.Renderer):
         pm = getToolByName(portal, "portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName()
         return current_user
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
 
 class AddForm(base.NullAddForm):

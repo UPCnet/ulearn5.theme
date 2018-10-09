@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-from plone.memoize.compress import xhtml_compress
-from plone.memoize.instance import memoize
-from plone.portlets.interfaces import IPortletDataProvider
-from zope.component import getMultiAdapter
-from zope.formlib import form
-from zope.interface import implements
-from zope import schema
-
 from Acquisition import aq_inner
+from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.app.portlets import PloneMessageFactory as _
+from plone import api
 from plone.app.portlets.portlets import base
-from zope.component.hooks import getSite
+from plone.memoize.compress import xhtml_compress
+from plone.memoize.instance import memoize
 from plone.memoize.view import memoize_contextless
-from DateTime.DateTime import DateTime
+from plone.portlets.interfaces import IPortletDataProvider
+from zope import schema
+from zope.component import getMultiAdapter
+from zope.component.hooks import getSite
+from zope.interface import implements
+
+from ulearn5.core import _
 
 
 class IImportantNewsPortlet(IPortletDataProvider):
@@ -58,6 +58,12 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal(self):
         return getSite()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
 
     def published_news_items(self):
         return self._data()

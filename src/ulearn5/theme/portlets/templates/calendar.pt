@@ -2,42 +2,24 @@
    xmlns:tal="http://xml.zope.org/namespaces/tal"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
    i18n:domain="plone"
+   tal:condition="not:view/isAnon"
    tal:omit-tag="">
 
-   <section id="box_agenda" class="ulearnbox portletCalendar" role="section">
+   <section id="box_agenda" class="ulearnbox portletCalendar" role="section" tal:define="today view/today">
       <div class="osomcorner-wrapper"><div class="osomcorner"></div> </div>
-      <h2>Agenda</h2>
-      <div id="agenda" class="row" tal:define="today view/today">
-         <div id="day" class="bubble left col-lg-4 col-md-4 col-xs-4">
-            <div class="arrow"></div>
-            <div class="bubble-content">
-               <p tal:content="today/number">14</p>
-               <p class="data"
-                  tal:content="today/weekday">Jueves</p>
-            </div>
-         </div>
-         <div id="esdev" class="col-md-8"
-            tal:define="today_event view/get_nearest_today_event">
-            <div class="vertical_aligned">
-               <a href="#"
-                  tal:condition="today_event"
-                  tal:content="today_event/Title"
-                  tal:attributes="href today_event/getURL">Desayuno de trabajo: aportando valores a la formación...</a>
-               <a href="#"
-                  tal:condition="not: today_event"
-                  i18n:domain="ulearn"
-                  i18n:translate="not_events_for_today">There are not events today</a>
-            </div>
-         </div>
-      </div>
+      <h2 id="today"
+          tal:attributes="data-year today/year; data-month today/month; data-day today/day;
+                          data-community view/is_community; data-community_path view/getCommunityPath">
+        Agenda
+      </h2>
       <div class="portlet portlet-calendari"
          tal:define="navigation_root_url context/@@plone_portal_state/navigation_root_url;
                      year view/year;">
          <div class="portlet-block">
            <header class="portlet-header">
              <a href="#" rel="nofollow" class="calendari-anterior" title="Previous month"
-                tal:define="prev_month view/prev_month; prev_year view/prev_year"
-                tal:attributes="href view/prev_query; data-year prev_year; data-month prev_month;"
+                tal:define="prev_month view/prev_month; prev_year view/prev_year; "
+                tal:attributes="href view/prev_query; data-year prev_year; data-month prev_month; data-community view/is_community; data-community_path view/getCommunityPath"
                 i18n:attributes="title title_previous_month;">&laquo;</a>
              <h3>
                 <span i18n:translate="" tal:omit-tag="">
@@ -49,7 +31,7 @@
              </h3>
              <a href="#" rel="nofollow" class="calendari-seguent" title="Next month"
                 tal:define="next_month view/next_month; next_year view/next_year"
-                tal:attributes="href view/next_query; data-year next_year; data-month next_month;"
+                tal:attributes="href view/next_query; data-year next_year; data-month next_month; data-community view/is_community; data-community_path view/getCommunityPath"
                 i18n:attributes="title title_next_month;">&raquo;</a>
            </header>
            <article class="portlet-content">
@@ -59,7 +41,7 @@
                      <tr class="weekdays">
                         <tal:data repeat="weekday view/weekdays">
                            <th scope="col">
-                              <abbr data-toggle='tooltip' data-placement='top' i18n:translate="" tal:content="weekday">Su</abbr>
+                              <abbr i18n:translate="" tal:content="weekday">Su</abbr>
                            </th>
                         </tal:data>
                      </tr>
@@ -71,17 +53,19 @@
                                                         next_month day/next_month;
                                                         prev_month day/prev_month;
                                                         events day/events;
+                                                        classtag python:view.getclasstag_event(day);
                                                         limit python:len(events) if events is not None else 0"
-                                    tal:attributes="class python:u'%s%s%s%s' %
+                                    tal:attributes="class python:u'%s%s%s%s%s' %
                                     ((' avui' if today else ''),
                                     (' cal_next_month' if next_month else ''),
                                     (' cal_prev_month' if prev_month else ''),
-                                    (' te-esdeveniment' if events else ''))">
+                                    (events and ' cal_has_events' or ''),
+                                    (classtag or ''));
+                                    data-year day/year; data-month day/month; data-day day/day; data-community view/is_community; data-community_path view/getCommunityPath">
                               <tal:comment tal:condition="nothing">Add span or a to style td children and not td</tal:comment>
                               <span tal:condition="not:events" tal:content="day/day"></span>
-                              <a tal:condition="events" tal:attributes="title day/events_string;"
-                                 rel="popover" data-placement="bottom"
-                                 tal:content="day/day">31</a>
+                              <a tal:condition="events" tal:content="day/day">31</a>
+
                            </td>
                         </tal:block>
                      </tr>
@@ -98,13 +82,26 @@
             </a>
          </li>
       </ul>
-      <ul class="icons-ul" i18n:domain="ulearn">
-         <li tal:repeat="event view/get_next_three_events">
-            <a tal:attributes="href event/getURL">
-               <i class="fa fa-calendar"></i>
-               <tal:event content="event/Title">Event Title</tal:event>
-            </a>
-         </li>
+      <ul i18n:domain="ulearn" class="icons-ul">
+        <tal:block tal:repeat="events view/getDayEventsGroup">
+          <li tal:attributes="class string:${events/community_type} text">
+            <p tal:repeat="event events/events">
+              <a tal:attributes="href event/getURL">
+                <tal:event content="event/start"> 07/12 </tal:event>
+                <span tal:condition="event/end">
+                  <span i18n:translate=""> to </span>
+                  <tal:event content="event/end"> 07/12 </tal:event>
+                </span>
+                - <tal:event content="event/Title"> Event Title </tal:event>
+              </a>
+            </p>
+            <div class="clearfix"></div>
+            <span class="text2">
+              <!-- <span i18n:translate="">Published in</span> -->
+              <a tal:attributes="href events/community_url" tal:content="events/community_name"></a>
+            </span>
+          </li>
+        </tal:block>
       </ul>
       <p class="newevent"
          tal:condition="view/show_newevent_url">

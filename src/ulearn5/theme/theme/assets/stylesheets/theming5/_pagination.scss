@@ -15,8 +15,8 @@
   }
 
   li.active a {
-    color:#7F7F7F;
-    background: transparent;
+    color: #7F7F7F !important;
+    background: transparent !important;
     font-weight: bolder;
     &::after {
       content:"";

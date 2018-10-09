@@ -1,0 +1,20 @@
+<div class="titleResource">
+  <h3>
+    <a tal:attributes="href string:${view/item/getURL}/view;
+                       title view/item/Title">
+      <tal:renderer replace="structure view/getTitle"> </tal:renderer>
+    </a>
+  </h3>
+</div>
+<div class="contentResource"
+     tal:define="download_url string:${view/item/getURL}/@@download/file/${view/item/file/filename}">
+  <p>
+    <a tal:attributes="href download_url">
+      <tal:name tal:content="view/item/file/filename">Filename</tal:name>
+    </a>
+    <span class="discreet"
+        tal:define="size view/item/file/getSize;
+                    kb python:size/1024">
+      &mdash; <span tal:replace="kb" /> KB</span>
+  </p>
+</div>

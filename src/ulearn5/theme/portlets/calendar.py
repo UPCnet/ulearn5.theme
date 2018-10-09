@@ -1,51 +1,56 @@
-import json
-from Acquisition import aq_inner, aq_chain
-from DateTime import DateTime
-
-from zope.interface import implements
-from zope.component import getMultiAdapter
-from zope.component.hooks import getSite
-from zope.i18nmessageid import MessageFactory
-
+# -*- coding: utf-8 -*-
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from datetime import datetime
+from datetime import timedelta
+
 from plone import api
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.memoize.view import memoize_contextless
-from plone.app.event.base import localized_today, localized_now, dt_end_of_day
 from plone.app.event.base import RET_MODE_OBJECTS
+from plone.app.event.base import construct_calendar
 from plone.app.event.base import first_weekday
-from plone.app.event.base import get_events, construct_calendar
+from plone.app.event.base import get_events
+from plone.app.event.base import localized_now
+from plone.app.event.base import localized_today
 from plone.app.event.base import wkday_to_mon1
 from plone.app.event.portlets import get_calendar_url
-from plone.event.interfaces import IEventAccessor
+from plone.app.portlets.portlets import base
 from plone.dexterity.interfaces import IDexterityContent
+from plone.event.interfaces import IEvent
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.i18nmessageid import MessageFactory
+from zope.interface import implements
 
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IEventsFolder
 from ulearn5.theme import calmodule
 
+import itertools
+
+
 PLMF = MessageFactory('plonelocales')
 
 
 class ICalendarPortlet(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information.
-    """
+    """ A portlet which renders the calendar portlet """
 
 
 class Assignment(base.Assignment):
     implements(ICalendarPortlet)
-
-    title = _(u'calendar', default=u'Calendar portlet')
+    title = _(u'Calendar')
 
 
 class Renderer(base.Renderer):
-
     render = ViewPageTemplateFile('templates/calendar.pt')
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
     def update(self):
         context = aq_inner(self.context)
@@ -62,10 +67,16 @@ class Renderer(base.Renderer):
                 path = '/' + '/'.join(set(community_path) - set(portal_path))
             else:
                 path = ''
+
+        community_path = self.getCommunityPath()
+        path = community_path if community_path else path
+
         self.search_base = path
         self.state = ('published', 'intranet')
 
         self.username = api.user.get_current().id
+        # self.user_info = get_safe_member_by_id(self.username)
+
         self.calendar_url = get_calendar_url(context, self.search_base)
 
         self.year, self.month = year, month = self.year_month_display()
@@ -140,31 +151,42 @@ class Renderer(base.Renderer):
     def __init__(self, *args, **kwargs):
         super(Renderer, self).__init__(*args, **kwargs)
 
-    def nav_pattern_options(self, query):
-        return json.dumps({
-            'url': '%s/@@calendari%s&%s' % (
-                getSite().absolute_url(),
-                query,
-                self.quote_query('state', self.state)),
-            'target': '.portletCalendar'
-        })
+    def getPriorityClassTypeEvent(self, events):
+        priorityTypesOrder = ['Organizative', 'Closed', 'Open']
+        classType = {'Organizative': 'event-organizative', 'Closed': 'event-closed', 'Open': 'event-open'}
+        for typeCommunity in priorityTypesOrder:
+            for event in events:
+                if IEvent.providedBy(event):
+                    community = event.aq_parent.aq_parent
+                else:
+                    community = event.aq_parent.aq_parent.aq_parent
+                if community.community_type == typeCommunity:
+                    return classType[typeCommunity]
 
-    def quote_query(self, key, value):
-        """ This only is capable of Zope encode tuples. If ever required, can
-        be extended to support further types (and complex dicts of data)"""
+    def getclasstag_event(self, day):
+        # Returns class color to show in the calendar
+        classtag = ''
 
-        if isinstance(value, tuple):
-            return ''.join(
-                ['{}:tuple={}&'.format(key, item) for item in value])
-        else:
-            return ''
+        if day['events']:
+            # if len(day['events']) > 1:
+            if len(day['events']) > 1:
+                classtag += ' ' + self.getPriorityClassTypeEvent(day['events'])
+                classtag += ' event-multiple '
+            else:
+                event = day['events'][0]
+                community = event.aq_parent.aq_parent.community_type
 
-    @property
-    def cal_data(self):
-        """Calendar iterator over weeks and days of the month to display.
-        """
+                if 'Closed' in community:
+                    classtag += ' event-closed '
+                elif 'Open' in community:
+                    classtag += ' event-open '
+                else:
+                    # Organizative
+                    classtag += ' event-organizative '
+        return classtag
+
+    def getCalendarDict(self):
         context = aq_inner(self.context)
-        today = localized_today(context)
         year, month = self.year_month_display()
         monthdates = [dat for dat in self.cal.itermonthdates(year, month)]
 
@@ -179,10 +201,20 @@ class Renderer(base.Renderer):
 
         start = monthdates[0]
         end = monthdates[-1]
-        events = get_events(context, start=start, end=end,
+        events = get_events(context,
+                            start=start - timedelta(days=30),
+                            end=end,
                             ret_mode=RET_MODE_OBJECTS,
                             expand=True, **query_kw)
-        cal_dict = construct_calendar(events, start=start, end=end)
+        return construct_calendar(events, start=start, end=end)
+
+    @property
+    def cal_data(self):
+        context = aq_inner(self.context)
+        today = localized_today(context)
+        year, month = self.year_month_display()
+        monthdates = [dat for dat in self.cal.itermonthdates(year, month)]
+        cal_dict = self.getCalendarDict()
 
         # [[day1week1, day2week1, ... day7week1], [day1week2, ...]]
         caldata = [[]]
@@ -194,24 +226,11 @@ class Renderer(base.Renderer):
             if isodat in cal_dict:
                 date_events = cal_dict[isodat]
 
-            events_string = u""
-            url = ""
-            if date_events:
-                for occ in date_events:
-                    accessor = IEventAccessor(occ)
-                    url = accessor.url
-                    whole_day = accessor.whole_day
-                    time = accessor.start.time().strftime('%H:%M')
-                    base = u'<a href="%s"><span class="title">%s</span>%s</a>'
-                    events_string += base % (
-                        url,
-                        accessor.title,
-                        not whole_day and u' %s' % time or u'')
-
             caldata[-1].append(
                 {'date': dat,
                  'day': dat.day,
-                 'url': url,
+                 'month': dat.month,
+                 'year': dat.year,
                  'prev_month': dat.month < month,
                  'next_month': dat.month > month,
                  'today':
@@ -219,121 +238,131 @@ class Renderer(base.Renderer):
                     dat.month == today.month and
                     dat.day == today.day,
                  'date_string': u"%s-%s-%s" % (dat.year, dat.month, dat.day),
-                 'events_string': events_string,
-                 'events': date_events})
+                 'events': date_events}
+            )
         return caldata
 
     def today(self):
         today = {}
         loc_today = localized_today(self.context)
         weekday = loc_today.isoweekday()
-        today['weekday'] = PLMF(self._ts.day_msgid(0 if weekday == 7 else weekday, format='l'))
-        today['number'] = loc_today.day
+        today['weekdayLit'] = PLMF(self._ts.day_msgid(
+            0 if weekday == 7 else weekday, format='l'))
+        today['day'] = loc_today.day
+        today['month'] = loc_today.month
+        today['year'] = loc_today.year
         return today
 
-    @memoize_contextless
-    def get_nearest_today_event(self):
+    def getEventCalendarDict(self, event):
+        start = event.start.strftime('%d/%m') if not event.recurrence else event.ocstart.strftime('%d/%m')
+        searchStart = event.start.strftime('%m/%s') if not event.recurrence else event.ocstart.strftime('%m/%s')
+        end = event.end.strftime('%d/%m') if not event.recurrence else event.ocend.strftime('%d/%m')
+        end = None if end == start else end
+        return dict(Title=event.title,
+                    getURL=event.absolute_url(),
+                    start=start,
+                    searchStart=searchStart,
+                    end=end,
+                    community_type=event.community_type,
+                    community_name=event.aq_parent.aq_parent.title,
+                    community_url=event.aq_parent.aq_parent.absolute_url())
+
+    def getDayEvents(self, date):
+        events = self.getCalendarDict()
+        list_events = []
+        if date.strftime('%Y-%m-%d') in events:
+            events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')])
+            for event in events:
+                list_events.append(self.getEventCalendarDict(event))
+        return list_events
+
+    def getNextThreeEvents(self):
         context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        now = localized_now()
+        query_kw = {}
+        if self.search_base:
+            portal = getToolByName(context, 'portal_url').getPortalObject()
+            query_kw['path'] = {'query': '%s%s' % (
+                '/'.join(portal.getPhysicalPath()), self.search_base)}
 
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
-        navigation_root_path = portal_state.navigation_root_path()
+        if self.state:
+            query_kw['review_state'] = self.state
 
-        context = aq_inner(self.context)
-        path = navigation_root_path
-        for obj in aq_chain(context):
-            if ICommunity.providedBy(obj):
-                community = aq_inner(obj)
-                path = '/'.join(community.getPhysicalPath())
+        events = get_events(context, ret_mode=RET_MODE_OBJECTS, expand=True, **query_kw)
+        events = self.filterNextEvents(events)
+        events = self.filterOccurrenceEvents(events)
 
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'start': {'query': [now, dt_end_of_day(now)], 'range': 'min:max'},
-            'end': {'query': now, 'range': 'min'},
-            'sort_on': 'start',
-            'path': path,
-            'sort_limit': 1
-        }
+        list_events = []
+        for event in events[:3]:
+            list_events.append(self.getEventCalendarDict(event))
 
-        result = pc(**query)
-        if result:
-            return result[0]
+        return list_events
+
+    def filterOccurrenceEvents(self, events):
+        filter_events = []
+        for event in events:
+            if not IEvent.providedBy(event):
+                ocurrence = event
+                event = event.aq_parent
+                if event not in filter_events:
+                    event.ocstart = ocurrence.start
+                    event.ocend = ocurrence.end
+                    filter_events.append(event)
+            else:
+                filter_events.append(event)
+
+        return filter_events
+
+    def filterNextEvents(self, events):
+        filter_events = []
+        for event in events:
+            if event.end > localized_now():
+                filter_events.append(event)
+        return filter_events
+
+    def getDayEventsGroup(self):
+        group_events = []
+        if 'day' not in self.request.form and 'month' in self.request.form:
+            list_events = self.getNextThreeEvents()
+        elif 'day' not in self.request.form and 'month' not in self.request.form:
+            list_events = self.getNextThreeEvents()
         else:
-            return
+            list_events = self.getDayEvents(self.getDateEvents())
 
-    def get_next_three_events(self):
-        context = aq_inner(self.context)
-        pc = getToolByName(context, 'portal_catalog')
-        now = localized_now()
-
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
-        navigation_root_path = portal_state.navigation_root_path()
-
-        context = aq_inner(self.context)
-        path = navigation_root_path
-        for obj in aq_chain(context):
-            if ICommunity.providedBy(obj):
-                community = aq_inner(obj)
-                path = '/'.join(community.getPhysicalPath())
-
-        query = {
-            'portal_type': 'Event',
-            'review_state': self.state,
-            'end': {'query': now, 'range': 'min'},
-            'sort_on': 'start',
-            'path': path,
-            }
-
-        result = pc(**query)
-        nearest = self.get_nearest_today_event()
-        if nearest:
-            return [event for event in result if event.id != nearest.id][:3]
+        if len(list_events):
+            list_events = sorted(list_events, key=lambda x: x['community_name'])
+            for key, group in itertools.groupby(list_events, key=lambda x: x['community_name']):
+                events = [event for event in group]
+                events = sorted(events, key=lambda x: (x['searchStart'], x['Title']))
+                group_events.append(dict(Title=key,
+                                         getURL=events[0]['getURL'],
+                                         community_url=events[0]['community_url'],
+                                         community_type=events[0]['community_type'],
+                                         community_name=events[0]['community_name'],
+                                         num_events=len(events),
+                                         events=events))
+            return group_events
         else:
-            return result[:3]
+            return None
 
-    def getEventsForCalendar(self):
-        context = aq_inner(self.context)
-        year = self.year
-        month = self.month
-        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
-        navigation_root_path = portal_state.navigation_root_path()
-
-        context = aq_inner(self.context)
-        path = navigation_root_path
-        for obj in aq_chain(context):
-            if ICommunity.providedBy(obj):
-                community = aq_inner(obj)
-                path = '/'.join(community.getPhysicalPath())
-
-        weeks = self.calendar.getEventsForCalendar(month, year, path=path)
-        for week in weeks:
-            for day in week:
-                daynumber = day['day']
-                if daynumber == 0:
-                    continue
-                day['is_today'] = self.isToday(daynumber)
-                if day['event']:
-                    cur_date = DateTime(year, month, daynumber)
-                    localized_date = [self._ts.ulocalized_time(cur_date, context=context, request=self.request)]
-                    day['eventstring'] = '\n'.join(localized_date + [' %s' %
-                        self.getEventString(e) for e in day['eventslist']])
-                    day['date_string'] = '%s-%s-%s' % (year, month, daynumber)
-
-        return weeks
+    def getDateEvents(self):
+        formatDate = "%Y-%m-%d"
+        if 'day' in self.request.form:
+            date = '{}-{}-{}'.format(self.request.form['year'], self.request.form['month'], self.request.form['day'])
+        else:
+            date = datetime.today().strftime(formatDate)
+        dateEvent = datetime.strptime(date, formatDate)
+        return dateEvent
 
     def show_newevent_url(self):
         """ Assume that the calendar is only shown on the community itself. """
-        context = aq_inner(self.context)
         if IPloneSiteRoot.providedBy(self.context):
             return False
-        else:
-            user_roles = api.user.get_roles(username=self.username, obj=self.context)
-            if 'Editor' in user_roles and ICommunity.providedBy(context):
-                return True
-            else:
-                return False
+        elif ICommunity.providedBy(self.context):
+                user_roles = api.user.get_roles(
+                    username=self.username, obj=self.context)
+                if 'Editor' in user_roles:
+                    return True
+        return False
 
     def newevent_url(self):
         """ Assume that the new event button is only shown on the community itself. """
@@ -351,6 +380,10 @@ class Renderer(base.Renderer):
 
     def is_community(self):
         """ Assume that the calendar is only shown on the community itself. """
+        if 'community' in self.request.form:
+            if self.request.form['community'] != 'False':
+                return True
+
         context = aq_inner(self.context)
         for obj in aq_chain(context):
             if ICommunity.providedBy(obj):
@@ -358,10 +391,26 @@ class Renderer(base.Renderer):
 
         return False
 
+    def getCommunityPath(self):
+        if self.is_community():
+            if 'community_path' in self.request.form:
+                return self.request.form['community_path']
+            else:
+                community = aq_inner(self.context)
+                portal = api.portal.get()
+                portal_path = portal.getPhysicalPath()
+                for obj in aq_chain(community):
+                    if ICommunity.providedBy(obj):
+                        community_path = obj.getPhysicalPath()
+                return '/' + '/'.join(set(community_path) - set(portal_path))
+        else:
+            return ''
+
     def get_event_folder_url(self):
         """ Assume that the new event button is only shown on the community itself. """
         context = aq_inner(self.context)
-        return '{}/events'.format(context.absolute_url())
+        portal = getToolByName(context, 'portal_url').getPortalObject()
+        return '/'.join(portal.getPhysicalPath()) + self.search_base + '/events'
 
 
 class AddForm(base.NullAddForm):

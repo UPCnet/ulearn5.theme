@@ -1,0 +1,73 @@
+body.portaltype-ulearn-banner #content {
+  .banner {
+    max-width: 285px;
+  }
+
+  .osomcorner-wrapper .osomcorner {
+    background-color: #FFFFFF;
+  }
+}
+
+body.portaltype-ulearn-banner #content,
+#personal_banners {
+
+  margin-bottom: 30px;
+
+  .banner {
+    margin-bottom: 15px;
+
+    .defaultBanner {
+      min-height: 60px;
+      display: table;
+      position: relative;
+      width: 100%;
+
+      a {
+        background-color: #9E0054;
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 1.5em;
+        line-height: 1.25;
+        padding: 10px 15px 10px 15px;
+        display: table-cell;
+        vertical-align: middle;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #8E004B;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      background-color: #9E0054;
+
+      &:hover {
+        background-color: #8E004B;
+      }
+    }
+
+    a:not([class])[target="_blank"]::after {
+      display: none;
+    }
+  }
+
+  .osomcorner-wrapper {
+    width: auto;
+    height: auto;
+    top: 0px;
+    right: -22px;
+
+    .osomcorner {
+      padding: 7px 0;
+      top: 0px;
+      width: 40px;
+    }
+  }
+}

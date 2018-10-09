@@ -1,0 +1,114 @@
+/* Portlet Quicklinks */
+
+.portletQuicklinks {
+    a + h2.titleBox {
+        margin-right: 20px;
+    }
+
+    h2.titleBox::after {
+        display: none;
+    }
+
+    .nav > li {
+        margin-bottom: 4px;
+
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+
+        & > a,
+        & > span,
+        & > span + ul a {
+            position: relative;
+            display: block;
+            padding: 5px 10px 5px 15px;
+            color: #666;
+
+            &.link {
+               padding: 5px 10px 5px 0px;
+            }
+
+            &:hover {
+                background-color: transparent;
+                color: #007bc0;
+            }
+
+            &:focus {
+                background-color: transparent;
+                outline: none;
+            }
+        }
+
+        & > a {
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        &:first-of-type > a {
+            padding-top: 0px;
+        }
+
+        & > span {
+            cursor: pointer;
+            background: #e8e8e8 none repeat scroll 0 0;
+            border-left: 5px solid #666;
+            font-weight: 600;
+
+            &:hover {
+                background-color: #e8e8e8;
+                border-left: 5px solid #e8e8e8;
+            }
+
+            &:focus {
+                background-color: #e8e8e8;
+            }
+        }
+
+        & > span + ul {
+            list-style: none;
+            padding-left: 0px;
+
+            & > li:last-of-type a {
+                padding-bottom: 6px;
+            }
+
+            a {
+                border-bottom: 1px solid #e8e8e8;
+            }
+        }
+
+        & > .arrow {
+
+            &::after {
+                content: "\f106";
+                color: #666;
+                float: right;
+                font-family: FontAwesome;
+                font-size: 18px;
+                font-weight: normal;
+                margin-right: 5px;
+                margin-top: 0;
+            }
+
+            &.collapsed::after {
+                content: "\f107";
+            }
+
+            &:hover::after {
+                color: #007bc0;
+            }
+        }
+    }
+
+    .fa-cog {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5em;
+        color: #666;
+        cursor: pointer;
+
+        &:hover {
+            color: #007bc0;
+        }
+    }
+}

@@ -1,11 +1,12 @@
-from zope.interface import implements
-from plone import api
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
+# -*- coding: utf-8 -*-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from Products.CMFPlone import PloneMessageFactory as _
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.interface import implements
+
+from ulearn5.core import _
 
 
 class ISharedWithMePortlet(IPortletDataProvider):
@@ -26,6 +27,11 @@ class Renderer(base.Renderer):
     def __init__(self, context, request, view, manager, data):
         super(Renderer, self).__init__(context, request, view, manager, data)
         self.portal_url = api.portal.get().absolute_url()
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
 
 
 class AddForm(base.NullAddForm):

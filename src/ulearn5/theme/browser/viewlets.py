@@ -1,24 +1,40 @@
 # -*- coding: utf-8 -*-
-from five import grok
-from Acquisition import aq_inner, aq_chain
-from cgi import escape
-from plone import api
-from zope.interface import Interface
-from zope.component import getMultiAdapter, getUtility
+from Acquisition import aq_chain
+from Acquisition import aq_inner
+from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import ILanguageSchema
 from Products.CMFPlone.utils import safe_unicode
+
+from cgi import escape
+from five import grok
+from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import IHtmlHead, IPortalHeader, IAboveContent, IPortalFooter
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from ulearn5.core.browser.viewlets import viewletBase
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from plone.registry.interfaces import IRegistry
-from souper.soup import get_soup
-from souper.soup import Record
-from repoze.catalog.query import Eq
+from plone.app.layout.viewlets.interfaces import IAboveContent
+from plone.app.layout.viewlets.interfaces import IHtmlHead
+from plone.app.layout.viewlets.interfaces import IPortalFooter
+from plone.app.layout.viewlets.interfaces import IPortalHeader
 from plone.memoize import forever
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRetriever
+from plone.registry.interfaces import IRegistry
+from repoze.catalog.query import Eq
+from souper.soup import Record
+from souper.soup import get_soup
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.globalrequest import getRequest
+from zope.interface import Interface
+
+from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.content.community import ICommunity
-from ulearn5.core.interfaces import IDocumentFolder, ILinksFolder, IPhotosFolder, IEventsFolder, INewsItemFolder
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.core.interfaces import IDocumentFolder
+from ulearn5.core.interfaces import IEventsFolder
+from ulearn5.core.interfaces import ILinksFolder
+from ulearn5.core.interfaces import INewsItemFolder
+from ulearn5.core.interfaces import IPhotosFolder
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
 import datetime
 
@@ -107,7 +123,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
-            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats():
+            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats() or self.canManageHeader() or self.canManageFooter() or self.canManageBanners() or self.canManagePersonalBanners():
                 return True
         return False
 
@@ -139,6 +155,46 @@ class viewletHeaderUlearn(viewletBase):
         if 'WebMaster' in roles or 'Manager' in roles:
             return True
         return False
+
+    def canManageHeader(self):
+        return self.canManageDirectory('header')
+
+    def canManageFooter(self):
+        return self.canManageDirectory('footer')
+
+    def isDisplayedPortletBanners(self, typePortlet):
+        columns = ['ContentWellPortlets.BelowTitlePortletManager1',
+                   'ContentWellPortlets.BelowTitlePortletManager2',
+                   'ContentWellPortlets.BelowTitlePortletManager3',
+                   'plone.leftcolumn', 'plone.rightcolumn']
+        for column in columns:
+            managerColumn = getUtility(IPortletManager, name=column)
+            retriever = getMultiAdapter((self.context, managerColumn), IPortletRetriever)
+            portlets = retriever.getPortlets()
+            for portlet in portlets:
+                if 'banners' in portlet['name']:
+                    if portlet['assignment'].typePortlet == typePortlet:
+                        return True
+        return False
+
+    def canManageBanners(self):
+        if self.isDisplayedPortletBanners('Global'):
+            return self.canManageDirectory('banners')
+        return False
+
+    def canManagePersonalBanners(self):
+        if self.isDisplayedPortletBanners('Personal'):
+            current = api.user.get_current()
+            portal = api.portal.get()
+            if 'Members' in portal:
+                if current.id in portal['Members']:
+                    if 'banners' in portal['Members'][current.id]:
+                        return True
+        return False
+
+    def currentUser(self):
+        user = api.user.get_current().id
+        return user
 
     def _createLinksMenu(self, language):
         """ Genera el menu de enlaces segun el idioma que tenga definido el
@@ -179,6 +235,7 @@ class viewletHeaderUlearn(viewletBase):
                         'title': obj.title,
                         'url': obj.remoteUrl,
                         'new_window': obj.open_link_in_new_window,
+                        'icon': obj.awicon
                         }
                 try:
                     carpetes[link_parent_path]['links'].append(info)
@@ -193,10 +250,10 @@ class viewletHeaderUlearn(viewletBase):
         """ Devuelve el menu de enlaces segun el idioma que tenga definido el
             usuario en su perfil
         """
-        current = api.user.get_current()
-        if current.getUserName() == 'Anonymous User':
+        if api.user.is_anonymous():
             pass
         else:
+            current = api.user.get_current()
             user_language = current.getProperty('language')
             if not user_language or user_language == '':
                 lt = getToolByName(self.portal(), 'portal_languages')
@@ -217,6 +274,45 @@ class viewletHeaderUlearn(viewletBase):
                 return dades.values()
             else:
                 return exist[0].attrs['dades']
+
+    def get_customized_header(self):
+        """
+        Get dades header
+        """
+        user = api.user.get_current()
+        pt = getToolByName(self.portal(), 'portal_languages')
+
+        if not api.user.is_anonymous():
+            user_language = user.getProperty('language')
+            if not user_language or user_language == '':
+                user_language = pt.getPreferredLanguage()
+                user.setMemberProperties({'language': user_language})
+        else:
+            registry = getUtility(IRegistry)
+            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
+            useCookie = lan_tool.use_cookie_negotiation
+            if useCookie:
+                request = getRequest()
+                user_language = request.cookies.get('I18N_LANGUAGE')
+                if not user_language:
+                    user_language = pt.getPreferredLanguage()
+            else:
+                user_language = pt.getPreferredLanguage()
+
+        catalog = getToolByName(self, 'portal_catalog')
+        portalPath = '/'.join(api.portal.get().getPhysicalPath())
+        path = portalPath + '/gestion/header/' + user_language
+
+        now = DateTime()
+        images = catalog.searchResults(portal_type='Image',
+                                       path={'query': path, 'depth': 1},
+                                       expires={'query': now, 'range': 'min', },
+                                       effective={'query': now, 'range': 'max', },
+                                       sort_on='getObjPositionInParent')
+        if len(images) > 0:
+            return images[0].getURL()
+        else:
+            return None
 
 
 class folderBar(viewletBase):
@@ -245,11 +341,25 @@ class folderBar(viewletBase):
                 self.folder_type = 'news'
                 break
             if ICommunity.providedBy(obj):
-                self.folder_type = 'community'
+                self.folder_type = 'stream'
                 break
 
+    def show_news(self):
+        community = self.get_community()
+        return community.show_news
+
+    def show_events(self):
+        community = self.get_community()
+        return community.show_events
+
     def bubble_class(self, bubble):
-        width = 'col-xs-3'
+        community = self.get_community()
+        if community.show_news and community.show_events:
+            width = 'col-xs-3'
+        elif community.show_news or community.show_events:
+            width = 'col-xs-4'
+        else:
+            width = 'col-xs-6'
 
         if bubble == self.folder_type:
             return 'active bubble top {}'.format(width)
@@ -307,6 +417,46 @@ class viewletFooterUlearn(viewletBase):
             links['disclaimer'] = 'https://www.upc.edu/en/disclaimer'
 
         return links
+
+    def get_customized_footer(self):
+        """
+        Get dades footer
+        """
+        user = api.user.get_current()
+        pt = getToolByName(self.portal(), 'portal_languages')
+
+        if not api.user.is_anonymous():
+            user_language = user.getProperty('language')
+            if not user_language or user_language == '':
+                user_language = pt.getPreferredLanguage()
+                user.setMemberProperties({'language': user_language})
+        else:
+            registry = getUtility(IRegistry)
+            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
+            useCookie = lan_tool.use_cookie_negotiation
+            if useCookie:
+                request = getRequest()
+                user_language = request.cookies.get('I18N_LANGUAGE')
+                if not user_language:
+                    user_language = pt.getPreferredLanguage()
+            else:
+                user_language = pt.getPreferredLanguage()
+
+        catalog = getToolByName(self, 'portal_catalog')
+        portalPath = '/'.join(api.portal.get().getPhysicalPath())
+        path = portalPath + '/gestion/footer/' + user_language
+
+        now = DateTime()
+        pages = catalog.searchResults(portal_type='Document',
+                                      review_state=('published', 'intranet'),
+                                      path={'query': path, 'depth': 1},
+                                      expires={'query': now, 'range': 'min', },
+                                      effective={'query': now, 'range': 'max', },
+                                      sort_on='getObjPositionInParent')
+        if len(pages) > 0:
+            return pages[0].getObject().text
+        else:
+            return None
 
 
 class angularRouteView(viewletBase):

@@ -1,3 +1,4 @@
+<tal:block tal:condition="not:view/isAnon">
 <tal:newsitems tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
                            plone_view context/@@plone;
                            dades_noticies view/dadesNoticies"
@@ -59,3 +60,4 @@
     </div>
 
 </tal:newsitems>
+</tal:block>

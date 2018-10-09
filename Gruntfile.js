@@ -30,6 +30,13 @@ module.exports = function (grunt) {
                     cssDir: 'css/',
                     outputStyle: 'compressed'
                 },
+            },
+            ulearn_backend: {
+                options: {
+                    sassDir: 'stylesheets/ulearn_backend',
+                    cssDir: 'css/',
+                    outputStyle: 'compressed'
+                },
             }
         },
         concat: {
@@ -53,18 +60,19 @@ module.exports = function (grunt) {
                 '../../../../../../ulearn5.js/ulearn5/js/components/ngDialog/css/ngDialog-theme-plain.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/sweetalert/lib/sweet-alert.css',
                 '../../../../../../ulearn5.js/ulearn5/js/components/v-modal/dist/v-modal.css',
-                '../../portlets/importantnews/importantnews.css',
-                '../../portlets/flashesinformativos/flashesinformativos.css',
-                '../../portlets/mysubjects/mysubjects.css',
                 'css/ulearn.css'],
                 dest: 'css/ulearn-concat.css',
             },
+            ulearn_backend: {
+                src: ['css/ulearn_backend.css'],
+                dest: 'css/ulearn_backend.min.css',
+            }
         },
         cssmin: {
             target : {
-				src : ["css/ulearn-concat.css"],
-				dest : "css/ulearn.min.css"
-			}
+                src : ["css/ulearn-concat.css"],
+                dest : "css/ulearn.min.css"
+            }
         },
         watch: {
             theming5: {
@@ -85,9 +93,16 @@ module.exports = function (grunt) {
             ulearn: {
                 files: [
                     'stylesheets/ulearn/*.scss',
-                    'stylesheets/ulearn.scss'
+                    'stylesheets/ulearn.scss',
+                    '!stylesheets/ulearn/*backend.scss'
                 ],
                 tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin']
+            },
+            ulearn_backend: {
+                files: [
+                    'stylesheets/ulearn/*backend.scss'
+                ],
+                tasks: ['compass:ulearn', 'concat:ulearn', 'cssmin', 'compass:ulearn_backend', 'concat:ulearn_backend']
             }
         },
         uglify: {

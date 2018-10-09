@@ -28,6 +28,10 @@
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.mytags" title="My Tags"
                 i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.rss" title="Ulearn RSS"
+                i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.banners" title="Ulearn Banners"
+                i18n:attributes="title"/>
 
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />

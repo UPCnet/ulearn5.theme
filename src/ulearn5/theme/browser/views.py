@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
-from AccessControl import getSecurityManager
+import json
+import pkg_resources
+import pytz
+import scss
+
 from Acquisition import aq_inner
-from base5.core.utils import json_response
-from base5.core.utils import pref_lang
-from cStringIO import StringIO
 from DateTime import DateTime
-from email import Encoders
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.utils import formatdate
 from five import grok
 from plone import api
+from repoze.catalog.query import Eq
+from scss import Scss
+from souper.interfaces import ICatalogFactory
+from souper.soup import get_soup
+from zope.component import getUtilitiesFor
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.component.hooks import getSite
+from zope.interface import Interface
+
+from plone.app.contenttypes.browser.collection import CollectionView
 from plone.app.users.browser.userdatapanel import UserDataPanel
 from plone.batching import Batch
 from plone.dexterity.interfaces import IDexterityContent
@@ -19,7 +26,7 @@ from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.permissions import ModifyPortalContent
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
@@ -27,24 +34,22 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
-from repoze.catalog.query import Eq
-from scss import Scss
-from souper.interfaces import ICatalogFactory
-from souper.soup import get_soup
+
+from base5.core.utils import json_response
+from base5.core.utils import pref_lang
+
 from ulearn5.core.browser.searchuser import searchUsersFunction
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from zope.component import getUtilitiesFor
-from zope.component import getUtility
-from zope.component import queryUtility
-from zope.component.hooks import getSite
-from zope.i18n import translate
-from zope.interface import Interface
 
-import json
-import pkg_resources
-import pytz
-import scss
+from email import Encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.utils import formatdate
+
+from cStringIO import StringIO
+from zope.i18n import translate
 
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
@@ -745,16 +750,18 @@ class SearchFilteredNews(grok.View):
 
                     news_html += '<li class="noticies clearfix">' \
                                    '<div>' \
-                                      '<div class="imatge_noticia">' \
-                                        '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'\
-                                      '</div>' \
+                                      '<div class="imatge_noticia">'
+
+                    if noticia.getObject().image:
+                        news_html +=     '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'
+                    news_html +=      '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\
                                         '<a href="' + noticia.getURL() + '">' + abrevia(noticia.Title, 70) + '</a>'\
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text.encode('utf-8')+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore + '</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore.encode('utf-8') + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\
@@ -777,7 +784,7 @@ class SearchFilteredNews(grok.View):
             query = " AND ".join(query)
             query = quote_bad_chars(query) + '*'
             r_results = pc.searchResults(portal_type='News Item',
-                                         review_state='intranet',
+                                         review_state=['intranet', 'published'],
                                          expires={'query': now, 'range': 'min', },
                                          sort_on='created',
                                          sort_order='reverse',
@@ -790,7 +797,7 @@ class SearchFilteredNews(grok.View):
 
         else:
             r_results = pc.searchResults(portal_type='News Item',
-                                         review_state='intranet',
+                                         review_state=['intranet', 'published'],
                                          expires={'query': now, 'range': 'min', },
                                          sort_on='created',
                                          sort_order='reverse',
@@ -857,6 +864,46 @@ class ContentsPrettyView(grok.View):
         return all_items
 
 
+class CollectionNewsView(grok.View, CollectionView):
+    """ Show content from news in a folder, added search input """
+
+    grok.name('collection_news_view')
+    grok.context(Interface)
+    grok.require('base.member')
+    grok.template('collectionnews')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def viewUrl(self):
+        return self.context.absolute_url()
+
+    def lastSearch(self):
+        if 'filter' in self.request.form:
+            return self.request.form['filter']
+        else:
+            return ''
+
+    def results(self, **kwargs):
+        contentFilter = dict(self.request.get('contentFilter', {}))
+        contentFilter.update(kwargs.get('contentFilter', {}))
+
+        if 'filter' in self.request.form:
+            queryFilters = ''
+            for fil in self.context.query:
+                if fil['i'] == 'SearchableText':
+                    queryFilters = fil['v']
+
+            formFilter = self.request.form['filter']
+            filters = formFilter if queryFilters == '' else queryFilters.encode('utf-8') + ' ' + formFilter
+            contentFilter.update({'SearchableText': filters})
+
+        kwargs.setdefault('custom_query', contentFilter)
+        kwargs.setdefault('batch', True)
+        kwargs.setdefault('b_size', self.b_size)
+        kwargs.setdefault('b_start', self.b_start)
+        results = self.collection_behavior.results(**kwargs)
+        return results
+
+
 class SharedWithMe(baseCommunities):
     """ The list of communities """
 
@@ -865,18 +912,18 @@ class SharedWithMe(baseCommunities):
     grok.layer(IUlearn5ThemeLayer)
 
 
-class resetMenuBar(grok.View):
+class ResetMenuBar(grok.View):
     """ This view reset the personal bar """
-
     grok.name('reset_menu')
-    grok.context(IPloneSiteRoot)
-    grok.template('reset_menu_bar')
+    grok.context(Interface)
+    grok.require('cmf.ModifyPortalContent')
     grok.layer(IUlearn5ThemeLayer)
 
-    def update(self):
+    def render(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         soup_menu = get_soup('menu_soup', portal)
         soup_menu.clear()
+        self.redirect('/'.join(self.context.getPhysicalPath()))
 
 
 class SendEventToAttendees(grok.View):

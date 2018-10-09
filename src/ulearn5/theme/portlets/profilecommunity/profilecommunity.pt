@@ -1,4 +1,4 @@
-<tal:profile tal:define="is_community view/community_mode" i18n:domain="ulearn">
+<tal:profile tal:condition="not:view/isAnon" tal:define="is_community view/community_mode" i18n:domain="ulearn">
     <tal:iscommunity condition="is_community">
         <div id="box_community" class="ulearnbox" tal:define="community view/get_community;
             community_hash python:view.get_hash(community)">

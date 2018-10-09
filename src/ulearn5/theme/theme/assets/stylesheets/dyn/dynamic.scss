@@ -7,22 +7,37 @@
 // $alt-gradient-start-color: #27B040;
 // $alt-gradient-end-color: #229A38;
 // $background-property: transparent;
-// $background-color: #eae9e4;
+// $background-color: #EDF1F2;
 // $buttons-color-primary: #24a33b;
 // $buttons-color-secondary: #017000;
 
 // Main
 body {
-  background: $background-property $background-color;
+  background: $background-color;
 }
 
 a {
   color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 5%);
+  }
 }
 
-// #portal-header {
-//   @include gradient-vertical($alt-gradient-start-color, $alt-gradient-end-color);
-// }
+.bg {
+  background-color: $background-color;
+}
+
+.bg-main {
+  background-color: $main-color;
+}
+
+.bg-secondary {
+  background-color: $secondary-color;
+}
+
+#portal-header {
+  @include gradient-vertical($alt-gradient-start-color, $alt-gradient-end-color);
+}
 
 .osomcorner {
   background-color: $background-color;
@@ -32,12 +47,16 @@ a {
     color: $secondary-color;
 }
 
-#peu {
+#portal-footer {
   background-color: $main-color;
-}
 
-#peu .container {
-  background-color: $main-color;
+  .container {
+    background-color: $main-color;
+  }
+
+  .bg .fa {
+    color: $main-color;;
+  }
 }
 
 .num {
@@ -46,6 +65,10 @@ a {
 
 #menusup {
   nav {
+    .bubble {
+      border-right: 1px solid $background-color;
+      border-left: 1px solid $background-color;
+    }
     .active {
       .arrow {
         border-top-color: $main-color;
@@ -58,38 +81,33 @@ a {
   }
 }
 
-#day {
-  background: none repeat scroll 0 0 $main-color;
-  text-shadow: 1px 1px 0 #444;
-  .arrow { border-left-color: $main-color; }
-}
-
 .todayevent{ background:$main-color; }
 
 #communitylist {
-  a {
-    h4 { color: $main-color; }
-    }
   img {
     &:hover {border:2px solid $main-color;}
   }
-}
-
-#box_comunitats {
-  .bubble-content {
-    background: none repeat scroll 0 0 $main-color;
+  h2,
+  h4 {
+    border-left: none;
   }
-  .bubble {
-    .arrow { border-right-color: $main-color; }
+  h2.Closed.text,
+  h4.Closed.text {
+    color: $color_community_closed;
+  }
+  h2.Organizative.text,
+  h4.Organizative.text {
+    color: $color_community_organizative;
+  }
+  h2.Open.text,
+  h4.Open.text {
+    color: $color_community_open;
   }
 }
 
-input[type="text"] {
-  border-color: $main-color;
-}
-
+textarea:focus,
 input[type="text"]:focus {
-  border-color: $secondary-color;
+  border-color: $main-color !important;
 }
 
 .box_badges {
@@ -122,8 +140,16 @@ input[type="text"]:focus {
   color: #FFFFFF;
   background-image: none;
   background-color: $buttons-color-secondary;
-  *background-color: $buttons-color-secondary;
 }
+
+.btn-comunitat:hover,
+.btn-comunitat:active,
+.btn-comunitat.active {
+  &:hover {
+    background-color: darken($buttons-color-secondary, 5%);
+  }
+}
+
 .context {
   background: $buttons-color-primary;
 }
@@ -213,22 +239,51 @@ h1, h2, h3, label, span.label, fieldset legend {
 }
 
 .Closed {
-  border-left: 3px solid $color_community_closed;
+  border-left: 5px solid $color_community_closed;
 }
 
 .Organizative {
-  border-left: 3px solid $color_community_organizative;
+  border-left: 5px solid $color_community_organizative;
 }
 
 .Open {
-  border-left: 3px solid $color_community_open;
+  border-left: 5px solid $color_community_open;
 }
 
-#box_comunitats .bubble a {
-  color: $main-color;
-  font-weight: 600;
-  height: 18px;
-  width: 33px;
+.popover.fade.bottom a.Closed.text,
+.Closed.text a {
+  color: $color_community_closed;
+}
+
+.popover.fade.bottom a.Organizative.text,
+.Organizative.text a {
+  color: $color_community_organizative;
+}
+
+.popover.fade.bottom a.Open.text,
+.Open.text a {
+  color: $color_community_open;
+}
+
+td.cal_has_events {
+  &.event-closed {
+    background: $color_community_closed;
+    &:hover{
+      background: darken($color_community_closed, 5%);
+    }
+  }
+  &.event-organizative {
+    background: $color_community_organizative;
+    &:hover{
+      background: darken($color_community_organizative, 5%);
+    }
+  }
+  &.event-open {
+    background: $color_community_open;
+    &:hover{
+      background: darken($color_community_open, 5%);
+    }
+  }
 }
 
 #tagslist a h4 {
@@ -258,6 +313,13 @@ border-color: $main-color;
     background-color: $main-color;
     border: 1px solid $main-color;
 }
+
+#maxui-container .maxui-button:not([disabled]):active,
+#maxui-container .maxui-button:not([disabled]):hover {
+    background-color: darken($main-color, 5%);
+    border: 1px solid darken($main-color, 5%);
+}
+
 .loginbox {
   .control-label {
     color: $main-color;
@@ -314,8 +376,362 @@ border-color: $main-color;
     margin-right: 2px;
 }
 
+.section-front-page img.newsImage:hover {
+  border: 2px solid $main-color!important;
+}
+
 /* The slider */
 
 input:checked+.sliderbutton {
   background-color: $main-color;
+}
+
+
+/* Portlet profile within community */
+
+.btn-group.contentaddtoolbar .btn-default {
+  color: $buttons-color-primary;
+  background-color: #edf1f2!important;
+  border-color: #ddd;
+  &:hover {
+    background-color: $buttons-color-primary!important;
+    color: #fff!important;
+    border-color: #ddd;
+  }
+}
+
+/* Buttons */
+
+body:not(.template-folder_contents) .btn-default {
+  background-color: $buttons-color-primary!important;
+  &:hover{
+    background-color: darken($buttons-color-primary, 5%)!important;
+  }
+}
+
+
+/* Links footer - Header */
+
+.footer-complementary a,
+.main-banner .upc-eines>li>a,
+li.ulearn-eines-ql>a>span,
+li.upc-eines-cerca button {
+  color: $secondary-color!important;
+  &:hover {
+    color: darken($secondary-color, 5%)!important;
+  }
+}
+
+#edit-zone .plone-toolbar-logo {
+  background: darken($main-color, 5%)!important;
+}
+
+#edit-zone .plone-toolbar-logo:after,
+.plone-toolbar-top #edit-zone .plone-toolbar-logo:after {
+  border-left: 4px solid darken($main-color, 5%)!important;
+}
+
+#edit-zone a:focus,
+#edit-zone nav>ul>li>a:hover,
+#edit-zone nav>ul>li.active>a,
+#edit-zone nav>ul ul a:hover,
+#edit-zone nav>ul>li.active>a>span+span,
+#edit-zone li:not(.active) a:hover>span {
+  background: $secondary-color !important;
+}
+
+/* Portlet ButtonBar */
+
+#menusup nav a {
+  color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 5%);
+  }
+}
+
+/* Tabs */
+
+.autotoc-nav>a.active,
+.autotoc-nav>a.active:focus,
+.autotoc-nav>a.active:hover,
+.pat-autotoc.autotabs .autotoc-nav a.active,
+.pat-autotoc.autotabs .autotoc-nav a.active:hover {
+  border-bottom: 3px solid $secondary-color!important;
+}
+
+/* Porlet communities */
+
+#box_comunitats {
+  .bubble a {
+    font-weight: 600;
+    height: 18px;
+    width: 33px;
+  }
+  .titleClosed {
+    color: $color_community_closed;
+  }
+  .titleOpen {
+    color: $color_community_open;
+  }
+  .titleOrganizative {
+    color: $color_community_organizative;
+  }
+  .Closed {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_closed;
+      }
+      a {
+        color: $color_community_closed;
+      }
+    }
+    .bubble-content {
+        background: none repeat scroll 0 0 $color_community_closed;
+    }
+  }
+  .Open {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_open;
+      }
+      a {
+        color: $color_community_open;
+      }
+    }
+    .bubble-content {
+      background: none repeat scroll 0 0 $color_community_open;
+    }
+  }
+  .Organizative {
+    .bubble {
+      .arrow {
+        border-right-color: $color_community_organizative;
+      }
+      a {
+        color: $color_community_organizative;
+      }
+    }
+    .bubble-content {
+      background: none repeat scroll 0 0 $color_community_organizative;
+    }
+  }
+}
+
+/* Buttons */
+
+.btn.btn-primary {
+  background: $main-color;
+  border-color: darken($main-color, 5%);
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:hover:active, {
+  background: darken($main-color, 5%);
+}
+
+/* Button reedirect to top */
+
+.back-to-top {
+  color: lighten($main-color, 5%);
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($main-color, 5%);
+  }
+}
+
+/* Fieldset widget */
+
+div[id^='formfield-form-widgets-fieldset_'] {
+  border-bottom: 1px solid $main-color;
+}
+
+div[id^=formfield-form-widgets-check_] {
+  .fa.fa-eye {
+    color: $main-color !important;
+  }
+}
+
+/* Portlet Recent Changes */
+
+li.Organizative.changeRow {
+  border-left: 5px solid $color_community_organizative;
+}
+
+li.Closed.changeRow {
+  border-left: 5px solid $color_community_closed;
+}
+
+li.Open.changeRow {
+  border-left: 5px solid $color_community_open;
+}
+
+li.notCommunity.changeRow {
+  border-left: 5px solid $buttons-color-primary;
+}
+
+li.Organizative.changeRow .titleChange,
+li.Organizative.changeRow .infoTypeChange::before {
+  color: $color_community_organizative;
+}
+
+li.Closed.changeRow .titleChange,
+li.Closed.changeRow .infoTypeChange::before {
+  color: $color_community_closed;
+}
+
+li.Open.changeRow .titleChange,
+li.Open.changeRow .infoTypeChange::before {
+  color: $color_community_open;
+}
+
+li.notCommunity.changeRow .titleChange,
+li.notCommunity.changeRow .infoTypeChange::before {
+  color: $buttons-color-primary;
+}
+
+
+/* Portlet Flashes informativos */
+
+.ulearnboxflash {
+
+  #flasinformatiu {
+
+    #flashes-informativos {
+
+      &.bubble.left .arrow {
+        border-left-color: $buttons-color-primary;
+      }
+
+      .bubble-content {
+        background-color: $buttons-color-primary;
+      }
+
+    }
+
+    .carousel-control {
+      color: $buttons-color-primary !important;
+    }
+  }
+}
+
+/* Portlet Smart */
+
+#portlet-smart {
+
+    .carousel {
+
+        .carousel-ctrl {
+             color: $buttons-color-primary !important;
+
+            &:hover {
+                color: darken($buttons-color-primary, 5%) !important;
+            }
+        }
+    }
+}
+
+/* Portlet Banners */
+
+body.portaltype-ulearn-banner #content,
+#personal_banners {
+
+  .banner {
+
+    .defaultBanner {
+
+      a {
+        background-color: $buttons-color-primary !important;
+
+        &:hover {
+          background-color: darken($buttons-color-primary, 5%) !important;
+        }
+      }
+    }
+
+    img {
+      background-color: $buttons-color-primary !important;
+
+      &:hover {
+        background-color: darken($buttons-color-primary, 5%) !important;
+      }
+    }
+  }
+}
+
+/* Portlet Quicklinks */
+
+.portletQuicklinks {
+  .nav > li {
+    & > a,
+    & > span,
+    & > span + ul a {
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+
+    & > span:hover {
+      border-left: 5px solid $secondary-color;
+    }
+
+    & > span.arrow:hover::after {
+        color: $secondary-color;
+    }
+  }
+
+  .fa-cog:hover {
+    color: $secondary-color;
+  }
+}
+
+
+
+/* Pagination */
+
+.pagination > li > a {
+  color: $secondary-color;
+
+  &:hover {
+    color: darken($secondary-color, 5%);
+  }
+}
+
+/* Users list */
+
+#userlist {
+  .fa {
+    color: $buttons-color-primary !important;
+
+    &:hover {
+      color: darken($buttons-color-primary, 5%) !important;
+    }
+  }
+}
+
+/* Top toolbar */
+
+.plone-toolbar-expanded #edit-zone li a:hover>span {
+  background: $buttons-color-primary !important;
+}
+
+
+/* View Collection News */
+
+body.template-collection_news_view #content-core {
+
+  form#searchNews {
+
+    .fa {
+      color: $main-color!important;
+    }
+  }
+
+  .imatge_noticia {
+
+    img:hover {
+      border: 2px solid $main-color!important;
+    }
+  }
 }

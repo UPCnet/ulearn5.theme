@@ -1,10 +1,11 @@
 <div id="box_mysubjects"
 	 class="ulearnbox"
 	 i18n:domain="ulearn"
+	 tal:condition="not:view/isAnon"
      tal:define="subjects view/getSubjects;
-	    		       subjects_student python:subjects['studentCourses'];
-	      	 	     subjects_teacher python:subjects['teacherCourses'];
-						     primary_color view/getPrimaryColor">
+	    		 subjects_student python:subjects['studentCourses'];
+	      	 	 subjects_teacher python:subjects['teacherCourses'];
+				 primary_color view/getPrimaryColor">
     <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
 
 	<ul class="nav nav-stacked" id="accordion_portlet">

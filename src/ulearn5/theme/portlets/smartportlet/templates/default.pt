@@ -1,7 +1,0 @@
-<a href=""
-   tal:attributes="href view/item/getURL">
-    <span tal:replace="view/item/Title">
-    Notícies RSS
-    </span>
-</a>
-<time class="smaller" tal:content="python:view.toLocalizedTime(view.item.Date)">May 5</time>
