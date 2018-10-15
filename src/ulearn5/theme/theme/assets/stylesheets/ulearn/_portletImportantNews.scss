@@ -80,6 +80,18 @@
 
 .favorite {display:none;}
 
+.portlet-noticies .categories {
+    margin-top: 5px;
+}
+ .portlet-noticies .category {
+    background-color: #344961;
+    color: #FFF;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 4px 8px;
+    margin-bottom: 3px;
+}
+
 @media only screen and (max-width: 480px) {
     .portlet-noticies .list-portlet h2 {
         font-size: 20px;
