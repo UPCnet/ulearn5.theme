@@ -20,10 +20,18 @@ body {
 	font-weight: 300;
 	line-height: 1.25;
 	color: #636363;
+	background-color: #edf1f2!important;
 	position: relative;
 	min-height: 100%;
 	margin: 0;
 	padding-bottom: 6rem;
+}
+
+footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 @supports (display:flex) {
@@ -40,23 +48,33 @@ body {
 	body {
 		display: block;
 	}
-	.template-login_form > main {
+	.template-login_form footer, .template-logged_out footer, .template-login_failed footer {
+		position: fixed;
+	}
+	.template-login_form main {
 		display: block;
 		padding-top: 10%;
 		padding-bottom: 2%;
 	}
-	.template-logged_out > main {
+	.template-logged_out main {
 		display: block;
 		padding-top: 10%;
 		padding-bottom: 1%;
 	}
-	.template-login_failed > main {
+	.template-login_failed main {
 		display: block;
 		padding-top: 5%;
 		padding-bottom: 1%;
 	}
 	.plone-toolbar-top #edit-zone nav > ul ul {
 		display: none;
+	}
+	:focus,
+	.footer-nets li a:focus,
+	.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus, {
+	  outline: 0px;
+	  text-decoration: none;
+	  filter:none;
 	}
 }
 
@@ -67,13 +85,6 @@ h4,
 h5,
 h6 {
 	font-weight: 600;
-}
-
-footer {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
 }
 
 input[type="text"],
@@ -297,7 +308,7 @@ button {
 		 padding-top: 2px;
 	}
 
-}NAvig
+}
 
 .img-responsive {
 	display: none!important;
@@ -374,7 +385,6 @@ button {
 }
 
 #portal-footer {
-	background-color: #f58d3d;
 	border-top: none;
 
 	a {
@@ -3150,7 +3160,6 @@ article.media.ng-scope {
 		width: auto!important;
 	}
 	.container {
-		width: auto!important;
 		max-width: 1560px!important;
 	}
 }
