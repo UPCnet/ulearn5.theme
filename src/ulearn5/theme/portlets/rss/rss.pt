@@ -39,6 +39,9 @@
                 <tal:block tal:condition="view/data/display_description">
                   <p class="description" tal:condition="item/summary|nothing" tal:content="item/summary">Text Noticia</p>
                 </tal:block>
+                <p class="categories" tal:condition="view/data/display_categories">
+                 <span class="category" tal:repeat="category item/categories" tal:content="category">Categoria</span>
+                </p>
               </div>
             </div>
           </li>
