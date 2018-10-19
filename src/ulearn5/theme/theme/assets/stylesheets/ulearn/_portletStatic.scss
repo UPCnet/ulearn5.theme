@@ -1,0 +1,10 @@
+.portlet-static h2::after {
+    content: none !important;
+}
+
+.portlet-static .portletFooter {
+    border-bottom: 1px solid #cfcfcf;
+    border-top: 1px solid #cfcfcf;
+    margin-top: 10px;
+    padding: 10px 0px;
+}
