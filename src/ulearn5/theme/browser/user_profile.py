@@ -88,7 +88,7 @@ class userProfile(BrowserView):
     def get_user_info_for_display(self):
         user_properties_utility = getUtility(ICatalogFactory, name='user_properties')
 
-        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.user_properties_extender')
 
         portal = api.portal.get()
         current_user = api.user.get_current().id
@@ -119,7 +119,7 @@ class userProfile(BrowserView):
             return rendered_properties
 
     def get_public_user_info_for_display(self):
-        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.user_properties_extender')
 
         rendered_properties = []
 
@@ -133,7 +133,7 @@ class userProfile(BrowserView):
         return rendered_properties
 
     def get_private_user_info_for_display(self):
-        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.user_properties_extender')
 
         portal = api.portal.get()
         current_user = api.user.get_current().id
@@ -153,7 +153,7 @@ class userProfile(BrowserView):
         return rendered_properties
 
     def separate_public_private_info(self):
-        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.user_properties_extender')
+        extender_name = api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.user_properties_extender')
         if extender_name in [a[0] for a in getUtilitiesFor(ICatalogFactory)]:
             extended_user_properties_utility = getUtility(ICatalogFactory, name=extender_name)
             return hasattr(extended_user_properties_utility, 'public_properties')

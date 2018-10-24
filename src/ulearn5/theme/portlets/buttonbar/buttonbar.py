@@ -62,7 +62,7 @@ class Renderer(base.Renderer):
         return True
 
     def is_activate_sharedwithme(self):
-        if (api.portal.get_registry_record('base5.core.controlpanel.core.IGenwebCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
+        if (api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
             portal = api.portal.get()
             if portal.portal_actions.object.local_roles.visible is False:
                 portal.portal_actions.object.local_roles.visible = True
