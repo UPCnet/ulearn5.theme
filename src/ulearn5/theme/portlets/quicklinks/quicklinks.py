@@ -65,30 +65,32 @@ class Renderer(base.Renderer):
                                                    path={'query': brainFolder.getPath(), 'depth': 1},
                                                    sort_on='getObjPositionInParent')
             res[folder] = {}
+            index = 0
             for brain in folderContents:
                 brain = brain.getObject()
                 if brain.portal_type == 'Link':
                     url = brain.remoteUrl.replace('${portal_url}', instance_name)
-                    res[folder][brain.id] = {'title': brain.title,
-                                             'url': url,
-                                             'target': '_blink' if brain.open_link_in_new_window else '',
-                                             'isLink': True}
+                    res[folder][index] = {'title': brain.title,
+                                          'url': url,
+                                          'target': '_blink' if brain.open_link_in_new_window else '',
+                                          'isLink': True}
                 else:
-                    res[folder][brain.id] = {'title': brain.title,
-                                             'UID': brain.UID(),
-                                             'isLink': False}
+                    res[folder][index] = {'title': brain.title,
+                                          'UID': brain.UID(),
+                                          'isLink': False}
 
                     pathNextFolder = brainFolder.getPath() + '/' + brain.id
                     nextFolderContents = catalog.searchResults(portal_type=('Link'),
                                                                path={'query': pathNextFolder, 'depth': 1},
                                                                sort_on='getObjPositionInParent')
-                    res[folder][brain.id]['links'] = []
+                    res[folder][index]['links'] = []
                     for nextBrain in nextFolderContents:
                         nextBrain = nextBrain.getObject()
                         url = nextBrain.remoteUrl.replace('${portal_url}', instance_name)
-                        res[folder][brain.id]['links'].append({'title': nextBrain.title,
-                                                               'target': '_blink' if nextBrain.open_link_in_new_window else '',
-                                                               'url': url})
+                        res[folder][index]['links'].append({'title': nextBrain.title,
+                                                            'target': '_blink' if nextBrain.open_link_in_new_window else '',
+                                                            'url': url})
+                index += 1
         return res
 
     def getInfoFolders(self):
