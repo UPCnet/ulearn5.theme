@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-0.8 (unreleased)
+0.8 (2018-10-29)
 ----------------
 
-- Nothing changed yet.
-
+* Estilos footer [iago.lopez]
+* Grunt ulearn5.js (ce289ae) [iago.lopez]
+* Estilos [iago.lopez]
+* Portlet quicklink: orden [iago.lopez]
+* Quitar Genweb [Pilar Marinas]
+* Diseño portlet static [iago.lopez]
 
 0.7 (2018-10-18)
 ----------------
