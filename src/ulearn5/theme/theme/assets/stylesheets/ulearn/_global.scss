@@ -28,6 +28,10 @@ body {
 
 footer {
 	margin-top: 30px;
+
+	.container {
+		max-width: 1920px !important;
+	}
 }
 
 .template-login_form footer, .template-logged_out footer, .template-login_failed footer {
