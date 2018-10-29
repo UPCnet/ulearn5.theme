@@ -24,14 +24,14 @@ body {
 	position: relative;
 	min-height: 100%;
 	margin: 0;
-	padding-bottom: 6rem;
 }
 
 footer {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	margin-top: 30px;
+}
+
+.template-login_form footer, .template-logged_out footer, .template-login_failed footer {
+	margin-top: 0px;
 }
 
 @supports (display:flex) {
