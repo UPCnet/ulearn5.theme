@@ -1,0 +1,16 @@
+@media print {
+
+    #edit-zone {
+        display: none !important;
+    }
+
+    header a[rel="home"][href]:after,
+    #menusup a[href]:after {
+        content: none !important;
+    }
+
+    #box_community .contentaddtoolbar {
+        display: grid !important;
+    }
+
+}
