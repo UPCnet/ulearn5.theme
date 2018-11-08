@@ -759,6 +759,9 @@ class SearchFilteredNews(grok.View):
 
                     if noticia.getObject().image:
                         news_html +=     '<img src="' + noticia.getURL() + '/@@images/image/thumb" alt="'+noticiaObj.id + '" title="' + noticiaObj.id + '" class="newsImage" width="222" height="222">'
+                    else:
+                        news_html +=     '<img class="newsImage" src="/++theme++ulearn5/assets/images/defaultImage.png" width="222" height="222">'
+
                     news_html +=      '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\

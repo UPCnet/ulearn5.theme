@@ -122,6 +122,10 @@ $(document).ready(function (event) {
   };
 
   var textSearch = function(text) {
+      // Refresh filters
+      var maxui = this;
+      maxui.filters = []
+
       var keywords = text.split(' ');
       for (var kw = 0; kw < keywords.length; kw++) {
           var kwtype = 'keyword';
