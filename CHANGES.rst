@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.9 (unreleased)
+0.9 (2018-11-08)
 ----------------
 
-- Nothing changed yet.
-
+* Solucion problemas buttonbar noticias, paginacion y buscador [Iago López Fernández]
+* Estilos imprimir página [iago.lopez]
+* Estilos footer [iago.lopez]
 
 0.8 (2018-10-29)
 ----------------
