@@ -49,11 +49,21 @@ footer {
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
 /* IE10+ CSS styles go here */
+	@media (min-width: 1200px) {
+        	.template-login_form main > .container,
+		.template-logged_out main > .container,
+		.template-login_failed main > .container {
+                	max-width: 1000px !important;
+        	}
+	}
+
 	body {
 		display: block;
 	}
 	.template-login_form footer, .template-logged_out footer, .template-login_failed footer {
 		position: fixed;
+		bottom: 0px;
+		width: 100%;
 	}
 	.template-login_form main {
 		display: block;
@@ -161,10 +171,10 @@ button {
 .template-logged_out,
 .template-login_failed {
 	background: url(../images/background-login.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	-webkit-background-size: cover!important;
+	-moz-background-size: cover!important;
+	-o-background-size: cover!important;
+	background-size: cover!important;
 	height: 100%;
 }
 
@@ -3168,7 +3178,7 @@ article.media.ng-scope {
 		width: auto!important;
 	}
 	.container {
-		max-width: 1560px!important;
+		max-width: 1560px;
 		width: auto;
 	}
 }
