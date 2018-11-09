@@ -180,6 +180,10 @@ input[type="checkbox"].required::after {
     color: #CCC;
 }
 
+.plone-toolbar-top #edit-zone nav > ul ul {
+    display: none;
+}
+
 /* Others */
 
 .pat-structure .navbar {
