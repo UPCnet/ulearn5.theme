@@ -2448,7 +2448,7 @@ input:checked+.sliderbutton:before {
 	border-bottom: 1px solid #dddddd;
 	display: flex;
 	margin-bottom: 10px;
-	width: 1000px;
+	width: 100%;
 }
 
 #newtoolbar-title {
@@ -5515,4 +5515,10 @@ img.portraitProfile{
 /* Visibility widget */
 div[id^=formfield-form-widgets-check_] input[id^=form-widgets-check_] {
 	display: none!important;
+}
+
+/* Universal link */
+#object-universal-link {
+	position: absolute;
+	right: 0;
 }
