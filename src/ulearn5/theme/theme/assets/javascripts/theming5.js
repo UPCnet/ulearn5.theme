@@ -225,10 +225,12 @@ $(document).ready(function () {
     });
 
     // Delete .portalMessage 15 seconds after being displayed
-    if($('.portalMessage').length){
-      setTimeout(function () {
-        $('.portalMessage').fadeOut(1000, function() { $(this).remove(); });
-      }, 15000);
+    if($('.portalMessage').length > 0){
+        if($('.portalMessage:contains("resolveuid")').length == 0){
+            setTimeout(function () {
+                $('.portalMessage').fadeOut(1000, function() { $(this).remove(); });
+            }, 15000);
+        }
     }
 
     // Button scroll up of the page
@@ -260,6 +262,7 @@ $(document).ready(function () {
         }
     });
 
+    // Buttonbar notices
     $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
         return results ? results[1] : false;
@@ -271,5 +274,12 @@ $(document).ready(function () {
         }, 500);
     }
 
+    // Object universal link
+    if($("#object-universal-link").length > 0){
+        clipboard = new ClipboardJS('#object-universal-link');
+        clipboard.on('success', function(e) {
+            alert($("#object-universal-link").attr("data-clipboard-success"));
+        });
+    }
 
 }); //ready

@@ -50,14 +50,14 @@
           <a href="" tal:attributes="href view/data/more_url" target="_blink">
             <i class="icon-plus-sign icons"> </i>
             <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més notícies</span>
-            <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">Més notícies</span>
+            <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">More news</span>
           </a>
         </li>
         <li class="noticies clearfix" tal:condition="not:view/data/more_url">
           <a href="" tal:condition="view/siteurl" tal:attributes="href view/siteurl" target="_blink">
             <i class="icon-plus-sign icons"> </i>
             <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més notícies</span>
-            <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">Més notícies</span>
+            <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">More news</span>
           </a>
         </li>
       </ul>
