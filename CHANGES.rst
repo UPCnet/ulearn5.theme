@@ -2,11 +2,17 @@ Changelog
 =========
 
 
-0.10 (unreleased)
+0.10 (2018-11-12)
 -----------------
 
-- Nothing changed yet.
-
+* Merge [Pilar Marinas]
+* Estilos Object universal link dentro de las comunidades [Iago López Fernández]
+* Estilos - z-index [Iago López Fernández]
+* Estilos Object universal link dentro de las comunidades [Iago López Fernández]
+* Eliminar conflicto i18ndude [Iago López Fernández]
+* Object universal link [Iago López Fernández]
+* Estilos [Iago López Fernández]
+* More ie11 fixes [root@comunitatsdevel]
 
 0.9 (2018-11-08)
 ----------------
