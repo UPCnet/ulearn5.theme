@@ -5528,11 +5528,11 @@ div[id^=formfield-form-widgets-check_] input[id^=form-widgets-check_] {
 }
 
 /* Universal link */
+#viewlet-above-content-title {
+	position: relative;
+}
+
 #object-universal-link {
 	position: absolute;
 	right: 0;
-}
-
-#object-universal-link.community {
-	margin-right: 30px;
 }
