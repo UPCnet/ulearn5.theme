@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.11 (unreleased)
+0.11 (2018-11-13)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos Object universal link [Iago López Fernández]
 
 0.10 (2018-11-12)
 -----------------
