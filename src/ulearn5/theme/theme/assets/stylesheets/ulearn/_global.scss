@@ -5536,3 +5536,14 @@ div[id^=formfield-form-widgets-check_] input[id^=form-widgets-check_] {
 	position: absolute;
 	right: 0;
 }
+
+/* Template full view */
+
+body.template-full_view div#content-core #object-universal-link {
+    display: none;
+}
+
+body.template-full_view div#content-core h2,
+body.template-full_view div#content-core .h2 {
+    font-size: 30px;
+}
