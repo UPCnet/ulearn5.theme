@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.12 (unreleased)
+0.12 (2018-11-16)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos vista Todo el contenido [Iago López Fernández]
 
 0.11 (2018-11-13)
 -----------------
