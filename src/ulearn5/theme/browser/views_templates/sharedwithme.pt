@@ -43,11 +43,11 @@
                                 <span class="description">{{shared_item.description}}</span>
                             </p>
                             <div class="shared_by">
-                              <i class="fa fa-share-alt icons"></i>Compartido por
+                              <i class="fa fa-share-alt icons"></i><span i18n:translate="">Compartido por</span>
                               <a ng-href="{{shared_item.by_profile}}">{{shared_item.by}}</a>
                             </div>
                             <div class="shared_from">
-                              desde
+                              <span i18n:translate="">desde</span>
                               <span class="shared_from_community">{{shared_item.community_displayname}}</span>
                             </div>
                             <div class="visualClear">
