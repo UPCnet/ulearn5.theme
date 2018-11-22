@@ -407,7 +407,7 @@ button {
 
 	.container {
 		border-top: none;
-		background-color: #f58d3d;
+		background-color: #007ac1;
 		font-size: 14px;
 		color: white;
 	}
@@ -564,7 +564,7 @@ button {
 }
 
 .num {
-	background: none repeat scroll 0 0 #f58d3d;
+	background: none repeat scroll 0 0 #007ac1;
 	border-left: 1px solid #eee;
 	border-radius: 0 5px 5px 0;
 	color: white;
@@ -644,13 +644,13 @@ button {
 		}
 		.active {
 			.arrow {
-				border-top-color: #f58d3d;
+				border-top-color: #007ac1;
 				display: block;
 			}
 			&,
 			a,
 			a:hover {
-				background: #f58d3d !important;
+				background: #007ac1 !important;
 				color: white;
 				text-shadow: none;
 			}
@@ -936,7 +936,7 @@ button {
 		padding: 6px 0px;
 		width: 40px;
 		text-align: center;
-		background: none repeat scroll 0 0 #f58d3d;
+		background: none repeat scroll 0 0 #007ac1;
 	}
 	.bubble {
 		a {
@@ -946,7 +946,7 @@ button {
 			width: 33px;
 		}
 		.arrow {
-			border-right-color: #f58d3d;
+			border-right-color: #007ac1;
 		}
 	}
 	i {
@@ -2441,11 +2441,11 @@ input#form-widgets-domain {
 }
 
 input:checked+.sliderbutton {
-	background-color: #f58d3d;
+	background-color: #007ac1;
 }
 
 input:focus+.sliderbutton {
-	box-shadow: 0 0 1px #f58d3d;
+	box-shadow: 0 0 1px #007ac1;
 }
 
 input:checked+.sliderbutton:before {
