@@ -173,7 +173,7 @@ class viewletHeaderUlearn(viewletBase):
             portlets = retriever.getPortlets()
             for portlet in portlets:
                 if 'banners' in portlet['name']:
-                    if portlet['assignment'].typePortlet == typePortlet:
+                    if getattr(portlet['assignment'], 'typePortlet', '') == typePortlet:
                         return True
         return False
 
