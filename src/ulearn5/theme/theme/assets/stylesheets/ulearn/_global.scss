@@ -971,7 +971,7 @@ button {
 
 #box_stats {
 	.bubble-content {
-		padding: 5px 12px;
+		padding: 0px 12px;
 		text-align: center;
 		height: 18px
 	}
@@ -979,6 +979,7 @@ button {
 		background-color: #344961;
 		color: white;
 		width: 60px;
+		padding: 5px 0;
 		.arrow {
 			border-left-color: #344961;
 		}
@@ -986,14 +987,15 @@ button {
 	p {
 		margin: 0;
 		padding: 5px 0 5px 78px;
-		background-color: #deded6;
-		font-weight: bold;
+		background-color: #edf0f1;
+		font-weight: 500;
 		text-transform: capitalize;
 	}
 	ul {
 		margin-top: 5px;
 		margin-left: 0px;
 		list-style: none;
+		padding-left: 0px;
 	}
 	li {
 		margin-bottom: 5px;
