@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-0.13 (unreleased)
+0.13 (2018-11-26)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos estadisticas [Iago López Fernández]
+* Estilos cabecera [Iago López Fernández]
+* Estilos portlet estadistiques [Iago López Fernández]
+* Estilos: Cambiar antiguo naranja por azul upc [Iago López Fernández]
+* Evitar error banner en el header [Iago López Fernández]
+* Traducciones shared with me [Iago López Fernández]
 
 0.12 (2018-11-16)
 -----------------
