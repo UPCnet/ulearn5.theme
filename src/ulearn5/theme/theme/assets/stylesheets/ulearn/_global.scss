@@ -109,6 +109,10 @@ select {
 	display: inline-block;
 }
 
+.input-sm {
+	padding: 0px 10px;
+}
+
 input[type="text"] {
 	border-color: #E76E10;
 	margin-right: 5px;
@@ -2312,8 +2316,24 @@ i.icon-folder-filtered_contents_search_view {
 	max-width: 100%;
 }
 
+#home-angular-route-view ul+div.ng-scope {
+	display: flow-root;
+}
+
+#home-angular-route-view .nav {
+    margin-bottom: 15px;
+}
+
 #home-angular-route-view select {
 	max-width: 100%;
+}
+
+#home-angular-route-view .table>tbody>tr>th,
+#home-angular-route-view .table>tfoot>tr>td,
+#home-angular-route-view .table>tfoot>tr>th,
+#home-angular-route-view .table>thead>tr>td,
+#home-angular-route-view .table>thead>tr>th {
+	padding: 10px !important;
 }
 
 input#form-widgets-max_server,
@@ -3698,6 +3718,7 @@ ul.folder-factories {
 
 .select2-container {
 	margin-bottom: 0em!important;
+	border: 1px solid #d1d1d1 !important;
 }
 
 .select2-container .select2-choice {
@@ -5551,4 +5572,10 @@ body.template-full_view div#content-core #object-universal-link {
 body.template-full_view div#content-core h2,
 body.template-full_view div#content-core .h2 {
     font-size: 30px;
+}
+
+/* Modal */
+
+v-dialog[middle] {
+ 	min-width: 650px;
 }
