@@ -3582,7 +3582,6 @@ li.dropdown.ulearn-eines-ql .caret {
 	content: "";
 	width: 100%;
 	height: 5px;
-	background: #fff;
 	position: absolute;
 	right: 0;
 	bottom: 2px;
@@ -3836,6 +3835,10 @@ body.template-default_error_message {
 
 .plone-toolbar-top #edit-zone .plone-toolbar-logo:after {
 	border-left: 4px solid #007AC1 !important;
+}
+
+#edit-zone nav>ul .plone-toolbar-separator {
+	border-bottom: none !important;
 }
 
 .autotoc-nav {

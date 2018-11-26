@@ -384,6 +384,10 @@ input:checked+.sliderbutton {
   background-color: $main-color;
 }
 
+.nav-tabs>li.active>a {
+  border-bottom: 3px solid $main-color;
+}
+
 
 /* Portlet profile within community */
 
