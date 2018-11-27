@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.14 (unreleased)
+0.14 (2018-11-27)
 -----------------
 
-- Nothing changed yet.
-
+* Esborrem portlet sharedwithme esta inclos a la buttonbar [Pilar Marinas]
 
 0.13 (2018-11-26)
 -----------------
