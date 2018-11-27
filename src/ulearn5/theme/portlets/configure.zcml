@@ -42,14 +42,6 @@
         />
 
     <plone:portlet
-        name="ulearn.portlets.sharedwithme"
-        interface=".sharedwithme.ISharedWithMePortlet"
-        assignment=".sharedwithme.Assignment"
-        renderer=".sharedwithme.Renderer"
-        addview=".sharedwithme.AddForm"
-        />
-
-    <plone:portlet
         name="ulearn.portlets.profile"
         interface=".profile.IProfilePortlet"
         assignment=".profile.Assignment"
