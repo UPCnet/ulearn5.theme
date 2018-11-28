@@ -191,7 +191,7 @@ input.maxui-button {
 
 // OVERRIDES
 h1, h2, h3, label, span.label, fieldset legend {
-  color: $secondary-color;
+  color: $secondary-color !important;
 }
 
 #maxui-container .maxui-actions {
