@@ -1,6 +1,8 @@
 # from plone.memoize import ram
+from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 from plone import api
 from plone.app.portlets import PloneMessageFactory as _PMF
 from plone.app.portlets.portlets import base
@@ -60,9 +62,12 @@ class Renderer(base.Renderer):
                                         UID=self.data.folder)
 
         for brainFolder in folders:
+            now = DateTime()
             folder = brainFolder.id
             folderContents = catalog.searchResults(portal_type=('Link', 'Folder', 'privateFolder'),
                                                    path={'query': brainFolder.getPath(), 'depth': 1},
+                                                   expires={'query': now, 'range': 'min', },
+                                                   effective={'query': now, 'range': 'max', },
                                                    sort_on='getObjPositionInParent')
             res[folder] = {}
             index = 0
@@ -82,6 +87,8 @@ class Renderer(base.Renderer):
                     pathNextFolder = brainFolder.getPath() + '/' + brain.id
                     nextFolderContents = catalog.searchResults(portal_type=('Link'),
                                                                path={'query': pathNextFolder, 'depth': 1},
+                                                               expires={'query': now, 'range': 'min', },
+                                                               effective={'query': now, 'range': 'max', },
                                                                sort_on='getObjPositionInParent')
                     res[folder][index]['links'] = []
                     for nextBrain in nextFolderContents:
