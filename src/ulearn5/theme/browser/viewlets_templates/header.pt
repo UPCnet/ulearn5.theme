@@ -119,7 +119,7 @@
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a href="reset_menu">
+              <a href="string:${viewlet/portal_url}/reset_menu">
                 <i class="fa fa-refresh"></i>
                 <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
