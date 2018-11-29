@@ -8,7 +8,7 @@
     <drop attributes="class" css:content="#edit-bar a.pat-plone-modal" />
     <!-- Cut down barceloneta without just for backend UI -->
     <rules css:if-content="body.portaltype-plone-site, body.template-folder_contents, body.viewpermission-portlets-manage-portlets, body.viewpermission-portlets-manage-own-portlets">
-        <rules css:if-not-content="body.template-profile, body.template-allcommunities, body.template-search, body.template-login_failed, body.template-login_form, body.template-logged_out, body.template-default_error_message, body.template-event_listing, body.template-personal-information, body.template-personal-preferences, body.template-ulearn-personal-preferences,
+        <rules css:if-not-content="body.template-profile, body.template-allcommunities, body.template-search, body.template-login_failed, body.template-login_form, body.template-logged_out, body.template-default_error_message, body.template-event_listing, body.template-personal-information, body.template-personal-preferences, body.template-ulearn-personal-preferences, body.template-mail_password_form,
         body.template-change-password, body.viewpermission-ulearn-manage-nomines">
             <theme href="++theme++barceloneta/index.html" />
             <notheme css:if-not-content="#visual-portal-wrapper" />
