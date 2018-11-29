@@ -324,12 +324,12 @@ class viewletHeaderUlearn(viewletBase):
             else:
                 nominas_folder_name = JSONproperties.getProperty('nominas_folder_name').lower()
                 path = '/'.join(api.portal.get().getPhysicalPath()) + '/' + nominas_folder_name
-                current = api.user.get_current()
-                roles = api.user.get_roles(username=current.id, obj=path)
-                if 'Manager' in roles or 'WebMaster' in roles or 'Gestor Nomines' in roles:
-                    return nominas_folder_name
-                else:
-                    return False
+                if not api.user.is_anonymous():
+                    current = api.user.get_current()
+                    roles = api.user.get_roles(username=current.id, obj=path)
+                    if 'Manager' in roles or 'WebMaster' in roles or 'Gestor Nomines' in roles:
+                        return nominas_folder_name
+                return False
 
 
 class folderBar(viewletBase):
