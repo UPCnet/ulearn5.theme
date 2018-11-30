@@ -39,6 +39,7 @@
     <drop css:content="#mainnavigation" />
     <drop css:content="#portal-breadcrumbs" />
     <drop css:content="#portal-anontools" />
+    <drop css:content="#portal-footer-wrapper" />
     <!-- Alert message -->
     <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
     <!-- Content header -->
