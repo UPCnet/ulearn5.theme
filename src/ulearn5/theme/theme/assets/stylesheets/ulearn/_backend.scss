@@ -184,6 +184,10 @@ input[type="checkbox"].required::after {
     display: none;
 }
 
+.plone-toolbar-top #edit-zone nav > ul ul {
+    background: rgba(20, 20, 20, 0.99) !important;
+}
+
 /* Others */
 
 .pat-structure .navbar {
