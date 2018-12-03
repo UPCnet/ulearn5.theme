@@ -65,13 +65,13 @@
                                types_list view/types_list;
                                all_checked python:(len(types_list) == len(request.get('portal_type', []))) or first_call;
                                toggle_select_state python:all_checked and 'true' or 'false';">
-<!--                 <div class="optionsToggle">
+                <div class="optionsToggle">
                   <input type="checkbox" onchange="" name="pt_toggle" value="#" id="pt_toggle" class="noborder" checked="checked"
                          tal:attributes="checked python:all_checked and 'checked' or '';" />
 
                   <label for="pt_toggle"
                          i18n:translate="label_toggle">Select All/None</label>
-                </div> -->
+                </div>
                 <div class="search-type-options row">
                   <div tal:repeat="type types_list" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                     <input type="checkbox" name="portal_type:list" value="#" class="noborder" checked="checked"
