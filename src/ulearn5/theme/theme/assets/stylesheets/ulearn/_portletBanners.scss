@@ -9,7 +9,8 @@ body.portaltype-ulearn-banner #content {
 }
 
 body.portaltype-ulearn-banner #content,
-#personal_banners {
+#box_banner_nomines,
+#box_banners {
 
   margin-bottom: 30px;
 
@@ -70,4 +71,8 @@ body.portaltype-ulearn-banner #content,
       width: 40px;
     }
   }
+}
+
+#box_banner_nomines {
+  margin-bottom: 0px;
 }

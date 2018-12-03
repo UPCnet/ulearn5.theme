@@ -1,4 +1,4 @@
-<div id="personal_banners" i18n:domain="ulearn.enginyersbcn" tal:condition="not:view/isAnon">
+<div id="box_banners" i18n:domain="ulearn.enginyersbcn" tal:condition="not:view/isAnon">
     <tal:banners tal:repeat="banner view/getBanners">
         <div class="banner">
             <tal:block tal:condition="banner/image">
