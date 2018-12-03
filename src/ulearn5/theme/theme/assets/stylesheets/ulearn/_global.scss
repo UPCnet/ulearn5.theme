@@ -5718,3 +5718,12 @@ body.viewpermission-ulearn-manage-nomines {
 	    padding: 0px 0 12px 0;
 	}
 }
+
+/* Menu gestion, quitar edición de las fechas a los enlaces y carpetas */
+
+body.template-link.section-gestion.subsection-menu #autotoc-item-autotoc-3,
+body.portaltype-link.section-gestion.subsection-menu #autotoc-item-autotoc-3,
+body.portaltype-folder.section-gestion.subsection-menu #autotoc-item-autotoc-2,
+body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-autotoc-2 {
+	display: none!important;
+}
