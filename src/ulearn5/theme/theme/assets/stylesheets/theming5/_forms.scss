@@ -105,6 +105,10 @@ select.form-control {
   background-repeat: no-repeat;
 }
 
+select.form-control[multiple],
+select.form-control[size="5"] {
+  background-image: none;
+}
 
 :focus,
 .footer-nets li a:focus,

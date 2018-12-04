@@ -549,6 +549,10 @@ li.upc-eines-cerca button {
 
 div[id^='formfield-form-widgets-fieldset_'] {
   border-bottom: 1px solid $main-color;
+
+  h4 {
+    color: $main-color;
+  }
 }
 
 div[id^=formfield-form-widgets-check_] {
