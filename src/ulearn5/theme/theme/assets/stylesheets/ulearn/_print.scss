@@ -1,16 +1,17 @@
 @media print {
 
+    #menusup,
+    #flasinformatiu,
+    #viewlet-below-content-title div.cell.col-md-3,
+    #viewlet-below-content .discussion button,
+    #viewlet-below-content .discussion input,
+    #viewlet-below-content #commenting,
+    #viewlet-above-content-title,
+    section:not(#main-content),
+    #portal-footer,
+    #breadcrumbs,
+    #header-menu,
     #edit-zone {
         display: none !important;
     }
-
-    header a[rel="home"][href]:after,
-    #menusup a[href]:after {
-        content: none !important;
-    }
-
-    #box_community .contentaddtoolbar {
-        display: grid !important;
-    }
-
 }
