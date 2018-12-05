@@ -5726,3 +5726,97 @@ body.portaltype-folder.section-gestion.subsection-menu #autotoc-item-autotoc-2,
 body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-autotoc-2 {
 	display: none!important;
 }
+
+/* Discussion */
+
+#commenting legend,
+.discussion legend {
+	padding: 0.5em 0.5em 0.5em 0;
+	font-weight: normal;
+}
+
+.discussion {
+
+	.comment {
+		margin-bottom: 12px;
+		padding-left: 40px;
+		border-left: 1px solid #b2b2b2;
+	}
+
+	.commentImage {
+		border-radius: 50px;
+		overflow: hidden;
+		position: absolute;
+		margin-left: -40px;
+		margin-top: 3px;
+	}
+
+	.documentByLine {
+		font-weight: normal;
+	}
+
+	.commentDate {
+		display: inline;
+		color: #76797C;
+	}
+
+	.commentBody {
+		margin: 1em 0;
+		padding: 1em;
+		overflow: auto;
+		border: 1px solid #ccc;
+
+		p {
+			float: left;
+			margin-bottom: 0;
+		}
+	}
+
+	.commentactionsform {
+		display: inline;
+		margin-left: 6px;
+	}
+
+	.commentActions {
+		float: right;
+		text-align: right;
+	}
+}
+
+.cancelreplytocomment {
+	display: none;
+}
+
+.replyTreeLevel0 {
+	margin-left: 0px;
+    margin-top: 10px;
+	padding-top: 10px;
+	box-shadow: 0 -10px 10px -10px rgba(0,0,0,.25);
+}
+
+.replyTreeLevel1 { margin-left: 20px; }
+.replyTreeLevel2 { margin-left: 40px; }
+.replyTreeLevel3 { margin-left: 60px; }
+.replyTreeLevel4 { margin-left: 80px; }
+.replyTreeLevel5 { margin-left: 100px; }
+.replyTreeLevel6 { margin-left: 120px; }
+.replyTreeLevel7 { margin-left: 140px; }
+.replyTreeLevel8 { margin-left: 160px; }
+.replyTreeLevel9 { margin-left: 180px; }
+.replyTreeLevel10 { margin-left: 200px; }
+
+#viewlet-below-content .loginbutton {
+	margin: 10 0;
+}
+
+#viewlet-below-content .reply .loginbutton {
+	display: none;
+}
+
+#viewlet-below-content .reply ~ .reply .loginbutton {
+	display: inline-block;
+}
+
+#dobulkaction {
+	margin: 0.3em 0;
+}

@@ -106,6 +106,11 @@
  <hidden manager="plone.abovecontenttitle" skinname="Ulearn5Theme">
   <viewlet name="contentleadimage"/>
  </hidden>
+ <hidden manager="plone.belowcontent" skinname="Ulearn5Theme">
+  <viewlet name="plone.belowcontenttitle.keywords"/>
+  <viewlet name="plone.manage_portlets_fallback"/>
+  <viewlet name="plone.comments"/>
+ </hidden>
  <hidden manager="plone.abovecontenttitle" skinname="Ulearn5UPC">
   <viewlet name="contentleadimage"/>
  </hidden>
