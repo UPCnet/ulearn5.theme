@@ -53,7 +53,7 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
         view="plone.app.layout.globals.interfaces.IViewView"
-        class=".comments.CommentsViewlet"
+        class="plone.app.discussion.browser.comments.CommentsViewlet"
         permission="zope2.View"
     />
 
