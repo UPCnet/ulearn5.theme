@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.16 (unreleased)
+0.16 (2018-12-11)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos [Iago López Fernández]
 
 0.15 (2018-12-11)
 -----------------
