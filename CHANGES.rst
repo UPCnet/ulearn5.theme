@@ -2,11 +2,31 @@ Changelog
 =========
 
 
-0.15 (unreleased)
+0.15 (2018-12-11)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos [Iago López Fernández]
+* Viewlet plone.comments [Iago López Fernández]
+* Mover y aplicar estilos al viewlet plone.comments [Iago López Fernández]
+* Corregir enlace cabecera [Iago López Fernández]
+* Estilos print [Iago López Fernández]
+* Portlet profile y comunidades: Cambiar tamaño de la imagen de una comunidad [Iago López Fernández]
+* Estilos [Iago López Fernández]
+* Estilos banners [Iago López Fernández]
+* Añadir commuta al buscador [Iago López Fernández]
+* Estilos portlet Quicklinks: quitar icono correo [Iago López Fernández]
+* Quitar fechas de publicacion y caducidad en las carpetas y enlaces del menu de gestion [Iago López Fernández]
+* Eliminar footer duplicado [Iago López Fernández]
+* Quitar footer del login [Iago López Fernández]
+* Estilos [Iago López Fernández]
+* Eliminar estilo [Iago López Fernández]
+* Enlace cambio de contraseña [Iago López Fernández]
+* Diazo body.template-mail_password_form [Iago López Fernández]
+* Menu nominas, no mostrar si eres anonimo [Iago López Fernández]
+* Arreglar enlace reset_menu [Iago López Fernández]
+* Porlet quicklinks: Tener en cuenta las fechas de publicación y expiración [Iago López Fernández]
+* Estilos vistas nominas [Iago López Fernández]
+* Enlaces de las nominas en la cabecera [Iago López Fernández]
 
 0.14 (2018-11-27)
 -----------------
