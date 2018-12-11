@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12"
                     tal:define="image nocall:community/image | nothing">
-                    <img tal:attributes="src string:${community/absolute_url}/@@image/image/preview"
+                    <img tal:attributes="src string:${community/absolute_url}/@@images/image/preview"
                         tal:condition="nocall:image"/>
                     <img src="++theme++ulearn5/assets/images/avatar_default.png"
                         tal:condition="nocall:not:image"/>

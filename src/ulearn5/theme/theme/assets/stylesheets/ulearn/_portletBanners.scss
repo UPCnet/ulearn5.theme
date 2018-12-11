@@ -37,11 +37,11 @@ body.portaltype-ulearn-banner #content,
         &:hover {
           background-color: #8E004B;
         }
-
-        &::after {
-          display: none;
-        }
       }
+    }
+
+    a::after {
+      display: none;
     }
 
     img {
@@ -52,10 +52,6 @@ body.portaltype-ulearn-banner #content,
       &:hover {
         background-color: #8E004B;
       }
-    }
-
-    a:not([class])[target="_blank"]::after {
-      display: none;
     }
   }
 
