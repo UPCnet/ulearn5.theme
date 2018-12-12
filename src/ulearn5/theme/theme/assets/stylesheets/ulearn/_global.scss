@@ -665,6 +665,17 @@ button {
 	}
 }
 
+#maxui-widget-container,
+#communities-view,
+#news-container,
+#librarysearch, {
+	display: none;
+
+	&.active {
+		display: block !important;
+	}
+}
+
 // Botó blau
 .btn-group>.btn-comunitat {
 	font-size: 13px;
