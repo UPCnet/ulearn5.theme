@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.17 (unreleased)
+0.17 (2018-12-12)
 -----------------
 
-- Nothing changed yet.
-
+* Mejorar percepción buttonbar [Iago López Fernández]
 
 0.16 (2018-12-11)
 -----------------
