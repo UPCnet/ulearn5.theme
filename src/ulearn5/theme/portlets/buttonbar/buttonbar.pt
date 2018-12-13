@@ -163,7 +163,7 @@
             <script src="++ulearn++portlets/buttonbar/subscribednews.js"></script>
             </tal:newsitems>
         </div>
-      <div id="librarysearch" ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
+      <div id="librarysearch" ng-class="{active: ctrl.active_tab == 'sharedwithme'}" tal:condition="shared">
          <div id="sharedwithme-container">
             <div id="shared-with-me-view" ng-controller="SharedWithMe as swm">
                <div class="caixessearch_shared">
