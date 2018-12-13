@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.19 (unreleased)
+0.19 (2018-12-13)
 -----------------
 
-- Nothing changed yet.
-
+* Mejorar carga imagenes [Iago López Fernández]
 
 0.18 (2018-12-13)
 -----------------
