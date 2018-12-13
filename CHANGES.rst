@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.21 (unreleased)
+0.21 (2018-12-13)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos etiquetas [Iago López Fernández]
+* No hacer peticion al sharedwithme si no esta la tab [Iago López Fernández]
 
 0.20 (2018-12-13)
 -----------------
