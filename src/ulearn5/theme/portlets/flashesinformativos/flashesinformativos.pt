@@ -17,8 +17,8 @@
         <div class="carousel-inner col-md-10">
             <tal:item tal:repeat="item flashes">
                 <div tal:define="isTheFirst repeat/item/start" tal:attributes="class python:isTheFirst and 'item active' or 'item'">
-                    <img tal:condition="item/flash/image" tal:define="scale item/flash/@@images" tal:replace="structure python: scale.scale('image',
-                                    scale='mini').tag(css_class='newsImage col-md-2')"/>
+                    <img tal:condition="item/flash/image" class="newsImage col-md-2"
+                         tal:attributes="src string:${item/url}/@@images/image/tile" />
 
                     <a href="#" tal:attributes="href item/url">
                         <span class="col-md-6" tal:replace="structure item/title">Flash</span>
