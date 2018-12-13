@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.18 (unreleased)
+0.18 (2018-12-13)
 -----------------
 
-- Nothing changed yet.
-
+* Menu gestion [Iago López Fernández]
+* Mejorar carga imagenes [Iago López Fernández]
 
 0.17 (2018-12-12)
 -----------------
