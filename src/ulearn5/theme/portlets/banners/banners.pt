@@ -5,16 +5,14 @@
                 <a tal:condition="banner/open_external" target="_blank"
                    tal:attributes="title banner/title;
                                    href banner/url">
-                    <img tal:define="scale banner/@@images"
-                         tal:replace="structure python: scale.scale('image',
-                                      scale='preview').tag(css_class='image-inline')">
+                    <img class="image-inline"
+                         tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
                 </a>
                 <a tal:condition="not:banner/open_external"
                    tal:attributes="title banner/title;
                                    href banner/url">
-                    <img tal:define="scale banner/@@images"
-                         tal:replace="structure python: scale.scale('image',
-                                      scale='preview').tag(css_class='image-inline')">
+                    <img class="image-inline"
+                         tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
                 </a>
             </tal:block>
 
