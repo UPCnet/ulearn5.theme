@@ -204,6 +204,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal and 'menu' in portal['gestion'] and language in portal['gestion']['menu']:
             menu = portal['gestion']['menu'][language]
+            instance_name = "/".join(portal.getPhysicalPath())
             path_language = "/".join(menu.getPhysicalPath())
 
             catalog = api.portal.get_tool(name='portal_catalog')
@@ -232,9 +233,10 @@ class viewletHeaderUlearn(viewletBase):
             for link in links:
                 obj = link.getObject()
                 link_parent_path = "/".join(obj.__parent__.getPhysicalPath())
+                url = obj.remoteUrl.replace('${portal_url}', instance_name)
                 info = {'id': obj.id,
                         'title': obj.title,
-                        'url': obj.remoteUrl,
+                        'url': url,
                         'new_window': obj.open_link_in_new_window,
                         'icon': obj.awicon
                         }
