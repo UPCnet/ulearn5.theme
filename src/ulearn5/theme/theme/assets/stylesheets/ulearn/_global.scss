@@ -5820,3 +5820,14 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 #dobulkaction {
 	margin: 0.3em 0;
 }
+
+#maxui-widget-container,
+#communities-view,
+#news-container,
+#librarysearch {
+	display: none;
+
+	&.active {
+		display: block !important;
+	}
+}

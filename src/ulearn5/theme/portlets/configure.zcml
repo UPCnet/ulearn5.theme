@@ -154,6 +154,31 @@
         editview=".quicklinks.quicklinks.EditForm"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.subscribednews"
+        interface=".subscribednews.subscribednews.ISubscribedNewsPortlet"
+        assignment=".subscribednews.subscribednews.Assignment"
+        renderer=".subscribednews.subscribednews.Renderer"
+        addview=".subscribednews.subscribednews.AddForm"
+        editview=".subscribednews.subscribednews.EditForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.custombuttonbar"
+        interface=".custombuttonbar.custombuttonbar.ICustomButtonBarPortlet"
+        assignment=".custombuttonbar.custombuttonbar.Assignment"
+        renderer=".custombuttonbar.custombuttonbar.Renderer"
+        addview=".custombuttonbar.custombuttonbar.AddForm"
+    />
+
+    <plone:portlet
+        name="ulearn.portlets.mycommunities"
+        interface=".mycommunities.mycommunities.IMyCommunitiesPortlet"
+        assignment=".mycommunities.mycommunities.Assignment"
+        renderer=".mycommunities.mycommunities.Renderer"
+        addview=".mycommunities.mycommunities.AddForm"
+    />
+
     <adapter
         for="ulearn5.core.interfaces.IVideo"
         provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"

@@ -1,0 +1,67 @@
+<tal:newsitems tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                           plone_view context/@@plone;
+                           dades_noticies view/dadesNoticies;
+                           Batch python:modules['Products.CMFPlone'].Batch;
+                           b_size python:10;
+                           b_start python:0;
+                           b_start request/b_start | b_start;
+                           batch python:Batch(dades_noticies, b_size, int(b_start), orphan=1);"
+               i18n:domain="ulearn">
+
+    <div id="news-container" class="portlet-subscribed-news tab-container">
+        <div id="subscribednews-search" class="folded">
+            <a href="#" id="subscribednews-favorites-filter" title=""></a>
+            <div id="subscribednews-search-box">
+                <input id="subscribednews-search-text" type="search"
+                 data-literal="" class="maxui-empty maxui-text-input"
+                 value="" tal:attributes="data-path context/absolute_url" />
+
+                <tal:sea tal:define="searchers view/getSearchers;">
+                <span class="add-on"><i class="fa fa-search"></i></span>
+                <select id="searcher_selector" class="form-control searcher_selector">
+                    <option selected disabled><span i18n:translate="find_label">busqueda...</span></option>
+                    <tal:search tal:repeat="search searchers">
+                       <option tal:content="search">search</option>
+                    </tal:search>
+                </select>
+                </tal:sea>
+            </div>
+            <div id="subscribednews-search-filters"></div>
+        </div>
+
+       <ul class="list-search-portlet">
+          <li class="noticies clearfix" tal:repeat="obj batch">
+              <div>
+                  <div class="imatge_noticia">
+                    <a href="" tal:attributes="href obj/url">
+                        <img tal:condition="obj/new/image"
+                           tal:define="scale obj/new/@@images"
+                           tal:replace="structure python: scale.scale('image',
+                           scale='mini').tag(css_class='newsImage')" />
+                        <img tal:condition="not:obj/new/image" class="newsImage"
+                           src="/++theme++ulearn5/assets/images/defaultImage.png" />
+                        <p class="discreet" tal:condition="obj/new/image_caption|nothing"
+                           tal:content="structure obj/new/image_caption" >
+                        </p>
+                    </a>
+                  </div>
+                  <div class="text_noticia">
+                      <h2>
+                          <a href="" tal:attributes="href obj/url">
+                             <span tal:replace="obj/title">Notícies RSS</span>
+                          </a>
+                      </h2>
+                      <p class="data"><time class="smaller" tal:content="obj/date">May 5</time></p>
+                      <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text Noticia</span>
+                      <a href="#" class="readmore"
+                         tal:attributes="href obj/url">
+                         <span class="readmore" i18n:translate="readmore">Leer mas..</span>
+                      </a>
+                  </div>
+              </div>
+         </li>
+      </ul>
+      <div metal:use-macro="here/batch_macros/macros/navigation" />
+    </div>
+
+</tal:newsitems>

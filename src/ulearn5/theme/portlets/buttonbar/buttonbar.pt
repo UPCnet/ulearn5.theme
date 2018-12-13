@@ -45,8 +45,8 @@
        </nav>
     </div>
     <div ng-switch="ctrl.active_tab" >
-        <div id="maxui-widget-container" class="tab-container" ng-hide="ctrl.active_tab !== 'stream'"></div>
-        <div id="communities-view" class="tab-container" ng-switch-when="mycommunities">
+        <div id="maxui-widget-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'stream'}"></div>
+        <div id="communities-view" class="tab-container" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
             <div id="communities-view-int" ng-controller="AllCommunities as comCtrl">
                 <div id="communitysearch">
                     <div id="searchinputcommunities">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div id="news-container" class="tab-container" ng-switch-when="news">
+         <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}">
             <tal:newsitems tal:define="news_to_show view/news_to_show;" tal:condition="news_to_show" i18n:domain="ulearn">
             <div tal:define="dades_noticies view/dadesNoticies;
                           Batch python:modules['Products.CMFPlone'].Batch;
@@ -164,7 +164,7 @@
             <script src="++ulearn++portlets/buttonbar/subscribednews.js"></script>
             </tal:newsitems>
         </div>
-      <div id="librarysearch" ng-switch-when="sharedwithme">
+      <div id="librarysearch" ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
          <div id="sharedwithme-container">
             <div id="shared-with-me-view" ng-controller="SharedWithMe as swm">
                <div class="caixessearch_shared">

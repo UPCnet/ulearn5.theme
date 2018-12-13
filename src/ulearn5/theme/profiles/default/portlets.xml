@@ -32,6 +32,10 @@
                 i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.banners" title="Ulearn Banners"
                 i18n:attributes="title"/>
+    <portlet title="News Subscribed with tags" addview="ulearn.portlets.subscribednews"
+        description="News Subscribed with tags portlet"/>
+    <portlet title="Custom ButtonBar" addview="ulearn.portlets.custombuttonbar"
+        description="Custom buttonBar portlet "/>
 
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />

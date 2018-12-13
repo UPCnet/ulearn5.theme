@@ -1,39 +1,35 @@
 # -*- coding: utf-8 -*-
+from plone.memoize.compress import xhtml_compress
+from plone.memoize.instance import memoize
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.component import getMultiAdapter
+from zope.formlib import form
+from zope.interface import implements
+from zope import schema
 from Acquisition import aq_inner
-from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _PFM
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone import api
+from plone.app.portlets import PloneMessageFactory as _
 from plone.app.portlets.portlets import base
-from plone.memoize.instance import memoize
-from plone.memoize.view import memoize_contextless
-from plone.portlets.interfaces import IPortletDataProvider
-from repoze.catalog.query import Eq
-from souper.soup import get_soup
-from zope import schema
-from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
-from zope.interface import implements
-from plone.memoize import ram
-from time import time
+from plone.memoize.view import memoize_contextless
+from DateTime.DateTime import DateTime
 
-from ulearn5.core import _
+from plone import api
+from souper.soup import get_soup
+from repoze.catalog.query import Eq
 
-import transaction
 
+class ISubscribedNewsPortlet(IPortletDataProvider):
 
-class IButtonBarPortlet(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information.
-    """
-    count = schema.Int(title=_PFM(u'Number of items to display'),
-                       description=_PFM(u'How many items to list.'),
+    count = schema.Int(title=_(u'Number of items to display'),
+                       description=_(u'How many items to list.'),
                        required=True,
                        default=20)
 
-    state = schema.Tuple(title=_PFM(u"Workflow state"),
-                         description=_PFM(u"Items in which workflow state to show."),
+    state = schema.Tuple(title=_(u"Workflow state"),
+                         description=_(u"Items in which workflow state to show."),
                          default=('published', 'intranet'),
                          required=True,
                          value_type=schema.Choice(
@@ -42,59 +38,30 @@ class IButtonBarPortlet(IPortletDataProvider):
 
 
 class Assignment(base.Assignment):
-    implements(IButtonBarPortlet)
+    implements(ISubscribedNewsPortlet)
 
     def __init__(self, count=20, state=('published', 'intranet')):
         self.count = count
         self.state = state
 
-    title = _(u'buttonbar', default=u'Button bar')
+    @property
+    def title(self):
+        return _(u"My Subscribed News")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('buttonbar.pt')
+    _template = ViewPageTemplateFile('subscribednews.pt')
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
 
-    def isAnon(self):
-        if not api.user.is_anonymous():
-            return False
-        return True
+    # @ram.cache(render_cachekey)
+    def render(self):
+        return xhtml_compress(self._template())
 
-    def is_activate_sharedwithme(self):
-        if (api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
-            portal = api.portal.get()
-            if portal.portal_actions.object.local_roles.visible is False:
-                portal.portal_actions.object.local_roles.visible = True
-                transaction.commit()
-            return True
-        else:
-            return False
-
-    def is_activate_news(self):
-        return api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_news')
-
-    def getClass(self):
-        """ Returns class for links """
-        shared = self.is_activate_sharedwithme()
-        news = self.is_activate_news()
-        width = ''
-        if shared and news:
-            width = 'col-md-3 col-sm-3 col-xs-3'
-        elif shared and not news:
-            width = 'col-md-4 col-sm-4 col-xs-4'
-        elif news and not shared:
-            width = 'col-md-4 col-sm-4 col-xs-4'
-        else:
-            width = 'col-md-6 col-sm-6 col-xs-6'
-
-        return "bubble top " + width
-
-    # Subscribed news
-
-    def news_to_show(self):
+    @property
+    def available(self):
         return self.data.count > 0 and len(self._data())
 
     @memoize_contextless
@@ -119,7 +86,7 @@ class Renderer(base.Renderer):
 
         return info_id
 
-    # @ram.cache(lambda *args: time() // (5 * 60))
+    @memoize
     def _data(self):
         news = []
         context = aq_inner(self.context)
@@ -129,9 +96,10 @@ class Renderer(base.Renderer):
         state = self.data.state
 
         news += self.get_news(context, state, path, limit)
-
-        return news
-
+        if news:
+            return news
+        else:
+            return []
 
     def getSearchers(self):
         portal = getSite()
@@ -229,16 +197,15 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    schema = IButtonBarPortlet
+    schema = ISubscribedNewsPortlet
     label = _(u"Add Subscribed News Portlet")
     description = _(u"This portlet displays subscribed News Items.")
 
     def create(self, data):
-        return Assignment(count=data.get('count', 20),
-                          state=data.get('state', ('intranet', )))
+        return Assignment(count=data.get('count', 20), state=data.get('state', ('published', )))
 
 
 class EditForm(base.EditForm):
-    schema = IButtonBarPortlet
+    schema = ISubscribedNewsPortlet
     label = _(u"Edit Subscribed News Portlet")
     description = _(u"This portlet displays subscribed News Items.")

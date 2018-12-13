@@ -1,0 +1,60 @@
+<div class="ulearnbox portlet-mycommunities">
+  <div id="communities-view" data-ng-controller="AllCommunities as ctrl">
+     <section id="communitylist">
+       <ul>
+         <li data-dir-paginate="community in ctrl.user_communities | filter:q | itemsPerPage: ctrl.pageSize" data-current-page="ctrl.currentPage" data-ng-cloak>
+           <div class="row-fluid">
+             <div class="span2">
+               <a data-ng-href="{{community.url}}">
+                 <img data-ng-if="community.image"
+                      data-ng-src="{{community.url}}/@@images/image/thumb" />
+                 <img data-ng-if="!community.image"
+                      src="++ulearn++static/images/avatar_default.png" />
+               </a>
+             </div>
+             <div class="span10">
+               <a data-ng-href="{{community.url}}">
+                 <h4>{{community.title}}</h4>
+                 <p>{{community.description}}</p>
+               </a>
+             </div>
+           </div>
+           <div class="community-actions">
+             <a class="community-action community-favorite community-icon-"
+                data-ng-class="{'community-favorited': community.favorited}"
+                data-ng-click="ctrl.toggleFavorite(community)">
+                {{ 'ALLCOMMUNITIES_VIEW.FAVORITE' | translate }}
+             </a>
+             <a class="community-action community-subscribe community-icon-"
+                data-ng-if="!ctrl.is_subscribed(community.url)"
+                data-ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}"
+                data-ng-click="ctrl.subscribe(community)" data-ng-cloak>
+                {{ 'ALLCOMMUNITIES_VIEW.SUBSCRIBE' | translate }}
+             </a>
+             <a class="community-action community-subscribe community-icon-"
+                data-ng-if="ctrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+                data-ng-class="{'community-subscribed': ctrl.is_subscribed(community.url)}"
+                data-ng-click="ctrl.unSubscribe(community)" data-ng-cloak>
+                {{ 'ALLCOMMUNITIES_VIEW.UNSUBSCRIBE' | translate }}
+             </a>
+             <a class="community-action community-edit community-icon-"
+                data-ng-if="community.can_manage"
+                data-ng-href="{{community.url}}/edit">
+                {{ 'ALLCOMMUNITIES_VIEW.EDIT' | translate }}
+              </a>
+             <a class="community-action community-delete community-icon-"
+                data-ng-if="community.can_manage"
+                data-ng-click="ctrl.delete(community)">
+                {{ 'ALLCOMMUNITIES_VIEW.DELETE' | translate }}
+              </a>
+           </div>
+         </li>
+       </ul>
+     </section>
+     <div class="pagination">
+       <dir-pagination-controls boundary-links="true" template-url="++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+     </div>
+
+   </div>
+
+</div>
