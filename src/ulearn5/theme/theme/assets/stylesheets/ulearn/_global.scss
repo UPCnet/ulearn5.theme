@@ -5841,3 +5841,26 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 #dobulkaction {
 	margin: 0.3em 0;
 }
+
+/* Category viewlet */
+
+#category.documentByLine {
+	min-height: 20px;
+    padding: 18px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    padding: 9px 15px 0px 15px;
+    border-radius: 2px !important;
+    margin: -15px;
+
+	&:before {
+		content: "\f02c";
+		font-family: FontAwesome;
+	}
+
+	ul {
+		padding-left: 16px;
+		list-style: none;
+	}
+}
