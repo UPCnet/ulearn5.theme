@@ -82,7 +82,12 @@
                                           Item Title
                                        </a>
                                     </h2>
-                                    <p class="data"><time class="smaller" tal:content="item_date">May 5</time></p>
+                                    <p class="data">
+                                       <time class="smaller" tal:content="item_date"
+                                             tal:condition="python:item_date!='31/12/1969'">
+                                          May 5
+                                       </time>
+                                    </p>
                                     <span class="description"
                                           tal:condition="item_description"
                                           tal:content="item_description">

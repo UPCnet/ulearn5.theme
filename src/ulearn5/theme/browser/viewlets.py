@@ -329,7 +329,7 @@ class viewletHeaderUlearn(viewletBase):
                 if not api.user.is_anonymous():
                     current = api.user.get_current()
                     roles = api.user.get_roles(username=current.id, obj=path)
-                    if 'Manager' in roles or 'WebMaster' in roles or 'Gestor Nomines' in roles:
+                    if 'Manager' in roles or 'Gestor Nomines' in roles:
                         return nominas_folder_name
                 return False
 
