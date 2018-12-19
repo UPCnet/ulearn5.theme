@@ -62,6 +62,9 @@ class TitleViewlet(TitleViewlet, viewletBase):
         lang = current.getProperty('language')
         titleUlearn = self.context.translate('Ulearn Communities', domain='ulearn', target_language=lang)
         marcaUlearn = escape(safe_unicode(titleUlearn))
+        titleSite = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.html_title_' + lang)
+        if titleSite:
+            marcaUlearn = titleSite
 
         if page_title == portal_title or self.context.id == 'front-page':
             self.site_title = u"%s" % (marcaUlearn)
