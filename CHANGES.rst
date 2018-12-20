@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.23 (unreleased)
+0.23 (2018-12-20)
 -----------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/develop' [Pilar Marinas]
+* Fix Title Site [Iago López Fernández]
 
 0.22 (2018-12-20)
 -----------------
