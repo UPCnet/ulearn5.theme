@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.22 (unreleased)
+0.22 (2018-12-20)
 -----------------
 
-- Nothing changed yet.
-
+* Title Site [Pilar Marinas]
+* Estilos vista imprimir [Iago López Fernández]
 
 0.21 (2018-12-13)
 -----------------
