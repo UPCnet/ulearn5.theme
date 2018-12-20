@@ -5862,5 +5862,17 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 	ul {
 		padding-left: 16px;
 		list-style: none;
+
+		li {
+			display: inline-block;
+		    background: #007ac1;
+		    padding: 2px 8px;
+		    margin-bottom: 5px;
+		    border-radius: 20px;
+
+		    a {
+		    	color: white;
+		    }
+		}
 	}
 }
