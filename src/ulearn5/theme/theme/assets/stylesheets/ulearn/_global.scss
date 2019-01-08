@@ -895,7 +895,7 @@ body.section-front-page #librarysearch, {
 	}
 	li {
 		background-color: white;
-		margin-bottom: 2px;
+		margin: 10px 0px;
 		p {
 			color: #333;
 			line-height: 1em;
@@ -905,6 +905,7 @@ body.section-front-page #librarysearch, {
 		}
 		h3 {
 			margin-top: 0px;
+			font-size: 115.384615%;
 			.usuari_petit {
 				font-size: 0.6em;
 				font-weight: 400;
