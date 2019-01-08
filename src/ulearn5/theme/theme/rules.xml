@@ -113,7 +113,7 @@
             </replace>
         </rules>
     </rules>
-    <rules css:if-content="body.viewpermission-ulearn-manage-nomines">
+    <rules css:if-content="body.viewpermission-ulearn-manage-nomines, body.template-test-usersfile">
         <replace css:theme="#content-container" method="raw">
             <section id="main-content" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main-content">
                 <xsl:apply-templates css:select="#content" />
