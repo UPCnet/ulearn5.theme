@@ -150,9 +150,13 @@ input[type="text"]:focus {
 
 .context {
   background: $buttons-color-primary;
+  border-color: darken($buttons-color-primary, 5%);
 }
+.context:focus,
+.context:active,
 .context:hover {
   background: $buttons-color-secondary;
+  border-color: darken($buttons-color-secondary, 5%);
 }
 
 #box_stats {
@@ -524,14 +528,15 @@ li.upc-eines-cerca button {
 /* Buttons */
 
 .btn.btn-primary {
-  background: $main-color;
-  border-color: darken($main-color, 5%);
+  background: $buttons-color-primary;
+  border-color: darken($buttons-color-primary, 5%);
 }
 
 .btn.btn-primary:hover,
 .btn.btn-primary:active,
 .btn.btn-primary:hover:active, {
-  background: darken($main-color, 5%);
+  background: $buttons-color-secondary;
+  border-color: darken($buttons-color-secondary, 5%);
 }
 
 /* Button reedirect to top */
