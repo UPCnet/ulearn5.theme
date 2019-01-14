@@ -1960,11 +1960,11 @@ body.section-front-page #librarysearch, {
 		box-shadow: none;
 		clear: both;
 		margin-bottom: 10px;
-		padding: 10px 0;
+		padding: 10px 10px;
 		position: relative;
 	}
 	#box_thinkers.ulearnbox {
-		padding: 10px 0;
+		padding: 10px 10px;
 	}
 	#portlet-prefs,
 	.documentEditable,
@@ -5512,6 +5512,9 @@ a.quicklinks::after {
 	}
 	.main-banner>a h1>.icona-upc img {
 		width: auto;
+	}
+	.main-banner>nav .upc-eines .caret {
+	    margin-top: -18px !important;
 	}
 }
 
