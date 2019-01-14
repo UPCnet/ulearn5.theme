@@ -254,9 +254,9 @@ class Renderer(base.Renderer):
         return today
 
     def getEventCalendarDict(self, event):
-        start = event.start.strftime('%d/%m') if not event.recurrence else event.ocstart.strftime('%d/%m')
-        searchStart = event.start.strftime('%m/%s') if not event.recurrence else event.ocstart.strftime('%m/%s')
-        end = event.end.strftime('%d/%m') if not event.recurrence else event.ocend.strftime('%d/%m')
+        start = event.start.strftime('%d/%m') if not event.isocurrence else event.ocstart.strftime('%d/%m')
+        searchStart = event.start.strftime('%m/%s') if not event.isocurrence else event.ocstart.strftime('%m/%s')
+        end = event.end.strftime('%d/%m') if not event.isocurrence else event.ocend.strftime('%d/%m')
         end = None if end == start else end
         return dict(Title=event.title,
                     getURL=event.absolute_url(),
@@ -306,8 +306,10 @@ class Renderer(base.Renderer):
                 if event not in filter_events:
                     event.ocstart = ocurrence.start
                     event.ocend = ocurrence.end
+                    event.isocurrence = True
                     filter_events.append(event)
             else:
+                event.isocurrence = False
                 filter_events.append(event)
 
         return filter_events
