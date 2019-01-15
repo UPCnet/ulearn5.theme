@@ -2,11 +2,19 @@ Changelog
 =========
 
 
-0.24 (unreleased)
+0.24 (2019-01-15)
 -----------------
 
-- Nothing changed yet.
-
+* Resolver problema con tiny: https://github.com/tinymce/tinymce/issues/3248 [Iago López Fernández]
+* Portlet calendario: solucionar problema con eventos recurrentes [Iago López Fernández]
+* Portlet calendario: solucionar problema con eventos recurrentes [Iago López Fernández]
+* Estilos [Iago López Fernández]
+* Diazo vistas vilalta [Iago López Fernández]
+* Estilos /search [Iago López Fernández]
+* Add stats views [Pilar Marinas]
+* Estilos [Iago López Fernández]
+* solved problem if lang is en-us [Roberto Diaz]
+* Estilos viewlet categorias [Iago López Fernández]
 
 0.23 (2018-12-20)
 -----------------
