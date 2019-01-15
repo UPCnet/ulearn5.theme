@@ -271,7 +271,7 @@ class Renderer(base.Renderer):
         events = self.getCalendarDict()
         list_events = []
         if date.strftime('%Y-%m-%d') in events:
-            events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')])
+            events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')], specificDate=True)
             for event in events:
                 list_events.append(self.getEventCalendarDict(event))
         return list_events
@@ -297,17 +297,24 @@ class Renderer(base.Renderer):
 
         return list_events
 
-    def filterOccurrenceEvents(self, events):
+    def filterOccurrenceEvents(self, events, specificDate=False):
         filter_events = []
         for event in events:
             if not IEvent.providedBy(event):
                 ocurrence = event
                 event = event.aq_parent
-                if event not in filter_events:
+                if specificDate:
                     event.ocstart = ocurrence.start
                     event.ocend = ocurrence.end
                     event.isocurrence = True
-                    filter_events.append(event)
+                    if event not in filter_events:
+                        filter_events.append(event)
+                else:
+                    if event not in filter_events:
+                        event.ocstart = ocurrence.start
+                        event.ocend = ocurrence.end
+                        event.isocurrence = True
+                        filter_events.append(event)
             else:
                 event.isocurrence = False
                 filter_events.append(event)
