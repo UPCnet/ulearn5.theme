@@ -136,7 +136,7 @@ class viewletHeaderUlearn(viewletBase):
     def canManageDirectory(self, directory):
         current = api.user.get_current()
         portal = api.portal.get()
-        if 'gestion' in portal and directory in portal['gestion']:
+        if not api.user.is_anonymous() and 'gestion' in portal and directory in portal['gestion']:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'][directory])
             if 'Editor' in roles or 'Contributor' in roles or 'Reviewer' in roles or 'WebMaster' in roles or 'Manager' in roles:
                 return True
