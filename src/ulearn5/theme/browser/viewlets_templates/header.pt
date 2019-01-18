@@ -1,8 +1,9 @@
 <div id="header-menu" class="container">
   <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn"
-          tal:define="customized_header viewlet/get_customized_header">
+          tal:define="customized_header viewlet/get_customized_header;
+                      portal_url viewlet/portal_url">
 
-    <a tal:attributes="href string:${viewlet/portal_url}" target="_self" rel="home" accesskey="1">
+    <a tal:attributes="href string:${portal_url}" target="_self" rel="home" accesskey="1">
       <h1><span id="main-header" class="sr-only">UPC. Universitat Politècnica de Catalunya</span>
         <span aria-hidden="true" role="presentation" class="icona-upc">
           <tal:block tal:condition="not:customized_header">
@@ -49,94 +50,99 @@
           </ul>
         </li>
         <li role="presentation" class="upc-eines-skip"><a href="#main-content" role="menuitem" class="sr-only"> <span>Skip to content</span></a></li>
-        <li class="dropdown ulearn-eines-ql" role="menuitem" tal:condition="viewlet/viewNominesRootFolder">
-          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${viewlet/portal_url}/">
+        <li class="dropdown ulearn-eines-ql" role="menuitem"
+            tal:define="viewNominesRootFolder viewlet/viewNominesRootFolder"
+            tal:condition="viewNominesRootFolder">
+          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/">
             <tal:management i18n:domain="ulearn" i18n:translate="">Nomines</tal:management>
             <b aria-hidden="true" class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li role="menuitem">
-              <a href="#" tal:attributes="href string:${viewlet/portal_url}/@@manage-paysheet">
+              <a href="#" tal:attributes="href string:${portal_url}/@@manage-paysheet">
                 <i class="fa fa-money"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">Manage Nomines</tal:footer>
               </a>
             </li>
             <li role="menuitem">
-              <a href="#" tal:attributes="href string:${viewlet/portal_url}/${viewlet/viewNominesRootFolder}">
+              <a href="#" tal:attributes="href string:${portal_url}/${viewNominesRootFolder}">
                 <i class="fa fa-folder-open"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">Nomines Root folder</tal:footer>
               </a>
             </li>
             <li role="menuitem">
-              <a href="#" tal:attributes="href string:${viewlet/portal_url}/@@view-loginfo">
+              <a href="#" tal:attributes="href string:${portal_url}/@@view-loginfo">
                 <i class="fa fa-database"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">View loginfo</tal:footer>
               </a>
             </li>
           </ul>
         </li>
-        <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql">
-          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${viewlet/portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
+        <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql"
+            tal:define="canManageMenu viewlet/canManageMenu">
+          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
             <tal:management i18n:translate="menu-gestion">
                       Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
           <ul class="dropdown-menu pull-right" role="menu">
             <li role="menuitem" tal:condition="viewlet/canManageNews">
-              <a href="#" tal:attributes="href string:${viewlet/portal_url}/news">
+              <a href="#" tal:attributes="href string:${portal_url}/news">
                 <i class="fa fa-newspaper-o"></i>
                 <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
-              <a tal:attributes="href string:${viewlet/portal_url}/Members/${viewlet/currentUser}/banners">
+              <a tal:attributes="href string:${portal_url}/Members/${viewlet/currentUser}/banners">
                 <i class="fa fa-image"></i>
                 <tal:footer i18n:translate="menu-gestion-personal-banners">Personal banners</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageBanners">
-              <a tal:attributes="href string:${viewlet/portal_url}/gestion/banners">
+              <a tal:attributes="href string:${portal_url}/gestion/banners">
                 <i class="fa fa-image"></i>
                 <tal:footer i18n:translate="menu-gestion-global-banners">Global banners</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageHeader">
-              <a tal:attributes="href string:${viewlet/portal_url}/gestion/header">
+              <a tal:attributes="href string:${portal_url}/gestion/header">
                 <i class="fa fa-folder"></i>
                 <tal:footer i18n:translate="menu-gestion-header">Management header</tal:footer>
               </a>
             </li>
             <li role="menuitem" tal:condition="viewlet/canManageFooter">
-              <a tal:attributes="href string:${viewlet/portal_url}/gestion/footer">
+              <a tal:attributes="href string:${portal_url}/gestion/footer">
                 <i class="fa fa-folder"></i>
                 <tal:footer i18n:translate="menu-gestion-footer">Management footer</tal:footer>
               </a>
             </li>
-            <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/gestion/menu">
+            <li role="menuitem" tal:condition="canManageMenu">
+              <a tal:attributes="href string:${portal_url}/gestion/menu">
                 <i class="fa fa-folder"></i>
                 <tal:footer i18n:translate="menu-gestion-menu">Management menu</tal:footer>
               </a>
             </li>
-            <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/reset_menu">
+            <li role="menuitem" tal:condition="canManageMenu">
+              <a tal:attributes="href string:${portal_url}/reset_menu">
                 <i class="fa fa-refresh"></i>
                 <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
               </a>
             </li>
-            <li role="menuitem" tal:condition="viewlet/canManageStats"><a href="#" tal:attributes="href string:#/stats/activity">
-              <i class="fa fa-bar-chart"></i>
-              <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
-            </a></li>
+            <li role="menuitem" tal:condition="viewlet/canManageStats">
+              <a href="#" tal:attributes="href string:${portal_url}/#/stats/activity">
+                <i class="fa fa-bar-chart"></i>
+                <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
+              </a>
+            </li>
             <li aria-hidden="true" class="divider"></li>
-            <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/@@usergroup-userprefs">
+            <li role="menuitem" tal:condition="canManageMenu">
+              <a tal:attributes="href string:${portal_url}/@@usergroup-userprefs">
                 <i class="fa fa-users"></i>
                 <tal:footer i18n:domain="plone" i18n:translate="">Users and Groups</tal:footer>
               </a>
             </li>
-            <li role="menuitem" tal:condition="viewlet/canManageMenu">
-              <a tal:attributes="href string:${viewlet/portal_url}/@@overview-controlpanel">
+            <li role="menuitem" tal:condition="canManageMenu">
+              <a tal:attributes="href string:${portal_url}/@@overview-controlpanel">
                 <i class="fa fa-cog"></i>
                 <tal:footer i18n:domain="plone" i18n:translate="">Site Setup</tal:footer>
               </a>
@@ -173,7 +179,7 @@
             </a>
         </li>
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
-          <form id="searchGadget_form" action="${viewlet/portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${viewlet/portal_url}/@@ajax-search" class="pat-livesearch">
+          <form id="searchGadget_form" action="${portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${portal_url}/@@ajax-search" class="pat-livesearch">
             <legend class="sr-only" i18n:translate="">Buscar</legend>
             <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
             <fieldset role="search">
