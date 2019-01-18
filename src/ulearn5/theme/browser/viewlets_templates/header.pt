@@ -59,7 +59,7 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li role="menuitem">
-              <a href="#" tal:attributes="href string:${portal_url}/@@manage-paysheet">
+              <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-management">
                 <i class="fa fa-money"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">Manage Nomines</tal:footer>
               </a>
@@ -71,7 +71,7 @@
               </a>
             </li>
             <li role="menuitem">
-              <a href="#" tal:attributes="href string:${portal_url}/@@view-loginfo">
+              <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-log">
                 <i class="fa fa-database"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">View loginfo</tal:footer>
               </a>
