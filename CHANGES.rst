@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.25 (unreleased)
+0.25 (2019-01-24)
 -----------------
 
-- Nothing changed yet.
-
+* Rendimiento: Cabecera [Iago López Fernández]
+* Cambiar enlaces nominas cabecera [Iago López Fernández]
+* Rendimiento: Cabecera [Iago López Fernández]
+* Dynamic [Iago López Fernández]
 
 0.24 (2019-01-15)
 -----------------
