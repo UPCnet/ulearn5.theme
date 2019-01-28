@@ -11,7 +11,7 @@
             <img alt="" src="++theme++ulearn5/assets/images/logomark-responsive.png" class="img-responsive">
           </tal:block>
           <tal:block tal:condition="customized_header">
-            <img alt="" tal:attributes="src customized_header" class="img-desktop">
+            <img alt="" tal:attributes="src customized_header" class="img-custom">
           </tal:block>
         </span>
       </h1>
@@ -19,10 +19,10 @@
 
 
     <div class="button-menu-mobile hidden-md hidden-lg">
-      <a href="#" role="button">Menu<span role="presentation" class="icona-upc">menu</span></a>
+      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation" class="icona-upc">menu</span></a>
     </div>
     <div class="button-menu-mobile--close hidden-md hidden-lg">
-      <a href="#" role="button">Menu<span role="presentation" class="icona-upc">close</span></a>
+      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation" class="icona-upc">close</span></a>
     </div>
     <nav role="navigation" class="global-navigation">
       <h2 class="sr-only" i18n:translate="tools">Tools</h2>
