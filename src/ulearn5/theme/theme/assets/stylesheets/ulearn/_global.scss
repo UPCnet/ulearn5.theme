@@ -2202,7 +2202,7 @@ body.section-front-page #librarysearch, {
 	#dashboard .w1\3a 3,
 	.fila .w1\3a 3,
 	.template-atct_album_view #content-core .w1\3a 3 {
-		width: 100%;
+		/*width: 100%; */
 		margin: 0;
 	}
 }
@@ -4477,12 +4477,11 @@ span#form-widgets-file:after {
 		float: none;
 		width: 100%!important;
 	}
-	.bubble,
-	#menusup nav a {
-		background-color: #e8e8e8;
+	#menusup nav a, .bubble {
+		background-color: #fff;
 	}
 	#menusup nav .bubble .arrow {
-		border-top-color: #e8e8e8;
+		border-top-color: #fff;
 	}
 	.bubble.top .arrow:before {
 		box-shadow: none;
@@ -4493,12 +4492,6 @@ span#form-widgets-file:after {
 	div#portlets-below-title {
 		display: flex;
 		flex-flow: column;
-	}
-	.cell.BelowTitlePortletManager2.col-md-6 {
-		// order: -1;
-	}
-	.breadcrumbs {
-		background-color: #ffffff!important;
 	}
 	.bubble.top.col-md-3.col-sm-3.col-xs-3 {
 		border-right: 4px solid white;
@@ -5512,6 +5505,20 @@ a.quicklinks::after {
 	}
 	.main-banner>nav .upc-eines .caret {
 	    margin-top: -18px !important;
+	}
+	.cell.BelowTitlePortletManager2.col-md-6 {
+   	    order: -2!important;
+	}
+	section#main-content {
+   	    order: -1;
+	}
+	div#portlets-below-title {
+   	    display: flex;
+   	    flex-flow: column;
+	}
+	#portal-header.shrink .icona-upc img , 
+	#portal-header .icona-upc img {
+   	    max-height: 50px!important;
 	}
 }
 
