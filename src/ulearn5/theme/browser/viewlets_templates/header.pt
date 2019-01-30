@@ -65,6 +65,12 @@
               </a>
             </li>
             <li role="menuitem">
+              <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-import-pdfs">
+                <i class="fa fa-cloud-upload"></i>&nbsp;
+                <tal:footer i18n:domain="ulearn5.nomines" i18n:translate="">Import payment sheets</tal:footer>
+              </a>
+            </li>
+            <li role="menuitem">
               <a href="#" tal:attributes="href string:${portal_url}/${viewNominesRootFolder}">
                 <i class="fa fa-folder-open"></i>&nbsp;
                 <tal:footer i18n:domain="ulearn" i18n:translate="">Nomines Root folder</tal:footer>
