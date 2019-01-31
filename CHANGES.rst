@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.27 (unreleased)
+0.27 (2019-01-31)
 -----------------
 
-- Nothing changed yet.
-
+* Estils albert [root@comunitatsdevel]
+* Añadir enlace @@paysheet-import-pdfs en el menú de nóminas [Iago López Fernández]
+* Fix header [Iago López Fernández]
 
 0.26 (2019-01-28)
 -----------------
