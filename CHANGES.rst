@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.28 (unreleased)
+0.28 (2019-02-01)
 -----------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/develop' [Pilar Marinas]
+* Canvis al perfil per visualitzacio responsive [root@comunitatsdevel]
 
 0.27 (2019-01-31)
 -----------------
