@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from BeautifulSoup import BeautifulSoup
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from five.grok import adapter
@@ -7,6 +6,7 @@ from five.grok import implementer
 
 from base5.core.portlets.smart.renderers.interfaces import IPortletItemRenderer
 from base5.core.portlets.smart.renderers.renderers import PortletItemRenderer
+from base5.core.utils import abrevia
 from ulearn5.core.content.video_embed import IVideoEmbed
 from ulearn5.core.interfaces import IVideo
 
@@ -42,34 +42,7 @@ class YTVideoPortletItemRenderer(PortletItemRenderer):
 
     def getTitle(self):
         item = self.item.getObject()
-        return self.abrevia(item.title, 80)
-
-    def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
-
-        if sumlenght < len(summary):
-            bb = summary[:sumlenght]
-
-            lastspace = bb.rfind(' ')
-            cutter = lastspace
-            precut = bb[0:cutter]
-
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
-            bb = summary[0:cutter]
-
-            if bb.count('<p') > precut.count('</p'):
-                bb += '...</p>'
-            else:
-                bb = bb + '...'
-        else:
-            bb = summary
-
-        return BeautifulSoup(bb).prettify()
+        return abrevia(item.title, 45)
 
 
 @adapter(IVideo)
@@ -103,31 +76,4 @@ class VideoPortletItemRenderer(PortletItemRenderer):
 
     def getTitle(self):
         item = self.item.getObject()
-        return self.abrevia(item.title, 80)
-
-    def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
-
-        if sumlenght < len(summary):
-            bb = summary[:sumlenght]
-
-            lastspace = bb.rfind(' ')
-            cutter = lastspace
-            precut = bb[0:cutter]
-
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
-            bb = summary[0:cutter]
-
-            if bb.count('<p') > precut.count('</p'):
-                bb += '...</p>'
-            else:
-                bb = bb + '...'
-        else:
-            bb = summary
-
-        return BeautifulSoup(bb).prettify()
+        return abrevia(item.title, 45)

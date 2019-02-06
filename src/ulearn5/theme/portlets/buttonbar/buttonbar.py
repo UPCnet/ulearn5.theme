@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _PFM
@@ -18,6 +17,7 @@ from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 from zope.interface import implements
 
+from base5.core.utils import abrevia
 from ulearn5.core import _
 
 import transaction
@@ -173,9 +173,9 @@ class Renderer(base.Renderer):
                 text = None
             else:
                 if noticiaObj.description:
-                    text = self.abrevia(noticiaObj.description, 150)
+                    text = abrevia(noticiaObj.description, 150)
                 else:
-                    text = self.abrevia(noticiaObj.text.raw, 150)
+                    text = abrevia(noticiaObj.text.raw, 150)
 
             if noticiaObj.effective_date:
                 news_day = noticiaObj.effective_date.day()
@@ -189,7 +189,7 @@ class Renderer(base.Renderer):
             info = {'id': noticia.id,
                     'text': text,
                     'url': noticia.getURL(),
-                    'title': self.abrevia(noticia.Title, 70),
+                    'title': abrevia(noticia.Title, 70),
                     'new': noticiaObj,
                     'date': str(news_day) + '/' + str(news_month) + '/' + str(news_year),
                     'image': noticiaObj.image,
@@ -199,33 +199,6 @@ class Renderer(base.Renderer):
             dades.append(info)
 
         return dades
-
-    def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
-
-        if sumlenght < len(summary):
-            bb = summary[:sumlenght]
-
-            lastspace = bb.rfind(' ')
-            cutter = lastspace
-            precut = bb[0:cutter]
-
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
-            bb = summary[0:cutter]
-
-            if bb.count('<p') > precut.count('</p'):
-                bb += '...</p>'
-            else:
-                bb = bb + '...'
-        else:
-            bb = summary
-
-        return BeautifulSoup(bb).prettify()
 
 
 class AddForm(base.AddForm):

@@ -39,6 +39,7 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
 
+from base5.core.utils import abrevia
 from base5.core.utils import json_response
 from base5.core.utils import pref_lang
 
@@ -709,33 +710,6 @@ class SearchFilteredNews(grok.View):
             for char in bad_chars:
                 s = s.replace(char, quotestring(char))
             return s
-
-        def abrevia(summary, sumlenght):
-            """ Retalla contingut de cadenes """
-
-            bb = ''
-
-            if sumlenght < len(summary):
-                bb = summary[:sumlenght]
-
-                lastspace = bb.rfind(' ')
-                cutter = lastspace
-                precut = bb[0:cutter]
-
-                if precut.count('<b>') > precut.count('</b>'):
-                    cutter = summary.find('</b>', lastspace) + 4
-                elif precut.count('<strong>') > precut.count('</strong>'):
-                    cutter = summary.find('</strong>', lastspace) + 9
-                bb = summary[0:cutter]
-
-                if bb.count('<p') > precut.count('</p'):
-                    bb += '...</p>'
-                else:
-                    bb = bb + '...'
-            else:
-                bb = summary
-
-            return bb
 
         def makeHtmlData(news_list):
             news_html = ''

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -13,6 +12,7 @@ from zope import schema
 from zope.component.hooks import getSite
 from zope.interface import implements
 
+from base5.core.utils import abrevia
 from ulearn5.core import _
 
 import bleach
@@ -68,33 +68,6 @@ class Renderer(base.Renderer):
         if not api.user.is_anonymous():
             return False
         return True
-
-    def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
-
-        if sumlenght < len(summary):
-            bb = summary[:sumlenght]
-
-            lastspace = bb.rfind(' ')
-            cutter = lastspace
-            precut = bb[0:cutter]
-
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
-            bb = summary[0:cutter]
-
-            if bb.count('<p') > precut.count('</p'):
-                bb += '...</p>'
-            else:
-                bb = bb + '...'
-        else:
-            bb = summary
-
-        return BeautifulSoup(bb).prettify()
 
     def abreviaRichText(self, obj, limit):
         """ Retalla contingut segons un limit de caracters sense tags, tanca tags...
@@ -161,7 +134,7 @@ class Renderer(base.Renderer):
                     'flash': a.getObject(),
                     'image': a.getObject().image,
                     'text': text,
-                    'title': self.abrevia(a.Title, 90)
+                    'title': abrevia(a.Title, 90)
                     }
 
             dades.append(info)

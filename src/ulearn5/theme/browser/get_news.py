@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 
 from plone import api
 from zope.publisher.browser import BrowserView
+
+from base5.core.utils import abrevia
 
 
 class getNews(BrowserView):
@@ -27,9 +28,9 @@ class getNews(BrowserView):
                 text = None
             else:
                 if noticiaObj.description:
-                    text = self.abrevia(noticiaObj.description, 150)
+                    text = abrevia(noticiaObj.description, 150)
                 else:
-                    text = self.abrevia(noticiaObj.text.raw, 150)
+                    text = abrevia(noticiaObj.text.raw, 150)
 
             if noticiaObj.effective_date:
                 news_day = noticiaObj.effective_date.day()
@@ -43,7 +44,7 @@ class getNews(BrowserView):
             info = {'id': noticia.id,
                     'text': text,
                     'url': noticia.getURL(),
-                    'title': self.abrevia(noticia.Title, 70),
+                    'title': abrevia(noticia.Title, 70),
                     'date': str(news_day) + '/' + str(news_month) + '/' + str(news_year),
                     'image': noticia.getURL() + '/@@images/image/mini',
                     'subject': noticiaObj.subject,
@@ -52,30 +53,3 @@ class getNews(BrowserView):
             noticies.append(info)
 
         return noticies
-
-    def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
-
-        if sumlenght < len(summary):
-            bb = summary[:sumlenght]
-
-            lastspace = bb.rfind(' ')
-            cutter = lastspace
-            precut = bb[0:cutter]
-
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
-            bb = summary[0:cutter]
-
-            if bb.count('<p') > precut.count('</p'):
-                bb += '...</p>'
-            else:
-                bb = bb + '...'
-        else:
-            bb = summary
-
-        return BeautifulSoup(bb).prettify()
