@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 from five.grok import adapter
 from five.grok import implementer
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 from base5.core.portlets.smart.renderers.interfaces import IPortletItemRenderer
 from base5.core.portlets.smart.renderers.renderers import PortletItemRenderer
-
 from ulearn5.core.content.video_embed import IVideoEmbed
 from ulearn5.core.interfaces import IVideo
 
 import re
 
-
 YOUTUBE_REGEX = re.compile(r'youtube.*?(?:v=|embed\/)([\w\d-]+)', re.IGNORECASE)
 MEDIA_REGEX = re.compile(r'.aac|.f4v|.flac|.m4v|.mkv|.mov|.mp3|.mp4|.oga|.ogg|.ogv|.webm', re.IGNORECASE)
+
 
 @adapter(IVideoEmbed)
 @implementer(IPortletItemRenderer)
@@ -67,7 +69,7 @@ class YTVideoPortletItemRenderer(PortletItemRenderer):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()
 
 
 @adapter(IVideo)
@@ -128,4 +130,4 @@ class VideoPortletItemRenderer(PortletItemRenderer):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()

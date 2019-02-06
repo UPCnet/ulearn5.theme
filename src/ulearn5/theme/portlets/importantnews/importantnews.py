@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
+from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -63,7 +64,6 @@ class Renderer(base.Renderer):
         if not api.user.is_anonymous():
             return False
         return True
-
 
     def published_news_items(self):
         return self._data()
@@ -167,7 +167,7 @@ class Renderer(base.Renderer):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()
 
 
 class AddForm(base.AddForm):

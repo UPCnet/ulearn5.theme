@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
 from DateTime import DateTime
 from DateTime.interfaces import DateTimeError
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
@@ -202,7 +203,7 @@ class RSSFeed(object):
                 bb = bb + ' ...'
         else:
             bb = summary
-        return bb
+        return BeautifulSoup(bb).prettify()
 
     def getFirstImageDescription(self, summary):
         startTag = summary.find('<img')

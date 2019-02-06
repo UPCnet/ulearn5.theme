@@ -47,7 +47,8 @@ setup(
         'bleach',
         'bs4',
         'base5.core',
-        'ulearn5.core'
+        'ulearn5.core',
+        'BeautifulSoup'
     ],
     extras_require={
         'test': [

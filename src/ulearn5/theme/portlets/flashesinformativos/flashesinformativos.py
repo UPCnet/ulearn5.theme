@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.memoize.compress import xhtml_compress
 
 from plone import api
 from plone.app.portlets.portlets import base
+from plone.memoize.compress import xhtml_compress
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
@@ -68,7 +69,6 @@ class Renderer(base.Renderer):
             return False
         return True
 
-
     def abrevia(self, summary, sumlenght):
         """ Retalla contingut de cadenes
         """
@@ -94,7 +94,7 @@ class Renderer(base.Renderer):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()
 
     def abreviaRichText(self, obj, limit):
         """ Retalla contingut segons un limit de caracters sense tags, tanca tags...

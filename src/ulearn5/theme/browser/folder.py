@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
+
 from plone.app.contenttypes.browser.folder import FolderView
 
 
@@ -30,6 +33,6 @@ class MyFolderView(FolderView):
             else:
                 bb = summary
 
-            return bb
+            return BeautifulSoup(bb).prettify()
         else:
             return ""

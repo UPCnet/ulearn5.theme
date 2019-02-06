@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
+
 from plone.app.contenttypes.browser.collection import CollectionView
 
 
@@ -28,4 +31,4 @@ class MyCollectionView(CollectionView):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()

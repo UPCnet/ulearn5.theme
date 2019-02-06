@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
+from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _PFM
@@ -224,7 +225,7 @@ class Renderer(base.Renderer):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()
 
 
 class AddForm(base.AddForm):

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from BeautifulSoup import BeautifulSoup
 from DateTime.DateTime import DateTime
-from zope.publisher.browser import BrowserView
+
 from plone import api
+from zope.publisher.browser import BrowserView
 
 
 class getNews(BrowserView):
@@ -76,4 +78,4 @@ class getNews(BrowserView):
         else:
             bb = summary
 
-        return bb
+        return BeautifulSoup(bb).prettify()
