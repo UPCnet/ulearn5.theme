@@ -359,7 +359,8 @@ button {
 	-moz-transition: all 0.4s ease-in-out;
 }
 
-.ulearnbox h2 {
+.ulearnbox > #user > h2,
+.ulearnbox > h2 {
 	font-size: 1.5rem;
 	color: #636363!important;
 	position: relative;
@@ -370,7 +371,7 @@ button {
 	line-height: 1.1;
 }
 
-.ulearnbox h2::after {
+.ulearnbox > h2::after {
 	content: "";
 	position: absolute;
 	margin-left: 12px;
@@ -5530,7 +5531,7 @@ a.quicklinks::after {
    	    display: flex;
    	    flex-flow: column;
 	}
-	#portal-header.shrink .icona-upc img , 
+	#portal-header.shrink .icona-upc img ,
 	#portal-header .icona-upc img {
    	    max-height: 50px!important;
 	}
