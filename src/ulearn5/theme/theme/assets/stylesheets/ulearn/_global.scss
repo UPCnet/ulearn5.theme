@@ -5913,84 +5913,104 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 	}
 }
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.flip-card, .no-flip-card {
-  background-color: transparent;
-  height: 100%;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
+/* View grid_events_view */
 
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
+body.template-grid_events_view {
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
+	.list-agenda {
 
-.no-flip-card:hover .no-flip-card-inner {
-  transform: none;
-}
+		/* Do an horizontal flip when you move the mouse over the flip box container */
+		.flip-card:hover .flip-card-inner {
+			transform: rotateY(180deg);
+		}
 
-/* Position the front and back side */
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border: 1px solid rgba(0,0,0,.15);
-}
+		.no-flip-card:hover {
+			transform: none;
+		}
 
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-  background: #edf1f2;
-  color: black;
-}
+		/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+		.no-flip-card,
+		.flip-card {
 
-/* Style the back side */
-.flip-card-back {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #00B0B9;
-  color: white;
-  transform: rotateY(180deg);
-}
+			background-color: transparent;
+			height: 100%;
+			perspective: 1000px; /* Remove this if you don't want the 3D effect */
 
-.flip-card-back p {
-  font-weight: 400;
-  font-size: 1.225;
-}
+			/* This container is needed to position the front and back side */
+			.flip-card-inner {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				transition: transform 0.8s;
+				transform-style: preserve-3d;
 
-p.more_info {
-  padding: 5px 10px;
-  border-radius: 35px 35px 35px 35px;
-  -moz-border-radius: 35px 35px 35px 35px;
-  -webkit-border-radius: 35px 35px 35px 35px;
-  border: 1px solid;
-}
+				/* Position the front and back side */
+				.flip-card-front,
+				.flip-card-back {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					backface-visibility: hidden;
+					border: 1px solid #007ac133;
+				}
 
-.event-flip {
-  font-size: 0.925rem;
-  text-transform: uppercase;
-  font-weight: 400;
-  display: inline-block;
-  padding: 6px 7px 5px;
-  border-radius: 2px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  color: #00B0B9;
-}
+				/* Style the front side (fallback if image is missing) */
+				.flip-card-front {
+					background: #edf1f2;
 
-.list-agenda .event-highlighted.event-img .event-time {
-    background: #00B0B9 !important;
+					.event-flip {
+						font-size: 0.925rem;
+						text-transform: uppercase;
+						font-weight: 400;
+						display: inline-block;
+						padding: 6px 7px 5px;
+						border-radius: 2px;
+						position: absolute;
+						right: 5px;
+						top: 5px;
+						color: #007ac1;
+					}
+
+					.event-time {
+					    background: #007ac1 !important;
+					}
+
+					.event-title {
+						background: #007ac1;
+						color: #FFF !important;
+					}
+				}
+
+				/* Style the back side */
+				.flip-card-back {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					background-color: #007ac1;
+					border: 1px solid #007ac133;
+					color: white;
+					transform: rotateY(180deg);
+
+					p {
+						font-weight: 400;
+						font-size: 1.225;
+
+						&.more_info {
+							padding: 5px 10px;
+							border-radius: 35px 35px 35px 35px;
+							-moz-border-radius: 35px 35px 35px 35px;
+							-webkit-border-radius: 35px 35px 35px 35px;
+							border: 1px solid;
+
+							&:hover {
+								font-weight: 600;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
