@@ -3425,7 +3425,6 @@ nav.pagination ul li {
 		margin-bottom: 15px;
 	}
 	article {
-		padding-bottom: 22px;
 		position: relative;
 	}
 	.tileFooter {
@@ -3434,6 +3433,13 @@ nav.pagination ul li {
 		right: 15px;
 		font-weight: 500;
 		font-size: 14px;
+	}
+	#parent-fieldname-text {
+		& > h1:first-child,
+		& > h2:first-child,
+		& > h3:first-child {
+			margin-top: 0px;
+		}
 	}
 }
 
@@ -3482,6 +3488,14 @@ li.upc-eines-contacte {
 
 #communitysearch .col-md-9 {
 	margin-left: 0px !important;
+}
+
+#news-container .text_noticia .data {
+	& + h1,
+	& + h2,
+	& + h3 {
+		margin-top: 0px;
+	}
 }
 
 #news-container span.add-on,
