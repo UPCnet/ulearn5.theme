@@ -5900,7 +5900,7 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.flip-card {
+.flip-card, .no-flip-card {
   background-color: transparent;
   height: 100%;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
@@ -5919,6 +5919,10 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 /* Do an horizontal flip when you move the mouse over the flip box container */
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
+}
+
+.no-flip-card:hover .no-flip-card-inner {
+  transform: none;
 }
 
 /* Position the front and back side */
@@ -5946,10 +5950,20 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
   color: white;
   transform: rotateY(180deg);
 }
+
 .flip-card-back p {
   font-weight: 400;
   font-size: 1.225;
 }
+
+p.more_info {
+  padding: 5px 10px;
+  border-radius: 35px 35px 35px 35px;
+  -moz-border-radius: 35px 35px 35px 35px;
+  -webkit-border-radius: 35px 35px 35px 35px;
+  border: 1px solid;
+}
+
 .event-flip {
   font-size: 0.925rem;
   text-transform: uppercase;
@@ -5962,6 +5976,7 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
   top: 5px;
   color: #00B0B9;
 }
+
 .list-agenda .event-highlighted.event-img .event-time {
     background: #00B0B9 !important;
 }

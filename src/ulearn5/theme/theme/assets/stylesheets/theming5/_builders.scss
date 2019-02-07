@@ -498,26 +498,26 @@
       position: relative;
       display: block;
     }
-    &::after {
-      opacity: 0;
-      content: "\e902";
-      font-family: upc-icones;
-      border: 1.5px solid $link-color;
-      position: absolute;
-      font-size: $font-size-l;
-      bottom: -18px;
-      left: calc(50% - 18px);
-      margin-top: -18px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      text-align: center;
-      padding-top: 5px;
-      color: $link-color;
-      background: rgba(255, 255, 255, 0.8);
-      z-index: 0;
-      transition: all .5s ease;
-    }
+    // &::after {
+    //   opacity: 0;
+    //   content: "\e902";
+    //   font-family: upc-icones;
+    //   border: 1.5px solid $link-color;
+    //   position: absolute;
+    //   font-size: $font-size-l;
+    //   bottom: -18px;
+    //   left: calc(50% - 18px);
+    //   margin-top: -18px;
+    //   width: 36px;
+    //   height: 36px;
+    //   border-radius: 50%;
+    //   text-align: center;
+    //   padding-top: 5px;
+    //   color: $link-color;
+    //   background: rgba(255, 255, 255, 0.8);
+    //   z-index: 0;
+    //   transition: all .5s ease;
+    // }
   }
   .event-days {
     font-weight: 700;
