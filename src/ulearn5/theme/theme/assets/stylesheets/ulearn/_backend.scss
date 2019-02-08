@@ -82,6 +82,10 @@ body.template-clouseau {
         -webkit-border-radius: 5px !important;
         border-radius: 5px !important;
         padding: 12px;
+
+        p {
+            white-space: pre;
+        }
     }
 }
 
