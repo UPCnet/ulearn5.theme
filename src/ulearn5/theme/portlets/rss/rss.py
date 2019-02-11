@@ -203,7 +203,7 @@ class RSSFeed(object):
                 bb = bb + ' ...'
         else:
             bb = summary
-        return BeautifulSoup(bb).prettify()
+        return BeautifulSoup(bb.decode('utf-8')).prettify()
 
     def getFirstImageDescription(self, summary):
         startTag = summary.find('<img')
