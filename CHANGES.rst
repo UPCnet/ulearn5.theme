@@ -2,11 +2,19 @@ Changelog
 =========
 
 
-0.29 (unreleased)
+0.29 (2019-02-11)
 -----------------
 
-- Nothing changed yet.
-
+* Optimizar portlet calendario [Pilar Marinas]
+* transition vista esdeveniments [alberto.duran]
+* Estilos clouseau [Iago López Fernández]
+* Estilos: template-grid_events_view [Iago López Fernández]
+* Estilos: Quitar margin-top del primer h1, h2 o h3 de una notícia. [Iago López Fernández]
+* Refinar estils back vista esdeveniments [alberto.duran]
+* Estils vista esdeveniment [alberto.duran]
+* Import abrevia from base5.core [Iago López Fernández]
+* Estilos h2 portlets [Iago López Fernández]
+* Fix abrevia [Iago López Fernández]
 
 0.28 (2019-02-01)
 -----------------
