@@ -6,8 +6,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from datetime import datetime
-from datetime import timedelta
+from datetime import date, datetime, time
 
 from plone import api
 from plone.app.event.base import RET_MODE_OBJECTS
@@ -148,9 +147,6 @@ class Renderer(base.Renderer):
     def date_events_url(self, date):
         return '%s?mode=day&date=%s' % (self.calendar_url, date)
 
-    def __init__(self, *args, **kwargs):
-        super(Renderer, self).__init__(*args, **kwargs)
-
     def getPriorityClassTypeEvent(self, events):
         priorityTypesOrder = ['Organizative', 'Closed', 'Open']
         classType = {'Organizative': 'event-organizative', 'Closed': 'event-closed', 'Open': 'event-open'}
@@ -185,24 +181,27 @@ class Renderer(base.Renderer):
                     classtag += ' event-organizative '
         return classtag
 
-    def getCalendarDict(self):
+    def getCalendarDict(self, start=None, end=None):
         context = aq_inner(self.context)
+        today = localized_today(context)
         year, month = self.year_month_display()
         monthdates = [dat for dat in self.cal.itermonthdates(year, month)]
-
         query_kw = {}
         if self.search_base:
-            portal = getToolByName(context, 'portal_url').getPortalObject()
+            portal = api.portal.get()
             query_kw['path'] = {'query': '%s%s' % (
                 '/'.join(portal.getPhysicalPath()), self.search_base)}
 
         if self.state:
             query_kw['review_state'] = self.state
 
-        start = monthdates[0]
-        end = monthdates[-1]
+        if not start:
+            start = monthdates[0]
+        if not end:
+            end = monthdates[-1]
+
         events = get_events(context,
-                            start=start - timedelta(days=30),
+                            start=start,
                             end=end,
                             ret_mode=RET_MODE_OBJECTS,
                             expand=True, **query_kw)
@@ -254,79 +253,58 @@ class Renderer(base.Renderer):
         return today
 
     def getEventCalendarDict(self, event):
-        start = event.start.strftime('%d/%m') if not event.isocurrence else event.ocstart.strftime('%d/%m')
-        searchStart = event.start.strftime('%m/%s') if not event.isocurrence else event.ocstart.strftime('%m/%s')
-        end = event.end.strftime('%d/%m') if not event.isocurrence else event.ocend.strftime('%d/%m')
+        start = event.start.strftime('%d/%m')
+        #Variable para ordenar los eventos por fecha
+        searchStart = event.start.strftime('%m/%s')
+        end = event.end.strftime('%d/%m')
         end = None if end == start else end
-        return dict(Title=event.title,
+        if not IEvent.providedBy(event):
+            community = event.aq_parent.aq_parent.aq_parent
+            title_event = event.aq_parent.title
+        else:
+            community = event.aq_parent.aq_parent
+            title_event = event.title
+
+        return dict(Title=title_event,
                     getURL=event.absolute_url(),
                     start=start,
                     searchStart=searchStart,
                     end=end,
                     community_type=event.community_type,
-                    community_name=event.aq_parent.aq_parent.title,
-                    community_url=event.aq_parent.aq_parent.absolute_url())
+                    community_name=community.title,
+                    community_url=community.absolute_url())
 
     def getDayEvents(self, date):
-        events = self.getCalendarDict()
+        start_date = datetime.combine(date, time.min)
+        end_date = datetime.combine(date, time.max)
+        events = self.getCalendarDict(start=start_date, end=end_date)
         list_events = []
-        if date.strftime('%Y-%m-%d') in events:
-            events = self.filterOccurrenceEvents(events[date.strftime('%Y-%m-%d')], specificDate=True)
-            for event in events:
-                list_events.append(self.getEventCalendarDict(event))
+
+        for event in events[date.strftime('%Y-%m-%d')]:
+            list_events.append(self.getEventCalendarDict(event))
         return list_events
 
     def getNextThreeEvents(self):
         context = aq_inner(self.context)
         query_kw = {}
         if self.search_base:
-            portal = getToolByName(context, 'portal_url').getPortalObject()
+            portal = api.portal.get()
             query_kw['path'] = {'query': '%s%s' % (
                 '/'.join(portal.getPhysicalPath()), self.search_base)}
 
         if self.state:
             query_kw['review_state'] = self.state
 
-        events = get_events(context, ret_mode=RET_MODE_OBJECTS, expand=True, **query_kw)
-        events = self.filterNextEvents(events)
-        events = self.filterOccurrenceEvents(events)
+        today = localized_today(context)
+        start = today
+
+        events = get_events(context, start=start, limit=3, ret_mode=RET_MODE_OBJECTS, expand=True, **query_kw)
 
         list_events = []
         for event in events[:3]:
             list_events.append(self.getEventCalendarDict(event))
 
         return list_events
-
-    def filterOccurrenceEvents(self, events, specificDate=False):
-        filter_events = []
-        for event in events:
-            if not IEvent.providedBy(event):
-                ocurrence = event
-                event = event.aq_parent
-                if specificDate:
-                    event.ocstart = ocurrence.start
-                    event.ocend = ocurrence.end
-                    event.isocurrence = True
-                    if event not in filter_events:
-                        filter_events.append(event)
-                else:
-                    if event not in filter_events:
-                        event.ocstart = ocurrence.start
-                        event.ocend = ocurrence.end
-                        event.isocurrence = True
-                        filter_events.append(event)
-            else:
-                event.isocurrence = False
-                filter_events.append(event)
-
-        return filter_events
-
-    def filterNextEvents(self, events):
-        filter_events = []
-        for event in events:
-            if event.end > localized_now():
-                filter_events.append(event)
-        return filter_events
 
     def getDayEventsGroup(self):
         group_events = []
@@ -358,7 +336,7 @@ class Renderer(base.Renderer):
         if 'day' in self.request.form:
             date = '{}-{}-{}'.format(self.request.form['year'], self.request.form['month'], self.request.form['day'])
         else:
-            date = datetime.today().strftime(formatDate)
+            date = date.today().strftime(formatDate)
         dateEvent = datetime.strptime(date, formatDate)
         return dateEvent
 
@@ -418,7 +396,7 @@ class Renderer(base.Renderer):
     def get_event_folder_url(self):
         """ Assume that the new event button is only shown on the community itself. """
         context = aq_inner(self.context)
-        portal = getToolByName(context, 'portal_url').getPortalObject()
+        portal = api.portal.get()
         return '/'.join(portal.getPhysicalPath()) + self.search_base + '/events'
 
 
