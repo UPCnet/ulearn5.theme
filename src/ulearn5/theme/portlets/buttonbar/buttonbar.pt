@@ -85,11 +85,33 @@
                                 </a>
                             </div>
                             <div class="community-actions">
-                                <a class="community-action community-favorite community-icon-" ng-class="{'community-favorited': community.favorited}" ng-click="comCtrl.toggleFavorite(community)">favorite</a>
-                                <a class="community-action community-subscribe community-icon-" ng-if="!comCtrl.is_subscribed(community.url)" ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}" ng-click="comCtrl.subscribe(community)" ng-cloak>subscribe</a>
-                                <a class="community-action community-subscribe community-icon-" ng-if="comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')" ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}" ng-click="comCtrl.unSubscribe(community)" ng-cloak>unsubscribe</a>
-                                <a class="community-action community-edit community-icon-" ng-if="community.can_manage" ng-href="{{community.url}}/edit">edit</a>
-                                <a class="community-action community-delete community-icon-" ng-if="community.can_manage" ng-click="comCtrl.delete(community)">delete</a>
+                                <a class="community-action community-favorite community-icon-"
+                                   ng-class="{'community-favorited': community.favorited}"
+                                   ng-click="comCtrl.toggleFavorite(community)">
+                                  {{ 'ALLCOMMUNITIES_VIEW.FAVORITE' | translate }}
+                                </a>
+                                <a class="community-action community-subscribe community-icon-"
+                                   ng-if="!comCtrl.is_subscribed(community.url)"
+                                   ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
+                                   ng-click="comCtrl.subscribe(community)" ng-cloak>
+                                  {{ 'ALLCOMMUNITIES_VIEW.SUBSCRIBE' | translate }}
+                                </a>
+                                <a class="community-action community-subscribe community-icon-"
+                                   ng-if="comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+                                   ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
+                                   ng-click="comCtrl.unSubscribe(community)" ng-cloak>
+                                  {{ 'ALLCOMMUNITIES_VIEW.UNSUBSCRIBE' | translate }}
+                                </a>
+                                <a class="community-action community-edit community-icon-"
+                                   ng-if="community.can_manage"
+                                   ng-href="{{community.url}}/edit">
+                                  {{ 'ALLCOMMUNITIES_VIEW.EDIT' | translate }}
+                                </a>
+                                <a class="community-action community-delete community-icon-"
+                                   ng-if="community.can_manage"
+                                   ng-click="comCtrl.delete(community)">
+                                  {{ 'ALLCOMMUNITIES_VIEW.DELETE' | translate }}
+                                </a>
                             </div>
                         </article>
                     </section>
