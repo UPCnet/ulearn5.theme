@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.31 (unreleased)
+0.31 (2019-02-12)
 -----------------
 
-- Nothing changed yet.
-
+* Modificar tipo de contenido File para visualizar directamente los PDF [Iago López Fernández]
+* Traducciones buttonbar [Iago López Fernández]
 
 0.30 (2019-02-12)
 -----------------
