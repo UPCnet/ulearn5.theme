@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.30 (unreleased)
+0.30 (2019-02-12)
 -----------------
 
-- Nothing changed yet.
-
+* Codificación UTF-8 [Iago López Fernández]
+* Codificación UTF-8 [Iago López Fernández]
 
 0.29 (2019-02-11)
 -----------------
