@@ -57,4 +57,13 @@
         permission="zope2.View"
     />
 
+    <browser:page
+      name="search"
+      class=".search.Search"
+      permission="zope2.View"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+      template="views_templates/search.pt"
+    />
+
 </configure>

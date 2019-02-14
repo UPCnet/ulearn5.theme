@@ -85,7 +85,7 @@
                 </div>
               </div>
             </fieldset>
-            <fieldset class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <fieldset class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
               <legend i18n:translate="label_new_items_since">New items since</legend>
               <div>
                 <div class="search-date-options row">
@@ -96,25 +96,25 @@
                                         ever string:1970-01-02;
                                         checked python:request.get('created', []);
                                         checked python:(len(checked) == 1) and checked[0] or ever">
-                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <input type="radio" id="query-date-yesterday" name="created.query:record:list:date"
                              tal:attributes="value yesterday;
                                              checked python:checked==yesterday and 'checked' or '';" />
                       <label for="query-date-yesterday" i18n:translate="time_yesterday">Yesterday</label>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <input type="radio" id="query-date-lastweek" name="created.query:record:list:date"
                              tal:attributes="value lastweek;
                                              checked python:checked==lastweek and 'checked' or '';" />
                       <label for="query-date-lastweek" i18n:translate="time_last_week">Last week</label>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <input type="radio" id="query-date-lastmonth" name="created.query:record:list:date"
                              tal:attributes="value lastmonth;
                                              checked python:checked==lastmonth and 'checked' or '';" />
                       <label for="query-date-lastmonth" i18n:translate="time_last_month">Last month</label>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <input type="radio" id="query-date-ever" name="created.query:record:list:date"
                              tal:attributes="value ever;
                                              checked python:checked==ever and 'checked' or '';" />
@@ -123,6 +123,53 @@
                   </tal:datetime>
                 </div>
                 <input type="hidden" name="created.range:record" value="min" />
+              </div>
+            </fieldset>
+            <fieldset class="col-lg-3 col-md-3 col-sm-12 col-xs-12 subjects">
+              <legend i18n:translate="label_tags">Tags</legend>
+              <div class="field"
+                   tal:define="usedSubjects python:context.portal_catalog.uniqueValuesFor('Subject');"
+                   tal:condition="usedSubjects">
+                <div class="formHelp"></div>
+                <select name="Subject:list"
+                        id="Subject"
+                        size="7"
+                        multiple="multiple"
+                        tal:define="activeSubjects view/get_subject_filters">
+                  <tal:cond condition="activeSubjects">
+                    <tal:block tal:repeat="subject usedSubjects">
+                      <tal:block tal:define="selected python:subject in activeSubjects">
+                        <option value="#"
+                                tal:condition="selected"
+                                tal:content="subject"
+                                tal:attributes="value subject;"
+                                i18n:domain="plone-metadata"
+                                i18n:translate=""
+                                selected>
+                          dummy
+                        </option>
+                        <option value="#"
+                                tal:condition="not:selected"
+                                tal:content="subject"
+                                tal:attributes="value subject;"
+                                i18n:domain="plone-metadata"
+                                i18n:translate="">
+                          dummy
+                        </option>
+                      </tal:block>
+                    </tal:block>
+                  </tal:cond>
+                  <tal:cond condition="not:activeSubjects">
+                    <option value="#"
+                            tal:repeat="subject usedSubjects"
+                            tal:content="subject"
+                            tal:attributes="value subject;"
+                            i18n:domain="plone-metadata"
+                            i18n:translate="">
+                      dummy
+                    </option>
+                  </tal:cond>
+                </select>
               </div>
             </fieldset>
            </div>
