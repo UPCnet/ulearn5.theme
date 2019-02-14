@@ -5902,13 +5902,20 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
     border-radius: 2px !important;
     margin: -15px;
 
-	&:before {
+    &:before {
 		content: "\f02c";
 		font-family: FontAwesome;
+
+		ul {
+			padding-left: 16px !important;
+		}
 	}
+}
+
+#category {
 
 	ul {
-		padding-left: 16px;
+		padding-left: 0px;
 		list-style: none;
 
 		li {
@@ -5916,7 +5923,9 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 		    background: #007ac1;
 		    padding: 2px 8px;
 		    margin-bottom: 5px;
-		    border-radius: 20px;
+		    border-radius: 20px !important;
+		    color: white;
+
 		    a {
 		    	color: white;
 		    }

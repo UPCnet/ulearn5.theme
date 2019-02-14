@@ -35,7 +35,8 @@
                       first_call not:request/advanced_search|nothing;
                       st python:request.get('SearchableText', '');
                       DateTime python:modules['DateTime'].DateTime;
-                      navigation_root_url view/navroot_url;">
+                      navigation_root_url view/navroot_url;
+                      activeSubjects view/get_subject_filters;">
 
         <input type="hidden" name="sort_on" value="" />
         <input type="hidden" name="sort_order" value="" />
@@ -134,8 +135,7 @@
                 <select name="Subject:list"
                         id="Subject"
                         size="7"
-                        multiple="multiple"
-                        tal:define="activeSubjects view/get_subject_filters">
+                        multiple="multiple">
                   <tal:cond condition="activeSubjects">
                     <tal:block tal:repeat="subject usedSubjects">
                       <tal:block tal:define="selected python:subject in activeSubjects">
@@ -189,6 +189,14 @@
                 Search Term
               </strong>
             </h1>
+
+            <nav id="category" tal:condition="activeSubjects">
+              <ul>
+                <li tal:repeat="category activeSubjects" tal:content="category">
+                  dummy
+                </li>
+              </ul>
+            </nav>
 
             <p id="rss-subscription" i18n:domain="plone"
                tal:condition="context/@@syndication-util/search_rss_enabled">
