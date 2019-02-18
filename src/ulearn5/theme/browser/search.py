@@ -8,3 +8,7 @@ class Search(OriginalSearch):
         if 'Subject' in self.request.form:
             return self.request.form['Subject']
         return False
+
+    def get_all_subjects(self):
+        subjects = self.context.portal_catalog.uniqueValuesFor('Subject')
+        return sorted(subjects, key=lambda x: x.lower())

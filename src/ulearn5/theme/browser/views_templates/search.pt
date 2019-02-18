@@ -129,7 +129,7 @@
             <fieldset class="col-lg-3 col-md-3 col-sm-12 col-xs-12 subjects">
               <legend i18n:translate="label_tags">Tags</legend>
               <div class="field"
-                   tal:define="usedSubjects python:context.portal_catalog.uniqueValuesFor('Subject');"
+                   tal:define="usedSubjects view/get_all_subjects"
                    tal:condition="usedSubjects">
                 <div class="formHelp"></div>
                 <select name="Subject:list"
