@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.32 (unreleased)
+0.32 (2019-02-21)
 -----------------
 
-- Nothing changed yet.
-
+* Buscador, ordenar etiquetas [Iago López Fernández]
+* Mejora: Buscador por etiquetas [Iago López Fernández]
+* Buscador por etiquetas [Iago López Fernández]
 
 0.31 (2019-02-12)
 -----------------
