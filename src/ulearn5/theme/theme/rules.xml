@@ -50,7 +50,7 @@
     <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
 
     <replace css:theme="#favicon" method="raw">
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+      <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     </replace>
     <rules css:if-content="body.template-default_error_message">
         <theme href="error.html" />
