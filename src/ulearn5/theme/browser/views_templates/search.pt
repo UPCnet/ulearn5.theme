@@ -171,6 +171,16 @@
                   </tal:cond>
                 </select>
               </div>
+              <script type="text/javascript">
+                $("#searchform").on("submit", function(){
+                  allSubjects = "<ul>";
+                  $("#Subject option:selected").each(function(){
+                    allSubjects += "<li class='subj'>" + $(this).text() + "</li>";
+                  })
+                  allSubjects += "</ul>";
+                  $("#category").html(allSubjects);
+                });
+              </script>
             </fieldset>
            </div>
         </div>
@@ -190,8 +200,8 @@
               </strong>
             </h1>
 
-            <nav id="category" tal:condition="activeSubjects">
-              <ul>
+            <nav id="category">
+              <ul tal:condition="activeSubjects">
                 <li tal:repeat="category activeSubjects" tal:content="category">
                   dummy
                 </li>
