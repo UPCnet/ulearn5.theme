@@ -5019,6 +5019,7 @@ li.select2-search-field.form-control {
 #maxui-container .maxui-actor a .maxui-displayname {
 	font-size: 15px;
 	font-weight: 600;
+	display: block;
 }
 
 #maxui-container #maxui-mainpanel #maxui-timeline {
@@ -5928,6 +5929,10 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 
 		    a {
 		    	color: white;
+		    }
+
+		    &.subj {
+		    	margin-right: 3.5px;
 		    }
 		}
 	}
