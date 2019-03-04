@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.33 (unreleased)
+0.33 (2019-03-04)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos [Iago López Fernández]
+* Buscador, actualizar etiquetas [Iago López Fernández]
+* Cargar favicon costumizado correctamente en producción [Iago López Fernández]
 
 0.32 (2019-02-21)
 -----------------
