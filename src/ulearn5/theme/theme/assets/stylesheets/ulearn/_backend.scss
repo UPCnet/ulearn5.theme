@@ -205,6 +205,13 @@ input[type="checkbox"].required::after {
     background: rgba(20, 20, 20, 0.99) !important;
 }
 
+
+/* Keywords manager */
+
+body.template-prefs_keywords_view .icon-search {
+    display: none;
+}
+
 /* Others */
 
 .pat-structure .navbar {
