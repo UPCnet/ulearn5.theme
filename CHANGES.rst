@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.34 (unreleased)
+0.34 (2019-03-06)
 -----------------
 
-- Nothing changed yet.
-
+* Estilo keyword manager [Iago López Fernández]
 
 0.33 (2019-03-04)
 -----------------
