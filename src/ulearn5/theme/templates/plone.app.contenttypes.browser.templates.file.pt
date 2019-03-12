@@ -23,7 +23,7 @@
     <a tal:attributes="href download_url">
       <span class="fa fa-download"></span>
     </a>
-    <p></p>
+    <br/>
     <object type="application/pdf" width="100%" height="480"
           tal:define="filename context/file/filename"
           tal:attributes="data string:${context/absolute_url}/@@display-file/file/${filename}"></object>
