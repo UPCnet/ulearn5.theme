@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.35 (unreleased)
+0.35 (2019-03-13)
 -----------------
 
-- Nothing changed yet.
-
+* Evitar Redraw y aplicar estilos dynamic al inicio [alberto.duran]
+* Añadir al permisos del menu de gestion el viewNominesRootFolder [Iago López Fernández]
+* Solucionar TALError [Iago López Fernández]
+* Quitar modal registro usuarios [Iago López Fernández]
 
 0.34 (2019-03-06)
 -----------------
