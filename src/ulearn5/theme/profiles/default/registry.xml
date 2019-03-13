@@ -16,7 +16,7 @@
 	<records prefix="plone.resources/bootstrap-popover" interface='Products.CMFPlone.interfaces.IResourceRegistry'>
 		<value key="js">++plone++static/components/bootstrap/js/popover.js</value>
 		<value key="deps">jquery</value>
-  	</records>
+  </records>
 
 	<records prefix="plone.resources/tinymce-layer"
               interface='Products.CMFPlone.interfaces.IResourceRegistry'>
@@ -24,13 +24,13 @@
         <value key="deps">tinymce</value>
     </records>
 
-	<records prefix="plone.bundles/dynamic-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+	<!-- <records prefix="plone.bundles/dynamic-styles" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 		<value key="resources"> </value>
 		<value key="enabled">True</value>
 		<value key="compile">False</value>
 		<value key="csscompilation">dynamic.css</value>
 		<value key="last_compilation">2017-10-30 00:00:00</value>
-	</records>
+	</records> -->
 
 	<records prefix="plone.bundles/pl_variables" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
 		<value key="resources"> </value>

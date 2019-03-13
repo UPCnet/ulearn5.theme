@@ -17,6 +17,7 @@
             <after css:theme-children="head">
                 <link rel="stylesheet" href="++theme++barceloneta/less/barceloneta-compiled.css" />
                 <link rel="stylesheet" href="++theme++ulearn5/assets/css/ulearn_backend.min.css" />
+                <link rel="stylesheet" href="dynamic.css" />
             </after>
             <rules css:if-content="#portal-top">
                 <!-- Attributes -->
