@@ -129,7 +129,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal:
             roles = api.user.get_roles(username=current.id, obj=portal['gestion'])
-            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats() or self.canManageHeader() or self.canManageFooter() or self.canManageBanners() or self.canManagePersonalBanners() or self.viewNominesRootFolder():
+            if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles or self.canManageMenu() or self.canManageNews() or self.canManageStats() or self.canManageHeader() or self.canManageFooter() or self.canManageBanners() or self.canManagePersonalBanners() or self.canManageCommunityTags() or self.viewNominesRootFolder():
                 return True
         return False
 
@@ -167,6 +167,9 @@ class viewletHeaderUlearn(viewletBase):
 
     def canManageFooter(self):
         return self.canManageDirectory('footer')
+
+    def canManageCommunityTags(self):
+        return self.canManageDirectory('community-tags')
 
     def isDisplayedPortletBanners(self, typePortlet):
         columns = ['ContentWellPortlets.BelowTitlePortletManager1',

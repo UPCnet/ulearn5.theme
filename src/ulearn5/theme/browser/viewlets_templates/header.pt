@@ -98,6 +98,12 @@
                 <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
               </a>
             </li>
+            <li role="menuitem" tal:condition="viewlet/canManageCommunityTags">
+              <a href="#" tal:attributes="href string:${portal_url}/gestion/community-tags">
+                <i class="fa fa-filter"></i>
+                <tal:footer i18n:translate="menu-gestio-community-tags">Community tags</tal:footer>
+              </a>
+            </li>
             <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
               <a tal:attributes="href string:${portal_url}/Members/${viewlet/currentUser}/banners">
                 <i class="fa fa-image"></i>
