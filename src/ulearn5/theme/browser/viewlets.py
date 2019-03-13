@@ -169,7 +169,9 @@ class viewletHeaderUlearn(viewletBase):
         return self.canManageDirectory('footer')
 
     def canManageCommunityTags(self):
-        return self.canManageDirectory('community-tags')
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IUlearnControlPanelSettings)
+        return self.canManageDirectory('community-tags') and settings.activate_tags
 
     def isDisplayedPortletBanners(self, typePortlet):
         columns = ['ContentWellPortlets.BelowTitlePortletManager1',
