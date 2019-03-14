@@ -1018,3 +1018,50 @@ class SendEventToAttendees(grok.View):
 
     def applytz(self, dt):
         return dt.astimezone(pytz.timezone(api.portal.get_registry_record('plone.portal_timezone')))
+
+
+class AllCommunitiesByTag(grok.View):
+    grok.name('allcommunities_bytag')
+    grok.template('allcommunities_bytag')
+    grok.require('base.member')
+    grok.layer(IUlearn5ThemeLayer)
+    grok.context(IPloneSiteRoot)
+
+    def getInfo(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        path = '/'.join(api.portal.get().getPhysicalPath()) + '/gestion/community-tags'
+        tag_brains = catalog(portal_type=('ulearn.community_tag'),
+                             sort_on=('sortable_title'),
+                             sort_order='ascending',
+                             path=path)
+
+        result = []
+        for tag_item in tag_brains:
+            community_brains = catalog(portal_type=('ulearn.community'),
+                                       community_tags=tag_item.Title.decode('utf-8'))
+            communities = []
+            for item in community_brains:
+                communities.append({
+                    'title': item.Title,
+                    'url': item.getURL(),
+                    'type': item.community_type
+                })
+
+            tag = tag_item.getObject()
+            if tag.image:
+                image_path = tag_item.getURL() + '/images/image/thumb'
+                icon = None
+            else:
+                image_path = None
+                icon = tag.awicon if tag.awicon else 'fa-filter'
+
+            result.append({
+                'id': tag_item.id,
+                'title': tag_item.Title,
+                'description': tag_item.Description,
+                'image_path': image_path,
+                'icon': icon,
+                'communities': communities
+            })
+
+        return result

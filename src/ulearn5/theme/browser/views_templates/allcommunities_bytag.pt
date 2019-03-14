@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="ulearn">
+
+<head>
+  <metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1);"/>
+</head>
+<body>
+
+  <metal:main metal:fill-slot="main"
+              tal:define="info view/getInfo;">
+
+    <div class="row equal">
+      <div tal:repeat="tag info" class="col-sm-12 col-md-12 col-lg-6">
+        <div class="tagInfo col-md-12">
+          <div class="image col-md-2">
+            <tal:block tal:condition="tag/image_path">
+              <img tal:attributes="src tag/image_path;
+                                   title tag/title;
+                                   alt tag/title;"/>
+            </tal:block>
+            <tal:block tal:condition="not:tag/image_path">
+              <span tal:attributes="class string:box_badges fa ${tag/icon}"></span>
+            </tal:block>
+          </div>
+          <div class="info col-md-10">
+            <h2 tal:content="tag/title">Title</h2>
+            <p tal:content="tag/description">Description</p>
+          </div>
+          <div tal:condition="tag/communities" class="communities col-md-12">
+            <ul>
+              <li tal:repeat="community tag/communities"
+                  tal:attributes="class string:${community/type} text">
+                <a tal:attributes="href community/url;"
+                   class="title_community">
+                  <span class="fa fa-play-circle"></span>
+                  <span tal:content="community/title">Community</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </metal:main>
+</body>
+</html>

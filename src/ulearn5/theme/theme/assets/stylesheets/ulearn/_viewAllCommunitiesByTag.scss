@@ -1,0 +1,94 @@
+body.portaltype-ulearn-community_tag {
+
+    div#content-core {
+
+        .fa {
+            font-size: 55px;
+            color: #960055;
+            margin-top: -5px;
+        }
+    }
+}
+
+body.template-allcommunities_bytag {
+
+    #main-content {
+        padding: 0px;
+    }
+
+    article#content {
+        background-color: transparent !important;
+        padding: 0px 15px 15px 15px !important;
+        display: block;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .row.equal {
+        display: flex !important;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+    }
+
+    .tagInfo {
+        background-color: #fff;
+        padding: 15px;
+        box-shadow: -1px 1px 2px #ddd;
+        margin-bottom: 30px;
+
+        .image {
+            padding: 0px;
+            text-align: center;
+
+            .fa {
+                font-size: 55px;
+                color: #960055;
+                margin-top: -5px;
+            }
+        }
+
+        .info {
+
+            h2 {
+                margin-top: 0px;
+                font-size: 24px;
+            }
+        }
+
+        .communities {
+            border-top: 1px solid #edf1f2;
+            padding-top: 10px;
+
+            ul {
+                list-style: none;
+                padding-left: 0px;
+                margin-bottom: 0px;
+
+                li {
+                    border-left: none;
+
+                    a {
+                        display: block;
+                        font-weight: bold;
+                        font-size: 1.1em;
+
+                        &:not(:last-of-type) {
+                            padding-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 860px) {
+
+    body.template-allcommunities_bytag {
+
+        img {
+            max-width: 80px !important;
+            margin-bottom: 15px;
+        }
+    }
+}
