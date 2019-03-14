@@ -91,6 +91,15 @@
                     </a>
                 </tal:block>
             </div>
+            <tal:block tal:condition="view/view_community_tags">
+                <nav id="category" tal:condition="community/community_tags">
+                    <ul>
+                        <li tal:repeat="tag community/community_tags" tal:content="tag">
+                            dummy
+                        </li>
+                    </ul>
+                </nav>
+            </tal:block>
         </div>
     </tal:iscommunity>
     <tal:isprofile condition="not:is_community" tal:define="isAdmin view/is_admin_user">

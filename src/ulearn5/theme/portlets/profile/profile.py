@@ -216,6 +216,11 @@ class Renderer(base.Renderer):
         else:
             return "Change community type"
 
+    def view_community_tags(self):
+        registry = queryUtility(IRegistry)
+        ulearn_tool = registry.forInterface(IUlearnControlPanelSettings)
+        return ulearn_tool.activate_tags
+
 
 class AddForm(base.NullAddForm):
 

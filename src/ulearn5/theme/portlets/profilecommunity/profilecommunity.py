@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-from hashlib import sha1
-from plone import api
-from plone.app.portlets.portlets import base
-from plone.portlets.interfaces import IPortletDataProvider
-from zope.component import getMultiAdapter
-from zope.interface import implements
-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from hashlib import sha1
+from plone import api
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
+from zope.component import getMultiAdapter
+from zope.component import queryUtility
+from zope.interface import implements
+
 from base5.core.utils import get_safe_member_by_id
 from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 
 class IProfileCommunityPortlet(IPortletDataProvider):
@@ -87,6 +90,11 @@ class Renderer(base.Renderer):
 
     def get_community_type(self, community):
         return community.community_type
+
+    def view_community_tags(self):
+        registry = queryUtility(IRegistry)
+        ulearn_tool = registry.forInterface(IUlearnControlPanelSettings)
+        return ulearn_tool.activate_tags
 
 
 class AddForm(base.NullAddForm):
