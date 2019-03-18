@@ -255,22 +255,25 @@ h1, h2, h3, label, span.label, fieldset legend {
 .popover.fade.bottom a.Closed.text,
 .Closed.text a,
 a.Closed.text,
+a.Closed.text.community-action,
 span.Closed.text {
-  color: $color_community_closed;
+  color: $color_community_closed !important;
 }
 
 .popover.fade.bottom a.Organizative.text,
 .Organizative.text a,
 a.Organizative.text,
+a.Organizative.text.community-action,
 span.Organizative.text {
-  color: $color_community_organizative;
+  color: $color_community_organizative !important;
 }
 
 .popover.fade.bottom a.Open.text,
 .Open.text a,
 a.Open.text,
+a.Open.text.community-action,
 span.Open.text {
-  color: $color_community_open;
+  color: $color_community_open !important;
 }
 
 td.cal_has_events {
