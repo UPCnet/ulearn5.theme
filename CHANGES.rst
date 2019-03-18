@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.37 (unreleased)
+0.37 (2019-03-18)
 -----------------
 
-- Nothing changed yet.
-
+* Revision permisos webmaster [Pilar Marinas]
 
 0.36 (2019-03-14)
 -----------------
