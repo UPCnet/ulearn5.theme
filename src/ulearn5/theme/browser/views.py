@@ -898,7 +898,7 @@ class ResetMenuBar(grok.View):
     """ This view reset the personal bar """
     grok.name('reset_menu')
     grok.context(Interface)
-    grok.require('cmf.ModifyPortalContent')
+    grok.require('base.webmaster')
     grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
