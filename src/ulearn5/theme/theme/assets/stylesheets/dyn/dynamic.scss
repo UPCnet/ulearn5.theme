@@ -253,17 +253,23 @@ h1, h2, h3, label, span.label, fieldset legend {
 }
 
 .popover.fade.bottom a.Closed.text,
-.Closed.text a {
+.Closed.text a,
+a.Closed.text,
+span.Closed.text {
   color: $color_community_closed;
 }
 
 .popover.fade.bottom a.Organizative.text,
-.Organizative.text a {
+.Organizative.text a,
+a.Organizative.text,
+span.Organizative.text {
   color: $color_community_organizative;
 }
 
 .popover.fade.bottom a.Open.text,
-.Open.text a {
+.Open.text a,
+a.Open.text,
+span.Open.text {
   color: $color_community_open;
 }
 

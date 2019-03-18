@@ -158,6 +158,20 @@ class AllCommunities(baseCommunities):
     grok.require('base.member')
     grok.layer(IUlearn5ThemeLayer)
 
+    def getAllCommunityTags(self):
+        registry = queryUtility(IRegistry)
+        ulearn_tool = registry.forInterface(IUlearnControlPanelSettings)
+        if not ulearn_tool.activate_tags:
+            return None
+
+        path = '/'.join(api.portal.get().getPhysicalPath()) + '/gestion/community-tags'
+        catalog = api.portal.get_tool('portal_catalog')
+        tags = catalog(portal_type=('ulearn.community_tag'),
+                       sort_on=('sortable_title'),
+                       sort_order='ascending',
+                       path=path)
+        return tags
+
 
 class communitiesAJAX(baseCommunities):
     """ The list of communities via AJAX """

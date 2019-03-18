@@ -10,15 +10,18 @@ from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.registry.interfaces import IRegistry
 from repoze.catalog.query import Eq
 from souper.soup import get_soup
 from zope import schema
 from zope.component import getMultiAdapter
+from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import implements
 
 from base5.core.utils import abrevia
 from ulearn5.core import _
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 import transaction
 
@@ -199,6 +202,20 @@ class Renderer(base.Renderer):
             dades.append(info)
 
         return dades
+
+    def getAllCommunityTags(self):
+        registry = queryUtility(IRegistry)
+        ulearn_tool = registry.forInterface(IUlearnControlPanelSettings)
+        if not ulearn_tool.activate_tags:
+            return None
+
+        path = '/'.join(api.portal.get().getPhysicalPath()) + '/gestion/community-tags'
+        catalog = api.portal.get_tool('portal_catalog')
+        tags = catalog(portal_type=('ulearn.community_tag'),
+                       sort_on=('sortable_title'),
+                       sort_order='ascending',
+                       path=path)
+        return tags
 
 
 class AddForm(base.AddForm):

@@ -87,7 +87,19 @@ body.template-allcommunities_bytag {
     padding-top: 15px;
 }
 
-@media (max-width: 860px) {
+body.template-allcommunities {
+
+    #category {
+        padding-top: 7px;
+
+        ul li {
+            min-height: auto !important;
+            margin-left: 5px;
+        }
+    }
+}
+
+@media (max-width: 865px) {
 
     body.template-allcommunities_bytag {
 

@@ -714,85 +714,6 @@ body.section-front-page #librarysearch, {
 	*background-color: #003bb3;
 }
 
-// Listat de comunitats
-#communitylist {
-	clear: both;
-	min-height: 10px;
-	margin-top: 15px;
-	color: #555;
-	.eines {
-		color: #34495E;
-		font-size: 18px;
-		text-decoration: none;
-		i {
-			padding-right: 2px
-		}
-	}
-	ul {
-		margin-left: 0;
-		padding-left: 0;
-		list-style: none;
-	}
-	li {
-		min-height: 55px;
-		line-height: 20px;
-		border-bottom: 1px solid #DDDDDD;
-		margin-bottom: 0;
-		padding-bottom: 15px;
-		padding-left: 10px;
-		padding-top: 10px;
-		background: none repeat scroll 0 0 #FFFFFF;
-		box-shadow: none;
-	}
-	a {
-		color: #555;
-		text-decoration: none;
-		h4 {
-			color: #F58D3D;
-			font-size: 16px;
-			margin-bottom: 0;
-			margin-top: 0;
-			&:hover {
-				opacity: 0.8;
-			}
-		}
-		h2 {
-			color: #007BC0;
-			font-size: 18px;
-			margin-bottom: 5px;
-			margin-top: 1px !important;
-			&:hover {
-				opacity: 0.8;
-			}
-		}
-	}
-	img {
-		max-height: 115px;
-		margin-top: 3px;
-		border: 1px solid #d1d1d1;
-		padding: 5px;
-		width: 100%!important;
-		max-width: none!important;
-		object-fit: cover;
-		&:hover {
-			transition: all 0.25s ease 0s;
-			border: 2px solid #F58D3D;
-		}
-	}
-	div.col-md-2 {
-		padding-left: 5px;
-	}
-}
-
-#communitylist article.media.ng-scope {
-	padding: 0 15px 15px 0px!important;
-}
-
-#communitylist article.media.ng-scope:last-of-type {
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 10px;
-}
-
 // Afegida la icona de comunitats a tot arreu.
 .icon-ulearn-community,
 .icon-ulearn.community {
@@ -1081,10 +1002,6 @@ body.section-front-page #librarysearch, {
 	color: #eee
 }
 
-#communitylist .anycommunities a {
-	color: #007BC0
-}
-
 .template-personal-information {
 	.customfile {
 		clear: both;
@@ -1327,10 +1244,6 @@ body.section-front-page #librarysearch, {
 			color: #34495E;
 		}
 	}
-}
-
-#communitylist .eines i {
-	font-size: 14px;
 }
 
 .ploneCalendar {
@@ -1991,21 +1904,6 @@ body.section-front-page #librarysearch, {
 		height: 55px;
 		margin-top: 0;
 		padding-top: 10px;
-	}
-	#communitylist img {
-		float: left;
-		margin-right: 15px;
-	}
-	#communitylist li {
-		position: relative;
-	}
-	#communitylist .eines {
-		position: absolute;
-		right: 0;
-		top: 15px;
-	}
-	#communitylist a h4 {
-		margin-top: -10px;
 	}
 	#librarysearch h2 {
 		float: left;
@@ -3077,6 +2975,10 @@ a.community-action {
 	padding-right: 10px;
 }
 
+a.community-action:last-of-type {
+	padding-right: 0px;
+}
+
 a.community-action.community-favorite.community-favorited:before {
     color: #ff9b00;
 }
@@ -3745,10 +3647,6 @@ ol.searchResults li {
 	margin-bottom: 15px;
 }
 
-div#communities-view #communitylist img {
-	max-width: none!important;
-}
-
 dd[itemprop="attendee"],
 dd[itemprop="location"] {
 	padding-left: 0px !important;
@@ -4208,10 +4106,6 @@ i.glyphicon.link-external {
 	min-height: 4.8em;
 }
 
-#communitylist img {
-	margin-top: 0px!important
-}
-
 table.listing {
 	width: 100%;
 }
@@ -4505,10 +4399,6 @@ span#form-widgets-file:after {
 	#communities-view .media-left {
 		width: 100%;
 		margin-bottom: 10px;
-	}
-	#communitylist article.media.ng-scope,
-	#communitylist article.media.ng-scope:last-of-type {
-		padding: 0 0px 15px 0!important;
 	}
 	.community-actions {
 		text-align: left;
