@@ -153,6 +153,11 @@
                   <tal:seemore i18n:translate="seemore_communities">See more communities</tal:seemore>
                </a>
             </li>
+            <li tal:condition="view/view_community_tags">
+               <a tal:attributes="href string:${view/portal_url}/allcommunities_bytag">
+                  <tal:seemore i18n:translate="see_communities_bytag">See communities by tag</tal:seemore>
+               </a>
+            </li>
             <li tal:condition="campus_url">
                <a tal:attributes="href campus_url" target="_blank">
                   <tal:gotocampus i18n:translate="gotocampus">Go to the campus</tal:gotocampus>

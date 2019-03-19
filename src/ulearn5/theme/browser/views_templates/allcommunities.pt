@@ -27,7 +27,7 @@
             <span class="add-on"><i class="fa fa-search"></i></span>
           </div>
           <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
-            <select ng-model="t" i18n:domain="ulearn" class="form-control searchInput">
+            <select ng-model="t" class="form-control searchInput">
               <option value="" i18n:translate="">Todas las comunidades</option>
               <optgroup label="------------------------------"></optgroup>
               <option value="Closed" i18n:translate="Closed">Closed</option>
@@ -68,9 +68,9 @@
                   <a class="{{community.type}} text community-action"
                      ng-click="ctrl.searchFilterAllCommunities(community.type)">
                     <i class="fa fa-tasks"></i>
-                    <span data-ng-if="community.type === 'Open'" i18n:translate="Open" ng-selected="Open"></span>
-                    <span data-ng-if="community.type === 'Organizative'" i18n:translate="Organizative"></span>
-                    <span data-ng-if="community.type === 'Closed'" i18n:translate="Closed"></span>
+                    <span data-ng-if="community.type === 'Open'" i18n:translate="Open" ng-selected="Open">Open</span>
+                    <span data-ng-if="community.type === 'Organizative'" i18n:translate="Organizative">Organizative</span>
+                    <span data-ng-if="community.type === 'Closed'" i18n:translate="Closed">Closed</span>
                   </a>
 
                   <a class="community-action community-favorite community-icon-"

@@ -97,12 +97,12 @@
                             </a>
 
                             <div class="community-actions">
-                              <a class="{{community.type}} text community-action" i18n:domain="ulearn"
+                              <a class="{{community.type}} text community-action"
                                  ng-click="comCtrl.searchFilterAllCommunities(community.type)">
                                 <i class="fa fa-tasks"></i>
-                                <span data-ng-if="community.type === 'Open'" i18n:translate="Open"></span>
-                                <span data-ng-if="community.type === 'Organizative'" i18n:translate="Organizative"></span>
-                                <span data-ng-if="community.type === 'Closed'" i18n:translate="Closed"></span>
+                                <span data-ng-if="community.type === 'Open'" i18n:translate="Open">Open</span>
+                                <span data-ng-if="community.type === 'Organizative'" i18n:translate="Organizative">Organizative</span>
+                                <span data-ng-if="community.type === 'Closed'" i18n:translate="Closed">Closed</span>
                               </a>
 
                               <a class="community-action community-favorite community-icon-"
@@ -157,7 +157,7 @@
             </div>
         </div>
         <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}">
-            <tal:newsitems tal:define="news_to_show view/news_to_show;" tal:condition="news_to_show" i18n:domain="ulearn">
+            <tal:newsitems tal:define="news_to_show view/news_to_show;" tal:condition="news_to_show">
             <div tal:define="dades_noticies view/dadesNoticies;
                           Batch python:modules['Products.CMFPlone'].Batch;
                           b_size python:10;
