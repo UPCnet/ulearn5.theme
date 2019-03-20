@@ -103,9 +103,20 @@ body.template-allcommunities {
 
     body.template-allcommunities_bytag {
 
-        img {
-            max-width: 80px !important;
-            margin-bottom: 15px;
+        .block {
+            width: 100%;
+
+            img {
+                max-width: 80px !important;
+                margin-bottom: 15px;
+            }
         }
     }
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }

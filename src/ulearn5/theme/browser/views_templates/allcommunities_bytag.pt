@@ -15,8 +15,8 @@
   <metal:main metal:fill-slot="main"
               tal:define="info view/getInfo;">
 
-    <div class="row equal">
-      <div tal:repeat="tag info" class="col-sm-12 col-md-12 col-lg-6">
+    <div class="row">
+      <div tal:repeat="tag info" class="col-sm-12 col-md-12 col-lg-6 block">
         <div class="tagInfo col-md-12">
           <div class="image col-md-2">
             <tal:block tal:condition="tag/image_path">
@@ -47,6 +47,7 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="++theme++ulearn5/assets/javascripts/allCommunitiesByTag.min.js"></script>
 
   </metal:main>
 </body>

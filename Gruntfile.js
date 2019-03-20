@@ -108,7 +108,8 @@ module.exports = function (grunt) {
         uglify: {
             main: {
                 files: {
-                    'javascripts/theming5.min.js': 'javascripts/theming5.js'
+                    'javascripts/theming5.min.js': 'javascripts/theming5.js',
+                    'javascripts/allCommunitiesByTag.min.js': 'javascripts/allCommunitiesByTag.js'
                 }
             }
         },
