@@ -212,6 +212,14 @@ body.template-prefs_keywords_view .icon-search {
     display: none;
 }
 
+/* Disable tab member-fields */
+
+body.template-usergroup-userprefs .autotabs .autotoc-nav a:last-child,
+body.template-usergroup-groupprefs .autotabs .autotoc-nav a:last-child,
+body.template-usergroup-controlpanel .autotabs .autotoc-nav a:last-child {
+    display: none;
+}
+
 /* Others */
 
 .pat-structure .navbar {
@@ -225,7 +233,6 @@ body.template-prefs_keywords_view .icon-search {
 .pat-structure .navbar-search input.form-control {
     height: 30px !important;
 }
-
 
 .btn.btn-primary[type="submit"] {
     color: #FFFFFF !important;
