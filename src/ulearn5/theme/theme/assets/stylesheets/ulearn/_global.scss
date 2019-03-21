@@ -5082,7 +5082,8 @@ li.select2-search-field.form-control {
 }
 
 #maxui-container #maxui-activities .maxui-activity .maxui-footer .maxui-origin {
-	order: 2!important
+	order: 2!important;
+	max-width: 220px;
 }
 
 #maxui-container #maxui-mainpanel #maxui-activity-sort .maxui-sort-action.active {
