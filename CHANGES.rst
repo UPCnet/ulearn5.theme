@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.38 (unreleased)
+0.38 (2019-03-25)
 -----------------
 
-- Nothing changed yet.
-
+* Merge Estadistiques [Pilar Marinas]
+* Estilo actividad [Iago López Fernández]
+* Disable tab member-fields [Iago López Fernández]
 
 0.37 (2019-03-18)
 -----------------
