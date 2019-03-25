@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.39 (unreleased)
+0.39 (2019-03-25)
 -----------------
 
-- Nothing changed yet.
-
+* grunt estadistiques [Pilar Marinas]
 
 0.38 (2019-03-25)
 -----------------
