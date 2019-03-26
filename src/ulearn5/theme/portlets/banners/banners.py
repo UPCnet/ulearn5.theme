@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_chain
+from Acquisition import aq_inner
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -15,6 +17,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from ulearn5.core import _
 from ulearn5.core.browser.security import execute_under_special_role
+from ulearn5.core.content.community import ICommunity
 
 import transaction
 
@@ -26,6 +29,7 @@ class TypesVocabulary(object):
         types = []
         types.append(SimpleVocabulary.createTerm(u'Global', 'Global', _(u'Global')))
         types.append(SimpleVocabulary.createTerm(u'Personal', 'Personal', _(u'Personal')))
+        types.append(SimpleVocabulary.createTerm(u'Comunitat', 'Comunitat', _(u'Comunitat')))
         return SimpleVocabulary(types)
 
 
@@ -53,8 +57,10 @@ class Assignment(base.Assignment):
     def title(self):
         if self.typePortlet == 'Global':
             return _(u'banners_global', default=u'Banners (Global)')
-        else:
+        elif self.typePortlet == 'Personal':
             return _(u'banners_personal', default=u'Banners (Personal)')
+        else:
+            return _(u'banners_comunitats', default=u'Banners (Comunitats)')
 
 
 def createOrGetObject(self, context, newid, title, type_name):
@@ -118,15 +124,31 @@ class Renderer(base.Renderer):
                         execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
                 else:
                     execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
-        else:
+        elif self.data.typePortlet == 'Global':
             path = '/'.join(api.portal.get().getPhysicalPath()) + "/gestion/banners"
+        else:
+            path = self.getCommunityPath()
 
-        result = catalog(portal_type='ulearn.banner',
-                         review_state='intranet',
-                         path={'query': path, 'depth': 1},
-                         sort_on="getObjPositionInParent")
+        data = {'portal_type': 'ulearn.banner',
+                'review_state': 'intranet',
+                'sort_on': "getObjPositionInParent"}
+
+        if self.data.typePortlet == 'Comunitat':
+            data.update({'community_type': ('Open', 'Closed', 'Organizatived')})
+            data.update({'path': path})
+        else:
+            data.update({'path': {'query': path, 'depth': 1}})
+
+        result = catalog(**data)
         banners = [banner.getObject() for banner in result]
         return banners
+
+    def getCommunityPath(self):
+        community = aq_inner(self.context)
+        for obj in aq_chain(community):
+            if ICommunity.providedBy(obj):
+                return '/' + '/'.join(obj.getPhysicalPath())
+        return '/'.join(api.portal.get().getPhysicalPath())
 
 
 class AddForm(base.AddForm):
