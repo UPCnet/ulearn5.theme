@@ -714,6 +714,10 @@ body.section-front-page #librarysearch, {
 	*background-color: #003bb3;
 }
 
+#communitylist a {
+	display: inline-block !important;
+}
+
 // Listat de comunitats
 #communitylist {
 	clear: both;

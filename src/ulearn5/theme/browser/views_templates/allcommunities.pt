@@ -53,10 +53,19 @@
                 </a>
               </div>
               <div class="col-md-10">
-                <a ng-href="{{community.url}}">
+
+                <a ng-if="community.type === 'Open' && !ctrl.is_subscribed(community.url)"
+                   class="community-action" ng-click="ctrl.subscribe(community)" ng-cloak>
                   <h4 class="{{community.type}} text">{{community.title}}</h4>
                   <p>{{community.description}}</p>
                 </a>
+
+                <a ng-if="!(community.type === 'Open') || (community.type === 'Open' && ctrl.is_subscribed(community.url))"
+                   ng-href="{{community.url}}">
+                  <h4 class="{{community.type}} text">{{community.title}}</h4>
+                  <p>{{community.description}}</p>
+                </a>
+
               </div>
             </div>
             <div class="community-actions">
