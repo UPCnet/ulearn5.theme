@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.40 (unreleased)
+0.40 (2019-04-01)
 -----------------
 
-- Nothing changed yet.
-
+* Vista allcommunities: Modificar funcionalidad comunidades abiertas [Iago López Fernández]
+* Portlet banners - Por comunidades [Iago López Fernández]
 
 0.39 (2019-03-25)
 -----------------
