@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.41 (unreleased)
+0.41 (2019-04-01)
 -----------------
 
-- Nothing changed yet.
-
+* View image community in communities open and not subscribed [Pilar Marinas]
 
 0.40 (2019-04-01)
 -----------------
