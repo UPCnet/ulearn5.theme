@@ -1,5 +1,7 @@
-<div id="box_banners" i18n:domain="ulearn.enginyersbcn" tal:condition="not:view/isAnon">
-    <tal:banners tal:repeat="banner view/getBanners">
+<tal:block tal:condition="not:view/isAnon">
+<div id="box_banners" i18n:domain="ulearn.enginyersbcn"
+     tal:define="banners view/getBanners" tal:condition="banners">
+    <tal:banners tal:repeat="banner banners">
         <div class="banner">
             <tal:block tal:condition="banner/image">
                 <a tal:condition="banner/open_external" target="_blank"
@@ -33,3 +35,4 @@
         </div>
     </tal:banners>
 </div>
+</tal:block>
