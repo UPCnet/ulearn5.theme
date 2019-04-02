@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.42 (unreleased)
+0.42 (2019-04-02)
 -----------------
 
-- Nothing changed yet.
-
+* Solucionar estadisticas IE11 [Pilar Marinas]
+* Portlet Banners: No mostrar espacio vacio si no hay banners [Iago López Fernández]
 
 0.41 (2019-04-01)
 -----------------
