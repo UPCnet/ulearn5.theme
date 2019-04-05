@@ -219,9 +219,10 @@ class viewletHeaderUlearn(viewletBase):
                               sort_on="getObjPositionInParent")
 
             carpetes = {}
-            for folder in folders:
+            for pos, folder in enumerate(folders):
                 path = folder.getPath()
                 carpeta = {'id': folder.id,
+                           'position': pos,
                            'title': folder.getObject().title,
                            'url': folder.getURL(),
                            'links': []
@@ -279,9 +280,11 @@ class viewletHeaderUlearn(viewletBase):
                 record.attrs['dades'] = dades.values()
                 soup_menu.add(record)
                 soup_menu.reindex()
-                return dades.values()
+                result = dades.values()
             else:
-                return exist[0].attrs['dades']
+                result = exist[0].attrs['dades']
+
+            return sorted(result, key=lambda x: x['position'])
 
     def get_customized_header(self):
         """
