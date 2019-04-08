@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.43 (unreleased)
+0.43 (2019-04-08)
 -----------------
 
-- Nothing changed yet.
-
+* Arreglar problema de codificación en el filtro de búsqueda de una notícia [Iago López Fernández]
+* Grunt ulearn5.js 57c79b1 [Iago López Fernández]
+* Aplicar orden de la carpeta en los enlaces del menu [Iago López Fernández]
 
 0.42 (2019-04-02)
 -----------------
