@@ -804,3 +804,9 @@ body.template-grid_events_view {
     }
   }
 }
+
+/* Search */
+
+.template-search select[name="Subject:list"] option {
+  color: $main-color !important;
+}
