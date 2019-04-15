@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.44 (unreleased)
+0.44 (2019-04-15)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos select de etiquetas del buscador [Iago López Fernández]
 
 0.43 (2019-04-08)
 -----------------
