@@ -19,6 +19,7 @@ from zope.interface import implements
 
 from base5.core.utils import abrevia
 from ulearn5.core import _
+from ulearn5.core.utils import getSearchersFromUser
 
 import transaction
 
@@ -134,18 +135,7 @@ class Renderer(base.Renderer):
             return []
 
     def getSearchers(self):
-        portal = getSite()
-        current_user = api.user.get_current()
-        userid = current_user.id
-        soup_searches = get_soup('user_news_searches', portal)
-        exist = [r for r in soup_searches.query(Eq('id', userid))]
-        res = []
-        if exist:
-            values = exist[0].attrs['searches']
-            if values:
-                for val in values:
-                    res.append(' '.join(val))
-        return res
+        return getSearchersFromUser()
 
     def get_news(self, context, state, path, limit):
         catalog = getToolByName(context, 'portal_catalog')
