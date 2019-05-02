@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.45 (unreleased)
+0.45 (2019-05-02)
 -----------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/estadistiques' into develop [Pilar Marinas]
+* Mejora buscador subscribednews [Iago López Fernández]
+* Grunt ulearn5.js c155785 [Iago López Fernández]
 
 0.44 (2019-04-15)
 -----------------
