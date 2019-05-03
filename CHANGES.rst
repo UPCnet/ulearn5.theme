@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.46 (unreleased)
+0.46 (2019-05-03)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js [Pilar Marinas]
 
 0.45 (2019-05-02)
 -----------------
