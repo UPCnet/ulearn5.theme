@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.47 (unreleased)
+0.47 (2019-05-15)
 -----------------
 
-- Nothing changed yet.
-
+* Mostrar texto noticias con la vista collection_news_view [Iago López Fernández]
 
 0.46 (2019-05-03)
 -----------------
