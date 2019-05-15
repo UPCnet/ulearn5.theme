@@ -88,11 +88,18 @@
                                           May 5
                                        </time>
                                     </p>
-                                    <span class="description"
+                                    <span class="text_noticia"
                                           tal:condition="item_description"
-                                          tal:content="item_description">
-                                          Description
+                                          tal:replace="item_description">
+                                       Text Noticia
                                     </span>
+                                    <tal:block tal:condition="not:item_description">
+                                       <span class="text_noticia"
+                                             tal:condition="item/text"
+                                             tal:replace="structure python:view.abreviaText(item.text.raw, 250)">
+                                          Text Noticia
+                                       </span>
+                                    </tal:block>
                                     <a href="#" tal:attributes="href item_link">
                                        <span class="readmore" i18n:translate="readmore">Leer mas..</span>
                                     </a>

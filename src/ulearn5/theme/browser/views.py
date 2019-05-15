@@ -885,6 +885,9 @@ class CollectionNewsView(grok.View, CollectionView):
         results = self.collection_behavior.results(**kwargs)
         return results
 
+    def abreviaText(self, text, num):
+        return abrevia(text, num)
+
 
 class SharedWithMe(baseCommunities):
     """ The list of communities """
