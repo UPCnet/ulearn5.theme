@@ -6050,3 +6050,18 @@ body.template-grid_events_view {
 		}
 	}
 }
+
+/* EasyForm */
+
+body.portaltype-easyform {
+
+	#formEpilogue,
+	#form-buttons-modeleditor {
+		display: none;
+	}
+
+	#form .fieldPreview div:nth-child(3) {
+		margin-top: 10px;
+	}
+
+}

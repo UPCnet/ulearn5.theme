@@ -12,14 +12,14 @@
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".user_profile.userProfile"
         permission="base.authenticated"
-        />
+    />
 
     <browser:page
         for="*"
         name="plone_javascript_variables.js"
         class=".jsvariables.JSVariables"
         permission="zope.Public"
-        />
+    />
 
     <!-- override FolderView class and template -->
     <browser:page
@@ -30,6 +30,7 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         permission="zope2.View"
     />
+
     <browser:page
         for="plone.app.contenttypes.behaviors.collection.ISyndicatableCollection"
         class="ulearn5.theme.browser.collection.MyCollectionView"
@@ -44,7 +45,7 @@
         for="*"
         class=".get_news.getNews"
         permission="zope.Public"
-        />
+    />
 
     <!-- Comments viewlet -->
     <browser:viewlet
@@ -58,12 +59,17 @@
     />
 
     <browser:page
-      name="search"
-      class=".search.Search"
-      permission="zope2.View"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-      template="views_templates/search.pt"
+        name="search"
+        class=".search.Search"
+        permission="zope2.View"
+        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/search.pt"
+    />
+
+    <browser:resource
+        name="ulearnSchemaeditor.js"
+        file="schemaeditor.js"
     />
 
 </configure>
