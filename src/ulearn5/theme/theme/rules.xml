@@ -81,7 +81,7 @@
     </rules>
     <!-- Template for frontpage and profile-->
     <rules css:if-content="body.section-front-page, body.template-profile, body.template-search,
-                           body.template-mail_password_form">
+                           body.template-mail_password_form, body.template-addprofile">
         <theme href="homepage.html" />
         <rules css:if-content="body.section-front-page">
             <drop css:content=".documentFirstHeading" />
