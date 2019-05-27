@@ -1,0 +1,23 @@
+.portlet-polls {
+
+    h2::after {
+        content: none !important;
+    }
+
+    dl.votePortlet {
+        margin-bottom: 0px;
+
+        h3 {
+            margin-top: 0px;
+            padding: 6px 0;
+        }
+
+        input[name="poll.submit"] {
+            margin: 6px 0;
+        }
+
+        .pollresultholder {
+
+        }
+    }
+}
