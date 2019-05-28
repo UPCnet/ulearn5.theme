@@ -6071,3 +6071,9 @@ body.portaltype-easyform {
 	}
 
 }
+
+/* Widget checkbox info */
+
+div.checbox-info-widget.required::after {
+  content: "";
+}
