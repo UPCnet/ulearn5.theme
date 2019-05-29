@@ -1,0 +1,42 @@
+body.userrole-anonymous.template-welcomeloginview #header-menu .global-navigation {
+  display: none !important;
+}
+
+body.template-welcomeloginview {
+
+  .loginbox {
+    background-color: white;
+    background-image: none;
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #eeeeee;
+    border-radius: 4px;
+    border-right: 1px solid #eeeeee;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.96;
+    padding: 20px;
+    width: 465px;
+
+    .loginlogo {
+      margin-bottom: 0px;
+    }
+  }
+
+  .control-group {
+    text-align: center;
+
+    & > h2 {
+      color: black !important;
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+  }
+
+  article#content {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
