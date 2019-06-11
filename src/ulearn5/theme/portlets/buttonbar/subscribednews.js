@@ -17,6 +17,11 @@ $(document).ready(function (event) {
         var path = $(this).data().path;
         var normalized = normalizeWhiteSpace(text, false);
         textSearch(normalized);
+        if($('#searcher_selector option[value="' + normalized + '"]').length > 0){
+          $('#searcher_selector').val(normalized);
+        }else{
+          $('#searcher_selector').val($('#searcher_selector option:first-child').text());
+        }
         $.get(path + '/search_filtered_news', { q: normalized }, function(data) {
           $('.list-search-portlet').html(data);
         });
@@ -50,7 +55,6 @@ $(document).ready(function (event) {
       $.get(path + '/search_filtered_news', { q: normalized }, function(data) {
         $('.list-search-portlet').html(data);
       });
-
       if($('#searcher_selector').val(normalized).val() == null){
         $('#searcher_selector').val($('#searcher_selector option:first-child').text());
       }
