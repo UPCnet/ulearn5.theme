@@ -2,11 +2,17 @@ Changelog
 =========
 
 
-0.48 (unreleased)
+0.48 (2019-06-26)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js 67a3d49 [Iago López Fernández]
+* Subscribednews: Mejora de la búsqueda de notícias [Iago López Fernández]
+* Añadir vista welcomeLoginView (switchmed + gebropharma) en backend.xml y rules.xml + Estilos para esta vista [Iago López Fernández]
+* Estilos widget checlbox info [Iago López Fernández]
+* Grunt ulearn5.js 14970d8 + Overrided portlet collective.polls [Iago López Fernández]
+* Añadir vista addprofile (switchmed) en backend.xml y rules.xml [Iago López Fernández]
+* Estilos maxui-widget-container [Iago López Fernández]
+* EasyForm [Iago López Fernández]
 
 0.47 (2019-05-15)
 -----------------
