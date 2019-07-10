@@ -20,26 +20,7 @@
         class=".jsvariables.JSVariables"
         permission="zope.Public"
     />
-
-    <!-- override FolderView class and template -->
-    <browser:page
-        for="plone.dexterity.interfaces.IDexterityContainer"
-        class="ulearn5.theme.browser.folder.MyFolderView"
-        name="summary_view"
-        template="../templates/plone.app.contenttypes.browser.templates.listing_summary.pt"
-        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-        permission="zope2.View"
-    />
-
-    <browser:page
-        for="plone.app.contenttypes.behaviors.collection.ISyndicatableCollection"
-        class="ulearn5.theme.browser.collection.MyCollectionView"
-        name="summary_view"
-        template="../templates/plone.app.contenttypes.browser.templates.listing_summary.pt"
-        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-        permission="zope2.View"
-    />
-
+   
     <browser:page
         name="get_news"
         for="*"
