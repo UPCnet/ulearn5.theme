@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.49 (unreleased)
+0.49 (2019-07-17)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos widget Fieldset h5 [Iago López Fernández]
+* Quitar override FolderView CollectionView y modificar abrevia por la funcion de plone CroppedDescription [pilar.marinas]
 
 0.48 (2019-06-26)
 -----------------
