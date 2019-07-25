@@ -5148,9 +5148,13 @@ li.select2-search-field.form-control {
 	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 }
 
-#maxui-container #maxui-conversations-header,
-input.maxui-button.maxui-button-grey {
+#maxui-container #maxui-conversations-header {
 	display: none!important;
+}
+
+input.maxui-button.maxui-button-grey:hover,
+input.maxui-button.maxui-button-grey:active {
+	color: white !important;
 }
 
 #maxui-container #maxui-conversations .maxui-wrapper #maxui-conversations-list .maxui-conversation .maxui-activity-content {
