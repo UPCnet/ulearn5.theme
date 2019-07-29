@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.50 (unreleased)
+0.50 (2019-07-29)
 -----------------
 
-- Nothing changed yet.
-
+* Chat: Mostrar btn para cargar el historial del chat antiguo [Iago López Fernández]
+* Añadir viewlet-above-content-title a la vista filtered_contents_search [Iago López Fernández]
 
 0.49 (2019-07-17)
 -----------------
