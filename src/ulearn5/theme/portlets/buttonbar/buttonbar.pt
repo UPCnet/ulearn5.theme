@@ -179,6 +179,12 @@
                             </div>
                         </div>
                    </li>
+                   <li class="noticies clearfix">
+                    <a href="" tal:attributes="href string:${view/get_noticias_folder_url}">
+                      <i class="icon-plus-sign icons"> </i>
+                      <span i18n:translate="seemore">Mes noticies</span>
+                    </a>
+                  </li>
                 </ul>
                 <div metal:use-macro="here/batch_macros/macros/navigation" />
             </div>

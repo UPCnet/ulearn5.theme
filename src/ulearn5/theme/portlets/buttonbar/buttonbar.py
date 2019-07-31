@@ -30,7 +30,7 @@ class IButtonBarPortlet(IPortletDataProvider):
     count = schema.Int(title=_PFM(u'Number of items to display'),
                        description=_PFM(u'How many items to list.'),
                        required=True,
-                       default=20)
+                       default=10)
 
     state = schema.Tuple(title=_PFM(u"Workflow state"),
                          description=_PFM(u"Items in which workflow state to show."),
@@ -44,7 +44,7 @@ class IButtonBarPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IButtonBarPortlet)
 
-    def __init__(self, count=20, state=('published', 'intranet')):
+    def __init__(self, count=10, state=('published', 'intranet')):
         self.count = count
         self.state = state
 
@@ -105,7 +105,7 @@ class Renderer(base.Renderer):
         return self._data()
 
     def get_noticias_folder_url(self):
-        url = self.portal().absolute_url() + '/noticies'
+        url = self.portal().absolute_url() + '/news'
         return url
 
     def dadesNoticies(self):
@@ -197,7 +197,7 @@ class AddForm(base.AddForm):
     description = _(u"This portlet displays subscribed News Items.")
 
     def create(self, data):
-        return Assignment(count=data.get('count', 20),
+        return Assignment(count=data.get('count', 10),
                           state=data.get('state', ('intranet', )))
 
 
