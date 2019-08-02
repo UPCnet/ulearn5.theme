@@ -17,6 +17,8 @@
   <include package=".browser" />
   <include package=".portlets" />
 
+  <include file="patches.zcml" />
+
   <!-- ++theme++ulearn5 -->
   <plone:static
       directory="theme"

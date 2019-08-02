@@ -63,11 +63,14 @@
                       <div class="media-body">
                         <div class="summary" tal:attributes="title item_type">
                           <h2 class="tileHeadline media-heading">
-                          <a tal:attributes="href item_link;
-                                                class string:$item_type_class $item_wf_state_class url;
-                                                title item_type"
-                             tal:content="item_title">Item Title
-                          </a>
+                            <a tal:attributes="href item_link;
+                                                  class string:$item_type_class $item_wf_state_class url;
+                                                  title item_type"
+                               tal:define="mimeIcon item/MimeTypeIcon|nothing">
+                              <img class="mime-icon" tal:condition="mimeIcon"
+                                tal:attributes="src mimeIcon">
+                              <span tal:content="item_title">Item Title</span>
+                            </a>
                         </h2>
                         </div>
 

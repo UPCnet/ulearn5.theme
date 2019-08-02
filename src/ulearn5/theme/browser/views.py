@@ -46,6 +46,7 @@ from base5.core.utils import pref_lang
 from ulearn5.core.browser.searchuser import searchUsersFunction
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from ulearn5.theme.patches import getMimeTypeIcon
 
 from email import Encoders
 from email.mime.base import MIMEBase
@@ -646,6 +647,10 @@ class FilteredContentsSearchView(grok.View):
         favorite = [{'obj': r, 'tipus': order_by_type[r.portal_type] if r.portal_type in order_by_type else 6} for r in results]
         return favorite
 
+    def getFileIcon(self, item):
+        if item.Type == 'File':
+            return getMimeTypeIcon(self, item.getObject().file)
+
 
 class SearchFilteredContentAjax(FilteredContentsSearchView):
     """ Ajax helper for filtered content search view for every folder. """
@@ -818,6 +823,7 @@ class ContentsPrettyView(grok.View):
                        'item_url': item.getURL(),
                        'item_path': item.getPath(),
                        'item_state': item.review_state,
+                       'item_icon': getMimeTypeIcon(self, item.getObject().file) if item.portal_type == 'File' else None,
                        } for item in items if item.exclude_from_nav is False]
 
         if len(all_items) > 0:
@@ -841,7 +847,8 @@ class ContentsPrettyView(grok.View):
                        'item_desc': item2.Description[:120],
                        'item_type': item2.portal_type,
                        'item_url': item2.getURL(),
-                       'item_state': item2.review_state
+                       'item_state': item2.review_state,
+                       'item_icon': getMimeTypeIcon(self, item2.getObject().file) if item2.portal_type == 'File' else None,
                        } for item2 in items if item2.exclude_from_nav is False]
         return all_items
 

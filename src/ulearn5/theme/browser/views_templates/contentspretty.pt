@@ -21,9 +21,11 @@
                                             normalizeString nocall: context/plone_utils/normalizeString;
                                             item_type_class python:'contenttype-' + normalizeString(type)">
                                 <a tal:attributes="href item/item_url;
-                                                   class string:$item_type_class icon internal_link"
-                                   target="_self"
-                                   title="">
+                                                   class string:${item_type_class} icon internal_link"
+                                   target="_self" title=""
+                                   tal:define="mimeIcon item/item_icon">
+                                    <img class="mime-icon" tal:condition="mimeIcon"
+                                         tal:attributes="src mimeIcon">
                                     <span tal:content="item/item_title">Title</span>
                                 </a>
                             </h3>
@@ -43,11 +45,13 @@
                                      tal:repeat="item2 subitems">
                                     <a tal:define="type item2/item_type;
                                                    normalizeString nocall: context/plone_utils/normalizeString;
-                                                   item_type_class python:'contenttype-' + normalizeString(type)"
+                                                   item_type_class python:'contenttype-' + normalizeString(type);
+                                                   mimeIcon item2/item_icon"
                                        tal:attributes="href item2/item_url;
-                                                       class string:$item_type_class icon internal_link"
-                                       target="_self"
-                                       title="">
+                                                       class string:${item_type_class} icon internal_link"
+                                       target="_self" title="">
+                                        <img class="mime-icon" tal:condition="mimeIcon"
+                                             tal:attributes="src mimeIcon">
                                         <span tal:content="item2/item_title">Title</span>
                                     </a>
                                 </div>

@@ -24,7 +24,6 @@
 
   <div id="librarysearch">
 
-    <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
     <h1 class="documentFirstHeading" tal:content="context/Title" />
 
     <div class="documentDescription" tal:content="context/Description">Descripció</div>
@@ -71,7 +70,10 @@
                             item_url contingut/obj/getURL|contingut/obj/absolute_url;">
               <div class="favorite">
                 <div class="star pull-right"><i class="fa fa-star pull-right"></i></div>
-                <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
+                <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;"
+                   tal:define="mimeIcon python: view.getFileIcon(contingut['obj'])">
+                  <img class="mime-icon" tal:condition="mimeIcon"
+                       tal:attributes="src mimeIcon">
                   <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
                   <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
                   </h4>
@@ -85,7 +87,10 @@
             <li tal:define="item_type contingut/obj/portal_type;
                               item_url contingut/obj/getURL|contingut/obj/absolute_url;">
               <div class="nofavorite">
-                <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;">
+                <a tal:attributes="href python: item_url+'/view' if item_type in use_view_action else item_url;"
+                   tal:define="mimeIcon python: view.getFileIcon(contingut['obj'])">
+                  <img class="mime-icon" tal:condition="mimeIcon"
+                       tal:attributes="src mimeIcon">
                   <h4 tal:attributes="class item_type"><span tal:replace="contingut/obj/Title">Title</span>
                   <span tal:condition="ulearn_utils/is_activate_sharedwithme"><i tal:condition="contingut/obj/is_shared" class="shared_icon fa fa-share-alt-square" aria-hidden="true"></i></span>
                   </h4>

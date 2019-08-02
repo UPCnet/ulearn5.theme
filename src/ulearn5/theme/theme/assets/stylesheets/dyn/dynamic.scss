@@ -23,6 +23,13 @@ a {
   }
 }
 
+.svgicon {
+  fill: $main-color;
+  &:hover {
+    fill: darken($main-color, 5%);
+  }
+}
+
 .bg {
   background-color: $background-color;
 }
@@ -194,7 +201,7 @@ input.maxui-button {
 }
 
 // OVERRIDES
-h1, h2, h3, label, span.label, fieldset legend {
+h1, h2, h3, h4, h5, label, span.label, fieldset legend {
   color: $secondary-color !important;
 }
 

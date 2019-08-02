@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="ulearn">
+
+    <include package="collective.monkeypatcher" />
+
+    <monkey:patch
+        description="Costumize mime type icons"
+        class="plone.app.contenttypes.browser.utils.Utils"
+        original="getMimeTypeIcon"
+        replacement=".patches.getMimeTypeIcon"
+    />
+
+    <monkey:patch
+        description="Costumize mime type icons"
+        class="plone.app.contentlisting.contentlisting.BaseContentListingObject"
+        original="MimeTypeIcon"
+        replacement=".patches.MimeTypeIcon"
+    />
+
+</configure>

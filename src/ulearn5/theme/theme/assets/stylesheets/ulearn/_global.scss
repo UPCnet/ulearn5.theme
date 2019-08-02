@@ -163,6 +163,41 @@ a:active {
 	outline: 0 none;
 }
 
+img[src$="-ulearn.svg"] {
+	display: none;
+}
+
+.mime-icon {
+	margin-right: 4px;
+}
+
+.svgicon {
+  	fill: #007BC0;
+  	margin-right: 9px;
+}
+
+.svgicon,
+.mime-icon {
+	height: 20px;
+  	vertical-align: middle;
+  	margin-bottom: 3px;
+}
+
+
+.template-contents_pretty_view .secciofolders .svgicon,
+.template-contents_pretty_view .secciofolders .mime-icon {
+	height: 15px;
+}
+
+a:svgicon,
+a:svgicon {
+	fill: #004A74;
+}
+
+object {
+	margin-top: 10px;
+}
+
 label[for="form.ext_editor"]~div.widget {
 	display: none;
 }
@@ -1274,10 +1309,6 @@ body.section-front-page #librarysearch, {
 	margin-bottom: 18px;
 }
 
-#librarysearch .Document {
-	font-size: 18px!important;
-}
-
 .icon-ulearn-video {
 	@extend .fa-video-camera;
 	@extend .fa;
@@ -1465,18 +1496,8 @@ body.section-front-page #librarysearch, {
 }
 
 #librarysearch {
-	.File:before {
-		content: "\f1c1";
-		font-family: FontAwesome;
-		font-size: 18px;
-		font-style: normal;
-		font-weight: normal;
-		text-decoration: inherit;
-		margin-right: 7px;
-	}
 	.File {
 		color: #585858;
-		font-size: 14px;
 		font-weight: 600;
 	}
 	.CloudFile:before {
@@ -1504,7 +1525,6 @@ body.section-front-page #librarysearch, {
 	}
 	.Link {
 		color: #585858;
-		font-size: 14px;
 		font-weight: 600;
 	}
 	.Image:before {
@@ -1518,7 +1538,6 @@ body.section-front-page #librarysearch, {
 	}
 	.Image {
 		color: #585858;
-		font-size: 14px;
 		font-weight: 600;
 	}
 	.Document:before {
@@ -1532,7 +1551,6 @@ body.section-front-page #librarysearch, {
 	}
 	.Document {
 		color: #585858;
-		font-size: 14px;
 		font-weight: 600;
 	}
 }
@@ -1760,8 +1778,12 @@ body.section-front-page #librarysearch, {
 	font-style: normal;
 	font-weight: normal;
 	text-decoration: inherit;
-	margin-right: 10px;
+	margin-right: 7px;
 	font-size: 18px;
+}
+
+.contenttype-easyform.contenttype-easyform::before {
+	margin-right: 7px;
 }
 
 .template-folder_listing .summary img {
@@ -2555,8 +2577,35 @@ input:checked+.sliderbutton:before {
 }
 
 
-/* =========== Vista contents_pretty_view =========== */
+/* =========== Vista contents_pretty_view + iconos =========== */
 
+.template-filtered_contents_search_view #tagslist svg,
+.template-tabular_view [class^='contenttype-'] svg,
+.template-summary_view [class^='contenttype-'] svg,
+.template-contents_pretty_view [class^='contenttype-'] svg,
+.template-listing_view #content [class^='contenttype-'] svg {
+	display: none;
+}
+
+.template-filtered_contents_search_view #tagslist svg,
+.template-tabular_view #content .contenttype-file svg,
+.template-summary_view #content .contenttype-file svg,
+.template-listing_view #content .contenttype-file svg,
+.template-contents_pretty_view #content .contenttype-file svg {
+	display: inline !important;
+}
+
+.template-filtered_contents_search_view #tagslist img[src^="++theme++ulearn5/assets/icons/"],
+.template-filtered_contents_search_view #tagslist svg {
+	float: left;
+	margin-top: -2px;
+	margin-bottom: 0px;
+}
+
+.template-tabular_view #content .contenttype-folder:before,
+.template-tabular_view #content .contenttype-privatefolder:before,
+.template-summary_view #content .contenttype-folder:before,
+.template-summary_view #content .contenttype-privatefolder:before,
 .template-listing_view #content .contenttype-folder:before,
 .template-listing_view #content .contenttype-privatefolder:before,
 .template-contents_pretty_view #content .contenttype-privatefolder:before,
@@ -2570,17 +2619,8 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
-.template-listing_view #content .contenttype-file:before,
-.template-contents_pretty_view #content .contenttype-file:before {
-	content: "\f1c1";
-	font-family: FontAwesome;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: normal;
-	text-decoration: inherit;
-	margin-right: 7px;
-}
-
+.template-tabular_view #content .contenttype-link:before,
+.template-summary_view #content .contenttype-link:before,
 .template-listing_view #content .contenttype-link:before,
 .template-contents_pretty_view #content .contenttype-link:before {
 	content: "\f0c1";
@@ -2592,6 +2632,8 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.template-tabular_view #content .contenttype-link_pie:before,
+.template-summary_view #content .contenttype-link_pie:before,
 .template-listing_view #content .contenttype-link_pie:before,
 .template-contents_pretty_view #content .contenttype-link_pie:before {
 	content: "\f0c1";
@@ -2603,6 +2645,8 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.template-tabular_view #content .contenttype-image:before,
+.template-summary_view #content .contenttype-image:before,
 .template-listing_view #content .contenttype-image:before,
 .template-contents_pretty_view #content .contenttype-image:before {
 	content: "\f1c5";
@@ -2614,6 +2658,8 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.template-tabular_view #content .contenttype-document:before,
+.template-summary_view #content .contenttype-document:before,
 .template-listing_view #content .contenttype-document:before,
 .template-contents_pretty_view #content .contenttype-document:before {
 	content: "\f0f6";

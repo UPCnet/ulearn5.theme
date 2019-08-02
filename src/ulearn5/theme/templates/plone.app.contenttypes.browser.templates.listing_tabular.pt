@@ -64,17 +64,13 @@
                       <tal:block tal:replace="field_data/value" />
                     </td>
                     <td tal:condition="python:field == 'Title'">
-                      <a tal:condition="python:item_type == 'File' and showicons"
-                         tal:attributes="href item_link;
-                                         class string:$item_type_class $item_wf_state_class url;
-                                         title item_type">
-                         <img class="mime-icon"
-                                tal:attributes="src item/MimeTypeIcon">
-                      </a>
                       <a tal:attributes="href item_link;
-                                         class string:$item_type_class $item_wf_state_class url;
-                                         title item_type"
-                         tal:content="item_title">Item Title
+                                            class string:$item_type_class $item_wf_state_class url;
+                                            title item_type"
+                         tal:define="mimeIcon item/MimeTypeIcon|nothing">
+                        <img class="mime-icon" tal:condition="mimeIcon"
+                          tal:attributes="src mimeIcon">
+                        <span tal:content="item_title">Item Title</span>
                       </a>
                       <a tal:condition="python:item_has_image and thumb_scale_table">
                          <img tal:attributes="href item_link"
