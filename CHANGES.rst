@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.51 (unreleased)
+0.51 (2019-09-02)
 -----------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/develop' [pilar.marinas]
+* Añadir enlace para ver más noticias en la buttonbar [Iago López Fernández]
 
 0.50 (2019-07-29)
 -----------------
