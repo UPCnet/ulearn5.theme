@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.52 (unreleased)
+0.52 (2019-09-09)
 -----------------
 
-- Nothing changed yet.
-
+* Add state published or intranet in portlet flash infornmatiu [Pilar Marinas]
 
 0.51 (2019-09-02)
 -----------------
