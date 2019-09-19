@@ -39,6 +39,11 @@
             <after css:theme-children="head" css:content="head link" />
             <!-- Script -->
             <after css:theme-children="head" css:content="head script" />
+            <rules css:if-content="body.template-folder_contents">
+                <after css:theme-children="head">
+                    <script src="++theme++ulearn5/assets/javascripts/reload-folder-contents.js"></script>
+                </after>
+            </rules>
             <!-- We don't need global nav -->
             <drop css:theme="#mainnavigation-wrapper" />
             <!-- Hero unit on homepage only -->
