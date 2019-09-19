@@ -258,11 +258,10 @@ class Renderer(base.Renderer):
         searchStart = event.start.strftime('%m/%s')
         end = event.end.strftime('%d/%m')
         end = None if end == start else end
+        community = self.getCommunityEvent(event)
         if not IEvent.providedBy(event):
-            community = event.aq_parent.aq_parent.aq_parent
             title_event = event.aq_parent.title
         else:
-            community = event.aq_parent.aq_parent
             title_event = event.title
 
         return dict(Title=title_event,
@@ -375,6 +374,14 @@ class Renderer(base.Renderer):
         for obj in aq_chain(context):
             if ICommunity.providedBy(obj):
                 return True
+
+        return False
+
+    def getCommunityEvent(self, event):
+        context = aq_inner(event)
+        for obj in aq_chain(context):
+            if ICommunity.providedBy(obj):
+                return obj
 
         return False
 
