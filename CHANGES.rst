@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.53 (unreleased)
+0.53 (2019-09-20)
 -----------------
 
-- Nothing changed yet.
-
+* Calendario: no mostrar eventos fuera de la comunidad por que peta [Iago López Fernández]
+* Calendario: Solucionar problema con eventos dentro de carpetas [Iago López Fernández]
 
 0.52 (2019-09-09)
 -----------------
