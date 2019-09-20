@@ -195,6 +195,8 @@ class Renderer(base.Renderer):
         if self.state:
             query_kw['review_state'] = self.state
 
+        query_kw['community_type'] = ['Organizative', 'Closed', 'Open']
+
         if not start:
             start = monthdates[0]
         if not end:
@@ -293,6 +295,8 @@ class Renderer(base.Renderer):
 
         if self.state:
             query_kw['review_state'] = self.state
+
+        query_kw['community_type'] = ['Organizative', 'Closed', 'Open']
 
         today = localized_today(context)
         start = today
