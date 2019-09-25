@@ -134,7 +134,7 @@ class Renderer(base.Renderer):
                 'sort_on': "getObjPositionInParent"}
 
         if self.data.typePortlet == 'Comunitat':
-            data.update({'community_type': ('Open', 'Closed', 'Organizatived')})
+            data.update({'community_type': ('Open', 'Closed', 'Organizative')})
             data.update({'path': path})
         else:
             data.update({'path': {'query': path, 'depth': 1}})
