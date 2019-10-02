@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.54 (unreleased)
+0.54 (2019-10-02)
 -----------------
 
-- Nothing changed yet.
-
+* Portlet Banner comunidades: arreglar bug comunidades organizativas [Iago López Fernández]
 
 0.53 (2019-09-20)
 -----------------
