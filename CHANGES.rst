@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.56 (unreleased)
+0.56 (2019-10-24)
 -----------------
 
-- Nothing changed yet.
-
+* Añadir ayuda en el buscador [Iago López Fernández]
 
 0.55 (2019-10-24)
 -----------------
