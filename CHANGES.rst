@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.55 (unreleased)
+0.55 (2019-10-24)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js [Iago López Fernández]
 
 0.54 (2019-10-02)
 -----------------
