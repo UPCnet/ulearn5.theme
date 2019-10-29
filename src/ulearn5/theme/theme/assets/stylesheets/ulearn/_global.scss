@@ -6082,3 +6082,35 @@ body.portaltype-easyform {
 div.checbox-info-widget.required::after {
   content: "";
 }
+
+/* Flicker */
+
+.flicker {
+	animation-name: flicker;
+	animation-duration: 2s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+
+	-webkit-animation-name: flicker;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes flicker {
+	0% { opacity: 1.0; }
+	50% { opacity: 0.1; }
+	100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes flicker {
+	0% { opacity: 1.0; }
+	50% { opacity: 0.1; }
+	100% { opacity: 1.0; }
+}
+
+@keyframes flicker {
+	0% { opacity: 1.0; }
+	50% { opacity: 0.1; }
+	100% { opacity: 1.0; }
+}
