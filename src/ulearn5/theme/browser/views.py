@@ -144,9 +144,10 @@ class baseCommunities(grok.View):
 
     def get_all_communities(self):
         pc = api.portal.get_tool('portal_catalog')
-        r_results = pc.searchResults(portal_type="ulearn.community", community_type=[u"Closed", u"Organizative"])
-        ur_results = pc.unrestrictedSearchResults(portal_type="ulearn.community", community_type=u"Open")
-        return r_results + ur_results
+        r_results_organizative = pc.searchResults(portal_type="ulearn.community", community_type=u"Organizative", sort_on="sortable_title")
+        r_results_closed= pc.searchResults(portal_type="ulearn.community", community_type=u"Closed", sort_on="sortable_title")
+        ur_results_open = pc.unrestrictedSearchResults(portal_type="ulearn.community", community_type=u"Open", sort_on="sortable_title")
+        return r_results_organizative + r_results_closed + ur_results_open
 
     def get_authenticator(self):
         return createToken()
