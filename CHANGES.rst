@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.57 (unreleased)
+0.57 (2019-11-06)
 -----------------
 
-- Nothing changed yet.
-
+* Ordenar vista comunidades por Organizativas, Cerradas, Abiertas y en orden alfabetico [pilar.marinas]
+* Video 100% [Iago López Fernández]
+* CSS Flicker [Iago López Fernández]
 
 0.56 (2019-10-24)
 -----------------
