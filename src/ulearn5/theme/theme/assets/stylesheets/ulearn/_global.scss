@@ -6068,14 +6068,15 @@ body.template-grid_events_view {
 body.portaltype-easyform {
 
 	#formEpilogue,
-	#form-buttons-modeleditor {
+	#form-buttons-modeleditor,
+	#plone-contentmenu-actions-import,
+	#plone-contentmenu-actions-export {
 		display: none;
 	}
 
 	#form .fieldPreview div:nth-child(3) {
 		margin-top: 10px;
 	}
-
 }
 
 /* Widget checkbox info */
