@@ -17,7 +17,7 @@
                     tal:define="image nocall:community/image | nothing">
                     <img tal:attributes="src string:${community/absolute_url}/@@images/image/preview"
                         tal:condition="nocall:image"/>
-                    <img src="++theme++ulearn5/assets/images/avatar_default.png"
+                    <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/avatar_default.png"
                         tal:condition="nocall:not:image"/>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="photo col-md-12" tal:define="ulearn_utils context/@@ulearn.utils">
                         <a tal:attributes="href string:${view/portal_url}/@@personal-information">
-                        <img tal:condition="isAdmin" tal:attributes="src string:++theme++ulearn5/assets/images/defaultUser.png" alt="admin user" style="width:202px">
+                        <img tal:condition="isAdmin" tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/defaultUser.png" alt="admin user" style="width:202px">
                         <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large" style="width:202px">
                         </a>
                     </div>
@@ -122,16 +122,16 @@
                     <div class="badges col-md-12">
                         <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
                             tal:attributes="enabled view/has_complete_profile">
-                            <img src="++theme++ulearn5/assets/images/badge1.png">
+                            <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge1.png">
                         </badge>
                         <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png" threshold="50">
-                            <img src="++theme++ulearn5/assets/images/badge2.png">
+                            <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge2.png">
                         </badge>
                         <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png" threshold="100">
-                            <img src="++theme++ulearn5/assets/images/badge3.png">
+                            <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge3.png">
                         </badge>
                         <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png" threshold="500">
-                            <img src="++theme++ulearn5/assets/images/badge4.png">
+                            <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge4.png">
                         </badge>
                     </div>
                 </div>

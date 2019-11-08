@@ -25,6 +25,7 @@ from ulearn5.core.adapters.portrait import convertSquareImage
 from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from plone.memoize.view import memoize_contextless
 
 import urllib
 
@@ -216,6 +217,9 @@ class Renderer(base.Renderer):
         else:
             return "Change community type"
 
+    @memoize_contextless
+    def portal_url(self):
+        return self.portal().absolute_url()
 
 class AddForm(base.NullAddForm):
 
