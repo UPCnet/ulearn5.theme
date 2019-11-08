@@ -75,7 +75,7 @@
                                     <img ng-if="community.image"
                                          ng-src="{{community.url}}/@@images/image/thumb" />
                                     <img ng-if="!community.image"
-                                         src="++theme++ulearn5/assets/images/avatar_default.png" />
+                                         tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/avatar_default.png" />
                                 </a>
                             </div>
                             <div class="media-body">
@@ -116,7 +116,7 @@
                         </article>
                     </section>
                     <div class="pagination">
-                        <dir-pagination-controls boundary-links="true" template-url="/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                        <dir-pagination-controls boundary-links="true" tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
                 </div>
             </div>
@@ -227,7 +227,7 @@
                   </div>
                </section>
                <div class="pagination">
-                  <dir-pagination-controls boundary-links="true" template-url="++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                  <dir-pagination-controls boundary-links="true" tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
                </div>
             </div>
          </div>

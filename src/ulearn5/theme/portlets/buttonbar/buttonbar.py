@@ -98,6 +98,10 @@ class Renderer(base.Renderer):
         return self.data.count > 0 and len(self._data())
 
     @memoize_contextless
+    def portal_url(self):
+        return self.portal().absolute_url()
+        
+    @memoize_contextless
     def portal(self):
         return getSite()
 
