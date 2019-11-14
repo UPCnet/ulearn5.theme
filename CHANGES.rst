@@ -2,11 +2,14 @@ Changelog
 =========
 
 
-0.58 (unreleased)
+0.58 (2019-11-14)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js [pilar.marinas]
+* Add portal_url in ++ [pilar.marinas]
+* Add portal_url in ++ [root]
+* Traducciones en el modal de cambio de workflow de la vista folder_contents [Iago López Fernández]
+* Estilos Easyform [Iago López Fernández]
 
 0.57 (2019-11-06)
 -----------------
