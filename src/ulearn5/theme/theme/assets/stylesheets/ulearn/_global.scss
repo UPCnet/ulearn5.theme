@@ -6116,3 +6116,20 @@ div.checbox-info-widget.required::after {
 	50% { opacity: 0.1; }
 	100% { opacity: 1.0; }
 }
+
+/* Top toolbar - Workflow */
+
+.plone-toolbar-top li#plone-contentmenu-workflow {
+    display: table !important;
+
+    & > span {
+	    display: table-cell;
+	    vertical-align: middle;
+	    font-weight: 800;
+    	height: 50px;
+
+	    &:last-of-type {
+			padding-right: 8px;
+		}
+	}
+}
