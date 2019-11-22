@@ -46,20 +46,16 @@
             <div class="row">
               <div class="col-md-2">
                 <a ng-if="community.type === 'Open' && !ctrl.is_subscribed(community.url)"
-                   class="community-action" ng-click="ctrl.subscribe(community)" ng-cloak>
-                  <img ng-if="!ctrl.is_subscribed(community.url) && community.image"
+                   class="community-action community-image" ng-click="ctrl.subscribe(community)" ng-cloak>
+                  <img ng-if="community.image"
                        ng-src="{{community.url}}/thumbnail-image" />
-                  <img ng-if="ctrl.is_subscribed(community.url) && community.image"
-                       ng-src="{{community.url}}/@@images/image/thumb" />
                   <img ng-if="!community.image"
                        src="++theme++ulearn5/assets/images/avatar_default.png" />
                 </a>
                 <a ng-if="!(community.type === 'Open') || (community.type === 'Open' && ctrl.is_subscribed(community.url))"
                    ng-href="{{community.url}}">
-                  <img ng-if="!ctrl.is_subscribed(community.url) && community.image"
+                  <img ng-if="community.image"
                        ng-src="{{community.url}}/thumbnail-image" />
-                  <img ng-if="ctrl.is_subscribed(community.url) && community.image"
-                       ng-src="{{community.url}}/@@images/image/thumb" />
                   <img ng-if="!community.image"
                        src="++theme++ulearn5/assets/images/avatar_default.png" />
                 </a>

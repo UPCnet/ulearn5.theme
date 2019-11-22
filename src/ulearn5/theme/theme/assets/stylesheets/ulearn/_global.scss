@@ -3083,6 +3083,10 @@ a.community-action {
 	padding-right: 10px;
 }
 
+a.community-action.community-image {
+	padding-right: 0px !important;
+}
+
 a.community-action.community-favorite.community-favorited:before {
     color: #ff9b00;
 }
