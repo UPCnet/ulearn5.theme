@@ -225,6 +225,28 @@ body.template-usergroup-controlpanel .autotabs .autotoc-nav a:last-child {
     display: none;
 }
 
+/* Confidentiality condition login view */
+
+body.template-login_confidentiality_policy {
+
+    ul.plone-toolbar-main {
+        display: none !important;
+    }
+
+    .formControls {
+        margin-top: 12px;
+    }
+
+    input#accept_confidentiality_policy {
+        margin-top: 3px;
+    }
+
+    .infoPolicy {
+        padding: 20px;
+        border: 1px solid #CCC;
+    }
+}
+
 /* Others */
 
 .pat-structure .navbar {
@@ -242,4 +264,3 @@ body.template-usergroup-controlpanel .autotabs .autotoc-nav a:last-child {
 .btn.btn-primary[type="submit"] {
     color: #FFFFFF !important;
 }
-
