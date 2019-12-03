@@ -118,20 +118,23 @@ class Renderer(base.Renderer):
                                        community_type=typeCommunity,
                                        sort_on="sortable_title")
 
-        def format_communities():
-            """ Generator to return information of the community.
-            """
-            for community in communities:
-                    info = {'id': community.id,
-                            'url': community.getURL(),
-                            'title': community.Title,
-                            'community_type': community.community_type,
-                            'image': community.getObject().image,
-                            'pending': self.get_pending_community_user(community, current_user)
-                            }
-                    yield info
+        result = self.format_communities(current_user, communities)
+        return result if len(result) > 0 else None
 
-        return format_communities() if len(communities) > 0 else None
+    def format_communities(self, current_user, communities):
+        """ Generator to return information of the community.
+        """
+        result = []
+        for community in communities:
+            info = {'id': community.id,
+                    'url': community.getURL(),
+                    'title': community.Title,
+                    'community_type': community.community_type,
+                    'image': community.getObject().image,
+                    'pending': self.get_pending_community_user(community, current_user)
+                    }
+            result.append(info)
+        return result
 
     def getOpenCommunities(self):
         """ in GWOPA equals to CoP """

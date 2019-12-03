@@ -3,35 +3,37 @@
           i18n:domain="ulearn">
 
     <portlet addview="ulearn.portlets.angularrouteview" title="Ulearn AngularRouteView"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.communities" title="Ulearn Communities"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.calendar" title="Ulearn Calendar"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.thinnkers" title="Ulearn Thinnkers"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.buttonbar" title="Ulearn Button Bar"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.profile" title="Ulearn Profile"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.profilecommunity" title="Ulearn Profile Community"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
 
     <!--portlets externs -->
     <portlet addview="ulearn.portlets.discussion" title="Ulearn discussion"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.importantnews" title="News Important"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.flashesinformativos" title="News Flash"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.mysubjects" title="My Subjects"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.mytags" title="My Tags"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.rss" title="Ulearn RSS"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.banners" title="Ulearn Banners"
-                i18n:attributes="title"/>
+             i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.mycommunities" title="Ulearn My Communities"
+             i18n:attributes="title"/>
 
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />
