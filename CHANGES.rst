@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.59 (unreleased)
+0.59 (2019-12-12)
 -----------------
 
-- Nothing changed yet.
-
+* Añadir portlet mycommunities y mejorar rendimiento portlet communities [Iago López Fernández]
+* Estilos template login_confidentiality_policy [Iago López Fernández]
+* allcomunities: Imagenes de las comunidades del mismo tamaño [Iago López Fernández]
+* Estilos Top toolbar - Workflow [Iago López Fernández]
 
 0.58 (2019-11-14)
 -----------------
