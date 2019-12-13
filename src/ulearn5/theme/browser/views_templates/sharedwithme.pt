@@ -30,7 +30,7 @@
                   </div>
                 </div>
 
-                <section id="sharedlist">
+                <section id="sharedlist" i18n:domain="ulearn">
                     <div id="content-core">
                         <p ng-if="ctrl.shared_items.length == 0" ng-cloak i18n:translate="no_content_shared_user">There is no content shared with you right now.</p>
                         <div class="tileItem visualIEFloatFix" dir-paginate="shared_item in ctrl.shared_items | filter:q | itemsPerPage: ctrl.pageSize" current-page="ctrl.currentPage" ng-cloak>
