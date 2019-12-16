@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.60 (unreleased)
+0.60 (2019-12-16)
 -----------------
 
-- Nothing changed yet.
-
+* Ver traducciones sharedwithme [Iago López Fernández]
 
 0.59 (2019-12-12)
 -----------------
