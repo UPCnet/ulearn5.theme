@@ -121,7 +121,7 @@
            title="Download this event in iCal format"
            i18n:attributes="title title_add_to_ical;">
           <img alt=""
-              tal:attributes="src string:${portal_url}/++resource++plone.app.event/icon_export_ical.png"/>
+              tal:attributes="src string:${portal_url}/++theme++ulearn5/assets/images/icon_export_ical.png"/>
           <span i18n:translate="label_add_to_ical">iCal</span>
         </a>
       </dd>
