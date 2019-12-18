@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.61 (unreleased)
+0.61 (2019-12-18)
 -----------------
 
-- Nothing changed yet.
-
+* Icono evento [Iago López Fernández]
 
 0.60 (2019-12-16)
 -----------------
