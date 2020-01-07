@@ -48,10 +48,21 @@ class Renderer(RendererCommunities):
             portal = api.portal.get()
             soup = get_soup('communities_acl', portal)
 
+            check = False
             for community in communities:
                 records = [r for r in soup.query(Eq('gwuuid', community.gwuuid))]
                 if records:
                     if username in [a['id'] for a in records[0].attrs['acl']['users']]:
+                        check = True
+
+                    if not check:
+                        user_groups = [group.id for group in api.group.get_groups(username=username)]
+                        if user_groups:
+                            for groups in user_groups:
+                                if user_groups in [a['id'] for a in records[0].attrs['acl']['groups']]:
+                                    check = True
+
+                    if check:
                         info = {'id': community.id,
                                 'url': community.getURL(),
                                 'title': community.Title,
@@ -60,6 +71,7 @@ class Renderer(RendererCommunities):
                                 'pending': self.get_pending_community_user(community, username)
                                 }
                         result.append(info)
+
         return result
 
 
