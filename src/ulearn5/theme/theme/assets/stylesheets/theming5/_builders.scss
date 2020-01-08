@@ -521,18 +521,18 @@
   }
   .event-days {
     font-weight: 700;
-    font-size: $font-size-xl;
+    font-size: 1.4rem;
     color:#fff;
     display: block;
     //auric adjustment
     padding-bottom: 1px; margin-top: -2px; line-height: 1;
   }
+  .event-years,
   .event-months {
     font-weight: 300;
-    font-size: $font-size-s;
+    font-size: .825rem;
     text-transform: uppercase;
     color: #fff;
-    display: block;
     //auric adjustment
     padding-bottom: 1px; margin-top: -2px;
   }
@@ -545,7 +545,7 @@
       .event-time {
         opacity: 0.9;
         background: rgba(255,255,255,.9);
-        .event-days, .event-months {
+        .event-days, .event-months, .event-years {
           color: #fff;
         }
       }
