@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.62 (unreleased)
+0.62 (2020-01-14)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos vista eventos [Iago López Fernández]
+* Portlet mycommunities: mostrar comunidades a las que perteneces por un grupo [Iago López Fernández]
 
 0.61 (2019-12-18)
 -----------------
