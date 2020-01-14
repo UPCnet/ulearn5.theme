@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.63 (unreleased)
+0.63 (2020-01-14)
 -----------------
 
-- Nothing changed yet.
-
+* Solucionar que no de error portlet mycommunities [pilar.marinas]
 
 0.62 (2020-01-14)
 -----------------
