@@ -59,8 +59,9 @@ class Renderer(RendererCommunities):
                         user_groups = [group.id for group in api.group.get_groups(username=username)]
                         if user_groups:
                             for groups in user_groups:
-                                if user_groups in [a['id'] for a in records[0].attrs['acl']['groups']]:
-                                    check = True
+                                if 'groups' in records[0].attrs['acl']:
+                                    if user_groups in [a['id'] for a in records[0].attrs['acl']['groups']]:
+                                        check = True
 
                     if check:
                         info = {'id': community.id,
