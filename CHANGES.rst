@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.64 (unreleased)
+0.64 (2020-01-22)
 -----------------
 
-- Nothing changed yet.
-
+* Modify require_login to came_from [pilar.marinas]
 
 0.63 (2020-01-14)
 -----------------
