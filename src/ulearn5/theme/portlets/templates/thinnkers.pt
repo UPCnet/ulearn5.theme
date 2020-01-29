@@ -8,8 +8,11 @@
 
       <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
 
-      <h2 i18n:translate="" tal:content="view/get_people_literal">
+      <h2 i18n:translate="" tal:condition="not:is_community" tal:content="view/get_people_literal">
         Thinnkers
+      </h2>
+      <h2 i18n:translate="" tal:condition="is_community">
+        Community members
       </h2>
       <div id="miniatures">
         <lastauthors type="context"
