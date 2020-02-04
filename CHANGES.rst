@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.66 (unreleased)
+0.66 (2020-02-04)
 -----------------
 
-- Nothing changed yet.
-
+* Quitar notificacion travis [pilar.marinas]
+* Literal portlet thinnkers [Iago López Fernández]
 
 0.65 (2020-01-27)
 -----------------
