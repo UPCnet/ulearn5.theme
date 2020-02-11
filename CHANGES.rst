@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.67 (unreleased)
+0.67 (2020-02-11)
 -----------------
 
-- Nothing changed yet.
-
+* View in content_pretty_view [pilar.marinas]
+* Turn off email notifications entirely [pilar.marinas]
 
 0.66 (2020-02-04)
 -----------------
