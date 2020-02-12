@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.68 (unreleased)
+0.68 (2020-02-12)
 -----------------
 
-- Nothing changed yet.
-
+* Quitar texto Compartit amb mi de la busqueda vista filtrada [pilar.marinas]
 
 0.67 (2020-02-11)
 -----------------
