@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.69 (unreleased)
+0.69 (2020-03-03)
 -----------------
 
-- Nothing changed yet.
-
+* Traduccion mensaje event_to_attendees [Iago López Fernández]
 
 0.68 (2020-02-12)
 -----------------
