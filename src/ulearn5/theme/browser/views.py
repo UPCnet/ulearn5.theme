@@ -4,28 +4,29 @@ import pkg_resources
 import pytz
 import scss
 
+from plone import api
 from Acquisition import aq_inner
 from DateTime import DateTime
 from five import grok
-from plone import api
 from repoze.catalog.query import Eq
 from scss import Scss
 from souper.interfaces import ICatalogFactory
 from souper.soup import get_soup
+from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import Interface
 
-from plone.app.contenttypes.browser.collection import CollectionView
-from plone.app.users.browser.userdatapanel import UserDataPanel
 from AccessControl import getSecurityManager
 from Products.CMFCore.permissions import ModifyPortalContent
+from plone.app.contenttypes.browser.collection import CollectionView
+from plone.app.users.browser.userdatapanel import UserDataPanel
 
-from plone.memoize import ram
 from plone.batching import Batch
 from plone.dexterity.interfaces import IDexterityContent
+from plone.memoize import ram
 from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
@@ -120,6 +121,24 @@ Descripció: %(description)s
 S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
 """
 
+ATTENDEES_MESSAGE_TEMPLATE_ES = """\
+%(title)s
+Iniciar: %(start)s
+Final: %(end)s
+Asistentes: %(attendees)s
+Descripción: %(description)s
+Se adjunta un archivo iCalendar con más información sobre el evento.
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_EN = """\
+%(title)s
+Start: %(start)s
+End: %(end)s
+Attendees: %(attendees)s
+Description: %(description)s
+An iCalendar file with more information about the event is attached.
+"""
+
 
 def _render_cachekey(method, self, main_color, secondary_color, background_property, background_color,
                      buttons_color_primary, buttons_color_secondary, maxui_form_bg,
@@ -139,7 +158,7 @@ class baseCommunities(grok.View):
         self.portal_url = api.portal.get().absolute_url()
 
     @memoize_contextless
-    def portal(self):
+    def portal(self ):
         return getSite()
 
     def get_all_communities(self):
@@ -932,7 +951,15 @@ class SendEventToAttendees(grok.View):
             'description': self.context.Description()
         }
 
-        body = ATTENDEES_MESSAGE_TEMPLATE % map
+        default_language = api.portal.get_default_language()
+
+        if default_language == 'ca':
+            body = ATTENDEES_MESSAGE_TEMPLATE % map
+        elif default_language == 'es':
+            body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
+        else:
+            body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
+
         msg = MIMEMultipart()
         msg['From'] = portal.get_registry_record('plone.email_from_address')
         msg['To'] = ', '.join(self.context.attendees).encode('utf-8')
