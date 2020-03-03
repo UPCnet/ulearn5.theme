@@ -957,8 +957,10 @@ class SendEventToAttendees(grok.View):
             body = ATTENDEES_MESSAGE_TEMPLATE % map
         elif default_language == 'es':
             body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
+            subject = 'Invitación: %s\n' % self.context.Title()
         else:
             body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
+            subject = 'Meeting: %s\n' % self.context.Title()
 
         msg = MIMEMultipart()
         msg['From'] = portal.get_registry_record('plone.email_from_address')
