@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+0.70 (2020-03-03)
+-----------------
+
+* Preparing release 0.69 [pilar.marinas]
+* Traduccion mensaje event_to_attendees [Iago López Fernández]
+
 0.69 (2020-03-03)
 -----------------
 
