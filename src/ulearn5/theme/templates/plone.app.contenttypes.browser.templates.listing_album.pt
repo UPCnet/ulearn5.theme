@@ -22,14 +22,15 @@
 
 <article class="AlbumPhoto">
   <metal:listingmacro define-macro="listing"
-      tal:define="portal context/@@plone_portal_state/portal;
-                  image_scale portal/@@image_scale">
+      tal:define="portal context/@@plone_portal_state/portal;">
   <tal:images tal:repeat="image images">
     <div class="photoAlbumEntry">
       <a tal:attributes="href string:${image/getURL}/view;
                          title image/Description">
         <div class="photoAlbumEntryWrapper">
-          <img tal:replace="structure python:image_scale.tag(image, 'image', scale='thumb')" />
+          <img tal:attributes="src string:${image/getURL}/@@images/image/mini;
+                               title image/Title;
+                               alt image/Title;" />
         </div>
         <div class="photoAlbumEntryTitle" tal:content="image/Title">
             Title
@@ -52,7 +53,6 @@
         <div class="photoAlbumEntryWrapper">
           <i class="fa fa-folder"></i>
 
-  <!-- <img tal:replace="structure python:image_scale.tag(random_image, fieldname='image', scale='thumb')" /> -->
         </div>
         <div class="photoAlbumEntryTitle">
           <tal:title content="album/Title">Title</tal:title>

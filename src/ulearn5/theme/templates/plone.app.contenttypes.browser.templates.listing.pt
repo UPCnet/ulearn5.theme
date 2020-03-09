@@ -27,8 +27,7 @@
                          showicons view/show_icons">
       <tal:listing condition="batch">
         <div class="entries" metal:define-slot="entries"
-            tal:define="portal context/@@plone_portal_state/portal;
-                        image_scale portal/@@image_scale">
+            tal:define="portal context/@@plone_portal_state/portal;">
           <tal:repeat repeat="item batch" metal:define-macro="entries">
             <tal:block tal:define="obj item/getObject;
                 item_url item/getURL;
@@ -54,10 +53,12 @@
                 <article class="media">
                   <header metal:define-macro="listitem" tal:attributes="class python:'vevent' if item_is_event else None">
                   <div class="media-left">
-                          <a tal:attributes="href item_link;"
-                             tal:condition="python: item_has_image and thumb_scale_list">
-                             <img tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_list, css_class=img_class)" />
-                          </a>
+                    <a tal:attributes="href item_link;"
+                       tal:condition="python: item_has_image and thumb_scale_list">
+                       <img tal:attributes="src string:${item_url}/@@images/image/thumb;
+                                            title item_title;
+                                            alt item_title" />
+                    </a>
                   </div>
                     <metal:block metal:define-macro="document_byline">
                       <div class="media-body">

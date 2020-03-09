@@ -40,8 +40,7 @@
                   tal:content="field">Field name</th>
             </tr>
           </thead>
-          <tbody tal:define="portal context/@@plone_portal_state/portal;
-                             image_scale portal/@@image_scale">
+          <tbody tal:define="portal context/@@plone_portal_state/portal;">
             <tal:entries tal:repeat="item batch">
               <tal:block tal:define="item_url item/getURL;
                                      item_title item/Title;
@@ -77,8 +76,10 @@
                          tal:content="item_title">Item Title
                       </a>
                       <a tal:condition="python:item_has_image and thumb_scale_table">
-                         <img tal:attributes="href item_link"
-                              tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_table, css_class=img_class)" />
+                         <img class="thumb-tile pull-right"
+                              tal:attributes="src string:${item_url}/@@images/image/tile;
+                                              alt item_title;
+                                              title item_title;" />
                       </a>
                     </td>
                     <td tal:condition="python:field == 'Creator'"
