@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.71 (unreleased)
+0.71 (2020-03-09)
 -----------------
 
-- Nothing changed yet.
-
+* Cambiar image_scale por /@@images/image/... [Iago López Fernández]
+* Traduccion asumpto del mensaje event_to_attendees [Iago López Fernández]
 
 0.70 (2020-03-03)
 -----------------
