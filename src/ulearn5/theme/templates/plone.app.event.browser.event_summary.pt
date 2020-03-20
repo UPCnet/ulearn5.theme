@@ -7,7 +7,7 @@
       tal:omit-tag="">
 <body tal:omit-tag="">
 
-<tal:def tal:define="data python:view.data; excludes view/excludes">
+<tal:def tal:define="data python:view.data; excludes view/excludes; ulearn_utils context/@@ulearn.utils;">
 
   <dl class="event summary details" summary="Event details" i18n:attributes="summary summary_event_details">
 
@@ -25,7 +25,7 @@
 
     <tal:cond condition="python:'date' not in excludes">
       <dt i18n:translate="event_when">When</dt>
-      <dd tal:define="ulearn_utils context/@@ulearn.utils;">
+      <dd>
         <tal:date replace="structure python:ulearn_utils.formatted_date_user_timezone(context)" />
       </dd>
 <!--       <dd tal:define="start_tzname data/timezone;
@@ -50,7 +50,7 @@
           <tal:def define="this_is_occ python: occ.absolute_url() == context.absolute_url()">
             <a tal:attributes="href occ/absolute_url" tal:omit-tag="this_is_occ">
               <strong tal:omit-tag="not: this_is_occ">
-                <tal:date replace="structure python:view.formatted_date(occ)"/>
+                <tal:date replace="structure python:ulearn_utils.formatted_date_user_timezone(context)"/>
               </strong>
             </a>
           </tal:def>
