@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.72 (unreleased)
+0.72 (2020-03-20)
 -----------------
 
-- Nothing changed yet.
-
+* Tener en cuenta la timezone en las ocurrencias de los eventos [Iago López Fernández]
+* Tener en cuenta la timezone en las ocurrencias de los eventos [Iago López Fernández]
+* Portlet calendar: tener en cuenta los timezone [Iago López Fernández]
+* Ver evento con la timezone del usuario [Iago López Fernández]
 
 0.71 (2020-03-09)
 -----------------
