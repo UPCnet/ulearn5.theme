@@ -6,11 +6,13 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from datetime import date, datetime, time
+from datetime import date
+from datetime import datetime
+from datetime import time
+from datetime import timedelta
 
 from plone import api
 from plone.app.event.base import RET_MODE_OBJECTS
-from plone.app.event.base import construct_calendar
 from plone.app.event.base import first_weekday
 from plone.app.event.base import get_events
 from plone.app.event.base import localized_now
@@ -26,10 +28,11 @@ from zope.interface import implements
 
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IEventsFolder
+from ulearn5.core.utils import construct_calendar_user_timezone
+from ulearn5.core.utils import getUserPytzTimezone
 from ulearn5.theme import calmodule
 
 import itertools
-
 
 PLMF = MessageFactory('plonelocales')
 
@@ -207,7 +210,7 @@ class Renderer(base.Renderer):
                             end=end,
                             ret_mode=RET_MODE_OBJECTS,
                             expand=True, **query_kw)
-        return construct_calendar(events, start=start, end=end)
+        return construct_calendar_user_timezone(events, start=start, end=end)
 
     @property
     def cal_data(self):
@@ -254,11 +257,11 @@ class Renderer(base.Renderer):
         today['year'] = loc_today.year
         return today
 
-    def getEventCalendarDict(self, event):
-        start = event.start.strftime('%d/%m')
+    def getEventCalendarDict(self, event, timezone):
+        start = event.start.astimezone(timezone).strftime('%d/%m')
         #Variable para ordenar los eventos por fecha
-        searchStart = event.start.strftime('%m/%s')
-        end = event.end.strftime('%d/%m')
+        searchStart = event.start.astimezone(timezone).strftime('%m/%s')
+        end = event.end.astimezone(timezone).strftime('%d/%m')
         end = None if end == start else end
         community = self.getCommunityEvent(event)
         if not IEvent.providedBy(event):
@@ -275,17 +278,17 @@ class Renderer(base.Renderer):
                     community_name=community.title,
                     community_url=community.absolute_url())
 
-    def getDayEvents(self, date):
-        start_date = datetime.combine(date, time.min)
-        end_date = datetime.combine(date, time.max)
+    def getDayEvents(self, date, timezone):
+        start_date = datetime.combine(date, time.min) - timedelta(hours=12)
+        end_date = datetime.combine(date, time.max) + timedelta(hours=12)
         events = self.getCalendarDict(start=start_date, end=end_date)
         list_events = []
 
         for event in events[date.strftime('%Y-%m-%d')]:
-            list_events.append(self.getEventCalendarDict(event))
+            list_events.append(self.getEventCalendarDict(event, timezone))
         return list_events
 
-    def getNextThreeEvents(self):
+    def getNextThreeEvents(self, timezone):
         context = aq_inner(self.context)
         query_kw = {}
         if self.search_base:
@@ -298,25 +301,24 @@ class Renderer(base.Renderer):
 
         query_kw['community_type'] = ['Organizative', 'Closed', 'Open']
 
-        today = localized_today(context)
-        start = today
-
+        start = datetime.now(timezone).date()
         events = get_events(context, start=start, limit=3, ret_mode=RET_MODE_OBJECTS, expand=True, **query_kw)
 
         list_events = []
         for event in events[:3]:
-            list_events.append(self.getEventCalendarDict(event))
+            list_events.append(self.getEventCalendarDict(event, timezone))
 
         return list_events
 
     def getDayEventsGroup(self):
         group_events = []
+        timezone = getUserPytzTimezone()
         if 'day' not in self.request.form and 'month' in self.request.form:
-            list_events = self.getNextThreeEvents()
+            list_events = self.getNextThreeEvents(timezone)
         elif 'day' not in self.request.form and 'month' not in self.request.form:
-            list_events = self.getNextThreeEvents()
+            list_events = self.getNextThreeEvents(timezone)
         else:
-            list_events = self.getDayEvents(self.getDateEvents())
+            list_events = self.getDayEvents(self.getDateEvents(), timezone)
 
         if len(list_events):
             list_events = sorted(list_events, key=lambda x: x['community_name'])
