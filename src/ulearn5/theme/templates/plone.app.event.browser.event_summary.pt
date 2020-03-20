@@ -50,7 +50,7 @@
           <tal:def define="this_is_occ python: occ.absolute_url() == context.absolute_url()">
             <a tal:attributes="href occ/absolute_url" tal:omit-tag="this_is_occ">
               <strong tal:omit-tag="not: this_is_occ">
-                <tal:date replace="structure python:ulearn_utils.formatted_date_user_timezone(context)"/>
+                <tal:date replace="structure python:ulearn_utils.formatted_date_user_timezone(occ)"/>
               </strong>
             </a>
           </tal:def>
