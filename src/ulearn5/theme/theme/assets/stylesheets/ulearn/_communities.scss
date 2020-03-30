@@ -73,3 +73,7 @@ a.community-action {
 
     &.community-delete:before                           { content: '\e806'; }
 }
+
+body.template-allcommunities .sweet-alert {
+    overflow-wrap: break-word;
+}
