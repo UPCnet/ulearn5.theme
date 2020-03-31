@@ -264,3 +264,11 @@ body.template-login_confidentiality_policy {
 .btn.btn-primary[type="submit"] {
     color: #FFFFFF !important;
 }
+
+body.section-front-page li#plone-contentmenu-workflow {
+    display: none !important;
+}
+
+body.userrole-manager.section-front-page li#plone-contentmenu-workflow {
+    display: table !important;
+}
