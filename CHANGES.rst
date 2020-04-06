@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.73 (unreleased)
+0.73 (2020-04-06)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulern5.js modificar usuarios mostrar editacl [Pilar Marinas]
+* Estilos: Evitar que l'usuario cambie el workflow de la página principal [Iago López Fernández]
+* Mostrar error de LinkIntegrity al borrar una comunidad [Iago López Fernández]
 
 0.72 (2020-03-20)
 -----------------
