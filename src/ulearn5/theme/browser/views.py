@@ -292,6 +292,7 @@ class CustomCSS(grok.View):
 class SearchUser(grok.View):
     grok.name('searchUser')
     grok.context(Interface)
+    grok.require('base.member')
 
     @json_response
     def render(self):
