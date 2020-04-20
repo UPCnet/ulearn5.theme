@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.74 (unreleased)
+0.74 (2020-04-20)
 -----------------
 
-- Nothing changed yet.
-
+* Add permiso vista searchUsers [Pilar Marinas]
 
 0.73 (2020-04-06)
 -----------------
