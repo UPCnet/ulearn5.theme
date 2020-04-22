@@ -20,7 +20,7 @@
         class=".jsvariables.JSVariables"
         permission="zope.Public"
     />
-   
+
     <browser:page
         name="get_news"
         for="*"
