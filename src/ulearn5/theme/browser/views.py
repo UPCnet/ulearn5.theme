@@ -1081,21 +1081,23 @@ class UsersCommunities(grok.View):
                 info = ICommunityACL(community.getObject())().attrs.get('acl', '')
 
                 listUsers = []
-                for user in info['users']:
-                    if 'user' not in self.request.form or self.request.form['user'] == user['id']:
-                        listUsers.append({'id': user['id'],
-                                          'fullname': user['displayName'] if user['displayName'] else '-',
-                                          'role': user['role']})
+                if 'users' in info:
+                    for user in info['users']:
+                        if 'user' not in self.request.form or self.request.form['user'] == user['id']:
+                            listUsers.append({'id': user['id'],
+                                              'fullname': user['displayName'] if 'displayName' in user and user['displayName'] else '-',
+                                              'role': user['role']})
 
-                for group in info['groups']:
-                    users = api.user.get_users(groupname=group['id'])
-                    for user in users:
-                        if 'user' not in self.request.form or self.request.form['user'] == user.id:
-                            fullname = user.getProperty('fullname', '-')
-                            fullname = fullname if fullname else '-'
-                            listUsers.append({'id': user.id,
-                                              'fullname': fullname + ' [' + group['id'] + ']',
-                                              'role': group['role']})
+                if 'groups' in info:
+                    for group in info['groups']:
+                        users = api.user.get_users(groupname=group['id'])
+                        for user in users:
+                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
+                                fullname = user.getProperty('fullname', '-')
+                                fullname = fullname if fullname else '-'
+                                listUsers.append({'id': user.id,
+                                                  'fullname': fullname + ' [' + group['id'] + ']',
+                                                  'role': group['role']})
 
                 if listUsers:
                     result.append({'id': community.id,
@@ -1124,7 +1126,7 @@ class UsersCommunities(grok.View):
         all_members = [pm.getMemberById(userid) for userid in md._members.keys()]
 
         for user in all_members:
-            if user.id != 'admin':
+            if user and user.id != 'admin':
                 fullname = user.getProperty('fullname', '-')
                 result.append({'id': user.id,
                                'fullname': fullname if fullname else '-'})
