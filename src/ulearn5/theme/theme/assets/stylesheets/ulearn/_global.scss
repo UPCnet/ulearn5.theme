@@ -2626,6 +2626,19 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+
+.template-contents_pretty_view #content .contenttype-externalcontent:before,
+.template-listing_view #content .contenttype-externalcontent:before,
+#tagslist a .ExternalContent:before {
+  content: "\f1c6";
+  font-size: 18px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: inherit;
+  margin-right: 10px;
+}
+
 .template-contents_pretty_view .vistaquadricula .col-md-6 {
 	margin-left: 0;
 }
