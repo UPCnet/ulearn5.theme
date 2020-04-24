@@ -30,7 +30,7 @@
             <select class="form-control typeSearch">
               <option value="user" i18n:translate="">User</option>
               <option value="community" i18n:translate="">Community</option>
-              <option value="all" i18n:translate="">All communities (This may take a while)</option>
+              <option value="all" i18n:translate="">Export: All communities (This may take a while)</option>
             </select>
           </div>
           <div class="col-md-6 communityBlock" style="display: none;">
@@ -63,7 +63,10 @@
               <table class="table" tal:condition="community">
                 <thead>
                   <tr>
-                    <th tal:content="community/title"></th>
+                    <th colspan="2" tal:content="community/title"></th>
+                  </tr>
+                  <tr>
+                    <th i18n:translate="">User</th>
                     <th i18n:translate="">Role</th>
                   </tr>
                 </thead>
@@ -144,10 +147,10 @@
               $('.communityBlock').show();
               $('.userBlock').hide();
               $('.communitySearch').val($.urlParam('community'));
-            } else if (window.location.href.indexOf("search") >= 0) {
-              $('.typeSearch').val('all');
+            } else {
+              $('.typeSearch').val('user');
               $('.communityBlock').hide();
-              $('.userBlock').hide();
+              $('.userBlock').show();
             }
 
             $('.typeSearch').on('change', function(){
@@ -172,11 +175,15 @@
                   url = url.substring(0, index);
               }
               if (value == 'user') {
-                window.location = url + '?search&user=' + $('.userSearch').select2('val');
+                var user = $('.userSearch').select2('val');
+                if (user.length > 0) {
+                  window.location = url + '?user=' + user;
+                }
               } else if (value == 'community') {
-                window.location = url + '?search&community=' + $('.communitySearch').val();
-              } else {
-                window.location = url + '?search';
+                window.location = url + '?community=' + $('.communitySearch').val();
+              } else if (value == 'all') {
+                url = url.split('/users_communities')[0]
+                window.open(url + '/export_users_communities', '_blank');
               }
             });
           });

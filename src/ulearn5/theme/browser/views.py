@@ -3,6 +3,7 @@ import json
 import pkg_resources
 import pytz
 import scss
+import csv
 
 from plone import api
 from Acquisition import aq_inner
@@ -1067,7 +1068,7 @@ class UsersCommunities(grok.View):
     def result(self):
         result = []
 
-        if 'search' in self.request.form:
+        if 'user' in self.request.form or 'community' in self.request.form:
             data = {'portal_type': "ulearn.community",
                     'sort_on': 'sortable_title'}
 
@@ -1118,23 +1119,75 @@ class UsersCommunities(grok.View):
                            'title': community.Title})
         return result
 
-    def allUsers(self):
-        result = []
-
-        md = getToolByName(api.portal.get(), 'portal_memberdata')
-        pm = getToolByName(api.portal.get(), 'portal_membership')
-        all_members = [pm.getMemberById(userid) for userid in md._members.keys()]
-
-        for user in all_members:
-            if user and user.id != 'admin':
-                fullname = user.getProperty('fullname', '-')
-                result.append({'id': user.id,
-                               'fullname': fullname if fullname else '-'})
-
-        return result
-
     def showResults(self):
-        return 'search' in self.request.form
+        return 'user' in self.request.form or 'community' in self.request.form
 
     def userSearch(self):
         return 'user' in self.request.form
+
+
+class ExportUsersCommunities(grok.View):
+    grok.name('export_users_communities')
+    grok.context(Interface)
+    grok.require('base.webmaster')
+    grok.layer(IUlearn5ThemeLayer)
+
+    data_header_columns = [
+        "User",
+        "Community",
+        "Role"]
+
+    def render(self):
+        output_file = StringIO()
+        # Write the BOM of the text stream to make its charset explicit
+        output_file.write(u'\ufeff'.encode('utf8'))
+        self.write_data(output_file)
+
+        header_content_type = 'text/csv'
+        header_filename = 'export.csv'
+        self.request.response.setHeader('Content-Type', header_content_type)
+        self.request.response.setHeader(
+            'Content-Disposition',
+            'attachment; filename="{0}"'.format(header_filename))
+        return output_file.getvalue()
+
+    def data(self):
+        result = []
+
+        data = {'portal_type': "ulearn.community",
+                'sort_on': 'sortable_title'}
+
+        pc = api.portal.get_tool(name='portal_catalog')
+        communities = pc.searchResults(**data)
+
+        for community in communities:
+            info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+
+            if 'users' in info:
+                for user in info['users']:
+                    userField = user['displayName'] if 'displayName' in user and user['displayName'] else '-'
+                    userField += ' (' + user['id'] + ')'
+                    result.append({'user': userField,
+                                   'community': community.Title + ' (' + community.id + ')',
+                                   'role': user['role']})
+
+            if 'groups' in info:
+                for group in info['groups']:
+                    users = api.user.get_users(groupname=group['id'])
+                    for user in users:
+                        fullname = user.getProperty('fullname', '-')
+                        userField = fullname if fullname else '-'
+                        userField += ' [' + group['id'] + '] (' + user.id + ')'
+                        result.append({'user': userField,
+                                       'community': community.Title + ' (' + community.id + ')',
+                                       'role': group['role']})
+        return result
+
+    def write_data(self, output_file):
+        writer = csv.writer(output_file, dialect='excel', delimiter=',')
+        writer.writerow(self.data_header_columns)
+
+        for row in self.data():
+            writer.writerow([row['user'].encode('utf-8'),
+                             row['community'].encode('utf-8'),
+                             row['role'].encode('utf-8')])
