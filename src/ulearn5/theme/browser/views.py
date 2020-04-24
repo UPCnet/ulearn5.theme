@@ -1130,7 +1130,11 @@ class UsersCommunities(grok.View):
                 fullname = user.getProperty('fullname', '-')
                 result.append({'id': user.id,
                                'fullname': fullname if fullname else '-'})
+
         return result
 
     def showResults(self):
         return 'search' in self.request.form
+
+    def userSearch(self):
+        return 'user' in self.request.form
