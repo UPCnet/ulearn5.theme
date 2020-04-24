@@ -1189,5 +1189,5 @@ class ExportUsersCommunities(grok.View):
 
         for row in self.data():
             writer.writerow([row['user'].encode('utf-8'),
-                             row['community'].encode('utf-8'),
+                             row['community'].decode('utf-8').encode('utf-8'),
                              row['role'].encode('utf-8')])
