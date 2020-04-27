@@ -21,7 +21,7 @@
       <div id="content" class="documentEditable" i18n:domain="ulearn"
            tal:define="data view/result; showResults view/showResults;">
 
-        <h2 class="documentFirstHeading" i18n:translate="">Community permissions</h2>
+        <h2 class="documentFirstHeading" i18n:translate="">Information for users and communities</h2>
 
         <!-- <p tal:content="data"></p> -->
         <div class="row searchFilters">
