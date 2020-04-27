@@ -1,0 +1,26 @@
+body.template-users_communities {
+    .btn-primary {
+        margin: 10px 0px;
+    }
+
+    div.select2-container.userSearch {
+        padding: 0px;
+        margin-top: 1px;
+
+        a.select2-choice {
+            margin: 0px !important;
+            border: 0px solid transparent;
+        }
+    }
+
+    #content div.info {
+        width: 100%;
+        padding: 10px;
+        background-color: #DDDDDD;
+        margin-bottom: 10px;
+
+        p {
+            margin-bottom: 0px;
+        }
+    }
+}

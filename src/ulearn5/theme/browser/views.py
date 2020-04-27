@@ -3,11 +3,13 @@ import json
 import pkg_resources
 import pytz
 import scss
+import csv
 
 from plone import api
 from Acquisition import aq_inner
 from DateTime import DateTime
 from five import grok
+from operator import itemgetter
 from repoze.catalog.query import Eq
 from scss import Scss
 from souper.interfaces import ICatalogFactory
@@ -27,7 +29,6 @@ from plone.app.users.browser.userdatapanel import UserDataPanel
 from plone.batching import Batch
 from plone.dexterity.interfaces import IDexterityContent
 from plone.memoize import ram
-from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
@@ -45,6 +46,7 @@ from base5.core.utils import json_response
 from base5.core.utils import pref_lang
 
 from ulearn5.core.browser.searchuser import searchUsersFunction
+from ulearn5.core.content.community import ICommunityACL
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
@@ -1052,3 +1054,147 @@ class SendEventToAttendees(grok.View):
 
     def applytz(self, dt):
         return dt.astimezone(pytz.timezone(api.portal.get_registry_record('plone.portal_timezone')))
+
+
+class UsersCommunities(grok.View):
+    """  """
+
+    grok.name('users_communities')
+    grok.context(Interface)
+    grok.require('base.webmaster')
+    grok.template('users_communities')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def result(self):
+        result = []
+
+        if 'user' in self.request.form or 'community' in self.request.form:
+            data = {'portal_type': "ulearn.community",
+                    'sort_on': 'sortable_title'}
+
+            if 'community' in self.request.form:
+                data.update({'id': self.request.form['community']})
+
+            pc = api.portal.get_tool(name='portal_catalog')
+            communities = pc.searchResults(**data)
+
+            for community in communities:
+                info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+
+                listUsers = []
+                if 'users' in info:
+                    for tmpuser in info['users']:
+                        user = api.user.get(userid=tmpuser['id'])
+                        if user:
+                            fullname = user.getProperty('fullname', '-')
+                            fullname = fullname if fullname else '-'
+                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
+                                listUsers.append({'id': user.id,
+                                                  'fullname': fullname,
+                                                  'role': tmpuser['role']})
+
+                if 'groups' in info:
+                    for group in info['groups']:
+                        users = api.user.get_users(groupname=group['id'])
+                        for user in users:
+                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
+                                fullname = user.getProperty('fullname', '-')
+                                fullname = fullname if fullname else '-'
+                                listUsers.append({'id': user.id,
+                                                  'fullname': fullname + ' [' + group['id'] + ']',
+                                                  'role': group['role']})
+
+                if listUsers:
+                    result.append({'id': community.id,
+                                   'title': community.Title,
+                                   'users': sorted(listUsers, key=itemgetter('fullname'))})
+
+        return result
+
+    def allCommunities(self):
+        data = {'portal_type': "ulearn.community",
+                'sort_on': 'sortable_title'}
+        pc = api.portal.get_tool(name='portal_catalog')
+        communities = pc.searchResults(**data)
+
+        result = []
+        for community in communities:
+            result.append({'id': community.id,
+                           'title': community.Title})
+        return result
+
+    def showResults(self):
+        return 'user' in self.request.form or 'community' in self.request.form
+
+    def userSearch(self):
+        return 'user' in self.request.form
+
+
+class ExportUsersCommunities(grok.View):
+    grok.name('export_users_communities')
+    grok.context(Interface)
+    grok.require('base.webmaster')
+    grok.layer(IUlearn5ThemeLayer)
+
+    data_header_columns = [
+        "User",
+        "Community",
+        "Role"]
+
+    def render(self):
+        output_file = StringIO()
+        # Write the BOM of the text stream to make its charset explicit
+        output_file.write(u'\ufeff'.encode('utf8'))
+        self.write_data(output_file)
+
+        header_content_type = 'text/csv'
+        header_filename = 'export.csv'
+        self.request.response.setHeader('Content-Type', header_content_type)
+        self.request.response.setHeader(
+            'Content-Disposition',
+            'attachment; filename="{0}"'.format(header_filename))
+        return output_file.getvalue()
+
+    def data(self):
+        result = []
+
+        data = {'portal_type': "ulearn.community",
+                'sort_on': 'sortable_title'}
+
+        pc = api.portal.get_tool(name='portal_catalog')
+        communities = pc.searchResults(**data)
+
+        for community in communities:
+            info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+
+            if 'users' in info:
+                for tmpuser in info['users']:
+                    user = api.user.get(userid=tmpuser['id'])
+                    if user:
+                        fullname = user.getProperty('fullname', '-')
+                        userField = fullname if fullname else '-'
+                        userField += ' (' + user.id + ')'
+                        result.append({'user': userField,
+                                       'community': community.Title + ' (' + community.id + ')',
+                                       'role': tmpuser['role']})
+
+            if 'groups' in info:
+                for group in info['groups']:
+                    users = api.user.get_users(groupname=group['id'])
+                    for user in users:
+                        fullname = user.getProperty('fullname', '-')
+                        userField = fullname if fullname else '-'
+                        userField += ' [' + group['id'] + '] (' + user.id + ')'
+                        result.append({'user': userField,
+                                       'community': community.Title + ' (' + community.id + ')',
+                                       'role': group['role']})
+        return result
+
+    def write_data(self, output_file):
+        writer = csv.writer(output_file, dialect='excel', delimiter=',')
+        writer.writerow(self.data_header_columns)
+
+        for row in self.data():
+            writer.writerow([row['user'].encode('utf-8'),
+                             row['community'].decode('utf-8').encode('utf-8'),
+                             row['role'].encode('utf-8')])

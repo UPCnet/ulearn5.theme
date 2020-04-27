@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:block fill-slot="top_slot"/>
+</head>
+
+<body>
+
+<metal:main fill-slot="content">
+    <tal:main-macro metal:define-macro="main">
+      <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+          Status message
+      </div>
+
+      <div id="content" class="documentEditable" i18n:domain="ulearn"
+           tal:define="data view/result; showResults view/showResults;">
+
+        <h2 class="documentFirstHeading" i18n:translate="">Information for users and communities</h2>
+
+        <!-- <p tal:content="data"></p> -->
+        <div class="row searchFilters">
+          <div class="col-md-6">
+            <label i18n:translate="">Type of search</label>
+            <select class="form-control typeSearch">
+              <option value="user" i18n:translate="">User</option>
+              <option value="community" i18n:translate="">Community</option>
+              <option value="all" i18n:translate="">Export: All communities (This may take a while)</option>
+            </select>
+          </div>
+          <div class="col-md-6 communityBlock" style="display: none;">
+            <label i18n:translate="">Community</label>
+            <select class="form-control communitySearch">
+              <tal:block tal:repeat="community view/allCommunities">
+                <option tal:attributes="value community/id" tal:content="community/title">X</option>
+              </tal:block>
+            </select>
+          </div>
+          <div class="col-md-6 userBlock">
+            <label i18n:translate="">User</label>
+            <input type="text" class="form-control userSearch" />
+          </div>
+          <div class="col-md-12">
+            <input class="btn btn-primary button-field search" type="button" i18n:attributes="value" value="Search"/>
+          </div>
+        </div>
+
+        <div class="result" tal:condition="showResults">
+          <h3 class="documentFirstHeading" i18n:translate="">Search results</h3>
+
+          <div class="row searchResult" tal:condition="data" tal:define="userSearch view/userSearch">
+            <div class="col-md-12">
+              <div class="info">
+                <p><b i18n:translate="">INFO:</b> <span i18n:translate="">User means `Fullname [Group] (User ID)`</span></p>
+              </div>
+            </div>
+            <div class="col-md-6" tal:repeat="community data" tal:condition="not:userSearch">
+              <table class="table" tal:condition="community">
+                <thead>
+                  <tr>
+                    <th colspan="2" tal:content="community/title"></th>
+                  </tr>
+                  <tr>
+                    <th i18n:translate="">User</th>
+                    <th i18n:translate="">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr tal:repeat="user community/users">
+                    <td tal:content="string:${user/fullname} (${user/id})"></td>
+                    <td tal:content="user/role"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12" tal:condition="userSearch">
+              <table class="table" tal:condition="data">
+                <thead>
+                  <tr>
+                    <th i18n:translate="">Community</th>
+                    <th i18n:translate="">User</th>
+                    <th i18n:translate="">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tal:block tal:repeat="community data">
+                    <tr tal:repeat="user community/users">
+                      <td tal:content="community/title"></td>
+                      <td tal:content="string:${user/fullname} (${user/id})"></td>
+                      <td tal:content="user/role"></td>
+                    </tr>
+                  </tal:block>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div tal:condition="not:data">
+            <p i18n:translate="">No results</p>
+          </div>
+        </div>
+
+        <script src="/++theme++ulearn5/assets/javascripts/users_communities.min.js"></script>
+      </div>
+    </tal:main-macro>
+</metal:main>
+</body>
+</html>
