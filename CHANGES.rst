@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.75 (unreleased)
+0.75 (2020-04-27)
 -----------------
 
-- Nothing changed yet.
-
+* Vista users_communities [Iago López Fernández]
+* icono externalstorage [Iago López Fernández]
 
 0.74 (2020-04-20)
 -----------------
