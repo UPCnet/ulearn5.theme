@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.76 (unreleased)
+0.76 (2020-04-27)
 -----------------
 
-- Nothing changed yet.
-
+* Corregir error de codificación [Iago López Fernández]
 
 0.75 (2020-04-27)
 -----------------
