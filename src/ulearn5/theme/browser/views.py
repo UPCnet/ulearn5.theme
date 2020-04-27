@@ -1083,11 +1083,15 @@ class UsersCommunities(grok.View):
 
                 listUsers = []
                 if 'users' in info:
-                    for user in info['users']:
-                        if 'user' not in self.request.form or self.request.form['user'] == user['id']:
-                            listUsers.append({'id': user['id'],
-                                              'fullname': user['displayName'] if 'displayName' in user and user['displayName'] else '-',
-                                              'role': user['role']})
+                    for tmpuser in info['users']:
+                        user = api.user.get(userid=tmpuser['id'])
+                        if user:
+                            fullname = user.getProperty('fullname', '-')
+                            fullname = fullname if fullname else '-'
+                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
+                                listUsers.append({'id': user.id,
+                                                  'fullname': fullname,
+                                                  'role': tmpuser['role']})
 
                 if 'groups' in info:
                     for group in info['groups']:
@@ -1164,12 +1168,15 @@ class ExportUsersCommunities(grok.View):
             info = ICommunityACL(community.getObject())().attrs.get('acl', '')
 
             if 'users' in info:
-                for user in info['users']:
-                    userField = user['displayName'] if 'displayName' in user and user['displayName'] else '-'
-                    userField += ' (' + user['id'] + ')'
-                    result.append({'user': userField,
-                                   'community': community.Title + ' (' + community.id + ')',
-                                   'role': user['role']})
+                for tmpuser in info['users']:
+                    user = api.user.get(userid=tmpuser['id'])
+                    if user:
+                        fullname = user.getProperty('fullname', '-')
+                        userField = fullname if fullname else '-'
+                        userField += ' (' + user.id + ')'
+                        result.append({'user': userField,
+                                       'community': community.Title + ' (' + community.id + ')',
+                                       'role': tmpuser['role']})
 
             if 'groups' in info:
                 for group in info['groups']:
