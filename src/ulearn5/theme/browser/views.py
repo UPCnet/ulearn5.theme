@@ -1060,7 +1060,7 @@ class UsersCommunities(grok.View):
     """  """
 
     grok.name('users_communities')
-    grok.context(Interface)
+    grok.context(IPloneSiteRoot)
     grok.require('base.webmaster')
     grok.template('users_communities')
     grok.layer(IUlearn5ThemeLayer)
@@ -1132,7 +1132,7 @@ class UsersCommunities(grok.View):
 
 class ExportUsersCommunities(grok.View):
     grok.name('export_users_communities')
-    grok.context(Interface)
+    grok.context(IPloneSiteRoot)
     grok.require('base.webmaster')
     grok.layer(IUlearn5ThemeLayer)
 
@@ -1195,6 +1195,6 @@ class ExportUsersCommunities(grok.View):
         writer.writerow(self.data_header_columns)
 
         for row in self.data():
-            writer.writerow([row['user'].encode('utf-8'),
-                             row['community'].decode('utf-8').encode('utf-8'),
-                             row['role'].encode('utf-8')])
+            writer.writerow([row['user'],
+                             row['community'],
+                             row['role']])
