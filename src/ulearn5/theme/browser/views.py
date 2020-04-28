@@ -1068,12 +1068,12 @@ class UsersCommunities(grok.View):
     def result(self):
         result = []
 
-        if 'user' in self.request.form or 'community' in self.request.form:
+        if 'user' in self.request.form or 'idcommunity' in self.request.form:
             data = {'portal_type': "ulearn.community",
                     'sort_on': 'sortable_title'}
 
-            if 'community' in self.request.form:
-                data.update({'id': self.request.form['community']})
+            if 'idcommunity' in self.request.form:
+                data.update({'id': self.request.form['idcommunity']})
 
             pc = api.portal.get_tool(name='portal_catalog')
             communities = pc.searchResults(**data)
