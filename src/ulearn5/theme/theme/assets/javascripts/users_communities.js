@@ -37,11 +37,11 @@ $(document).ready(function(){
     $('.typeSearch').val('user');
     $('.communityBlock').hide();
     $('.userBlock').show();
-  } else if ($.urlParam('community')) {
+  } else if ($.urlParam('idcommunity')) {
     $('.typeSearch').val('community');
     $('.communityBlock').show();
     $('.userBlock').hide();
-    $('.communitySearch').val($.urlParam('community'));
+    $('.communitySearch').val($.urlParam('idcommunity'));
   } else {
     $('.typeSearch').val('user');
     $('.communityBlock').hide();
@@ -75,7 +75,7 @@ $(document).ready(function(){
         window.location = url + '?user=' + user;
       }
     } else if (value == 'community') {
-      window.location = url + '?community=' + $('.communitySearch').val();
+      window.location = url + '?idcommunity=' + $('.communitySearch').val();
     } else if (value == 'all') {
       url = url.split('/users_communities')[0]
       window.open(url + '/export_users_communities', '_blank');
