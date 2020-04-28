@@ -1101,7 +1101,7 @@ class UsersCommunities(grok.View):
                                 fullname = user.getProperty('fullname', '-')
                                 fullname = fullname if fullname else '-'
                                 listUsers.append({'id': user.id,
-                                                  'fullname': fullname + ' [' + group['id'] + ']',
+                                                  'fullname': fullname + ' [' + group['id'].encode('utf-8') + ']',
                                                   'role': group['role']})
 
                 if listUsers:
@@ -1124,7 +1124,7 @@ class UsersCommunities(grok.View):
         return result
 
     def showResults(self):
-        return 'user' in self.request.form or 'community' in self.request.form
+        return 'user' in self.request.form or 'idcommunity' in self.request.form
 
     def userSearch(self):
         return 'user' in self.request.form
@@ -1184,7 +1184,7 @@ class ExportUsersCommunities(grok.View):
                     for user in users:
                         fullname = user.getProperty('fullname', '-')
                         userField = fullname if fullname else '-'
-                        userField += ' [' + group['id'] + '] (' + user.id + ')'
+                        userField += ' [' + group['id'].encode('utf-8') + '] (' + user.id + ')'
                         result.append({'user': userField,
                                        'community': community.Title + ' (' + community.id + ')',
                                        'role': group['role']})
