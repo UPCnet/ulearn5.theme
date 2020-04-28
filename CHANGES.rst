@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.77 (unreleased)
+0.77 (2020-04-28)
 -----------------
 
-- Nothing changed yet.
-
+* Solucionar erroes codificacion [Iago López Fernández]
+* users_communities - Solucionar conflicto con calendario [Iago López Fernández]
+* users_communities - Solucionar conflicto con calendario [Iago López Fernández]
 
 0.76 (2020-04-27)
 -----------------
