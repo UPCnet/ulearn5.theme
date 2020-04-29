@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.78 (unreleased)
+0.78 (2020-04-29)
 -----------------
 
-- Nothing changed yet.
-
+* Quitar layer view ExportUsersCommunities para poder sobreescribir para unite [Pilar Marinas]
 
 0.77 (2020-04-28)
 -----------------
