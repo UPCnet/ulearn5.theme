@@ -1134,7 +1134,6 @@ class ExportUsersCommunities(grok.View):
     grok.name('export_users_communities')
     grok.context(IPloneSiteRoot)
     grok.require('base.webmaster')
-    grok.layer(IUlearn5ThemeLayer)
 
     data_header_columns = [
         "User",
