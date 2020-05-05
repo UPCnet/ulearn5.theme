@@ -1136,7 +1136,9 @@ class ExportUsersCommunities(grok.View):
     grok.require('base.webmaster')
 
     data_header_columns = [
-        "User",
+        "User ID",
+        "Fullname",
+        "Group",
         "Community",
         "Role"]
 
@@ -1170,10 +1172,9 @@ class ExportUsersCommunities(grok.View):
                 for tmpuser in info['users']:
                     user = api.user.get(userid=tmpuser['id'])
                     if user:
-                        fullname = user.getProperty('fullname', '-')
-                        userField = fullname if fullname else '-'
-                        userField += ' (' + user.id + ')'
-                        result.append({'user': userField,
+                        result.append({'fullname': user.getProperty('fullname', ''),
+                                       'userid': user.id,
+                                       'group': '',
                                        'community': community.Title + ' (' + community.id + ')',
                                        'role': tmpuser['role']})
 
@@ -1181,10 +1182,9 @@ class ExportUsersCommunities(grok.View):
                 for group in info['groups']:
                     users = api.user.get_users(groupname=group['id'])
                     for user in users:
-                        fullname = user.getProperty('fullname', '-')
-                        userField = fullname if fullname else '-'
-                        userField += ' [' + group['id'].encode('utf-8') + '] (' + user.id + ')'
-                        result.append({'user': userField,
+                        result.append({'fullname': user.getProperty('fullname', ''),
+                                       'userid': user.id,
+                                       'group': group['id'].encode('utf-8'),
                                        'community': community.Title + ' (' + community.id + ')',
                                        'role': group['role']})
         return result
@@ -1194,6 +1194,8 @@ class ExportUsersCommunities(grok.View):
         writer.writerow(self.data_header_columns)
 
         for row in self.data():
-            writer.writerow([row['user'],
+            writer.writerow([row['userid'],
+                             row['fullname'],
+                             row['group'],
                              row['community'],
                              row['role']])
