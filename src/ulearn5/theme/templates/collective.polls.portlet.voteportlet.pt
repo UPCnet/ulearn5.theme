@@ -40,14 +40,6 @@
           for this reason some functionality may not be accessible.
         </div>
       </noscript>
-      <tal:spinner>
-        <div class="poll-spinner">
-          <img alt="" src="/++theme++ulearn5/assets/images/spinner.gif"
-              tal:define="portal_url context/@@plone_portal_state/portal_url"
-              tal:attributes="src string:${portal_url}/++theme++ulearn5/assets/images/spinner.gif"
-              />
-        </div>
-      </tal:spinner>
     </dd>
     <dd class="portletFooter">
       <span class="portletBottomLeft" />
