@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.79 (unreleased)
+0.79 (2020-06-09)
 -----------------
 
-- Nothing changed yet.
-
+* Quitar spinner portlet de votaciones [Iago López Fernández]
+* Estilos tarjetas eventos [Iago López Fernández]
+* Estilos tarjetas eventos [Iago López Fernández]
+* Separar id usuario y grupo en el export de usuario y grupos [Iago López Fernández]
 
 0.78 (2020-04-29)
 -----------------
