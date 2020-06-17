@@ -71,7 +71,7 @@
                     <section id="communitylist">
                         <article class="media" dir-paginate="community in comCtrl.user_communities | filter:q | filter:t | itemsPerPage: comCtrl.pageSize" current-page="comCtrl.currentPage" ng-cloak>
                             <div class="media-left">
-                                <a ng-href="{{community.url}}">
+                                <a ng-href="{{community.url_tab_view}}">
                                     <img ng-if="community.image"
                                          ng-src="{{community.url}}/@@images/image/thumb" />
                                     <img ng-if="!community.image"
@@ -79,7 +79,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <a ng-href="{{community.url}}">
+                                <a ng-href="{{community.url_tab_view}}">
                                     <h2 class="{{community.type}} text">{{community.title}}</h2>
                                     <p>{{community.description}}</p>
                                 </a>

@@ -64,11 +64,15 @@ class Renderer(RendererCommunities):
                                         check = True
 
                     if check:
+                        if community.tab_view == 'Documents':
+                            url = community.getURL() + '/documents'
+                        else:
+                            url = community.getURL()
                         info = {'id': community.id,
-                                'url': community.getURL(),
+                                'url': url,
                                 'title': community.Title,
                                 'community_type': community.community_type,
-                                'image': community.getObject().image,
+                                'image': obj.image,
                                 'pending': self.get_pending_community_user(community, username)
                                 }
                         result.append(info)
