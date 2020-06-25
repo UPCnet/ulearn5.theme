@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.80 (unreleased)
+0.80 (2020-06-25)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js [pilar.marinas]
+* Configurable comunidad  si quieres ver activityStream o Documents [Pilar Marinas]
 
 0.79 (2020-06-09)
 -----------------
