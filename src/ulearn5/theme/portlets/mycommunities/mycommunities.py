@@ -72,7 +72,7 @@ class Renderer(RendererCommunities):
                                 'url': url,
                                 'title': community.Title,
                                 'community_type': community.community_type,
-                                'image': obj.image,
+                                'image': community.getObject().image,
                                 'pending': self.get_pending_community_user(community, username)
                                 }
                         result.append(info)
