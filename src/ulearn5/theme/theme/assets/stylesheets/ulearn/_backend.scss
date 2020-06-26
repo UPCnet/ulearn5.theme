@@ -272,3 +272,7 @@ body.section-front-page li#plone-contentmenu-workflow {
 body.userrole-manager.section-front-page li#plone-contentmenu-workflow {
     display: table !important;
 }
+
+#formfield-form-widgets-notify_activity_via_mail > label[for=form-widgets-notify_activity_via_mail] {
+    display: none;
+}
