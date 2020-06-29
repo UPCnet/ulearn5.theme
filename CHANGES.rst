@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.81 (unreleased)
+0.81 (2020-06-29)
 -----------------
 
-- Nothing changed yet.
-
+* Estilo nuevos campos notificaciones comunidad [Iago López Fernández]
+* Solucionar error imagen portlet [Pilar Marinas]
 
 0.80 (2020-06-25)
 -----------------
