@@ -276,3 +276,8 @@ body.userrole-manager.section-front-page li#plone-contentmenu-workflow {
 #formfield-form-widgets-notify_activity_via_mail > label[for=form-widgets-notify_activity_via_mail] {
     display: none;
 }
+
+body.template-topbar-manage-portlets button[name=config_paysheets-hide],
+body.template-topbar-manage-portlets button[name=config_paysheets-remove] {
+    display: none !important;
+}
