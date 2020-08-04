@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.82 (unreleased)
+0.82 (2020-08-04)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos manage-portlets config_paysheets [Iago López Fernández]
 
 0.81 (2020-06-29)
 -----------------
