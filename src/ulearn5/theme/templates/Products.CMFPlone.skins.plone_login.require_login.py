@@ -18,8 +18,12 @@ portal = context.portal_url.getPortalObject()
 if context.portal_membership.isAnonymousUser():
     return portal.restrictedTraverse(login)()
 else:
-    came_from = context.REQUEST.get('came_from')
-    if came_from:
-        context.REQUEST.response.redirect(came_from)
+    from AccessControl import getSecurityManager
+    if getSecurityManager().checkPermission("zope2.View", context):
+        came_from = context.REQUEST.get('came_from')
+        if came_from:
+            context.REQUEST.response.redirect(came_from)
+        else:
+            return portal.restrictedTraverse('insufficient_privileges')()
     else:
         return portal.restrictedTraverse('insufficient_privileges')()
