@@ -97,7 +97,7 @@ class Renderer(base.Renderer):
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
-               and isinstance(portrait, Image) and portrait.size != '3566':
+               and isinstance(portrait, Image) and portrait.size != 3566:
                 return True
                 # 3566 is the size of defaultUser.png I don't know how get image
                 # title. This behavior is reproduced in profile portlet.
@@ -135,6 +135,31 @@ class Renderer(base.Renderer):
                 badges[3]['awarded'] = True
 
         return badges
+
+    def get_badges_info(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IUlearnControlPanelSettings, check=False)
+
+        info = {
+            'profile': {
+                'title': _(u'Complete the profile'),
+                'num': 0,
+            },
+            'winwin1': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin1})),
+                'num': settings.threshold_winwin1,
+            },
+            'winwin2': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin2})),
+                'num': settings.threshold_winwin2,
+            },
+            'winwin3': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin3})),
+                'num': settings.threshold_winwin3,
+            }
+        }
+
+        return info
 
     def get_community(self):
         context = aq_inner(self.context)

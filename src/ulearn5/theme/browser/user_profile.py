@@ -1,23 +1,26 @@
+# -*- coding: utf-8 -*-
 from OFS.Image import Image
-
-from zope.interface import implements
-from zope.component import getUtility
-from zope.publisher.interfaces import IPublishTraverse, NotFound
-from zope.component import getUtilitiesFor
-
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from plone import api
+from plone.registry.interfaces import IRegistry
 from souper.interfaces import ICatalogFactory
+from zope.component import getUtilitiesFor
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.interface import implements
+from zope.publisher.interfaces import IPublishTraverse
+from zope.publisher.interfaces import NotFound
 
 from base5.core import _
 from base5.core.utils import get_safe_member_by_id
-
-from plone import api
 from mrs5.max.utilities import IMAXClient
-import urllib
-from Products.CMFCore.utils import getToolByName
 from ulearn5.core.adapters.portrait import convertSquareImage
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+
+import urllib
 
 
 class userProfile(BrowserView):
@@ -74,7 +77,7 @@ class userProfile(BrowserView):
             if member_info.get('fullname', False) \
                and member_info.get('fullname', False) != self.username \
                and member_info.get('email', False) \
-               and isinstance(portrait, Image) and portrait.size != '3566':
+               and isinstance(portrait, Image) and portrait.size != 3566:
                 return True
                 # 3566 is the size of defaultUser.png I don't know how get image
                 # title. This behavior is reproduced in profile portlet.
@@ -84,6 +87,31 @@ class userProfile(BrowserView):
             # The user doesn't have any property information for some weird
             # reason or simply beccause we are admin
             return False
+
+    def get_badges_info(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IUlearnControlPanelSettings, check=False)
+
+        info = {
+            'profile': {
+                'title': _(u'Complete the profile'),
+                'num': 0,
+            },
+            'winwin1': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin1})),
+                'num': settings.threshold_winwin1,
+            },
+            'winwin2': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin2})),
+                'num': settings.threshold_winwin2,
+            },
+            'winwin3': {
+                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin3})),
+                'num': settings.threshold_winwin3,
+            }
+        }
+
+        return info
 
     def get_user_info_for_display(self):
         user_properties_utility = getUtility(ICatalogFactory, name='user_properties')

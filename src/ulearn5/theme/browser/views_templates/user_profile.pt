@@ -80,13 +80,24 @@
                         </div>
                     </div>
                     <div class="row" tal:condition="not:isAdmin">
-                        <div class="badges col-md-12">
+                        <div class="badges col-md-12" tal:define="badges_info view/get_badges_info">
                           <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
-                                 tal:attributes="enabled view/has_complete_profile">
+                                 tal:attributes="enabled view/has_complete_profile;
+                                                 title badges_info/profile/title;
+                                                 alt badges_info/profile/title">
                           </badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png" threshold="50"></badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png" threshold="100"></badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png" threshold="500"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png"
+                               tal:attributes="threshold badges_info/winwin1/num;
+                                               title badges_info/winwin1/title;
+                                               alt badges_info/winwin1/title"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png"
+                               tal:attributes="threshold badges_info/winwin2/num;
+                                               title badges_info/winwin2/title;
+                                               alt badges_info/winwin2/title"></badge>
+                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png"
+                               tal:attributes="threshold badges_info/winwin3/num;
+                                               title badges_info/winwin3/title;
+                                               alt badges_info/winwin3/title"></badge>
                         </div>
                     </div>
                   </div>
