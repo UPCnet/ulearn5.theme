@@ -2,11 +2,14 @@ Changelog
 =========
 
 
-0.83 (unreleased)
+0.83 (2020-09-08)
 -----------------
 
-- Nothing changed yet.
-
+* Ficheros grunt antiguo [Iago López Fernández]
+* Grunt ulearn5.js [pilar.marinas]
+* Fix badges + Grunt js: Añadir title y alt a los badges [Iago López Fernández]
+* Fix require_login [Iago López Fernández]
+* ulearn5.js: Añadir class botón estadísticas - Acceso a información diaria [Iago López Fernández]
 
 0.82 (2020-08-04)
 -----------------
