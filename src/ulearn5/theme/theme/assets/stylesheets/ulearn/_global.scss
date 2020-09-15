@@ -1275,10 +1275,6 @@ body.section-front-page #librarysearch, {
 	margin-bottom: 18px;
 }
 
-#librarysearch .Document {
-	font-size: 18px!important;
-}
-
 .icon-ulearn-video {
 	@extend .fa-video-camera;
 	@extend .fa;
@@ -1477,9 +1473,10 @@ body.section-front-page #librarysearch, {
 	}
 	.File {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
+	.Etherpad:before,
 	.CloudFile:before {
 		content: "\f0c2";
 		font-family: FontAwesome;
@@ -1489,7 +1486,22 @@ body.section-front-page #librarysearch, {
 		text-decoration: inherit;
 		margin-right: 7px;
 	}
+	.Etherpad,
 	.CloudFile {
+		color: #585858;
+		font-size: 16px;
+		font-weight: 600;
+	}
+	.ExternalContent:before {
+		content: "\f1c6";
+		font-family: FontAwesome;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: normal;
+		text-decoration: inherit;
+		margin-right: 7px;
+	}
+	.ExternalContent {
 		color: #585858;
 		font-size: 16px;
 		font-weight: 600;
@@ -1505,7 +1517,7 @@ body.section-front-page #librarysearch, {
 	}
 	.Link {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 	.Image:before {
@@ -1519,7 +1531,7 @@ body.section-front-page #librarysearch, {
 	}
 	.Image {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 	.Document:before {
@@ -1533,7 +1545,7 @@ body.section-front-page #librarysearch, {
 	}
 	.Document {
 		color: #585858;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 	}
 }
@@ -2626,11 +2638,25 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
-
 .template-contents_pretty_view #content .contenttype-externalcontent:before,
 .template-listing_view #content .contenttype-externalcontent:before,
 #tagslist a .ExternalContent:before {
   content: "\f1c6";
+  font-size: 18px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: inherit;
+  margin-right: 10px;
+}
+
+.template-contents_pretty_view #content .contenttype-etherpad:before,
+.template-listing_view #content .contenttype-etherpad:before,
+#tagslist a .Etherpad:before,
+.template-contents_pretty_view #content .contenttype-cloudfile:before,
+.template-listing_view #content .contenttype-cloudfile:before,
+#tagslist a .Cloudfile:before {
+  content: "\f0c2";
   font-size: 18px;
   font-family: FontAwesome;
   font-style: normal;

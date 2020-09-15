@@ -281,3 +281,30 @@ body.template-topbar-manage-portlets button[name=config_paysheets-hide],
 body.template-topbar-manage-portlets button[name=config_paysheets-remove] {
     display: none !important;
 }
+
+body.template-folder_contents #object-universal-link {
+    display: none !important;
+}
+
+/* Contenttypes icons */
+
+body.template-folder_contents .contenttype-externalcontent:before {
+  content: "\f1c6";
+  font-size: 18px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: inherit;
+  margin-right: 10px;
+}
+
+body.template-folder_contents .contenttype-etherpad:before,
+body.template-folder_contents .contenttype-cloudfile:before {
+  content: "\f0c2";
+  font-size: 18px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: inherit;
+  margin-right: 10px;
+}
