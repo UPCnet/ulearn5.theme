@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.84 (unreleased)
+0.84 (2020-09-17)
 -----------------
 
-- Nothing changed yet.
-
+* Iconos contenttypes [Iago López Fernández]
 
 0.83 (2020-09-08)
 -----------------
