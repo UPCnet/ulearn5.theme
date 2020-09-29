@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.85 (unreleased)
+0.85 (2020-09-29)
 -----------------
 
-- Nothing changed yet.
-
+* Fix CSS maxicons.svg [Iago López Fernández]
+* Fix url [Iago López Fernández]
 
 0.84 (2020-09-17)
 -----------------
