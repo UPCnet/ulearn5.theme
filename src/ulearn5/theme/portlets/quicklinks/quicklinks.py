@@ -55,7 +55,7 @@ class Renderer(base.Renderer):
         res = {}
 
         portal = getSite()
-        instance_name = "/".join(portal.getPhysicalPath())
+        instance_name = portal.absolute_url()
 
         catalog = getToolByName(portal, 'portal_catalog')
         folders = catalog.searchResults(portal_type=('Folder', 'privateFolder'),

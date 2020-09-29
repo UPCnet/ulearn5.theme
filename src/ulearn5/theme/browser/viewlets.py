@@ -209,7 +209,7 @@ class viewletHeaderUlearn(viewletBase):
         portal = api.portal.get()
         if 'gestion' in portal and 'menu' in portal['gestion'] and language in portal['gestion']['menu']:
             menu = portal['gestion']['menu'][language]
-            instance_name = "/".join(portal.getPhysicalPath())
+            instance_name = portal.absolute_url()
             path_language = "/".join(menu.getPhysicalPath())
 
             catalog = api.portal.get_tool(name='portal_catalog')
