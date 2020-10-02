@@ -1,5 +1,9 @@
 body.template-collection_news_view #content-core {
 
+    .documentDescription.description {
+        display: none;
+    }
+
     form#searchNews {
         position: relative;
 
