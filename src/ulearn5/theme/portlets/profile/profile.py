@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from OFS.Image import Image
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -19,15 +18,14 @@ from zope.interface import implements
 
 from base5.core.utils import get_safe_member_by_id
 from base5.core.utils import pref_lang
-from mrs5.max.utilities import IMAXClient
 from ulearn5.core import _
-from ulearn5.core.adapters.portrait import convertSquareImage
+
 from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from plone.memoize.view import memoize_contextless
-
-import urllib
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
 
 
 class IProfilePortlet(IPortletDataProvider):
@@ -79,28 +77,12 @@ class Renderer(base.Renderer):
     def has_complete_profile(self):
         if self.user_info:
             id = self.user_info['id']
-            maxclient, settings = getUtility(IMAXClient)()
-            foto = maxclient.people[id].avatar
-            imageUrl = foto.uri + '/large'
-
-            portrait = urllib.urlretrieve(imageUrl)
-
-            scaled, mimetype = convertSquareImage(portrait[0])
-            portrait = Image(id=id, file=scaled, title=id)
-
-            membertool = getToolByName(self, 'portal_memberdata')
-            membertool._setPortrait(portrait, str(id))
-            import transaction
-            transaction.commit()
-
-            member_info = get_safe_member_by_id(id)
-            if member_info.get('fullname', False) \
-               and member_info.get('fullname', False) != self.username \
-               and member_info.get('email', False) \
-               and isinstance(portrait, Image) and portrait.size != 3566:
-                return True
-                # 3566 is the size of defaultUser.png I don't know how get image
-                # title. This behavior is reproduced in profile portlet.
+            portal = api.portal.get()
+            soup_users_portrait = get_soup('users_portrait', portal)
+            exist = [r for r in soup_users_portrait.query(Eq('id_username', id))]
+            if exist:
+                user_record = exist[0]
+                return user_record.attrs['portrait']
             else:
                 return False
         else:
