@@ -17,6 +17,8 @@ from zope.publisher.interfaces import NotFound
 from base5.core import _
 from base5.core.utils import get_safe_member_by_id
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from souper.soup import get_soup
+from repoze.catalog.query import Eq
 
 
 class userProfile(BrowserView):
@@ -54,7 +56,7 @@ class userProfile(BrowserView):
 
     def has_complete_profile(self):
         if self.user_info:
-            id = self.user_info['id']
+            id = self.user_info.id
             portal = api.portal.get()
             soup_users_portrait = get_soup('users_portrait', portal)
             exist = [r for r in soup_users_portrait.query(Eq('id_username', id))]
