@@ -2,11 +2,19 @@ Changelog
 =========
 
 
-0.86 (unreleased)
+0.86 (2020-10-13)
 -----------------
 
-- Nothing changed yet.
-
+* CSS portlet thinkers [Iago López Fernández]
+* Grunt ulearn5.js literales search users [pilar.marinas]
+* Solucionar error soup [Pilar Marinas]
+* Modificar codigo para el badget de la imagen lo mire del soup y no actualize siempre foto [Pilar Marinas]
+* Vista author: pillar imagen del max [Iago López Fernández]
+* Grunt theme [pilar.marinas]
+* Solucionar que se vea bien la caja de comentarios en las noticias [Pilar Marinas]
+* Solucionar que la imagen del usuario en los comentarios sea la del max [Pilar Marinas]
+* Grunt ulearn5.js 668402b [Iago López Fernández]
+* Quitar descripcion vista colección de noticias [Iago López Fernández]
 
 0.85 (2020-09-29)
 -----------------
