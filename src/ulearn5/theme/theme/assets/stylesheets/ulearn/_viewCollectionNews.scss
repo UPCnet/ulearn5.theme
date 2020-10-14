@@ -1,8 +1,8 @@
-body.template-collection_news_view #content-core {
+body.template-collection_news_view .documentDescription.description {
+    display: none;
+}
 
-    .documentDescription.description {
-        display: none;
-    }
+body.template-collection_news_view #content-core {
 
     form#searchNews {
         position: relative;
