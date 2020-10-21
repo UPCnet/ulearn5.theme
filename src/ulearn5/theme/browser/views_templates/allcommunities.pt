@@ -78,7 +78,7 @@
             </div>
             <div class="community-actions">
               <a class="community-action community-notify community-icon-"
-                 ng-if="community.activate_notify_push && !(community.type === 'Organizative')"
+                 ng-if="community.activate_notify_push && !(community.type === 'Organizative') && ctrl.is_subscribed(community.url)"
                  ng-class="{'community-not_notify_push': community.not_notify_push}"
                  ng-click="ctrl.toggleNotNotifyPush(community)">
                  {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYPUSH' | translate }}
