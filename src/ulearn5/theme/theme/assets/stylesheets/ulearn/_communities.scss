@@ -64,6 +64,16 @@ a.community-action {
     &.community-favorite.community-favorited:before        { content: '\e800'; color: $linkColor}
     &.community-favorite.community-favorited:hover:before  { color : favoriteColor}
 
+    &.community-notify:before                            { font-family: FontAwesome; content: "\f046"; }
+    &.community-notify.community-not_notify_push                       { color: $linkColor; }
+    &.community-notify.community-not_notify_push:before                { font-family: FontAwesome; content: "\f096"; color: $linkColor;}
+    &.community-notify.community-not_notify_push:hover:before          { color:$hoverLinkColor;}
+    &.community-notify.community-not_notify_push:hover                 { color:$hoverLinkColor;}
+    &.community-notify.community-not_notify_mail                       { color: $linkColor; }
+    &.community-notify.community-not_notify_mail:before                { font-family: FontAwesome; content: "\f096"; color: $linkColor;}
+    &.community-notify.community-not_notify_mail:hover:before          { color:$hoverLinkColor;}
+    &.community-notify.community-not_notify_mail:hover                 { color:$hoverLinkColor;}
+
     &.community-flag:before                             { content: '\e81e'; }
     &.community-flag:hover:before                       { content: '\e81e'; color: $linkColor;}
     &.community-flag.community-flagged                      { color: $linkColor; }
