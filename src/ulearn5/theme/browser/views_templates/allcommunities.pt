@@ -83,6 +83,12 @@
                  ng-click="ctrl.toggleNotNotifyPush(community)">
                  {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYPUSH' | translate }}
               </a>
+              <a class="community-action community-notify-mail community-icon-"
+                 ng-if="community.activate_notify_mail && ctrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+                 ng-class="{'community-not_notify_mail': community.not_notify_mail}"
+                 ng-click="ctrl.toggleNotNotifyMail(community)">
+                 {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYMAIL' | translate }}
+              </a>
               <a class="community-action community-favorite community-icon-"
                  ng-class="{'community-favorited': community.favorited}"
                  ng-click="ctrl.toggleFavorite(community)">
