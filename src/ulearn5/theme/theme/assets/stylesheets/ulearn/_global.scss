@@ -6197,3 +6197,8 @@ div.checbox-info-widget.required::after {
 #content-core div#parent-fieldname-text {
     min-height: 175px;
 }
+
+#box_community .icon-etherpad:before {
+	font-family: FontAwesome !important;
+  	content: "\f0c2";
+}

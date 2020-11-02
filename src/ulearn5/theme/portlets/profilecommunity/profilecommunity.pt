@@ -28,7 +28,7 @@
                  class="btn-group contentaddtoolbar">
                 <tal:docs condition="documentPage" repeat="type types">
                     <tal:con tal:define="type_id type/id">
-                        <tal:cond tal:condition="python: type_id in ('Folder', 'Document', 'File' , 'Image', 'Link')">
+                        <tal:cond tal:condition="python: type_id in ('Folder', 'Document', 'File' , 'Image', 'Link', 'Etherpad')">
                             <a class="btn btn-default" rel="tooltip" data-placement="bottom"
                                 tal:attributes="href type/action; title type/description">
                                 <i tal:attributes="class string:icon-${type/extra/id}"></i>
