@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.87 (unreleased)
+0.87 (2020-11-11)
 -----------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js feffa49 [Iago López Fernández]
+* Añadir Etherpad en el portlet de perfil de la comunidad [Iago López Fernández]
+* Solucionar que se vea bien la caja de comentarios en las noticias [Iago López Fernández]
+* Quitar descripcion vista colección de noticias [Iago López Fernández]
 
 0.86 (2020-10-13)
 -----------------
