@@ -33,7 +33,6 @@ from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
 from plone.registry.interfaces import IRegistry
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
 from Products.CMFPlone.interfaces import IPloneSiteRoot
@@ -371,10 +370,10 @@ class TypeAheadSearch(grok.View):
         path = None
         if cf != '':
             path = cf
-        ploneUtils = getToolByName(self.context, 'plone_utils')
-        portal_url = getToolByName(self.context, 'portal_url')()
+        ploneUtils = api.portal.get_tool(name='plone_utils')
+        portal_url = api.portal.get_tool(name='portal_url')()
         pretty_title_or_id = ploneUtils.pretty_title_or_id
-        portalProperties = getToolByName(self.context, 'portal_properties')
+        portalProperties = api.portal.get_tool(name='portal_properties')
         siteProperties = getattr(portalProperties, 'site_properties', None)
         useViewAction = []
         if siteProperties is not None:
@@ -426,7 +425,7 @@ class TypeAheadSearch(grok.View):
 
         label_show_all = _('label_show_all', default='Show all items')
 
-        ts = getToolByName(self.context, 'translation_service')
+        ts = api.portal.get_tool(name='translation_service')
 
         queryElements = []
 
@@ -482,7 +481,7 @@ class FilteredContentsSearchView(grok.View):
             self.tags = []
 
     def get_batched_contenttags(self, query=None, batch=True, b_size=10, b_start=0):
-        pc = getToolByName(self.context, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         path = self.context.getPhysicalPath()
         path = "/".join(path)
         r_results = pc.searchResults(path=path,
@@ -498,7 +497,7 @@ class FilteredContentsSearchView(grok.View):
         return batch
 
     def get_contenttags_by_query(self):
-        pc = getToolByName(self.context, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         path = self.context.getPhysicalPath()
         path = "/".join(path)
 
@@ -555,7 +554,7 @@ class FilteredContentsSearchView(grok.View):
             return items
 
     def get_tags_by_query(self):
-        pc = getToolByName(self.context, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
 
         def quotestring(s):
             return '"%s"' % s
@@ -594,8 +593,7 @@ class FilteredContentsSearchView(grok.View):
         return self.context.absolute_url()
 
     def getContent(self):
-        portal = api.portal.get()
-        catalog = getToolByName(portal, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         path = self.context.getPhysicalPath()
         path = "/".join(path)
 
@@ -775,7 +773,7 @@ class SearchFilteredNews(grok.View):
                 news_html = '<li class="noticies clearfix"><div> No hay coincidencias. </div></li>'
             return news_html
 
-        pc = getToolByName(self.context, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         now = DateTime()
         path = self.context.getPhysicalPath()
         path = "/".join(path)
@@ -825,8 +823,7 @@ class ContentsPrettyView(grok.View):
     def getItemPropierties(self):
         all_items = []
 
-        portal = api.portal.get()
-        catalog = getToolByName(portal, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         path = self.context.getPhysicalPath()
         path = "/".join(path)
 
@@ -854,8 +851,7 @@ class ContentsPrettyView(grok.View):
 
     def getSubItemPropierties(self, item_path):
         all_items = []
-        portal = api.portal.get()
-        catalog = getToolByName(portal, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         path = item_path
 
         items = catalog.searchResults(path={'query': path, 'depth': 1},
@@ -928,7 +924,7 @@ class ResetMenuBar(grok.View):
     grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
-        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        portal = api.portal.get_tool(name='portal_url').getPortalObject()
         soup_menu = get_soup('menu_soup', portal)
         soup_menu.clear()
         self.redirect('/'.join(self.context.getPhysicalPath()))
@@ -942,9 +938,8 @@ class SendEventToAttendees(grok.View):
 
     def render(self):
         portal = api.portal
-        context = aq_inner(self.context)
         subject = 'Invitació: %s\n' % self.context.Title()
-        mailhost = getToolByName(context, 'MailHost')
+        mailhost = api.portal.get_tool(name='MailHost')
 
         map = {
             'title': self.context.Title(),

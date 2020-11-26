@@ -2,7 +2,6 @@
 from Acquisition import aq_chain
 from Acquisition import aq_inner
 from Acquisition import aq_parent
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -118,8 +117,7 @@ class Renderer(base.Renderer):
         return '{}/{}'.format(self.get_community().absolute_url(), discussion_folder_id)
 
     def getCommunities(self):
-        portal = getSite()
-        pc = getToolByName(portal, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         communities = pc.searchResults(object_provides=ICommunity.__identifier__)
         return communities
 

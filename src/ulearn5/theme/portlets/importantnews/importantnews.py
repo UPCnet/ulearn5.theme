@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -97,7 +96,7 @@ class Renderer(base.Renderer):
         return noticies
 
     def get_news(self, context, state, path, limit):
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         now = DateTime()
         results = catalog(portal_type='News Item',
                           review_state=state,

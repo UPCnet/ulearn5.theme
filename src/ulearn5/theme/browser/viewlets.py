@@ -2,7 +2,6 @@
 from Acquisition import aq_chain
 from Acquisition import aq_inner
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import ILanguageSchema
 from Products.CMFPlone.utils import safe_unicode
 
@@ -265,7 +264,7 @@ class viewletHeaderUlearn(viewletBase):
             current = api.user.get_current()
             user_language = current.getProperty('language')
             if not user_language or user_language == '':
-                lt = getToolByName(self.portal(), 'portal_languages')
+                lt = api.portal.get_tool(name='portal_languages')
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
@@ -291,7 +290,7 @@ class viewletHeaderUlearn(viewletBase):
         Get dades header
         """
         user = api.user.get_current()
-        pt = getToolByName(self.portal(), 'portal_languages')
+        pt = api.portal.get_tool(name='portal_languages')
 
         if not api.user.is_anonymous():
             user_language = user.getProperty('language')
@@ -310,7 +309,7 @@ class viewletHeaderUlearn(viewletBase):
             else:
                 user_language = pt.getPreferredLanguage()
 
-        catalog = getToolByName(self, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
         path = portalPath + '/gestion/header/' + user_language
 
@@ -328,7 +327,7 @@ class viewletHeaderUlearn(viewletBase):
     def viewNominesRootFolder(self):
         # If package is installed check if its needed to show the button
         if isInstalledProduct(self, 'ulearn5.nomines'):
-            JSONproperties = getToolByName(self, 'portal_properties').nomines_properties
+            JSONproperties = api.portal.get_tool(name='portal_properties').nomines_properties
             if not JSONproperties.getProperty('nominas_folder_name'):
                 return '#'
             else:
@@ -423,7 +422,7 @@ class viewletFooterUlearn(viewletBase):
         current = api.user.get_current()
         language = current.getProperty('language')
         if not language:
-            lt = getToolByName(self.portal(), 'portal_languages')
+            lt = api.portal.get_tool(name='portal_languages')
             language = lt.getPreferredLanguage()
 
         links = {}
@@ -450,7 +449,7 @@ class viewletFooterUlearn(viewletBase):
         Get dades footer
         """
         user = api.user.get_current()
-        pt = getToolByName(self.portal(), 'portal_languages')
+        pt = api.portal.get_tool(name='portal_languages')
 
         if not api.user.is_anonymous():
             user_language = user.getProperty('language')
@@ -469,7 +468,7 @@ class viewletFooterUlearn(viewletBase):
             else:
                 user_language = pt.getPreferredLanguage()
 
-        catalog = getToolByName(self, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         portalPath = '/'.join(api.portal.get().getPhysicalPath())
         path = portalPath + '/gestion/footer/' + user_language
 

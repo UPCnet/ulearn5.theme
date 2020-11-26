@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from DateTime.DateTime import DateTime
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -56,8 +55,7 @@ class Renderer(base.Renderer):
 
         data_access = get_data_acces_community_user() + 0.001   # Suma 0.001 para que no muetre los que acaba de crear el usuario
         now = DateTime() + 0.001  # Suma 0.001 para que no muetre los que acaba de crear el usuario
-        portal = api.portal.get()
-        pc = getToolByName(portal, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
 
         date_range_query = {'query': (data_access, now), 'range': 'min:max'}
 
@@ -97,7 +95,7 @@ class Renderer(base.Renderer):
                 return True
 
     def showEditCommunity(self):
-        pm = getToolByName(self.portal(), 'portal_membership')
+        pm = api.portal.get_tool(name='portal_membership')
         user = pm.getAuthenticatedMember()
 
         if not IPloneSiteRoot.providedBy(self.context) and \
@@ -109,9 +107,8 @@ class Renderer(base.Renderer):
             return True
 
     def getTypeCommunities(self, typeCommunity):
-        portal = self.portal()
-        pc = getToolByName(portal, "portal_catalog")
-        pm = getToolByName(portal, "portal_membership")
+        pc = api.portal.get_tool(name="portal_catalog")
+        pm = api.portal.get_tool(name="portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName().lower()
         communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,
@@ -181,8 +178,7 @@ class Renderer(base.Renderer):
         return settings.library_url
 
     def get_user(self):
-        portal = self.portal()
-        pm = getToolByName(portal, "portal_membership")
+        pm = api.portal.get_tool(name="portal_membership")
         current_user = pm.getAuthenticatedMember().getUserName()
         return current_user
 

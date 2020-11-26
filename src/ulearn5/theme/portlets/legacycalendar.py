@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from Products.PythonScripts.standard import url_quote_plus
 from StringIO import StringIO
@@ -61,7 +60,7 @@ def _render_cachekey(fun, self):
             key.write(brain.modified)
             key.write('\n\n')
 
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         path = navigation_root_path
         brains = catalog(
             portal_type=self.calendar.getCalendarTypes(),
@@ -95,9 +94,8 @@ class Renderer(base.Renderer):
             return
         self.updated = True
 
-        context = aq_inner(self.context)
-        self.calendar = getToolByName(context, 'portal_calendar')
-        self._ts = getToolByName(context, 'translation_service')
+        self.calendar = api.portal.get_tool(name='portal_calendar')
+        self._ts = api.portal.get_tool(name='translation_service')
         self.url_quote_plus = url_quote_plus
 
         self.now = localtime()

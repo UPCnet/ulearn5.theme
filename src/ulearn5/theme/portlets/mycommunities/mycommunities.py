@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -30,8 +29,7 @@ class Renderer(RendererCommunities):
     render = ViewPageTemplateFile('mycommunities.pt')
 
     def getTypeCommunities(self, typeCommunity):
-        portal = self.portal()
-        pc = getToolByName(portal, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        community_type=typeCommunity,
                                        sort_on="sortable_title")

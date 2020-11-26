@@ -1,6 +1,5 @@
 # from plone.memoize import ram
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -57,7 +56,7 @@ class Renderer(base.Renderer):
         portal = getSite()
         instance_name = portal.absolute_url()
 
-        catalog = getToolByName(portal, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         folders = catalog.searchResults(portal_type=('Folder', 'privateFolder'),
                                         UID=self.data.folder)
 
@@ -103,7 +102,7 @@ class Renderer(base.Renderer):
     def getInfoFolders(self):
         res = {}
         current = api.user.get_current().id
-        catalog = getToolByName(getSite(), 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         folders = catalog.searchResults(portal_type=('Folder', 'privateFolder'),
                                         UID=self.data.folder)
         for brainFolder in folders:

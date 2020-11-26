@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -91,7 +90,7 @@ class Renderer(base.Renderer):
         self.next_query = '?month=%s&year=%s' % (next_month, next_year)
 
         self.cal = calmodule.Calendar(first_weekday())
-        self._ts = getToolByName(context, 'translation_service')
+        self._ts = api.portal.get_tool(name='translation_service')
         self.month_name = PLMF(
             self._ts.month_msgid(month),
             default=self._ts.month_english(month)

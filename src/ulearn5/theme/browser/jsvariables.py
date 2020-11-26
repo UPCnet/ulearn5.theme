@@ -1,7 +1,7 @@
+from plone import api
 from zope.i18n import translate
 from zope.publisher.browser import BrowserView
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 
@@ -31,12 +31,11 @@ AJAX_NORESPONSE = _(u'text_ajax_noresponse_message',
 class JSVariables(BrowserView):
 
     def __call__(self, *args, **kwargs):
-        context = self.context
         response = self.request.response
         response.setHeader('content-type', 'text/javascript;;charset=utf-8')
 
-        props = getToolByName(context, 'portal_properties').site_properties
-        portal_url = getToolByName(context, 'portal_url')()
+        props = api.portal.get_tool(name='portal_properties').site_properties
+        portal_url = api.portal.get_tool(name='portal_url')()
         base_url = self.request['HTTP_REFERER']
 
         # the following are flags for mark_special_links.js

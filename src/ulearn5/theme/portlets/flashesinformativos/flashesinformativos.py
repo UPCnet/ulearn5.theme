@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone import api
@@ -107,8 +106,7 @@ class Renderer(base.Renderer):
         return text_with_tags_fixed
 
     def getFlashesInformativos(self):
-        portal = self.portal()
-        pc = getToolByName(portal, "portal_catalog")
+        pc = api.portal.get_tool(name="portal_catalog")
         limit = self.data.count
         now = DateTime()
 

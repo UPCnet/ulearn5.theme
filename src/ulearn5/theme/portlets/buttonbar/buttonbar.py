@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _PFM
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -100,7 +99,7 @@ class Renderer(base.Renderer):
     @memoize_contextless
     def portal_url(self):
         return self.portal().absolute_url()
-        
+
     @memoize_contextless
     def portal(self):
         return getSite()
@@ -142,7 +141,7 @@ class Renderer(base.Renderer):
         return getSearchersFromUser()
 
     def get_news(self, context, state, path, limit):
-        catalog = getToolByName(context, 'portal_catalog')
+        catalog = api.portal.get_tool(name='portal_catalog')
         now = DateTime()
         results = catalog(portal_type='News Item',
                           review_state=state,
