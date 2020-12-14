@@ -122,18 +122,19 @@ class Renderer(base.Renderer):
                                    sort_limit=limit,
                                    is_flash=True)[:limit]
         dades = []
-        for a in flashes:
-            if a.getObject().text is None:
+        for flash in flashes:
+            flashObj = flash.getObject()
+            if flashObj.text is None:
                 text = None
             else:
-                text = self.abreviaRichText(a.getObject().text.raw, 90)
+                text = self.abreviaRichText(flashObj.text.raw, 90)
 
-            info = {'id': a.id,
-                    'url': a.getURL(),
-                    'flash': a.getObject(),
-                    'image': a.getObject().image,
+            info = {'id': flash.id,
+                    'url': flash.getURL(),
+                    'flash': flashObj,
+                    'image': flashObj.image,
                     'text': text,
-                    'title': abrevia(a.Title, 90)
+                    'title': abrevia(flash.Title, 90)
                     }
 
             dades.append(info)
