@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.90 (unreleased)
+0.90 (2020-12-15)
 -----------------
 
-- Nothing changed yet.
-
+* Modificar portlet flash informativo para que no haga tanto getObject [Pilar Marinas]
 
 0.89 (2020-11-26)
 -----------------
