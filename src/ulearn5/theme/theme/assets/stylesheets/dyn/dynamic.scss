@@ -806,6 +806,48 @@ body.template-grid_events_view {
   }
 }
 
+
+/* View grid_future_events_view */
+
+body.template-grid_future_events_view {
+
+  .list-agenda {
+
+    .no-flip-card,
+    .flip-card {
+
+      .flip-card-inner {
+
+        .flip-card-front,
+        .flip-card-back {
+          border: 1px solid transparentize($main-color, 0.8);
+        }
+
+        .flip-card-front {
+          background: $background-color;
+
+          .event-flip {
+            color: $main-color;
+          }
+
+          .event-time {
+            background: $main-color !important;
+          }
+
+          .event-title {
+            background: $main-color;
+          }
+        }
+
+        .flip-card-back {
+          background-color: $main-color;
+          border: 1px solid transparentize($main-color, 0.8);
+        }
+      }
+    }
+  }
+}
+
 /* Search */
 
 .template-search select[name="Subject:list"] option {
