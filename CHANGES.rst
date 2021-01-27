@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.91 (unreleased)
+0.91 (2021-01-27)
 -----------------
 
-- Nothing changed yet.
-
+* Estilos campos zoom [Iago López Fernández]
+* Grunt watch [Iago López Fernández]
+* Estilos campos zoom [Iago López Fernández]
+* Estilos template grid_future_events_view [Pilar Marinas]
 
 0.90 (2020-12-15)
 -----------------
