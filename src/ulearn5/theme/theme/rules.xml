@@ -52,7 +52,8 @@
     <replace css:theme="#favicon" method="raw">
       <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     </replace>
-    <rules css:if-content="body.template-default_error_message">
+    <rules css:if-content="body.template-default_error_message,
+                           body.template-next-meetings, body.template-view_pretty_entries_rooms_not_availables">
         <theme href="error.html" />
         <!-- Portlets Central column -->
         <replace css:theme="#content-container" method="raw">
