@@ -47,6 +47,7 @@ from base5.core.utils import pref_lang
 from ulearn5.core.browser.searchuser import searchUsersFunction
 from ulearn5.core.content.community import ICommunityACL
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.core.hooks import packages_installed
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
 from email import Encoders
@@ -114,29 +115,89 @@ END:STANDARD
 """
 
 ATTENDEES_MESSAGE_TEMPLATE = """\
+Us han convidat a l'esdeveniment:
+
 %(title)s
-Iniciar: %(start)s
-Final: %(end)s
+
+Inici: %(start)s
+Fi: %(end)s
 Assistents: %(attendees)s
+Lloc: %(place)s
 Descripció: %(description)s
+
 S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
 """
 
 ATTENDEES_MESSAGE_TEMPLATE_ES = """\
+Os han invitado al evento:
+
 %(title)s
-Iniciar: %(start)s
-Final: %(end)s
+
+Inicio: %(start)s
+Fin: %(end)s
 Asistentes: %(attendees)s
+Lugar: %(place)s
 Descripción: %(description)s
+
 Se adjunta un archivo iCalendar con más información sobre el evento.
 """
 
 ATTENDEES_MESSAGE_TEMPLATE_EN = """\
+You have been invited to the event:
+
 %(title)s
+
 Start: %(start)s
 End: %(end)s
 Attendees: %(attendees)s
+Place: %(place)s
 Description: %(description)s
+
+An iCalendar file with more information about the event is attached.
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_ZOOM = """\
+Us han convidat a l'esdeveniment:
+
+%(title)s
+
+Inici: %(start)s
+Fi: %(end)s
+Assistents: %(attendees)s
+Lloc: %(place)s
+Sala Zoom: %(zoom)s
+Descripció: %(description)s
+
+S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES = """\
+Os han invitado al evento:
+
+%(title)s
+
+Inicio: %(start)s
+Fin: %(end)s
+Asistentes: %(attendees)s
+Lugar: %(place)s
+Sala Zoom: %(zoom)s
+Descripción: %(description)s
+
+Se adjunta un archivo iCalendar con más información sobre el evento.
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_ZOOM_EN = """\
+You have been invited to the event:
+
+%(title)s
+
+Start: %(start)s
+End: %(end)s
+Attendees: %(attendees)s
+Place: %(place)s
+Zoom room: %(zoom)s
+Description: %(description)s
+
 An iCalendar file with more information about the event is attached.
 """
 
@@ -938,7 +999,6 @@ class SendEventToAttendees(grok.View):
 
     def render(self):
         portal = api.portal
-        subject = 'Invitació: %s\n' % self.context.Title()
         mailhost = api.portal.get_tool(name='MailHost')
 
         map = {
@@ -946,19 +1006,35 @@ class SendEventToAttendees(grok.View):
             'start': self.applytz(self.context.start).strftime('%d/%m/%Y %H:%M:%S'),
             'end': self.applytz(self.context.end).strftime('%d/%m/%Y %H:%M:%S'),
             'attendees': ', '.join(self.context.attendees).encode('utf-8'),
+            'place': self.context.location.encode('utf-8'),
             'description': self.context.Description()
         }
 
         default_language = api.portal.get_default_language()
 
-        if default_language == 'ca':
-            body = ATTENDEES_MESSAGE_TEMPLATE % map
-        elif default_language == 'es':
-            body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
-            subject = 'Invitación: %s\n' % self.context.Title()
+        installed = packages_installed()
+        if 'ulearn5.zoom' in installed and hasattr(self.context, 'url_zoom') and self.context.url_zoom is not None:
+            map.update({'zoom': self.context.url_zoom.encode('utf-8')})
+
+            if default_language == 'ca':
+                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM % map
+                subject = 'Invitació: %s\n' % self.context.Title()
+            elif default_language == 'es':
+                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES % map
+                subject = 'Invitación: %s\n' % self.context.Title()
+            else:
+                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM_EN % map
+                subject = 'Meeting: %s\n' % self.context.Title()
         else:
-            body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
-            subject = 'Meeting: %s\n' % self.context.Title()
+            if default_language == 'ca':
+                body = ATTENDEES_MESSAGE_TEMPLATE % map
+                subject = 'Invitació: %s\n' % self.context.Title()
+            elif default_language == 'es':
+                body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
+                subject = 'Invitación: %s\n' % self.context.Title()
+            else:
+                body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
+                subject = 'Meeting: %s\n' % self.context.Title()
 
         msg = MIMEMultipart()
         msg['From'] = portal.get_registry_record('plone.email_from_address')
