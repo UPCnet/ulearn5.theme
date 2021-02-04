@@ -115,87 +115,66 @@ END:STANDARD
 """
 
 ATTENDEES_MESSAGE_TEMPLATE = """\
-Us han convidat a l'esdeveniment:
+Us han convidat a l'esdeveniment: %(title)s
+que comença a les %(start_hour)s del dia %(start_day)s
+i acaba a les %(end_hour)s del dia %(end_day)s
 
-%(title)s
+"""
 
-Inici: %(start)s
-Fi: %(end)s
+ATTENDEES_MESSAGE_TEMPLATE_LOCATION = """\
+Que tindrà lloc a: %(location)s
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_ZOOM = """\
+Unir-se amb Zoom: %(zoom_link)s
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_END = """\
 Assistents: %(attendees)s
-Lloc: %(place)s
 Descripció: %(description)s
 
 S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
 """
 
 ATTENDEES_MESSAGE_TEMPLATE_ES = """\
-Os han invitado al evento:
+Ha sido invitado/a al evento: %(title)s
+que empieza a las %(start_hour)s del día %(start_day)s
+y acaba a las %(end_hour)s del día %(end_day)s
 
-%(title)s
+"""
 
-Inicio: %(start)s
-Fin: %(end)s
+ATTENDEES_MESSAGE_TEMPLATE_LOCATION_ES = """\
+Que tendrá lugar en: %(location)s
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES = """\
+Unirse con Zoom: %(zoom_link)s
+"""
+
+ATTENDEES_MESSAGE_TEMPLATE_END_ES = """\
 Asistentes: %(attendees)s
-Lugar: %(place)s
 Descripción: %(description)s
 
 Se adjunta un archivo iCalendar con más información sobre el evento.
 """
 
 ATTENDEES_MESSAGE_TEMPLATE_EN = """\
-You have been invited to the event:
+You have been invited to the following event: %(title)s
+that starts at %(start_hour)s on %(start_day)s
+and ends at %(end_hour)s on %(end_day)s
 
-%(title)s
-
-Start: %(start)s
-End: %(end)s
-Attendees: %(attendees)s
-Place: %(place)s
-Description: %(description)s
-
-An iCalendar file with more information about the event is attached.
 """
 
-ATTENDEES_MESSAGE_TEMPLATE_ZOOM = """\
-Us han convidat a l'esdeveniment:
-
-%(title)s
-
-Inici: %(start)s
-Fi: %(end)s
-Assistents: %(attendees)s
-Lloc: %(place)s
-Sala Zoom: %(zoom)s
-Descripció: %(description)s
-
-S'adjunta un fitxer iCalendar amb més informació sobre l'esdeveniment.
-"""
-
-ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES = """\
-Os han invitado al evento:
-
-%(title)s
-
-Inicio: %(start)s
-Fin: %(end)s
-Asistentes: %(attendees)s
-Lugar: %(place)s
-Sala Zoom: %(zoom)s
-Descripción: %(description)s
-
-Se adjunta un archivo iCalendar con más información sobre el evento.
+ATTENDEES_MESSAGE_TEMPLATE_LOCATION_EN = """\
+That have been place at: %(location)s
 """
 
 ATTENDEES_MESSAGE_TEMPLATE_ZOOM_EN = """\
-You have been invited to the event:
+Join with Zoom: %(zoom_link)s
+"""
 
-%(title)s
-
-Start: %(start)s
-End: %(end)s
+ATTENDEES_MESSAGE_TEMPLATE_END_EN = """\
 Attendees: %(attendees)s
-Place: %(place)s
-Zoom room: %(zoom)s
 Description: %(description)s
 
 An iCalendar file with more information about the event is attached.
@@ -1003,38 +982,59 @@ class SendEventToAttendees(grok.View):
 
         map = {
             'title': self.context.Title(),
-            'start': self.applytz(self.context.start).strftime('%d/%m/%Y %H:%M:%S'),
-            'end': self.applytz(self.context.end).strftime('%d/%m/%Y %H:%M:%S'),
+            'start_hour': self.applytz(self.context.start).strftime('%H:%M:%S'),
+            'start_day': self.applytz(self.context.start).strftime('%d/%m/%Y'),
+            'end_hour': self.applytz(self.context.end).strftime('%H:%M:%S'),
+            'end_day': self.applytz(self.context.end).strftime('%d/%m/%Y'),
             'attendees': ', '.join(self.context.attendees).encode('utf-8'),
-            'place': self.context.location.encode('utf-8'),
             'description': self.context.Description()
         }
 
-        default_language = api.portal.get_default_language()
+        location = self.context.location is not None and self.context.location != ""
+        if location:
+            map.update({'location': self.context.location.encode('utf-8')})
 
         installed = packages_installed()
-        if 'ulearn5.zoom' in installed and hasattr(self.context, 'url_zoom') and self.context.url_zoom is not None:
-            map.update({'zoom': self.context.url_zoom.encode('utf-8')})
+        zoom_link = 'ulearn5.zoom' in installed and hasattr(self.context, 'url_zoom') and self.context.url_zoom is not None
 
-            if default_language == 'ca':
-                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM % map
-                subject = 'Invitació: %s\n' % self.context.Title()
-            elif default_language == 'es':
-                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES % map
-                subject = 'Invitación: %s\n' % self.context.Title()
-            else:
-                body = ATTENDEES_MESSAGE_TEMPLATE_ZOOM_EN % map
-                subject = 'Meeting: %s\n' % self.context.Title()
+        if zoom_link:
+            map.update({'zoom_link': self.context.url_zoom.encode('utf-8')})
+
+        default_language = api.portal.get_default_language()
+
+        if default_language == 'ca':
+            body = ATTENDEES_MESSAGE_TEMPLATE % map
+
+            if location:
+                body += ATTENDEES_MESSAGE_TEMPLATE_LOCATION % map
+
+            if zoom_link:
+                body += ATTENDEES_MESSAGE_TEMPLATE_ZOOM % map
+
+            body += ATTENDEES_MESSAGE_TEMPLATE_END % map
+            subject = 'Invitació: %s\n' % self.context.Title()
+
+        elif default_language == 'es':
+            body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
+            if location:
+                body += ATTENDEES_MESSAGE_TEMPLATE_LOCATION_ES % map
+
+            if zoom_link:
+                body += ATTENDEES_MESSAGE_TEMPLATE_ZOOM_ES % map
+
+            body += ATTENDEES_MESSAGE_TEMPLATE_END_ES % map
+            subject = 'Invitación: %s\n' % self.context.Title()
+
         else:
-            if default_language == 'ca':
-                body = ATTENDEES_MESSAGE_TEMPLATE % map
-                subject = 'Invitació: %s\n' % self.context.Title()
-            elif default_language == 'es':
-                body = ATTENDEES_MESSAGE_TEMPLATE_ES % map
-                subject = 'Invitación: %s\n' % self.context.Title()
-            else:
-                body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
-                subject = 'Meeting: %s\n' % self.context.Title()
+            body = ATTENDEES_MESSAGE_TEMPLATE_EN % map
+            if location:
+                body += ATTENDEES_MESSAGE_TEMPLATE_LOCATION_EN % map
+
+            if zoom_link:
+                body += ATTENDEES_MESSAGE_TEMPLATE_ZOOM_EN % map
+
+            body += ATTENDEES_MESSAGE_TEMPLATE_END_EN % map
+            subject = 'Meeting: %s\n' % self.context.Title()
 
         msg = MIMEMultipart()
         msg['From'] = portal.get_registry_record('plone.email_from_address')
