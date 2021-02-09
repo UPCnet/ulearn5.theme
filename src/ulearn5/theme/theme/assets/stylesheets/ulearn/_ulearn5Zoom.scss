@@ -8,6 +8,18 @@
     }
 }
 
+#formfield-form-widgets-IZoom-create_zoom {
+
+    .zoomError,
+    & > label {
+        display: none;
+    }
+
+    & > div.fieldErrorBox {
+        color: red;
+    }
+}
+
 body.template-next-meetings {
     .card {
         border: 1px solid #d4d4d4;
