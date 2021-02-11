@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-0.92 (unreleased)
+0.92 (2021-02-11)
 -----------------
 
-- Nothing changed yet.
-
+* Estilo errores formularios [Iago López Fernández]
+* Estilos ulearn5.zoom [Iago López Fernández]
+* Estilos ulearn5.zoom [Iago López Fernández]
+* Modificar mensaje convocatoria y añadir nuevo para ulearn5.zoom [Iago López Fernández]
+* Modificar mensaje convocatoria y añadir nuevo para ulearn5.zoom [Iago López Fernández]
+* Estilos ulearn5.zoom [Iago López Fernández]
 
 0.91 (2021-01-27)
 -----------------
