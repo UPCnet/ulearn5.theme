@@ -78,7 +78,7 @@ $(document).ready(function(){
       window.location = url + '?idcommunity=' + $('.communitySearch').val();
     } else if (value == 'all') {
       url = url.split('/users_communities')[0]
-      window.open(url + '/export_users_communities', '_blank');
+      window.open(url + '/gestion/exports/export_users_communities.csv/@@download/file/export_users_communities.csv', '_blank');
     }
   });
 });

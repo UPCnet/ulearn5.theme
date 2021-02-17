@@ -4,6 +4,7 @@ import pkg_resources
 import pytz
 import scss
 import csv
+import transaction
 
 from plone import api
 from Acquisition import aq_inner
@@ -20,7 +21,6 @@ from zope.component import getUtility
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import Interface
-
 from AccessControl import getSecurityManager
 from Products.CMFCore.permissions import ModifyPortalContent
 from plone.app.contenttypes.browser.collection import CollectionView
@@ -28,6 +28,8 @@ from plone.app.users.browser.userdatapanel import UserDataPanel
 
 from plone.batching import Batch
 from plone.dexterity.interfaces import IDexterityContent
+from plone.dexterity.utils import createContentInContainer
+from plone.namedfile import NamedBlobFile
 from plone.memoize import ram
 from plone.memoize.view import memoize_contextless
 from plone.protect import createToken
@@ -36,6 +38,7 @@ from plone.registry.interfaces import IRegistry
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
@@ -45,6 +48,7 @@ from base5.core.utils import json_response
 from base5.core.utils import pref_lang
 
 from ulearn5.core.browser.searchuser import searchUsersFunction
+from ulearn5.core.browser.setup import createOrGetObject
 from ulearn5.core.content.community import ICommunityACL
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from ulearn5.core.hooks import packages_installed
@@ -1214,18 +1218,37 @@ class ExportUsersCommunities(grok.View):
         "Role"]
 
     def render(self):
-        output_file = StringIO()
-        # Write the BOM of the text stream to make its charset explicit
-        output_file.write(u'\ufeff'.encode('utf8'))
-        self.write_data(output_file)
+        try:
+            output_file = StringIO()
+            # Write the BOM of the text stream to make its charset explicit
+            output_file.write(u'\ufeff'.encode('utf8'))
+            self.write_data(output_file)
 
-        header_content_type = 'text/csv'
-        header_filename = 'export.csv'
-        self.request.response.setHeader('Content-Type', header_content_type)
-        self.request.response.setHeader(
-            'Content-Disposition',
-            'attachment; filename="{0}"'.format(header_filename))
-        return output_file.getvalue()
+            portal = getSite()
+            exports = createOrGetObject(portal['gestion'], 'exports', u'Exports', u'privateFolder')
+            exports.exclude_from_nav = False
+            exports.setLayout('folder_listing')
+            behavior = ISelectableConstrainTypes(exports)
+            behavior.setConstrainTypesMode(1)
+            behavior.setLocallyAllowedTypes(('File',))
+            behavior.setImmediatelyAddableTypes(('File',))
+            exports._Delete_objects_Permission = ('Site Administrator','Manager',)
+
+            file_filename = u'export_users_communities.csv'
+            file = NamedBlobFile(data=output_file.getvalue(), contentType='text/csv', filename=file_filename)
+
+            if file_filename not in exports:
+                export = createContentInContainer(exports, 'File', title=file_filename, file=file)
+                api.content.transition(obj=export, transition='reject')
+                transaction.commit()
+            else:
+                export = exports[file_filename]
+                export.file = file
+                export.reindexObject()
+
+            return 'OK'
+        except:
+            return 'KO'
 
     def data(self):
         result = []

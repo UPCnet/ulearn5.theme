@@ -30,7 +30,7 @@
             <select class="form-control typeSearch">
               <option value="user" i18n:translate="">User</option>
               <option value="community" i18n:translate="">Community</option>
-              <option value="all" i18n:translate="">Export: All communities (This may take a while)</option>
+              <option value="all" i18n:translate="">Export: All communities (File generated the night before)</option>
             </select>
           </div>
           <div class="col-md-6 communityBlock" style="display: none;">
