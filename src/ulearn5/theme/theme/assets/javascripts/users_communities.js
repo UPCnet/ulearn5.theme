@@ -36,15 +36,18 @@ $(document).ready(function(){
   if ($.urlParam('user')) {
     $('.typeSearch').val('user');
     $('.communityBlock').hide();
+    $('.buttonAddFavorite').hide();
     $('.userBlock').show();
   } else if ($.urlParam('idcommunity')) {
     $('.typeSearch').val('community');
     $('.communityBlock').show();
+    $('.buttonAddFavorite').show();
     $('.userBlock').hide();
     $('.communitySearch').val($.urlParam('idcommunity'));
   } else {
     $('.typeSearch').val('user');
     $('.communityBlock').hide();
+    $('.buttonAddFavorite').hide();
     $('.userBlock').show();
   }
 
@@ -52,12 +55,15 @@ $(document).ready(function(){
     var value = $(this).val();
     if (value == 'user') {
       $('.communityBlock').hide();
+      $('.buttonAddFavorite').hide();
       $('.userBlock').show();
     } else if (value == 'community') {
       $('.communityBlock').show();
+      $('.buttonAddFavorite').show();
       $('.userBlock').hide();
     } else {
       $('.communityBlock').hide();
+      $('.buttonAddFavorite').hide();
       $('.userBlock').hide();
     }
   });
@@ -79,6 +85,31 @@ $(document).ready(function(){
     } else if (value == 'all') {
       url = url.split('/users_communities')[0]
       window.open(url + '/gestion/exports/export_users_communities.csv/@@download/file/export_users_communities.csv', '_blank');
+    }
+  });
+
+  $('.searchFilters input.add_favorite').on('click', function(){
+    var value = $('.typeSearch').val();
+    var url = window.location.href.replace('#/', '')
+    index = url.indexOf('?');
+    if (index != -1) {
+        url = url.substring(0, index);
+    }
+    if (value == 'community') {
+      url = url.split('/users_communities')[0]
+      var id=$('.communitySearch').val();
+      $.ajax({
+        type: "get",
+        url: url + '/addcommunityasfavoritefromallusers',
+        data:{community:id},
+        success: function(res){
+          alertify.success("Set favorite from all users.");
+        },
+        error:function(error)
+        {
+          alertify.error("Error to set favorite in community.");
+        }
+      });
     }
   });
 });
