@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.93 (unreleased)
+0.93 (2021-02-18)
 -----------------
 
-- Nothing changed yet.
-
+* Añadir comunidad como favorita a todos los usuarios subscritos [Iago López Fernández]
+* Añadir comunidad como favorita a todos los usuarios subscritos [Pilar Marinas]
+* Cambiar export_users_communities [Iago López Fernández]
 
 0.92 (2021-02-11)
 -----------------
