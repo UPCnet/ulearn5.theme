@@ -1,4 +1,5 @@
 body.template-users_communities {
+    .btn-secundary,
     .btn-primary {
         margin: 10px 0px;
     }
@@ -21,6 +22,17 @@ body.template-users_communities {
 
         p {
             margin-bottom: 0px;
+        }
+    }
+
+    .add_favorite {
+        display: none;
+
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: #E4E4E4;
+            color: #000;
         }
     }
 }

@@ -46,12 +46,9 @@
             <input type="text" class="form-control userSearch" />
           </div>
 
-          <div class="col-md-12 buttonAddFavorite">
-              <input class="btn btn-primary button-field add_favorite" type="button" i18n:attributes="value" value="Add Favorite"/>
-          </div>
-
           <div class="col-md-12">
             <input class="btn btn-primary button-field search" type="button" i18n:attributes="value" value="Search"/>
+            <input class="btn btn-secundary button-field add_favorite pull-right" type="button" i18n:attributes="value" value="Add Favorite"/>
           </div>
         </div>
 
