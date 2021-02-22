@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.94 (unreleased)
+0.94 (2021-02-22)
 -----------------
 
-- Nothing changed yet.
-
+* Codificación mensaje event_to_attendees [Iago López Fernández]
 
 0.93 (2021-02-18)
 -----------------
