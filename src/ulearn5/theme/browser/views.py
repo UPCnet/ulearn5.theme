@@ -55,6 +55,7 @@ from ulearn5.core.hooks import packages_installed
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 
 from email import Encoders
+from email.header import Header
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -1044,9 +1045,9 @@ class SendEventToAttendees(grok.View):
         msg['From'] = portal.get_registry_record('plone.email_from_address')
         msg['To'] = ', '.join(self.context.attendees).encode('utf-8')
         msg['Date'] = formatdate(localtime=True)
-        msg['Subject'] = subject
+        msg['Subject'] = Header(subject, 'utf-8')
 
-        msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'plain', 'utf-8'))
         msg.attach(self.get_ics())
         mailhost.send(msg)
 
