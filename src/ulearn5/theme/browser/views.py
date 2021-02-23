@@ -47,6 +47,8 @@ from base5.core.utils import abrevia
 from base5.core.utils import json_response
 from base5.core.utils import pref_lang
 
+from mrs5.max.utilities import IMAXClient
+
 from ulearn5.core.browser.searchuser import searchUsersFunction
 from ulearn5.core.browser.setup import createOrGetObject
 from ulearn5.core.content.community import ICommunityACL
@@ -63,6 +65,7 @@ from email.utils import formatdate
 
 from cStringIO import StringIO
 from zope.i18n import translate
+from hashlib import sha1
 
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
@@ -1133,7 +1136,9 @@ class SendEventToAttendees(grok.View):
 
 
 class UsersCommunities(grok.View):
-    """  """
+    """ Vista que dado un usuario devuelve las comunidades a las que esta susbcrito y con que rol
+        o dada una comunidad devuelve los usuarios susbcritos y con que rol
+    """
 
     grok.name('users_communities')
     grok.context(IPloneSiteRoot)
@@ -1144,48 +1149,116 @@ class UsersCommunities(grok.View):
     def result(self):
         result = []
 
-        if 'user' in self.request.form or 'idcommunity' in self.request.form:
-            data = {'portal_type': "ulearn.community",
-                    'sort_on': 'sortable_title'}
+        maxclient, settings = getUtility(IMAXClient)()
+        maxclient.setActor(settings.max_restricted_username)
+        maxclient.setToken(settings.max_restricted_token)
 
-            if 'idcommunity' in self.request.form:
-                data.update({'id': self.request.form['idcommunity']})
+        if 'user' in self.request.form:
+            user_id = self.request.form['user']
+            communities_subscription = maxclient.people[user_id].subscriptions.get()
+            user = api.user.get(userid=user_id)
+            if user:
+                fullname = user.getProperty('fullname', '-')
+                fullname = fullname if fullname else '-'
+
+            for community in communities_subscription:
+                if 'delete' in community['permissions']:
+                    role = 'owner'
+                elif 'write' in community['permissions']:
+                    role = 'writer'
+                elif 'read' in community['permissions']:
+                    role = 'reader'
+                listUsers = []
+                listUsers.append({'id': user.id,
+                                  'fullname': fullname,
+                                  'role': role})
+                result.append({'title': community['displayName'],
+                               'users': sorted(listUsers, key=itemgetter('fullname'))})
+
+        if 'idcommunity' in self.request.form:
+            community_id = self.request.form['idcommunity']
+            data = {'portal_type': "ulearn.community",
+                    'sort_on': 'sortable_title',
+                    'id': community_id }
 
             pc = api.portal.get_tool(name='portal_catalog')
-            communities = pc.searchResults(**data)
+            communities = pc.unrestrictedSearchResults(**data)
+
+            maxclient, settings = getUtility(IMAXClient)()
+            maxclient.setActor(settings.max_restricted_username)
+            maxclient.setToken(settings.max_restricted_token)
 
             for community in communities:
-                info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+                communityObj = community._unrestrictedGetObject()
+                community_hash = sha1(communityObj.absolute_url()).hexdigest()
+                users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
 
-                listUsers = []
-                if 'users' in info:
-                    for tmpuser in info['users']:
-                        user = api.user.get(userid=tmpuser['id'])
-                        if user:
-                            fullname = user.getProperty('fullname', '-')
-                            fullname = fullname if fullname else '-'
-                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
-                                listUsers.append({'id': user.id,
-                                                  'fullname': fullname,
-                                                  'role': tmpuser['role']})
-
-                if 'groups' in info:
-                    for group in info['groups']:
-                        users = api.user.get_users(groupname=group['id'])
-                        for user in users:
-                            if 'user' not in self.request.form or self.request.form['user'] == user.id:
-                                fullname = user.getProperty('fullname', '-')
-                                fullname = fullname if fullname else '-'
-                                listUsers.append({'id': user.id,
-                                                  'fullname': fullname + ' [' + group['id'].encode('utf-8') + ']',
-                                                  'role': group['role']})
-
-                if listUsers:
-                    result.append({'id': community.id,
-                                   'title': community.Title,
-                                   'users': sorted(listUsers, key=itemgetter('fullname'))})
+                for user_subscription in users_subscription:
+                    user = api.user.get(userid=user_subscription['username'])
+                    if user:
+                        fullname = user.getProperty('fullname', '-')
+                        fullname = fullname if fullname else '-'
+                    if 'delete' in user_subscription['permissions']:
+                        role = 'owner'
+                    elif 'write' in user_subscription['permissions']:
+                        role = 'writer'
+                    elif 'read' in user_subscription['permissions']:
+                        role = 'reader'
+                    listUsers = []
+                    listUsers.append({'id': user.id,
+                                      'fullname': fullname,
+                                      'role': role})
+                result.append({'title': communityObj.title,
+                               'users': sorted(listUsers, key=itemgetter('fullname'))})
 
         return result
+
+    # Funcion antigua con grupos
+    # def result(self):
+    #     result = []
+
+    #     if 'user' in self.request.form or 'idcommunity' in self.request.form:
+    #         data = {'portal_type': "ulearn.community",
+    #                 'sort_on': 'sortable_title'}
+
+    #         if 'idcommunity' in self.request.form:
+    #             data.update({'id': self.request.form['idcommunity']})
+
+    #         pc = api.portal.get_tool(name='portal_catalog')
+    #         communities = pc.searchResults(**data)
+
+    #         for community in communities:
+    #             info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+
+    #             listUsers = []
+    #             if 'users' in info:
+    #                 for tmpuser in info['users']:
+    #                     user = api.user.get(userid=tmpuser['id'])
+    #                     if user:
+    #                         fullname = user.getProperty('fullname', '-')
+    #                         fullname = fullname if fullname else '-'
+    #                         if 'user' not in self.request.form or self.request.form['user'] == user.id:
+    #                             listUsers.append({'id': user.id,
+    #                                               'fullname': fullname,
+    #                                               'role': tmpuser['role']})
+
+    #             if 'groups' in info:
+    #                 for group in info['groups']:
+    #                     users = api.user.get_users(groupname=group['id'])
+    #                     for user in users:
+    #                         if 'user' not in self.request.form or self.request.form['user'] == user.id:
+    #                             fullname = user.getProperty('fullname', '-')
+    #                             fullname = fullname if fullname else '-'
+    #                             listUsers.append({'id': user.id,
+    #                                               'fullname': fullname + ' [' + group['id'].encode('utf-8') + ']',
+    #                                               'role': group['role']})
+
+    #             if listUsers:
+    #                 result.append({'id': community.id,
+    #                                'title': community.Title,
+    #                                'users': sorted(listUsers, key=itemgetter('fullname'))})
+
+    #     return result
 
     def allCommunities(self):
         data = {'portal_type': "ulearn.community",
@@ -1214,7 +1287,6 @@ class ExportUsersCommunities(grok.View):
     data_header_columns = [
         "User ID",
         "Fullname",
-        "Group",
         "Community",
         "Role"]
 
@@ -1258,30 +1330,29 @@ class ExportUsersCommunities(grok.View):
                 'sort_on': 'sortable_title'}
 
         pc = api.portal.get_tool(name='portal_catalog')
-        communities = pc.searchResults(**data)
+        communities = pc.unrestrictedSearchResults(**data)
+
+        maxclient, settings = getUtility(IMAXClient)()
+        maxclient.setActor(settings.max_restricted_username)
+        maxclient.setToken(settings.max_restricted_token)
 
         for community in communities:
-            info = ICommunityACL(community.getObject())().attrs.get('acl', '')
-
-            if 'users' in info:
-                for tmpuser in info['users']:
-                    user = api.user.get(userid=tmpuser['id'])
-                    if user:
-                        result.append({'fullname': user.getProperty('fullname', ''),
-                                       'userid': user.id,
-                                       'group': '',
-                                       'community': community.Title + ' (' + community.id + ')',
-                                       'role': tmpuser['role']})
-
-            if 'groups' in info:
-                for group in info['groups']:
-                    users = api.user.get_users(groupname=group['id'])
-                    for user in users:
-                        result.append({'fullname': user.getProperty('fullname', ''),
-                                       'userid': user.id,
-                                       'group': group['id'].encode('utf-8'),
-                                       'community': community.Title + ' (' + community.id + ')',
-                                       'role': group['role']})
+            communityObj = community._unrestrictedGetObject()
+            community_hash = sha1(communityObj.absolute_url()).hexdigest()
+            users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
+            for user_subscription in users_subscription:
+                user = api.user.get(userid=user_subscription['username'])
+                if user:                    
+                    if 'delete' in user_subscription['permissions']:
+                        role = 'owner'
+                    elif 'write' in user_subscription['permissions']:
+                        role = 'writer'
+                    elif 'read' in user_subscription['permissions']:
+                        role = 'reader'                
+                    result.append({'userid': user.id,
+                                   'fullname': user.getProperty('fullname', ''),
+                                   'community': community.Title + ' (' + community.id + ')',
+                                   'role': role})
         return result
 
     def write_data(self, output_file):
@@ -1291,6 +1362,95 @@ class ExportUsersCommunities(grok.View):
         for row in self.data():
             writer.writerow([row['userid'],
                              row['fullname'],
-                             row['group'],
                              row['community'],
                              row['role']])
+
+# Antiguo con grupos
+# class ExportUsersCommunities(grok.View):
+#     grok.name('export_users_communities')
+#     grok.context(IPloneSiteRoot)
+#     grok.require('base.webmaster')
+
+#     data_header_columns = [
+#         "User ID",
+#         "Fullname",
+#         "Group",
+#         "Community",
+#         "Role"]
+
+#     def render(self):
+#         try:
+#             output_file = StringIO()
+#             # Write the BOM of the text stream to make its charset explicit
+#             output_file.write(u'\ufeff'.encode('utf8'))
+#             self.write_data(output_file)
+
+#             portal = getSite()
+#             exports = createOrGetObject(portal['gestion'], 'exports', u'Exports', u'privateFolder')
+#             exports.exclude_from_nav = False
+#             exports.setLayout('folder_listing')
+#             behavior = ISelectableConstrainTypes(exports)
+#             behavior.setConstrainTypesMode(1)
+#             behavior.setLocallyAllowedTypes(('File',))
+#             behavior.setImmediatelyAddableTypes(('File',))
+#             exports._Delete_objects_Permission = ('Site Administrator','Manager',)
+
+#             file_filename = u'export_users_communities.csv'
+#             file = NamedBlobFile(data=output_file.getvalue(), contentType='text/csv', filename=file_filename)
+
+#             if file_filename not in exports:
+#                 export = createContentInContainer(exports, 'File', title=file_filename, file=file)
+#                 api.content.transition(obj=export, transition='reject')
+#                 transaction.commit()
+#             else:
+#                 export = exports[file_filename]
+#                 export.file = file
+#                 export.reindexObject()
+
+#             return 'OK'
+#         except:
+#             return 'KO'
+
+#     def data(self):
+#         result = []
+
+#         data = {'portal_type': "ulearn.community",
+#                 'sort_on': 'sortable_title'}
+
+#         pc = api.portal.get_tool(name='portal_catalog')
+#         communities = pc.searchResults(**data)
+
+#         for community in communities:
+#             info = ICommunityACL(community.getObject())().attrs.get('acl', '')
+
+#             if 'users' in info:
+#                 for tmpuser in info['users']:
+#                     user = api.user.get(userid=tmpuser['id'])
+#                     if user:
+#                         result.append({'fullname': user.getProperty('fullname', ''),
+#                                        'userid': user.id,
+#                                        'group': '',
+#                                        'community': community.Title + ' (' + community.id + ')',
+#                                        'role': tmpuser['role']})
+
+#             if 'groups' in info:
+#                 for group in info['groups']:
+#                     users = api.user.get_users(groupname=group['id'])
+#                     for user in users:
+#                         result.append({'fullname': user.getProperty('fullname', ''),
+#                                        'userid': user.id,
+#                                        'group': group['id'].encode('utf-8'),
+#                                        'community': community.Title + ' (' + community.id + ')',
+#                                        'role': group['role']})
+#         return result
+
+#     def write_data(self, output_file):
+#         writer = csv.writer(output_file, dialect='excel', delimiter=',')
+#         writer.writerow(self.data_header_columns)
+
+#         for row in self.data():
+#             writer.writerow([row['userid'],
+#                              row['fullname'],
+#                              row['group'],
+#                              row['community'],
+#                              row['role']])
