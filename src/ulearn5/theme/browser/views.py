@@ -1192,24 +1192,24 @@ class UsersCommunities(grok.View):
                 communityObj = community._unrestrictedGetObject()
                 community_hash = sha1(communityObj.absolute_url()).hexdigest()
                 users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
+                listUsers = []
                 if users_subscription:
                     for user_subscription in users_subscription:
                         user = api.user.get(userid=user_subscription['username'])
                         if user:
                             fullname = user.getProperty('fullname', '-')
                             fullname = fullname if fullname else '-'
-                        if 'delete' in user_subscription['permissions']:
-                            role = 'owner'
-                        elif 'write' in user_subscription['permissions']:
-                            role = 'writer'
-                        elif 'read' in user_subscription['permissions']:
-                            role = 'reader'
-                        listUsers = []
-                        listUsers.append({'id': user.id,
-                                          'fullname': fullname,
-                                          'role': role})
-                    result.append({'title': communityObj.title,
-                                   'users': sorted(listUsers, key=itemgetter('fullname'))})
+                            if 'delete' in user_subscription['permissions']:
+                                role = 'owner'
+                            elif 'write' in user_subscription['permissions']:
+                                role = 'writer'
+                            elif 'read' in user_subscription['permissions']:
+                                role = 'reader'
+                            listUsers.append({'id': user.id,
+                                              'fullname': fullname,
+                                              'role': role})
+                result.append({'title': communityObj.title,
+                               'users': sorted(listUsers, key=itemgetter('fullname'))})
 
         return result
 
