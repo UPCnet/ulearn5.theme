@@ -1192,24 +1192,24 @@ class UsersCommunities(grok.View):
                 communityObj = community._unrestrictedGetObject()
                 community_hash = sha1(communityObj.absolute_url()).hexdigest()
                 users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
-
-                for user_subscription in users_subscription:
-                    user = api.user.get(userid=user_subscription['username'])
-                    if user:
-                        fullname = user.getProperty('fullname', '-')
-                        fullname = fullname if fullname else '-'
-                    if 'delete' in user_subscription['permissions']:
-                        role = 'owner'
-                    elif 'write' in user_subscription['permissions']:
-                        role = 'writer'
-                    elif 'read' in user_subscription['permissions']:
-                        role = 'reader'
-                    listUsers = []
-                    listUsers.append({'id': user.id,
-                                      'fullname': fullname,
-                                      'role': role})
-                result.append({'title': communityObj.title,
-                               'users': sorted(listUsers, key=itemgetter('fullname'))})
+                if users_subscription:
+                    for user_subscription in users_subscription:
+                        user = api.user.get(userid=user_subscription['username'])
+                        if user:
+                            fullname = user.getProperty('fullname', '-')
+                            fullname = fullname if fullname else '-'
+                        if 'delete' in user_subscription['permissions']:
+                            role = 'owner'
+                        elif 'write' in user_subscription['permissions']:
+                            role = 'writer'
+                        elif 'read' in user_subscription['permissions']:
+                            role = 'reader'
+                        listUsers = []
+                        listUsers.append({'id': user.id,
+                                          'fullname': fullname,
+                                          'role': role})
+                    result.append({'title': communityObj.title,
+                                   'users': sorted(listUsers, key=itemgetter('fullname'))})
 
         return result
 
@@ -1336,23 +1336,32 @@ class ExportUsersCommunities(grok.View):
         maxclient.setActor(settings.max_restricted_username)
         maxclient.setToken(settings.max_restricted_token)
 
+        portal = api.portal.get()
+        registry = queryUtility(IRegistry)
+        ulearn_settings = registry.forInterface(IUlearnControlPanelSettings)
+        if ulearn_settings.url_site != None:
+            url_site = ulearn_settings.url_site
+        else:
+            url_site = portal.absolute_url()
+
         for community in communities:
             communityObj = community._unrestrictedGetObject()
-            community_hash = sha1(communityObj.absolute_url()).hexdigest()
+            community_hash = sha1(url_site + '/' + '/'.join(communityObj.absolute_url().split('/')[-1:])).hexdigest()
             users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
-            for user_subscription in users_subscription:
-                user = api.user.get(userid=user_subscription['username'])
-                if user:                    
-                    if 'delete' in user_subscription['permissions']:
-                        role = 'owner'
-                    elif 'write' in user_subscription['permissions']:
-                        role = 'writer'
-                    elif 'read' in user_subscription['permissions']:
-                        role = 'reader'                
-                    result.append({'userid': user.id,
-                                   'fullname': user.getProperty('fullname', ''),
-                                   'community': community.Title + ' (' + community.id + ')',
-                                   'role': role})
+            if users_subscription:
+                for user_subscription in users_subscription:
+                    user = api.user.get(userid=user_subscription['username'])
+                    if user:
+                        if 'delete' in user_subscription['permissions']:
+                            role = 'owner'
+                        elif 'write' in user_subscription['permissions']:
+                            role = 'writer'
+                        elif 'read' in user_subscription['permissions']:
+                            role = 'reader'
+                        result.append({'userid': user.id,
+                                       'fullname': user.getProperty('fullname', ''),
+                                       'community': community.Title + ' (' + community.id + ')',
+                                       'role': role})
         return result
 
     def write_data(self, output_file):
