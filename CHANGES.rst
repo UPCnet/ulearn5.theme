@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.95 (unreleased)
+0.95 (2021-03-08)
 -----------------
 
-- Nothing changed yet.
-
+* Solucionar error vista users_communities [Pilar Marinas]
+* Modificar vista export_userS_communities para que se pueda hacer por puerto [Pilar Marinas]
+* Modificado codigo vistas users_communities [Pilar Marinas]
 
 0.94 (2021-02-22)
 -----------------
