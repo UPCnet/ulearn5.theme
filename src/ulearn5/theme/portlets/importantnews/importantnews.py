@@ -100,11 +100,10 @@ class Renderer(base.Renderer):
         now = DateTime()
         results = catalog(portal_type='News Item',
                           review_state=state,
-                          path=path,
+                          is_important=True,
                           expires={'query': now, 'range': 'min', },
                           effective={'query': now, 'range': 'max', },
                           sort_on='effective',
-                          is_important=True,
                           sort_order='reverse',
                           sort_limit=limit)
         noticies = self.dades(results)

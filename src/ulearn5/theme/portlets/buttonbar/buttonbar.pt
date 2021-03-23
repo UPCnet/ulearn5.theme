@@ -133,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}">
+        <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}" ta:condition="news">
             <tal:newsitems tal:define="news_to_show view/news_to_show;" tal:condition="news_to_show" i18n:domain="ulearn">
             <div tal:define="dades_noticies view/dadesNoticies;
                           Batch python:modules['Products.CMFPlone'].Batch;

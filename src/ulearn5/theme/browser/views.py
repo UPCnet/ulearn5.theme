@@ -977,6 +977,31 @@ class ResetMenuBar(grok.View):
         soup_menu.clear()
         self.redirect('/'.join(self.context.getPhysicalPath()))
 
+class ResetHeader(grok.View):
+    """ This view reset the header """
+    grok.name('reset_header')
+    grok.context(Interface)
+    grok.require('base.webmaster')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def render(self):
+        portal = api.portal.get_tool(name='portal_url').getPortalObject()
+        soup_header = get_soup('header_soup', portal)
+        soup_header.clear()
+        self.redirect('/'.join(self.context.getPhysicalPath()))
+
+class ResetFooter(grok.View):
+    """ This view reset the footer """
+    grok.name('reset_footer')
+    grok.context(Interface)
+    grok.require('base.webmaster')
+    grok.layer(IUlearn5ThemeLayer)
+
+    def render(self):
+        portal = api.portal.get_tool(name='portal_url').getPortalObject()
+        soup_footer = get_soup('footer_soup', portal)
+        soup_footer.clear()
+        self.redirect('/'.join(self.context.getPhysicalPath()))
 
 class SendEventToAttendees(grok.View):
     grok.context(IDexterityContent)

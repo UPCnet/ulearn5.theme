@@ -285,44 +285,57 @@ class viewletHeaderUlearn(viewletBase):
 
             return sorted(result, key=lambda x: x['position'])
 
-    def get_customized_header(self):
+    def _createLinksHeader(self, language):
+        """ Genera el header segun el idioma que tenga definido el
+            usuario en su perfil
         """
-        Get dades header
-        """
-        user = api.user.get_current()
-        pt = api.portal.get_tool(name='portal_languages')
+        portal = api.portal.get()
+        if 'gestion' in portal and 'header' in portal['gestion'] and language in portal['gestion']['header']:
+            catalog = api.portal.get_tool(name='portal_catalog')
+            portalPath = '/'.join(api.portal.get().getPhysicalPath())
+            path = portalPath + '/gestion/header/' + language
 
-        if not api.user.is_anonymous():
-            user_language = user.getProperty('language')
-            if not user_language or user_language == '':
-                user_language = pt.getPreferredLanguage()
-                user.setMemberProperties({'language': user_language})
-        else:
-            registry = getUtility(IRegistry)
-            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
-            useCookie = lan_tool.use_cookie_negotiation
-            if useCookie:
-                request = getRequest()
-                user_language = request.cookies.get('I18N_LANGUAGE')
-                if not user_language:
-                    user_language = pt.getPreferredLanguage()
+            now = DateTime()
+            images = catalog.searchResults(portal_type='Image',
+                                           path={'query': path, 'depth': 1},
+                                           sort_on='getObjPositionInParent')
+            if len(images) > 0:
+                return images[0].getURL()
             else:
-                user_language = pt.getPreferredLanguage()
-
-        catalog = api.portal.get_tool(name='portal_catalog')
-        portalPath = '/'.join(api.portal.get().getPhysicalPath())
-        path = portalPath + '/gestion/header/' + user_language
-
-        now = DateTime()
-        images = catalog.searchResults(portal_type='Image',
-                                       path={'query': path, 'depth': 1},
-                                       expires={'query': now, 'range': 'min', },
-                                       effective={'query': now, 'range': 'max', },
-                                       sort_on='getObjPositionInParent')
-        if len(images) > 0:
-            return images[0].getURL()
+                return None
         else:
             return None
+
+    def get_customized_header(self):
+        """ Devuelve el header segun el idioma que tenga definido el
+            usuario en su perfil
+        """
+        if api.user.is_anonymous():
+            pass
+        else:
+            current = api.user.get_current()
+            user_language = current.getProperty('language')
+            if not user_language or user_language == '':
+                lt = api.portal.get_tool(name='portal_languages')
+                user_language = lt.getPreferredLanguage()
+                current.setMemberProperties({'language': user_language})
+
+            portal = api.portal.get()
+            soup_header = get_soup('header_soup', portal)
+            exist = [r for r in soup_header.query(Eq('id_headersoup', user_language))]
+
+            if not exist:
+                dades = self._createLinksHeader(user_language)
+                record = Record()
+                record.attrs['id_headersoup'] = user_language
+                record.attrs['dades'] = dades
+                soup_header.add(record)
+                soup_header.reindex()
+                result = dades
+            else:
+                result = exist[0].attrs['dades']
+
+            return result
 
     def viewNominesRootFolder(self):
         # If package is installed check if its needed to show the button
@@ -444,46 +457,58 @@ class viewletFooterUlearn(viewletBase):
 
         return links
 
-    def get_customized_footer(self):
+    def _createLinksFooter(self, language):
+        """ Genera el footer segun el idioma que tenga definido el
+            usuario en su perfil
         """
-        Get dades footer
-        """
-        user = api.user.get_current()
-        pt = api.portal.get_tool(name='portal_languages')
+        portal = api.portal.get()
+        if 'gestion' in portal and 'footer' in portal['gestion'] and language in portal['gestion']['footer']:
+            catalog = api.portal.get_tool(name='portal_catalog')
+            portalPath = '/'.join(api.portal.get().getPhysicalPath())
+            path = portalPath + '/gestion/footer/' + language
 
-        if not api.user.is_anonymous():
-            user_language = user.getProperty('language')
-            if not user_language or user_language == '':
-                user_language = pt.getPreferredLanguage()
-                user.setMemberProperties({'language': user_language})
-        else:
-            registry = getUtility(IRegistry)
-            lan_tool = registry.forInterface(ILanguageSchema, prefix='plone')
-            useCookie = lan_tool.use_cookie_negotiation
-            if useCookie:
-                request = getRequest()
-                user_language = request.cookies.get('I18N_LANGUAGE')
-                if not user_language:
-                    user_language = pt.getPreferredLanguage()
+            now = DateTime()
+            pages = catalog.searchResults(portal_type='Document',
+                                          review_state=('published', 'intranet'),
+                                          path={'query': path, 'depth': 1},
+                                          sort_on='getObjPositionInParent')
+            if len(pages) > 0:
+                return pages[0].getObject().text
             else:
-                user_language = pt.getPreferredLanguage()
-
-        catalog = api.portal.get_tool(name='portal_catalog')
-        portalPath = '/'.join(api.portal.get().getPhysicalPath())
-        path = portalPath + '/gestion/footer/' + user_language
-
-        now = DateTime()
-        pages = catalog.searchResults(portal_type='Document',
-                                      review_state=('published', 'intranet'),
-                                      path={'query': path, 'depth': 1},
-                                      expires={'query': now, 'range': 'min', },
-                                      effective={'query': now, 'range': 'max', },
-                                      sort_on='getObjPositionInParent')
-        if len(pages) > 0:
-            return pages[0].getObject().text
+                return None
         else:
             return None
 
+    def get_customized_footer(self):
+        """ Devuelve el footer segun el idioma que tenga definido el
+            usuario en su perfil
+        """
+        if api.user.is_anonymous():
+            pass
+        else:
+            current = api.user.get_current()
+            user_language = current.getProperty('language')
+            if not user_language or user_language == '':
+                lt = api.portal.get_tool(name='portal_languages')
+                user_language = lt.getPreferredLanguage()
+                current.setMemberProperties({'language': user_language})
+
+            portal = api.portal.get()
+            soup_header = get_soup('footer_soup', portal)
+            exist = [r for r in soup_header.query(Eq('id_footersoup', user_language))]
+
+            if not exist:
+                dades = self._createLinksFooter(user_language)
+                record = Record()
+                record.attrs['id_footersoup'] = user_language
+                record.attrs['dades'] = dades
+                soup_header.add(record)
+                soup_header.reindex()
+                result = dades
+            else:
+                result = exist[0].attrs['dades']
+
+            return result
 
 class angularRouteView(viewletBase):
     grok.name('ulearn.angularrouteview')
