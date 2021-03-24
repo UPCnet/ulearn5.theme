@@ -105,7 +105,9 @@ class Renderer(base.Renderer):
                           effective={'query': now, 'range': 'max', },
                           sort_on='effective',
                           sort_order='reverse',
-                          sort_limit=limit)[:limit]
+                          sort_limit=limit
+                          )[:limit]
+
         noticies = self.dades(results)
         for item in noticies:
             yield item

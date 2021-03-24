@@ -68,59 +68,61 @@ class Renderer(base.Renderer):
             return False
         return True
 
-    def abreviaRichText(self, obj, limit):
-        """ Retalla contingut segons un limit de caracters sense tags, tanca tags...
-        """
-        text_clean_bleach = bleach.clean(obj, tags=['p', 'strong', 'em', 'a', 'b', 'br'], strip=True)
+    # def abreviaRichText(self, obj, limit):
+    #     """ Retalla contingut segons un limit de caracters sense tags, tanca tags...
+    #     """
+    #     text_clean_bleach = bleach.clean(obj, tags=['p', 'strong', 'em', 'a', 'b', 'br'], strip=True)
 
-        def fix_tags(html):
-            return str(bs4.BeautifulSoup(html))
+    #     def fix_tags(html):
+    #         return str(bs4.BeautifulSoup(html))
 
-        def clear_tags(html):
-            return re.sub(r'</?.*?>', '', html)
+    #     def clear_tags(html):
+    #         return re.sub(r'</?.*?>', '', html)
 
-        def retallar(text, limit):
-            retallat = text[:limit]
-            remaining_word = re.search(r'^([^\s]*).*?(?:\s|$)', text[limit:]).groups()[0]
-            return retallat + remaining_word
+    #     def retallar(text, limit):
+    #         retallat = text[:limit]
+    #         remaining_word = re.search(r'^([^\s]*).*?(?:\s|$)', text[limit:]).groups()[0]
+    #         return retallat + remaining_word
 
-        text_with_tags_fixed = fix_tags(text_clean_bleach)
-        text_sense_format = clear_tags(text_with_tags_fixed)
+    #     text_with_tags_fixed = fix_tags(text_clean_bleach)
+    #     text_sense_format = clear_tags(text_with_tags_fixed)
 
-        if len(text_sense_format) <= limit:
-            return text_with_tags_fixed
+    #     if len(text_sense_format) <= limit:
+    #         return text_with_tags_fixed
 
-        limit2 = int(limit)
-        text_sense_format = ''
-        while len(text_sense_format) <= limit:
-            desc_text = text_clean_bleach[:limit2]
-            desc_text = retallar(text_clean_bleach, limit2)
-            text_with_tags_fixed = fix_tags(desc_text + '...')
-            text_sense_format = clear_tags(text_with_tags_fixed)
+    #     limit2 = int(limit)
+    #     text_sense_format = ''
+    #     while len(text_sense_format) <= limit:
+    #         desc_text = text_clean_bleach[:limit2]
+    #         desc_text = retallar(text_clean_bleach, limit2)
+    #         text_with_tags_fixed = fix_tags(desc_text + '...')
+    #         text_sense_format = clear_tags(text_with_tags_fixed)
 
-            limit2 += 30
+    #         limit2 += 30
 
-            if len(text_clean_bleach) == len(desc_text):
-                break
+    #         if len(text_clean_bleach) == len(desc_text):
+    #             break
 
-        return text_with_tags_fixed
+    #     return text_with_tags_fixed
 
     def getFlashesInformativos(self):
-        pc = api.portal.get_tool(name="portal_catalog")
+        catalog = api.portal.get_tool(name="portal_catalog")
         limit = self.data.count
         now = DateTime()
 
         # start = DateTime('1969/12/31 00:00:00 GMT+2')  # Fecha effectiva por defecto
         # date_range_query = {'query': (start, now), 'range': 'min:max'}
 
-        flashes = pc.searchResults(portal_type=['News Item'],
-                                   review_state=['published', 'intranet'],
-                                   expires={'query': now, 'range': 'min', },
-                                   effective={'query': now, 'range': 'max', },
-                                   sort_on='effective',
-                                   sort_order='reverse',
-                                   sort_limit=limit,
-                                   is_flash=True)[:limit]
+        flashes = catalog(portal_type='News Item',
+                          review_state='intranet',
+                          is_flash=True,
+                          expires={'query': now, 'range': 'min', },
+                          effective={'query': now, 'range': 'max', },
+                          sort_on='effective',
+                          sort_order='reverse',
+                          sort_limit=limit
+                          )[:limit]
+
         dades = []
         for flash in flashes:
             flashObj = flash.getObject()
