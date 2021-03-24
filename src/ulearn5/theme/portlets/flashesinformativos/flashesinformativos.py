@@ -124,16 +124,17 @@ class Renderer(base.Renderer):
         dades = []
         for flash in flashes:
             flashObj = flash.getObject()
-            if flashObj.text is None:
-                text = None
-            else:
-                text = self.abreviaRichText(flashObj.text.raw, 90)
+            # Lo comento porque creo que no se utiliza en ningun sitio
+            # Mejora rendimiento
+            # if flashObj.text is None:
+            #     text = None
+            # else:
+            #     text = self.abreviaRichText(flashObj.text.raw, 90)
 
             info = {'id': flash.id,
                     'url': flash.getURL(),
                     'flash': flashObj,
                     'image': flashObj.image,
-                    'text': text,
                     'title': abrevia(flash.Title, 90)
                     }
 

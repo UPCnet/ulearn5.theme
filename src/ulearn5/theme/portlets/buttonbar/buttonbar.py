@@ -145,14 +145,13 @@ class Renderer(base.Renderer):
         now = DateTime()
         results = catalog(portal_type='News Item',
                           review_state=state,
-                          path=path,
+                          is_outoflist=False,
                           expires={'query': now, 'range': 'min', },
                           effective={'query': now, 'range': 'max', },
                           sort_on='effective',
                           sort_order='reverse',
-                          sort_limit=limit,
-                          is_outoflist=False
-                          )
+                          sort_limit=limit
+                          )[:limit]
 
         noticies = self.dades(results)
         for item in noticies:
