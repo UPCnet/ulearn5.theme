@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-0.96 (unreleased)
+0.96 (2021-03-25)
 -----------------
 
-- Nothing changed yet.
-
+* Quitar abreviaRichText portlet flash [Pilar Marinas]
+* Reset header footer menu redirect absolute_url [Pilar Marinas]
+* Add limit in query [Pilar Marinas]
+* Comento abreviaRichText flashinformatiu porque no se utiliza [Pilar Marinas]
+* Portlet buttonbar si no tiene que mostrar noticias no las calcule [Pilar Marinas]
+* Soup Header and Footer y quitar path importantnews [Pilar Marinas]
 
 0.95 (2021-03-08)
 -----------------
