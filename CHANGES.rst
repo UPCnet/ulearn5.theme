@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.97 (unreleased)
+0.97 (2021-03-29)
 -----------------
 
-- Nothing changed yet.
-
+* Modificar funcion paquetes instalados con cache [Pilar Marinas]
 
 0.96 (2021-03-25)
 -----------------
