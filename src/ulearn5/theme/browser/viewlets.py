@@ -35,6 +35,7 @@ from ulearn5.core.interfaces import INewsItemFolder
 from ulearn5.core.interfaces import IPhotosFolder
 from ulearn5.core.utils import isInstalledProduct
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from ulearn5.core.hooks import packages_installed
 
 import datetime
 
@@ -339,7 +340,9 @@ class viewletHeaderUlearn(viewletBase):
 
     def viewNominesRootFolder(self):
         # If package is installed check if its needed to show the button
-        if isInstalledProduct(self, 'ulearn5.nomines'):
+        installed = packages_installed()
+        #if isInstalledProduct(self, 'ulearn5.nomines'):
+        if 'ulearn5.nomines' in installed:
             JSONproperties = api.portal.get_tool(name='portal_properties').nomines_properties
             if not JSONproperties.getProperty('nominas_folder_name'):
                 return '#'
