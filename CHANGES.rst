@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.98 (unreleased)
+0.98 (2021-04-12)
 -----------------
 
-- Nothing changed yet.
-
+* password reset [Pilar Marinas]
+* Quitar funcion antigua isInstalledProduct que no se utiliza [Pilar Marinas]
 
 0.97 (2021-03-29)
 -----------------
