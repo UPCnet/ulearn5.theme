@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.99 (unreleased)
+0.99 (2021-04-21)
 -----------------
 
-- Nothing changed yet.
-
+* Solucionar error effective_date para Formularios [Pilar Marinas]
+* Diazo body.template-intranet_view [Iago López Fernández]
 
 0.98 (2021-04-12)
 -----------------
