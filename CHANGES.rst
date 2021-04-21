@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.100 (unreleased)
+0.100 (2021-04-21)
 ------------------
 
-- Nothing changed yet.
-
+* Solucionar error effective_date para Formularios [Pilar Marinas]
 
 0.99 (2021-04-21)
 -----------------
