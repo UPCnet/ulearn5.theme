@@ -45,9 +45,15 @@
                 item_start python: item.start.strftime('%d/%m/%Y a %H:%M') if item_is_event else None;
                 item_end python: item.end.strftime('%d/%m/%Y a %H:%M') if item_is_event else None;
                 item_has_image python:item.getIcon;
-                item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year()) if item.effective_date else str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());
+                item_effective python:str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());
                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;
                 ">
+
+                <tal:cond tal:condition="python: item_type != 'FormFolder'">
+                 <tal:block tal:define="item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year());">
+                  </tal:block>
+                </tal:cond>
+
               <metal:block define-slot="entry">
 
                 <article class="media">
