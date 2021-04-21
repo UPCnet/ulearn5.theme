@@ -49,8 +49,8 @@
                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;
                 ">
 
-                <tal:cond tal:condition="python: item_type != 'FormFolder'">
-                 <tal:block tal:define="item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year());">
+                <tal:cond tal:condition="python: (item_type != 'FormFolder')">
+                 <tal:block tal:define="item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year()) if item.effective_date else str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());">
                   </tal:block>
                 </tal:cond>
 
