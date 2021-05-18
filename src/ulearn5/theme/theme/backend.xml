@@ -13,7 +13,7 @@
         body.template-campanyes, body.template-test-usersfile, body.template-stats_accessed_communities,
         body.template-addprofile, body.template-welcomeloginview, body.template-users_communities,
         body.template-next-meetings, body.template-view_pretty_entries_rooms_not_availables,
-        body.template-intranet_view, body.template-subjects_view, body.template-services_view">
+        body.template-intranet_view, body.template-subjects_view, body.template-services_view, body.template-secretary_view">
             <theme href="++theme++barceloneta/index.html" />
             <notheme css:if-not-content="#visual-portal-wrapper" />
             <!-- We can't control the bundle from here due to include. Just hard code -->
