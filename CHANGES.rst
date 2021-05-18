@@ -2,11 +2,14 @@ Changelog
 =========
 
 
-0.101 (unreleased)
+0.101 (2021-05-18)
 ------------------
 
-- Nothing changed yet.
-
+* Solucionar quickedit monitor 13 [pilar.marinas]
+* Estilos Quickedit [Iago López Fernández]
+* Diazo body.template-services_view [Iago López Fernández]
+* Fix Codificación getICal contact_name [Iago López Fernández]
+* Diazo body.template-subjects_view [Pilar Marinas]
 
 0.100 (2021-04-21)
 ------------------
