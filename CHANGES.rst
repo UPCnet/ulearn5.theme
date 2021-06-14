@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.102 (unreleased)
+0.102 (2021-06-14)
 ------------------
 
-- Nothing changed yet.
-
+* Estilo responsive [Iago López Fernández]
+* Diazo secretary_view [Iago López Fernández]
 
 0.101 (2021-05-18)
 ------------------
