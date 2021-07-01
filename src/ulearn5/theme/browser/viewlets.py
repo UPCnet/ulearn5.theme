@@ -64,7 +64,7 @@ class TitleViewlet(TitleViewlet, viewletBase):
         marcaUlearn = escape(safe_unicode(titleUlearn))
         if lang not in ['ca', 'en', 'es']:
             lang = 'ca'
-        titleSite = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.html_title_' + lang)
+        titleSite = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.html_title_' + str(lang))
         if titleSite:
             marcaUlearn = titleSite
 
