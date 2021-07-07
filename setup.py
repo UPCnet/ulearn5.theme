@@ -14,7 +14,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='ulearn5.theme',
-    version='0.103.dev0',
+    version='0.103',
     description="Tema Comunitats Plone 5",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers

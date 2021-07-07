@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.103 (unreleased)
+0.103 (2021-07-07)
 ------------------
 
-- Nothing changed yet.
-
+* Solucionar error blanquerna que idioma admin devuelve unicode [Pilar Marinas]
 
 0.102 (2021-06-14)
 ------------------
