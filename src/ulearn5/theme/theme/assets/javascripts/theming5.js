@@ -282,4 +282,13 @@ $(document).ready(function () {
         });
     }
 
+    // Close notify popup
+    $('.close-notify-popup').on('click', function(){
+        $(this).parent().parent().remove();
+        $.ajax({
+            url: $(this).attr('data-url'),
+            success: function (data) {}
+        });
+    });
+
 }); //ready

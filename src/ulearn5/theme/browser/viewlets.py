@@ -6,6 +6,7 @@ from Products.CMFPlone.interfaces import ILanguageSchema
 from Products.CMFPlone.utils import safe_unicode
 
 from cgi import escape
+from datetime import datetime as ddatetime
 from five import grok
 from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
@@ -22,6 +23,7 @@ from souper.soup import Record
 from souper.soup import get_soup
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.globalrequest import getRequest
 from zope.interface import Interface
 
@@ -35,9 +37,12 @@ from ulearn5.core.interfaces import INewsItemFolder
 from ulearn5.core.interfaces import IPhotosFolder
 
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from ulearn5.core.controlpopup import IPopupSettings
 from ulearn5.core.hooks import packages_installed
+from ulearn5.core.utils import getAnnotationNotifyPopup
 
 import datetime
+import transaction
 
 grok.context(Interface)
 
@@ -512,6 +517,7 @@ class viewletFooterUlearn(viewletBase):
 
             return result
 
+
 class angularRouteView(viewletBase):
     grok.name('ulearn.angularrouteview')
     grok.template('angularrouteview')
@@ -524,3 +530,75 @@ class angularRouteView(viewletBase):
             if ICommunity.providedBy(obj):
                 return True
         return False
+
+
+class popupNotify(viewletBase):
+    grok.name('ulearn.popupNotify')
+    grok.template('popup_notify')
+    grok.viewletmanager(IPortalFooter)
+    grok.layer(IUlearn5ThemeLayer)
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
+    def viewPopup(self):
+        user = api.user.get_current()
+        aNotify = getAnnotationNotifyPopup()
+        return aNotify['activate_notify'] and user.id not in aNotify['users_notify']
+
+    def content(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IPopupSettings)
+
+        user = api.user.get_current()
+        map = {
+            'fullname': user.getProperty('fullname', user.id),
+        }
+
+        try:
+            return settings.message_notify % map
+        except:
+            return settings.message_notify
+
+
+class popupNotifyBirthday(viewletBase):
+    grok.name('ulearn.popupNotifyBirthday')
+    grok.template('popup_notify_birthday')
+    grok.viewletmanager(IPortalFooter)
+    grok.layer(IUlearn5ThemeLayer)
+
+    def isAnon(self):
+        if not api.user.is_anonymous():
+            return False
+        return True
+
+    def viewPopup(self):
+        user = api.user.get_current()
+        aNotify = getAnnotationNotifyPopup()
+        return aNotify['activate_birthday'] and user.id in aNotify['users_birthday']
+
+    def content(self):
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IPopupSettings)
+
+        user = api.user.get_current()
+        birthday = user.getProperty('birthday')
+        if "/" in birthday:
+            birthday = ddatetime.strptime(birthday, '%d/%m/%Y')
+        elif "-" in birthday:
+            birthday = ddatetime.strptime(birthday, '%d-%m-%Y')
+
+        user_year = int(birthday.strftime('%Y'))
+        current_year = int(datetime.datetime.now().strftime('%Y'))
+
+        map = {
+            'fullname': user.getProperty('fullname', user.id),
+            'years': current_year - user_year
+        }
+
+        try:
+            return settings.message_birthday % map
+        except:
+            return settings.message_birthday
