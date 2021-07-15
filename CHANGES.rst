@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.104 (unreleased)
+0.104 (2021-07-15)
 ------------------
 
-- Nothing changed yet.
-
+* Redirect login microsoft azure in require_login [Pilar Marinas]
+* Popups notificaciones [Iago López Fernández]
+* Estilo buscador [Iago López Fernández]
 
 0.103 (2021-07-07)
 ------------------
