@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.105 (unreleased)
+0.105 (2021-07-19)
 ------------------
 
-- Nothing changed yet.
-
+* Notificacions popup [Iago López Fernández]
 
 0.104 (2021-07-15)
 ------------------
