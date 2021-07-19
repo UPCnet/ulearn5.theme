@@ -546,21 +546,25 @@ class popupNotify(viewletBase):
     def viewPopup(self):
         user = api.user.get_current()
         aNotify = getAnnotationNotifyPopup()
-        return aNotify['activate_notify'] and user.id not in aNotify['users_notify']
+        if aNotify['activate_notify'] and user.id not in aNotify['users_notify']:
+            portal = api.portal.get()
+            try:
+                return 'notify' in portal['gestion']['popup']
+            except:
+                pass
+        return False
 
     def content(self):
-        registry = queryUtility(IRegistry)
-        settings = registry.forInterface(IPopupSettings)
-
         user = api.user.get_current()
         map = {
             'fullname': user.getProperty('fullname', user.id),
         }
 
+        portal = api.portal.get()
         try:
-            return settings.message_notify % map
+            return portal['gestion']['popup']['notify'].text.raw % map
         except:
-            return settings.message_notify
+            return portal['gestion']['popup']['notify'].text.raw
 
 
 class popupNotifyBirthday(viewletBase):
@@ -577,12 +581,15 @@ class popupNotifyBirthday(viewletBase):
     def viewPopup(self):
         user = api.user.get_current()
         aNotify = getAnnotationNotifyPopup()
-        return aNotify['activate_birthday'] and user.id in aNotify['users_birthday']
+        if aNotify['activate_birthday'] and user.id in aNotify['users_birthday']:
+            portal = api.portal.get()
+            try:
+                return 'birthday' in portal['gestion']['popup']
+            except:
+                pass
+        return False
 
     def content(self):
-        registry = queryUtility(IRegistry)
-        settings = registry.forInterface(IPopupSettings)
-
         user = api.user.get_current()
         birthday = user.getProperty('birthday')
         if "/" in birthday:
@@ -598,7 +605,8 @@ class popupNotifyBirthday(viewletBase):
             'years': current_year - user_year
         }
 
+        portal = api.portal.get()
         try:
-            return settings.message_birthday % map
+            return portal['gestion']['popup']['birthday'].text.raw % map
         except:
-            return settings.message_birthday
+            return portal['gestion']['popup']['birthday'].text.raw
