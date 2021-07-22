@@ -44,6 +44,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
 
 from base5.core.utils import abrevia
+from base5.core.utils import abreviaPlainText
 from base5.core.utils import json_response
 from base5.core.utils import pref_lang
 
@@ -808,11 +809,11 @@ class SearchFilteredNews(grok.View):
                     news_html +=      '</div>' \
                                       '<div class="text_noticia">' \
                                         '<h2>'\
-                                        '<a href="' + noticia.getURL() + '">' + abrevia(noticia.Title, 70) + '</a>'\
+                                        '<a href="' + noticia.getURL() + '">' + abreviaPlainText(noticia.Title, 70) + '</a>'\
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abrevia(noticia.Title, 70) + '"><span class="readmore">'+readmore.encode('utf-8') + '</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abreviaPlainText(noticia.Title, 70) + '"><span class="readmore">'+readmore.encode('utf-8') + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\

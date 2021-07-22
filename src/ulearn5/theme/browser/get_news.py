@@ -5,6 +5,7 @@ from plone import api
 from zope.publisher.browser import BrowserView
 
 from base5.core.utils import abrevia
+from base5.core.utils import abreviaPlainText
 
 
 class getNews(BrowserView):
@@ -44,7 +45,7 @@ class getNews(BrowserView):
             info = {'id': noticia.id,
                     'text': text,
                     'url': noticia.getURL(),
-                    'title': abrevia(noticia.Title, 70),
+                    'title': abreviaPlainText(noticia.Title, 70),
                     'date': str(news_day) + '/' + str(news_month) + '/' + str(news_year),
                     'image': noticia.getURL() + '/@@images/image/mini',
                     'subject': noticiaObj.subject,

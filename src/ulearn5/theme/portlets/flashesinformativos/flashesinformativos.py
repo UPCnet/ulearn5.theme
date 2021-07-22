@@ -11,7 +11,7 @@ from zope import schema
 from zope.component.hooks import getSite
 from zope.interface import implements
 
-from base5.core.utils import abrevia
+from base5.core.utils import abreviaPlainText
 from ulearn5.core import _
 
 import bleach
@@ -137,7 +137,7 @@ class Renderer(base.Renderer):
                     'url': flash.getURL(),
                     'flash': flashObj,
                     'image': flashObj.image,
-                    'title': abrevia(flash.Title, 90)
+                    'title': abreviaPlainText(flash.Title, 90)
                     }
 
             dades.append(info)

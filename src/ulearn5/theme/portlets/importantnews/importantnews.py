@@ -15,6 +15,7 @@ from zope.component.hooks import getSite
 from zope.interface import implements
 
 from base5.core.utils import abrevia
+from base5.core.utils import abreviaPlainText
 from ulearn5.core import _
 
 
@@ -133,7 +134,7 @@ class Renderer(base.Renderer):
             info = {'id': noticia.id,
                     'text': text,
                     'url': noticia.getURL(),
-                    'title': abrevia(noticia.Title, 70),
+                    'title': abreviaPlainText(noticia.Title, 70),
                     'new': noticiaObj,
                     'date': str(news_day) + '/' + str(news_month) + '/' + str(news_year),
                     'image': noticiaObj.image
