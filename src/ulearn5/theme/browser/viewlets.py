@@ -544,14 +544,15 @@ class popupNotify(viewletBase):
         return True
 
     def viewPopup(self):
-        user = api.user.get_current()
-        aNotify = getAnnotationNotifyPopup()
-        if aNotify['activate_notify'] and user.id not in aNotify['users_notify']:
-            portal = api.portal.get()
-            try:
-                return 'notify' in portal['gestion']['popup']
-            except:
-                pass
+        if api.portal.get_registry_record('ulearn5.core.controlpanel.IPopupSettings.activate_notify'):
+            user = api.user.get_current()
+            aNotify = getAnnotationNotifyPopup()
+            if user.id not in aNotify['users_notify']:
+                portal = api.portal.get()
+                try:
+                    return 'notify' in portal['gestion']['popup']
+                except:
+                    pass
         return False
 
     def content(self):
@@ -579,14 +580,15 @@ class popupNotifyBirthday(viewletBase):
         return True
 
     def viewPopup(self):
-        user = api.user.get_current()
-        aNotify = getAnnotationNotifyPopup()
-        if aNotify['activate_birthday'] and user.id in aNotify['users_birthday']:
-            portal = api.portal.get()
-            try:
-                return 'birthday' in portal['gestion']['popup']
-            except:
-                pass
+        if api.portal.get_registry_record('ulearn5.core.controlpanel.IPopupSettings.activate_birthday'):
+            user = api.user.get_current()
+            aNotify = getAnnotationNotifyPopup()
+            if user.id in aNotify['users_birthday']:
+                portal = api.portal.get()
+                try:
+                    return 'birthday' in portal['gestion']['popup']
+                except:
+                    pass
         return False
 
     def content(self):
