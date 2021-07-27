@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_chain
 from Acquisition import aq_inner
-from DateTime.DateTime import DateTime
-from Products.CMFPlone.interfaces import ILanguageSchema
 from Products.CMFPlone.utils import safe_unicode
 
 from cgi import escape
@@ -23,8 +21,7 @@ from souper.soup import Record
 from souper.soup import get_soup
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.component import queryUtility
-from zope.globalrequest import getRequest
+from zope.component.hooks import getSite
 from zope.interface import Interface
 
 from ulearn5.core.browser.viewlets import viewletBase
@@ -37,12 +34,9 @@ from ulearn5.core.interfaces import INewsItemFolder
 from ulearn5.core.interfaces import IPhotosFolder
 
 from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from ulearn5.core.controlpopup import IPopupSettings
 from ulearn5.core.hooks import packages_installed
-from ulearn5.core.utils import getAnnotationNotifyPopup
 
 import datetime
-import transaction
 
 grok.context(Interface)
 
@@ -301,7 +295,6 @@ class viewletHeaderUlearn(viewletBase):
             portalPath = '/'.join(api.portal.get().getPhysicalPath())
             path = portalPath + '/gestion/header/' + language
 
-            now = DateTime()
             images = catalog.searchResults(portal_type='Image',
                                            path={'query': path, 'depth': 1},
                                            sort_on='getObjPositionInParent')
@@ -474,7 +467,6 @@ class viewletFooterUlearn(viewletBase):
             portalPath = '/'.join(api.portal.get().getPhysicalPath())
             path = portalPath + '/gestion/footer/' + language
 
-            now = DateTime()
             pages = catalog.searchResults(portal_type='Document',
                                           review_state=('published', 'intranet'),
                                           path={'query': path, 'depth': 1},
@@ -546,8 +538,10 @@ class popupNotify(viewletBase):
     def viewPopup(self):
         if api.portal.get_registry_record('ulearn5.core.controlpopup.IPopupSettings.activate_notify'):
             user = api.user.get_current()
-            aNotify = getAnnotationNotifyPopup()
-            if user.id not in aNotify['users_notify']:
+            portal = getSite()
+            soup = get_soup('notify_popup', portal)
+            user_soup = [r for r in soup.query(Eq('id', user.id))]
+            if not user_soup:
                 portal = api.portal.get()
                 try:
                     return 'notify' in portal['gestion']['popup']
