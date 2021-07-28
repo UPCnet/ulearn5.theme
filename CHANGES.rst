@@ -2,11 +2,13 @@ Changelog
 =========
 
 
-0.106 (unreleased)
+0.106 (2021-07-28)
 ------------------
 
-- Nothing changed yet.
-
+* Notificaciones popup, cambiar annotation por soup [Iago López Fernández]
+* Quitar annotation popup aniversario y hacer control con cookie [Iago López Fernández]
+* Mejora para no llamar tanto al annotation de los popup [Iago López Fernández]
+* abreviaPlainText [Iago López Fernández]
 
 0.105 (2021-07-19)
 ------------------
