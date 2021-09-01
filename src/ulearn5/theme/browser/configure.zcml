@@ -53,4 +53,11 @@
         file="schemaeditor.js"
     />
 
+    <browser:page
+      name="macros-comunitats-header"
+      for="*"
+      permission="zope.Public"
+      template="viewlets_templates/header_macros.pt"
+      />
+
 </configure>

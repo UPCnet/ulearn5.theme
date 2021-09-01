@@ -1,0 +1,138 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+  <metal:block metal:define-macro="paysheet">
+    <li class="dropdown ulearn-eines-ql" role="menuitem"
+        tal:define="viewNominesRootFolder viewlet/viewNominesRootFolder"
+        tal:condition="viewNominesRootFolder">
+      <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/">
+        <tal:management i18n:domain="ulearn" i18n:translate="">Nomines</tal:management>
+        <b aria-hidden="true" class="caret"></b>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="menuitem">
+          <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-management">
+            <i class="fa fa-money"></i>&nbsp;
+            <tal:footer i18n:domain="ulearn" i18n:translate="">Manage Nomines</tal:footer>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-import-pdfs">
+            <i class="fa fa-cloud-upload"></i>&nbsp;
+            <tal:footer i18n:domain="ulearn5.nomines" i18n:translate="">Import payment sheets</tal:footer>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" tal:attributes="href string:${portal_url}/${viewNominesRootFolder}">
+            <i class="fa fa-folder-open"></i>&nbsp;
+            <tal:footer i18n:domain="ulearn" i18n:translate="">Nomines Root folder</tal:footer>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-log">
+            <i class="fa fa-database"></i>&nbsp;
+            <tal:footer i18n:domain="ulearn" i18n:translate="">View loginfo</tal:footer>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </metal:block>
+
+  <metal:block metal:define-macro="gestion-news">
+    <li role="menuitem" tal:condition="viewlet/canManageNews">
+      <a href="#" tal:attributes="href string:${portal_url}/news">
+        <i class="fa fa-newspaper-o"></i>
+        <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
+      </a>
+    </li>
+    <block metal:use-macro="context/macros-comunitats-header/gestion-links"></block>
+  </metal:block>
+
+  <metal:block metal:define-macro="gestion-no-news">
+    <block metal:use-macro="context/macros-comunitats-header/gestion-links"></block>
+  </metal:block>
+
+  <metal:block metal:define-macro="gestion-links"
+               tal:define="canManageMenu viewlet/canManageMenu;
+                           canManageHeader viewlet/canManageHeader;
+                           canManageFooter viewlet/canManageFooter">
+
+    <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
+      <a tal:attributes="href string:${portal_url}/Members/${viewlet/currentUser}/banners">
+        <i class="fa fa-image"></i>
+        <tal:footer i18n:translate="menu-gestion-personal-banners">Personal banners</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="viewlet/canManageBanners">
+      <a tal:attributes="href string:${portal_url}/gestion/banners">
+        <i class="fa fa-image"></i>
+        <tal:footer i18n:translate="menu-gestion-global-banners">Global banners</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageHeader">
+      <a tal:attributes="href string:${portal_url}/gestion/header">
+        <i class="fa fa-folder"></i>
+        <tal:footer i18n:translate="menu-gestion-header">Management header</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageHeader">
+      <a tal:attributes="href string:${portal_url}/reset_header">
+        <i class="fa fa-refresh"></i>
+        <tal:footer i18n:translate="menu-reset-header">Reset Header</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageFooter">
+      <a tal:attributes="href string:${portal_url}/gestion/footer">
+        <i class="fa fa-folder"></i>
+        <tal:footer i18n:translate="menu-gestion-footer">Management footer</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageFooter">
+      <a tal:attributes="href string:${portal_url}/reset_footer">
+        <i class="fa fa-refresh"></i>
+        <tal:footer i18n:translate="menu-reset-footer">Reset Footer</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageMenu">
+      <a tal:attributes="href string:${portal_url}/gestion/menu">
+        <i class="fa fa-folder"></i>
+        <tal:footer i18n:translate="menu-gestion-menu">Management menu</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageMenu">
+      <a tal:attributes="href string:${portal_url}/reset_menu">
+        <i class="fa fa-refresh"></i>
+        <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="viewlet/canManageStats">
+      <a href="#" tal:attributes="href string:${portal_url}/#/stats/activity">
+        <i class="fa fa-bar-chart"></i>
+        <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="viewlet/canManageStats">
+      <a href="#" tal:attributes="href string:${portal_url}/users_communities">
+        <i class="fa fa-info-circle"></i>
+        <tal:footer i18n:translate="menu-info-users-communities">Information for users and communities</tal:footer>
+      </a>
+    </li>
+    <li aria-hidden="true" class="divider"></li>
+    <li role="menuitem" tal:condition="canManageMenu">
+      <a tal:attributes="href string:${portal_url}/@@usergroup-userprefs">
+        <i class="fa fa-users"></i>
+        <tal:footer i18n:domain="plone" i18n:translate="">Users and Groups</tal:footer>
+      </a>
+    </li>
+    <li role="menuitem" tal:condition="canManageMenu">
+      <a tal:attributes="href string:${portal_url}/@@overview-controlpanel">
+        <i class="fa fa-cog"></i>
+        <tal:footer i18n:domain="plone" i18n:translate="">Site Setup</tal:footer>
+      </a>
+    </li>
+  </metal:block>
+
+</html>
