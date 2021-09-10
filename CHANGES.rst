@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.107 (unreleased)
+0.107 (2021-09-10)
 ------------------
 
-- Nothing changed yet.
-
+* Menu gestion por macros [Iago López Fernández]
 
 0.106 (2021-07-28)
 ------------------
