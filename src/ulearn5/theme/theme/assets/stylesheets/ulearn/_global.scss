@@ -5964,15 +5964,16 @@ body.portaltype-privatefolder.section-gestion.subsection-menu #autotoc-item-auto
 
 #category.documentByLine {
 	min-height: 20px;
-    padding: 18px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    border: 1px solid #cccccc;
-    padding: 9px 15px 0px 15px;
-    border-radius: 2px !important;
-    margin: -15px;
+  padding: 18px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+	padding: 9px 15px;
+	border-radius: 2px !important;
+	margin: -15px -15px 15px -15px;
+	width: calc(100% + 30px);
 
-    &:before {
+  &:before {
 		content: "\f02c";
 		font-family: FontAwesome;
 
