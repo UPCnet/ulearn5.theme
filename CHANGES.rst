@@ -2,11 +2,11 @@ Changelog
 =========
 
 
-0.108 (unreleased)
+0.108 (2022-03-28)
 ------------------
 
-- Nothing changed yet.
-
+* Estilos Category viewlet [ilopezsmx]
+* CSS popup [ilopezsmx]
 
 0.107 (2021-09-10)
 ------------------
