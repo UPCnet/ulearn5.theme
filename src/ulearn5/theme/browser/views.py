@@ -1314,6 +1314,7 @@ class ExportUsersCommunities(grok.View):
     data_header_columns = [
         "User ID",
         "Fullname",
+        "Email",
         "Community",
         "Role"]
 
@@ -1387,6 +1388,7 @@ class ExportUsersCommunities(grok.View):
                             role = 'reader'
                         result.append({'userid': user.id,
                                        'fullname': user.getProperty('fullname', ''),
+                                       'email': user.getProperty('email', ''),
                                        'community': community.Title + ' (' + community.id + ')',
                                        'role': role})
         return result
@@ -1398,6 +1400,7 @@ class ExportUsersCommunities(grok.View):
         for row in self.data():
             writer.writerow([row['userid'],
                              row['fullname'],
+                             row['email'],
                              row['community'],
                              row['role']])
 
