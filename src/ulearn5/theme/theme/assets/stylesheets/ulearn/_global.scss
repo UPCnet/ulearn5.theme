@@ -6324,3 +6324,25 @@ div.checbox-info-widget.required::after {
 	top: 21%;
 	left: 75% !important;
 }
+
+/* PloneFormGen Fieldset */
+
+.PFGFieldsetWidget {
+	width: 100% !important;
+	background-color: #edf1f2;
+	padding: 10px 10px 0px 10px !important;
+	margin-bottom: 20px !important;
+
+	legend {
+		font-size: 24px;
+		color: #04192D !important;
+		font-weight: 600;
+		display: contents;
+	}
+
+	.field {
+		margin-bottom: 20px !important;
+		width: 99%;
+	}
+}
+
