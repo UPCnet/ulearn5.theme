@@ -2,11 +2,12 @@ Changelog
 =========
 
 
-0.109 (unreleased)
+0.109 (2022-06-15)
 ------------------
 
-- Nothing changed yet.
-
+* Compilar estilos [ilopezsmx]
+* Estilos PloneFormGen Fieldset [Iago López]
+* Incluir correo en export_users_communities [Iago López]
 
 0.108 (2022-03-28)
 ------------------
