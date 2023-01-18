@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.110 (unreleased)
+0.110 (2023-01-18)
 ------------------
 
-- Nothing changed yet.
-
+* Grunt ulearn5.js estadisticas app [Pilar Marinas]
 
 0.109 (2022-06-15)
 ------------------
