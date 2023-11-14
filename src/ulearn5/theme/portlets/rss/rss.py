@@ -102,7 +102,7 @@ class RSSFeed(object):
             'url': link,
             'summary': self.abrevia(description, 250),
             'image': item.get('href', '') or self.getFirstImageDescription(description),
-            'categories': [tag['term'] for tag in item.tags],
+            'categories': [tag['term'] for tag in item.get('tags', [])],
         }
         if hasattr(item, "updated"):
             try:
@@ -135,6 +135,7 @@ class RSSFeed(object):
                 self._siteurl = d.feed.link
             except AttributeError:
                 self._siteurl = ""
+
             for item in d['items']:
                 try:
                     itemdict = self._buildItemDict(item)
