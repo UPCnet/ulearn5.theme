@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.111 (unreleased)
+0.111 (2023-11-15)
 ------------------
 
-- Nothing changed yet.
-
+* [FIX] Porlets RSS no funcionaba si el RSS no contenia tags [Iago López]
 
 0.110 (2023-01-18)
 ------------------
