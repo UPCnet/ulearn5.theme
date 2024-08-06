@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.112 (unreleased)
+0.112 (2024-08-06)
 ------------------
 
-- Nothing changed yet.
-
+* [UPD] Grunt ulearn5.js [Iago López]
 
 0.111 (2023-11-15)
 ------------------
