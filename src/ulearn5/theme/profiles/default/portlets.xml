@@ -34,6 +34,8 @@
              i18n:attributes="title"/>
     <portlet addview="ulearn.portlets.mycommunities" title="Ulearn My Communities"
              i18n:attributes="title"/>
+    <portlet addview="ulearn.portlets.folderview" title="Ulearn Folder View"
+             i18n:attributes="title"/>
 
     <assignment remove="True" name="navigation" category="context" key="/"
                   manager="plone.leftcolumn" type="portlets.Navigation" />

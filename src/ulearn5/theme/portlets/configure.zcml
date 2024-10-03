@@ -174,4 +174,13 @@
         factory=".smart.renderers.YTVideoPortletItemRenderer"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.folderview"
+        interface=".folderview.folderview.IFolderViewPortlet"
+        assignment=".folderview.folderview.Assignment"
+        renderer=".folderview.folderview.Renderer"
+        addview=".folderview.folderview.AddForm"
+        editview=".folderview.folderview.EditForm"
+        />
+
 </configure>

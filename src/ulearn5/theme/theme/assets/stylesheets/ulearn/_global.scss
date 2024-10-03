@@ -2575,6 +2575,8 @@ input:checked+.sliderbutton:before {
 
 /* =========== Vista contents_pretty_view =========== */
 
+.folder_view_portlet .contenttype-folder:before,
+.folder_view_portlet .contenttype-privatefolder:before,
 .template-listing_view #content .contenttype-folder:before,
 .template-listing_view #content .contenttype-privatefolder:before,
 .template-contents_pretty_view #content .contenttype-privatefolder:before,
@@ -2588,6 +2590,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-file:before,
 .template-listing_view #content .contenttype-file:before,
 .template-contents_pretty_view #content .contenttype-file:before {
 	content: "\f1c1";
@@ -2599,6 +2602,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-link:before,
 .template-listing_view #content .contenttype-link:before,
 .template-contents_pretty_view #content .contenttype-link:before {
 	content: "\f0c1";
@@ -2610,6 +2614,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-link_pie:before,
 .template-listing_view #content .contenttype-link_pie:before,
 .template-contents_pretty_view #content .contenttype-link_pie:before {
 	content: "\f0c1";
@@ -2621,6 +2626,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-image:before,
 .template-listing_view #content .contenttype-image:before,
 .template-contents_pretty_view #content .contenttype-image:before {
 	content: "\f1c5";
@@ -2632,6 +2638,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-document:before,
 .template-listing_view #content .contenttype-document:before,
 .template-contents_pretty_view #content .contenttype-document:before {
 	content: "\f0f6";
@@ -2643,6 +2650,7 @@ input:checked+.sliderbutton:before {
 	margin-right: 7px;
 }
 
+.folder_view_portlet .contenttype-externalcontent:before,
 .template-contents_pretty_view #content .contenttype-externalcontent:before,
 .template-listing_view #content .contenttype-externalcontent:before,
 #tagslist a .ExternalContent:before {
@@ -2655,6 +2663,7 @@ input:checked+.sliderbutton:before {
   margin-right: 10px;
 }
 
+.folder_view_portlet .contenttype-etherpad:before,
 .template-contents_pretty_view #content .contenttype-etherpad:before,
 .template-listing_view #content .contenttype-etherpad:before,
 #tagslist a .Etherpad:before,
@@ -2670,6 +2679,7 @@ input:checked+.sliderbutton:before {
   margin-right: 10px;
 }
 
+.folder_view_portlet .vistaquadricula .col-md-6,
 .template-contents_pretty_view .vistaquadricula .col-md-6 {
 	margin-left: 0;
 }
@@ -6345,4 +6355,3 @@ div.checbox-info-widget.required::after {
 		width: 99%;
 	}
 }
-

@@ -1,0 +1,59 @@
+<tal:block tal:condition="not:view/isAnon">
+<div class="ulearnbox folder_view_portlet" i18n:domain="ulearn"
+     tal:define="title view/title">
+
+    <h2 tal:condition="title" tal:content="title">Folder</h2>
+
+    <div class="vistaquadricula"
+         tal:define="items view/getItemPropierties;
+                     blocs view/getBlocs">
+
+        <tal:bloc tal:repeat="x python:range(0, blocs)">
+        <div class="row fila">
+        <tal:bloc tal:repeat="y python:range(0, len(items[x]))">
+        <div class="col-md-6"
+             tal:define="item python:items[x][y]">
+            <h3 tal:define="type item/item_type;
+                            normalizeString nocall: context/plone_utils/normalizeString;
+                            item_type_class python:'contenttype-' + normalizeString(type)">
+                <a tal:attributes="href item/item_url;
+                                   class string:$item_type_class icon internal_link"
+                   target="_self"
+                   title="">
+                    <span tal:content="item/item_title">Title</span>
+                </a>
+            </h3>
+            <p tal:condition="item/item_desc"><span tal:content="item/item_desc"></span>
+                <a class="internal-link"
+                   tal:attributes="href item/item_url"
+                   target="_self"
+                   title="">... [+] més</a>
+            </p>
+
+            <div class="secciofolders"
+                 tal:define="type item/item_type;
+                             path item/item_path;
+                             subitems python:view.getSubItemPropierties(path)"
+                 tal:condition="python: type == 'Folder' or 'privateFolder'">
+                <div class="col-md-12"
+                     tal:repeat="item2 subitems">
+                    <a tal:define="type item2/item_type;
+                                   normalizeString nocall: context/plone_utils/normalizeString;
+                                   item_type_class python:'contenttype-' + normalizeString(type)"
+                        tal:attributes="href item2/item_url;
+                                        class string:$item_type_class icon internal_link"
+                        target="_self"
+                        title="">
+                        <span tal:content="item2/item_title">Title</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </tal:bloc>
+        </div>
+        </tal:bloc>
+
+    </div>
+
+</div>
+</tal:block>
