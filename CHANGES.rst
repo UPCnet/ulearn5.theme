@@ -2,11 +2,10 @@ Changelog
 =========
 
 
-0.113 (unreleased)
+0.113 (2024-10-07)
 ------------------
 
-- Nothing changed yet.
-
+* [ADD] Nuevo portlet Vista de carpeta [Iago López]
 
 0.112 (2024-08-06)
 ------------------
