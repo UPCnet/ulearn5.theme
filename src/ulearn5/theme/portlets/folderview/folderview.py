@@ -86,7 +86,7 @@ class Renderer(base.Renderer):
             all_items += [{'item_title': item.Title,
                         'item_desc': item.Description[:110],
                         'item_type': item.portal_type,
-                        'item_url': item.getURL(),
+                        'item_url': item.getURL() + ('/view' if item.portal_type != 'File' or item.getURL().endswith('.pdf') else '/download'),
                         'item_path': item.getPath(),
                         'item_state': item.review_state,
                         } for item in items if item.exclude_from_nav is False]
@@ -110,7 +110,7 @@ class Renderer(base.Renderer):
         all_items += [{'item_title': item2.Title,
                        'item_desc': item2.Description[:120],
                        'item_type': item2.portal_type,
-                       'item_url': item2.getURL(),
+                       'item_url': item2.getURL() + ('/view' if item2.portal_type != 'File' or item2.getURL().endswith('.pdf') else '/download'),
                        'item_state': item2.review_state
                        } for item2 in items if item2.exclude_from_nav is False]
         return all_items
