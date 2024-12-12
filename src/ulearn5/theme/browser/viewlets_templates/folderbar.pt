@@ -3,50 +3,54 @@
     tal:condition="viewlet/render_viewlet"
     i18n:domain="ulearn">
     <nav>
+        <!-- Activating 'stream' bubble -->
         <div class="active bubble top"
             tal:attributes="class python: viewlet.bubble_class('stream')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <!-- i18n:translate="ulearn_activity" -->
                 <a i18n:attributes="title ulearn_activity; aria-label ulearn_activity" aria-hidden="true"
-                    tal:attributes="href string:${community/absolute_url}">
+                   tal:attributes="href string:${community/absolute_url}">
                     <i class="fa fa-comment icons"></i>
                 </a>
             </div>
         </div>
+
+        <!-- 'documents' bubble -->
         <div class="bubble top"
             tal:attributes="class python: viewlet.bubble_class('documents')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <!-- i18n:translate="ulearn_documents" -->
-                <a title="Documents" aria-label="Documents" aria-hidden="true"
-                   i18n:attributes="title ulearn_documents; aria-label ulearn_documents"
-                   tal:attributes="href string:${community/absolute_url}/documents">
+                <a i18n:attributes="title ulearn_documents; aria-label ulearn_documents"
+                   tal:attributes="href string:${community/absolute_url}/documents"
+                   title="Documents" aria-label="Documents" aria-hidden="true">
                     <i class="fa fa-file-text-o icons"></i>
                 </a>
             </div>
         </div>
+
+        <!-- 'news' bubble -->
         <div class="bubble top"
             tal:condition="viewlet/show_news"
             tal:attributes="class python: viewlet.bubble_class('news')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <!-- i18n:translate="ulearn_news" -->
-                <a title="Noticies" aria-label="Noticies" aria-hidden="true"
-                   i18n:attributes="title ulearn_news; aria-label ulearn_news"
-                   tal:attributes="href string:${community/absolute_url}/news">
+                <a i18n:attributes="title ulearn_news; aria-label ulearn_news"
+                   tal:attributes="href string:${community/absolute_url}/news"
+                   title="Noticies" aria-label="Noticies" aria-hidden="true">
                     <i class="fa fa-newspaper-o icons"></i>
                 </a>
             </div>
         </div>
+
+        <!-- 'events' bubble -->
         <div class="bubble top"
             tal:condition="viewlet/show_events"
             tal:attributes="class python: viewlet.bubble_class('events')">
             <div class="arrow"></div>
             <div class="bubble-content">
-                <!-- i18n:translate="Events" -->
-                <a i18n:attributes="title Events; aria-label Events" aria-hidden="true"
-                    tal:attributes="href string:${community/absolute_url}/events">
+                <a i18n:attributes="title Events; aria-label Events"
+                   tal:attributes="href string:${community/absolute_url}/events"
+                   title="Events" aria-label="Events" aria-hidden="true">
                     <i class="fa fa-calendar icons"></i>
                 </a>
             </div>

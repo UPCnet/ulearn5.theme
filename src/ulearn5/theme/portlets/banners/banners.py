@@ -20,6 +20,7 @@ from ulearn5.core.browser.security import execute_under_special_role
 from ulearn5.core.content.community import ICommunity
 
 import transaction
+from io import StringIO  # Cambiado para Python 3
 
 
 class TypesVocabulary(object):
@@ -27,22 +28,22 @@ class TypesVocabulary(object):
 
     def __call__(self, context):
         types = []
-        types.append(SimpleVocabulary.createTerm(u'Global', 'Global', _(u'Global')))
-        types.append(SimpleVocabulary.createTerm(u'Personal', 'Personal', _(u'Personal')))
-        types.append(SimpleVocabulary.createTerm(u'Comunitat', 'Comunitat', _(u'Comunitat')))
+        types.append(SimpleVocabulary.createTerm('Global', 'Global', _('Global')))
+        types.append(SimpleVocabulary.createTerm('Personal', 'Personal', _('Personal')))
+        types.append(SimpleVocabulary.createTerm('Comunitat', 'Comunitat', _('Comunitat')))
         return SimpleVocabulary(types)
 
 
-grok.global_utility(TypesVocabulary, name=u"ulearn.portlets.banners.Types")
+grok.global_utility(TypesVocabulary, name="ulearn.portlets.banners.Types")
 
 
 class IBannersPortlet(IPortletDataProvider):
     """ A portlet which renders the banners portlet """
 
     typePortlet = schema.Choice(
-        title=_(u'Type'),
-        vocabulary=u"ulearn.portlets.banners.Types",
-        default=u'Global',
+        title=_('Type'),
+        vocabulary="ulearn.portlets.banners.Types",
+        default='Global',
         required=True
     )
 
@@ -56,28 +57,28 @@ class Assignment(base.Assignment):
     @property
     def title(self):
         if self.typePortlet == 'Global':
-            return _(u'banners_global', default=u'Banners (Global)')
+            return _('Banners (Global)')
         elif self.typePortlet == 'Personal':
-            return _(u'banners_personal', default=u'Banners (Personal)')
+            return _('Banners (Personal)')
         else:
-            return _(u'banners_comunitats', default=u'Banners (Comunitats)')
+            return _('Banners (Comunitats)')
 
 
 def createOrGetObject(self, context, newid, title, type_name):
-        if newid in context.contentIds():
-            obj = context[newid]
-        else:
-            obj = createContentInContainer(context, type_name, title=title, checkConstrains=False)
-            transaction.savepoint()
-            if obj.id != newid:
-                context.manage_renameObject(obj.id, newid)
-            obj.reindexObject()
-        return obj
+    if newid in context.contentIds():
+        obj = context[newid]
+    else:
+        obj = createContentInContainer(context, type_name, title=title, checkConstrains=False)
+        transaction.savepoint()
+        if obj.id != newid:
+            context.manage_renameObject(obj.id, newid)
+        obj.reindexObject()
+    return obj
 
 
 def createPersonalBannerFolder(userid):
     portal = getSite()
-    perFolder = createOrGetObject(portal, portal['Members'], userid, userid, u'privateFolder')
+    perFolder = createOrGetObject(portal, portal['Members'], userid, userid, 'privateFolder')
     perFolder.exclude_from_nav = False
     perFolder.setLayout('folder_listing')
     behavior = ISelectableConstrainTypes(perFolder)
@@ -90,7 +91,7 @@ def createPersonalBannerFolder(userid):
         perFolder.manage_delLocalRoles([username])
     perFolder.manage_setLocalRoles(userid, ['Contributor', 'Editor', 'Reader'])
 
-    banFolder = createOrGetObject(portal, perFolder, 'banners', 'Banners', u'Folder')
+    banFolder = createOrGetObject(portal, perFolder, 'banners', 'Banners', 'Folder')
     banFolder.exclude_from_nav = False
     banFolder.setLayout('folder_listing')
     behavior = ISelectableConstrainTypes(banFolder)
@@ -107,9 +108,7 @@ class Renderer(base.Renderer):
         base.Renderer.__init__(self, *args)
 
     def isAnon(self):
-        if not api.user.is_anonymous():
-            return False
-        return True
+        return api.user.is_anonymous()
 
     def getBanners(self):
         catalog = api.portal.get_tool(name='portal_catalog')
@@ -153,8 +152,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IBannersPortlet
-    label = _(u"Add Banners Portlet")
-    description = _(u"This portlet displays banners.")
+    label = _("Add Banners Portlet")
+    description = _("This portlet displays banners.")
 
     def create(self, data):
         return Assignment(typePortlet=data.get('typePortlet', "Global"))
@@ -162,5 +161,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IBannersPortlet
-    label = _(u"Edit Banners Portlet")
-    description = _(u"This portlet displays banners.")
+    label = _("Edit Banners Portlet")
+    description = _("This portlet displays banners.")

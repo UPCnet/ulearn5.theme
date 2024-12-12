@@ -1,6 +1,8 @@
-$(document).ready(function (event) {
+$(document).ready(function () {
 
   var selector = '#subscribednews-search-box .maxui-text-input';
+  
+  // Focus in event handler
   $('#subscribednews-search').on('focusin', selector, function(event) {
       event.preventDefault();
       var text = $(this).val();
@@ -19,18 +21,19 @@ $(document).ready(function (event) {
         textSearch(normalized);
         if($('#searcher_selector option[value="' + normalized + '"]').length > 0){
           $('#searcher_selector').val(normalized);
-        }else{
+        } else {
           $('#searcher_selector').val($('#searcher_selector option:first-child').text());
         }
         $.get(path + '/search_filtered_news', { q: normalized }, function(data) {
           $('.list-search-portlet').html(data);
         });
-      }
+    }
   });
 
+  // Remove filter handler
   $('#subscribednews-search-filters').on('click', '.maxui-close', function(event) {
       event.preventDefault();
-      var filter = $(this.parentNode.parentNode);
+      var filter = $(this).closest('.maxui-filter');
       var path = $('#subscribednews-search-text').attr('data-path');
       delFilter({
           type: filter.attr('type'),
@@ -40,33 +43,29 @@ $(document).ready(function (event) {
       var keywords_ls = [];
       var keywords = $('#subscribednews-search-filters .maxui-filter');
 
-      for (var i = 0; i < keywords.length; i++) {
-          if (keywords[i].getAttribute('value') === filter.attr('value') & keywords[i].getAttribute('type') === filter.attr('type')) {
-              deleted = true;
-              keywords.splice(i, 1);
+      keywords.each(function() {
+          if ($(this).attr('value') !== filter.attr('value') || $(this).attr('type') !== filter.attr('type')) {
+              keywords_ls.push($(this).attr('value'));
           }
-      }
-
-      for (var kw = 0; kw < keywords.length; kw++) {
-        keywords_ls.push(keywords[kw].getAttribute('value'));
-      }
+      });
 
       var normalized = keywords_ls.join(' ');
       $.get(path + '/search_filtered_news', { q: normalized }, function(data) {
         $('.list-search-portlet').html(data);
       });
-      if($('#searcher_selector').val(normalized).val() == null){
+      if ($('#searcher_selector').val(normalized).val() == null) {
         $('#searcher_selector').val($('#searcher_selector option:first-child').text());
       }
       $('#subscribednews-search-text').val(normalized);
   });
 
+  // Add search news handler
   $('#subscribednews-search-filters').on('click', '.add-search-news', function(event) {
     var keywords_ls = [];
     var keywords = $('#subscribednews-search-filters .maxui-filter');
-    for (var kw = 0; kw < keywords.length; kw++) {
-      keywords_ls.push(keywords[kw].getAttribute('value'));
-    }
+    keywords.each(function() {
+      keywords_ls.push($(this).attr('value'));
+    });
     var items = keywords_ls.join(',');
     var path = $('#subscribednews-search-text').attr('data-path');
     $.post(path + '/add_user_search', { items: items }, function(data){
@@ -76,12 +75,13 @@ $(document).ready(function (event) {
     });
   });
 
+  // Remove search news handler
   $('#subscribednews-search-filters').on('click', '.remove-search-news', function(event) {
     var keywords_ls = [];
     var keywords = $('#subscribednews-search-filters .maxui-filter');
-    for (var kw = 0; kw < keywords.length; kw++) {
-      keywords_ls.push(keywords[kw].getAttribute('value'));
-    }
+    keywords.each(function() {
+      keywords_ls.push($(this).attr('value'));
+    });
     var items = keywords_ls.join(',');
     var path = $('#subscribednews-search-text').attr('data-path');
     $.post(path + '/remove_user_search', { items: items }, function(data){
@@ -94,95 +94,91 @@ $(document).ready(function (event) {
     });
   });
 
+  // Searcher selector change handler
   $('#searcher_selector').on('change',function(event){
-
     var text = $(this).val();
     var path = $('#subscribednews-search-text').attr('data-path');
     var normalized = normalizeWhiteSpace(text, false);
     delAllFilters();
     textSearch(normalized);
 
-    $('#subscribednews-search').toggleClass('folded', false);
+    $('#subscribednews-search').removeClass('folded');
     $('#subscribednews-search-text').val($("#searcher_selector").val());
 
     $.get(path + '/search_filtered_news', { q: normalized }, function(data) {
       $('.list-search-portlet').html(data);
     });
-
   });
 
-  var finalActions = function(text) {
-    maxui.textSearch(text);
-    $('#subscribednews-search').toggleClass('folded', false);
-    $('#subscribednews-search-text').val('');
-  }
-
+  // Normalize white spaces
   var normalizeWhiteSpace = function(s, multi) {
       s = s.replace(/(^\s*)|(\s*$)/gi, "");
       s = s.replace(/\n /, "\n");
-      var trimMulti = true;
-      if (arguments.length > 1) {
-          trimMulti = multi;
-      }
-      if (trimMulti === true) {
+      var trimMulti = multi === undefined ? true : multi;
+      if (trimMulti) {
           s = s.replace(/[ ]{2,}/gi, " ");
       }
       return s;
   }
 
+  // Text search functionality
   var textSearch = function(text) {
-      // Refresh filters
-      var maxui = this;
       maxui.filters = []
-
       var keywords = text.split(' ');
-      for (var kw = 0; kw < keywords.length; kw++) {
-          var kwtype = 'keyword';
-          var keyword = keywords[kw];
-
+      keywords.forEach(function(keyword) {
           if (keyword.length >= 3) {
               addFilter({
-                  type: kwtype,
+                  type: 'keyword',
                   value: keyword
               }, false);
           }
-      }
+      });
       reloadFilters();
   }
 
+  // Get searchers after POST request
   var getSearchers = function(data){
-    data_array = [];
-    if (typeof data === 'string' || data instanceof String){
-        data_parser = data.replace(/'/g, '"');
-        data_array = JSON.parse(data_parser);
+    var data_array = [];
+    if (typeof data === 'string'){
+        data_array = JSON.parse(data.replace(/'/g, '"'));
     }
     $('#searcher_selector option').remove();
     $('#searcher_selector').html('<option disabled="disabled" value="Cerca...">Cerca...</option>');
     $('#searcher_selector').val($('#searcher_selector option:first-child').text());
-    for (var i = 0; i < data_array.length; i++){
-        $('#searcher_selector').append($('<option>', { value : data_array[i] }).text(data_array[i]));
-    }
+    data_array.forEach(function(item) {
+        $('#searcher_selector').append($('<option>', { value : item }).text(item));
+    });
   }
 
-  /**
-   *    Prepares a object with the current active filters
-   *
-   *    @param {String} (optional)    A string containing the id of the last activity loaded
-   **/
+  // Reload current filters and UI
+  var reloadFilters = function() {
+      var filters = getFilters();
+      $('#subscribednews-search').toggleClass('folded', !filters.visible);
+
+      var template = '';
+      maxui.filters.forEach(function(filter) {
+        template += `<div class="maxui-filter maxui-keyword" type="keyword" value="${filter.value}">
+                       <span>${filter.value}<a class="maxui-close" href=""><i class="maxui-icon-cancel-circled" alt="tanca"/></a></span>
+                     </div>`;
+      });
+      var path = $('#subscribednews-search-text').attr('data-path');
+      var keywords_ls = maxui.filters.map(function(filter) { return filter.value; }).join(',');
+
+      $.get(path + '/search_in_searchers', { items: keywords_ls}, function(data) {
+        if (data !== 'True') {
+          template += '<div id="subscribednews-filters-toolbox"><a class="add-search-news" href=""><i class="fa fa-floppy-o fa-2" ></i></a></div>';
+        } else {
+          template += '<div id="subscribednews-filters-toolbox"><a class="remove-search-news" href=""><i class="fa fa-trash fa-2" ></i></a></div>';
+        }
+        $('#subscribednews-search-filters').html(template);
+      });
+  }
+
+  // Get active filters
   var getFilters = function() {
-      var maxui = this;
-      var params = {
-          filters: maxui.filters
-      };
-      if (params.filters === undefined) {
-          params.filters = [];
-      }
       var filters = {};
-      // group filters
       var enableSearchToggle = false;
-      for (var f = 0; f < params.filters.length; f++) {
-          var filter = params.filters[f];
-          // Enable toggle button only if there's at least one visible filter
+      maxui.filters.forEach(function(filter) {
           if (filter.visible) {
               enableSearchToggle = true;
           }
@@ -190,67 +186,18 @@ $(document).ready(function (event) {
               filters[filter.type] = [];
           }
           filters[filter.type].push(filter.value);
-      }
-      // Accept a optional parameter indicating search start point
-      if (arguments.length > 0) {
-          filters.before = arguments[0];
-      }
-      return {
-          filters: filters,
-          visible: enableSearchToggle
-      };
-  }
-
-
-    /**
-   *    Reloads the current filters UI and executes the search, optionally starting
-   *    at a given point of the timeline
-   *
-   *    @param {String} (optional)    A string containing the id of the last activity loaded
-   **/
-  var reloadFilters = function() {
-      var maxui = this;
-      var filters;
-
-      var values = [];
-      keywords_ls=[];
-      var template = '';
-      for (var i = 0; i < maxui.filters.length; i++) {
-        template = template + '<div class="maxui-filter maxui-keyword" type="keyword" value="'+maxui.filters[i].value+'"><span>'+maxui.filters[i].value+'<a class="maxui-close" href=""><i class="maxui-icon-cancel-circled" alt="tanca"/></a></span></div>';
-        keywords_ls.push(maxui.filters[i].value);
-      }
-      items = keywords_ls.join(',');
-      var path = $('#subscribednews-search-text').attr('data-path');
-
-      $.get(path + '/search_in_searchers', { items: items}, function(data) {
-        if(data != 'True'){
-          template += '<div id="subscribednews-filters-toolbox"><a class="add-search-news" href=""><i class="fa fa-floppy-o fa-2" ></i></a></div>';
-        }
-        else{
-          template += '<div id="subscribednews-filters-toolbox"><a class="remove-search-news" href=""><i class="fa fa-trash fa-2" ></i></a></div>';
-        };
-        $('#subscribednews-search-filters').html(template);
       });
-      // Accept a optional parameter indicating search start point
-      if (arguments.length > 0) {
-          filters = getFilters(arguments[0]);
-      } else {
-          filters = getFilters();
-      }
-      //Enable or disable filter toogle if there are visible filters defined (or not)
-      $('#subscribednews-search').toggleClass('folded', !filters.visible);
+      return { filters: filters, visible: enableSearchToggle };
   }
-  /**
-   *    Adds a new filter to the search if its not present
-   *    @param {Object} filter    An object repesenting a filter, with the keys "type" and "value"
-   **/
+
+  // Delete individual filter
   var delFilter = function(filter) {
-      var maxui = this;
       var deleted = false;
       for (var i = 0; i < maxui.filters.length; i++) {
-          if (maxui.filters[i].value === filter.value & maxui.filters[i].type === filter.type) {
-              deleted = true;
+          if (maxui.filters[i].value === filter.value && maxui.filters[i].type === filter.type) {
               maxui.filters.splice(i, 1);
+              deleted = true;
+              break;
           }
       }
       if (deleted) {
@@ -258,43 +205,21 @@ $(document).ready(function (event) {
       }
   }
 
+  // Delete all filters
   var delAllFilters = function() {
-      var maxui = this;
       maxui.filters = [];
       $('#subscribednews-search-filters').html('');
       $('#subscribednews-search-text').val('');
   }
 
-  /**
-   *    Adds a new filter to the search if its not present
-   *    @param {Object} filter    An object repesenting a filter, with the keys "type" and "value"
-   **/
+  // Add new filter
   var addFilter = function(filter) {
-      var maxui = this
       var reload = true;
-      //Reload or not by func argument
-      if (arguments.length > 1) {
-          reload = arguments[1];
-      }
-      if (!maxui.filters) {
-          maxui.filters = [];
-      }
-      // show filters bu default unless explicitly specified on filter argument
-      if (!filter.hasOwnProperty('visible')) {
-          filter.visible = true;
-      }
-      var already_filtered = false;
-      for (var i = 0; i < maxui.filters.length; i++) {
-          if (maxui.filters[i].value === filter.value & maxui.filters[i].type === filter.type) {
-              already_filtered = true;
-          }
-      }
-      if (!already_filtered) {
+      if (maxui.filters.every(function(existingFilter) { return existingFilter.value !== filter.value || existingFilter.type !== filter.type; })) {
           maxui.filters.push(filter);
-          if (reload === true) {
+          if (reload) {
               reloadFilters();
           }
       }
   }
-
 });

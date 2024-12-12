@@ -27,7 +27,7 @@
         <div class="row searchFilters">
           <div class="col-md-6">
             <label i18n:translate="">Type of search</label>
-            <select class="form-control typeSearch">
+            <select class="form-control typeSearch" aria-label="Select search type">
               <option value="user" i18n:translate="">User</option>
               <option value="community" i18n:translate="">Community</option>
               <option value="all" i18n:translate="">Export: All communities (File generated the night before)</option>
@@ -35,7 +35,7 @@
           </div>
           <div class="col-md-6 communityBlock" style="display: none;">
             <label i18n:translate="">Community</label>
-            <select class="form-control communitySearch">
+            <select class="form-control communitySearch" aria-label="Select community">
               <tal:block tal:repeat="community view/allCommunities">
                 <option tal:attributes="value community/id" tal:content="community/title">X</option>
               </tal:block>
@@ -43,7 +43,7 @@
           </div>
           <div class="col-md-6 userBlock">
             <label i18n:translate="">User</label>
-            <input type="text" class="form-control userSearch" />
+            <input type="text" class="form-control userSearch" aria-label="Search user" />
           </div>
 
           <div class="col-md-12">
@@ -110,5 +110,6 @@
       </div>
     </tal:main-macro>
 </metal:main>
+
 </body>
 </html>

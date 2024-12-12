@@ -14,7 +14,7 @@ from souper.soup import get_soup
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer  # Cambié de implements a implementer
 
 from base5.core.utils import abrevia
 from base5.core.utils import abreviaPlainText
@@ -25,8 +25,7 @@ import transaction
 
 
 class IButtonBarPortlet(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information.
-    """
+    """ A portlet which can render the logged user profile information. """
     count = schema.Int(title=_PFM(u'Number of items to display'),
                        description=_PFM(u'How many items to list.'),
                        required=True,
@@ -41,8 +40,8 @@ class IButtonBarPortlet(IPortletDataProvider):
                          )
 
 
+@implementer(IButtonBarPortlet)  # Cambié de implements a implementer
 class Assignment(base.Assignment):
-    implements(IButtonBarPortlet)
 
     def __init__(self, count=10, state=('published', 'intranet')):
         self.count = count

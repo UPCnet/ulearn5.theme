@@ -12,11 +12,11 @@
                  tal:define="items view/getItemPropierties;
                              blocs view/getBlocs">
 
-                 <tal:bloc tal:repeat="x python:range(0, blocs)">
-                  <div  class="row fila">
-                  <tal:bloc tal:repeat="y python:range(0, len(items[x]))">
-                    <div class="col-md-6"
-                         tal:define="item python:items[x][y]">
+                 <tal:repeat tal:for="x python:range(0, blocs)">
+                  <div class="row fila">
+                    <tal:repeat tal:for="y python:range(0, len(items[x]))">
+                        <div class="col-md-6"
+                             tal:define="item python:items[x][y]">
                             <h3 tal:define="type item/item_type;
                                             normalizeString nocall: context/plone_utils/normalizeString;
                                             item_type_class python:'contenttype-' + normalizeString(type)">
@@ -38,7 +38,7 @@
                                  tal:define="type item/item_type;
                                              path item/item_path;
                                              subitems python:view.getSubItemPropierties(path)"
-                                 tal:condition="python: type == 'Folder' or 'privateFolder'">
+                                 tal:condition="python: type == 'Folder' or type == 'privateFolder'">
                                 <div class="col-md-12"
                                      tal:repeat="item2 subitems">
                                     <a tal:define="type item2/item_type;
@@ -54,9 +54,9 @@
 
                             </div>
                         </div>
-                     </tal:bloc>
+                     </tal:repeat>
                      </div>
-                     </tal:bloc>
+                     </tal:repeat>
 
               </div>
 

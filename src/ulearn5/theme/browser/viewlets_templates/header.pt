@@ -23,12 +23,13 @@
     <div class="button-menu-mobile--close hidden-md hidden-lg">
       <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation" class="icona-upc">close</span></a>
     </div>
+
     <nav role="navigation" class="global-navigation">
       <h2 class="sr-only" i18n:translate="tools">Tools</h2>
       <ul role="menubar" class="upc-eines" tal:define="menu viewlet/linksMenu">
         <li tal:condition="menu" class="dropdown ulearn-eines-ql" role="menuitem" tal:repeat="dades menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <tal:quicklinks tal:content="dades/title"> Quick Links </tal:quicklinks>
+            <tal:quicklinks tal:content="dades/title">Quick Links</tal:quicklinks>
             <span aria-hidden="true" class="caret"></span>
           </a>
           <ul class="dropdown-menu pull-right" role="menu">
@@ -49,27 +50,31 @@
           </ul>
         </li>
 
-        <li role="presentation" class="upc-eines-skip"><a href="#main-content" role="menuitem" class="sr-only"> <span>Skip to content</span></a></li>
+        <li role="presentation" class="upc-eines-skip">
+          <a href="#main-content" role="menuitem" class="sr-only">
+            <span>Skip to content</span>
+          </a>
+        </li>
 
         <block metal:use-macro="context/macros-comunitats-header/paysheet"></block>
 
         <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql">
           <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
-            <tal:management i18n:translate="menu-gestion">
-                      Management</tal:management>
+            <tal:management i18n:translate="menu-gestion">Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
           <ul class="dropdown-menu pull-right" role="menu">
             <block metal:use-macro="context/macros-comunitats-header/gestion-news"></block>
           </ul>
         </li>
-        <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql" >
+
+        <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql">
           <a href="#" id="ql" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="menuitem" aria-haspopup="true">
             <i tal:attributes="class string:fa ${dades/quickLinksIcon}"></i>
-              <tal:quicklinks tal:content="dades/quickLinksLiteral"> Quick Links </tal:quicklinks>
-              <span aria-hidden="true" class="caret"></span>
+            <tal:quicklinks tal:content="dades/quickLinksLiteral">Quick Links</tal:quicklinks>
+            <span aria-hidden="true" class="caret"></span>
           </a>
-          <ul class="dropdown-menu pull-right" aria-labelledby="ql" role="menu" >
+          <ul class="dropdown-menu pull-right" aria-labelledby="ql" role="menu">
             <li role="presentation" tal:repeat="item dades/quickLinksTable">
               <tal:span condition="not: item/new_window">
                 <a tal:attributes="href string:${item/link}" role="menuitem">
@@ -86,12 +91,14 @@
             </li>
           </ul>
         </li>
+
         <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte" style="outline-style: none;">
-            <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
-                <i class="fa fa-info-circle"></i>
-                <tal:block i18n:translate="info">Info</tal:block>
-            </a>
+          <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
+            <i class="fa fa-info-circle"></i>
+            <tal:block i18n:translate="info">Info</tal:block>
+          </a>
         </li>
+
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
           <form id="searchGadget_form" action="${portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${portal_url}/@@ajax-search" class="pat-livesearch">
             <legend class="sr-only" i18n:translate="">Buscar</legend>

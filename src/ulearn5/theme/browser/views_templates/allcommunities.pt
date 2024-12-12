@@ -9,6 +9,10 @@
 <head>
   <metal:block fill-slot="top_slot"
              tal:define="dummy python:request.set('disable_border',1);"/>
+  
+  <!-- Incluir el script de AngularJS si es necesario -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-utils-pagination/0.11.1/dirPagination.js"></script>
 </head>
 
 <body>

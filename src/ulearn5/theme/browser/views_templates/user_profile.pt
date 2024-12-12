@@ -8,139 +8,126 @@
 
 <head>
     <metal:block fill-slot="top_slot"
-                 tal:define="dummy python:request.set('disable_border',1);
-                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
-                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+                 tal:define="dummy python:request.set('disable_border', 1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn', 1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn', 1);" />
 </head>
 
 <body>
 
 <tal:comment replace="nothing">
-    Please note that this template fills the "content" slot instead of the
-    "main" slot, this is done so we can provide stuff like the content
-    tabs. This also means that we have to supply things that are normally
-    present from main_template.
+    Please note that this template fills the "content" slot instead of the "main" slot, this is done so we can provide content like the content tabs.
 </tal:comment>
 
-
 <metal:main metal:fill-slot="content"
-                    tal:define="username view/username;
-                                userinfo view/user_info;
-                                portal_url context/@@plone_portal_state/navigation_root_url;
-                                member context/@@plone_portal_state/member;">
+           tal:define="username view/username;
+                       userinfo view/user_info;
+                       portal_url context/@@plone_portal_state/navigation_root_url;
+                       member context/@@plone_portal_state/member;">
 
-      <tal:noAuthor condition="not: userinfo">
-          <dl class="portalMessage error">
-              <dt i18n:translate="">
-                  Error
-              </dt>
-              <dd i18n:domain="plone" i18n:translate="text_no_user_by_name">
-                  No user by that name.
-              </dd>
-          </dl>
-          <div id="content">
-              &nbsp;
-          </div>
-      </tal:noAuthor>
+    <tal:noAuthor condition="not: userinfo">
+        <dl class="portalMessage error">
+            <dt i18n:translate="">Error</dt>
+            <dd i18n:domain="plone" i18n:translate="text_no_user_by_name">No user by that name.</dd>
+        </dl>
+        <div id="content">&nbsp;</div>
+    </tal:noAuthor>
 
-      <tal:haveAuthor condition="userinfo"
-          tal:define="isOwner python:member.getId()==username;
-                      isAnon context/@@plone_portal_state/anonymous;">
+    <tal:haveAuthor condition="userinfo"
+                    tal:define="isOwner python:member.getId() == username;
+                               isAnon context/@@plone_portal_state/anonymous;">
 
-          <div metal:use-macro="context/global_statusmessage/macros/portal_message">
-              Portal status message
-          </div>
+        <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+            Portal status message
+        </div>
 
-          <div id="content">
-              <h1 class="documentFirstHeading" tal:condition="view/fullname" tal:content="view/fullname">
-                  Author name
-              </h1>
+        <div id="content">
+            <h1 class="documentFirstHeading" tal:condition="view/fullname" tal:content="view/fullname">
+                Author name
+            </h1>
 
-              <h1 class="documentFirstHeading" tal:condition="not: view/fullname" tal:content="username">
-                  Author ID
-              </h1>
+            <h1 class="documentFirstHeading" tal:condition="not: view/fullname" tal:content="username">
+                Author ID
+            </h1>
 
-              <div id="content-core" i18n:domain="ulearn">
+            <div id="content-core" i18n:domain="ulearn">
                 <div class="row" tal:define="isAdmin view/is_admin_user">
-                  <div class="col-md-2">
-                    <div class="row">
-                        <div class="photo col-md-12">
-                          <p>
-                            <span class="dades currentactivity">
-                              <max-activities-count object="user" tal:attributes="username username"></max-activities-count>
-                            </span>
-                            <span i18n:domain="ulearn" i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
-                          </p>
-                          <a tal:omit-tag="not: isOwner"
-                             tal:attributes="href string:${view/portal_url}/@@personal-information"
-                             tal:define="ulearn_utils context/@@ulearn.utils">
-                              <img tal:condition="isAdmin" tal:attributes="src string:++theme++ulearn5/assets/images/defaultUser.png" alt="admin user">
-                              <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${view/username}/avatar/large" alt="User" >
-                          </a>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="photo col-md-12">
+                                <p>
+                                    <span class="dades currentactivity">
+                                        <max-activities-count object="user" tal:attributes="username username"></max-activities-count>
+                                    </span>
+                                    <span i18n:domain="ulearn" i18n:translate="" tal:content="view/get_posts_literal">thinnkins</span>
+                                </p>
+                                <a tal:omit-tag="not: isOwner"
+                                   tal:attributes="href string:${view/portal_url}/@@personal-information"
+                                   tal:define="ulearn_utils context/@@ulearn.utils">
+                                    <img tal:condition="isAdmin" tal:attributes="src string:++theme++ulearn5/assets/images/defaultUser.png" alt="admin user">
+                                    <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${view/username}/avatar/large" alt="User">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row" tal:condition="not:isAdmin">
+                            <div class="badges col-md-12" tal:define="badges_info view/get_badges_info">
+                                <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
+                                       tal:attributes="enabled view/has_complete_profile;
+                                                       title badges_info/profile/title;
+                                                       alt badges_info/profile/title"></badge>
+                                <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png"
+                                       tal:attributes="threshold badges_info/winwin1/num;
+                                                       title badges_info/winwin1/title;
+                                                       alt badges_info/winwin1/title"></badge>
+                                <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png"
+                                       tal:attributes="threshold badges_info/winwin2/num;
+                                                       title badges_info/winwin2/title;
+                                                       alt badges_info/winwin2/title"></badge>
+                                <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png"
+                                       tal:attributes="threshold badges_info/winwin3/num;
+                                                       title badges_info/winwin3/title;
+                                                       alt badges_info/winwin3/title"></badge>
+                            </div>
                         </div>
                     </div>
-                    <div class="row" tal:condition="not:isAdmin">
-                        <div class="badges col-md-12" tal:define="badges_info view/get_badges_info">
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
-                                 tal:attributes="enabled view/has_complete_profile;
-                                                 title badges_info/profile/title;
-                                                 alt badges_info/profile/title">
-                          </badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png"
-                               tal:attributes="threshold badges_info/winwin1/num;
-                                               title badges_info/winwin1/title;
-                                               alt badges_info/winwin1/title"></badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png"
-                               tal:attributes="threshold badges_info/winwin2/num;
-                                               title badges_info/winwin2/title;
-                                               alt badges_info/winwin2/title"></badge>
-                          <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png"
-                               tal:attributes="threshold badges_info/winwin3/num;
-                                               title badges_info/winwin3/title;
-                                               alt badges_info/winwin3/title"></badge>
-                        </div>
-                    </div>
-                  </div>
 
-                  <div class="col-md-10" tal:define="separate_public_private_info view/separate_public_private_info">
-                    <tal:block tal:condition="not:separate_public_private_info">
-                      <div class="infoProfile">
-                        <tal:field repeat="field view/get_user_info_for_display">
-                          <h3 class="control-label" tal:content="field/name">Biography</h3>
-                          <p tal:content="field/value"></p>
-                        </tal:field>
-                      </div>
-                    </tal:block>
-                    <tal:block tal:condition="separate_public_private_info">
-                      <tal:block tal:define="public view/get_public_user_info_for_display; private view/get_private_user_info_for_display">
-                        <h2 class="titleInfo" i18n:translate="info_public">Public information (directory)</h2>
-                        <div class="infoProfile">
-                          <tal:field repeat="field public">
-                            <h3 class="control-label" tal:content="field/name">Biography</h3>
-                            <p tal:content="field/value"></p>
-                          </tal:field>
-                        </div>
-                        <br/>
-                        <br/>
-                        <tal:block tal:condition="nocall: private | nothing">
-                          <h2 class="titleInfo titleInfoPrivate" i18n:translate="info_private">Internal information</h2>
-                          <p i18n:translate="info_private_help">These fields are only visible by administrators if necessary.</p>
-                          <div class="infoProfile">
-                            <tal:field repeat="field private">
-                              <h3 class="control-label" tal:content="field/name">Biography</h3>
-                              <p tal:content="field/value"></p>
-                            </tal:field>
-                          </div>
+                    <div class="col-md-10" tal:define="separate_public_private_info view/separate_public_private_info">
+                        <tal:block tal:condition="not: separate_public_private_info">
+                            <div class="infoProfile">
+                                <tal:field repeat="field view/get_user_info_for_display">
+                                    <h3 class="control-label" tal:content="field/name">Biography</h3>
+                                    <p tal:content="field/value"></p>
+                                </tal:field>
+                            </div>
                         </tal:block>
-                      </tal:block>
-                    </tal:block>
-                  </div>
+                        <tal:block tal:condition="separate_public_private_info">
+                            <tal:block tal:define="public view/get_public_user_info_for_display;
+                                                  private view/get_private_user_info_for_display">
+                                <h2 class="titleInfo" i18n:translate="info_public">Public information (directory)</h2>
+                                <div class="infoProfile">
+                                    <tal:field repeat="field public">
+                                        <h3 class="control-label" tal:content="field/name">Biography</h3>
+                                        <p tal:content="field/value"></p>
+                                    </tal:field>
+                                </div>
+                                <br/>
+                                <tal:block tal:condition="nocall: private | nothing">
+                                    <h2 class="titleInfo titleInfoPrivate" i18n:translate="info_private">Internal information</h2>
+                                    <p i18n:translate="info_private_help">These fields are only visible by administrators if necessary.</p>
+                                    <div class="infoProfile">
+                                        <tal:field repeat="field private">
+                                            <h3 class="control-label" tal:content="field/name">Biography</h3>
+                                            <p tal:content="field/value"></p>
+                                        </tal:field>
+                                    </div>
+                                </tal:block>
+                            </tal:block>
+                        </tal:block>
+                    </div>
                 </div>
-              </div>
-          </div>
-
-        </tal:haveAuthor>
-
+            </div>
+        </div>
+    </tal:haveAuthor>
 
 </metal:main>
 

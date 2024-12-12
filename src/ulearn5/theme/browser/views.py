@@ -39,7 +39,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import safe_unicode
+from Products.CMFPlone.utils import str
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
 
@@ -64,7 +64,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
 
-from cStringIO import StringIO
+from io import StringIO
 from zope.i18n import translate
 from hashlib import sha1
 
@@ -344,10 +344,11 @@ class SearchUser(grok.View):
     grok.context(Interface)
     grok.require('base.member')
 
-    @json_response
     def render(self):
-        return {'users': self.get_my_users(),
-                'properties': self.get_user_info_for_display()}
+        self.request.response.setHeader('Content-Type', 'application/json')
+        return json.dumps({'users': self.get_my_users(),
+                            'properties': self.get_user_info_for_display()})
+
 
     def get_my_users(self):
         searchby = ''
@@ -446,7 +447,7 @@ class TypeAheadSearch(grok.View):
                 s = s.replace(char, quotestring(char))
             return s
 
-        multispace = u'\u3000'.encode('utf-8')
+        multispace = u'\u3000'
         for char in ('?', '-', '+', '*', multispace):
             q = q.replace(char, ' ')
         r = q.split()
@@ -487,7 +488,7 @@ class TypeAheadSearch(grok.View):
                 if result.portal_type in useViewAction:
                     itemUrl += '/view'
 
-                full_title = safe_unicode(pretty_title_or_id(result))
+                full_title = str(pretty_title_or_id(result))
                 if len(full_title) > MAX_TITLE:
                     display_title = ''.join((full_title[:MAX_TITLE], '...'))
                 else:
@@ -495,7 +496,7 @@ class TypeAheadSearch(grok.View):
 
                 full_title = full_title.replace('"', '&quot;')
 
-                display_description = safe_unicode(result.Description)
+                display_description = str(result.Description)
                 if len(display_description) > MAX_DESCRIPTION:
                     display_description = ''.join(
                         (display_description[:MAX_DESCRIPTION], '...'))
@@ -563,7 +564,7 @@ class FilteredContentsSearchView(grok.View):
             return self.getContent()
 
         if not self.query == '':
-            multispace = u'\u3000'.encode('utf-8')
+            multispace = u'\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -615,7 +616,7 @@ class FilteredContentsSearchView(grok.View):
             return s
 
         if not self.query == '':
-            multispace = u'\u3000'.encode('utf-8')
+            multispace = u'\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -813,7 +814,7 @@ class SearchFilteredNews(grok.View):
                                         '</h2>'\
                                         '<p><time class="smaller">'+str(noticiaObj.modification_date.day()) + '/' + str(noticiaObj.modification_date.month()) + '/' + str(noticiaObj.modification_date.year())+'</time></p>'\
                                         '<span>'+text+'</span>'\
-                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abreviaPlainText(noticia.Title, 70) + '"><span class="readmore">'+readmore.encode('utf-8') + '</span>'\
+                                        '<a href="'+noticia.getURL()+'" class="readmore" title="'+abreviaPlainText(noticia.Title, 70) + '"><span class="readmore">'+readmore + '</span>'\
                                         '</a>'\
                                       '</div>'\
                                    '</div>'\
@@ -828,7 +829,7 @@ class SearchFilteredNews(grok.View):
         path = "/".join(path)
         self.query = self.request.form.get('q', '')
         if not self.query == '':
-            multispace = u'\u3000'.encode('utf-8')
+            multispace = u'\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -943,7 +944,7 @@ class CollectionNewsView(grok.View, CollectionView):
                     queryFilters = fil['v']
 
             formFilter = self.request.form['filter']
-            filters = formFilter if queryFilters == '' else queryFilters.encode('utf-8') + ' ' + formFilter
+            filters = formFilter if queryFilters == '' else queryFilters + ' ' + formFilter
             contentFilter.update({'SearchableText': filters})
 
         kwargs.setdefault('custom_query', contentFilter)
@@ -1020,19 +1021,19 @@ class SendEventToAttendees(grok.View):
             'start_day': self.applytz(self.context.start).strftime('%d/%m/%Y'),
             'end_hour': self.applytz(self.context.end).strftime('%H:%M:%S'),
             'end_day': self.applytz(self.context.end).strftime('%d/%m/%Y'),
-            'attendees': ', '.join(self.context.attendees).encode('utf-8'),
+            'attendees': ', '.join(self.context.attendees),
             'description': self.context.Description()
         }
 
         location = self.context.location is not None and self.context.location != ""
         if location:
-            map.update({'location': self.context.location.encode('utf-8')})
+            map.update({'location': self.context.location})
 
         installed = packages_installed()
         zoom_link = 'ulearn5.zoom' in installed and hasattr(self.context, 'url_zoom') and self.context.url_zoom is not None
 
         if zoom_link:
-            map.update({'zoom_link': self.context.url_zoom.encode('utf-8')})
+            map.update({'zoom_link': self.context.url_zoom})
 
         default_language = api.portal.get_default_language()
 
@@ -1072,7 +1073,7 @@ class SendEventToAttendees(grok.View):
 
         msg = MIMEMultipart()
         msg['From'] = portal.get_registry_record('plone.email_from_address')
-        msg['To'] = ', '.join(self.context.attendees).encode('utf-8')
+        msg['To'] = ', '.join(self.context.attendees)
         msg['Date'] = formatdate(localtime=True)
         msg['Subject'] = Header(subject, 'utf-8')
 
@@ -1113,13 +1114,13 @@ class SendEventToAttendees(grok.View):
         out.write(ICS_EVENT_START % map)
 
         for assistant in self.context.attendees:
-            out.write('ATTENDEE;CN={0};ROLE=REQ-PARTICIPANT:{0}\n'.format(assistant.encode('utf-8')))
+            out.write('ATTENDEE;CN={0};ROLE=REQ-PARTICIPANT:{0}\n'.format(assistant))
 
         for category in self.context.subject:
-            out.write('CATEGORIES:%s\n' % category.encode('utf-8'))
+            out.write('CATEGORIES:%s\n' % category)
 
-        contact_name = self.context.contact_name.encode('utf-8') if self.context.contact_name else None
-        location = self.context.location.encode('utf-8') if self.context.location else None
+        contact_name = self.context.contact_name if self.context.contact_name else None
+        location = self.context.location if self.context.location else None
         map = {
             'contact_name': contact_name,
             'contact_email': self.context.contact_email,
@@ -1240,53 +1241,6 @@ class UsersCommunities(grok.View):
 
         return result
 
-    # Funcion antigua con grupos
-    # def result(self):
-    #     result = []
-
-    #     if 'user' in self.request.form or 'idcommunity' in self.request.form:
-    #         data = {'portal_type': "ulearn.community",
-    #                 'sort_on': 'sortable_title'}
-
-    #         if 'idcommunity' in self.request.form:
-    #             data.update({'id': self.request.form['idcommunity']})
-
-    #         pc = api.portal.get_tool(name='portal_catalog')
-    #         communities = pc.searchResults(**data)
-
-    #         for community in communities:
-    #             info = ICommunityACL(community.getObject())().attrs.get('acl', '')
-
-    #             listUsers = []
-    #             if 'users' in info:
-    #                 for tmpuser in info['users']:
-    #                     user = api.user.get(userid=tmpuser['id'])
-    #                     if user:
-    #                         fullname = user.getProperty('fullname', '-')
-    #                         fullname = fullname if fullname else '-'
-    #                         if 'user' not in self.request.form or self.request.form['user'] == user.id:
-    #                             listUsers.append({'id': user.id,
-    #                                               'fullname': fullname,
-    #                                               'role': tmpuser['role']})
-
-    #             if 'groups' in info:
-    #                 for group in info['groups']:
-    #                     users = api.user.get_users(groupname=group['id'])
-    #                     for user in users:
-    #                         if 'user' not in self.request.form or self.request.form['user'] == user.id:
-    #                             fullname = user.getProperty('fullname', '-')
-    #                             fullname = fullname if fullname else '-'
-    #                             listUsers.append({'id': user.id,
-    #                                               'fullname': fullname + ' [' + group['id'].encode('utf-8') + ']',
-    #                                               'role': group['role']})
-
-    #             if listUsers:
-    #                 result.append({'id': community.id,
-    #                                'title': community.Title,
-    #                                'users': sorted(listUsers, key=itemgetter('fullname'))})
-
-    #     return result
-
     def allCommunities(self):
         data = {'portal_type': "ulearn.community",
                 'sort_on': 'sortable_title'}
@@ -1403,93 +1357,3 @@ class ExportUsersCommunities(grok.View):
                              row['email'],
                              row['community'],
                              row['role']])
-
-# Antiguo con grupos
-# class ExportUsersCommunities(grok.View):
-#     grok.name('export_users_communities')
-#     grok.context(IPloneSiteRoot)
-#     grok.require('base.webmaster')
-
-#     data_header_columns = [
-#         "User ID",
-#         "Fullname",
-#         "Group",
-#         "Community",
-#         "Role"]
-
-#     def render(self):
-#         try:
-#             output_file = StringIO()
-#             # Write the BOM of the text stream to make its charset explicit
-#             output_file.write(u'\ufeff'.encode('utf8'))
-#             self.write_data(output_file)
-
-#             portal = getSite()
-#             exports = createOrGetObject(portal['gestion'], 'exports', u'Exports', u'privateFolder')
-#             exports.exclude_from_nav = False
-#             exports.setLayout('folder_listing')
-#             behavior = ISelectableConstrainTypes(exports)
-#             behavior.setConstrainTypesMode(1)
-#             behavior.setLocallyAllowedTypes(('File',))
-#             behavior.setImmediatelyAddableTypes(('File',))
-#             exports._Delete_objects_Permission = ('Site Administrator','Manager',)
-
-#             file_filename = u'export_users_communities.csv'
-#             file = NamedBlobFile(data=output_file.getvalue(), contentType='text/csv', filename=file_filename)
-
-#             if file_filename not in exports:
-#                 export = createContentInContainer(exports, 'File', title=file_filename, file=file)
-#                 api.content.transition(obj=export, transition='reject')
-#                 transaction.commit()
-#             else:
-#                 export = exports[file_filename]
-#                 export.file = file
-#                 export.reindexObject()
-
-#             return 'OK'
-#         except:
-#             return 'KO'
-
-#     def data(self):
-#         result = []
-
-#         data = {'portal_type': "ulearn.community",
-#                 'sort_on': 'sortable_title'}
-
-#         pc = api.portal.get_tool(name='portal_catalog')
-#         communities = pc.searchResults(**data)
-
-#         for community in communities:
-#             info = ICommunityACL(community.getObject())().attrs.get('acl', '')
-
-#             if 'users' in info:
-#                 for tmpuser in info['users']:
-#                     user = api.user.get(userid=tmpuser['id'])
-#                     if user:
-#                         result.append({'fullname': user.getProperty('fullname', ''),
-#                                        'userid': user.id,
-#                                        'group': '',
-#                                        'community': community.Title + ' (' + community.id + ')',
-#                                        'role': tmpuser['role']})
-
-#             if 'groups' in info:
-#                 for group in info['groups']:
-#                     users = api.user.get_users(groupname=group['id'])
-#                     for user in users:
-#                         result.append({'fullname': user.getProperty('fullname', ''),
-#                                        'userid': user.id,
-#                                        'group': group['id'].encode('utf-8'),
-#                                        'community': community.Title + ' (' + community.id + ')',
-#                                        'role': group['role']})
-#         return result
-
-#     def write_data(self, output_file):
-#         writer = csv.writer(output_file, dialect='excel', delimiter=',')
-#         writer.writerow(self.data_header_columns)
-
-#         for row in self.data():
-#             writer.writerow([row['userid'],
-#                              row['fullname'],
-#                              row['group'],
-#                              row['community'],
-#                              row['role']])
