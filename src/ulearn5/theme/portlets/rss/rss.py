@@ -244,70 +244,70 @@ class RSSFeed(object):
 
 class IRSSPortlet(IPortletDataProvider):
 
-    portlet_title = schema.TextLine(title=_PMF(u'Title'),
-                                    description=_PMF(u'Title of the portlet.  If omitted, the title of the feed will be used.'),
+    portlet_title = schema.TextLine(title=_PMF('Title'),
+                                    description=_PMF('Title of the portlet.  If omitted, the title of the feed will be used.'),
                                     required=False,
-                                    default=u'')
+                                    default='')
 
-    count = schema.Int(title=_PMF(u'Number of items to display'),
-                       description=_PMF(u'How many items to list.'),
+    count = schema.Int(title=_PMF('Number of items to display'),
+                       description=_PMF('How many items to list.'),
                        required=True,
                        default=5)
 
-    url = schema.TextLine(title=_PMF(u'URL of RSS feed'),
-                          description=_PMF(u'Link of the RSS feed to display.'),
+    url = schema.TextLine(title=_PMF('URL of RSS feed'),
+                          description=_PMF('Link of the RSS feed to display.'),
                           required=True,
-                          default=u'')
+                          default='')
 
-    timeout = schema.Int(title=_PMF(u'Feed reload timeout'),
-                         description=_PMF(u'Time in minutes after which the feed should be reloaded.'),
+    timeout = schema.Int(title=_PMF('Feed reload timeout'),
+                         description=_PMF('Time in minutes after which the feed should be reloaded.'),
                          required=True,
                          default=100)
 
-    display_date = schema.Bool(title=_(u'Display dates'),
+    display_date = schema.Bool(title=_('Display dates'),
                                required=False,
                                default=True)
 
-    display_description = schema.Bool(title=_(u'Display descriptions'),
+    display_description = schema.Bool(title=_('Display descriptions'),
                                       required=False,
                                       default=True)
 
-    display_image = schema.Bool(title=_(u'Display images'),
+    display_image = schema.Bool(title=_('Display images'),
                                 required=False,
                                 default=True)
 
-    display_categories = schema.Bool(title=_(u'Display categories'),
+    display_categories = schema.Bool(title=_('Display categories'),
                                      required=False,
                                      default=False)
 
-    more_url = schema.TextLine(title=_(u'More link'),
-                               description=_(u'Url that links to more content.'),
+    more_url = schema.TextLine(title=_('More link'),
+                               description=_('Url that links to more content.'),
                                required=False,
-                               default=u'')
+                               default='')
 
-    more_text = schema.TextLine(title=_(u'More text'),
-                                description=_(u'Text to show more content.'),
+    more_text = schema.TextLine(title=_('More text'),
+                                description=_('Text to show more content.'),
                                 required=False,
-                                default=u'')
+                                default='')
 
 
 class Assignment(base.Assignment):
     implements(IRSSPortlet)
 
-    portlet_title = u''
+    portlet_title = ''
 
     @property
     def title(self):
         """return the title with RSS feed title or from URL"""
         feed = FEED_DATA.get(self.data.url, None)
         if feed is None:
-            return u'RSS: ' + self.url[:20]
+            return 'RSS: ' + self.url[:20]
         else:
-            return u'RSS: ' + feed.title[:20]
+            return 'RSS: ' + feed.title[:20]
 
-    def __init__(self, portlet_title=u'', count=5, url=u"", timeout=100,
+    def __init__(self, portlet_title='', count=5, url="", timeout=100,
                  display_date=True, display_description=True, display_image=True,
-                 display_categories=False, more_text=u'', more_url=''):
+                 display_categories=False, more_text='', more_url=''):
         self.portlet_title = portlet_title
         self.count = count
         self.url = url
@@ -396,11 +396,11 @@ class Renderer(base.DeferredRenderer):
 
 class AddForm(base.AddForm):
     schema = IRSSPortlet
-    label = _PMF(u"Add RSS Portlet")
-    description = _PMF(u"This portlet displays an RSS feed.")
+    label = _PMF("Add RSS Portlet")
+    description = _PMF("This portlet displays an RSS feed.")
 
     def create(self, data):
-        return Assignment(portlet_title=data.get('portlet_title', u''),
+        return Assignment(portlet_title=data.get('portlet_title', ''),
                           count=data.get('count', 5),
                           url=data.get('url', ''),
                           timeout=data.get('timeout', 100),
@@ -408,11 +408,11 @@ class AddForm(base.AddForm):
                           display_description=data.get('display_description', True),
                           display_image=data.get('display_image', True),
                           display_categories=data.get('display_categories', False),
-                          more_text=data.get('more_text', u''),
+                          more_text=data.get('more_text', ''),
                           more_url=data.get('more_url', ''))
 
 
 class EditForm(base.EditForm):
     schema = IRSSPortlet
-    label = _PMF(u"Edit RSS Portlet")
-    description = _PMF(u"This portlet displays an RSS feed.")
+    label = _PMF("Edit RSS Portlet")
+    description = _PMF("This portlet displays an RSS feed.")

@@ -24,7 +24,7 @@ class IMyTagsPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IMyTagsPortlet)
 
-    title = _(u'mytags', default=u'My Tags')
+    title = _('mytags', default='My Tags')
 
 
 class Renderer(base.Renderer):

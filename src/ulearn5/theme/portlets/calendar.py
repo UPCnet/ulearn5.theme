@@ -42,7 +42,7 @@ class ICalendarPortlet(IPortletDataProvider):
 
 class Assignment(base.Assignment):
     implements(ICalendarPortlet)
-    title = _(u'Calendar')
+    title = _('Calendar')
 
 
 class Renderer(base.Renderer):
@@ -240,7 +240,7 @@ class Renderer(base.Renderer):
                     dat.year == today.year and
                     dat.month == today.month and
                     dat.day == today.day,
-                 'date_string': u"%s-%s-%s" % (dat.year, dat.month, dat.day),
+                 'date_string': "%s-%s-%s" % (dat.year, dat.month, dat.day),
                  'events': date_events}
             )
         return caldata

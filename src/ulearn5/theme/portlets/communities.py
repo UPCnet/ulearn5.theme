@@ -29,7 +29,7 @@ class ICommunitiesNavigation(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(ICommunitiesNavigation)
 
-    title = _(u'communities', default=u'Communities portlet')
+    title = _('communities', default='Communities portlet')
 
 
 class Renderer(base.Renderer):

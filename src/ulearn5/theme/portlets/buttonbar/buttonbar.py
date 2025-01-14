@@ -26,13 +26,13 @@ import transaction
 
 class IButtonBarPortlet(IPortletDataProvider):
     """ A portlet which can render the logged user profile information. """
-    count = schema.Int(title=_PFM(u'Number of items to display'),
-                       description=_PFM(u'How many items to list.'),
+    count = schema.Int(title=_PFM('Number of items to display'),
+                       description=_PFM('How many items to list.'),
                        required=True,
                        default=10)
 
-    state = schema.Tuple(title=_PFM(u"Workflow state"),
-                         description=_PFM(u"Items in which workflow state to show."),
+    state = schema.Tuple(title=_PFM("Workflow state"),
+                         description=_PFM("Items in which workflow state to show."),
                          default=('published', 'intranet'),
                          required=True,
                          value_type=schema.Choice(
@@ -47,7 +47,7 @@ class Assignment(base.Assignment):
         self.count = count
         self.state = state
 
-    title = _(u'buttonbar', default=u'Button bar')
+    title = _('buttonbar', default='Button bar')
 
 
 class Renderer(base.Renderer):
@@ -195,8 +195,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IButtonBarPortlet
-    label = _(u"Add Subscribed News Portlet")
-    description = _(u"This portlet displays subscribed News Items.")
+    label = _("Add Subscribed News Portlet")
+    description = _("This portlet displays subscribed News Items.")
 
     def create(self, data):
         return Assignment(count=data.get('count', 10),
@@ -205,5 +205,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IButtonBarPortlet
-    label = _(u"Edit Subscribed News Portlet")
-    description = _(u"This portlet displays subscribed News Items.")
+    label = _("Edit Subscribed News Portlet")
+    description = _("This portlet displays subscribed News Items.")

@@ -27,7 +27,7 @@ class ICommentsPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(ICommentsPortlet)
 
-    title = _(u'discussion', default=u'Discussion portlet')
+    title = _('discussion', default='Discussion portlet')
 
 
 class Renderer(base.Renderer):

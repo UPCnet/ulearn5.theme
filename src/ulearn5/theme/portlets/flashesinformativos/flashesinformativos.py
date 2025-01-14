@@ -23,14 +23,14 @@ class IFlashesInformativosPortlet(IPortletDataProvider):
     """ A portlet which can render Flashes Informativos information.
     """
 
-    name = schema.TextLine(title=_(u"label_navigation_title", default=u"Title"),
-                           description=_(u"help_navigation_title",
-                                         default=u"The title of the navigation tree."),
-                           default=u"",
+    name = schema.TextLine(title=_("label_navigation_title", default="Title"),
+                           description=_("help_navigation_title",
+                                         default="The title of the navigation tree."),
+                           default="",
                            required=False)
 
-    count = schema.Int(title=_(u'Number of items to display'),
-                       description=_(u'How many items to list.'),
+    count = schema.Int(title=_('Number of items to display'),
+                       description=_('How many items to list.'),
                        required=False,
                        default=4)
 
@@ -42,7 +42,7 @@ class Assignment(base.Assignment):
         self.name = name
         self.count = count
 
-    title = _(u'flashes_informativos', default=u'Flashes Informativos')
+    title = _('flashes_informativos', default='Flashes Informativos')
 
 
 class Renderer(base.Renderer):
@@ -151,8 +151,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IFlashesInformativosPortlet
-    label = _(u"Add Flashes Informativos Portlet")
-    description = _(u"This portlet displays Flashes Informativos.")
+    label = _("Add Flashes Informativos Portlet")
+    description = _("This portlet displays Flashes Informativos.")
 
     def create(self, data):
         return Assignment(name=data.get('name', ""), count=data.get('count', 5))
@@ -160,5 +160,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IFlashesInformativosPortlet
-    label = _(u"Edit Flashes Informativos portlet")
-    description = _(u"This portlet displays Flashes Informativos.")
+    label = _("Edit Flashes Informativos portlet")
+    description = _("This portlet displays Flashes Informativos.")

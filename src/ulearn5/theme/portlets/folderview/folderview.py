@@ -17,8 +17,8 @@ class IFolderViewPortlet(IPortletDataProvider):
     """ A portlet which renders the folder view """
 
     name = schema.TextLine(
-        title=_(u'Title'),
-        description=_(u'Title of the portlet.'),
+        title=_('Title'),
+        description=_('Title of the portlet.'),
         required=False
     )
 
@@ -31,7 +31,7 @@ class IFolderViewPortlet(IPortletDataProvider):
         }
     )
     folder = schema.Choice(
-        title=u"Carpeta",
+        title="Carpeta",
         source=CatalogSource(is_folderish=True),
         required=True,
     )
@@ -48,7 +48,7 @@ class Assignment(base.Assignment):
     def title(self):
         if self.name:
             return self.name
-        return _(u'Folder View Portlet')
+        return _('Folder View Portlet')
 
 
 
@@ -118,8 +118,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IFolderViewPortlet
-    label = _(u"Add Folder view Portlet")
-    description = _(u"This portlet displays a folder view.")
+    label = _("Add Folder view Portlet")
+    description = _("This portlet displays a folder view.")
 
     def create(self, data):
         return Assignment(name=data.get('name', ""),
@@ -128,5 +128,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IFolderViewPortlet
-    label = _(u"Edit Folder view Portlet")
-    description = _(u"This portlet displays a folder view.")
+    label = _("Edit Folder view Portlet")
+    description = _("This portlet displays a folder view.")

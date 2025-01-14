@@ -52,9 +52,9 @@ class TitleViewlet(TitleViewlet, viewletBase):
     grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
-        context_state = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
+        context_state = getMultiAdapter((self.context, self.request), name='plone_context_state')
         page_title = escape(safe_unicode(context_state.object_title()))
-        portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
+        portal_state = getMultiAdapter((self.context, self.request), name='plone_portal_state')
         portal_title = escape(safe_unicode(portal_state.navigation_root_title()))
 
         current = api.user.get_current()
@@ -68,9 +68,9 @@ class TitleViewlet(TitleViewlet, viewletBase):
             marcaUlearn = titleSite
 
         if page_title == portal_title or self.context.id == 'front-page':
-            self.site_title = u"%s" % (marcaUlearn)
+            self.site_title = "%s" % (marcaUlearn)
         else:
-            self.site_title = u"%s - %s" % (page_title, marcaUlearn)
+            self.site_title = "%s - %s" % (page_title, marcaUlearn)
 
 
 class viewletHeaderUlearn(viewletBase):
@@ -276,10 +276,10 @@ class viewletHeaderUlearn(viewletBase):
                 dades = self._createLinksMenu(user_language)
                 record = Record()
                 record.attrs['id_menusoup'] = user_language
-                record.attrs['dades'] = dades.values()
+                record.attrs['dades'] = list(dades.values())
                 soup_menu.add(record)
                 soup_menu.reindex()
-                result = dades.values()
+                result = list(dades.values())
             else:
                 result = exist[0].attrs['dades']
 

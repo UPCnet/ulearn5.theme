@@ -20,7 +20,7 @@ class IStatsPortlet(IPortletDataProvider):
 
 class Assignment(base.Assignment):
     implements(IStatsPortlet)
-    title = _(u'stats', default=u'Stats')
+    title = _('stats', default='Stats')
 
 
 class Renderer(base.Renderer):
@@ -70,7 +70,7 @@ class Renderer(base.Renderer):
         if literal == 'thinnkers':
             return 'thinnkins'
         else:
-            return _(u'entrades')
+            return _('entrades')
 
     def show_stats(self):
         """ The base.webmaster can see stats.

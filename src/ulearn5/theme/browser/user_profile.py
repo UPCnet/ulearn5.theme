@@ -76,19 +76,19 @@ class userProfile(BrowserView):
 
         info = {
             'profile': {
-                'title': _(u'Complete the profile'),
+                'title': _('Complete the profile'),
                 'num': 0,
             },
             'winwin1': {
-                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin1})),
+                'title': self.context.translate(_('badge_title', default='Contribute ${num} posts', mapping={'num': settings.threshold_winwin1})),
                 'num': settings.threshold_winwin1,
             },
             'winwin2': {
-                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin2})),
+                'title': self.context.translate(_('badge_title', default='Contribute ${num} posts', mapping={'num': settings.threshold_winwin2})),
                 'num': settings.threshold_winwin2,
             },
             'winwin3': {
-                'title': self.context.translate(_(u'badge_title', default=u'Contribute ${num} posts', mapping={u'num': settings.threshold_winwin3})),
+                'title': self.context.translate(_('badge_title', default='Contribute ${num} posts', mapping={'num': settings.threshold_winwin3})),
                 'num': settings.threshold_winwin3,
             }
         }

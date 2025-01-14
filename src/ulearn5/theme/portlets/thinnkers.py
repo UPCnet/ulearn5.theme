@@ -23,7 +23,7 @@ class IThinnkersPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IThinnkersPortlet)
 
-    title = _(u'thinnkers portlet')
+    title = _('thinnkers portlet')
 
 
 class Renderer(base.Renderer):

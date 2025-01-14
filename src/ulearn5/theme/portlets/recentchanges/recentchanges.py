@@ -22,10 +22,10 @@ logger = logging.getLogger("Plone")
 
 class IRecentChangesPortlet(IPortletDataProvider):
 
-    name = schema.TextLine(title=_PMF(u"Title"),
+    name = schema.TextLine(title=_PMF("Title"),
                            required=True)
 
-    count = schema.Int(title=_PMF(u'Number of items to display'),
+    count = schema.Int(title=_PMF('Number of items to display'),
                        required=True,
                        default=6)
 
@@ -42,7 +42,7 @@ class Assignment(base.Assignment):
         """ Display the name in portlet mngmt interface """
         if self.name:
             return self.name
-        return _(u'Recent changes')
+        return _('Recent changes')
 
 
 class Renderer(base.Renderer):
@@ -135,8 +135,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IRecentChangesPortlet
-    label = _(u"Add Recent Changes Portlet")
-    description = _(u"This portlet displays recently modified content.")
+    label = _("Add Recent Changes Portlet")
+    description = _("This portlet displays recently modified content.")
 
     def create(self, data):
         return Assignment(name=data.get('name', ""), count=data.get('count', 5))
@@ -144,5 +144,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IRecentChangesPortlet
-    label = _(u"Edit Recent Changes Portlet")
-    description = _(u"This portlet displays recently modified content.")
+    label = _("Edit Recent Changes Portlet")
+    description = _("This portlet displays recently modified content.")

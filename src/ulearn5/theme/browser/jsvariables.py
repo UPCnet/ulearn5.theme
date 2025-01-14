@@ -15,17 +15,17 @@ var mark_special_links = '%(mark_links)s';
 var ajax_noresponse_message = '%(ajax_noresponse)s';
 """
 
-FORM_MODIFIED = _(u'text_form_modified_message',
-                  default=u'Your form has not been saved. All changes you '
-                          u'have made will be lost.')
+FORM_MODIFIED = _('text_form_modified_message',
+                  default='Your form has not been saved. All changes you '
+                          'have made will be lost.')
 
-FORM_RESUBMIT = _(u'text_form_resubmit_message',
-                  default=u'You already clicked the submit button. Do you '
-                          u'really want to submit this form again?')
+FORM_RESUBMIT = _('text_form_resubmit_message',
+                  default='You already clicked the submit button. Do you '
+                          'really want to submit this form again?')
 
-AJAX_NORESPONSE = _(u'text_ajax_noresponse_message',
-                    default=u'No response from server. Please try again '
-                            u'later.')
+AJAX_NORESPONSE = _('text_ajax_noresponse_message',
+                    default='No response from server. Please try again '
+                            'later.')
 
 
 class JSVariables(BrowserView):

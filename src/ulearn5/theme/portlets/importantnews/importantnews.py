@@ -21,13 +21,13 @@ from ulearn5.core import _
 
 class IImportantNewsPortlet(IPortletDataProvider):
 
-    count = schema.Int(title=_(u'Number of items to display'),
-                       description=_(u'How many items to list.'),
+    count = schema.Int(title=_('Number of items to display'),
+                       description=_('How many items to list.'),
                        required=True,
                        default=4)
 
-    state = schema.Tuple(title=_(u"Workflow state"),
-                         description=_(u"Items in which workflow state to show."),
+    state = schema.Tuple(title=_("Workflow state"),
+                         description=_("Items in which workflow state to show."),
                          default=('published', 'intranet'),
                          required=True,
                          value_type=schema.Choice(
@@ -42,7 +42,7 @@ class Assignment(base.Assignment):
         self.count = count
         self.state = state
 
-    title = _(u'importantnews', default=u'Important News')
+    title = _('importantnews', default='Important News')
 
 
 class Renderer(base.Renderer):
@@ -146,8 +146,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IImportantNewsPortlet
-    label = _(u"Add News Portlet")
-    description = _(u"This portlet displays recent News Items.")
+    label = _("Add News Portlet")
+    description = _("This portlet displays recent News Items.")
 
     def create(self, data):
         return Assignment(count=data.get('count', 8),
@@ -156,5 +156,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IImportantNewsPortlet
-    label = _(u"Edit News Portlet")
-    description = _(u"This portlet displays recent News Items.")
+    label = _("Edit News Portlet")
+    description = _("This portlet displays recent News Items.")

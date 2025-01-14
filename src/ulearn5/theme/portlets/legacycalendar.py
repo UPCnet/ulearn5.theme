@@ -3,7 +3,7 @@ from Acquisition import aq_inner
 from DateTime import DateTime
 from Products.CMFPlone.utils import safe_unicode
 from Products.PythonScripts.standard import url_quote_plus
-from StringIO import StringIO
+from io import StringIO
 
 from plone import api
 from plone.app.portlets import PloneMessageFactory as _
@@ -29,7 +29,7 @@ class ICalendarPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(ICalendarPortlet)
 
-    title = _(u'Calendar')
+    title = _('Calendar')
 
 
 def _render_cachekey(fun, self):
@@ -42,13 +42,13 @@ def _render_cachekey(fun, self):
     else:
         portal_state = getMultiAdapter((context, self.request), name='plone_portal_state')
         key = StringIO()
-        print >> key, portal_state.navigation_root_url()
-        print >> key, cache.get_language(context, self.request)
-        print >> key, self.calendar.getFirstWeekDay()
+        print(portal_state.navigation_root_url(), file=key)
+        print(cache.get_language(context, self.request), file=key)
+        print(self.calendar.getFirstWeekDay(), file=key)
 
         year, month = self.getYearAndMonthToDisplay()
-        print >> key, year
-        print >> key, month
+        print(year, file=key)
+        print(month, file=key)
 
         navigation_root_path = portal_state.navigation_root_path()
         start = DateTime('%s/%s/1' % (year, month))
@@ -141,7 +141,7 @@ class Renderer(base.Renderer):
     def getEventString(self, event):
         start = event['start'] and ':'.join(event['start'].split(':')[:2]) or ''
         end = event['end'] and ':'.join(event['end'].split(':')[:2]) or ''
-        title = safe_unicode(event['title']) or u'event'
+        title = safe_unicode(event['title']) or 'event'
 
         if start and end:
             eventstring = "%s-%s %s" % (start, end, title)
@@ -225,10 +225,10 @@ class Renderer(base.Renderer):
 
     def getReviewStateString(self):
         states = self.calendar.getCalendarStates()
-        return ''.join(map(lambda x: 'review_state=%s&amp;' % self.url_quote_plus(x), states))
+        return ''.join(['review_state=%s&amp;' % self.url_quote_plus(x) for x in states])
     def getEventTypes(self):
         types = self.calendar.getCalendarTypes()
-        return ''.join(map(lambda x: 'Type=%s&amp;' % self.url_quote_plus(x), types))
+        return ''.join(['Type=%s&amp;' % self.url_quote_plus(x) for x in types])
     def getQueryString(self):
         request = self.request
         query_string = request.get('orig_query',

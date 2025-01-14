@@ -17,7 +17,7 @@ class IAngularRouteViewPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IAngularRouteViewPortlet)
 
-    title = _(u'angularrouteview', default=u'AngularRouteView')
+    title = _('angularrouteview', default='AngularRouteView')
 
 
 class Renderer(base.Renderer):

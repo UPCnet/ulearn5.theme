@@ -17,9 +17,9 @@ from ulearn5.core import _
 
 class IQuicklinksPortlet(IPortletDataProvider):
 
-    folder = schema.Choice(title=_PMF(u"label_navigation_root_path", default=u"Root node"),
-                           description=_PMF(u'help_navigation_root',
-                           default=u"You may search for and choose a folder to act as the root of the navigation tree. Leave blank to use the Plone site root."),
+    folder = schema.Choice(title=_PMF("label_navigation_root_path", default="Root node"),
+                           description=_PMF('help_navigation_root',
+                           default="You may search for and choose a folder to act as the root of the navigation tree. Leave blank to use the Plone site root."),
                            required=True,
                            source=CatalogSource(is_folderish=True))
 
@@ -33,7 +33,7 @@ class Assignment(base.Assignment):
     @property
     def title(self):
         """ Display the name in portlet mngmt interface """
-        return _(u'Quicklinks')
+        return _('Quicklinks')
 
 
 class Renderer(base.Renderer):
@@ -118,8 +118,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IQuicklinksPortlet
-    label = _(u"Add Quicklinks Portlet")
-    description = _(u"This portlet displays quicklinks.")
+    label = _("Add Quicklinks Portlet")
+    description = _("This portlet displays quicklinks.")
 
     def create(self, data):
         return Assignment(folder=data.get('folder', None))
@@ -127,5 +127,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IQuicklinksPortlet
-    label = _(u"Edit Quicklinks Portlet")
-    description = _(u"This portlet displays quicklinks.")
+    label = _("Edit Quicklinks Portlet")
+    description = _("This portlet displays quicklinks.")

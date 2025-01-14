@@ -19,29 +19,29 @@ class IMySubjectsPortlet(IPortletDataProvider):
     """ A portlet which can show actived.
     """
 
-    wsUrl = schema.TextLine(title=_(u"label_wsurl", default=u"Webservice Url"),
-                            description=_(u"help_wsurl",
-                                          default=u"Url on moodle."),
-                            default=u"",
+    wsUrl = schema.TextLine(title=_("label_wsurl", default="Webservice Url"),
+                            description=_("help_wsurl",
+                                          default="Url on moodle."),
+                            default="",
                             required=True)
 
-    wsFunction = schema.TextLine(title=_(u"label_wsfunction", default=u"Webservice Function"),
-                                 description=_(u"help_wsfunction",
-                                               default=u"Function on moodle."),
-                                 default=u"",
+    wsFunction = schema.TextLine(title=_("label_wsfunction", default="Webservice Function"),
+                                 description=_("help_wsfunction",
+                                               default="Function on moodle."),
+                                 default="",
                                  required=True)
 
-    wsToken = schema.TextLine(title=_(u"label_wstoken", default=u"Webservice Token"),
-                              description=_(u"help_wstoken",
-                                            default=u"Token to connect to moodle."),
-                              default=u"",
+    wsToken = schema.TextLine(title=_("label_wstoken", default="Webservice Token"),
+                              description=_("help_wstoken",
+                                            default="Token to connect to moodle."),
+                              default="",
                               required=True)
 
 
 class Assignment(base.Assignment):
     implements(IMySubjectsPortlet)
 
-    title = _(u'mysubjects', default=u'mysubjects')
+    title = _('mysubjects', default='mysubjects')
 
     def __init__(self, wsUrl="", wsFunction="", wsToken=""):
         self.wsUrl = wsUrl
@@ -87,8 +87,8 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     schema = IMySubjectsPortlet
-    label = _(u"Add My Subjects Portlet")
-    description = _(u"This portlet displays my subjects on moodle.")
+    label = _("Add My Subjects Portlet")
+    description = _("This portlet displays my subjects on moodle.")
 
     def create(self, data):
         return Assignment(wsUrl=data.get('wsUrl', ''),
@@ -98,5 +98,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     schema = IMySubjectsPortlet
-    label = _(u"Edit My Subjects Portlet")
-    description = _(u"This portlet displays my subjects on moodle.")
+    label = _("Edit My Subjects Portlet")
+    description = _("This portlet displays my subjects on moodle.")

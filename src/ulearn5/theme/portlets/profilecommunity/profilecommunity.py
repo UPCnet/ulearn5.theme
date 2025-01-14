@@ -23,7 +23,7 @@ class IProfileCommunityPortlet(IPortletDataProvider):
 class Assignment(base.Assignment):
     implements(IProfileCommunityPortlet)
 
-    title = _(u'profilecommunity', default=u'Profile Community')
+    title = _('profilecommunity', default='Profile Community')
 
 
 class Renderer(base.Renderer):

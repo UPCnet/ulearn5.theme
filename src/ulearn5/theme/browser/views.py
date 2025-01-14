@@ -213,9 +213,9 @@ class baseCommunities(grok.View):
 
     def get_all_communities(self):
         pc = api.portal.get_tool('portal_catalog')
-        r_results_organizative = pc.searchResults(portal_type="ulearn.community", community_type=u"Organizative", sort_on="sortable_title")
-        r_results_closed= pc.searchResults(portal_type="ulearn.community", community_type=u"Closed", sort_on="sortable_title")
-        ur_results_open = pc.unrestrictedSearchResults(portal_type="ulearn.community", community_type=u"Open", sort_on="sortable_title")
+        r_results_organizative = pc.searchResults(portal_type="ulearn.community", community_type="Organizative", sort_on="sortable_title")
+        r_results_closed= pc.searchResults(portal_type="ulearn.community", community_type="Closed", sort_on="sortable_title")
+        ur_results_open = pc.unrestrictedSearchResults(portal_type="ulearn.community", community_type="Open", sort_on="sortable_title")
         return r_results_organizative + r_results_closed + ur_results_open
 
     def get_authenticator(self):
@@ -447,7 +447,7 @@ class TypeAheadSearch(grok.View):
                 s = s.replace(char, quotestring(char))
             return s
 
-        multispace = u'\u3000'
+        multispace = '\u3000'
         for char in ('?', '-', '+', '*', multispace):
             q = q.replace(char, ' ')
         r = q.split()
@@ -564,7 +564,7 @@ class FilteredContentsSearchView(grok.View):
             return self.getContent()
 
         if not self.query == '':
-            multispace = u'\u3000'
+            multispace = '\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -616,7 +616,7 @@ class FilteredContentsSearchView(grok.View):
             return s
 
         if not self.query == '':
-            multispace = u'\u3000'
+            multispace = '\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -749,7 +749,7 @@ class AllTags(grok.View):
         subjects = []
         pc = api.portal.get_tool('portal_catalog')
         subjs_index = pc._catalog.indexes['Subject']
-        [subjects.append(index[0]) for index in subjs_index.items()]
+        [subjects.append(index[0]) for index in list(subjs_index.items())]
 
         portal = getSite()
         current_user = api.user.get_current()
@@ -829,7 +829,7 @@ class SearchFilteredNews(grok.View):
         path = "/".join(path)
         self.query = self.request.form.get('q', '')
         if not self.query == '':
-            multispace = u'\u3000'
+            multispace = '\u3000'
             for char in ('?', '-', '+', '*', multispace):
                 self.query = self.query.replace(char, ' ')
 
@@ -1276,11 +1276,11 @@ class ExportUsersCommunities(grok.View):
         try:
             output_file = StringIO()
             # Write the BOM of the text stream to make its charset explicit
-            output_file.write(u'\ufeff'.encode('utf8'))
+            output_file.write('\ufeff'.encode('utf8'))
             self.write_data(output_file)
 
             portal = getSite()
-            exports = createOrGetObject(portal['gestion'], 'exports', u'Exports', u'privateFolder')
+            exports = createOrGetObject(portal['gestion'], 'exports', 'Exports', 'privateFolder')
             exports.exclude_from_nav = False
             exports.setLayout('folder_listing')
             behavior = ISelectableConstrainTypes(exports)
@@ -1289,7 +1289,7 @@ class ExportUsersCommunities(grok.View):
             behavior.setImmediatelyAddableTypes(('File',))
             exports._Delete_objects_Permission = ('Site Administrator','Manager',)
 
-            file_filename = u'export_users_communities.csv'
+            file_filename = 'export_users_communities.csv'
             file = NamedBlobFile(data=output_file.getvalue(), contentType='text/csv', filename=file_filename)
 
             if file_filename not in exports:
