@@ -1,38 +1,35 @@
 <tal:block tal:condition="not:view/isAnon">
-<div id="box_banners" i18n:domain="ulearn.enginyersbcn"
-     tal:define="banners view/getBanners" tal:condition="banners">
-    <tal:banners tal:repeat="banner banners">
-        <div class="banner">
-            <tal:block tal:condition="banner/image">
-                <a tal:condition="banner/open_external" target="_blank"
-                   tal:attributes="title banner/title;
+    <div id="box_banners" i18n:domain="ulearn.enginyersbcn" tal:define="banners view/getBanners"
+        tal:condition="banners">
+        <tal:banners tal:repeat="banner banners">
+            <div class="banner">
+                <tal:block tal:condition="banner/image">
+                    <a tal:condition="banner/open_external" target="_blank" tal:attributes="title banner/title;
                                    href banner/url">
-                    <img class="image-inline"
-                         tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
-                </a>
-                <a tal:condition="not:banner/open_external"
-                   tal:attributes="title banner/title;
+                        <img class="image-inline"
+                            tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
+                    </a>
+                    <a tal:condition="not:banner/open_external" tal:attributes="title banner/title;
                                    href banner/url">
-                    <img class="image-inline"
-                         tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
-                </a>
-            </tal:block>
+                        <img class="image-inline"
+                            tal:attributes="src string:${banner/absolute_url}/@@images/image/preview" />
+                    </a>
+                </tal:block>
 
-            <tal:block tal:condition="not: banner/image">
-                <div class="defaultBanner">
-                    <a tal:condition="banner/open_external" tal:content="banner/title" target="_blank"
-                       tal:attributes="title banner/title;
+                <tal:block tal:condition="not: banner/image">
+                    <div class="defaultBanner">
+                        <a tal:condition="banner/open_external" tal:content="banner/title" target="_blank"
+                            tal:attributes="title banner/title;
                                        href banner/url">
-                        Link
-                    </a>
-                    <a tal:condition="not:banner/open_external" tal:content="banner/title"
-                       tal:attributes="title banner/title;
+                            Link
+                        </a>
+                        <a tal:condition="not:banner/open_external" tal:content="banner/title" tal:attributes="title banner/title;
                                        href banner/url">
-                        Link
-                    </a>
-                </div>
-            </tal:block>
-        </div>
-    </tal:banners>
-</div>
+                            Link
+                        </a>
+                    </div>
+                </tal:block>
+            </div>
+        </tal:banners>
+    </div>
 </tal:block>
