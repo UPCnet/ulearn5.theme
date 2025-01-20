@@ -1,9 +1,6 @@
 $(document).ready(function (event) {
-
   // Desplegable asignaturas
-  $('.subject').click(function() {
-      $(this).toggleClass("subjectInfo");
+  $(".subject").click(function () {
+    $(this).toggleClass("subjectInfo");
   });
-
-
 });

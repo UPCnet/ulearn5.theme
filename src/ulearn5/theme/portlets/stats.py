@@ -7,7 +7,7 @@ from hashlib import sha1
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-from zope.interface import implements
+from zope.interface import implementer
 from zope.security import checkPermission
 
 from ulearn5.core import _
@@ -18,8 +18,8 @@ class IStatsPortlet(IPortletDataProvider):
     """ A portlet which can render the community stats information """
 
 
+@implementer(IStatsPortlet)
 class Assignment(base.Assignment):
-    implements(IStatsPortlet)
     title = _('stats', default='Stats')
 
 

@@ -8,28 +8,26 @@ from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from six.moves import range
 
 
 class IFolderViewPortlet(IPortletDataProvider):
-    """ A portlet which renders the folder view """
+    """A portlet which renders the folder view"""
 
     name = schema.TextLine(
-        title=_('Title'),
-        description=_('Title of the portlet.'),
-        required=False
+        title=_("Title"), description=_("Title of the portlet."), required=False
     )
 
     form.widget(
-        'folder',
+        "folder",
         RelatedItemsFieldWidget,
         pattern_options={
             "rootPath": "/",
             "mode": "auto",
-        }
+        },
     )
     folder = schema.Choice(
         title="Carpeta",
@@ -38,8 +36,8 @@ class IFolderViewPortlet(IPortletDataProvider):
     )
 
 
+@implementer(IFolderViewPortlet)
 class Assignment(base.Assignment):
-    implements(IFolderViewPortlet)
 
     def __init__(self, name="", folder=None):
         self.name = name
@@ -49,13 +47,12 @@ class Assignment(base.Assignment):
     def title(self):
         if self.name:
             return self.name
-        return _('Folder View Portlet')
-
+        return _("Folder View Portlet")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('folderview.pt')
+    render = ViewPageTemplateFile("folderview.pt")
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -74,27 +71,35 @@ class Renderer(base.Renderer):
         nElements = 2
         llistaElements = []
 
-        catalog = api.portal.get_tool(name='portal_catalog')
+        catalog = api.portal.get_tool(name="portal_catalog")
         container = catalog.searchResults(UID=self.data.folder)
 
         if container:
             path = container[0].getObject().getPhysicalPath()
             path = "/".join(path)
-            items = catalog.searchResults(path={'query': path, 'depth': 1},
-                                        sort_on="getObjPositionInParent")
+            items = catalog.searchResults(
+                path={"query": path, "depth": 1}, sort_on="getObjPositionInParent"
+            )
 
-
-            all_items += [{'item_title': item.Title,
-                        'item_desc': item.Description[:110],
-                        'item_type': item.portal_type,
-                        'item_url': item.getURL(),
-                        'item_path': item.getPath(),
-                        'item_state': item.review_state,
-                        } for item in items if item.exclude_from_nav is False]
+            all_items += [
+                {
+                    "item_title": item.Title,
+                    "item_desc": item.Description[:110],
+                    "item_type": item.portal_type,
+                    "item_url": item.getURL(),
+                    "item_path": item.getPath(),
+                    "item_state": item.review_state,
+                }
+                for item in items
+                if item.exclude_from_nav is False
+            ]
 
         if len(all_items) > 0:
             # Retorna una llista amb els elements en blocs de 2 elements
-            llistaElements = [all_items[i:i + nElements] for i in range(0, len(all_items), nElements)]
+            llistaElements = [
+                all_items[i : i + nElements]
+                for i in range(0, len(all_items), nElements)
+            ]
         return llistaElements
 
     def getBlocs(self):
@@ -103,17 +108,23 @@ class Renderer(base.Renderer):
 
     def getSubItemPropierties(self, item_path):
         all_items = []
-        catalog = api.portal.get_tool(name='portal_catalog')
+        catalog = api.portal.get_tool(name="portal_catalog")
         path = item_path
 
-        items = catalog.searchResults(path={'query': path, 'depth': 1},
-                                      sort_on="getObjPositionInParent")
-        all_items += [{'item_title': item2.Title,
-                       'item_desc': item2.Description[:120],
-                       'item_type': item2.portal_type,
-                       'item_url': item2.getURL(),
-                       'item_state': item2.review_state
-                       } for item2 in items if item2.exclude_from_nav is False]
+        items = catalog.searchResults(
+            path={"query": path, "depth": 1}, sort_on="getObjPositionInParent"
+        )
+        all_items += [
+            {
+                "item_title": item2.Title,
+                "item_desc": item2.Description[:120],
+                "item_type": item2.portal_type,
+                "item_url": item2.getURL(),
+                "item_state": item2.review_state,
+            }
+            for item2 in items
+            if item2.exclude_from_nav is False
+        ]
         return all_items
 
 
@@ -123,8 +134,7 @@ class AddForm(base.AddForm):
     description = _("This portlet displays a folder view.")
 
     def create(self, data):
-        return Assignment(name=data.get('name', ""),
-                          folder=data.get('folder', None))
+        return Assignment(name=data.get("name", ""), folder=data.get("folder", None))
 
 
 class EditForm(base.EditForm):

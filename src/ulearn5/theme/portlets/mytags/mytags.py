@@ -10,7 +10,7 @@ from repoze.catalog.query import Eq
 from souper.soup import get_soup
 from zope.component import queryUtility
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
@@ -21,8 +21,8 @@ class IMyTagsPortlet(IPortletDataProvider):
     """
 
 
+@implementer(IMyTagsPortlet)
 class Assignment(base.Assignment):
-    implements(IMyTagsPortlet)
 
     title = _('mytags', default='My Tags')
 

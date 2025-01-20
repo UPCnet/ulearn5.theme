@@ -14,7 +14,7 @@ from plone.memoize.compress import xhtml_compress
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
-from zope.interface import implements
+from zope.interface import implementer
 
 from time import localtime
 
@@ -26,9 +26,8 @@ class ICalendarPortlet(IPortletDataProvider):
     """
 
 
+@implementer(ICalendarPortlet)
 class Assignment(base.Assignment):
-    implements(ICalendarPortlet)
-
     title = _('Calendar')
 
 
