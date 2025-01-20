@@ -1,3 +1,2 @@
- <div tal:condition="viewlet/render_viewlet"
-      id="home-angular-route-view" ui-view >
- </div>
+<div tal:condition="viewlet/render_viewlet" id="home-angular-route-view" ui-view>
+</div>

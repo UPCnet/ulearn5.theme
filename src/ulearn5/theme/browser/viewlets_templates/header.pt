@@ -1,6 +1,5 @@
 <div id="header-menu" class="container">
-  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn"
-          tal:define="customized_header viewlet/get_customized_header;
+  <header role="banner" aria-labelledby="main-header" class="main-banner" i18n:domain="ulearn" tal:define="customized_header viewlet/get_customized_header;
                       portal_url viewlet/portal_url">
 
     <a tal:attributes="href string:${portal_url}" target="_self" rel="home" accesskey="1">
@@ -18,10 +17,12 @@
     </a>
 
     <div class="button-menu-mobile hidden-md hidden-lg">
-      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation" class="icona-upc">menu</span></a>
+      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation"
+          class="icona-upc">menu</span></a>
     </div>
     <div class="button-menu-mobile--close hidden-md hidden-lg">
-      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation" class="icona-upc">close</span></a>
+      <a href="#" role="button"><span i18n:translate="">Menu</span><span role="presentation"
+          class="icona-upc">close</span></a>
     </div>
 
     <nav role="navigation" class="global-navigation">
@@ -59,7 +60,8 @@
         <block metal:use-macro="context/macros-comunitats-header/paysheet"></block>
 
         <li tal:condition="viewlet/canManage" role="presentation" class="dropdown ulearn-eines-ql">
-          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/gestion" aria-expanded="false" aria-haspopup="true" role="menuitem">
+          <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/gestion"
+            aria-expanded="false" aria-haspopup="true" role="menuitem">
             <tal:management i18n:translate="menu-gestion">Management</tal:management>
             <span aria-hidden="true" class="caret"></span>
           </a>
@@ -68,8 +70,10 @@
           </ul>
         </li>
 
-        <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation" class="dropdown ulearn-eines-ql">
-          <a href="#" id="ql" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="menuitem" aria-haspopup="true">
+        <li tal:define="dades viewlet/quickLinks" tal:condition="dades/quickLinksShow" role="presentation"
+          class="dropdown ulearn-eines-ql">
+          <a href="#" id="ql" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="menuitem"
+            aria-haspopup="true">
             <i tal:attributes="class string:fa ${dades/quickLinksIcon}"></i>
             <tal:quicklinks tal:content="dades/quickLinksLiteral">Quick Links</tal:quicklinks>
             <span aria-hidden="true" class="caret"></span>
@@ -92,20 +96,26 @@
           </ul>
         </li>
 
-        <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte" style="outline-style: none;">
-          <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei" target="_blank">
+        <li tal:condition="viewlet/is_info_servei_activate" role="presentation" class="upc-eines-contacte"
+          style="outline-style: none;">
+          <a tal:define="servei viewlet/info_servei;" role="menuitem" accesskey="9" tal:attributes="href servei"
+            target="_blank">
             <i class="fa fa-info-circle"></i>
             <tal:block i18n:translate="info">Info</tal:block>
           </a>
         </li>
 
         <li role="presentation" class="upc-eines-cerca" style="outline-style: none;">
-          <form id="searchGadget_form" action="${portal_url}/@@search" role="search" data-pat-livesearch="ajaxUrl:${portal_url}/@@ajax-search" class="pat-livesearch">
+          <form id="searchGadget_form" action="${portal_url}/@@search" role="search"
+            data-pat-livesearch="ajaxUrl:${portal_url}/@@ajax-search" class="pat-livesearch">
             <legend class="sr-only" i18n:translate="">Buscar</legend>
             <label for="searchGadget" class="sr-only" i18n:translate="">Buscar</label>
             <fieldset role="search">
-              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText" i18n:attributes="placeholder search_site" class="searchField" tal:attributes="value request/input-cerca|nothing">
-              <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
+              <input id="input-cerca" accesskey="4" size="18" type="text" name="SearchableText"
+                i18n:attributes="placeholder search_site" class="searchField"
+                tal:attributes="value request/input-cerca|nothing">
+              <button type="submit" role="button" aria-label="Cerca" aria-hidden="true" data-toggle="tooltip"
+                data-placement="bottom" i18n:attributes="title Cerca" title="Cerca" class="icona-upc">magnifier</button>
             </fieldset>
           </form>
         </li>
