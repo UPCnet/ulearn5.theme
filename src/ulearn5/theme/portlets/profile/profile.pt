@@ -13,22 +13,21 @@
                 </p>
             </div>
             <div class="row">
-                <div class="col-md-12"
-                    tal:define="image nocall:community/image | nothing">
+                <div class="col-md-12" tal:define="image nocall:community/image | nothing">
                     <img tal:attributes="src string:${community/absolute_url}/@@images/image/preview"
-                        tal:condition="nocall:image"/>
+                        tal:condition="nocall:image" />
                     <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/avatar_default.png"
-                        tal:condition="nocall:not:image"/>
+                        tal:condition="nocall:not:image" />
                 </div>
             </div>
             <div tal:define="types view/get_addable_types;
                              documentPage python:view.isCurrentPage('documents');
                              eventsPage python:view.isCurrentPage('events');
-                             newsPage python:view.isCurrentPage('news');"
-                 class="btn-group contentaddtoolbar">
+                             newsPage python:view.isCurrentPage('news');" class="btn-group contentaddtoolbar">
                 <tal:docs condition="documentPage" repeat="type types">
                     <tal:con tal:define="type_id type/id">
-                        <tal:cond tal:condition="python: type_id in ('Folder', 'Document', 'File' , 'Image', 'Link', 'Etherpad')">
+                        <tal:cond
+                            tal:condition="python: type_id in ('Folder', 'Document', 'File' , 'Image', 'Link', 'Etherpad')">
                             <a class="btn btn-default" rel="tooltip" data-placement="bottom"
                                 tal:attributes="href type/action; title type/description">
                                 <i tal:attributes="class string:icon-${type/extra/id}"></i>
@@ -57,7 +56,8 @@
                     </tal:con>
                 </tal:news>
             </div>
-            <div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h3 id="editModalLabel" i18n:translate="editcommunity">Edit this community</h3>
@@ -66,12 +66,10 @@
                     <p></p>
                 </div>
             </div>
-            <div class="btn-group contentaddtoolbar"
-                tal:condition="view/showEditCommunity"
+            <div class="btn-group contentaddtoolbar" tal:condition="view/showEditCommunity"
                 ng-controller="profilePortlet as portlet"
                 tal:define="community_type python:view.get_community_type(community)">
-                <a class="btn btn-default"
-                    tal:attributes="href string:${community/absolute_url}/edit;"
+                <a class="btn btn-default" tal:attributes="href string:${community/absolute_url}/edit;"
                     i18n:attributes="title btnEditCommunity" title="Edit community">
                     <i class="fa fa-pencil"></i>
                 </a>
@@ -82,12 +80,11 @@
                 <tal:block tal:condition="view/has_webmaster_role">
                     <a class="btn btn-default" ng-dialog="++app++ulearn/portlets/change_community_type.html"
                         ng-dialog-class="ngdialog-theme-default changeCommunityType"
-                        ng-dialog-controller="profilePortletModal"
-                        ng-dialog-cache="false"
+                        ng-dialog-controller="profilePortletModal" ng-dialog-cache="false"
                         i18n:attributes="title btnChangeTypeCommunity" title="Change community type"
                         tal:attributes="ng-dialog-data string:{&quot;community_type&quot;: &quot;${community_type}&quot;, &quot;community_hash&quot;: &quot;${community_hash}&quot;}"
                         href="">
-                        <i class="fa fa-exchange" ></i>
+                        <i class="fa fa-exchange"></i>
                     </a>
                 </tal:block>
             </div>
@@ -95,8 +92,7 @@
     </tal:iscommunity>
     <tal:isprofile condition="not:is_community" tal:define="isAdmin view/is_admin_user">
         <tal:condition condition="view/userCheckDisplay">
-            <div id="box_perfil" class="ulearnbox"
-                tal:define="username view/username">
+            <div id="box_perfil" class="ulearnbox" tal:define="username view/username">
                 <div class="osomcorner-wrapper">
                     <div class="osomcorner"></div>
                 </div>
@@ -113,39 +109,39 @@
                 <div class="row">
                     <div class="photo col-md-12" tal:define="ulearn_utils context/@@ulearn.utils">
                         <a tal:attributes="href string:${view/portal_url}/@@personal-information">
-                        <img tal:condition="isAdmin" tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/defaultUser.png" alt="admin user" style="width:202px">
-                        <img tal:condition="not:isAdmin" tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large" style="width:202px">
+                            <img tal:condition="isAdmin"
+                                tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/defaultUser.png"
+                                alt="admin user" style="width:202px">
+                            <img tal:condition="not:isAdmin"
+                                tal:attributes="src string:${ulearn_utils/url_max_server}/people/${username}/avatar/large"
+                                style="width:202px">
                         </a>
                     </div>
                 </div>
                 <div class="row" tal:condition="not:isAdmin">
                     <div class="badges col-md-12" tal:define="badges_info view/get_badges_info">
-                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png"
-                            tal:attributes="enabled view/has_complete_profile;
+                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge1.png" tal:attributes="enabled view/has_complete_profile;
                                             title badges_info/profile/title;
                                             alt badges_info/profile/title">
                             <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge1.png;
                                                  title badges_info/profile/title;
                                                  alt badges_info/profile/title">
                         </badge>
-                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png"
-                               tal:attributes="threshold badges_info/winwin1/num;
+                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge2.png" tal:attributes="threshold badges_info/winwin1/num;
                                                title badges_info/winwin1/title;
                                                alt badges_info/winwin1/title">
                             <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge2.png;
                                                  title badges_info/winwin1/title;
                                                  alt badges_info/winwin1/title">
                         </badge>
-                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png"
-                               tal:attributes="threshold badges_info/winwin2/num;
+                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge3.png" tal:attributes="threshold badges_info/winwin2/num;
                                                title badges_info/winwin2/title;
                                                alt badges_info/winwin2/title">
                             <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge3.png;
                                                  title badges_info/winwin2/title;
                                                  alt badges_info/winwin2/title">
                         </badge>
-                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png"
-                               tal:attributes="threshold badges_info/winwin3/num;
+                        <badge class="box_badges" image="++theme++ulearn5/assets/images/badge4.png" tal:attributes="threshold badges_info/winwin3/num;
                                                title badges_info/winwin3/title;
                                                alt badges_info/winwin3/title">
                             <img tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/badge4.png;
