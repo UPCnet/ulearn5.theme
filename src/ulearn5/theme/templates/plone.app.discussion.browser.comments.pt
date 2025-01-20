@@ -36,6 +36,7 @@
                              depth python: depth > 10 and '10' or depth;
                              author_home_url python:view.get_commenter_home_url(username=reply.author_username);
                              has_author_link python:author_home_url and not isAnon;
+                             portrait_url python:view.get_commenter_portrait(reply.author_username);
                              review_state python:wtool.getInfoFor(reply, 'review_state', 'none');
                              canEdit python:view.can_edit(reply);
                              canDelete python:view.can_delete(reply);

@@ -1,24 +1,25 @@
 <div xmlns:tal="http://xml.zope.org/namespaces/tal"
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-     tal:omit-tag="" i18n:domain="plone">
-  <a id="add-field" class="pat-plone-modal"
-     href="${context/absolute_url}/@@add-field">
-    <button style="float: right; display: block;"
-           i18n:translate="add_new_field_hellip">Add new field&hellip;</button>
+     i18n:domain="plone"
+     class="pat-schemaeditor">
+  <a id="add-field" class="pat-plone-modal btn btn-secondary float-end ms-3"
+     href="${context/absolute_url}/@@add-field"
+     i18n:translate="add_new_field_hellip">
+     Add new field&hellip;
   </a>
 
-  <a id="add-fieldset" class="pat-plone-modal" tal:condition="context/enableFieldsets"
-     href="${context/absolute_url}/@@add-fieldset">
-    <button style="float: right; display: block;"
-           i18n:translate="add_fieldset_hellip">Add new fieldset&hellip;</button>
+  <a id="add-fieldset" class="pat-plone-modal btn btn-secondary float-end" tal:condition="context/enableFieldsets"
+     href="${context/absolute_url}/@@add-fieldset"
+     i18n:translate="add_fieldset_hellip">
+     Add new fieldset&hellip;
   </a>
 
   <metal:form metal:use-macro="context/@@ploneform-macros/form">
     <metal:top-slot metal:fill-slot="formtop">
       <input tal:replace="structure context/@@authenticator/authenticator" />
       <script type="text/javascript"
-              tal:attributes="src context/++resource++ulearnSchemaeditor.js"></script>
+      tal:attributes="src context/++resource++ulearnSchemaeditor.js"></script>
       <style type="text/css">
   .fieldPreview {
     background: #eee;
@@ -75,12 +76,19 @@
     <metal:fields-slot metal:fill-slot="fields">
 
       <tal:block tal:repeat="group python:[view] + list(view.groups)">
-        <fieldset tal:define="fieldset_name repeat/group/index"
+        <fieldset tal:define="fieldset_name repeat/group/index;
+                              can_delete python:view.can_delete_fieldset(group);"
                   tal:attributes="id string:fieldset-${fieldset_name};
-                                  class string:kssattr-fieldset-${fieldset_name}">
+                                  class string:kssattr-fieldset-${fieldset_name};
+                                  data-can-add-fields python:(repeat['group'].start or can_delete) and 'true' or 'false'">
 
           <legend tal:define="group_name python:group.label or view.default_fieldset_label"
                   tal:content="group_name">Fieldset name</legend>
+
+          <a id="delete-fieldset-${fieldset_name}" class="btn btn-sm btn-danger" tal:condition="python:context.enableFieldsets and can_delete"
+             href="${context/absolute_url}/@@delete-fieldset?name=${python:group.__name__}&_authenticator=${context/@@authenticator/token}"
+                  i18n:translate="delete_fieldset_hellip">Delete fieldset
+          </a>
 
           <tal:block tal:define="errors group/widgets/errors"
                      tal:condition="errors"
@@ -117,16 +125,15 @@
                 </div>
 
                 <div class="fieldControls">
-                    <a class="fieldSettings pat-plone-modal"
+                    <a class="fieldSettings pat-plone-modal btn btn-sm btn-secondary"
                        tal:define="edit_url python:view.edit_url(widget.field)"
                        tal:condition="edit_url"
                        i18n:translate=""
                        tal:attributes="href edit_url">Settings&hellip;</a>
-                    <a class="schemaeditor-delete-field"
+                    <a class="schemaeditor-delete-field btn btn-sm btn-danger ms-1"
                        i18n:attributes="title; data-confirm_msg"
                        title="Delete field"
                        data-confirm_msg="Are you sure you want to delete this field?"
-                       style="margin-left: 1em; font-size: 150%; border: none"
                        tal:define="delete_url python:view.delete_url(widget.field)"
                        tal:condition="delete_url"
                        tal:attributes="href delete_url">&times;</a>

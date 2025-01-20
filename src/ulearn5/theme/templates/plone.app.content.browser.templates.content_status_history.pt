@@ -24,7 +24,7 @@
   <body>
 
     <tal:comment tal:condition="nothing">
-      <div class="portalMessage info">
+      <div class="portalMessage info" role="status">
         <strong>Note</strong>
         <span>This form is used in two different ways - from folder_contents,
         allowing you to publish several things at once, and from the state
@@ -39,13 +39,13 @@
            tal:define="errors view/errors;
                        review_state context_state/workflow_state;
                        paths python:request.get('paths', ['/'.join(context.getPhysicalPath())]);
-                       batch python:context.getObjectsFromPathList(paths, batch=False);
+                       batch python:view.get_objects_from_path_list(paths);
                        folders_in_publishing python:[o.getId for o in batch if o.isPrincipiaFolderish];
                        came_from python:request.get('HTTP_REFERER', context.absolute_url()).split('?')[0];
                        dummy python:request.set('orig_template', came_from);
                      ">
       <metal:block tal:condition="python: paths and not batch"
-                   tal:replace="python:context.redirectToReferrer('The item(s) you selected are no longer available.')"/>
+                   tal:replace="view/redirect_to_referrer"/>
 
       <h1 class="documentFirstHeading"
           i18n:translate="heading_publishing_process">Publishing process</h1>
@@ -123,7 +123,7 @@
                                            item_title_or_id     item/pretty_title_or_id;
                                            item_description     item/Description;
                                            item_type            item/portal_type;
-                                           item_size            item/getObjSize;
+                                           item_size            python:view.human_readable_size(item.get_size());
                                            item_modified        item/ModificationDate;
                                            item_type_class      python:'contenttype-' + normalizeString(item_type);
                                            item_wf_state        item/review_state|python: wtool.getInfoFor(item, 'review_state', '');
@@ -173,13 +173,13 @@
                                     </a>
 
                                 <span class="state-expired"
-                                      tal:condition="python:context.isExpired(item)"
+                                      tal:condition="python:view.isExpired(item)"
                                       i18n:translate="time_expired">expired</span>
                             </td>
 
                             <td>
                               <span tal:condition="not: item_size"> &nbsp; </span>
-                              <span tal:condition="python:item_size>0"
+                              <span tal:condition="python:item_size"
                                     tal:content="item_size"
                                     tal:attributes="class item_wf_state_class"> size </span>
                             </td>

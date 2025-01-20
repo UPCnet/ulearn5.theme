@@ -9,7 +9,7 @@
     <select class="form-control" name="transition">
       <% if(data.transitions){
         _.each(data.transitions, function(transition){
-          %><option i18n:translate="" value="<%= transition.id %>"><%= transition.title %></option>
+          %><option value="<%= transition.id %>"><%= transition.title %></option>
           <%
         });
       } %>

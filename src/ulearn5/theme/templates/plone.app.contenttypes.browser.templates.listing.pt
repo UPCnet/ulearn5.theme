@@ -3,7 +3,7 @@
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     lang="en"
-    metal:use-macro="context/main_template/macros/master"
+    metal:use-macro="context/@@main_template/macros/master"
     i18n:domain="plone">
 <body>
 
@@ -27,12 +27,14 @@
                          showicons view/show_icons">
       <tal:listing condition="batch">
         <div class="entries" metal:define-slot="entries"
-            tal:define="portal context/@@plone_portal_state/portal;">
+            tal:define="portal context/@@plone_portal_state/portal;
+                        image_scale portal/@@image_scale">
           <tal:repeat repeat="item batch" metal:define-macro="entries">
             <tal:block tal:define="obj item/getObject;
                 item_url item/getURL;
                 item_id item/getId;
                 item_title item/Title;
+                item_title python:item_title or item_id;
                 item_description item/Description;
                 item_type item/PortalType;
                 item_modified item/ModificationDate;
@@ -48,45 +50,41 @@
                 item_effective python:str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());
                 item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;
                 ">
-
                 <tal:cond tal:condition="python: (item_type != 'FormFolder')">
-                 <tal:block tal:define="item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year()) if item.effective_date else str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());">
-                  </tal:block>
-                </tal:cond>
-
+                  <tal:block tal:define="item_effective python:str(item.effective_date.day()) + '/' + str(item.effective_date.month()) + '/' + str(item.effective_date.year()) if item.effective_date else str(item.creation_date.day()) + '/' + str(item.creation_date.month()) + '/' + str(item.creation_date.year());">
+                   </tal:block>
+                 </tal:cond>
               <metal:block define-slot="entry">
-
-                <article class="media">
+                <article class="entry">
                   <header metal:define-macro="listitem" tal:attributes="class python:'vevent' if item_is_event else None">
-                  <div class="media-left">
-                    <a tal:attributes="href item_link;"
-                       tal:condition="python: item_has_image and thumb_scale_list">
-                       <img tal:attributes="src string:${item_url}/@@images/image/thumb;
-                                            title item_title;
-                                            alt item_title" />
-                    </a>
-                  </div>
+                    <span class="summary" tal:attributes="title item_type">
+                      <a tal:condition="python:item_type == 'File' and showicons"
+                         tal:attributes="href item_link;
+                                         class string:$item_type_class $item_wf_state_class url;
+                                         title item_type">
+                         <img class="mime-icon"
+                                tal:attributes="src item/MimeTypeIcon">
+                      </a>
+                      <a tal:attributes="href item_link;
+                                            class string:$item_type_class $item_wf_state_class url;
+                                            title item_type"
+                         tal:content="item_title">Item Title
+                      </a>
+                      <a tal:attributes="href item_link;"
+                         tal:condition="python: item_has_image and thumb_scale_list">
+                         <img tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_list, css_class=img_class)" />
+                      </a>
+                    </span>
                     <metal:block metal:define-macro="document_byline">
-                      <div class="media-body">
-                        <div class="summary" tal:attributes="title item_type">
-                          <h2 class="tileHeadline media-heading">
-                          <a tal:attributes="href item_link;
-                                                class string:$item_type_class $item_wf_state_class url;
-                                                title item_type"
-                             tal:content="item_title">Item Title
-                          </a>
-                        </h2>
-                        </div>
-
-                        <div class="item-event">
+                      <div class="documentByLine">
                         <tal:event condition="item_is_event">
                           <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
-                          <span tal:condition="item/location" i18n:translate="label_event_byline_location">
-                            <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>
-                            <br/>
+                          <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
+                            <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
                           </span>
                         </tal:event>
                         <tal:byline condition="view/show_about">
+                          &mdash;
                           <tal:name tal:condition="item_creator"
                               tal:define="author python:view.pas_member.info(item_creator);
                                           creator_short_form author/username;
@@ -105,7 +103,7 @@
                           </tal:name>
 
                           <tal:modified condition="python: item_type != 'Event'">
-                            <br>
+                            &mdash;
                             <tal:mod i18n:translate="box_last_modified">last modified</tal:mod>
                             <span tal:replace="python:view.toLocalizedTime(item_modified,long_format=1)">
                               August 16, 2001 at 23:35:59
@@ -118,21 +116,15 @@
                             </tal:comment>
                           </metal:description>
                         </tal:byline>
-                        </div>
-                        <br/>
-                        <p class="description discreet"
-                            tal:condition="item_description"
-                            tal:content="item_description">
-                          description
-                        </p>
                       </div>
                     </metal:block>
                   </header>
-
+                  <p class="description discreet"
+                      tal:condition="item_description"
+                      tal:content="item_description">
+                    description
+                  </p>
                 </article>
-
-
-
               </metal:block>
             </tal:block>
           </tal:repeat>
