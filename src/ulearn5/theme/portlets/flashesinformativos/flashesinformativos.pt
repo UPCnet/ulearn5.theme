@@ -1,42 +1,41 @@
 <tal:block tal:condition="not:view/isAnon">
-<div class="ulearnboxflash row"
-     tal:define="flashes view/getFlashesInformativos"
-     tal:condition="flashes"
-     i18n:domain="ulearn">
+    <div class="ulearnboxflash row" tal:define="flashes view/getFlashesInformativos" tal:condition="flashes"
+        i18n:domain="ulearn">
 
-     <!-- Add class carousel-fade to change effect -->
-    <div id="flasinformatiu" class="carousel slide" data-duration="5000">
-        <div id="flashes-informativos" class="bubble left col-md-2">
-            <div class="arrow"></div>
-            <div class="bubble-content">
-                <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
-                    <p class="data" i18n:translate="flashesinformativos">Last hour</p>
-                </a>
-            </div>
-        </div>
-        <div class="carousel-inner col-md-10">
-            <tal:item tal:repeat="item flashes">
-                <div tal:define="isTheFirst repeat/item/start" tal:attributes="class python:isTheFirst and 'item active' or 'item'">
-                    <img tal:condition="item/flash/image" class="newsImage col-md-2"
-                         tal:attributes="src string:${item/url}/@@images/image/tile" />
-
-                    <a href="#" tal:attributes="href item/url">
-                        <span class="col-md-6" tal:replace="structure item/title">Flash</span>
+        <!-- Add class carousel-fade to change effect -->
+        <div id="flasinformatiu" class="carousel slide" data-duration="5000">
+            <div id="flashes-informativos" class="bubble left col-md-2">
+                <div class="arrow"></div>
+                <div class="bubble-content">
+                    <a tal:attributes="href string:${view/get_flashesinformatius_folder_url}">
+                        <p class="data" i18n:translate="flashesinformativos">Last hour</p>
                     </a>
                 </div>
-            </tal:item>
+            </div>
+            <div class="carousel-inner col-md-10">
+                <tal:item tal:repeat="item flashes">
+                    <div tal:define="isTheFirst repeat/item/start"
+                        tal:attributes="class python:isTheFirst and 'item active' or 'item'">
+                        <img tal:condition="item/flash/image" class="newsImage col-md-2"
+                            tal:attributes="src string:${item/url}/@@images/image/tile" />
+
+                        <a href="#" tal:attributes="href item/url">
+                            <span class="col-md-6" tal:replace="structure item/title">Flash</span>
+                        </a>
+                    </div>
+                </tal:item>
+            </div>
+
+            <!-- Carousel nav -->
+            <tal:bloc tal:condition="python:len(flashes) > 1">
+                <a class="carousel-control right" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
+            </tal:bloc>
         </div>
-
-        <!-- Carousel nav -->
-        <tal:bloc tal:condition="python:len(flashes) > 1">
-            <a class="carousel-control right" href="#flasinformatiu" data-slide="next">&rsaquo;</a>
-        </tal:bloc>
+        <script src="++ulearn++portlets/flashesinformativos/flashesinformativos.js"></script>
     </div>
-    <script src="++ulearn++portlets/flashesinformativos/flashesinformativos.js"></script>
-</div>
 
 
-<!-- <div class="ulearnboxflash row"
+    <!-- <div class="ulearnboxflash row"
      tal:define="flashes view/getFlashesInformativos"
      tal:condition="flashes"
      i18n:domain="ulearn">

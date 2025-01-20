@@ -20,19 +20,23 @@ import re
 
 
 class IFlashesInformativosPortlet(IPortletDataProvider):
-    """ A portlet which can render Flashes Informativos information.
-    """
+    """A portlet which can render Flashes Informativos information."""
 
-    name = schema.TextLine(title=_("label_navigation_title", default="Title"),
-                           description=_("help_navigation_title",
-                                         default="The title of the navigation tree."),
-                           default="",
-                           required=False)
+    name = schema.TextLine(
+        title=_("label_navigation_title", default="Title"),
+        description=_(
+            "help_navigation_title", default="The title of the navigation tree."
+        ),
+        default="",
+        required=False,
+    )
 
-    count = schema.Int(title=_('Number of items to display'),
-                       description=_('How many items to list.'),
-                       required=False,
-                       default=4)
+    count = schema.Int(
+        title=_("Number of items to display"),
+        description=_("How many items to list."),
+        required=False,
+        default=4,
+    )
 
 
 class Assignment(base.Assignment):
@@ -42,12 +46,12 @@ class Assignment(base.Assignment):
         self.name = name
         self.count = count
 
-    title = _('flashes_informativos', default='Flashes Informativos')
+    title = _("flashes_informativos", default="Flashes Informativos")
 
 
 class Renderer(base.Renderer):
 
-    _template = ViewPageTemplateFile('flashesinformativos.pt')
+    _template = ViewPageTemplateFile("flashesinformativos.pt")
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -113,15 +117,22 @@ class Renderer(base.Renderer):
         # start = DateTime('1969/12/31 00:00:00 GMT+2')  # Fecha effectiva por defecto
         # date_range_query = {'query': (start, now), 'range': 'min:max'}
 
-        flashes = catalog(portal_type='News Item',
-                          review_state='intranet',
-                          is_flash=True,
-                          expires={'query': now, 'range': 'min', },
-                          effective={'query': now, 'range': 'max', },
-                          sort_on='effective',
-                          sort_order='reverse',
-                          sort_limit=limit
-                          )[:limit]
+        flashes = catalog(
+            portal_type="News Item",
+            review_state="intranet",
+            is_flash=True,
+            expires={
+                "query": now,
+                "range": "min",
+            },
+            effective={
+                "query": now,
+                "range": "max",
+            },
+            sort_on="effective",
+            sort_order="reverse",
+            sort_limit=limit,
+        )[:limit]
 
         dades = []
         for flash in flashes:
@@ -133,19 +144,20 @@ class Renderer(base.Renderer):
             # else:
             #     text = self.abreviaRichText(flashObj.text.raw, 90)
 
-            info = {'id': flash.id,
-                    'url': flash.getURL(),
-                    'flash': flashObj,
-                    'image': flashObj.image,
-                    'title': abreviaPlainText(flash.Title, 90)
-                    }
+            info = {
+                "id": flash.id,
+                "url": flash.getURL(),
+                "flash": flashObj,
+                "image": flashObj.image,
+                "title": abreviaPlainText(flash.Title, 90),
+            }
 
             dades.append(info)
 
         return dades
 
     def get_flashesinformatius_folder_url(self):
-        url = self.portal().absolute_url() + '/news'
+        url = self.portal().absolute_url() + "/news"
         return url
 
 
@@ -155,7 +167,7 @@ class AddForm(base.AddForm):
     description = _("This portlet displays Flashes Informativos.")
 
     def create(self, data):
-        return Assignment(name=data.get('name', ""), count=data.get('count', 5))
+        return Assignment(name=data.get("name", ""), count=data.get("count", 5))
 
 
 class EditForm(base.EditForm):
