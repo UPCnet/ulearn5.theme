@@ -162,6 +162,15 @@
         addview=".mycommunities.mycommunities.AddForm"
         />
 
+    <plone:portlet
+        name="ulearn.portlets.folderview"
+        interface=".folderview.folderview.IFolderViewPortlet"
+        assignment=".folderview.folderview.Assignment"
+        renderer=".folderview.folderview.Renderer"
+        addview=".folderview.folderview.AddForm"
+        editview=".folderview.folderview.EditForm"
+        />
+
     <adapter
         for="ulearn5.core.interfaces.IVideo"
         provides="base5.core.portlets.smart.renderers.interfaces.IPortletItemRenderer"
@@ -174,13 +183,12 @@
         factory=".smart.renderers.YTVideoPortletItemRenderer"
         />
 
-    <plone:portlet
-        name="ulearn.portlets.folderview"
-        interface=".folderview.folderview.IFolderViewPortlet"
-        assignment=".folderview.folderview.Assignment"
-        renderer=".folderview.folderview.Renderer"
-        addview=".folderview.folderview.AddForm"
-        editview=".folderview.folderview.EditForm"
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="ulearn.portlets.banners.Types"
+        factory="ulearn5.theme.portlets.banners.banners.TypesVocabulary"
         />
+
 
 </configure>

@@ -9,12 +9,10 @@ from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
-from repoze.catalog.query import Eq
-from souper.soup import get_soup
 from zope import schema
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
-from zope.interface import implementer  # Cambié de implements a implementer
+from zope.interface import implementer
 
 from base5.core.utils import abrevia
 from base5.core.utils import abreviaPlainText
@@ -25,34 +23,37 @@ import transaction
 
 
 class IButtonBarPortlet(IPortletDataProvider):
-    """ A portlet which can render the logged user profile information. """
-    count = schema.Int(title=_PFM('Number of items to display'),
-                       description=_PFM('How many items to list.'),
-                       required=True,
-                       default=10)
+    """A portlet which can render the logged user profile information."""
 
-    state = schema.Tuple(title=_PFM("Workflow state"),
-                         description=_PFM("Items in which workflow state to show."),
-                         default=('published', 'intranet'),
-                         required=True,
-                         value_type=schema.Choice(
-                             vocabulary="plone.app.vocabularies.WorkflowStates")
-                         )
+    count = schema.Int(
+        title=_PFM("Number of items to display"),
+        description=_PFM("How many items to list."),
+        required=True,
+        default=10,
+    )
+
+    state = schema.Tuple(
+        title=_PFM("Workflow state"),
+        description=_PFM("Items in which workflow state to show."),
+        default=("published", "intranet"),
+        required=True,
+        value_type=schema.Choice(vocabulary="plone.app.vocabularies.WorkflowStates"),
+    )
 
 
-@implementer(IButtonBarPortlet)  # Cambié de implements a implementer
+@implementer(IButtonBarPortlet)
 class Assignment(base.Assignment):
 
-    def __init__(self, count=10, state=('published', 'intranet')):
+    def __init__(self, count=10, state=("published", "intranet")):
         self.count = count
         self.state = state
 
-    title = _('buttonbar', default='Button bar')
+    title = _("buttonbar", default="Button bar")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('buttonbar.pt')
+    render = ViewPageTemplateFile("buttonbar.pt")
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -63,7 +64,17 @@ class Renderer(base.Renderer):
         return True
 
     def is_activate_sharedwithme(self):
-        if (api.portal.get_registry_record('base5.core.controlpanel.core.IBaseCoreControlPanelSettings.elasticsearch') != 'localhost') and (api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme') == True):
+        if (
+            api.portal.get_registry_record(
+                "base5.core.controlpanel.core.IBaseCoreControlPanelSettings.elasticsearch"
+            )
+            != "localhost"
+        ) and (
+            api.portal.get_registry_record(
+                "ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_sharedwithme"
+            )
+            == True
+        ):
             portal = api.portal.get()
             if portal.portal_actions.object.local_roles.visible is False:
                 portal.portal_actions.object.local_roles.visible = True
@@ -73,21 +84,23 @@ class Renderer(base.Renderer):
             return False
 
     def is_activate_news(self):
-        return api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_news')
+        return api.portal.get_registry_record(
+            "ulearn5.core.controlpanel.IUlearnControlPanelSettings.activate_news"
+        )
 
     def getClass(self):
-        """ Returns class for links """
+        """Returns class for links"""
         shared = self.is_activate_sharedwithme()
         news = self.is_activate_news()
-        width = ''
+        width = ""
         if shared and news:
-            width = 'col-md-3 col-sm-3 col-xs-3'
+            width = "col-md-3 col-sm-3 col-xs-3"
         elif shared and not news:
-            width = 'col-md-4 col-sm-4 col-xs-4'
+            width = "col-md-4 col-sm-4 col-xs-4"
         elif news and not shared:
-            width = 'col-md-4 col-sm-4 col-xs-4'
+            width = "col-md-4 col-sm-4 col-xs-4"
         else:
-            width = 'col-md-6 col-sm-6 col-xs-6'
+            width = "col-md-6 col-sm-6 col-xs-6"
 
         return "bubble top " + width
 
@@ -108,7 +121,7 @@ class Renderer(base.Renderer):
         return self._data()
 
     def get_noticias_folder_url(self):
-        url = self.portal().absolute_url() + '/news'
+        url = self.portal().absolute_url() + "/news"
         return url
 
     def dadesNoticies(self):
@@ -118,7 +131,7 @@ class Renderer(base.Renderer):
     def id_noticies(self, noticies):
         info_id = []
         for item in noticies:
-            info_id.append(item['id'])
+            info_id.append(item["id"])
 
         return info_id
 
@@ -126,7 +139,9 @@ class Renderer(base.Renderer):
     def _data(self):
         news = []
         context = aq_inner(self.context)
-        portal_state = getMultiAdapter((context, self.request), name='plone_portal_state')
+        portal_state = getMultiAdapter(
+            (context, self.request), name="plone_portal_state"
+        )
         path = portal_state.navigation_root_path()
         limit = self.data.count
         state = self.data.state
@@ -141,17 +156,24 @@ class Renderer(base.Renderer):
         return getSearchersFromUser()
 
     def get_news(self, context, state, path, limit):
-        catalog = api.portal.get_tool(name='portal_catalog')
+        catalog = api.portal.get_tool(name="portal_catalog")
         now = DateTime()
-        results = catalog(portal_type='News Item',
-                          review_state=state,
-                          is_outoflist=False,
-                          expires={'query': now, 'range': 'min', },
-                          effective={'query': now, 'range': 'max', },
-                          sort_on='effective',
-                          sort_order='reverse',
-                          sort_limit=limit
-                          )[:limit]
+        results = catalog(
+            portal_type="News Item",
+            review_state=state,
+            is_outoflist=False,
+            expires={
+                "query": now,
+                "range": "min",
+            },
+            effective={
+                "query": now,
+                "range": "max",
+            },
+            sort_on="effective",
+            sort_order="reverse",
+            sort_limit=limit,
+        )[:limit]
 
         noticies = self.dades(results)
         for item in noticies:
@@ -178,15 +200,16 @@ class Renderer(base.Renderer):
                 news_month = noticiaObj.modification_date.month()
                 news_year = noticiaObj.modification_date.year()
 
-            info = {'id': noticia.id,
-                    'text': text,
-                    'url': noticia.getURL(),
-                    'title': abreviaPlainText(noticia.Title, 70),
-                    'new': noticiaObj,
-                    'date': str(news_day) + '/' + str(news_month) + '/' + str(news_year),
-                    'image': noticiaObj.image,
-                    'subject': noticiaObj.subject,
-                    }
+            info = {
+                "id": noticia.id,
+                "text": text,
+                "url": noticia.getURL(),
+                "title": abreviaPlainText(noticia.Title, 70),
+                "new": noticiaObj,
+                "date": (str(news_day) + "/" + str(news_month) + "/" + str(news_year)),
+                "image": noticiaObj.image,
+                "subject": noticiaObj.subject,
+            }
 
             dades.append(info)
 
@@ -199,8 +222,9 @@ class AddForm(base.AddForm):
     description = _("This portlet displays subscribed News Items.")
 
     def create(self, data):
-        return Assignment(count=data.get('count', 10),
-                          state=data.get('state', ('intranet', )))
+        return Assignment(
+            count=data.get("count", 10), state=data.get("state", ("intranet",))
+        )
 
 
 class EditForm(base.EditForm):

@@ -11,6 +11,7 @@ from zope import schema
 from zope.interface import implements
 
 from ulearn5.core import _
+from six.moves import range
 
 
 class IFolderViewPortlet(IPortletDataProvider):

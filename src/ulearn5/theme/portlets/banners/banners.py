@@ -4,14 +4,13 @@ from Acquisition import aq_inner
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from five import grok
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.dexterity.utils import createContentInContainer
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -20,55 +19,55 @@ from ulearn5.core.browser.security import execute_under_special_role
 from ulearn5.core.content.community import ICommunity
 
 import transaction
-from io import StringIO  # Cambiado para Python 3
 
 
+@implementer(IVocabularyFactory)
 class TypesVocabulary(object):
-    grok.implements(IVocabularyFactory)
 
     def __call__(self, context):
         types = []
-        types.append(SimpleVocabulary.createTerm('Global', 'Global', _('Global')))
-        types.append(SimpleVocabulary.createTerm('Personal', 'Personal', _('Personal')))
-        types.append(SimpleVocabulary.createTerm('Comunitat', 'Comunitat', _('Comunitat')))
+        types.append(SimpleVocabulary.createTerm("Global", "Global", _("Global")))
+        types.append(SimpleVocabulary.createTerm("Personal", "Personal", _("Personal")))
+        types.append(
+            SimpleVocabulary.createTerm("Comunitat", "Comunitat", _("Comunitat"))
+        )
         return SimpleVocabulary(types)
 
 
-grok.global_utility(TypesVocabulary, name="ulearn.portlets.banners.Types")
-
-
 class IBannersPortlet(IPortletDataProvider):
-    """ A portlet which renders the banners portlet """
+    """A portlet which renders the banners portlet"""
 
     typePortlet = schema.Choice(
-        title=_('Type'),
+        title=_("Type"),
         vocabulary="ulearn.portlets.banners.Types",
-        default='Global',
-        required=True
+        default="Global",
+        required=True,
     )
 
 
+@implementer(IBannersPortlet)
 class Assignment(base.Assignment):
-    implements(IBannersPortlet)
 
     def __init__(self, typePortlet="Global"):
         self.typePortlet = typePortlet
 
     @property
     def title(self):
-        if self.typePortlet == 'Global':
-            return _('Banners (Global)')
-        elif self.typePortlet == 'Personal':
-            return _('Banners (Personal)')
+        if self.typePortlet == "Global":
+            return _("Banners (Global)")
+        elif self.typePortlet == "Personal":
+            return _("Banners (Personal)")
         else:
-            return _('Banners (Comunitats)')
+            return _("Banners (Comunitats)")
 
 
 def createOrGetObject(self, context, newid, title, type_name):
     if newid in context.contentIds():
         obj = context[newid]
     else:
-        obj = createContentInContainer(context, type_name, title=title, checkConstrains=False)
+        obj = createContentInContainer(
+            context, type_name, title=title, checkConstrains=False
+        )
         transaction.savepoint()
         if obj.id != newid:
             context.manage_renameObject(obj.id, newid)
@@ -78,31 +77,33 @@ def createOrGetObject(self, context, newid, title, type_name):
 
 def createPersonalBannerFolder(userid):
     portal = getSite()
-    perFolder = createOrGetObject(portal, portal['Members'], userid, userid, 'privateFolder')
+    perFolder = createOrGetObject(
+        portal, portal["Members"], userid, userid, "privateFolder"
+    )
     perFolder.exclude_from_nav = False
-    perFolder.setLayout('folder_listing')
+    perFolder.setLayout("folder_listing")
     behavior = ISelectableConstrainTypes(perFolder)
     behavior.setConstrainTypesMode(1)
-    behavior.setLocallyAllowedTypes(('Folder',))
-    behavior.setImmediatelyAddableTypes(('Folder',))
+    behavior.setLocallyAllowedTypes(("Folder",))
+    behavior.setImmediatelyAddableTypes(("Folder",))
 
     api.content.disable_roles_acquisition(perFolder)
     for username, roles in perFolder.get_local_roles():
         perFolder.manage_delLocalRoles([username])
-    perFolder.manage_setLocalRoles(userid, ['Contributor', 'Editor', 'Reader'])
+    perFolder.manage_setLocalRoles(userid, ["Contributor", "Editor", "Reader"])
 
-    banFolder = createOrGetObject(portal, perFolder, 'banners', 'Banners', 'Folder')
+    banFolder = createOrGetObject(portal, perFolder, "banners", "Banners", "Folder")
     banFolder.exclude_from_nav = False
-    banFolder.setLayout('folder_listing')
+    banFolder.setLayout("folder_listing")
     behavior = ISelectableConstrainTypes(banFolder)
     behavior.setConstrainTypesMode(1)
-    behavior.setLocallyAllowedTypes(('ulearn.banner',))
-    behavior.setImmediatelyAddableTypes(('ulearn.banner',))
+    behavior.setLocallyAllowedTypes(("ulearn.banner",))
+    behavior.setImmediatelyAddableTypes(("ulearn.banner",))
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('banners.pt')
+    render = ViewPageTemplateFile("banners.pt")
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -111,32 +112,43 @@ class Renderer(base.Renderer):
         return api.user.is_anonymous()
 
     def getBanners(self):
-        catalog = api.portal.get_tool(name='portal_catalog')
+        catalog = api.portal.get_tool(name="portal_catalog")
 
-        if self.data.typePortlet == 'Personal':
+        if self.data.typePortlet == "Personal":
             username = api.user.get_current().id
-            path = '/'.join(api.portal.get().getPhysicalPath()) + "/Members/" + username + "/banners"
+            path = (
+                "/".join(api.portal.get().getPhysicalPath())
+                + "/Members/"
+                + username
+                + "/banners"
+            )
             portal = api.portal.get()
-            if 'Members' in portal:
-                if username in portal['Members']:
-                    if 'banners' not in portal['Members'][username]:
-                        execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
+            if "Members" in portal:
+                if username in portal["Members"]:
+                    if "banners" not in portal["Members"][username]:
+                        execute_under_special_role(
+                            portal, "Manager", createPersonalBannerFolder, username
+                        )
                 else:
-                    execute_under_special_role(portal, "Manager", createPersonalBannerFolder, username)
-        elif self.data.typePortlet == 'Global':
-            path = '/'.join(api.portal.get().getPhysicalPath()) + "/gestion/banners"
+                    execute_under_special_role(
+                        portal, "Manager", createPersonalBannerFolder, username
+                    )
+        elif self.data.typePortlet == "Global":
+            path = "/".join(api.portal.get().getPhysicalPath()) + "/gestion/banners"
         else:
             path = self.getCommunityPath()
 
-        data = {'portal_type': 'ulearn.banner',
-                'review_state': 'intranet',
-                'sort_on': "getObjPositionInParent"}
+        data = {
+            "portal_type": "ulearn.banner",
+            "review_state": "intranet",
+            "sort_on": "getObjPositionInParent",
+        }
 
-        if self.data.typePortlet == 'Comunitat':
-            data.update({'community_type': ('Open', 'Closed', 'Organizative')})
-            data.update({'path': path})
+        if self.data.typePortlet == "Comunitat":
+            data.update({"community_type": ("Open", "Closed", "Organizative")})
+            data.update({"path": path})
         else:
-            data.update({'path': {'query': path, 'depth': 1}})
+            data.update({"path": {"query": path, "depth": 1}})
 
         result = catalog(**data)
         banners = [banner.getObject() for banner in result]
@@ -146,8 +158,8 @@ class Renderer(base.Renderer):
         community = aq_inner(self.context)
         for obj in aq_chain(community):
             if ICommunity.providedBy(obj):
-                return '/' + '/'.join(obj.getPhysicalPath())
-        return '/'.join(api.portal.get().getPhysicalPath())
+                return "/" + "/".join(obj.getPhysicalPath())
+        return "/".join(api.portal.get().getPhysicalPath())
 
 
 class AddForm(base.AddForm):
@@ -156,7 +168,7 @@ class AddForm(base.AddForm):
     description = _("This portlet displays banners.")
 
     def create(self, data):
-        return Assignment(typePortlet=data.get('typePortlet', "Global"))
+        return Assignment(typePortlet=data.get("typePortlet", "Global"))
 
 
 class EditForm(base.EditForm):
