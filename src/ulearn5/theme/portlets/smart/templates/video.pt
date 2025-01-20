@@ -8,8 +8,6 @@
 </div>
 <div class="contentResource">
   <video tal:attributes="src string:${view/item/getURL};
-                        type string:video/${view/getType}"
-       controls="controls"
-       controlsList="nodownload">
+                        type string:video/${view/getType}" controls="controls" controlsList="nodownload">
   </video>
 </div>
