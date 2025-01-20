@@ -17,11 +17,15 @@ from ulearn5.core import _
 
 class IQuicklinksPortlet(IPortletDataProvider):
 
-    folder = schema.Choice(title=_PMF("label_navigation_root_path", default="Root node"),
-                           description=_PMF('help_navigation_root',
-                           default="You may search for and choose a folder to act as the root of the navigation tree. Leave blank to use the Plone site root."),
-                           required=True,
-                           source=CatalogSource(is_folderish=True))
+    folder = schema.Choice(
+        title=_PMF("label_navigation_root_path", default="Root node"),
+        description=_PMF(
+            "help_navigation_root",
+            default="You may search for and choose a folder to act as the root of the navigation tree. Leave blank to use the Plone site root.",
+        ),
+        required=True,
+        source=CatalogSource(is_folderish=True),
+    )
 
 
 @implementer(IQuicklinksPortlet)
@@ -32,12 +36,12 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        """ Display the name in portlet mngmt interface """
-        return _('Quicklinks')
+        """Display the name in portlet mngmt interface"""
+        return _("Quicklinks")
 
 
 class Renderer(base.Renderer):
-    _template = ViewPageTemplateFile('quicklinks.pt')
+    _template = ViewPageTemplateFile("quicklinks.pt")
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
@@ -56,62 +60,99 @@ class Renderer(base.Renderer):
         portal = getSite()
         instance_name = portal.absolute_url()
 
-        catalog = api.portal.get_tool(name='portal_catalog')
-        folders = catalog.searchResults(portal_type=('Folder', 'privateFolder'),
-                                        UID=self.data.folder)
+        catalog = api.portal.get_tool(name="portal_catalog")
+        folders = catalog.searchResults(
+            portal_type=("Folder", "privateFolder"), UID=self.data.folder
+        )
 
         for brainFolder in folders:
             now = DateTime()
             folder = brainFolder.id
-            folderContents = catalog.searchResults(portal_type=('Link', 'Folder', 'privateFolder'),
-                                                   path={'query': brainFolder.getPath(), 'depth': 1},
-                                                   expires={'query': now, 'range': 'min', },
-                                                   effective={'query': now, 'range': 'max', },
-                                                   sort_on='getObjPositionInParent')
+            folderContents = catalog.searchResults(
+                portal_type=("Link", "Folder", "privateFolder"),
+                path={"query": brainFolder.getPath(), "depth": 1},
+                expires={
+                    "query": now,
+                    "range": "min",
+                },
+                effective={
+                    "query": now,
+                    "range": "max",
+                },
+                sort_on="getObjPositionInParent",
+            )
             res[folder] = {}
             index = 0
             for brain in folderContents:
                 brain = brain.getObject()
-                if brain.portal_type == 'Link':
-                    url = brain.remoteUrl.replace('${portal_url}', instance_name)
-                    res[folder][index] = {'title': brain.title,
-                                          'url': url,
-                                          'target': '_blink' if brain.open_link_in_new_window else '',
-                                          'isLink': True}
+                if brain.portal_type == "Link":
+                    url = brain.remoteUrl.replace("${portal_url}", instance_name)
+                    res[folder][index] = {
+                        "title": brain.title,
+                        "url": url,
+                        "target": "_blink" if brain.open_link_in_new_window else "",
+                        "isLink": True,
+                    }
                 else:
-                    res[folder][index] = {'title': brain.title,
-                                          'UID': brain.UID(),
-                                          'isLink': False}
+                    res[folder][index] = {
+                        "title": brain.title,
+                        "UID": brain.UID(),
+                        "isLink": False,
+                    }
 
-                    pathNextFolder = brainFolder.getPath() + '/' + brain.id
-                    nextFolderContents = catalog.searchResults(portal_type=('Link'),
-                                                               path={'query': pathNextFolder, 'depth': 1},
-                                                               expires={'query': now, 'range': 'min', },
-                                                               effective={'query': now, 'range': 'max', },
-                                                               sort_on='getObjPositionInParent')
-                    res[folder][index]['links'] = []
+                    pathNextFolder = brainFolder.getPath() + "/" + brain.id
+                    nextFolderContents = catalog.searchResults(
+                        portal_type=("Link"),
+                        path={"query": pathNextFolder, "depth": 1},
+                        expires={
+                            "query": now,
+                            "range": "min",
+                        },
+                        effective={
+                            "query": now,
+                            "range": "max",
+                        },
+                        sort_on="getObjPositionInParent",
+                    )
+                    res[folder][index]["links"] = []
                     for nextBrain in nextFolderContents:
                         nextBrain = nextBrain.getObject()
-                        url = nextBrain.remoteUrl.replace('${portal_url}', instance_name)
-                        res[folder][index]['links'].append({'title': nextBrain.title,
-                                                            'target': '_blink' if nextBrain.open_link_in_new_window else '',
-                                                            'url': url})
+                        url = nextBrain.remoteUrl.replace(
+                            "${portal_url}", instance_name
+                        )
+                        res[folder][index]["links"].append(
+                            {
+                                "title": nextBrain.title,
+                                "target": (
+                                    "_blink"
+                                    if nextBrain.open_link_in_new_window
+                                    else ""
+                                ),
+                                "url": url,
+                            }
+                        )
                 index += 1
         return res
 
     def getInfoFolders(self):
         res = {}
         current = api.user.get_current().id
-        catalog = api.portal.get_tool(name='portal_catalog')
-        folders = catalog.searchResults(portal_type=('Folder', 'privateFolder'),
-                                        UID=self.data.folder)
+        catalog = api.portal.get_tool(name="portal_catalog")
+        folders = catalog.searchResults(
+            portal_type=("Folder", "privateFolder"), UID=self.data.folder
+        )
         for brainFolder in folders:
             folder = brainFolder.getObject()
             roles = api.user.get_roles(username=current, obj=brainFolder)
-            url = brainFolder.getURL() if 'Editor' in roles or 'Contributor' in roles or 'WebMaster' in roles or 'Manager' in roles else None
-            res[folder.id] = {'title': folder.title,
-                              'url': url,
-                              'UID': folder.UID()}
+            url = (
+                brainFolder.getURL()
+                if "Editor" in roles
+                or "Contributor" in roles
+                or "WebMaster" in roles
+                or "Manager" in roles
+                else None
+            )
+            res[folder.id] = {"title": folder.title, "url": url, "UID": folder.UID()}
 
         return res
 
@@ -122,7 +163,7 @@ class AddForm(base.AddForm):
     description = _("This portlet displays quicklinks.")
 
     def create(self, data):
-        return Assignment(folder=data.get('folder', None))
+        return Assignment(folder=data.get("folder", None))
 
 
 class EditForm(base.EditForm):
