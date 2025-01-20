@@ -67,6 +67,7 @@ from email.utils import formatdate
 from io import StringIO
 from zope.i18n import translate
 from hashlib import sha1
+from six.moves import range
 
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
