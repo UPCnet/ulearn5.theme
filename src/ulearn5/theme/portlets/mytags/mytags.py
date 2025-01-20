@@ -17,19 +17,18 @@ from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 
 class IMyTagsPortlet(IPortletDataProvider):
-    """ A portlet which can show actived.
-    """
+    """A portlet which can show actived."""
 
 
 @implementer(IMyTagsPortlet)
 class Assignment(base.Assignment):
 
-    title = _('mytags', default='My Tags')
+    title = _("mytags", default="My Tags")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('mytags.pt')
+    render = ViewPageTemplateFile("mytags.pt")
 
     @memoize_contextless
     def portal_url(self):
@@ -45,10 +44,10 @@ class Renderer(base.Renderer):
         current_user = api.user.get_current()
         userid = current_user.id
 
-        soup_tags = get_soup('user_subscribed_tags', portal)
-        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
+        soup_tags = get_soup("user_subscribed_tags", portal)
+        tags_soup = [r for r in soup_tags.query(Eq("id", userid))]
 
-        return tags_soup[0].attrs['tags'] if tags_soup else []
+        return tags_soup[0].attrs["tags"] if tags_soup else []
 
     def getPrimaryColor(self):
         registry = queryUtility(IRegistry)
