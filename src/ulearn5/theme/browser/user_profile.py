@@ -10,7 +10,6 @@ from souper.interfaces import ICatalogFactory
 from zope.component import getUtilitiesFor
 from zope.component import getUtility
 from zope.component import queryUtility
-from zope.interface import implements
 from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.interfaces import NotFound
 
@@ -19,11 +18,11 @@ from base5.core.utils import get_safe_member_by_id
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 from souper.soup import get_soup
 from repoze.catalog.query import Eq
+from zope.interface import implementer
 
-
+@implementer(IPublishTraverse)
 class userProfile(BrowserView):
     """ Return an user profile ../profile/{username} """
-    implements(IPublishTraverse)
 
     index = ViewPageTemplateFile('views_templates/user_profile.pt')
 
