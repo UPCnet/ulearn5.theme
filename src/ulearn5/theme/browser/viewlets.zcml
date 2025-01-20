@@ -1,0 +1,71 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="ulearn5.theme">
+
+
+    <browser:viewlet
+        name="ulearn.titleviewlet"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        class=".viewlets.TitleViewlet"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        />
+
+    <browser:viewlet
+        name="ulearn.header"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".viewlets.viewletHeaderUlearn"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/header.pt"
+        />
+
+    <browser:viewlet
+        name="ulearn.folderbar"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".viewlets.folderBar"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/folderbar.pt"
+        />
+
+    <browser:viewlet
+        name="ulearn.footer"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        class=".viewlets.viewletFooterUlearn"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/footer.pt"
+        />
+
+    <browser:viewlet
+        name="ulearn.angularrouteview"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        class=".viewlets.angularRouteView"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/angularrouteview.pt"
+        />
+
+    <browser:viewlet
+        name="ulearn.popupNotify"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        class=".viewlets.popupNotify"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/popup_notify.pt"
+        />
+
+    <browser:viewlet
+        name="ulearn.popupNotifyBirthday"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        class=".viewlets.popupNotifyBirthday"
+        layer="..interfaces.IUlearn5ThemeLayer"
+        permission="zope2.View"
+        template="viewlets_templates/popup_notify_birthday.pt"
+        />
+
+
+</configure>

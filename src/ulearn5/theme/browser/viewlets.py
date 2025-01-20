@@ -5,7 +5,7 @@ from Products.CMFPlone.utils import safe_unicode
 
 from cgi import escape
 from datetime import datetime as ddatetime
-from five import grok
+# from five import grok
 from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
 from plone.app.layout.viewlets.interfaces import IAboveContent
@@ -38,18 +38,18 @@ from ulearn5.core.hooks import packages_installed
 
 import datetime
 
-grok.context(Interface)
+# grok.context(Interface)
 
 
-class viewletBaseUlearn(viewletBase):
-    grok.baseclass()
+#class viewletBaseUlearn(viewletBase):
+#    grok.baseclass()
 
 
 class TitleViewlet(TitleViewlet, viewletBase):
-    grok.context(Interface)
-    grok.name('plone.htmlhead.title')
-    grok.viewletmanager(IHtmlHead)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.context(Interface)
+    # grok.name('plone.htmlhead.title')
+    # grok.viewletmanager(IHtmlHead)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
         context_state = getMultiAdapter((self.context, self.request), name='plone_context_state')
@@ -74,10 +74,10 @@ class TitleViewlet(TitleViewlet, viewletBase):
 
 
 class viewletHeaderUlearn(viewletBase):
-    grok.name('ulearn.header')
-    grok.template('header')
-    grok.viewletmanager(IPortalHeader)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.header')
+    # grok.template('header')
+    # grok.viewletmanager(IPortalHeader)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def is_info_servei_activate(self):
         servei = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.info_servei')
@@ -355,10 +355,10 @@ class viewletHeaderUlearn(viewletBase):
 
 
 class folderBar(viewletBase):
-    grok.name('ulearn.folderbar')
-    grok.template('folderbar')
-    grok.viewletmanager(IAboveContent)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.folderbar')
+    # grok.template('folderbar')
+    # grok.viewletmanager(IAboveContent)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
         context = aq_inner(self.context)
@@ -422,10 +422,10 @@ class folderBar(viewletBase):
 
 
 class viewletFooterUlearn(viewletBase):
-    grok.name('ulearn.footer')
-    grok.template('footer')
-    grok.viewletmanager(IPortalFooter)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.footer')
+    # grok.template('footer')
+    # grok.viewletmanager(IPortalFooter)
+    # grok.layer(IUlearn5ThemeLayer)
 
     @forever.memoize
     def get_current_year(self):
@@ -511,10 +511,10 @@ class viewletFooterUlearn(viewletBase):
 
 
 class angularRouteView(viewletBase):
-    grok.name('ulearn.angularrouteview')
-    grok.template('angularrouteview')
-    grok.viewletmanager(IAboveContent)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.angularrouteview')
+    # grok.template('angularrouteview')
+    # grok.viewletmanager(IAboveContent)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render_viewlet(self):
         context = aq_inner(self.context)
@@ -525,10 +525,10 @@ class angularRouteView(viewletBase):
 
 
 class popupNotify(viewletBase):
-    grok.name('ulearn.popupNotify')
-    grok.template('popup_notify')
-    grok.viewletmanager(IPortalFooter)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.popupNotify')
+    # grok.template('popup_notify')
+    # grok.viewletmanager(IPortalFooter)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def isAnon(self):
         if not api.user.is_anonymous():
@@ -563,10 +563,10 @@ class popupNotify(viewletBase):
 
 
 class popupNotifyBirthday(viewletBase):
-    grok.name('ulearn.popupNotifyBirthday')
-    grok.template('popup_notify_birthday')
-    grok.viewletmanager(IPortalFooter)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('ulearn.popupNotifyBirthday')
+    # grok.template('popup_notify_birthday')
+    # grok.viewletmanager(IPortalFooter)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def isAnon(self):
         if not api.user.is_anonymous():
