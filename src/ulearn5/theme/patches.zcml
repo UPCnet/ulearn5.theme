@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="dsoft_core">
+
+    <include package="collective.monkeypatcher" />
+
+    <monkey:patch
+        description="Patch Require Login View call function"
+        class="Products.CMFPlone.browser.login.login.RequireLoginView"
+        original="__call__"
+        replacement=".patches.require_login_call" />
+
+</configure>
