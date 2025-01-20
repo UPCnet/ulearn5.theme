@@ -9,7 +9,7 @@ import transaction
 from plone import api
 from Acquisition import aq_inner
 from DateTime import DateTime
-from five import grok
+# from five import grok
 from operator import itemgetter
 from repoze.catalog.query import Eq
 from scss import Scss
@@ -68,6 +68,8 @@ from io import StringIO
 from zope.i18n import translate
 from hashlib import sha1
 from six.moves import range
+
+from Products.Five.browser import BrowserView
 
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
@@ -201,8 +203,9 @@ def _render_cachekey(method, self, main_color, secondary_color, background_prope
             color_community_closed, color_community_organizative, color_community_open)
 
 
-class baseCommunities(grok.View):
-    grok.baseclass()
+#class baseCommunities(grok.View):
+class baseCommunities(BrowserView):
+    #grok.baseclass()
 
     def update(self):
         self.username = api.user.get_current().id
@@ -225,24 +228,24 @@ class baseCommunities(grok.View):
 
 class AllCommunities(baseCommunities):
     """ The list of communities """
-    grok.context(IPloneSiteRoot)
-    grok.require('base.member')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.context(IPloneSiteRoot)
+    # grok.require('base.member')
+    # grok.layer(IUlearn5ThemeLayer)
 
 
 class communitiesAJAX(baseCommunities):
     """ The list of communities via AJAX """
-    grok.name('my-communities-ajax')
-    grok.context(IPloneSiteRoot)
-    grok.require('base.member')
-    grok.template('my_communities_ajax')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('my-communities-ajax')
+    # grok.context(IPloneSiteRoot)
+    # grok.require('base.member')
+    # grok.template('my_communities_ajax')
+    # grok.layer(IUlearn5ThemeLayer)
 
 
-class dynamicCSS(grok.View):
-    grok.name('dynamic.css')
-    grok.context(Interface)
-    grok.layer(IUlearn5ThemeLayer)
+class dynamicCSS(BrowserView):
+    # grok.name('dynamic.css')
+    # grok.context(Interface)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
         registry = queryUtility(IRegistry)
@@ -328,22 +331,22 @@ class dynamicCSS(grok.View):
         return css.compile(dynamic_scss)
 
 
-class CustomCSS(grok.View):
-    grok.name('ulearncustom.css')
-    grok.context(Interface)
-    grok.layer(IUlearn5ThemeLayer)
+class CustomCSS(BrowserView):
+    # grok.name('ulearncustom.css')
+    # grok.context(Interface)
+    # grok.layer(IUlearn5ThemeLayer)
 
-    index = ViewPageTemplateFile('views_templates/ulearncustom.css.pt')
+    # index = ViewPageTemplateFile('views_templates/ulearncustom.css.pt')
 
     def render(self):
         self.request.response.setHeader('Content-Type', 'text/css')
         return self.index()
 
 
-class SearchUser(grok.View):
-    grok.name('searchUser')
-    grok.context(Interface)
-    grok.require('base.member')
+class SearchUser(BrowserView):
+    # grok.name('searchUser')
+    # grok.context(Interface)
+    # grok.require('base.member')
 
     def render(self):
         self.request.response.setHeader('Content-Type', 'application/json')
@@ -385,11 +388,11 @@ class SearchUser(grok.View):
             return rendered_properties
 
 
-class searchUsers(grok.View):
-    grok.name('searchUsers')
-    grok.context(Interface)
-    grok.require('base.member')
-    grok.layer(IUlearn5ThemeLayer)
+class searchUsers(BrowserView):
+    # grok.name('searchUsers')
+    # grok.context(Interface)
+    # grok.require('base.member')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         return 'searchUsers'
@@ -408,10 +411,10 @@ class ULearnPersonalPreferences(UserDataPanel):
         request.set('disable_plone.rightcolumn', True)
 
 
-class TypeAheadSearch(grok.View):
-    grok.name('gw_type_ahead_search')
-    grok.context(Interface)
-    grok.layer(IUlearn5ThemeLayer)
+class TypeAheadSearch(BrowserView):
+    # grok.name('gw_type_ahead_search')
+    # grok.context(Interface)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         # We set the parameters sent in livesearch using the old way.
@@ -516,13 +519,13 @@ class TypeAheadSearch(grok.View):
         return json.dumps(queryElements)
 
 
-class FilteredContentsSearchView(grok.View):
+class FilteredContentsSearchView(BrowserView):
     """ Filtered content search view for every folder. """
-    grok.name('filtered_contents_search_view')
-    grok.context(Interface)
-    grok.require('base.member')
-    grok.template('filtered_contents_search')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('filtered_contents_search_view')
+    # grok.context(Interface)
+    # grok.require('base.member')
+    # grok.template('filtered_contents_search')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
         self.query = self.request.form.get('q', '')
@@ -722,18 +725,18 @@ class FilteredContentsSearchView(grok.View):
 class SearchFilteredContentAjax(FilteredContentsSearchView):
     """ Ajax helper for filtered content search view for every folder. """
 
-    grok.name('search_filtered_content')
-    grok.context(Interface)
-    grok.template('filtered_contents_search_ajax')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('search_filtered_content')
+    # grok.context(Interface)
+    # grok.template('filtered_contents_search_ajax')
+    # grok.layer(IUlearn5ThemeLayer)
 
 
-class AllTags(grok.View):
-    grok.name('alltags')
-    grok.context(Interface)
-    grok.template('alltags')
-    grok.require('base.authenticated')
-    grok.layer(IUlearn5ThemeLayer)
+class AllTags(BrowserView):
+    # grok.name('alltags')
+    # grok.context(Interface)
+    # grok.template('alltags')
+    # grok.require('base.authenticated')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def get_subscribed_tags(self):
         portal = getSite()
@@ -765,12 +768,12 @@ class AllTags(grok.View):
         return list(set(subjects) - set(user_tags))
 
 
-class SearchFilteredNews(grok.View):
+class SearchFilteredNews(BrowserView):
     """ Filtered news search view for every folder. """
 
-    grok.name('search_filtered_news')
-    grok.context(Interface)
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('search_filtered_news')
+    # grok.context(Interface)
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
 
@@ -862,14 +865,14 @@ class SearchFilteredNews(grok.View):
             return data
 
 
-class ContentsPrettyView(grok.View):
+class ContentsPrettyView(BrowserView):
     """ Show content in a pretty way for every folder. """
 
-    grok.name('contents_pretty_view')
-    grok.context(Interface)
-    grok.require('base.member')
-    grok.template('contentspretty')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('contents_pretty_view')
+    # grok.context(Interface)
+    # grok.require('base.member')
+    # grok.template('contentspretty')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def getItemPropierties(self):
         all_items = []
@@ -916,14 +919,14 @@ class ContentsPrettyView(grok.View):
         return all_items
 
 
-class CollectionNewsView(grok.View, CollectionView):
+class CollectionNewsView(BrowserView, CollectionView):
     """ Show content from news in a folder, added search input """
 
-    grok.name('collection_news_view')
-    grok.context(Interface)
-    grok.require('base.member')
-    grok.template('collectionnews')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('collection_news_view')
+    # grok.context(Interface)
+    # grok.require('base.member')
+    # grok.template('collectionnews')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def viewUrl(self):
         return self.context.absolute_url()
@@ -962,17 +965,17 @@ class CollectionNewsView(grok.View, CollectionView):
 class SharedWithMe(baseCommunities):
     """ The list of communities """
 
-    grok.context(IPloneSiteRoot)
-    grok.require('base.member')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.context(IPloneSiteRoot)
+    # grok.require('base.member')
+    # grok.layer(IUlearn5ThemeLayer)
 
 
-class ResetMenuBar(grok.View):
+class ResetMenuBar(BrowserView):
     """ This view reset the personal bar """
-    grok.name('reset_menu')
-    grok.context(Interface)
-    grok.require('base.webmaster')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('reset_menu')
+    # grok.context(Interface)
+    # grok.require('base.webmaster')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
@@ -980,12 +983,12 @@ class ResetMenuBar(grok.View):
         soup_menu.clear()
         self.redirect(portal.absolute_url())
 
-class ResetHeader(grok.View):
+class ResetHeader(BrowserView):
     """ This view reset the header """
-    grok.name('reset_header')
-    grok.context(Interface)
-    grok.require('base.webmaster')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('reset_header')
+    # grok.context(Interface)
+    # grok.require('base.webmaster')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
@@ -993,12 +996,12 @@ class ResetHeader(grok.View):
         soup_header.clear()
         self.redirect(portal.absolute_url())
 
-class ResetFooter(grok.View):
+class ResetFooter(BrowserView):
     """ This view reset the footer """
-    grok.name('reset_footer')
-    grok.context(Interface)
-    grok.require('base.webmaster')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('reset_footer')
+    # grok.context(Interface)
+    # grok.require('base.webmaster')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
@@ -1006,11 +1009,11 @@ class ResetFooter(grok.View):
         soup_footer.clear()
         self.redirect(portal.absolute_url())
 
-class SendEventToAttendees(grok.View):
-    grok.context(IDexterityContent)
-    grok.name('event_to_attendees')
-    grok.require('cmf.ModifyPortalContent')
-    grok.layer(IUlearn5ThemeLayer)
+class SendEventToAttendees(BrowserView):
+    # grok.context(IDexterityContent)
+    # grok.name('event_to_attendees')
+    # grok.require('cmf.ModifyPortalContent')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def render(self):
         portal = api.portal
@@ -1164,16 +1167,16 @@ class SendEventToAttendees(grok.View):
         return dt.astimezone(pytz.timezone(api.portal.get_registry_record('plone.portal_timezone')))
 
 
-class UsersCommunities(grok.View):
+class UsersCommunities(BrowserView):
     """ Vista que dado un usuario devuelve las comunidades a las que esta susbcrito y con que rol
         o dada una comunidad devuelve los usuarios susbcritos y con que rol
     """
 
-    grok.name('users_communities')
-    grok.context(IPloneSiteRoot)
-    grok.require('base.webmaster')
-    grok.template('users_communities')
-    grok.layer(IUlearn5ThemeLayer)
+    # grok.name('users_communities')
+    # grok.context(IPloneSiteRoot)
+    # grok.require('base.webmaster')
+    # grok.template('users_communities')
+    # grok.layer(IUlearn5ThemeLayer)
 
     def result(self):
         result = []
@@ -1261,10 +1264,10 @@ class UsersCommunities(grok.View):
         return 'user' in self.request.form
 
 
-class ExportUsersCommunities(grok.View):
-    grok.name('export_users_communities')
-    grok.context(IPloneSiteRoot)
-    grok.require('base.webmaster')
+class ExportUsersCommunities(BrowserView):
+    # grok.name('export_users_communities')
+    # grok.context(IPloneSiteRoot)
+    # grok.require('base.webmaster')
 
     data_header_columns = [
         "User ID",

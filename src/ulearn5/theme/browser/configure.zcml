@@ -60,4 +60,172 @@
       template="viewlets_templates/header_macros.pt"
       />
 
+
+    <browser:page 
+        name="all-communities"
+        class="ulearn5.theme.browser.views.AllComunities"
+        permission="base.member"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+    
+    <browser:page 
+        name="my-communities-ajax"
+        class="ulearn5.theme.browser.views.communitiesAJAX"
+        permission="base.member"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/my_communities_ajax.pt"
+        />
+
+    <browser:page 
+        name="dynamic.css"
+        class="ulearn5.theme.browser.views.dynamicCSS"
+        for="zope.interface.Interface"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="ulearncustom.css"
+        class="ulearn5.theme.browser.views.CustomCSS"
+        for="zope.interface.Interface"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/ulerncustom.css.pt"
+        />
+
+
+    <browser:page 
+        name="searchUser"
+        class="ulearn5.theme.browser.views.SearchUser"
+        for="zope.interface.Interface"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="searchUsers"
+        class="ulearn5.theme.browser.views.searchUsers"
+        for="zope.interface.Interface"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="gw_type_ahead_search"
+        class="ulearn5.theme.browser.views.TypeAheadSearch"
+        for="zope.interface.Interface"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="filtered_contents_search_view"
+        class="ulearn5.theme.browser.views.FilteredContentsSearchView"
+        for="zope.interface.Interface"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/filtered_contents_search.pt"
+        />
+
+    <browser:page 
+        name="search_filtered_content"
+        class="ulearn5.theme.browser.views.SearchFilteredContentAjax"
+        for="zope.interface.Interface"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/filtered_contents_search_ajax.pt"
+        />
+
+    <browser:page 
+        name="alltags"
+        class="ulearn5.theme.browser.views.AllTags"
+        for="zope.interface.Interface"
+        permission="base.authenticated"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/alltags.pt"
+        />
+
+    <browser:page 
+        name="search_filtered_news"
+        class="ulearn5.theme.browser.views.SearchFilteredNews"
+        for="zope.interface.Interface"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="contents_pretty_view"
+        class="ulearn5.theme.browser.views.ContentsPrettyView"
+        for="zope.interface.Interface"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/contentspretty.pt"
+        />
+
+    <browser:page 
+        name="collection_news_view"
+        class="ulearn5.theme.browser.views.CollectionNewsView"
+        for="zope.interface.Interface"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/collectionnews.pt"
+        />
+
+    <browser:page 
+        class="ulearn5.theme.browser.views.SharedWithMe"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="base.member"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="reset_menu"
+        class="ulearn5.theme.browser.views.ResetMenuBar"
+        for="zope.interface.Interface"
+        permission="base.webmaster"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="reset_header"
+        class="ulearn5.theme.browser.views.ResetHeader"
+        for="zope.interface.Interface"
+        permission="base.webmaster"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="reset_footer"
+        class="ulearn5.theme.browser.views.ResetFooter"
+        for="zope.interface.Interface"
+        permission="base.webmaster"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="event_to_attendees"
+        class="ulearn5.theme.browser.views.SendEventToAttendees"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        permission="cmf.ModifyPortalContent"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    <browser:page 
+        name="users_communities"
+        class="ulearn5.theme.browser.views.UsersCommunities"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="base.webmaster"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        template="views_templates/users_communities.pt"
+        />
+
+    <browser:page 
+        name="export_users_communities"
+        class="ulearn5.theme.browser.views.ExportUsers"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="base.webmaster"
+        layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
+        />
+
+    
+
+
+
 </configure>
