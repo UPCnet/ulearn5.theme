@@ -1,18 +1,16 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      tal:omit-tag="">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n" tal:omit-tag="">
 
   <tal:block tal:condition="not:view/isAnon">
 
-    <div class="ulearnbox portlet-noticies rss" i18n:domain="plone"
-         tal:condition="view/enabled">
+    <div class="ulearnbox portlet-noticies rss" i18n:domain="plone" tal:condition="view/enabled">
 
-      <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+      <div class="osomcorner-wrapper">
+        <div class="osomcorner"></div>
+      </div>
       <h2 tal:content="view/title">Tags</h2>
       <ul class="list-portlet">
-        <tal:rss tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime"
-                 tal:repeat="item view/items">
+        <tal:rss tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime" tal:repeat="item view/items">
 
           <li class="noticies clearfix">
             <div>
@@ -37,10 +35,11 @@
                   </time>
                 </p>
                 <tal:block tal:condition="view/data/display_description">
-                  <p class="description" tal:condition="item/summary|nothing" tal:content="item/summary">Text Noticia</p>
+                  <p class="description" tal:condition="item/summary|nothing" tal:content="item/summary">Text Noticia
+                  </p>
                 </tal:block>
                 <p class="categories" tal:condition="view/data/display_categories">
-                 <span class="category" tal:repeat="category item/categories" tal:content="category">Categoria</span>
+                  <span class="category" tal:repeat="category item/categories" tal:content="category">Categoria</span>
                 </p>
               </div>
             </div>
@@ -49,25 +48,28 @@
         <li class="noticies clearfix" tal:condition="view/data/more_url">
           <a href="" tal:attributes="href view/data/more_url" target="_blink">
             <i class="icon-plus-sign icons"> </i>
-            <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més notícies</span>
+            <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més
+              notícies</span>
             <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">More news</span>
           </a>
         </li>
         <li class="noticies clearfix" tal:condition="not:view/data/more_url">
           <a href="" tal:condition="view/siteurl" tal:attributes="href view/siteurl" target="_blink">
             <i class="icon-plus-sign icons"> </i>
-            <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més notícies</span>
+            <span tal:omit-tag="" tal:condition="view/data/more_text" tal:content="view/data/more_text">Més
+              notícies</span>
             <span tal:omit-tag="" tal:condition="not:view/data/more_text" i18n:translate="seemore">More news</span>
           </a>
         </li>
       </ul>
     </div>
     <script type="text/javascript">
-      $(".portlet-noticies.rss .description").each(function(){
+      $(".portlet-noticies.rss .description").each(function () {
         $(this).html($(this).text());
       });
       $(".portlet-noticies.rss a[rel='external']").attr("target", "_blink")
     </script>
 
   </tal:block>
+
 </html>

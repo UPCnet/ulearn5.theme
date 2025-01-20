@@ -19,7 +19,7 @@ import time
 
 # Accept these bozo_exceptions encountered by feedparser when parsing
 # the feed:
-ACCEPTED_FEEDPARSER_EXCEPTIONS = (feedparser.CharacterEncodingOverride, )
+ACCEPTED_FEEDPARSER_EXCEPTIONS = (feedparser.CharacterEncodingOverride,)
 
 # store the feeds here (which means in RAM)
 FEED_DATA = {}  # url: ({date, title, url, itemlist})
@@ -31,7 +31,9 @@ class RSSFeed(object):
     """an RSS feed"""
 
     # TODO: discuss whether we want an increasing update time here, probably not though
-    FAILURE_DELAY = 10  # time in minutes after which we retry to load it after a failure
+    FAILURE_DELAY = (
+        10  # time in minutes after which we retry to load it after a failure
+    )
 
     def __init__(self, url, timeout):
         self.url = url
@@ -40,10 +42,10 @@ class RSSFeed(object):
         self._items = []
         self._title = ""
         self._siteurl = ""
-        self._loaded = False    # is the feed loaded
-        self._failed = False    # does it fail at the last update?
-        self._last_update_time_in_minutes = 0   # when was the feed last updated?
-        self._last_update_time = None            # time as DateTime or Nonw
+        self._loaded = False  # is the feed loaded
+        self._failed = False  # does it fail at the last update?
+        self._last_update_time_in_minutes = 0  # when was the feed last updated?
+        self._last_update_time = None  # time as DateTime or Nonw
 
     @property
     def last_update_time_in_minutes(self):
@@ -61,7 +63,7 @@ class RSSFeed(object):
 
     @property
     def ok(self):
-        return (not self._failed and self._loaded)
+        return not self._failed and self._loaded
 
     @property
     def loaded(self):
@@ -90,23 +92,23 @@ class RSSFeed(object):
                 return self._retrieveFeed()
         except:
             self._failed = True
-            logger.exception('failed to update RSS feed %s', self.url)
+            logger.exception("failed to update RSS feed %s", self.url)
 
         return self.ok
 
     def _buildItemDict(self, item):
-        link = item.links[0]['href']
-        description = self.html_escape(item.get('description', '').encode('utf-8'))
+        link = item.links[0]["href"]
+        description = self.html_escape(item.get("description", "").encode("utf-8"))
         itemdict = {
-            'title': item.title,
-            'url': link,
-            'summary': self.abrevia(description, 250),
-            'image': item.get('href', '') or self.getFirstImageDescription(description),
-            'categories': [tag['term'] for tag in item.get('tags', [])],
+            "title": item.title,
+            "url": link,
+            "summary": self.abrevia(description, 250),
+            "image": item.get("href", "") or self.getFirstImageDescription(description),
+            "categories": [tag["term"] for tag in item.get("tags", [])],
         }
         if hasattr(item, "updated"):
             try:
-                itemdict['updated'] = DateTime(item.updated)
+                itemdict["updated"] = DateTime(item.updated)
             except DateTimeError:
                 # It's okay to drop it because in the
                 # template, this is checked with
@@ -118,12 +120,14 @@ class RSSFeed(object):
     def _retrieveFeed(self):
         """do the actual work and try to retrieve the feed"""
         url = self.url
-        if url != '':
+        if url != "":
             self._last_update_time_in_minutes = time.time() / 60
             self._last_update_time = DateTime()
             d = feedparser.parse(url)
-            if getattr(d, 'bozo', 0) == 1 and not isinstance(d.get('bozo_exception'), ACCEPTED_FEEDPARSER_EXCEPTIONS):
-                self._loaded = True     # we tried at least but have a failed load
+            if getattr(d, "bozo", 0) == 1 and not isinstance(
+                d.get("bozo_exception"), ACCEPTED_FEEDPARSER_EXCEPTIONS
+            ):
+                self._loaded = True  # we tried at least but have a failed load
                 self._failed = True
                 return False
             try:
@@ -136,7 +140,7 @@ class RSSFeed(object):
             except AttributeError:
                 self._siteurl = ""
 
-            for item in d['items']:
+            for item in d["items"]:
                 try:
                     itemdict = self._buildItemDict(item)
                 except AttributeError:
@@ -147,73 +151,83 @@ class RSSFeed(object):
             self._failed = False
             return True
         self._loaded = True
-        self._failed = True     # no url set means failed
-        return False    # no url set, although that actually should not really happen
+        self._failed = True  # no url set means failed
+        return False  # no url set, although that actually should not really happen
 
     def html_escape(self, summary):
-        summary = summary.replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', "'").replace('&gt;', '>').replace('&lt;', '<')
-        return summary.replace('&middot;', '·').replace('&rsquo;', "'").replace("&ldquo;", '"').replace("&nbsp;", ' ')
+        summary = (
+            summary.replace("&amp;", "&")
+            .replace("&quot;", '"')
+            .replace("&apos;", "'")
+            .replace("&gt;", ">")
+            .replace("&lt;", "<")
+        )
+        return (
+            summary.replace("&middot;", "·")
+            .replace("&rsquo;", "'")
+            .replace("&ldquo;", '"')
+            .replace("&nbsp;", " ")
+        )
 
     def cleanConflictiveTags(self, summary):
         while "<iframe>" in summary:
-            startTag = summary.find('<iframe>')
-            endTag = summary.find('</iframe>', startTag) + 9
+            startTag = summary.find("<iframe>")
+            endTag = summary.find("</iframe>", startTag) + 9
             summary = summary[0:startTag] + summary[endTag:]
 
         while "<script>" in summary:
-            startTag = summary.find('<script>')
-            endTag = summary.find('</script>', startTag) + 9
+            startTag = summary.find("<script>")
+            endTag = summary.find("</script>", startTag) + 9
             summary = summary[0:startTag] + summary[endTag:]
 
         while "<img" in summary:
-            startTag = summary.find('<img')
-            endTag = summary.find('>', startTag) + 1
+            startTag = summary.find("<img")
+            endTag = summary.find(">", startTag) + 1
             summary = summary[0:startTag] + summary[endTag:]
 
         return summary
 
     def abrevia(self, summary, sumlenght):
-        """ Retalla contingut de cadenes
-        """
-        bb = ''
+        """Retalla contingut de cadenes"""
+        bb = ""
         summary = self.cleanConflictiveTags(summary)
         if sumlenght < len(summary):
             bb = summary[:sumlenght]
-            if '<a' in bb:
-                startLink = summary.find('<a')
-                sumlenght += 4 + summary.find('>', startLink) - startLink
+            if "<a" in bb:
+                startLink = summary.find("<a")
+                sumlenght += 4 + summary.find(">", startLink) - startLink
                 bb = summary[:sumlenght]
 
-            lastspace = bb.rfind(' ')
+            lastspace = bb.rfind(" ")
             cutter = lastspace
             precut = bb[0:cutter]
 
-            if precut.count('<b>') > precut.count('</b>'):
-                cutter = summary.find('</b>', lastspace) + 4
-            elif precut.count('<strong>') > precut.count('</strong>'):
-                cutter = summary.find('</strong>', lastspace) + 9
+            if precut.count("<b>") > precut.count("</b>"):
+                cutter = summary.find("</b>", lastspace) + 4
+            elif precut.count("<strong>") > precut.count("</strong>"):
+                cutter = summary.find("</strong>", lastspace) + 9
 
-            if precut.count('<a') > precut.count('</a>'):
-                cutter = summary.find('</a>', lastspace) + 4
+            if precut.count("<a") > precut.count("</a>"):
+                cutter = summary.find("</a>", lastspace) + 4
 
             bb = summary[0:cutter]
 
-            if bb.count('<p') > precut.count('</p'):
-                bb += ' ...</p>'
+            if bb.count("<p") > precut.count("</p"):
+                bb += " ...</p>"
             else:
-                bb = bb + ' ...'
+                bb = bb + " ..."
         else:
             bb = summary
 
         try:
-            return BeautifulSoup(bb.decode('utf-8', 'ignore')).prettify()
+            return BeautifulSoup(bb.decode("utf-8", "ignore")).prettify()
         except:
             return BeautifulSoup(bb).prettify()
 
     def getFirstImageDescription(self, summary):
-        startTag = summary.find('<img')
+        startTag = summary.find("<img")
         if startTag >= 0:
-            startLink = summary.find('src', startTag) + 5
+            startLink = summary.find("src", startTag) + 5
             endLink = summary.find('"', startLink)
             return summary[startLink:endLink]
         else:
@@ -244,70 +258,90 @@ class RSSFeed(object):
 
 class IRSSPortlet(IPortletDataProvider):
 
-    portlet_title = schema.TextLine(title=_PMF('Title'),
-                                    description=_PMF('Title of the portlet.  If omitted, the title of the feed will be used.'),
-                                    required=False,
-                                    default='')
+    portlet_title = schema.TextLine(
+        title=_PMF("Title"),
+        description=_PMF(
+            "Title of the portlet.  If omitted, the title of the feed will be used."
+        ),
+        required=False,
+        default="",
+    )
 
-    count = schema.Int(title=_PMF('Number of items to display'),
-                       description=_PMF('How many items to list.'),
-                       required=True,
-                       default=5)
+    count = schema.Int(
+        title=_PMF("Number of items to display"),
+        description=_PMF("How many items to list."),
+        required=True,
+        default=5,
+    )
 
-    url = schema.TextLine(title=_PMF('URL of RSS feed'),
-                          description=_PMF('Link of the RSS feed to display.'),
-                          required=True,
-                          default='')
+    url = schema.TextLine(
+        title=_PMF("URL of RSS feed"),
+        description=_PMF("Link of the RSS feed to display."),
+        required=True,
+        default="",
+    )
 
-    timeout = schema.Int(title=_PMF('Feed reload timeout'),
-                         description=_PMF('Time in minutes after which the feed should be reloaded.'),
-                         required=True,
-                         default=100)
+    timeout = schema.Int(
+        title=_PMF("Feed reload timeout"),
+        description=_PMF("Time in minutes after which the feed should be reloaded."),
+        required=True,
+        default=100,
+    )
 
-    display_date = schema.Bool(title=_('Display dates'),
-                               required=False,
-                               default=True)
+    display_date = schema.Bool(title=_("Display dates"), required=False, default=True)
 
-    display_description = schema.Bool(title=_('Display descriptions'),
-                                      required=False,
-                                      default=True)
+    display_description = schema.Bool(
+        title=_("Display descriptions"), required=False, default=True
+    )
 
-    display_image = schema.Bool(title=_('Display images'),
-                                required=False,
-                                default=True)
+    display_image = schema.Bool(title=_("Display images"), required=False, default=True)
 
-    display_categories = schema.Bool(title=_('Display categories'),
-                                     required=False,
-                                     default=False)
+    display_categories = schema.Bool(
+        title=_("Display categories"), required=False, default=False
+    )
 
-    more_url = schema.TextLine(title=_('More link'),
-                               description=_('Url that links to more content.'),
-                               required=False,
-                               default='')
+    more_url = schema.TextLine(
+        title=_("More link"),
+        description=_("Url that links to more content."),
+        required=False,
+        default="",
+    )
 
-    more_text = schema.TextLine(title=_('More text'),
-                                description=_('Text to show more content.'),
-                                required=False,
-                                default='')
+    more_text = schema.TextLine(
+        title=_("More text"),
+        description=_("Text to show more content."),
+        required=False,
+        default="",
+    )
 
 
 @implementer(IRSSPortlet)
 class Assignment(base.Assignment):
 
-    portlet_title = ''
+    portlet_title = ""
 
     @property
     def title(self):
         """return the title with RSS feed title or from URL"""
         feed = FEED_DATA.get(self.data.url, None)
         if feed is None:
-            return 'RSS: ' + self.url[:20]
+            return "RSS: " + self.url[:20]
         else:
-            return 'RSS: ' + feed.title[:20]
+            return "RSS: " + feed.title[:20]
 
-    def __init__(self, portlet_title='', count=5, url="", timeout=100,
-                 display_date=True, display_description=True, display_image=True,
-                 display_categories=False, more_text='', more_url=''):
+    def __init__(
+        self,
+        portlet_title="",
+        count=5,
+        url="",
+        timeout=100,
+        display_date=True,
+        display_description=True,
+        display_image=True,
+        display_categories=False,
+        more_text="",
+        more_url="",
+    ):
         self.portlet_title = portlet_title
         self.count = count
         self.url = url
@@ -322,7 +356,7 @@ class Assignment(base.Assignment):
 
 class Renderer(base.DeferredRenderer):
 
-    render_full = ZopeTwoPageTemplateFile('rss.pt')
+    render_full = ZopeTwoPageTemplateFile("rss.pt")
 
     @property
     def initializing(self):
@@ -375,11 +409,11 @@ class Renderer(base.DeferredRenderer):
     @property
     def title(self):
         """return title of feed for portlet"""
-        return getattr(self.data, 'portlet_title', '') or self._getFeed().title
+        return getattr(self.data, "portlet_title", "") or self._getFeed().title
 
     @property
     def items(self):
-        return self._getFeed().items[:self.data.count]
+        return self._getFeed().items[: self.data.count]
 
     @property
     def enabled(self):
@@ -400,16 +434,18 @@ class AddForm(base.AddForm):
     description = _PMF("This portlet displays an RSS feed.")
 
     def create(self, data):
-        return Assignment(portlet_title=data.get('portlet_title', ''),
-                          count=data.get('count', 5),
-                          url=data.get('url', ''),
-                          timeout=data.get('timeout', 100),
-                          display_date=data.get('display_date', True),
-                          display_description=data.get('display_description', True),
-                          display_image=data.get('display_image', True),
-                          display_categories=data.get('display_categories', False),
-                          more_text=data.get('more_text', ''),
-                          more_url=data.get('more_url', ''))
+        return Assignment(
+            portlet_title=data.get("portlet_title", ""),
+            count=data.get("count", 5),
+            url=data.get("url", ""),
+            timeout=data.get("timeout", 100),
+            display_date=data.get("display_date", True),
+            display_description=data.get("display_description", True),
+            display_image=data.get("display_image", True),
+            display_categories=data.get("display_categories", False),
+            more_text=data.get("more_text", ""),
+            more_url=data.get("more_url", ""),
+        )
 
 
 class EditForm(base.EditForm):
