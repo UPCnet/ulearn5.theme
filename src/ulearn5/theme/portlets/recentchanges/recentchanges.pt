@@ -1,33 +1,27 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      tal:condition="not:view/isAnon"
-      tal:omit-tag="">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n" tal:condition="not:view/isAnon" tal:omit-tag="">
 
-<div class="ulearnbox portletRecentChanges"
-    i18n:domain="plone"
-    tal:define="recent_items view/recent_items">
+  <div class="ulearnbox portletRecentChanges" i18n:domain="plone" tal:define="recent_items view/recent_items">
 
-    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+    <div class="osomcorner-wrapper">
+      <div class="osomcorner"></div>
+    </div>
     <h2 class="titleBox" tal:content="view/title"> Updated resources </h2>
     <ul>
       <tal:items tal:define="plone_view context/@@plone;
                              normalizeString nocall:plone_view/normalizeString;
-                             toLocalizedTime nocall:plone_view/toLocalizedTime;"
-                 tal:repeat="obj recent_items">
+                             toLocalizedTime nocall:plone_view/toLocalizedTime;" tal:repeat="obj recent_items">
 
-        <li tal:attributes="class string:${obj/community_type} changeRow"
-            tal:define="item_wf_state obj/review_state;
+        <li tal:attributes="class string:${obj/community_type} changeRow" tal:define="item_wf_state obj/review_state;
                         item_wf_state_class python:'state-' + normalizeString(item_wf_state);
                         item_class string:contenttype-${obj/portal_type};">
           <div tal:attributes="class string:infoTypeChange $item_class">
-            <a href=""
-                tal:attributes="href string:${obj/getURL}/view;
+            <a href="" tal:attributes="href string:${obj/getURL}/view;
                                 title obj/item_title;
                                 class string:$item_wf_state_class tile">
               <div class="titleChange">
                 <p tal:content="obj/item_title">
-                     Title
+                  Title
                 </p>
               </div>
               <div class="infoChange">
@@ -43,7 +37,6 @@
         </li>
       </tal:items>
     </ul>
-</div>
+  </div>
+
 </html>
-
-

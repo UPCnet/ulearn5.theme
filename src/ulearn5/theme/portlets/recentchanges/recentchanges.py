@@ -22,12 +22,11 @@ logger = logging.getLogger("Plone")
 
 class IRecentChangesPortlet(IPortletDataProvider):
 
-    name = schema.TextLine(title=_PMF("Title"),
-                           required=True)
+    name = schema.TextLine(title=_PMF("Title"), required=True)
 
-    count = schema.Int(title=_PMF('Number of items to display'),
-                       required=True,
-                       default=6)
+    count = schema.Int(
+        title=_PMF("Number of items to display"), required=True, default=6
+    )
 
 
 @implementer(IRecentChangesPortlet)
@@ -39,14 +38,14 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        """ Display the name in portlet mngmt interface """
+        """Display the name in portlet mngmt interface"""
         if self.name:
             return self.name
-        return _('Recent changes')
+        return _("Recent changes")
 
 
 class Renderer(base.Renderer):
-    _template = ViewPageTemplateFile('recentchanges.pt')
+    _template = ViewPageTemplateFile("recentchanges.pt")
 
     def title(self):
         return self.data.title
@@ -55,13 +54,23 @@ class Renderer(base.Renderer):
         base.Renderer.__init__(self, *args)
 
         context = aq_inner(self.context)
-        portal_state = getMultiAdapter((context, self.request), name='plone_portal_state')
+        portal_state = getMultiAdapter(
+            (context, self.request), name="plone_portal_state"
+        )
         self.anonymous = portal_state.anonymous()
         self.navigation_root_url = portal_state.navigation_root_url()
-        self.typesToShow = ['Document', 'File', 'Folder', 'Image', 'Link', 'ulearn.video', 'ulearn.video_embed']
+        self.typesToShow = [
+            "Document",
+            "File",
+            "Folder",
+            "Image",
+            "Link",
+            "ulearn.video",
+            "ulearn.video_embed",
+        ]
         self.navigation_root_path = portal_state.navigation_root_path()
 
-        plone_tools = getMultiAdapter((context, self.request), name='plone_tools')
+        plone_tools = getMultiAdapter((context, self.request), name="plone_tools")
         self.catalog = plone_tools.catalog()
 
     def render(self):
@@ -77,11 +86,13 @@ class Renderer(base.Renderer):
 
     def _data(self):
         limit = self.data.count
-        query = {'sort_on': 'modified',
-                 'path': {'query': self.getRootPath()},
-                 'portal_type': self.typesToShow,
-                 'sort_order': 'reverse',
-                 'sort_limit': limit}
+        query = {
+            "sort_on": "modified",
+            "path": {"query": self.getRootPath()},
+            "portal_type": self.typesToShow,
+            "sort_order": "reverse",
+            "sort_limit": limit,
+        }
 
         items = self.catalog(**query)[:limit]
         results = []
@@ -90,23 +101,30 @@ class Renderer(base.Renderer):
                 value = item.getObject()
                 if item.Description:
                     if len(item.Description) > 110:
-                        itemdescr = item.Description[:110] + '...'
+                        itemdescr = item.Description[:110] + "..."
                     else:
                         itemdescr = item.Description
                 else:
-                    itemdescr = ''
+                    itemdescr = ""
 
-                community_type = value.community_type if hasattr(value, 'community_type') else "notCommunity"
+                community_type = (
+                    value.community_type
+                    if hasattr(value, "community_type")
+                    else "notCommunity"
+                )
 
-                results += [{'item_title': item.Title,
-                             'item_description': itemdescr,
-                             'portal_type': value.portal_type.replace('.', '-'),
-                             'getURL': item.getURL(),
-                             'review_state': item.review_state,
-                             'creator': item.Creator,
-                             'community_type': community_type,
-                             'ModificationDate': value.modification_date.strftime('%d/%m')
-                             }]
+                results += [
+                    {
+                        "item_title": item.Title,
+                        "item_description": itemdescr,
+                        "portal_type": value.portal_type.replace(".", "-"),
+                        "getURL": item.getURL(),
+                        "review_state": item.review_state,
+                        "creator": item.Creator,
+                        "community_type": community_type,
+                        "ModificationDate": value.modification_date.strftime("%d/%m"),
+                    }
+                ]
             return results
         else:
             return None
@@ -127,10 +145,10 @@ class Renderer(base.Renderer):
                 if ICommunity.providedBy(obj):
                     community_path = obj.getPhysicalPath()
                     break
-            return '/'.join(community_path)
+            return "/".join(community_path)
         else:
             portal_path = portal.getPhysicalPath()
-            return '/'.join(portal_path)
+            return "/".join(portal_path)
 
 
 class AddForm(base.AddForm):
@@ -139,7 +157,7 @@ class AddForm(base.AddForm):
     description = _("This portlet displays recently modified content.")
 
     def create(self, data):
-        return Assignment(name=data.get('name', ""), count=data.get('count', 5))
+        return Assignment(name=data.get("name", ""), count=data.get("count", 5))
 
 
 class EditForm(base.EditForm):
