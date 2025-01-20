@@ -23,7 +23,7 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.event.interfaces import IEvent
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.i18nmessageid import MessageFactory
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.interfaces import IEventsFolder
@@ -40,8 +40,8 @@ class ICalendarPortlet(IPortletDataProvider):
     """ A portlet which renders the calendar portlet """
 
 
+@implementer(ICalendarPortlet)
 class Assignment(base.Assignment):
-    implements(ICalendarPortlet)
     title = _('Calendar')
 
 

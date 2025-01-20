@@ -7,7 +7,7 @@ from hashlib import sha1
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-from zope.interface import implements
+from zope.interface import implementer
 
 from base5.core.utils import get_safe_member_by_id
 from base5.core.utils import pref_lang
@@ -20,8 +20,8 @@ class IThinnkersPortlet(IPortletDataProvider):
     """
 
 
+@implementer(IThinnkersPortlet)
 class Assignment(base.Assignment):
-    implements(IThinnkersPortlet)
 
     title = _('thinnkers portlet')
 

@@ -6,7 +6,7 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from repoze.catalog.query import Eq
 from souper.soup import get_soup
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
@@ -17,8 +17,8 @@ class IMyCommunitiesNavigation(IPortletDataProvider):
     """A portlet which can render the logged user profile information."""
 
 
+@implementer(IMyCommunitiesNavigation)
 class Assignment(base.Assignment):
-    implements(IMyCommunitiesNavigation)
 
     title = _("mycommunities", default="My Communities portlet")
 

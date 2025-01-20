@@ -10,7 +10,7 @@ from plone.app.portlets import PloneMessageFactory as _PMF
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 
@@ -291,8 +291,8 @@ class IRSSPortlet(IPortletDataProvider):
                                 default='')
 
 
+@implementer(IRSSPortlet)
 class Assignment(base.Assignment):
-    implements(IRSSPortlet)
 
     portlet_title = ''
 

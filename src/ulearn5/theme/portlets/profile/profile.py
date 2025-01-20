@@ -14,7 +14,7 @@ from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import queryUtility
-from zope.interface import implements
+from zope.interface import implementer
 
 from base5.core.utils import get_safe_member_by_id
 from base5.core.utils import pref_lang
@@ -32,8 +32,8 @@ class IProfilePortlet(IPortletDataProvider):
     """ A portlet which can render the logged user profile information. """
 
 
+@implementer(IProfilePortlet)
 class Assignment(base.Assignment):
-    implements(IProfilePortlet)
 
     title = _('profile', default='User profile')
 

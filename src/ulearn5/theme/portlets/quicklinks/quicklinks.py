@@ -10,7 +10,7 @@ from plone.memoize.compress import xhtml_compress
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 
@@ -24,8 +24,8 @@ class IQuicklinksPortlet(IPortletDataProvider):
                            source=CatalogSource(is_folderish=True))
 
 
+@implementer(IQuicklinksPortlet)
 class Assignment(base.Assignment):
-    implements(IQuicklinksPortlet)
 
     def __init__(self, folder=None):
         self.folder = folder

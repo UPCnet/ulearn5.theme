@@ -4,7 +4,7 @@ from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.component import getMultiAdapter
-from zope.interface import implements
+from zope.interface import implementer
 
 from Acquisition import aq_chain
 from Acquisition import aq_inner
@@ -20,8 +20,8 @@ class IProfileCommunityPortlet(IPortletDataProvider):
     """ A portlet which can render the community information. """
 
 
+@implementer(IProfileCommunityPortlet)
 class Assignment(base.Assignment):
-    implements(IProfileCommunityPortlet)
 
     title = _('profilecommunity', default='Profile Community')
 

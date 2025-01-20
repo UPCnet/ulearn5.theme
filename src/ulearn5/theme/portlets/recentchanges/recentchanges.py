@@ -10,7 +10,7 @@ from plone.memoize.compress import xhtml_compress
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.component import getMultiAdapter
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
@@ -30,8 +30,8 @@ class IRecentChangesPortlet(IPortletDataProvider):
                        default=6)
 
 
+@implementer(IRecentChangesPortlet)
 class Assignment(base.Assignment):
-    implements(IRecentChangesPortlet)
 
     def __init__(self, name="", count=5):
         self.name = name

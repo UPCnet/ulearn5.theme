@@ -9,7 +9,7 @@ from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 
 from base5.core.utils import abreviaPlainText
 from ulearn5.core import _
@@ -39,8 +39,8 @@ class IFlashesInformativosPortlet(IPortletDataProvider):
     )
 
 
+@implementer(IFlashesInformativosPortlet)
 class Assignment(base.Assignment):
-    implements(IFlashesInformativosPortlet)
 
     def __init__(self, name="", count=4):
         self.name = name

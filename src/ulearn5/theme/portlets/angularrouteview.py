@@ -5,7 +5,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 
@@ -14,8 +14,8 @@ class IAngularRouteViewPortlet(IPortletDataProvider):
     """ A portlet angular route view """
 
 
+@implementer(IAngularRouteViewPortlet)
 class Assignment(base.Assignment):
-    implements(IAngularRouteViewPortlet)
 
     title = _('angularrouteview', default='AngularRouteView')
 

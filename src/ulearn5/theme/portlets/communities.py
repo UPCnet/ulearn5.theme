@@ -13,7 +13,7 @@ from repoze.catalog.query import Eq
 from souper.soup import get_soup
 from zope.component import queryUtility
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 from zope.security import checkPermission
 
 from ulearn5.core import _
@@ -26,8 +26,8 @@ class ICommunitiesNavigation(IPortletDataProvider):
     """
 
 
+@implementer(ICommunitiesNavigation)
 class Assignment(base.Assignment):
-    implements(ICommunitiesNavigation)
 
     title = _('communities', default='Communities portlet')
 

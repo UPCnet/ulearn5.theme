@@ -6,7 +6,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from plone.registry.interfaces import IRegistry
 from zope import schema
 from zope.component import queryUtility
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
@@ -40,8 +40,8 @@ class IMySubjectsPortlet(IPortletDataProvider):
     )
 
 
+@implementer(IMySubjectsPortlet)
 class Assignment(base.Assignment):
-    implements(IMySubjectsPortlet)
 
     title = _("mysubjects", default="mysubjects")
 

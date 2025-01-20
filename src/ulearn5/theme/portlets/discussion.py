@@ -10,7 +10,7 @@ from plone.app.portlets.portlets import base
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.component.hooks import getSite
-from zope.interface import implements
+from zope.interface import implementer
 
 from ulearn5.core import _
 from ulearn5.core.content.community import ICommunity
@@ -24,8 +24,8 @@ class ICommentsPortlet(IPortletDataProvider):
     """
 
 
+@implementer(ICommentsPortlet)
 class Assignment(base.Assignment):
-    implements(ICommentsPortlet)
 
     title = _('discussion', default='Discussion portlet')
 
