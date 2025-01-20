@@ -17,18 +17,18 @@ from ulearn5.core.content.community import ICommunity
 
 
 class IProfileCommunityPortlet(IPortletDataProvider):
-    """ A portlet which can render the community information. """
+    """A portlet which can render the community information."""
 
 
 @implementer(IProfileCommunityPortlet)
 class Assignment(base.Assignment):
 
-    title = _('profilecommunity', default='Profile Community')
+    title = _("profilecommunity", default="Profile Community")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('profilecommunity.pt')
+    render = ViewPageTemplateFile("profilecommunity.pt")
 
     def __init__(self, context, request, view, manager, data):
         super(Renderer, self).__init__(context, request, view, manager, data)
@@ -42,7 +42,7 @@ class Renderer(base.Renderer):
         return True
 
     def has_webmaster_role(self):
-        return 'WebMaster' in api.user.get_roles()
+        return "WebMaster" in api.user.get_roles()
 
     def get_community(self):
         context = aq_inner(self.context)
@@ -59,21 +59,27 @@ class Renderer(base.Renderer):
         return False
 
     def showEditCommunity(self):
-        if not IPloneSiteRoot.providedBy(self.context) and \
-           ICommunity.providedBy(self.context) and \
-           'Owner' in api.user.get_roles(username=self.username, obj=self.context):
+        if (
+            not IPloneSiteRoot.providedBy(self.context)
+            and ICommunity.providedBy(self.context)
+            and "Owner" in api.user.get_roles(username=self.username, obj=self.context)
+        ):
             return True
 
     def get_addable_types(self):
-        factories_view = getMultiAdapter((self.context, self.request), name='folder_factories')
+        factories_view = getMultiAdapter(
+            (self.context, self.request), name="folder_factories"
+        )
         return factories_view.addable_types()
 
     def get_posts_literal(self):
-        literal = api.portal.get_registry_record(name='ulearn5.core.controlpanel.IUlearnControlPanelSettings.people_literal')
-        if literal == 'thinnkers':
-            return 'thinnkins'
+        literal = api.portal.get_registry_record(
+            name="ulearn5.core.controlpanel.IUlearnControlPanelSettings.people_literal"
+        )
+        if literal == "thinnkers":
+            return "thinnkins"
         else:
-            return 'entrades'
+            return "entrades"
 
     def get_hash(self, community):
         return sha1(community.absolute_url()).hexdigest()
