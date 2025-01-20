@@ -1,6 +1,4 @@
-<div ng-controller="homeTopPageMenuButtons as ctrl"
-   tal:condition="not:view/isAnon"
-   tal:define="shared view/is_activate_sharedwithme;
+<div ng-controller="homeTopPageMenuButtons as ctrl" tal:condition="not:view/isAnon" tal:define="shared view/is_activate_sharedwithme;
    news view/is_activate_news;
    cls view/getClass">
     <div id="menusup" i18n:domain="ulearn">
@@ -8,15 +6,17 @@
             <div tal:attributes="class cls" ng-class="{active: ctrl.active_tab == 'stream'}">
                 <div class="arrow"></div>
                 <div class="bubble-content">
-                   <a ng-click="ctrl.active_tab = 'stream'" i18n:attributes="title Stream; aria-label Stream" aria-hidden="true">
-                      <i class="fa fa-comment icons"></i>
-                   </a>
+                    <a ng-click="ctrl.active_tab = 'stream'" i18n:attributes="title Stream; aria-label Stream"
+                        aria-hidden="true">
+                        <i class="fa fa-comment icons"></i>
+                    </a>
                 </div>
             </div>
             <div tal:attributes="class cls" ng-class="{active: ctrl.active_tab == 'mycommunities'}">
                 <div class="arrow"></div>
                 <div class="bubble-content">
-                    <a ng-click="ctrl.active_tab = 'mycommunities'" i18n:attributes="title my_communities; aria-label my_communities" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'mycommunities'"
+                        i18n:attributes="title my_communities; aria-label my_communities" aria-hidden="true">
                         <i class="fa fa-group icons"></i>
                     </a>
                 </div>
@@ -24,21 +24,23 @@
             <div tal:condition="news" tal:attributes="class cls" ng-class="{active: ctrl.active_tab == 'news'}">
                 <div class="arrow"></div>
                 <div class="bubble-content">
-                    <a ng-click="ctrl.active_tab = 'news'" i18n:attributes="title news; aria-label news" aria-hidden="true">
+                    <a ng-click="ctrl.active_tab = 'news'" i18n:attributes="title news; aria-label news"
+                        aria-hidden="true">
                         <i class="fa fa-newspaper-o icons"></i>
                     </a>
                 </div>
             </div>
-            <div tal:condition="shared" tal:attributes="class cls" ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
+            <div tal:condition="shared" tal:attributes="class cls"
+                ng-class="{active: ctrl.active_tab == 'sharedwithme'}">
                 <div class="arrow"></div>
                 <div class="bubble-content">
                     <a ng-click="ctrl.active_tab = 'sharedwithme'" title="Shared with me" aria-label="Shared with me"
-                       i18n:attributes="title shared_with_me; aria-label shared_with_me" aria-hidden="true">
+                        i18n:attributes="title shared_with_me; aria-label shared_with_me" aria-hidden="true">
                         <i class="fa fa-share-alt icons"></i>
                     </a>
                 </div>
             </div>
-       </nav>
+        </nav>
     </div>
     <div ng-switch="ctrl.active_tab">
         <div id="maxui-widget-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'stream'}"></div>
@@ -48,14 +50,13 @@
                     <div id="searchinputcommunities">
                         <div class="input-append row">
                             <div class="col-md-7 col-sm-7 col-xs-7">
-                                <input ng-model="q"
-                                       class="form-control searchInput" type="text" placeholder="Cerca"
-                                       i18n:attributes="placeholder search_communities">
+                                <input ng-model="q" class="form-control searchInput" type="text" placeholder="Cerca"
+                                    i18n:attributes="placeholder search_communities">
                                 <span class="add-on"><i class="fa fa-search"></i></span>
                             </div>
                             <div class="col-md-5 col-sm-5 col-xs-5">
                                 <select ng-model="t" ng-select="comCtrl.searchby($item)" i18n:domain="ulearn"
-                                        class="form-control searchInput">
+                                    class="form-control searchInput">
                                     <option value="" i18n:translate="">Todas las comunidades</option>
                                     <option value="Closed" i18n:translate="Closed">Closed</option>
                                     <option value="Open" i18n:translate="Open">Open</option>
@@ -65,13 +66,14 @@
                         </div>
                     </div>
                     <section id="communitylist">
-                        <article class="media" dir-paginate="community in comCtrl.user_communities | filter:q | filter:t | itemsPerPage: comCtrl.pageSize" current-page="comCtrl.currentPage" ng-cloak>
+                        <article class="media"
+                            dir-paginate="community in comCtrl.user_communities | filter:q | filter:t | itemsPerPage: comCtrl.pageSize"
+                            current-page="comCtrl.currentPage" ng-cloak>
                             <div class="media-left">
                                 <a ng-href="{{community.url_tab_view}}">
-                                    <img ng-if="community.image"
-                                         ng-src="{{community.url}}/@@images/image/thumb" />
+                                    <img ng-if="community.image" ng-src="{{community.url}}/@@images/image/thumb" />
                                     <img ng-if="!community.image"
-                                         tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/avatar_default.png" />
+                                        tal:attributes="src string:${view/portal_url}/++theme++ulearn5/assets/images/avatar_default.png" />
                                 </a>
                             </div>
                             <div class="media-body">
@@ -82,73 +84,73 @@
                             </div>
                             <div class="community-actions">
                                 <a class="community-action community-notify community-icon-"
-                                   ng-if="community.activate_notify_push && comCtrl.is_subscribed(community.url)"
-                                   ng-class="{'community-not_notify_push': community.not_notify_push}"
-                                   ng-click="comCtrl.toggleNotNotifyPush(community)">
-                                   {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYPUSH' | translate }}
+                                    ng-if="community.activate_notify_push && comCtrl.is_subscribed(community.url)"
+                                    ng-class="{'community-not_notify_push': community.not_notify_push}"
+                                    ng-click="comCtrl.toggleNotNotifyPush(community)">
+                                    {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYPUSH' | translate }}
                                 </a>
                                 <a class="community-action community-notify-mail community-icon-"
-                                   ng-if="community.activate_notify_mail && comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
-                                   ng-class="{'community-not_notify_mail': community.not_notify_mail}"
-                                   ng-click="comCtrl.toggleNotNotifyMail(community)">
-                                   {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYMAIL' | translate }}
+                                    ng-if="community.activate_notify_mail && comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+                                    ng-class="{'community-not_notify_mail': community.not_notify_mail}"
+                                    ng-click="comCtrl.toggleNotNotifyMail(community)">
+                                    {{ 'ALLCOMMUNITIES_VIEW.NOTNOTIFYMAIL' | translate }}
                                 </a>
                                 <a class="community-action community-favorite community-icon-"
-                                   ng-class="{'community-favorited': community.favorited}"
-                                   ng-click="comCtrl.toggleFavorite(community)">
-                                  {{ 'ALLCOMMUNITIES_VIEW.FAVORITE' | translate }}
+                                    ng-class="{'community-favorited': community.favorited}"
+                                    ng-click="comCtrl.toggleFavorite(community)">
+                                    {{ 'ALLCOMMUNITIES_VIEW.FAVORITE' | translate }}
                                 </a>
                                 <a class="community-action community-subscribe community-icon-"
-                                   ng-if="!comCtrl.is_subscribed(community.url)"
-                                   ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
-                                   ng-click="comCtrl.subscribe(community)" ng-cloak>
-                                  {{ 'ALLCOMMUNITIES_VIEW.SUBSCRIBE' | translate }}
+                                    ng-if="!comCtrl.is_subscribed(community.url)"
+                                    ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
+                                    ng-click="comCtrl.subscribe(community)" ng-cloak>
+                                    {{ 'ALLCOMMUNITIES_VIEW.SUBSCRIBE' | translate }}
                                 </a>
                                 <a class="community-action community-subscribe community-icon-"
-                                   ng-if="comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
-                                   ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
-                                   ng-click="comCtrl.unSubscribe(community)" ng-cloak>
-                                  {{ 'ALLCOMMUNITIES_VIEW.UNSUBSCRIBE' | translate }}
+                                    ng-if="comCtrl.is_subscribed(community.url) && !(community.type === 'Organizative')"
+                                    ng-class="{'community-subscribed': comCtrl.is_subscribed(community.url)}"
+                                    ng-click="comCtrl.unSubscribe(community)" ng-cloak>
+                                    {{ 'ALLCOMMUNITIES_VIEW.UNSUBSCRIBE' | translate }}
                                 </a>
-                                <a class="community-action community-edit community-icon-"
-                                   ng-if="community.can_manage"
-                                   ng-href="{{community.url}}/edit">
-                                  {{ 'ALLCOMMUNITIES_VIEW.EDIT' | translate }}
+                                <a class="community-action community-edit community-icon-" ng-if="community.can_manage"
+                                    ng-href="{{community.url}}/edit">
+                                    {{ 'ALLCOMMUNITIES_VIEW.EDIT' | translate }}
                                 </a>
                                 <a class="community-action community-delete community-icon-"
-                                   ng-if="community.can_manage"
-                                   ng-click="comCtrl.delete(community)">
-                                  {{ 'ALLCOMMUNITIES_VIEW.DELETE' | translate }}
+                                    ng-if="community.can_manage" ng-click="comCtrl.delete(community)">
+                                    {{ 'ALLCOMMUNITIES_VIEW.DELETE' | translate }}
                                 </a>
                             </div>
                         </article>
                     </section>
                     <div class="pagination">
-                        <dir-pagination-controls boundary-links="true" tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                        <dir-pagination-controls boundary-links="true"
+                            tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}" tal:condition="news">
+        <div id="news-container" class="tab-container" ng-class="{active: ctrl.active_tab == 'news'}"
+            tal:condition="news">
             <div tal:define="dades_noticies view/dadesNoticies;
                           Batch python:modules['Products.CMFPlone'].Batch;
                           b_size python:10;
                           b_start python:0;
                           b_start request/b_start | b_start;
                           batch python:Batch(dades_noticies, b_size, int(b_start), orphan=1);"
-                        class="portlet-subscribed-news">
+                class="portlet-subscribed-news">
                 <div id="subscribednews-search" class="folded">
                     <a href="#" id="subscribednews-favorites-filter" title=""></a>
                     <div id="subscribednews-search-box">
-                        <input id="subscribednews-search-text" type="search"
-                         data-literal="" class="maxui-empty maxui-text-input"
-                         value="" tal:attributes="data-path context/absolute_url" />
+                        <input id="subscribednews-search-text" type="search" data-literal=""
+                            class="maxui-empty maxui-text-input" value=""
+                            tal:attributes="data-path context/absolute_url" />
 
                         <span class="add-on"><i class="fa fa-search"></i></span>
                         <select id="searcher_selector" class="form-control searcher_selector">
                             <option selected disabled><span i18n:translate="find_label">busqueda...</span></option>
                             <tal:search tal:repeat="search searchers">
-                               <option tal:content="search">search</option>
+                                <option tal:content="search">search</option>
                             </tal:search>
                         </select>
                     </div>
@@ -158,83 +160,85 @@
                     <li class="noticies clearfix" tal:repeat="obj batch">
                         <div>
                             <div class="imatge_noticia">
-                              <a href="" tal:attributes="href obj/url">
-                                  <img tal:condition="obj/new/image"
-                                     tal:define="scale obj/new/@@images" class="newsImage"
-                                     tal:attributes="src string:${obj/url}/@@images/image/mini" />
-                                  <img tal:condition="not:obj/new/image" class="newsImage"
-                                     src="/++theme++ulearn5/assets/images/defaultImage.png" />
-                                  <p class="discreet" tal:condition="obj/new/image_caption|nothing"
-                                     tal:content="structure obj/new/image_caption" >
-                                  </p>
-                              </a>
+                                <a href="" tal:attributes="href obj/url">
+                                    <img tal:condition="obj/new/image" tal:define="scale obj/new/@@images"
+                                        class="newsImage" tal:attributes="src string:${obj/url}/@@images/image/mini" />
+                                    <img tal:condition="not:obj/new/image" class="newsImage"
+                                        src="/++theme++ulearn5/assets/images/defaultImage.png" />
+                                    <p class="discreet" tal:condition="obj/new/image_caption|nothing"
+                                        tal:content="structure obj/new/image_caption">
+                                    </p>
+                                </a>
                             </div>
                             <div class="text_noticia">
                                 <h2>
                                     <a href="" tal:attributes="href obj/url">
-                                       <span tal:replace="obj/title">Notícies RSS</span>
+                                        <span tal:replace="obj/title">Notícies RSS</span>
                                     </a>
                                 </h2>
                                 <p class="data"><time class="smaller" tal:content="obj/date">May 5</time></p>
-                                <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text Noticia</span>
-                                <a href="#" class="readmore"
-                                   tal:attributes="href obj/url">
-                                   <span class="readmore" i18n:translate="readmore">Leer mas..</span>
+                                <span tal:condition="obj/text|nothing" tal:replace="structure obj/text">Text
+                                    Noticia</span>
+                                <a href="#" class="readmore" tal:attributes="href obj/url">
+                                    <span class="readmore" i18n:translate="readmore">Leer mas..</span>
                                 </a>
                             </div>
                         </div>
-                   </li>
-                   <li class="noticies clearfix">
-                    <a href="" tal:attributes="href string:${view/get_noticias_folder_url}">
-                      <i class="icon-plus-sign icons"> </i>
-                      <span i18n:translate="seemore">Mes noticies</span>
-                    </a>
-                  </li>
+                    </li>
+                    <li class="noticies clearfix">
+                        <a href="" tal:attributes="href string:${view/get_noticias_folder_url}">
+                            <i class="icon-plus-sign icons"> </i>
+                            <span i18n:translate="seemore">Mes noticies</span>
+                        </a>
+                    </li>
                 </ul>
                 <div metal:use-macro="here/batch_macros/macros/navigation" />
             </div>
             <script src="++ulearn++portlets/buttonbar/subscribednews.js"></script>
         </div>
-      <div id="librarysearch" ng-class="{active: ctrl.active_tab == 'sharedwithme'}" tal:condition="shared">
-         <div id="sharedwithme-container">
-            <div id="shared-with-me-view" ng-controller="SharedWithMe as swm">
-               <div class="caixessearch_shared">
-                  <div id="searchinputcontent">
-                     <div class="input-append">
-                        <input ng-model="q"
-                           class="form-control searchInput" type="text" placeholder="Cerca"
-                           i18n:attributes="placeholder search">
-                        <span class="add-on"><i class="fa fa-search"></i></span>
-                     </div>
-                  </div>
-               </div>
-               <section id="sharedlist" i18n:domain="ulearn">
-                  <div id="content-core">
-                     <p ng-if="swm.shared_items.length == 0" ng-cloak i18n:translate="no_content_shared_user">There is no content shared with you right now.</p>
-                     <div class="tileItem visualIEFloatFix" dir-paginate="shared_item in swm.shared_items | filter:q | itemsPerPage: swm.pageSize" current-page="swm.currentPage" ng-cloak>
-                        <h4 class="tileHeadline {{shared_item.portal_type}}">
-                           <a ng-href="{{shared_item.url}}" class="summary url">{{shared_item.title}}</a>
-                        </h4>
-                        <div class="documentByLine"></div>
-                        <p class="tileBody">
-                           <span class="description">{{shared_item.description}}</span>
-                        </p>
-                        <div class="shared_by">
-                           <i class="fa fa-share-alt icons"></i><span i18n:translate="">Compartido por</span>
-                           <a ng-href="{{shared_item.by_profile}}">{{shared_item.by}}</a>
+        <div id="librarysearch" ng-class="{active: ctrl.active_tab == 'sharedwithme'}" tal:condition="shared">
+            <div id="sharedwithme-container">
+                <div id="shared-with-me-view" ng-controller="SharedWithMe as swm">
+                    <div class="caixessearch_shared">
+                        <div id="searchinputcontent">
+                            <div class="input-append">
+                                <input ng-model="q" class="form-control searchInput" type="text" placeholder="Cerca"
+                                    i18n:attributes="placeholder search">
+                                <span class="add-on"><i class="fa fa-search"></i></span>
+                            </div>
                         </div>
-                        <div class="shared_from">
-                           <span i18n:translate="">desde</span>
-                           <span class="shared_from_community">{{shared_item.community_displayname}}</span>
+                    </div>
+                    <section id="sharedlist" i18n:domain="ulearn">
+                        <div id="content-core">
+                            <p ng-if="swm.shared_items.length == 0" ng-cloak i18n:translate="no_content_shared_user">
+                                There is no content shared with you right now.</p>
+                            <div class="tileItem visualIEFloatFix"
+                                dir-paginate="shared_item in swm.shared_items | filter:q | itemsPerPage: swm.pageSize"
+                                current-page="swm.currentPage" ng-cloak>
+                                <h4 class="tileHeadline {{shared_item.portal_type}}">
+                                    <a ng-href="{{shared_item.url}}" class="summary url">{{shared_item.title}}</a>
+                                </h4>
+                                <div class="documentByLine"></div>
+                                <p class="tileBody">
+                                    <span class="description">{{shared_item.description}}</span>
+                                </p>
+                                <div class="shared_by">
+                                    <i class="fa fa-share-alt icons"></i><span i18n:translate="">Compartido por</span>
+                                    <a ng-href="{{shared_item.by_profile}}">{{shared_item.by}}</a>
+                                </div>
+                                <div class="shared_from">
+                                    <span i18n:translate="">desde</span>
+                                    <span class="shared_from_community">{{shared_item.community_displayname}}</span>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </section>
-               <div class="pagination">
-                  <dir-pagination-controls boundary-links="true" tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
-               </div>
+                    </section>
+                    <div class="pagination">
+                        <dir-pagination-controls boundary-links="true"
+                            tal:attributes="template-url string:${view/portal_url}/++components++ulearn/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
