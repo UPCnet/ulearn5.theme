@@ -1,75 +1,76 @@
 <tal:stats tal:condition="not:view/isAnon" tal:define="is_community view/is_community">
-<div id="box_stats" class="ulearnbox"
-     i18n:domain="ulearn">
+  <div id="box_stats" class="ulearnbox" i18n:domain="ulearn">
 
-    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+    <div class="osomcorner-wrapper">
+      <div class="osomcorner"></div>
+    </div>
 
     <h2 i18n:translate="stats">Stats</h2>
 
     <tal:iscommunity condition="is_community">
-        <ul>
-          <li>
-            <div class="bubble left pull-left">
-              <div class="arrow"></div>
-              <div class="bubble-content" ng-bind="context_activities">
-                0
-              </div>
+      <ul>
+        <li>
+          <div class="bubble left pull-left">
+            <div class="arrow"></div>
+            <div class="bubble-content" ng-bind="context_activities">
+              0
             </div>
-            <p i18n:translate="" tal:content="view/get_posts_literal">
-              Activity
-            </p>
-          </li>
-          <li>
-            <div class="bubble left pull-left">
-              <div class="arrow"></div>
-              <div class="bubble-content" ng-bind="users_comments">
-                0
-              </div>
+          </div>
+          <p i18n:translate="" tal:content="view/get_posts_literal">
+            Activity
+          </p>
+        </li>
+        <li>
+          <div class="bubble left pull-left">
+            <div class="arrow"></div>
+            <div class="bubble-content" ng-bind="users_comments">
+              0
             </div>
-            <p i18n:translate="stats_comments">
-              Comments
-            </p>
-          </li>
-          <li>
-            <div class="bubble left pull-left">
-              <div class="arrow"></div>
-              <div class="bubble-content">
-                <tal:docs content="python:view.get_stats_for('documents')">
-                  240
-                </tal:docs>
-              </div>
+          </div>
+          <p i18n:translate="stats_comments">
+            Comments
+          </p>
+        </li>
+        <li>
+          <div class="bubble left pull-left">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+              <tal:docs content="python:view.get_stats_for('documents')">
+                240
+              </tal:docs>
             </div>
-            <p i18n:translate="ulearn_documents">
-              Documents
-            </p>
-          </li>
-          <li>
-            <div class="bubble left pull-left">
-              <div class="arrow"></div>
-              <div class="bubble-content">
-                <tal:docs content="python:view.get_stats_for('links')">
-                  240
-                </tal:docs>
-              </div>
+          </div>
+          <p i18n:translate="ulearn_documents">
+            Documents
+          </p>
+        </li>
+        <li>
+          <div class="bubble left pull-left">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+              <tal:docs content="python:view.get_stats_for('links')">
+                240
+              </tal:docs>
             </div>
-            <p i18n:translate="ulearn_links">
-              Links
-            </p>
-          </li>
-          <li>
-            <div class="bubble left pull-left">
-              <div class="arrow"></div>
-              <div class="bubble-content">
-                <tal:docs content="python:view.get_stats_for('media')">
-                  240
-                </tal:docs>
-              </div>
+          </div>
+          <p i18n:translate="ulearn_links">
+            Links
+          </p>
+        </li>
+        <li>
+          <div class="bubble left pull-left">
+            <div class="arrow"></div>
+            <div class="bubble-content">
+              <tal:docs content="python:view.get_stats_for('media')">
+                240
+              </tal:docs>
             </div>
-            <p i18n:translate="ulearn_media">
-              Media
-            </p>
-          </li>
-        </ul>
+          </div>
+          <p i18n:translate="ulearn_media">
+            Media
+          </p>
+        </li>
+      </ul>
     </tal:iscommunity>
 
     <tal:isroot condition="not: is_community">
@@ -143,5 +144,5 @@
         </ul>
       </generalstats>
     </tal:isroot>
-</div>
+  </div>
 </tal:stats>

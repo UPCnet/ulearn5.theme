@@ -1,5 +1,7 @@
 <div id="box_comentaris" class="ulearnbox" tal:condition="not:view/isAnon">
-    <div class="osomcorner-wrapper"><div class="osomcorner"></div></div>
+    <div class="osomcorner-wrapper">
+        <div class="osomcorner"></div>
+    </div>
 
     <h2>Comentarios</h2>
     <ul class="icons">

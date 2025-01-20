@@ -1,2 +1,2 @@
- <div tal:condition="not:view/isAnon" id="home-angular-route-view" ui-view >
- </div>
+<div tal:condition="not:view/isAnon" id="home-angular-route-view" ui-view>
+</div>
