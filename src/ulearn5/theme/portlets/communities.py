@@ -1,24 +1,20 @@
 # -*- coding: utf-8 -*-
 from DateTime.DateTime import DateTime
-
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.registry.interfaces import IRegistry
-from repoze.catalog.query import Eq
-from souper.soup import get_soup
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from ulearn5.core import _
+from ulearn5.core.content.community import ICommunity
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.core.utils import get_or_initialize_annotation
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import implementer
 from zope.security import checkPermission
-
-from ulearn5.core import _
-from ulearn5.core.content.community import ICommunity
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
 
 
 class ICommunitiesNavigation(IPortletDataProvider):
@@ -44,14 +40,10 @@ class Renderer(base.Renderer):
             """ Returns the date of user access to the community.
             """
             user_community = user + '_' + community.id
-            portal = api.portal.get()
 
-            soup_access = get_soup('user_community_access', portal)
-            exist = [r for r in soup_access.query(Eq('user_community', user_community))]
-            if not exist:
-                return DateTime()
-            else:
-                return exist[0].attrs['data_access']
+            user_community_access = get_data_acces_community_user('user_community_access')
+            record = next((r for r in user_community_access.values() if r.get('user_community') == user_community), {})
+            return record.get('data_access', DateTime())
 
         data_access = get_data_acces_community_user() + 0.001   # Suma 0.001 para que no muetre los que acaba de crear el usuario
         now = DateTime() + 0.001  # Suma 0.001 para que no muetre los que acaba de crear el usuario

@@ -1,29 +1,23 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_chain
-from Acquisition import aq_inner
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from copy import deepcopy
 from hashlib import sha1
+
+from Acquisition import aq_chain, aq_inner
+from base5.core.utils import get_safe_member_by_id, pref_lang
 from plone import api
 from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize_contextless
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.registry.interfaces import IRegistry
-from zope.component import getMultiAdapter
-from zope.component import queryUtility
-from zope.interface import implementer
-
-from base5.core.utils import get_safe_member_by_id
-from base5.core.utils import pref_lang
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ulearn5.core import _
-
 from ulearn5.core.badges import AVAILABLE_BADGES
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from plone.memoize.view import memoize_contextless
-from repoze.catalog.query import Eq
-from souper.soup import get_soup
+from ulearn5.core.utils import get_or_initialize_annotation
+from zope.component import getMultiAdapter, queryUtility
+from zope.interface import implementer
 
 
 class IProfilePortlet(IPortletDataProvider):
@@ -75,14 +69,10 @@ class Renderer(base.Renderer):
     def has_complete_profile(self):
         if self.user_info:
             id = self.user_info["id"]
-            portal = api.portal.get()
-            soup_users_portrait = get_soup("users_portrait", portal)
-            exist = [r for r in soup_users_portrait.query(Eq("id_username", id))]
-            if exist:
-                user_record = exist[0]
-                return user_record.attrs["portrait"]
-            else:
-                return False
+            users_portrait = get_or_initialize_annotation('users_portrait')
+            record = next((r for r in users_portrait.values() if r.get('id_username') == id), {})
+            return record.get('portrait', False)
+
         else:
             # The user doesn't have any property information for some weird
             # reason or simply beccause we are admin

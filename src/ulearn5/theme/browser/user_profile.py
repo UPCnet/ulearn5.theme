@@ -1,24 +1,19 @@
 # -*- coding: utf-8 -*-
+from base5.core import _
+from base5.core.utils import get_safe_member_by_id
 from OFS.Image import Image
+from plone import api
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from plone import api
-from plone.registry.interfaces import IRegistry
 from souper.interfaces import ICatalogFactory
-from zope.component import getUtilitiesFor
-from zope.component import getUtility
-from zope.component import queryUtility
-from zope.publisher.interfaces import IPublishTraverse
-from zope.publisher.interfaces import NotFound
-
-from base5.core import _
-from base5.core.utils import get_safe_member_by_id
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from souper.soup import get_soup
-from repoze.catalog.query import Eq
+from ulearn5.core.utils import get_or_initialize_annotation
+from zope.component import getUtilitiesFor, getUtility, queryUtility
 from zope.interface import implementer
+from zope.publisher.interfaces import IPublishTraverse, NotFound
+
 
 @implementer(IPublishTraverse)
 class userProfile(BrowserView):
@@ -55,15 +50,12 @@ class userProfile(BrowserView):
 
     def has_complete_profile(self):
         if self.user_info:
-            id = self.user_info.id
-            portal = api.portal.get()
-            soup_users_portrait = get_soup('users_portrait', portal)
-            exist = [r for r in soup_users_portrait.query(Eq('id_username', id))]
-            if exist:
-                user_record = exist[0]
-                return user_record.attrs['portrait']
-            else:
-                return False
+            id = self.user_info.id            
+            users_portrait = get_or_initialize_annotation('users_portrait')
+            record = next((r for r in users_portrait.values() if r.get('id_username') == id), None)
+            if record:
+                return record.get('portrait')
+            return False
         else:
             # The user doesn't have any property information for some weird
             # reason or simply beccause we are admin

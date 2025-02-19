@@ -1,76 +1,62 @@
 # -*- coding: utf-8 -*-
-import json
-import pkg_resources
-import pytz
-import scss
 import csv
-import transaction
-
-from plone import api
-from Acquisition import aq_inner
-from DateTime import DateTime
-# from five import grok
-from operator import itemgetter
-from repoze.catalog.query import Eq
-from scss import Scss
-from souper.interfaces import ICatalogFactory
-from souper.soup import get_soup
-from zope.component import getMultiAdapter
-from zope.component import getUtilitiesFor
-from zope.component import getUtility
-from zope.component import queryUtility
-from zope.component.hooks import getSite
-from zope.interface import Interface
-from AccessControl import getSecurityManager
-from Products.CMFCore.permissions import ModifyPortalContent
-from plone.app.contenttypes.browser.collection import CollectionView
-from plone.app.users.browser.userdatapanel import UserDataPanel
-
-from plone.batching import Batch
-from plone.dexterity.interfaces import IDexterityContent
-from plone.dexterity.utils import createContentInContainer
-from plone.namedfile import NamedBlobFile
-from plone.memoize import ram
-from plone.memoize.view import memoize_contextless
-from plone.protect import createToken
-from plone.registry.interfaces import IRegistry
-
-from Products.CMFPlone import PloneMessageFactory as _
-from Products.CMFPlone.browser.navtree import getNavigationRoot
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import str
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.PythonScripts.standard import url_quote_plus
-
-from base5.core.utils import abrevia
-from base5.core.utils import abreviaPlainText
-from base5.core.utils import json_response
-from base5.core.utils import pref_lang
-
-from mrs5.max.utilities import IMAXClient
-
-from ulearn5.core.browser.searchuser import searchUsersFunction
-from ulearn5.core.browser.setup import createOrGetObject
-from ulearn5.core.content.community import ICommunityACL
-from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from ulearn5.core.hooks import packages_installed
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-
+import json
 from email import Encoders
 from email.header import Header
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
-
-from io import StringIO
-from zope.i18n import translate
 from hashlib import sha1
-from six.moves import range
+from io import StringIO
+# from five import grok
+from operator import itemgetter
 
+import pkg_resources
+import pytz
+import scss
+import transaction
+from AccessControl import getSecurityManager
+from Acquisition import aq_inner
+from base5.core.utils import (abrevia, abreviaPlainText, json_response,
+                              pref_lang)
+from DateTime import DateTime
+from mrs5.max.utilities import IMAXClient
+from plone import api
+from plone.app.contenttypes.browser.collection import CollectionView
+from plone.app.users.browser.userdatapanel import UserDataPanel
+from plone.batching import Batch
+from plone.dexterity.interfaces import IDexterityContent
+from plone.dexterity.utils import createContentInContainer
+from plone.memoize import ram
+from plone.memoize.view import memoize_contextless
+from plone.namedfile import NamedBlobFile
+from plone.protect import createToken
+from plone.registry.interfaces import IRegistry
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone.browser.navtree import getNavigationRoot
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
+from Products.CMFPlone.utils import str
 from Products.Five.browser import BrowserView
-
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PythonScripts.standard import url_quote_plus
+from scss import Scss
+from six.moves import range
+from souper.interfaces import ICatalogFactory
+from ulearn5.core.browser.searchuser import searchUsersFunction
+from ulearn5.core.browser.setup import createOrGetObject
+from ulearn5.core.content.community import ICommunityACL
+from ulearn5.core.controlpanel import IUlearnControlPanelSettings
+from ulearn5.core.hooks import packages_installed
+from ulearn5.core.utils import get_or_initialize_annotation
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from zope.component import (getMultiAdapter, getUtilitiesFor, getUtility,
+                            queryUtility)
+from zope.component.hooks import getSite
+from zope.i18n import translate
+from zope.interface import Interface
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
 
@@ -739,14 +725,12 @@ class AllTags(BrowserView):
     # grok.layer(IUlearn5ThemeLayer)
 
     def get_subscribed_tags(self):
-        portal = getSite()
         current_user = api.user.get_current()
         userid = current_user.id
 
-        soup_tags = get_soup('user_subscribed_tags', portal)
-        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
-
-        return tags_soup[0].attrs['tags'] if tags_soup else []
+        user_subscribed_tags = get_or_initialize_annotation(user_subscribed_tags)
+        record = next((r for r in user_subscribed_tags.values() if r.get('id') == userid), {})
+        return record.get('tags', [])
 
     def get_unsubscribed_tags(self):
 
@@ -758,15 +742,13 @@ class AllTags(BrowserView):
         portal = getSite()
         current_user = api.user.get_current()
         userid = current_user.id
-
-        soup_tags = get_soup('user_subscribed_tags', portal)
-        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
-        if tags_soup:
-            user_tags = tags_soup[0].attrs['tags']
+        user_subscribed_tags = get_or_initialize_annotation(user_subscribed_tags)
+        record = next((r for r in user_subscribed_tags.values() if r.get('id') == userid), None)
+        if record:
+            user_tags = record.get('tags')
         else:
             user_tags = ()
         return list(set(subjects) - set(user_tags))
-
 
 class SearchFilteredNews(BrowserView):
     """ Filtered news search view for every folder. """
@@ -979,8 +961,8 @@ class ResetMenuBar(BrowserView):
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        soup_menu = get_soup('menu_soup', portal)
-        soup_menu.clear()
+        menu_soup = get_or_initialize_annotation('menu_soup')
+        menu_soup.clear()
         self.redirect(portal.absolute_url())
 
 class ResetHeader(BrowserView):
@@ -992,8 +974,8 @@ class ResetHeader(BrowserView):
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        soup_header = get_soup('header_soup', portal)
-        soup_header.clear()
+        header_soup = get_or_initialize_annotation('header_soup')
+        header_soup.clear()
         self.redirect(portal.absolute_url())
 
 class ResetFooter(BrowserView):
@@ -1005,7 +987,7 @@ class ResetFooter(BrowserView):
 
     def render(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        soup_footer = get_soup('footer_soup', portal)
+        soup_footer = get_or_initialize_annotation('soup_footer')
         soup_footer.clear()
         self.redirect(portal.absolute_url())
 

@@ -1,42 +1,31 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_chain
-from Acquisition import aq_inner
-from Products.CMFPlone.utils import safe_unicode
-
+import datetime
+import uuid
 from cgi import escape
 from datetime import datetime as ddatetime
+
+from Acquisition import aq_chain, aq_inner
 # from five import grok
 from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import IAboveContent
-from plone.app.layout.viewlets.interfaces import IHtmlHead
-from plone.app.layout.viewlets.interfaces import IPortalFooter
-from plone.app.layout.viewlets.interfaces import IPortalHeader
+from plone.app.layout.viewlets.interfaces import (IAboveContent, IHtmlHead,
+                                                  IPortalFooter, IPortalHeader)
 from plone.memoize import forever
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletRetriever
+from plone.portlets.interfaces import IPortletManager, IPortletRetriever
 from plone.registry.interfaces import IRegistry
-from repoze.catalog.query import Eq
-from souper.soup import Record
-from souper.soup import get_soup
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-from zope.component.hooks import getSite
-from zope.interface import Interface
-
+from Products.CMFPlone.utils import safe_unicode
 from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from ulearn5.core.interfaces import IDocumentFolder
-from ulearn5.core.interfaces import IEventsFolder
-from ulearn5.core.interfaces import ILinksFolder
-from ulearn5.core.interfaces import INewsItemFolder
-from ulearn5.core.interfaces import IPhotosFolder
-
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
 from ulearn5.core.hooks import packages_installed
-
-import datetime
+from ulearn5.core.interfaces import (IDocumentFolder, IEventsFolder,
+                                     ILinksFolder, INewsItemFolder,
+                                     IPhotosFolder)
+from ulearn5.core.utils import get_or_initialize_annotation
+from ulearn5.theme.interfaces import IUlearn5ThemeLayer
+from zope.component import getMultiAdapter, getUtility
+from zope.component.hooks import getSite
+from zope.interface import Interface
 
 # grok.context(Interface)
 
@@ -268,20 +257,21 @@ class viewletHeaderUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            portal = api.portal.get()
-            soup_menu = get_soup('menu_soup', portal)
-            exist = [r for r in soup_menu.query(Eq('id_menusoup', user_language))]
+            menu_soup = get_or_initialize_annotation('menu_soup')
+            record = next((r for r in menu_soup.values() if r.get('id_menusoup') == user_language), None)
 
-            if not exist:
+            if not record:
                 dades = self._createLinksMenu(user_language)
-                record = Record()
-                record.attrs['id_menusoup'] = user_language
-                record.attrs['dades'] = list(dades.values())
-                soup_menu.add(record)
-                soup_menu.reindex()
+                record = {
+                    'id_menusoup': user_language,
+                    'dades': list(dades.values())
+                }
+
+                unique_key = str(uuid.uuid4())
+                menu_soup[unique_key] = record
                 result = list(dades.values())
             else:
-                result = exist[0].attrs['dades']
+                result = record['dades']
 
             return sorted(result, key=lambda x: x['position'])
 
@@ -319,20 +309,21 @@ class viewletHeaderUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            portal = api.portal.get()
-            soup_header = get_soup('header_soup', portal)
-            exist = [r for r in soup_header.query(Eq('id_headersoup', user_language))]
+            header_soup = get_or_initialize_annotation('header_soup')
+            record = next((r for r in header_soup.values() if r.get('id_headersoup') == user_language), None)
 
-            if not exist:
-                dades = self._createLinksHeader(user_language)
-                record = Record()
-                record.attrs['id_headersoup'] = user_language
-                record.attrs['dades'] = dades
-                soup_header.add(record)
-                soup_header.reindex()
-                result = dades
+            if not record:
+                dades = self._createLinksMenu(user_language)
+                record = {
+                    'id_headersoup': user_language,
+                    'dades': list(dades.values())
+                }
+
+                unique_key = str(uuid.uuid4())
+                header_soup[unique_key] = record
+                result = list(dades.values())
             else:
-                result = exist[0].attrs['dades']
+                result = record['dades']
 
             return result
 
@@ -492,21 +483,22 @@ class viewletFooterUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            portal = api.portal.get()
-            soup_header = get_soup('footer_soup', portal)
-            exist = [r for r in soup_header.query(Eq('id_footersoup', user_language))]
+            footer_soup = get_or_initialize_annotation('footer_soup')
+            record = next((r for r in footer_soup.values() if r.get('id_footersoup') == user_language), None)
 
-            if not exist:
-                dades = self._createLinksFooter(user_language)
-                record = Record()
-                record.attrs['id_footersoup'] = user_language
-                record.attrs['dades'] = dades
-                soup_header.add(record)
-                soup_header.reindex()
-                result = dades
+            if not record:
+                dades = self._createLinksMenu(user_language)
+                record = {
+                    'id_footersoup': user_language,
+                    'dades': list(dades.values())
+                }
+
+                unique_key = str(uuid.uuid4())
+                footer_soup[unique_key] = record
+                result = list(dades.values())
             else:
-                result = exist[0].attrs['dades']
-
+                result = record['dades']
+            
             return result
 
 
@@ -539,14 +531,17 @@ class popupNotify(viewletBase):
         if api.portal.get_registry_record('ulearn5.core.controlpopup.IPopupSettings.activate_notify'):
             user = api.user.get_current()
             portal = getSite()
-            soup = get_soup('notify_popup', portal)
-            user_soup = [r for r in soup.query(Eq('id', user.id))]
-            if not user_soup:
+
+            notify_popup = get_or_initialize_annotation('notify_popup')
+            record = next((r for r in notify_popup.values() if r.get('id') == user.id), None)
+
+            if not record:
                 portal = api.portal.get()
-                try:
+                try: 
                     return 'notify' in portal['gestion']['popup']
                 except:
                     pass
+
         return False
 
     def content(self):
