@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import csv
 import json
-from email import Encoders
+from email import encoders
 from email.header import Header
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -38,7 +38,6 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.browser.navtree import getNavigationRoot
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-from Products.CMFPlone.utils import str
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.PythonScripts.standard import url_quote_plus
@@ -1078,7 +1077,7 @@ class SendEventToAttendees(BrowserView):
 
         part = MIMEBase('application', "octet-stream")
         part.set_payload(self.n2rn(out.getvalue()))
-        Encoders.encode_base64(part)
+        encoders.encode_base64(part)
         part.add_header('Content-Disposition', 'attachment; filename="%s.ics"' % self.context.getId())
 
         return part

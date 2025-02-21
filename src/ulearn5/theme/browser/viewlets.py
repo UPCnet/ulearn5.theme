@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import uuid
-from cgi import escape
 from datetime import datetime as ddatetime
+from html import escape
 
 from Acquisition import aq_chain, aq_inner
 # from five import grok
