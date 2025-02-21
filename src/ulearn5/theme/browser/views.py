@@ -900,7 +900,7 @@ class ContentsPrettyView(BrowserView):
         return all_items
 
 
-class CollectionNewsView(BrowserView, CollectionView):
+class CollectionNewsView(CollectionView): #BrowserView, 
     """ Show content from news in a folder, added search input """
 
     # grok.name('collection_news_view')

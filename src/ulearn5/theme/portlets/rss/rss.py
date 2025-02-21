@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
-from BeautifulSoup import BeautifulSoup
+import time
+from logging import getLogger
+
+import feedparser
+from bs4 import BeautifulSoup
 from DateTime import DateTime
 from DateTime.interfaces import DateTimeError
-from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
-
-from logging import getLogger
 from plone import api
 from plone.app.portlets import PloneMessageFactory as _PMF
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
+from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
+from ulearn5.core import _
 from zope import schema
 from zope.interface import implementer
-
-from ulearn5.core import _
-
-import feedparser
-import time
 
 # Accept these bozo_exceptions encountered by feedparser when parsing
 # the feed:

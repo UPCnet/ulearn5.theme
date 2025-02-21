@@ -1,10 +1,10 @@
+from AccessControl import getSecurityManager
+from DateTime import DateTime
 from six.moves.urllib import parse
 from zope.component import getMultiAdapter
-from DateTime import DateTime
-from AccessControl import getSecurityManager
 
 
-def __call__(self):
+def require_login_call(self):
     url = ''
     portal_state = getMultiAdapter(
         (self.context, self.request),
