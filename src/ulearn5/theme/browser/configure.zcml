@@ -63,7 +63,7 @@
 
     <browser:page 
         name="all-communities"
-        class="ulearn5.theme.browser.views.AllComunities"
+        class="ulearn5.theme.browser.views.AllCommunities"
         permission="base.member"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
@@ -81,6 +81,7 @@
     <browser:page 
         name="dynamic.css"
         class="ulearn5.theme.browser.views.dynamicCSS"
+        permission="base.member"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
@@ -88,9 +89,10 @@
     <browser:page 
         name="ulearncustom.css"
         class="ulearn5.theme.browser.views.CustomCSS"
+        permission="base.member"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
-        template="views_templates/ulerncustom.css.pt"
+        template="views_templates/ulearncustom.css.pt"
         />
 
 
@@ -113,6 +115,7 @@
     <browser:page 
         name="gw_type_ahead_search"
         class="ulearn5.theme.browser.views.TypeAheadSearch"
+        permission="base.member"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
@@ -129,6 +132,7 @@
     <browser:page 
         name="search_filtered_content"
         class="ulearn5.theme.browser.views.SearchFilteredContentAjax"
+        permission="base.member"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/filtered_contents_search_ajax.pt"
@@ -147,6 +151,7 @@
         name="search_filtered_news"
         class="ulearn5.theme.browser.views.SearchFilteredNews"
         for="zope.interface.Interface"
+        permission="base.member"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
@@ -169,6 +174,7 @@
         />
 
     <browser:page 
+        name="shared_with_me"
         class="ulearn5.theme.browser.views.SharedWithMe"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         permission="base.member"
@@ -218,7 +224,7 @@
 
     <browser:page 
         name="export_users_communities"
-        class="ulearn5.theme.browser.views.ExportUsers"
+        class="ulearn5.theme.browser.views.ExportUsersCommunities"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         permission="base.webmaster"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
