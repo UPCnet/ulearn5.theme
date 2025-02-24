@@ -7,11 +7,12 @@
     <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
     <include package="z3c.jbot" file="meta.zcml" />
 
+    <!-- BASE.AUTHENTICATED CAMBIO -->
     <browser:page
         name="profile"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".user_profile.userProfile"
-        permission="base.authenticated"
+        permission="zope2.View"
     />
 
     <browser:page
@@ -60,47 +61,51 @@
       template="viewlets_templates/header_macros.pt"
       />
 
-
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="all-communities"
         class="ulearn5.theme.browser.views.AllCommunities"
-        permission="base.member"
+        permission="zope2.View"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
-    
+
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="my-communities-ajax"
         class="ulearn5.theme.browser.views.communitiesAJAX"
-        permission="base.member"
+        permission="zope2.View"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/my_communities_ajax.pt"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="dynamic.css"
         class="ulearn5.theme.browser.views.dynamicCSS"
-        permission="base.member"
+        permission="zope2.View"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="ulearncustom.css"
         class="ulearn5.theme.browser.views.CustomCSS"
-        permission="base.member"
+        permission="zope2.View"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/ulearncustom.css.pt"
         />
 
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="searchUser"
         class="ulearn5.theme.browser.views.SearchUser"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
@@ -108,14 +113,15 @@
         name="searchUsers"
         class="ulearn5.theme.browser.views.searchUsers"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="gw_type_ahead_search"
         class="ulearn5.theme.browser.views.TypeAheadSearch"
-        permission="base.member"
+        permission="zope2.View"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
@@ -124,84 +130,93 @@
         name="filtered_contents_search_view"
         class="ulearn5.theme.browser.views.FilteredContentsSearchView"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/filtered_contents_search.pt"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="search_filtered_content"
         class="ulearn5.theme.browser.views.SearchFilteredContentAjax"
-        permission="base.member"
+        permission="zope2.View"
         for="zope.interface.Interface"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/filtered_contents_search_ajax.pt"
         />
 
+    <!-- BASE.AUTHENTICATED CAMBIO -->
     <browser:page 
         name="alltags"
         class="ulearn5.theme.browser.views.AllTags"
         for="zope.interface.Interface"
-        permission="base.authenticated"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/alltags.pt"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="search_filtered_news"
         class="ulearn5.theme.browser.views.SearchFilteredNews"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="contents_pretty_view"
         class="ulearn5.theme.browser.views.ContentsPrettyView"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/contentspretty.pt"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="collection_news_view"
         class="ulearn5.theme.browser.views.CollectionNewsView"
         for="zope.interface.Interface"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/collectionnews.pt"
         />
 
+    <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
         name="shared_with_me"
         class="ulearn5.theme.browser.views.SharedWithMe"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        permission="base.member"
+        permission="zope2.View"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.WEBMASTER CAMBIO -->
     <browser:page 
         name="reset_menu"
         class="ulearn5.theme.browser.views.ResetMenuBar"
         for="zope.interface.Interface"
-        permission="base.webmaster"
+        permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.WEBMASTER CAMBIO -->
     <browser:page 
         name="reset_header"
         class="ulearn5.theme.browser.views.ResetHeader"
         for="zope.interface.Interface"
-        permission="base.webmaster"
+        permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.WEBMASTER CAMBIO -->
     <browser:page 
         name="reset_footer"
         class="ulearn5.theme.browser.views.ResetFooter"
         for="zope.interface.Interface"
-        permission="base.webmaster"
+        permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
@@ -213,20 +228,22 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
+    <!-- BASE.WEBMASTER CAMBIO -->
     <browser:page 
         name="users_communities"
         class="ulearn5.theme.browser.views.UsersCommunities"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        permission="base.webmaster"
+        permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/users_communities.pt"
         />
 
+    <!-- BASE.WEBMASTER CAMBIO -->
     <browser:page 
         name="export_users_communities"
         class="ulearn5.theme.browser.views.ExportUsersCommunities"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        permission="base.webmaster"
+        permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
