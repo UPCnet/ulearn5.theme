@@ -24,8 +24,8 @@
 
     <div id="librarysearch">
 
-      <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
-      <h1 class="documentFirstHeading" tal:content="context/Title" />
+      <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle"> </div>
+      <h1 class="documentFirstHeading" tal:content="context/Title"></h1>
 
       <div class="documentDescription" tal:content="context/Description">Descripció</div>
 

@@ -34,7 +34,7 @@ from zope.interface import Interface
 #    grok.baseclass()
 
 
-class TitleViewlet(TitleViewlet, viewletBase):
+class TitleViewlet(viewletBase):
     # grok.context(Interface)
     # grok.name('plone.htmlhead.title')
     # grok.viewletmanager(IHtmlHead)
