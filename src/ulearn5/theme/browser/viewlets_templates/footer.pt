@@ -1,7 +1,7 @@
-<div class="container" tal:define="customized_footer viewlet/get_customized_footer" i18n:domain="ulearn">
+<div class="container" tal:define="customized_footer view/get_customized_footer" i18n:domain="ulearn">
   <div class="row footer-complementary" tal:condition="not:customized_footer">
     <div class="col-xs-12">
-      <p><span>© UPCnet - ${viewlet/get_current_year}</span></p>
+      <p><span>© UPCnet - ${view/get_current_year}</span></p>
     </div>
   </div>
 

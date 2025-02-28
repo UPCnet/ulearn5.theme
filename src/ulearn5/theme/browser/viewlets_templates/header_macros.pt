@@ -3,7 +3,7 @@
 
   <metal:block metal:define-macro="paysheet">
     <li class="dropdown ulearn-eines-ql" role="menuitem"
-      tal:define="viewNominesRootFolder viewlet/viewNominesRootFolder" tal:condition="viewNominesRootFolder">
+      tal:define="viewNominesRootFolder view/viewNominesRootFolder" tal:condition="viewNominesRootFolder">
       <a class="dropdown-toggle" data-toggle="dropdown" tal:attributes="href string:${portal_url}/">
         <tal:management i18n:domain="ulearn" i18n:translate="">Nomines</tal:management>
         <b aria-hidden="true" class="caret"></b>
@@ -38,7 +38,7 @@
   </metal:block>
 
   <metal:block metal:define-macro="gestion-news">
-    <li role="menuitem" tal:condition="viewlet/canManageNews">
+    <li role="menuitem" tal:condition="view/canManageNews">
       <a href="#" tal:attributes="href string:${portal_url}/news">
         <i class="fa fa-newspaper-o"></i>
         <tal:footer i18n:translate="menu-gestio-noticies">Noticies</tal:footer>
@@ -51,17 +51,17 @@
     <block metal:use-macro="context/macros-comunitats-header/gestion-links"></block>
   </metal:block>
 
-  <metal:block metal:define-macro="gestion-links" tal:define="canManageMenu viewlet/canManageMenu;
-                           canManageHeader viewlet/canManageHeader;
-                           canManageFooter viewlet/canManageFooter">
+  <metal:block metal:define-macro="gestion-links" tal:define="canManageMenu view/canManageMenu;
+                           canManageHeader view/canManageHeader;
+                           canManageFooter view/canManageFooter">
 
-    <li role="menuitem" tal:condition="viewlet/canManagePersonalBanners">
-      <a tal:attributes="href string:${portal_url}/Members/${viewlet/currentUser}/banners">
+    <li role="menuitem" tal:condition="view/canManagePersonalBanners">
+      <a tal:attributes="href string:${portal_url}/Members/${view/currentUser}/banners">
         <i class="fa fa-image"></i>
         <tal:footer i18n:translate="menu-gestion-personal-banners">Personal banners</tal:footer>
       </a>
     </li>
-    <li role="menuitem" tal:condition="viewlet/canManageBanners">
+    <li role="menuitem" tal:condition="view/canManageBanners">
       <a tal:attributes="href string:${portal_url}/gestion/banners">
         <i class="fa fa-image"></i>
         <tal:footer i18n:translate="menu-gestion-global-banners">Global banners</tal:footer>
@@ -103,13 +103,13 @@
         <tal:footer i18n:translate="menu-reset-menu">Reset Menu</tal:footer>
       </a>
     </li>
-    <li role="menuitem" tal:condition="viewlet/canManageStats">
+    <li role="menuitem" tal:condition="view/canManageStats">
       <a href="#" tal:attributes="href string:${portal_url}/#/stats/activity">
         <i class="fa fa-bar-chart"></i>
         <tal:footer i18n:translate="menu-gestio-estadistiques">Estadistiques</tal:footer>
       </a>
     </li>
-    <li role="menuitem" tal:condition="viewlet/canManageStats">
+    <li role="menuitem" tal:condition="view/canManageStats">
       <a href="#" tal:attributes="href string:${portal_url}/users_communities">
         <i class="fa fa-info-circle"></i>
         <tal:footer i18n:translate="menu-info-users-communities">Information for users and communities</tal:footer>

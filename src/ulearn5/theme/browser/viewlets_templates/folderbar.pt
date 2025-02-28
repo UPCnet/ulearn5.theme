@@ -1,4 +1,4 @@
-<div id="menusup" tal:define="community viewlet/get_community" tal:condition="viewlet/render_viewlet"
+<div id="menusup" tal:define="community view/get_community" tal:condition="view/render_viewlet"
     i18n:domain="ulearn">
     <nav>
         <!-- Activating 'stream' bubble -->
@@ -25,7 +25,7 @@
         </div>
 
         <!-- 'news' bubble -->
-        <div class="bubble top" tal:condition="viewlet/show_news"
+        <div class="bubble top" tal:condition="view/show_news"
             tal:attributes="class python: viewlet.bubble_class('news')">
             <div class="arrow"></div>
             <div class="bubble-content">
@@ -38,7 +38,7 @@
         </div>
 
         <!-- 'events' bubble -->
-        <div class="bubble top" tal:condition="viewlet/show_events"
+        <div class="bubble top" tal:condition="view/show_events"
             tal:attributes="class python: viewlet.bubble_class('events')">
             <div class="arrow"></div>
             <div class="bubble-content">

@@ -63,10 +63,11 @@
 
     <!-- BASE.MEMBER CAMBIO -->
     <browser:page 
-        name="all-communities"
+        name="allcommunities"
         class="ulearn5.theme.browser.views.AllCommunities"
         permission="zope2.View"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        template="views_templates/allcommunities.pt"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 

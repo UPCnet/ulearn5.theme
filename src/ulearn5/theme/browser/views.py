@@ -192,9 +192,11 @@ def _render_cachekey(method, self, main_color, secondary_color, background_prope
 class baseCommunities(BrowserView):
     #grok.baseclass()
 
-    def update(self):
+    def __call__(self):
         self.username = api.user.get_current().id
         self.portal_url = api.portal.get().absolute_url()
+        return self.index()
+
 
     @memoize_contextless
     def portal(self ):
@@ -231,6 +233,10 @@ class dynamicCSS(BrowserView):
     # grok.name('dynamic.css')
     # grok.context(Interface)
     # grok.layer(IUlearn5ThemeLayer)
+
+    def __call__(self):
+        self.update()
+        return self.render()
 
     def update(self):
         registry = queryUtility(IRegistry)
@@ -270,7 +276,6 @@ class dynamicCSS(BrowserView):
     @ram.cache(_render_cachekey)
     def compile_scss(self, **kwargs):
         ulearnthemeegg = pkg_resources.get_distribution('ulearn5.theme')
-        scssfile = open('{}/ulearn5/theme/theme/assets/stylesheets/dyn/dynamic.scss'.format(ulearnthemeegg.location))
 
         settings = dict(main_color=self.settings.main_color,
                         secondary_color=self.settings.secondary_color,
@@ -310,8 +315,10 @@ class dynamicCSS(BrowserView):
                    'compress': False,
                    'debug_info': False,
                    })
-
-        dynamic_scss = ''.join([variables_scss, scssfile.read()])
+        
+        dynamic_scss = ''
+        with open(f'{ulearnthemeegg.location}/ulearn5/theme/theme/assets/stylesheets/dyn/dynamic.scss', 'r') as scssfile:
+            dynamic_scss = ''.join([variables_scss, scssfile.read()])
 
         return css.compile(dynamic_scss)
 
@@ -323,7 +330,7 @@ class CustomCSS(BrowserView):
 
     # index = ViewPageTemplateFile('views_templates/ulearncustom.css.pt')
 
-    def render(self):
+    def __call__(self):
         self.request.response.setHeader('Content-Type', 'text/css')
         return self.index()
 
@@ -333,7 +340,7 @@ class SearchUser(BrowserView):
     # grok.context(Interface)
     # grok.require('base.member')
 
-    def render(self):
+    def __call__(self):
         self.request.response.setHeader('Content-Type', 'application/json')
         return json.dumps({'users': self.get_my_users(),
                             'properties': self.get_user_info_for_display()})
@@ -379,7 +386,7 @@ class searchUsers(BrowserView):
     # grok.require('base.member')
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         return 'searchUsers'
 
     def get_people_literal(self):
@@ -401,7 +408,7 @@ class TypeAheadSearch(BrowserView):
     # grok.context(Interface)
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         # We set the parameters sent in livesearch using the old way.
         q = self.request['q']
         cf = self.request['cf']
@@ -511,6 +518,9 @@ class FilteredContentsSearchView(BrowserView):
     # grok.require('base.member')
     # grok.template('filtered_contents_search')
     # grok.layer(IUlearn5ThemeLayer)
+
+    def __call__(self):
+        self.update()
 
     def update(self):
         self.query = self.request.form.get('q', '')
@@ -723,6 +733,9 @@ class AllTags(BrowserView):
     # grok.require('base.authenticated')
     # grok.layer(IUlearn5ThemeLayer)
 
+    def __call__(self):
+        pass
+
     def get_subscribed_tags(self):
         current_user = api.user.get_current()
         userid = current_user.id
@@ -756,7 +769,7 @@ class SearchFilteredNews(BrowserView):
     # grok.context(Interface)
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
 
         def quotestring(s):
             return '"%s"' % s
@@ -854,6 +867,9 @@ class ContentsPrettyView(BrowserView):
     # grok.require('base.member')
     # grok.template('contentspretty')
     # grok.layer(IUlearn5ThemeLayer)
+
+    def __call__(self):
+        pass
 
     def getItemPropierties(self):
         all_items = []
@@ -958,7 +974,7 @@ class ResetMenuBar(BrowserView):
     # grok.require('base.webmaster')
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         menu_soup = get_or_initialize_annotation('menu_soup')
         menu_soup.clear()
@@ -971,7 +987,7 @@ class ResetHeader(BrowserView):
     # grok.require('base.webmaster')
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         header_soup = get_or_initialize_annotation('header_soup')
         header_soup.clear()
@@ -984,7 +1000,7 @@ class ResetFooter(BrowserView):
     # grok.require('base.webmaster')
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         soup_footer = get_or_initialize_annotation('soup_footer')
         soup_footer.clear()
@@ -996,7 +1012,7 @@ class SendEventToAttendees(BrowserView):
     # grok.require('cmf.ModifyPortalContent')
     # grok.layer(IUlearn5ThemeLayer)
 
-    def render(self):
+    def __call__(self):
         portal = api.portal
         mailhost = api.portal.get_tool(name='MailHost')
 
@@ -1159,6 +1175,9 @@ class UsersCommunities(BrowserView):
     # grok.template('users_communities')
     # grok.layer(IUlearn5ThemeLayer)
 
+    def __call__(self):
+        pass
+
     def result(self):
         result = []
 
@@ -1257,7 +1276,7 @@ class ExportUsersCommunities(BrowserView):
         "Community",
         "Role"]
 
-    def render(self):
+    def __call__(self):
         try:
             output_file = StringIO()
             # Write the BOM of the text stream to make its charset explicit

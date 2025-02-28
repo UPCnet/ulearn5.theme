@@ -1,10 +1,10 @@
-<tal:block tal:condition="not: viewlet/isAnon" i18n:domain="ulearn">
-    <div id="notify-popup" class="notify-popup" tal:condition="viewlet/viewPopup">
+<tal:block tal:condition="not: view/isAnon" i18n:domain="ulearn">
+    <div id="notify-popup" class="notify-popup" tal:condition="view/viewPopup">
         <div class="content-notify-popup">
             <span class="close-notify-popup fa fa-times" role="button" aria-label="Close popup"
                 i18n:attributes="title close_popup"
-                tal:attributes="data-url string:${viewlet/portal_url}/@@close_notify_popup"></span>
-            <div tal:content="structure viewlet/content"></div>
+                tal:attributes="data-url string:${view/portal_url}/@@close_notify_popup"></span>
+            <div tal:content="structure view/content"></div>
         </div>
     </div>
 </tal:block>

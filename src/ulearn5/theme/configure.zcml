@@ -17,6 +17,11 @@
 
   <include file="patches.zcml" />
 
+    <browser:resourceDirectory
+        name="ulearn5theme_images"
+        directory="theme/assets/images"
+        />
+
   <!-- ++theme++ulearn5 -->
   <plone:static
       directory="theme"
