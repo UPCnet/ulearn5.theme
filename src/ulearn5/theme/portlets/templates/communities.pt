@@ -146,21 +146,13 @@
           </a>
         </li>
       </ul>
-      <!-- <tal:showcreate condition="view/showCreateCommunity">
-        <a href="#addModal" class="btn btn-large btn-comunitat pat-plone-modal" data-pat-plone-modal="width: 80%;">
+      <tal:showcreate condition="view/showCreateCommunity">
+        <a href="#" class="btn btn-large btn-comunitat pat-plone-modal"
+          tal:attributes="href string:${view/portal_url}/addCommunity">
           <i class="fa fa-group"></i>
           <tal:createcommunity i18n:translate="createcommunity">Create a new community</tal:createcommunity>
         </a>
-        <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
-          aria-hidden="true">
-          <div class="modal-header">
-            <h3 id="myModalLabel" i18n:translate="createcommunity">Create a new community</h3>
-          </div>
-          <div class="modal-body">
-            <p tal:replace="structure view/get_addview"> </p>
-          </div>
-        </div>
-      </tal:showcreate> -->
+      </tal:showcreate>
     </div>
   </body>
 
