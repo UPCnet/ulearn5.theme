@@ -81,7 +81,7 @@ class Renderer(base.Renderer):
         return 'seemoreusers_{}'.format(self.get_people_literal())
 
     def get_hash(self, community):
-        return sha1(community.absolute_url()).hexdigest()
+        return sha1(community.absolute_url().encode('utf-8')).hexdigest()
 
 
 class AddForm(base.NullAddForm):

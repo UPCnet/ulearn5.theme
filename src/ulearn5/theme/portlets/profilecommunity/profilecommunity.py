@@ -82,7 +82,7 @@ class Renderer(base.Renderer):
             return "entrades"
 
     def get_hash(self, community):
-        return sha1(community.absolute_url()).hexdigest()
+        return sha1(community.absolute_url().encode('utf-8')).hexdigest()
 
     def isCurrentPage(self, page):
         param = False

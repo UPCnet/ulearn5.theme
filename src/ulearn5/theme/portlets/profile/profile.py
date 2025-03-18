@@ -191,7 +191,7 @@ class Renderer(base.Renderer):
             return "entrades"
 
     def get_hash(self, community):
-        return sha1(community.absolute_url()).hexdigest()
+        return sha1(community.absolute_url().encode('utf-8')).hexdigest()
 
     def get_url(self, community):
         return self.portal_url + "/" + community.getPhysicalPath()[-1]

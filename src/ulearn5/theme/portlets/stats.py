@@ -41,7 +41,7 @@ class Renderer(base.Renderer):
         context = aq_inner(self.context)
         # Light guard
         if ICommunity.providedBy(context):
-            return sha1(context.absolute_url()).hexdigest()
+            return sha1(context.absolute_url().encode('utf-8')).hexdigest()
 
     def is_community(self):
         """ Assume that the stats are only shown on the community itself. """

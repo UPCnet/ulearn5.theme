@@ -315,7 +315,7 @@ class dynamicCSS(BrowserView):
                    'compress': False,
                    'debug_info': False,
                    })
-        
+
         dynamic_scss = ''
         with open(f'{ulearnthemeegg.location}/ulearn5/theme/theme/assets/stylesheets/dyn/dynamic.scss', 'r') as scssfile:
             dynamic_scss = ''.join([variables_scss, scssfile.read()])
@@ -916,7 +916,7 @@ class ContentsPrettyView(BrowserView):
         return all_items
 
 
-class CollectionNewsView(CollectionView): #BrowserView, 
+class CollectionNewsView(CollectionView): #BrowserView,
     """ Show content from news in a folder, added search input """
 
     # grok.name('collection_news_view')
@@ -1222,7 +1222,7 @@ class UsersCommunities(BrowserView):
 
             for community in communities:
                 communityObj = community._unrestrictedGetObject()
-                community_hash = sha1(communityObj.absolute_url()).hexdigest()
+                community_hash = sha1(communityObj.absolute_url().encode('utf-8')).hexdigest()
                 users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
                 listUsers = []
                 if users_subscription:
@@ -1332,7 +1332,7 @@ class ExportUsersCommunities(BrowserView):
 
         for community in communities:
             communityObj = community._unrestrictedGetObject()
-            community_hash = sha1(url_site + '/' + '/'.join(communityObj.absolute_url().split('/')[-1:])).hexdigest()
+            community_hash = sha1((url_site + '/' + '/'.join(communityObj.absolute_url().split('/')[-1:])).encode('utf-8')).hexdigest()
             users_subscription = maxclient.contexts[community_hash].subscriptions.get(qs={'limit': 0})
             if users_subscription:
                 for user_subscription in users_subscription:
