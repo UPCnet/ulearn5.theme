@@ -4,7 +4,6 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="ulearn5.theme">
 
-
     <browser:viewlet
         name="ulearn.titleviewlet"
         manager="plone.app.layout.viewlets.interfaces.IHtmlHead"

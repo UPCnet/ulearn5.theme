@@ -7,27 +7,29 @@
     <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
     <include package="z3c.jbot" file="meta.zcml" />
 
+    <include file="viewlets.zcml" />
+
     <!-- BASE.AUTHENTICATED CAMBIO -->
     <browser:page
         name="profile"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         class=".user_profile.userProfile"
         permission="zope2.View"
-    />
+        />
 
     <browser:page
         for="*"
         name="plone_javascript_variables.js"
         class=".jsvariables.JSVariables"
         permission="zope.Public"
-    />
+        />
 
     <browser:page
         name="get_news"
         for="*"
         class=".get_news.getNews"
         permission="zope.Public"
-    />
+        />
 
     <!-- Comments viewlet -->
     <browser:viewlet
@@ -38,7 +40,7 @@
         view="plone.app.layout.globals.interfaces.IViewView"
         class="plone.app.discussion.browser.comments.CommentsViewlet"
         permission="zope2.View"
-    />
+        />
 
     <browser:page
         name="search"
@@ -47,22 +49,23 @@
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         template="views_templates/search.pt"
-    />
+        />
 
     <browser:resource
         name="ulearnSchemaeditor.js"
         file="schemaeditor.js"
-    />
+        />
 
     <browser:page
-      name="macros-comunitats-header"
-      for="*"
-      permission="zope.Public"
-      template="viewlets_templates/header_macros.pt"
-      />
+        name="macros-comunitats-header"
+        for="*"
+        permission="zope.Public"
+        template="viewlets_templates/header_macros.pt"
+        />
+
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="allcommunities"
         class="ulearn5.theme.browser.views.AllCommunities"
         permission="zope2.View"
@@ -72,7 +75,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="my-communities-ajax"
         class="ulearn5.theme.browser.views.communitiesAJAX"
         permission="zope2.View"
@@ -82,7 +85,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="dynamic.css"
         class="ulearn5.theme.browser.views.dynamicCSS"
         permission="zope2.View"
@@ -91,7 +94,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="ulearncustom.css"
         class="ulearn5.theme.browser.views.CustomCSS"
         permission="zope2.View"
@@ -102,7 +105,7 @@
 
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="searchUser"
         class="ulearn5.theme.browser.views.SearchUser"
         for="zope.interface.Interface"
@@ -110,7 +113,7 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
-    <browser:page 
+    <browser:page
         name="searchUsers"
         class="ulearn5.theme.browser.views.searchUsers"
         for="zope.interface.Interface"
@@ -119,7 +122,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="gw_type_ahead_search"
         class="ulearn5.theme.browser.views.TypeAheadSearch"
         permission="zope2.View"
@@ -127,7 +130,7 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
-    <browser:page 
+    <browser:page
         name="filtered_contents_search_view"
         class="ulearn5.theme.browser.views.FilteredContentsSearchView"
         for="zope.interface.Interface"
@@ -137,7 +140,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="search_filtered_content"
         class="ulearn5.theme.browser.views.SearchFilteredContentAjax"
         permission="zope2.View"
@@ -147,7 +150,7 @@
         />
 
     <!-- BASE.AUTHENTICATED CAMBIO -->
-    <browser:page 
+    <browser:page
         name="alltags"
         class="ulearn5.theme.browser.views.AllTags"
         for="zope.interface.Interface"
@@ -157,7 +160,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="search_filtered_news"
         class="ulearn5.theme.browser.views.SearchFilteredNews"
         for="zope.interface.Interface"
@@ -166,7 +169,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="contents_pretty_view"
         class="ulearn5.theme.browser.views.ContentsPrettyView"
         for="zope.interface.Interface"
@@ -176,7 +179,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="collection_news_view"
         class="ulearn5.theme.browser.views.CollectionNewsView"
         for="zope.interface.Interface"
@@ -186,7 +189,7 @@
         />
 
     <!-- BASE.MEMBER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="shared_with_me"
         class="ulearn5.theme.browser.views.SharedWithMe"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -195,7 +198,7 @@
         />
 
     <!-- BASE.WEBMASTER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="reset_menu"
         class="ulearn5.theme.browser.views.ResetMenuBar"
         for="zope.interface.Interface"
@@ -204,7 +207,7 @@
         />
 
     <!-- BASE.WEBMASTER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="reset_header"
         class="ulearn5.theme.browser.views.ResetHeader"
         for="zope.interface.Interface"
@@ -213,7 +216,7 @@
         />
 
     <!-- BASE.WEBMASTER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="reset_footer"
         class="ulearn5.theme.browser.views.ResetFooter"
         for="zope.interface.Interface"
@@ -221,7 +224,7 @@
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
 
-    <browser:page 
+    <browser:page
         name="event_to_attendees"
         class="ulearn5.theme.browser.views.SendEventToAttendees"
         for="plone.dexterity.interfaces.IDexterityContent"
@@ -230,7 +233,7 @@
         />
 
     <!-- BASE.WEBMASTER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="users_communities"
         class="ulearn5.theme.browser.views.UsersCommunities"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -240,16 +243,12 @@
         />
 
     <!-- BASE.WEBMASTER CAMBIO -->
-    <browser:page 
+    <browser:page
         name="export_users_communities"
         class="ulearn5.theme.browser.views.ExportUsersCommunities"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         permission="cmf.ManagePortal"
         layer="ulearn5.theme.interfaces.IUlearn5ThemeLayer"
         />
-
-    
-
-
 
 </configure>

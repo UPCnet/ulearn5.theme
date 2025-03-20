@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-import datetime
-import uuid
+from Acquisition import aq_chain, aq_inner
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
+
+
 from datetime import datetime as ddatetime
 from html import escape
-
-from Acquisition import aq_chain, aq_inner
-# from five import grok
 from plone import api
 from plone.app.layout.viewlets.common import TitleViewlet
-from plone.app.layout.viewlets.interfaces import (IAboveContent, IHtmlHead,
-                                                  IPortalFooter, IPortalHeader)
 from plone.memoize import forever
 from plone.portlets.interfaces import IPortletManager, IPortletRetriever
 from plone.registry.interfaces import IRegistry
-from Products.CMFPlone.utils import safe_unicode
+from zope.component import getMultiAdapter, getUtility
+from zope.component.hooks import getSite
+
 from ulearn5.core.browser.viewlets import viewletBase
 from ulearn5.core.content.community import ICommunity
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
@@ -22,10 +22,10 @@ from ulearn5.core.interfaces import (IDocumentFolder, IEventsFolder,
                                      ILinksFolder, INewsItemFolder,
                                      IPhotosFolder)
 from ulearn5.core.utils import get_or_initialize_annotation
-from ulearn5.theme.interfaces import IUlearn5ThemeLayer
-from zope.component import getMultiAdapter, getUtility
-from zope.component.hooks import getSite
-from zope.interface import Interface
+
+import datetime
+import uuid
+
 
 # grok.context(Interface)
 
@@ -34,11 +34,7 @@ from zope.interface import Interface
 #    grok.baseclass()
 
 
-class TitleViewlet(viewletBase):
-    # grok.context(Interface)
-    # grok.name('plone.htmlhead.title')
-    # grok.viewletmanager(IHtmlHead)
-    # grok.layer(IUlearn5ThemeLayer)
+class TitleViewlet(TitleViewlet):
 
     def update(self):
         context_state = getMultiAdapter((self.context, self.request), name='plone_context_state')
@@ -63,10 +59,6 @@ class TitleViewlet(viewletBase):
 
 
 class viewletHeaderUlearn(viewletBase):
-    # grok.name('ulearn.header')
-    # grok.template('header')
-    # grok.viewletmanager(IPortalHeader)
-    # grok.layer(IUlearn5ThemeLayer)
 
     def is_info_servei_activate(self):
         servei = api.portal.get_registry_record('ulearn5.core.controlpanel.IUlearnControlPanelSettings.info_servei')
@@ -262,14 +254,15 @@ class viewletHeaderUlearn(viewletBase):
 
             if not record:
                 dades = self._createLinksMenu(user_language)
+                dades = list(dades.values()) if dades else dades
                 record = {
                     'id_menusoup': user_language,
-                    'dades': list(dades.values())
+                    'dades': dades
                 }
 
                 unique_key = str(uuid.uuid4())
                 menu_soup[unique_key] = record
-                result = list(dades.values())
+                result = dades
             else:
                 result = record['dades']
 
@@ -314,14 +307,15 @@ class viewletHeaderUlearn(viewletBase):
 
             if not record:
                 dades = self._createLinksMenu(user_language)
+                dades = list(dades.values()) if dades else dades
                 record = {
                     'id_headersoup': user_language,
-                    'dades': list(dades.values())
+                    'dades': dades
                 }
 
                 unique_key = str(uuid.uuid4())
                 header_soup[unique_key] = record
-                result = list(dades.values())
+                result = dades
             else:
                 result = record['dades']
 
@@ -346,10 +340,6 @@ class viewletHeaderUlearn(viewletBase):
 
 
 class folderBar(viewletBase):
-    # grok.name('ulearn.folderbar')
-    # grok.template('folderbar')
-    # grok.viewletmanager(IAboveContent)
-    # grok.layer(IUlearn5ThemeLayer)
 
     def update(self):
         context = aq_inner(self.context)
@@ -487,26 +477,23 @@ class viewletFooterUlearn(viewletBase):
             record = next((r for r in footer_soup.values() if r.get('id_footersoup') == user_language), None)
 
             if not record:
-                dades = self._createLinksMenu(user_language)
+                dades = self._createLinksFooter(user_language)
+                dades = list(dades.values()) if dades else dades
                 record = {
                     'id_footersoup': user_language,
-                    'dades': list(dades.values())
+                    'dades': dades
                 }
 
                 unique_key = str(uuid.uuid4())
                 footer_soup[unique_key] = record
-                result = list(dades.values())
+                result = dades
             else:
                 result = record['dades']
-            
+
             return result
 
 
 class angularRouteView(viewletBase):
-    # grok.name('ulearn.angularrouteview')
-    # grok.template('angularrouteview')
-    # grok.viewletmanager(IAboveContent)
-    # grok.layer(IUlearn5ThemeLayer)
 
     def render_viewlet(self):
         context = aq_inner(self.context)
@@ -517,10 +504,6 @@ class angularRouteView(viewletBase):
 
 
 class popupNotify(viewletBase):
-    # grok.name('ulearn.popupNotify')
-    # grok.template('popup_notify')
-    # grok.viewletmanager(IPortalFooter)
-    # grok.layer(IUlearn5ThemeLayer)
 
     def isAnon(self):
         if not api.user.is_anonymous():
@@ -537,7 +520,7 @@ class popupNotify(viewletBase):
 
             if not record:
                 portal = api.portal.get()
-                try: 
+                try:
                     return 'notify' in portal['gestion']['popup']
                 except:
                     pass
@@ -558,10 +541,6 @@ class popupNotify(viewletBase):
 
 
 class popupNotifyBirthday(viewletBase):
-    # grok.name('ulearn.popupNotifyBirthday')
-    # grok.template('popup_notify_birthday')
-    # grok.viewletmanager(IPortalFooter)
-    # grok.layer(IUlearn5ThemeLayer)
 
     def isAnon(self):
         if not api.user.is_anonymous():
