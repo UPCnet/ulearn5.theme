@@ -306,8 +306,7 @@ class viewletHeaderUlearn(viewletBase):
             record = next((r for r in header_soup.values() if r.get('id_headersoup') == user_language), None)
 
             if not record:
-                dades = self._createLinksMenu(user_language)
-                dades = list(dades.values()) if dades else dades
+                dades = self._createLinksHeader(user_language)
                 record = {
                     'id_headersoup': user_language,
                     'dades': dades
@@ -474,7 +473,6 @@ class viewletFooterUlearn(viewletBase):
 
             if not record:
                 dades = self._createLinksFooter(user_language)
-                dades = list(dades.values()) if dades else dades
                 record = {
                     'id_footersoup': user_language,
                     'dades': dades

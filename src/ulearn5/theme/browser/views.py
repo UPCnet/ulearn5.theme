@@ -978,7 +978,7 @@ class ResetMenuBar(BrowserView):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         menu_soup = get_or_initialize_annotation('menu_soup')
         menu_soup.clear()
-        self.redirect(portal.absolute_url())
+        self.request.response.redirect(portal.absolute_url())
 
 class ResetHeader(BrowserView):
     """ This view reset the header """
@@ -991,7 +991,7 @@ class ResetHeader(BrowserView):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         header_soup = get_or_initialize_annotation('header_soup')
         header_soup.clear()
-        self.redirect(portal.absolute_url())
+        self.request.response.redirect(portal.absolute_url())
 
 class ResetFooter(BrowserView):
     """ This view reset the footer """
@@ -1004,7 +1004,7 @@ class ResetFooter(BrowserView):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
         soup_footer = get_or_initialize_annotation('soup_footer')
         soup_footer.clear()
-        self.redirect(portal.absolute_url())
+        self.request.response.redirect(portal.absolute_url())
 
 class SendEventToAttendees(BrowserView):
     # grok.context(IDexterityContent)
