@@ -1,8 +1,8 @@
-<div id="menusup" tal:define="community view/get_community" tal:condition="view/render_viewlet"
+<div id="menusup" tal:define="community view/get_community" tal:condition="view/available"
     i18n:domain="ulearn">
     <nav>
         <!-- Activating 'stream' bubble -->
-        <div class="active bubble top" tal:attributes="class python: viewlet.bubble_class('stream')">
+        <div class="active bubble top" tal:attributes="class python: view.bubble_class('stream')">
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a i18n:attributes="title ulearn_activity; aria-label ulearn_activity" aria-hidden="true"
@@ -13,7 +13,7 @@
         </div>
 
         <!-- 'documents' bubble -->
-        <div class="bubble top" tal:attributes="class python: viewlet.bubble_class('documents')">
+        <div class="bubble top" tal:attributes="class python: view.bubble_class('documents')">
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a i18n:attributes="title ulearn_documents; aria-label ulearn_documents"
@@ -26,7 +26,7 @@
 
         <!-- 'news' bubble -->
         <div class="bubble top" tal:condition="view/show_news"
-            tal:attributes="class python: viewlet.bubble_class('news')">
+            tal:attributes="class python: view.bubble_class('news')">
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a i18n:attributes="title ulearn_news; aria-label ulearn_news"
@@ -39,7 +39,7 @@
 
         <!-- 'events' bubble -->
         <div class="bubble top" tal:condition="view/show_events"
-            tal:attributes="class python: viewlet.bubble_class('events')">
+            tal:attributes="class python: view.bubble_class('events')">
             <div class="arrow"></div>
             <div class="bubble-content">
                 <a i18n:attributes="title Events; aria-label Events"

@@ -394,7 +394,7 @@ class folderBar(viewletBase):
             if ICommunity.providedBy(obj):
                 return obj
 
-    def render_viewlet(self):
+    def available(self):
         context = aq_inner(self.context)
         for obj in aq_chain(context):
             if ICommunity.providedBy(obj):
@@ -403,10 +403,6 @@ class folderBar(viewletBase):
 
 
 class viewletFooterUlearn(viewletBase):
-    # grok.name('ulearn.footer')
-    # grok.template('footer')
-    # grok.viewletmanager(IPortalFooter)
-    # grok.layer(IUlearn5ThemeLayer)
 
     @forever.memoize
     def get_current_year(self):
