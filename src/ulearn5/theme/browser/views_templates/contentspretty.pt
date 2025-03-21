@@ -12,9 +12,9 @@
                  tal:define="items view/getItemPropierties;
                              blocs view/getBlocs">
 
-                 <tal:repeat tal:for="x python:range(0, blocs)">
+                 <tal:block tal:repeat="x python:range(0, blocs)">
                   <div class="row fila">
-                    <tal:repeat tal:for="y python:range(0, len(items[x]))">
+                    <tal:block tal:repeat="y python:range(0, len(items[x]))">
                         <div class="col-md-6"
                              tal:define="item python:items[x][y]">
                             <h3 tal:define="type item/item_type;
@@ -54,9 +54,9 @@
 
                             </div>
                         </div>
-                     </tal:repeat>
+                     </tal:block>
                      </div>
-                     </tal:repeat>
+                     </tal:block>
 
               </div>
 

@@ -513,14 +513,6 @@ class TypeAheadSearch(BrowserView):
 
 class FilteredContentsSearchView(BrowserView):
     """ Filtered content search view for every folder. """
-    # grok.name('filtered_contents_search_view')
-    # grok.context(Interface)
-    # grok.require('base.member')
-    # grok.template('filtered_contents_search')
-    # grok.layer(IUlearn5ThemeLayer)
-
-    def __call__(self):
-        self.update()
 
     def update(self):
         self.query = self.request.form.get('q', '')

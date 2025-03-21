@@ -3,7 +3,7 @@
                    use_view_action site_properties/typesUseViewActionInListings|python:()">
 
   <ul tal:define="continguts view/get_contenttags_by_query" i18n:domain="ulearn">
-  
+
     <li tal:condition="ulearn_utils/is_activate_sharedwithme">
       <div class="nofavorite">
         <a tal:attributes="href python:context.absolute_url() + '/@@shared'">
@@ -11,10 +11,10 @@
         </a>
       </div>
     </li>
-  
-    <tal:repeat tal:for="continguttot continguts">
-    
-      <tal:repeat tal:for="contingut continguttot/favorite">
+
+    <tal:llistat tal:repeat="continguttot continguts">
+
+      <tal:favorite tal:repeat="contingut continguttot/favorite">
         <li tal:define="item_type contingut/obj/portal_type;
                         item_url contingut/obj/getURL|contingut/absolute_url;">
           <div class="favorite">
@@ -32,9 +32,9 @@
             </a>
           </div>
         </li>
-      </tal:repeat>
-      
-      <tal:repeat tal:for="contingut continguttot/nofavorite">
+      </tal:favorite>
+
+      <tal:nofavorite tal:repeat="contingut continguttot/nofavorite">
         <li tal:define="item_type contingut/obj/portal_type;
                         item_url contingut/obj/getURL|contingut/obj/absolute_url;">
           <div class="nofavorite">
@@ -51,9 +51,9 @@
             </a>
           </div>
         </li>
-      </tal:repeat>
-      
-    </tal:repeat>
+      </tal:nofavorite>
+
+    </tal:llistat>
 
   </ul>
 </tal:block>
