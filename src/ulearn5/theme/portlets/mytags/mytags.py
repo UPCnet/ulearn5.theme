@@ -7,10 +7,11 @@ from plone.registry.interfaces import IRegistry
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ulearn5.core import _
 from ulearn5.core.controlpanel import IUlearnControlPanelSettings
-from ulearn5.core.utils import get_or_initialize_annotation
 from zope.component import queryUtility
 from zope.component.hooks import getSite
 from zope.interface import implementer
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
 
 
 class IMyTagsPortlet(IPortletDataProvider):
@@ -37,13 +38,14 @@ class Renderer(base.Renderer):
         return True
 
     def getMyTags(self):
+        portal = api.portal.get()
         current_user = api.user.get_current()
         userid = current_user.id
 
-        user_subscribed_tags = get_or_initialize_annotation('user_subscribed_tags')
-        record = next((r for r in user_subscribed_tags.values() if r.get('id') == userid), {})
+        soup_tags = get_soup('user_subscribed_tags', portal)
+        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
 
-        return record.get('tags', [])
+        return tags_soup[0].attrs['tags'] if tags_soup else []
 
 
     def getPrimaryColor(self):

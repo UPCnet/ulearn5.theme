@@ -56,6 +56,8 @@ from zope.component import (getMultiAdapter, getUtilitiesFor, getUtility,
 from zope.component.hooks import getSite
 from zope.i18n import translate
 from zope.interface import Interface
+from souper.interfaces import ICatalogFactory
+from souper.soup import get_soup
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
 
@@ -968,7 +970,7 @@ class ResetMenuBar(BrowserView):
 
     def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        menu_soup = get_or_initialize_annotation('menu_soup')
+        menu_soup = get_soup('menu_soup', portal)
         menu_soup.clear()
         self.request.response.redirect(portal.absolute_url())
 
@@ -981,7 +983,7 @@ class ResetHeader(BrowserView):
 
     def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        header_soup = get_or_initialize_annotation('header_soup')
+        header_soup = get_soup('header_soup', portal)
         header_soup.clear()
         self.request.response.redirect(portal.absolute_url())
 
@@ -994,8 +996,8 @@ class ResetFooter(BrowserView):
 
     def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        soup_footer = get_or_initialize_annotation('footer_soup')
-        soup_footer.clear()
+        footer_soup = get_soup('footer_soup', portal)
+        footer_soup.clear()
         self.request.response.redirect(portal.absolute_url())
 
 class SendEventToAttendees(BrowserView):

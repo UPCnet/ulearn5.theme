@@ -22,9 +22,16 @@ from ulearn5.core.interfaces import (IDocumentFolder, IEventsFolder,
                                      ILinksFolder, INewsItemFolder,
                                      IPhotosFolder)
 from ulearn5.core.utils import get_or_initialize_annotation
+from zope.annotation.interfaces import IAnnotations
+from persistent.dict import PersistentDict
+
+from repoze.catalog.query import Eq
+from souper.soup import Record
+from souper.soup import get_soup
 
 import datetime
 import uuid
+import transaction
 
 
 # grok.context(Interface)
@@ -249,22 +256,20 @@ class viewletHeaderUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            menu_soup = get_or_initialize_annotation('menu_soup')
-            record = next((r for r in menu_soup.values() if r.get('id_menusoup') == user_language), None)
+            portal = api.portal.get()
+            soup_menu = get_soup('menu_soup', portal)
+            exist = [r for r in soup_menu.query(Eq('id_menusoup', user_language))]
 
-            if not record:
+            if not exist:
                 dades = self._createLinksMenu(user_language)
-                dades = list(dades.values()) if dades else dades
-                record = {
-                    'id_menusoup': user_language,
-                    'dades': dades
-                }
-
-                unique_key = str(uuid.uuid4())
-                menu_soup[unique_key] = record
-                result = dades
+                record = Record()
+                record.attrs['id_menusoup'] = user_language
+                record.attrs['dades'] = list(dades.values())  # Convertir dict_values a lista
+                soup_menu.add(record)
+                soup_menu.reindex()
+                result = list(dades.values())
             else:
-                result = record['dades']
+                result = exist[0].attrs['dades']
 
             return sorted(result, key=lambda x: x['position'])
 
@@ -302,21 +307,20 @@ class viewletHeaderUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            header_soup = get_or_initialize_annotation('header_soup')
-            record = next((r for r in header_soup.values() if r.get('id_headersoup') == user_language), None)
+            portal = api.portal.get()
+            soup_header = get_soup('header_soup', portal)
+            exist = [r for r in soup_header.query(Eq('id_headersoup', user_language))]
 
-            if not record:
+            if not exist:
                 dades = self._createLinksHeader(user_language)
-                record = {
-                    'id_headersoup': user_language,
-                    'dades': dades
-                }
-
-                unique_key = str(uuid.uuid4())
-                header_soup[unique_key] = record
+                record = Record()
+                record.attrs['id_headersoup'] = user_language
+                record.attrs['dades'] = dades
+                soup_header.add(record)
+                soup_header.reindex()
                 result = dades
             else:
-                result = record['dades']
+                result = exist[0].attrs['dades']
 
             return result
 
@@ -468,21 +472,20 @@ class viewletFooterUlearn(viewletBase):
                 user_language = lt.getPreferredLanguage()
                 current.setMemberProperties({'language': user_language})
 
-            footer_soup = get_or_initialize_annotation('footer_soup')
-            record = next((r for r in footer_soup.values() if r.get('id_footersoup') == user_language), None)
+            portal = api.portal.get()
+            soup_footer = get_soup('footer_soup', portal)
+            exist = [r for r in soup_footer.query(Eq('id_footersoup', user_language))]
 
-            if not record:
+            if not exist:
                 dades = self._createLinksFooter(user_language)
-                record = {
-                    'id_footersoup': user_language,
-                    'dades': dades
-                }
-
-                unique_key = str(uuid.uuid4())
-                footer_soup[unique_key] = record
+                record = Record()
+                record.attrs['id_footersoup'] = user_language
+                record.attrs['dades'] = dades
+                soup_footer.add(record)
+                soup_footer.reindex()
                 result = dades
             else:
-                result = record['dades']
+                result = exist[0].attrs['dades']
 
             return result
 
