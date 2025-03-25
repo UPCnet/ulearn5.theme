@@ -994,7 +994,7 @@ class ResetFooter(BrowserView):
 
     def __call__(self):
         portal = api.portal.get_tool(name='portal_url').getPortalObject()
-        soup_footer = get_or_initialize_annotation('soup_footer')
+        soup_footer = get_or_initialize_annotation('footer_soup')
         soup_footer.clear()
         self.request.response.redirect(portal.absolute_url())
 
