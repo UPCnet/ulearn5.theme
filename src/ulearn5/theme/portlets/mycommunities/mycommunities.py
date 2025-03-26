@@ -8,6 +8,8 @@ from ulearn5.core.content.community import ICommunity
 from ulearn5.core.utils import get_or_initialize_annotation
 from ulearn5.theme.portlets.communities import Renderer as RendererCommunities
 from zope.interface import implementer
+from repoze.catalog.query import Eq
+from souper.soup import get_soup
 
 
 class IMyCommunitiesNavigation(IPortletDataProvider):
@@ -41,46 +43,38 @@ class Renderer(RendererCommunities):
         username = api.user.get_current().id.lower()
         if username != "admin":
             portal = api.portal.get()
-            communities_acl = get_or_initialize_annotation("communities_acl")
+            soup = get_soup('communities_acl', portal)
 
+            check = False
             for community in communities:
-                # Reiniciamos la variable de control para cada comunidad.
-                check = False
-                # Buscamos el registro correspondiente al community.gwuuid
-                record = next((r for r in communities_acl.values() if r.get('gwuuid') == community.gwuuid), None)
-                if record:
-                    # Comprobamos si el usuario aparece en los usuarios del ACL
-                    acl_users = record.get('acl', {}).get('users', [])
-                    if username in [a.get("id") for a in acl_users]:
+                records = [r for r in soup.query(Eq('gwuuid', community.gwuuid))]
+                if records:
+                    if username in [a['id'] for a in records[0].attrs['acl']['users']]:
                         check = True
 
-                    # Si aún no está, comprobamos si el usuario pertenece a alguno de los grupos listados
                     if not check:
                         user_groups = [group.id for group in api.group.get_groups(username=username)]
                         if user_groups:
-                            acl_groups = record.get('acl', {}).get('groups', [])
-                            # Se comprueba cada grupo del usuario
-                            for group in user_groups:
-                                if group in [a.get("id") for a in acl_groups]:
-                                    check = True
-                                    break
+                            for groups in user_groups:
+                                if 'groups' in records[0].attrs['acl']:
+                                    if user_groups in [a['id'] for a in records[0].attrs['acl']['groups']]:
+                                        check = True
 
                     if check:
-                        if community.tab_view == "Documents":
-                            url = community.getURL() + "/documents"
+                        if community.tab_view == 'Documents':
+                            url = community.getURL() + '/documents'
                         else:
                             url = community.getURL()
-                        info = {
-                            "id": community.id,
-                            "url": url,
-                            "title": community.Title,
-                            "community_type": community.community_type,
-                            "image": community.getObject().image,
-                            "pending": self.get_pending_community_user(community, username),
-                        }
+                        info = {'id': community.id,
+                                'url': url,
+                                'title': community.Title,
+                                'community_type': community.community_type,
+                                'image': community.getObject().image,
+                                'pending': self.get_pending_community_user(community, username)
+                                }
                         result.append(info)
-        return result
 
+        return result
 
 class AddForm(base.NullAddForm):
 
