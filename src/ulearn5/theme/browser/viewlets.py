@@ -512,10 +512,9 @@ class popupNotify(viewletBase):
             user = api.user.get_current()
             portal = getSite()
 
-            notify_popup = get_or_initialize_annotation('notify_popup')
-            record = next((r for r in notify_popup.values() if r.get('id') == user.id), None)
-
-            if not record:
+            soup = get_soup('notify_popup', portal)
+            user_soup = [r for r in soup.query(Eq('id', user.id))]
+            if not user_soup:
                 portal = api.portal.get()
                 try:
                     return 'notify' in portal['gestion']['popup']
