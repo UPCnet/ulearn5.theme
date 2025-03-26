@@ -731,12 +731,14 @@ class AllTags(BrowserView):
         pass
 
     def get_subscribed_tags(self):
+        portal = api.portal.get()
         current_user = api.user.get_current()
         userid = current_user.id
 
-        user_subscribed_tags = get_or_initialize_annotation(user_subscribed_tags)
-        record = next((r for r in user_subscribed_tags.values() if r.get('id') == userid), {})
-        return record.get('tags', [])
+        soup_tags = get_soup('user_subscribed_tags', portal)
+        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
+
+        return tags_soup[0].attrs['tags'] if tags_soup else []
 
     def get_unsubscribed_tags(self):
 
@@ -745,13 +747,14 @@ class AllTags(BrowserView):
         subjs_index = pc._catalog.indexes['Subject']
         [subjects.append(index[0]) for index in list(subjs_index.items())]
 
-        portal = getSite()
+        portal = api.portal.get()
         current_user = api.user.get_current()
         userid = current_user.id
-        user_subscribed_tags = get_or_initialize_annotation(user_subscribed_tags)
-        record = next((r for r in user_subscribed_tags.values() if r.get('id') == userid), None)
-        if record:
-            user_tags = record.get('tags')
+
+        soup_tags = get_soup('user_subscribed_tags', portal)
+        tags_soup = [r for r in soup_tags.query(Eq('id', userid))]
+        if tags_soup:
+            user_tags = tags_soup[0].attrs['tags']
         else:
             user_tags = ()
         return list(set(subjects) - set(user_tags))
