@@ -38,9 +38,17 @@ class Renderer(base.Renderer):
 
     def __init__(self, context, request, view, manager, data):
         super(Renderer, self).__init__(context, request, view, manager, data)
-        self.username = api.user.get_current().id
-        self.user_info = get_safe_member_by_id(self.username)
-        self.portal_url = api.portal.get().absolute_url()
+
+        # Solo ejecuta el código si el usuario no es anónimo
+        if not api.user.is_anonymous():
+            self.username = api.user.get_current().id
+            self.user_info = get_safe_member_by_id(self.username)
+            self.portal_url = api.portal.get().absolute_url()
+        else:
+            # Si el usuario es anónimo, inicializa con valores predeterminados
+            self.username = None
+            self.user_info = None
+            self.portal_url = None
 
     def isAnon(self):
         if not api.user.is_anonymous():
