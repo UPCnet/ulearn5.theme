@@ -58,6 +58,7 @@ from zope.i18n import translate
 from zope.interface import Interface
 from souper.interfaces import ICatalogFactory
 from souper.soup import get_soup
+from repoze.catalog.query import Eq
 
 order_by_type = {"Folder": 1, "Document": 2, "File": 3, "Link": 4, "Image": 5}
 
@@ -728,7 +729,7 @@ class AllTags(BrowserView):
     # grok.layer(IUlearn5ThemeLayer)
 
     def __call__(self):
-        pass
+        return self.index()
 
     def get_subscribed_tags(self):
         portal = api.portal.get()
