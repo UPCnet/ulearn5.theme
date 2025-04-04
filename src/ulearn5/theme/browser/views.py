@@ -867,7 +867,7 @@ class ContentsPrettyView(BrowserView):
     # grok.layer(IUlearn5ThemeLayer)
 
     def __call__(self):
-        pass
+        return self.index()
 
     def getItemPropierties(self):
         all_items = []
@@ -1174,7 +1174,7 @@ class UsersCommunities(BrowserView):
     # grok.layer(IUlearn5ThemeLayer)
 
     def __call__(self):
-        pass
+        return self.index()
 
     def result(self):
         result = []
@@ -1278,7 +1278,7 @@ class ExportUsersCommunities(BrowserView):
         try:
             output_file = StringIO()
             # Write the BOM of the text stream to make its charset explicit
-            output_file.write('\ufeff'.encode('utf8'))
+            output_file.write('\ufeff')
             self.write_data(output_file)
 
             portal = getSite()
