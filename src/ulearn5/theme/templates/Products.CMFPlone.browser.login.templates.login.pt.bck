@@ -83,10 +83,7 @@
             </div>
         </form>
 
-        <div class="footer"
-             i18n:domain="ulearn"
-             tal:define="portal_state context/@@plone_portal_state;
-                         portal_url portal_state/portal_url">
+        <div class="footer" i18n:domain="ulearn">
           <strong i18n:translate="">Forgot your password?</strong>
           <p>
             <span i18n:translate="" tal:omit-tag="">If you have forgotten your password,</span>
