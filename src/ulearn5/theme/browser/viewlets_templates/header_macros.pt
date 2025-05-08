@@ -27,12 +27,6 @@
             <tal:footer i18n:domain="ulearn" i18n:translate="">Nomines Root folder</tal:footer>
           </a>
         </li>
-        <li role="menuitem">
-          <a href="#" tal:attributes="href string:${portal_url}/@@paysheet-log">
-            <i class="fa fa-database"></i>&nbsp;
-            <tal:footer i18n:domain="ulearn" i18n:translate="">View loginfo</tal:footer>
-          </a>
-        </li>
       </ul>
     </li>
   </metal:block>
