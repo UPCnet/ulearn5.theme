@@ -107,7 +107,10 @@ class Renderer(base.Renderer):
     def getTypeCommunities(self, typeCommunity):
         pc = api.portal.get_tool(name="portal_catalog")
         pm = api.portal.get_tool(name="portal_membership")
-        current_user = pm.getAuthenticatedMember().getUserName().lower()
+        current_user = pm.getAuthenticatedMember().getUserName()
+        if isinstance(current_user, dict):
+            current_user = current_user.get('username')
+        current_user = current_user.lower()
         communities = pc.searchResults(object_provides=ICommunity.__identifier__,
                                        favoritedBy=current_user,
                                        community_type=typeCommunity,
