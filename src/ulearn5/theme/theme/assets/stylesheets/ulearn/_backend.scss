@@ -309,3 +309,7 @@ body.template-folder_contents .contenttype-cloudfile:before {
   text-decoration: inherit;
   margin-right: 10px;
 }
+
+body.template-overview-controlpanel .warning {
+  display: none !important;
+}
